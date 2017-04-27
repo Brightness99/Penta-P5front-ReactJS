@@ -1,7 +1,3 @@
-declare module 'common-types' {
-  declare module.exports: any;
-}
-
 // Stores
 declare type AppStore = {
   rehydrated: boolean,
