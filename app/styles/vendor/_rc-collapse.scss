@@ -1,0 +1,16 @@
+.rc-collapse {
+  border-bottom: 0.1rem solid #eee;
+  border-top: 0.1rem solid #eee;
+
+  &-anim-active {
+    transition: height 0.3s cubic-bezier(0.87, 0.3, 0.68, 1.06);
+  }
+}
+
+.rc-collapse-content {
+  overflow: hidden;
+
+  &-inactive {
+    display: none;
+  }
+}

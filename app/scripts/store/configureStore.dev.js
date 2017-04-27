@@ -9,8 +9,6 @@ import createReactotronTrackingEnhancer from 'reactotron-redux';
 import rootEpic from 'epics';
 import rootReducer from 'reducers';
 
-import { ActionTypes } from 'constants/index';
-
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
 const reducer = combineReducers({ ...rootReducer });
@@ -24,9 +22,7 @@ const logger = createLogger({
 const configStore = (initialState = {}) => {
   const createStoreWithMiddleware = compose(
     applyMiddleware(thunk, epicMiddleware, logger),
-    createReactotronTrackingEnhancer(Reactotron, {
-      isActionImportant: action => action.type === ActionTypes.USER_LOGIN_SUCCESS,
-    })
+    createReactotronTrackingEnhancer(Reactotron)
   )(createStore);
 
   const store = createStoreWithMiddleware(reducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

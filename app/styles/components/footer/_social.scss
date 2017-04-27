@@ -1,0 +1,88 @@
+@mixin social-icon-color($rgbColor) {
+  background-color: $rgbColor;
+  box-shadow: 0 0 2rem 0 rgba($rgbColor, 0.5);
+}
+
+.app__footer__social {
+  color: #151617;
+  font-family: $font-family-open-sans-light;
+  font-size: $font-size-sm;
+  justify-content: center;
+  margin: 0 1.5rem;
+  text-align: center;
+
+  @include lg {
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  > div {
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    width: 100%;
+
+    @include lg {
+      justify-content: flex-start;
+    }
+  }
+
+  &-item {
+    align-content: center;
+    background-color: #fff;
+    border: 0.1rem solid #b4b7bc;
+    border-radius: 2rem;
+    cursor: pointer;
+    display: inline-flex;
+    height: 4rem;
+    justify-content: center;
+    margin-left: 1.5rem;
+    width: 4rem;
+
+    @include lg {
+      height: 3rem;
+      width: 3rem;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    > span {
+      fill: #b4b7bc;
+      width: 80%;
+    }
+
+    &:hover {
+
+      border-color: transparent;
+
+      > span {
+        fill: #fff;
+      }
+    }
+
+    &--facebook:hover {
+      @include social-icon-color(#3b5998);
+    }
+
+    &--twitter:hover {
+     @include social-icon-color(#00aced);
+    }
+
+    &--linkedin:hover {
+      @include social-icon-color(#0077B5);
+    }
+
+    &--google-plus:hover {
+      @include social-icon-color(#d34836);
+    }
+
+    &--instagram:hover {
+      @include social-icon-color(#ed4956);
+    }
+  }
+}

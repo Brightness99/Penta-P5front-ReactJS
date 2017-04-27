@@ -1,0 +1,42 @@
+@import 'social';
+@import 'links';
+@import 'logo';
+@import 'disclaimer';
+@import 'badges';
+@import 'infos';
+
+.app__footer {
+  bottom: 0;
+  color: #000;
+  left: 0;
+  font-size: $font-size-sm;
+  position: relative;
+  width: 100%;
+
+  > hr {
+    border-top-color: #efefef;
+  }
+
+  @include lg {
+    &__data {
+      display: flex;
+      padding-bottom: 4.2rem;
+      padding-top: 4.2rem;
+
+      &-left {
+        display: inline-flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  > .app__back-to-top {
+
+    height: 6rem;
+    margin-top: 2rem;
+    width: 100%;
+  }
+}

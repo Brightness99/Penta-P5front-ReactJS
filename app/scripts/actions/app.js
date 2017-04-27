@@ -1,9 +1,10 @@
 // @flow
+
 /**
  * @module Actions/App
  * @desc App Actions
  */
-import { ActionTypes, LOCATION_CHANGE } from 'constants/index';
+import { AppConstants, LOCATION_CHANGE } from 'constants/index';
 
 /**
  * Change route path.
@@ -39,7 +40,7 @@ export function goTo(pathname: string, options: Object = {}) {
  */
 export function showAlert(status: string, message: string, withTimeout: boolean = true) {
   return {
-    type: ActionTypes.SHOW_ALERT,
+    type: AppConstants.SHOW_ALERT,
     status,
     message,
     withTimeout,
@@ -53,6 +54,21 @@ export function showAlert(status: string, message: string, withTimeout: boolean 
  */
 export function hideAlert() {
   return {
-    type: ActionTypes.HIDE_ALERT,
+    type: AppConstants.HIDE_ALERT,
+  };
+}
+
+/**
+ * Update browser options.
+ *
+ * @param {Object} payload
+ * @param {boolean} initial
+ * @returns {Object}
+ */
+export function updateBrowserOptions(payload: Object, initial: boolean = false): Object {
+  return {
+    type: AppConstants.UPDATE_BROWSER_OPTIONS,
+    payload,
+    meta: { initial },
   };
 }
