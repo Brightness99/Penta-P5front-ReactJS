@@ -4,5 +4,8 @@
  */
 
 import { combineEpics } from 'redux-observable';
+import { userNewsletter } from './user';
 
-export default combineEpics();
+export default combineEpics(
+  userNewsletter,
+);
