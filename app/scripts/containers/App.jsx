@@ -10,8 +10,6 @@ import Home from 'containers/Home';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-import typeof { AppStore } from 'flow/';
-
 type Props = {
   app: AppStore,
   dispatch: () => {},
@@ -33,6 +31,7 @@ export class App extends React.Component {
             <main className="app__main">
               <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/test" component={Home} />
               </Switch>
             </main>
             <Footer />
