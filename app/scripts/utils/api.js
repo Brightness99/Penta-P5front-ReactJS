@@ -1,13 +1,14 @@
 // @flow
-
 /**
- * API functions
  * @module API
+ * @desc API functions
  */
-import { XHR } from 'constants/index';
+import { Observable } from 'rxjs/Observable';
+
+import config from 'config';
 
 /**
- * Fetch data outside the FSA types
+ * Fetch data with RxJS Ajax
  *
  * @instance
  * @param {Object} action
@@ -16,10 +17,11 @@ import { XHR } from 'constants/index';
  * @param {string} [action.payload] - Request body.
  * @param {Object} [action.headers]
  *
- * @returns {Promise}
+ * @returns {Stream}
  */
-export function request(action: Object = {}): Promise<Object | string> {
+export function rxAjax(action: Object = {}) {
   const errors = [];
+  const settings = {};
 
   if (!action.method) {
     action.method = 'GET';
@@ -37,71 +39,25 @@ export function request(action: Object = {}): Promise<Object | string> {
     throw new Error(`Error! You must pass \`${errors.join('`, `')}\``);
   }
 
-  const headers = {
-    ...action.headers,
-    Accept: 'application/json',
+  /* istanbul ignore else */
+  if (!action.url) {
+    action.url = config.apiUrl;
+  }
+
+  settings.url = `${action.url}${action.endpoint}`;
+  settings.method = action.method;
+  settings.crossDomain = true;
+  settings.withCredentials = true;
+  settings.responseType = 'json';
+
+  settings.headers = {
     'Content-Type': 'application/json',
+    'api-key': config.apiKey,
   };
 
-  return new Promise((resolve, reject) => {
-    const params = {
-      headers,
-      method: action.method,
-    };
+  if (action.method !== 'GET') {
+    settings.body = action.payload;
+  }
 
-    if (params.method !== 'GET') {
-      params.body = JSON.stringify(action.payload);
-    }
-
-    fetch(action.endpoint, params)
-      .then(response => {
-        if (response.status >= 400) {
-          const error: typeof Error = new Error(response);
-          error.response = response;
-
-          throw error;
-        } else {
-          return response;
-        }
-      })
-      .then(response => {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.indexOf('application/json') > -1) {
-          return response.json();
-        }
-
-        return response.text();
-      })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        /* istanbul ignore else */
-        if (error.response) {
-          const contentType = error.response.headers.get('content-type');
-
-          if (contentType && contentType.indexOf('application/json') > -1) {
-            error.response.json().then(json => {
-              reject({
-                status: XHR.FAIL,
-                code: error.response.status,
-                error: error.response.statusText,
-                data: json,
-              });
-            });
-
-            return;
-          }
-
-          error.response.text().then(text =>
-            reject({
-              status: XHR.FAIL,
-              code: error.response.status,
-              error: error.response.statusText,
-              data: text,
-            })
-          );
-        }
-      });
-  });
+  return Observable.ajax(settings);
 }
