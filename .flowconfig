@@ -1,11 +1,16 @@
 [ignore]
+.*/__tests__/.*
 .*/node_modules/.*
 .*/app/scripts/vendor/.*
+.*/app/scripts/utils/api.js
 
 [include]
 ./app/scripts/
 
 [libs]
+./node_modules/fbjs/node_modules/promise
+./node_modules/fbjs/flow/lib
+./flow-typed/
 
 [options]
 module.name_mapper='^actions\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/actions/\1'
@@ -14,8 +19,10 @@ module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/compone
 module.name_mapper='^constants\/index$' -> '<PROJECT_ROOT>/app/scripts/constants/'
 module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/containers/\1'
 module.name_mapper='^epics\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/epics/\1'
+module.name_mapper='^modules\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/modules/\1'
 module.name_mapper='^reducers\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/reducers/\1'
 module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/utils/\1'
+module.name_mapper='^vendor\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/vendor/\1'
 
 munge_underscores=true
 

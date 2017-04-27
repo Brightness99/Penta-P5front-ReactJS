@@ -15,7 +15,6 @@ export default {
   app: createReducer(appState, {
     [REHYDRATE](state, action) {
       return Object.assign({}, state, action.payload.app, {
-        notifications: appState.notifications,
         rehydrated: true,
       });
     },

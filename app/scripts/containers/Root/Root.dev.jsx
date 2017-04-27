@@ -1,3 +1,5 @@
+// @flow
+
 import 'vendor/reactotronConfig';
 import React from 'react';
 import { Provider } from 'react-redux';

@@ -7,12 +7,12 @@
     "start": "node config/webpack.server.js",
     "lint": "eslint  --ext .js --ext .jsx app/scripts config test",
     "lint:styles": "stylelint app/styles/**/*.scss",
-    "flow": "flow",
+    "flow": "flow check",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:ui": "nightwatch -c test/lib/nightwatch.conf.js",
     "test:ui:start": "npm start -- test:ui",
-    "precommit": "node config/tools commits && npm run lint && npm run lint:styles && npm test",
+    "precommit": "node config/tools commits && npm run lint && npm run lint:styles && npm run flow && npm test",
     "postmerge": "node config/tools update && npm update"
   },
   "repository": {

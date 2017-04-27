@@ -1,10 +1,8 @@
 // @flow
 
-import React from 'react';
+import React, { Element } from 'react';
 import { Router } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
-
-import type ReactElement from 'react';
 
 import { LOCATION_CHANGE } from '../constants/index';
 
@@ -12,7 +10,7 @@ import { LOCATION_CHANGE } from '../constants/index';
 export const history = createBrowserHistory();
 
 type Props = {
-  children: ReactElement,
+  children: typeof Element,
   dispatch: () => {},
 }
 
@@ -25,9 +23,11 @@ class ReduxRouter extends React.Component {
     this.unsubscribe();
   }
 
+  unsubscribe: () => {};
+
   static props: Props;
 
-  handleLocationChange = (location, action) => {
+  handleLocationChange = (location: {}, action: typeof LOCATION_CHANGE) => {
     const { dispatch } = this.props;
 
     dispatch({

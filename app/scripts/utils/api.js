@@ -7,7 +7,7 @@
 import { XHR } from 'constants/index';
 
 /**
- * Fetch data outside the FSA flow
+ * Fetch data outside the FSA types
  *
  * @instance
  * @param {Object} action
@@ -56,7 +56,7 @@ export function request(action: Object = {}): Promise<Object | string> {
     fetch(action.endpoint, params)
       .then(response => {
         if (response.status >= 400) {
-          const error = new Error(response);
+          const error: typeof Error = new Error(response);
           error.response = response;
 
           throw error;
