@@ -24,6 +24,15 @@ export function shouldComponentUpdate(instance: Object, nextProps: Object, nextS
 }
 
 /**
+ * Get Unix timestamp in seconds.
+ *
+ * @returns {number}
+ */
+export function getUnixtime(): number {
+  return Math.floor(Date.now() / 1000);
+}
+
+/**
  * Generate reducer.
  *
  * @param {Object} initialState
@@ -67,4 +76,36 @@ export function datasetToObject(elem: Element) {
     }
   });
   return data;
+}
+
+/**
+ * Get screen size breakpoint
+ * @returns {string}
+ */
+export function getScreenSize() {
+  const windowWidth = window.innerWidth;
+  let screenSize = 'xs';
+
+  /* istanbul ignore next */
+  if (windowWidth >= 1920) {
+    screenSize = 'xxxl';
+  } else if (windowWidth >= 1440) {
+    screenSize = 'xxl';
+  } else if (windowWidth >= 1280) {
+    screenSize = 'xl';
+  } else if (windowWidth >= 1024) {
+    screenSize = 'lg';
+  } else if (windowWidth >= 880) {
+    screenSize = 'im';
+  } else if (windowWidth >= 768) {
+    screenSize = 'md';
+  } else if (windowWidth >= 600) {
+    screenSize = 'is';
+  } else if (windowWidth >= 480) {
+    screenSize = 'sm';
+  } else if (windowWidth >= 400) {
+    screenSize = 'ix';
+  }
+
+  return screenSize;
 }
