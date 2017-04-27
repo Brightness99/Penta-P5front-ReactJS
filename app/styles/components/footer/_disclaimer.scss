@@ -1,0 +1,13 @@
+.app__footer__disclaimer {
+  color: #bbb;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  margin: 1rem 1.5rem 0;
+  text-align: center;
+
+  @include lg {
+    font-size: $font-size-sm;
+    margin: 2rem 0 0;
+    text-align: left;
+  }
+}

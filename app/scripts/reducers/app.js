@@ -5,9 +5,12 @@
  */
 
 import { REHYDRATE } from 'redux-persist/constants';
-import { createReducer } from 'utils/helpers';
+import { createReducer, getScreenSize } from 'utils/helpers';
+import { AppConstants } from 'constants/index';
+
 
 export const appState = {
+  screenSize: getScreenSize(),
   rehydrated: false,
 };
 
@@ -17,6 +20,12 @@ export default {
       return Object.assign({}, state, action.payload.app, {
         rehydrated: true,
       });
+    },
+    [AppConstants.UPDATE_BROWSER_OPTIONS](state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
   }),
 };
