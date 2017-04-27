@@ -1,0 +1,19 @@
+.app__back-to-top {
+  background-color: #eee;
+  border: 0;
+  color: #6A6F7A;
+  font-family: $font-family-open-sans-semibold;
+  outline: none;
+
+  > span {
+    fill: currentColor;
+    width: 1.4rem;
+  }
+
+  &--text {
+    > span {
+      margin-left: 1rem;
+    }
+  }
+}
+
