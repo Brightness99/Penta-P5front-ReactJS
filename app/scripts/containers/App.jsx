@@ -13,8 +13,8 @@ import Footer from 'components/Footer';
 type Props = {
   app: AppStore,
   dispatch: () => {},
-  router: {},
-}
+  router: RouterStore,
+};
 
 export class App extends React.Component {
   static props: Props;
