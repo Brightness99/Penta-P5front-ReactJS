@@ -1,9 +1,15 @@
 // *** Vendor
 @import '~sass-mediaqueries/media-queries';
 
+// *** Vendor customization
+@import 'vendor/rc-collapse';
+
 // *** Variables
 @import 'variables/common';
 @import 'variables/bootstrap';
+
+// *** Base
+@import 'base/typography';
 
 // *** Utilities
 @import 'utilities/functions';
@@ -16,3 +22,8 @@
 
 // *** Layout
 @import 'layout/global';
+
+// *** Components
+@import 'components/back-to-top/index';
+@import 'components/footer/index';
+@import 'components/newsletter/index';
