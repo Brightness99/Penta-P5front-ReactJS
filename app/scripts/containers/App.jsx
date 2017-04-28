@@ -21,7 +21,7 @@ export class App extends React.Component {
 
   render() {
     const { app, dispatch, router } = this.props;
-    let html = (<div>Loading</div>);
+    let html = (<div className="loader">Loading</div>);
 
     if (app.rehydrated) {
       html = (

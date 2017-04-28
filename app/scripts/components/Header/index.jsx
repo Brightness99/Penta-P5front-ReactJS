@@ -1,10 +1,11 @@
+// @flow
+
 import React from 'react';
 
-export default class Header extends React.Component {
+const Header = () => (
+  <div>
+    Header
+  </div>
+);
 
-  render() {
-    return (<div>
-      Header
-    </div>);
-  }
-}
+export default Header;

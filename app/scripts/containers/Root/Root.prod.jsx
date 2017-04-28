@@ -5,8 +5,8 @@ import { Provider } from 'react-redux';
 import App from 'containers/App';
 
 /* istanbul ignore next */
-const Root = (store: {}) => (
-  <Provider store={store}>
+const Root = (props: { store: {} }) => (
+  <Provider store={props.store}>
     <App />
   </Provider>
 );

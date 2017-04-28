@@ -6,13 +6,12 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 import { LOCATION_CHANGE } from '../constants/index';
 
-
 export const history = createBrowserHistory();
 
 type Props = {
   children: typeof Element,
   dispatch: () => {},
-}
+};
 
 class ReduxRouter extends React.Component {
   componentDidMount() {
