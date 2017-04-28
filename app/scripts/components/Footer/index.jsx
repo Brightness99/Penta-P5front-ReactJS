@@ -1,10 +1,11 @@
+// @flow
+
 import React from 'react';
 
-export default class Footer extends React.Component {
+const Footer = () => (
+  <div>
+    Footer
+  </div>
+);
 
-  render() {
-    return (<div>
-      Footer
-    </div>);
-  }
-}
+export default Footer;
