@@ -91,7 +91,7 @@ export class Links extends React.Component {
   renderDesktop() {
     return (
       <div className="app__footer__links-list">
-        {this.renderList()}
+        { this.renderList() }
       </div>
     );
   }
