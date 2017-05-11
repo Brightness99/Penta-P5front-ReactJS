@@ -1,0 +1,17 @@
+@import "topbar";
+
+.app__header {
+  background-color: #ddd; // TODO: Remove this
+
+  &__logo {
+    text-align: center;
+
+    svg {
+      height: 5rem;
+    }
+  }
+
+  &__container {
+
+  }
+}

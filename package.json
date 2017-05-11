@@ -128,6 +128,7 @@
     "moment": "^2.18.1",
     "rc-collapse": "^1.7.3",
     "react": "^15.5.4",
+    "react-credit-cards": "^0.4.1",
     "react-dom": "^15.5.4",
     "react-history": "^0.18.2",
     "react-inlinesvg": "^0.6.0",
