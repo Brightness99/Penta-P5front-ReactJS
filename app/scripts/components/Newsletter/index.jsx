@@ -95,7 +95,7 @@ export class Newsletter extends React.Component {
   };
 
   render() {
-    const { locale, parent, newsletter } = this.props;
+    const { locale } = this.props;
     const { canSubmit } = this.state;
 
     return (<div className="app__newsletter container">
