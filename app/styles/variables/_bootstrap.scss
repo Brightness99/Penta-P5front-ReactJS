@@ -12,19 +12,23 @@ $grid-breakpoints: (
   md: 768px,
   im: 880px,
   lg: 1024px,
-  xl: 1280px
+  xl: 1280px,
+  xxl: 1440px,
+  xxxl: 1920px
 );
-/* stylelint-enable */
 
 $container-max-widths: (
-  ix: 40rem,
-  sm: 48rem,
-  is: 58rem,
-  md: 72rem,
-  im: 88rem,
-  lg: 96rem,
-  xl: 114rem
+  ix: 400px,
+  sm: 480px,
+  is: 580px,
+  md: 720px,
+  im: 880px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1280px,
+  xxxl: 1710px
 );
+/* stylelint-enable */
 
 $brand-primary: #764abc;
 
