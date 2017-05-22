@@ -1,0 +1,62 @@
+.app__config__block {
+  background-color: $color-white;
+  border-radius: 3px;
+  margin-top: 2rem;
+  width: 100%;
+
+  &-header {
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    display: flex;
+    padding: 1rem;
+
+    &__order {
+      align-items: center;
+      background-color: $color-printi;
+      border-radius: 1.8rem;
+      color: #fff;
+      display: inline-flex;
+      font-size: $font-size-xl;
+      height: 3.6rem;
+      justify-content: center;
+      margin-top: 0.5rem;
+      max-width: 3.6rem;
+      min-width: 3.6rem;
+
+      svg {
+        fill: #fff;
+      }
+    }
+
+    &__title {
+      display: inline-flex;
+      flex-direction: column;
+      padding-left: 1.6rem;
+
+      > h3 {
+        display: inline-flex;
+        font-family: $font-family-nunito-regular;
+        font-size: 2.1rem;
+        font-weight: normal;
+        padding-top: 0.5rem;
+      }
+
+      > div {
+        display: inline-flex;
+      }
+    }
+
+    &__button {
+      background-color: transparent;
+      border: 0.1rem solid #6a6f7a;
+      border-radius: 0.3rem;
+      color: #6a6f7a;
+      height: 3rem;
+      font-family: $font-family-open-sans-bold;
+      font-size: $font-size-xxxs;
+      margin-top: 1rem;
+      text-transform: uppercase;
+      width: 16rem;
+    }
+  }
+}

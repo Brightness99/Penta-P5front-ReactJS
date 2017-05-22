@@ -49,10 +49,12 @@ export function rxAjax(action: Object = {}) {
   settings.crossDomain = true;
   settings.withCredentials = true;
   settings.responseType = 'json';
+  settings.user = 'printi';
+  settings.password = '2016alphaprotect';
 
   settings.headers = {
     'Content-Type': 'application/json',
-    'api-key': config.apiKey,
+    'Application-Source': 'react',
   };
 
   if (action.method !== 'GET') {

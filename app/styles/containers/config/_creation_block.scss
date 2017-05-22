@@ -1,0 +1,101 @@
+// TODO: Transitions to input reselect
+
+@mixin input-hover-select() {
+  background-color: $color-printi;;
+  border-color: $color-printi;
+  color: $color-white;
+}
+
+.app__config__creation {
+  display: flex;
+  flex-direction: column;
+  font-family: $font-family-open-sans-regular;
+  padding: 2rem 1rem;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+
+  &-label {
+    background-color: $white;
+    border: 0.1rem solid #dbdddf;
+    border-radius: 3px;
+    color: #151617;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: $font-size-sm;
+    height: 6rem;
+    overflow: hidden;
+    width: 100%;
+
+    span {
+      fill: $color-printi;
+      padding: 0.2rem;
+    }
+
+    &:hover,
+    &--selected {
+      background-color: $color-printi;;
+      border-color: $color-printi;
+      color: $color-white;
+    }
+  }
+
+  //
+  //input[type="radio"] {
+  //  opacity: 0;
+  //  width: 0;
+  //  height: 0;
+  //}
+  //
+  //input[type="radio"] ~ label {
+  //  span {
+  //    display: none;
+  //  }
+  //}
+  //
+  //input[type="radio"]:checked ~ label {
+  //  @include input-hover-select();
+  //
+  //  span {
+  //    display: block;
+  //  }
+  //}
+
+  &-image {
+    align-items: center;
+    background-color: $white;
+    border-right: 0.1rem solid #dbdddf;
+    display: inline-flex;
+    justify-content: center;
+    width: 6.5rem;
+
+    img {
+      max-height: 80%;
+    }
+  }
+
+  &-input {
+    align-items: center;
+    display: inline-flex;
+    height: 100%;
+  }
+
+  &-radio {
+    background-color: #f8f8f8;
+    border: 0.1rem solid #c1c1c1;
+    border-radius: 1.2rem;
+    height: 2.4rem;
+    margin-left: 0.9rem;
+    margin-right: 0.5rem;
+    width: 2.4rem;
+  }
+
+  p {
+    color: #878b94;
+    font-size: $font-size-xs;
+    line-height: 2rem;
+  }
+}

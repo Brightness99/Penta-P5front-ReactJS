@@ -1,0 +1,40 @@
+.app__input--radio {
+  align-content: center;
+  display: inline-flex;
+  height: auto;
+  width: auto;
+
+  input[type="radio"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  span {
+    background-color: #f8f8f8;
+    border: 0.1rem solid #c1c1c1;
+    border-radius: 1.2rem;
+    fill: $color-printi;
+    height: 2.4rem;
+    margin: auto 0.5rem;
+    padding: 0.2rem;
+    width: 2.4rem;
+  }
+
+  input[type="radio"] ~ span {
+    svg {
+      display: none;
+    }
+  }
+
+  input[type="radio"]:checked ~ span{
+    svg {
+      display: block;
+    }
+  }
+}
+
+
+
+
+

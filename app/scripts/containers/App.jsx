@@ -40,6 +40,7 @@ export class App extends React.Component {
 
   render() {
     const { app, dispatch, router } = this.props;
+
     let html = (<div className="loader">Loading</div>);
 
     if (app.rehydrated) {
@@ -50,7 +51,7 @@ export class App extends React.Component {
             <main className="app__main">
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/configuracao-:product" component={Config} />
+                <Route path="/configuracao-:slug" component={Config} />
                 <Route exact path="/test" component={Home} />
               </Switch>
             </main>

@@ -3,7 +3,12 @@
 import React from 'react';
 import cx from 'classnames';
 
-const Overlay = (props: { onClick?: () => {}, className: string }) => {
+type Props = {
+  onClick?: () => {},
+  className?: string,
+};
+
+const Overlay = (props: Props) => {
   const handleClick = (ev) => {
     ev.preventDefault();
 

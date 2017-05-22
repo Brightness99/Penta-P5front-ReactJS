@@ -1,0 +1,14 @@
+@import 'block';
+@import 'creation_block';
+@import 'options_block';
+
+.app__config {
+  padding-top: 38px;
+
+  h2 {
+    font-family: $font-family-open-sans-bold;
+    font-size: 1.8rem;
+    line-height: 3rem;
+    text-transform: uppercase;
+  }
+}

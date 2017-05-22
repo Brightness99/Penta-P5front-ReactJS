@@ -71,3 +71,30 @@ declare type UserStore = {
   newsletter: UserNewsletterStore,
   updatedAt: number,
 };
+
+declare type ProductSettingsStore = {
+  settings: {
+    enabledSources: {
+      upload?: boolean,
+      template?: boolean,
+      artCreation?: boolean,
+      cloud?: boolean,
+    },
+    autoselectSource?: ?string,
+    show_steps: {
+      source?: boolean,
+      options?: boolean,
+      matrix?: boolean,
+      additionalOptions?: boolean,
+    },
+    product: {
+      id: number,
+      title: string,
+      subtitle: string,
+      slug: string,
+    },
+    finalProduct: {
+      id: string,
+    },
+  },
+};
