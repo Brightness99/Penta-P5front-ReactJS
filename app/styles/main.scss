@@ -23,9 +23,14 @@
 // *** Layout
 @import 'layout/global';
 
+// *** Containers
+@import 'containers/config/index';
+
 // *** Components
 @import 'components/back-to-top/index';
-@import 'components/header/index';
 @import 'components/footer/index';
+@import 'components/header/index';
+@import 'components/input/index';
+@import 'components/more-info/index';
 @import 'components/newsletter/index';
 @import 'components/overlay/index';

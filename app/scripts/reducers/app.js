@@ -11,6 +11,9 @@ import { AppConstants } from 'constants/index';
 
 export const appState = {
   screenSize: getScreenSize(),
+  config: {
+    viewType: 'gallery',
+  },
   rehydrated: false,
 };
 
@@ -25,6 +28,15 @@ export default {
       return {
         ...state,
         ...action.payload,
+      };
+    },
+    [AppConstants.UPDATE_CONFIG_VIEW_TYPE](state, action) {
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...action.payload,
+        },
       };
     },
   }),

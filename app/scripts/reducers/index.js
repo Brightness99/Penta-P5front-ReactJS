@@ -4,13 +4,17 @@
  */
 
 import app from './app';
-import router from './router';
 import locale from './locale';
+import products from './products';
+import product_settings from './product_settings';
+import router from './router';
 import user from './user';
 
 export default {
   ...app,
-  ...router,
   ...locale,
+  ...products,
+  ...product_settings,
+  ...router,
   ...user,
 };

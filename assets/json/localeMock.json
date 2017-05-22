@@ -11,7 +11,8 @@
       "WARNING": "Atenção",
       "OOPS": "Ops!",
       "PROMPT_YES": "Sim",
-      "PROMPT_NO": "Não"
+      "PROMPT_NO": "Não",
+      "MORE_INFOS": "Mais informações"
     },
     "header": {
       "PRODUCTS": "Produtos",
@@ -202,6 +203,35 @@
         "print": {
           "TITLE": "Imprima já o seu %s pelo melhor preço",
           "QUESTIONS": "Ainda tem dúvidas? Ligue já (11) 4130-3799"
+        }
+      },
+      "product_settings": {
+        "BREADCRUMB_TITLE": "Configure",
+        "TITLE": "Configure seu produto",
+        "creation": {
+          "TITLE": "Escolher a forma de criar seu produto",
+          "MORE_INFO_TEXT": "Nesta opção você pode encontrar três formas de criação e envio da sua arte. Elas podem mudar de acordo com o produto escolhido. Selecione a maneira como deseja criar seu material para que os próximos passos sejam disponibilizados.",
+          "art": {
+            "TITLE": "Enviar minha arte final",
+            "SUBTITLE": "Faça upload de um arquivo finalizado para a impressão nos formatos suportados"
+          },
+          "online": {
+            "TITLE": "Criar modelo online",
+            "SUBTITLE": "Escolha um design e inclua suas informações e imagens na nossa ferramenta de edição"
+          },
+          "hire": {
+            "TITLE": "Contratar criação",
+            "SUBTITLE": "Contrate um profissional de design da Printi e tenha uma arte totalmente personalizada"
+          }
+        },
+        "options": {
+          "TITLE": "Selecione as opções",
+          "BUTTON_HELP": "Me ajude a configurar",
+          "MORE_INFO_TEXT": "Este passo a passo vai te ajudar com a montagem do seu produto. Crie a configuração ideal para a produção e impressão do seu material seguindo as indicações abaixo. Comece pelo formato, selecionando as medidas, em seguida o tipo de material ou tipo impressão e as opções extras disponíveis, como corte, acabamento e outros. Esses campos podem mudar de acordo com o produto escolhido."
+        },
+        "matrix": {
+          "TITLE": "Calcule o frete e a previsão de entrega",
+          "MORE_INFO_TEXT": "Nesta área você deverá selecionar a quantidade que deseja produzir. Escolha a data limite que deseja receber o material e veja o valor da sua compra com frete ou com frete grátis."
         }
       }
     },

@@ -1,0 +1,18 @@
+.app__more-infos {
+  align-items: center;
+  color: $color-printi;
+  display: flex;
+  font-size: $font-size-xs;
+  position: relative;
+
+  span {
+    fill: $color-printi;
+    height: $font-size-xxs;
+    margin-right: 0.3rem;
+    width: $font-size-xxs;
+
+    svg {
+      vertical-align: top;
+    }
+  }
+}

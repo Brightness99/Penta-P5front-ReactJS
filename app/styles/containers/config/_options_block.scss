@@ -1,0 +1,96 @@
+.app__config__options {
+  display: flex;
+  flex-direction: column;
+
+  > ul {
+    padding: 0;
+
+    li {
+      list-style: none;
+    }
+  }
+
+  &-header {
+    padding: 2rem 1rem 0;
+
+    h3 {
+      font-size: 2.1rem;
+      font-family: $font-family-nunito-regular;
+      margin-bottom: 0;
+    }
+
+    &__youtube {
+      align-items: center;
+      color: $color-printi;
+      display: flex;
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-xxxs;
+
+      span {
+        display: inline-flex;
+        height: 1.8rem;
+        margin-right: 0.5rem;
+        width: 1.8rem;
+      }
+    }
+  }
+
+  &-body {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0.5rem;
+
+    > li {
+      border-radius: 0.3rem;
+      display: inline-flex;
+      max-width: 50%;
+      padding: 1.5rem 0.5rem 0.8rem;
+
+      label {
+        background-color: $color-white;
+        border: 0.1rem solid #eeeeee;
+        font-family: $font-family-nunito-regular;
+        font-size: $font-size-sm;
+        width: 100%;
+
+        img ~ div {
+          border-top: 0.1rem solid #eeeeee;
+        }
+
+        &:hover,
+        &--selected {
+          background-color: $color-printi;
+          border-color: $color-printi;
+          color: $color-white;
+
+          img ~ div {
+            border-color: $color-printi;
+          }
+        }
+      }
+    }
+  }
+
+  &-input {
+    align-items: center;
+    display: flex;
+
+    height: 5rem;
+  }
+
+  &--show-list {
+    max-width: 100%;
+    width: 100%;
+
+    .app__config__options-body {
+      padding-top: 1rem;
+
+       > li {
+         max-width: 100%;
+         padding: 0.5rem;
+         width: 100%;
+       }
+    }
+  }
+
+}

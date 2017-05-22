@@ -1,5 +1,8 @@
 // @flow
 
+// TODO: Messages for e-mail not valid
+// TODO: Messages for submiting form
+
 import React from 'react';
 import SVG from 'react-inlinesvg';
 import cx from 'classnames';
@@ -17,6 +20,7 @@ type Props = {
 type State = {
   canSubmit: boolean,
   isSubmitted: boolean,
+  inputValue: ?string,
 };
 
 export class Newsletter extends React.Component {
@@ -26,6 +30,7 @@ export class Newsletter extends React.Component {
     this.state = {
       canSubmit: false,
       isSubmitted: false,
+      inputValue: '',
     };
   }
 
@@ -62,6 +67,10 @@ export class Newsletter extends React.Component {
       FAILURE: locale.FAILURE,
       SUCCESS: locale.SUCCESS,
     }));
+
+    this.setState({
+      inputValue: '',
+    });
   };
 
   renderSignupMessage() {
@@ -91,12 +100,13 @@ export class Newsletter extends React.Component {
 
     this.setState({
       canSubmit: regex.test(ev.target.value),
+      inputValue: ev.target.value,
     });
   };
 
   render() {
     const { locale } = this.props;
-    const { canSubmit } = this.state;
+    const { canSubmit, inputValue } = this.state;
 
     return (<div className="app__newsletter container">
       <div className="app__newsletter__icon">
@@ -115,6 +125,7 @@ export class Newsletter extends React.Component {
             name="email"
             placeholder={locale.PLACEHOLDER}
             onChange={this.handleChange}
+            value={inputValue}
           />
           <input
             className={
