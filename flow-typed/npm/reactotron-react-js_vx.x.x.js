@@ -27,6 +27,6 @@ declare module 'reactotron-react-js/dist/index' {
 }
 
 // Filename aliases
-declare module 'reactotron-react-js/dist/index.js' {
+declare module 'reactotron-react-js/dist/index.jsx' {
   declare module.exports: $Exports<'reactotron-react-js/dist/index'>;
 }

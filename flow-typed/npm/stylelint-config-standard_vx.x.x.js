@@ -28,6 +28,6 @@ declare module 'stylelint-config-standard' {
 declare module 'stylelint-config-standard/index' {
   declare module.exports: $Exports<'stylelint-config-standard'>;
 }
-declare module 'stylelint-config-standard/index.js' {
+declare module 'stylelint-config-standard/index.jsx' {
   declare module.exports: $Exports<'stylelint-config-standard'>;
 }

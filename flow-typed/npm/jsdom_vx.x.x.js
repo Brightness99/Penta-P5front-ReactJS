@@ -1843,7 +1843,7 @@ declare module 'jsdom/lib/jsdom/living/helpers/validate-names.js' {
 declare module 'jsdom/lib/jsdom/living/html-collection.js' {
   declare module.exports: $Exports<'jsdom/lib/jsdom/living/html-collection'>;
 }
-declare module 'jsdom/lib/jsdom/living/index.js' {
+declare module 'jsdom/lib/jsdom/living/index.jsx' {
   declare module.exports: $Exports<'jsdom/lib/jsdom/living/index'>;
 }
 declare module 'jsdom/lib/jsdom/living/named-properties-window.js' {

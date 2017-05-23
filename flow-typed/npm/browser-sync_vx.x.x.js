@@ -205,7 +205,7 @@ declare module 'browser-sync/bin/browser-sync.js' {
 declare module 'browser-sync/index' {
   declare module.exports: $Exports<'browser-sync'>;
 }
-declare module 'browser-sync/index.js' {
+declare module 'browser-sync/index.jsx' {
   declare module.exports: $Exports<'browser-sync'>;
 }
 declare module 'browser-sync/lib/args.js' {
@@ -304,7 +304,7 @@ declare module 'browser-sync/lib/public/socket.io.min.1.6.0.js' {
 declare module 'browser-sync/lib/public/stream.js' {
   declare module.exports: $Exports<'browser-sync/lib/public/stream'>;
 }
-declare module 'browser-sync/lib/server/index.js' {
+declare module 'browser-sync/lib/server/index.jsx' {
   declare module.exports: $Exports<'browser-sync/lib/server/index'>;
 }
 declare module 'browser-sync/lib/server/proxy-server.js' {

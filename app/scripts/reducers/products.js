@@ -21,8 +21,7 @@ export default {
         rehydrated: true,
       };
     },
-    [ProductConstants.PRODUCT_FETCH_REQUEST](state, action) {
-      console.log(state, action);
+    [ProductConstants.PRODUCT_FETCH_REQUEST](state) {
       return {
         ...state,
       };

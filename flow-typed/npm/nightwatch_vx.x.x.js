@@ -421,7 +421,7 @@ declare module 'nightwatch/examples/unittests/testUtilsWithChai.js' {
 declare module 'nightwatch/index' {
   declare module.exports: $Exports<'nightwatch'>;
 }
-declare module 'nightwatch/index.js' {
+declare module 'nightwatch/index.jsx' {
   declare module.exports: $Exports<'nightwatch'>;
 }
 declare module 'nightwatch/lib/api/assertions/attributeContains.js' {
@@ -565,7 +565,7 @@ declare module 'nightwatch/lib/core/queue.js' {
 declare module 'nightwatch/lib/http/request.js' {
   declare module.exports: $Exports<'nightwatch/lib/http/request'>;
 }
-declare module 'nightwatch/lib/index.js' {
+declare module 'nightwatch/lib/index.jsx' {
   declare module.exports: $Exports<'nightwatch/lib/index'>;
 }
 declare module 'nightwatch/lib/page-object/command-wrapper.js' {

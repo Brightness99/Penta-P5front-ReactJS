@@ -47,7 +47,7 @@ declare module 'markdown-loader/test/markdown-renderer' {
 }
 
 // Filename aliases
-declare module 'markdown-loader/example/index.js' {
+declare module 'markdown-loader/example/index.jsx' {
   declare module.exports: $Exports<'markdown-loader/example/index'>;
 }
 declare module 'markdown-loader/example/webpack.config.js' {
@@ -56,10 +56,10 @@ declare module 'markdown-loader/example/webpack.config.js' {
 declare module 'markdown-loader/index' {
   declare module.exports: $Exports<'markdown-loader'>;
 }
-declare module 'markdown-loader/index.js' {
+declare module 'markdown-loader/index.jsx' {
   declare module.exports: $Exports<'markdown-loader'>;
 }
-declare module 'markdown-loader/test/assets/index.js' {
+declare module 'markdown-loader/test/assets/index.jsx' {
   declare module.exports: $Exports<'markdown-loader/test/assets/index'>;
 }
 declare module 'markdown-loader/test/index.test.js' {

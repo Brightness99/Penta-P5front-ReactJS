@@ -49,7 +49,7 @@ declare module 'extract-text-webpack-plugin/ExtractedModule.js' {
 declare module 'extract-text-webpack-plugin/index' {
   declare module.exports: $Exports<'extract-text-webpack-plugin'>;
 }
-declare module 'extract-text-webpack-plugin/index.js' {
+declare module 'extract-text-webpack-plugin/index.jsx' {
   declare module.exports: $Exports<'extract-text-webpack-plugin'>;
 }
 declare module 'extract-text-webpack-plugin/loader.js' {

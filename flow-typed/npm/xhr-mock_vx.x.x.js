@@ -54,7 +54,7 @@ declare module 'xhr-mock/test/MockXMLHttpRequest' {
 declare module 'xhr-mock/index' {
   declare module.exports: $Exports<'xhr-mock'>;
 }
-declare module 'xhr-mock/index.js' {
+declare module 'xhr-mock/index.jsx' {
   declare module.exports: $Exports<'xhr-mock'>;
 }
 declare module 'xhr-mock/lib/MockRequest.js' {
@@ -66,7 +66,7 @@ declare module 'xhr-mock/lib/MockResponse.js' {
 declare module 'xhr-mock/lib/MockXMLHttpRequest.js' {
   declare module.exports: $Exports<'xhr-mock/lib/MockXMLHttpRequest'>;
 }
-declare module 'xhr-mock/test/index.js' {
+declare module 'xhr-mock/test/index.jsx' {
   declare module.exports: $Exports<'xhr-mock/test/index'>;
 }
 declare module 'xhr-mock/test/MockRequest.js' {

@@ -33,6 +33,6 @@ declare module 'script-loader/addScript.js' {
 declare module 'script-loader/index' {
   declare module.exports: $Exports<'script-loader'>;
 }
-declare module 'script-loader/index.js' {
+declare module 'script-loader/index.jsx' {
   declare module.exports: $Exports<'script-loader'>;
 }

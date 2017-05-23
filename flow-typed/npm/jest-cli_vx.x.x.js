@@ -192,7 +192,7 @@ declare module 'jest-cli/build/cli/args.js' {
 declare module 'jest-cli/build/cli/getJest.js' {
   declare module.exports: $Exports<'jest-cli/build/cli/getJest'>;
 }
-declare module 'jest-cli/build/cli/index.js' {
+declare module 'jest-cli/build/cli/index.jsx' {
   declare module.exports: $Exports<'jest-cli/build/cli/index'>;
 }
 declare module 'jest-cli/build/constants.js' {

@@ -30,9 +30,9 @@ declare module 'selenium-server-standalone-jar/test/index' {
 declare module 'selenium-server-standalone-jar/index' {
   declare module.exports: $Exports<'selenium-server-standalone-jar'>;
 }
-declare module 'selenium-server-standalone-jar/index.js' {
+declare module 'selenium-server-standalone-jar/index.jsx' {
   declare module.exports: $Exports<'selenium-server-standalone-jar'>;
 }
-declare module 'selenium-server-standalone-jar/test/index.js' {
+declare module 'selenium-server-standalone-jar/test/index.jsx' {
   declare module.exports: $Exports<'selenium-server-standalone-jar/test/index'>;
 }

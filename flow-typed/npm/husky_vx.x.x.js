@@ -45,9 +45,9 @@ declare module 'husky/bin/install.js' {
 declare module 'husky/bin/uninstall.js' {
   declare module.exports: $Exports<'husky/bin/uninstall'>;
 }
-declare module 'husky/src/index.js' {
+declare module 'husky/src/index.jsx' {
   declare module.exports: $Exports<'husky/src/index'>;
 }
-declare module 'husky/test/index.js' {
+declare module 'husky/test/index.jsx' {
   declare module.exports: $Exports<'husky/test/index'>;
 }

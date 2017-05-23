@@ -72,7 +72,7 @@ declare type UserStore = {
   updatedAt: number,
 };
 
-declare type ProductSettingsStore = {
+declare type SettingsStore = {
   settings: {
     enabledSources: {
       upload?: boolean,

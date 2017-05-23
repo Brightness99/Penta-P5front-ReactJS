@@ -996,7 +996,7 @@ declare module 'babel-runtime/core-js/array/fill.js' {
 declare module 'babel-runtime/core-js/array/filter.js' {
   declare module.exports: $Exports<'babel-runtime/core-js/array/filter'>;
 }
-declare module 'babel-runtime/core-js/array/find-index.js' {
+declare module 'babel-runtime/core-js/array/find-index.jsx' {
   declare module.exports: $Exports<'babel-runtime/core-js/array/find-index'>;
 }
 declare module 'babel-runtime/core-js/array/find.js' {
@@ -1686,6 +1686,6 @@ declare module 'babel-runtime/helpers/toConsumableArray.js' {
 declare module 'babel-runtime/helpers/typeof.js' {
   declare module.exports: $Exports<'babel-runtime/helpers/typeof'>;
 }
-declare module 'babel-runtime/regenerator/index.js' {
+declare module 'babel-runtime/regenerator/index.jsx' {
   declare module.exports: $Exports<'babel-runtime/regenerator/index'>;
 }

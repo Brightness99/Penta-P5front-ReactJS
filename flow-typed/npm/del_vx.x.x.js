@@ -28,6 +28,6 @@ declare module 'del' {
 declare module 'del/index' {
   declare module.exports: $Exports<'del'>;
 }
-declare module 'del/index.js' {
+declare module 'del/index.jsx' {
   declare module.exports: $Exports<'del'>;
 }

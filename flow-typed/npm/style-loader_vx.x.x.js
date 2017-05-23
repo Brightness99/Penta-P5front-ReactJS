@@ -67,7 +67,7 @@ declare module 'style-loader/fixUrls.js' {
 declare module 'style-loader/index' {
   declare module.exports: $Exports<'style-loader'>;
 }
-declare module 'style-loader/index.js' {
+declare module 'style-loader/index.jsx' {
   declare module.exports: $Exports<'style-loader'>;
 }
 declare module 'style-loader/test/basicTest.js' {

@@ -28,6 +28,6 @@ declare module 'raw-loader' {
 declare module 'raw-loader/index' {
   declare module.exports: $Exports<'raw-loader'>;
 }
-declare module 'raw-loader/index.js' {
+declare module 'raw-loader/index.jsx' {
   declare module.exports: $Exports<'raw-loader'>;
 }

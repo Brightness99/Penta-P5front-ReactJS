@@ -27,6 +27,6 @@ declare module 'babel-plugin-istanbul/lib/index' {
 }
 
 // Filename aliases
-declare module 'babel-plugin-istanbul/lib/index.js' {
+declare module 'babel-plugin-istanbul/lib/index.jsx' {
   declare module.exports: $Exports<'babel-plugin-istanbul/lib/index'>;
 }

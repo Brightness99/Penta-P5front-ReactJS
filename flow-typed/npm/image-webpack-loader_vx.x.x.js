@@ -38,7 +38,7 @@ declare module 'image-webpack-loader/test/webpack2.config' {
 declare module 'image-webpack-loader/index' {
   declare module.exports: $Exports<'image-webpack-loader'>;
 }
-declare module 'image-webpack-loader/index.js' {
+declare module 'image-webpack-loader/index.jsx' {
   declare module.exports: $Exports<'image-webpack-loader'>;
 }
 declare module 'image-webpack-loader/test/app.js' {

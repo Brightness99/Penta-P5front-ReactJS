@@ -30,7 +30,7 @@ declare module 'html-loader/lib/attributesParser' {
 declare module 'html-loader/index' {
   declare module.exports: $Exports<'html-loader'>;
 }
-declare module 'html-loader/index.js' {
+declare module 'html-loader/index.jsx' {
   declare module.exports: $Exports<'html-loader'>;
 }
 declare module 'html-loader/lib/attributesParser.js' {

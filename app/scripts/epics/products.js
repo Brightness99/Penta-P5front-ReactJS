@@ -4,6 +4,7 @@
  */
 import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, ProductConstants } from 'constants/index';
+import { push } from 'modules/ReduxRouter';
 
 export function productsFetch(action$) {
   return action$.ofType(ProductConstants.PRODUCT_FETCH_REQUEST)
@@ -23,10 +24,6 @@ export function productsFetch(action$) {
             };
           }
 
-          if (data.status === 404) {
-            console.log('cu');
-          }
-
           return {
             type: ProductConstants.PRODUCT_FETCH_FAILURE,
             payload: { message: 'Algo de errado não está correto' },
@@ -35,12 +32,16 @@ export function productsFetch(action$) {
         })
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
         .defaultIfEmpty({ type: ProductConstants.PRODUCT_FETCH_CANCEL })
-        .catch(error => [
-          {
+        .catch(error => {
+          if (error.status === 404) {
+            push('/404');
+          }
+
+          return ([{
             type: ProductConstants.PRODUCT_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
-          },
-        ]);
+          }]);
+        });
     });
 }

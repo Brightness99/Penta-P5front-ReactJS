@@ -10,42 +10,27 @@ import ConfigBlock from './ConfigBlock';
 type Props = {
   locale: {},
   screenSize: string,
-};
-
-type State = {
-  selectedCreation: string,
+  order: number,
+  finalProduct: {
+    id: string,
+  },
+  dispatch: () => {},
+  handleSourceSelection: () => {},
+  selectedSource: ?string,
 };
 
 export default class CreationBlock extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedCreation: '',
-    };
-
-    this.renderBlock = this.renderBlock.bind(this);
-  }
-
   static props: Props;
 
-  static state: State;
-
-  handleChange = (ev) => {
-    this.setState({
-      selectedCreation: ev.target.value,
-    });
-  };
-
   renderBlock(blockName, icon, locale) {
-    const { selectedCreation } = this.state;
+    const { handleSourceSelection, selectedSource } = this.props;
 
     return (
       <div className={`app__config__creation-${blockName}`}>
         <label
           className={cx(
             'app__config__creation-label',
-            selectedCreation === blockName && 'app__config__creation-label--selected'
+            selectedSource === blockName && 'app__config__creation-label--selected'
           )}
           htmlFor={`config-${blockName}`}
         >
@@ -57,7 +42,7 @@ export default class CreationBlock extends React.Component {
               name="config-creation"
               id={`config-${blockName}`}
               value={blockName}
-              onChange={this.handleChange}
+              onChange={handleSourceSelection}
             />
             {locale.TITLE}
           </div>
@@ -70,10 +55,10 @@ export default class CreationBlock extends React.Component {
   }
 
   render() {
-    const { locale, screenSize } = this.props;
+    const { locale, screenSize, order } = this.props;
 
     return (
-      <ConfigBlock locale={locale} screenSize={screenSize}>
+      <ConfigBlock locale={locale} screenSize={screenSize} order={order}>
         <div className="app__config__creation">
           {this.renderBlock('tweak', require('assets/media/svg-wannabe/Conf-Icon1.png'), locale.online)}
           {this.renderBlock('upload', require('assets/media/svg-wannabe/Conf-Icon3.png'), locale.art)}
