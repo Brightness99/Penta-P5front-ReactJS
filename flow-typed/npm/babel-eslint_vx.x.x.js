@@ -60,7 +60,7 @@ declare module 'babel-eslint/babylon-to-espree/convertComments.js' {
 declare module 'babel-eslint/babylon-to-espree/convertTemplateType.js' {
   declare module.exports: $Exports<'babel-eslint/babylon-to-espree/convertTemplateType'>;
 }
-declare module 'babel-eslint/babylon-to-espree/index.js' {
+declare module 'babel-eslint/babylon-to-espree/index.jsx' {
   declare module.exports: $Exports<'babel-eslint/babylon-to-espree/index'>;
 }
 declare module 'babel-eslint/babylon-to-espree/toAST.js' {
@@ -75,6 +75,6 @@ declare module 'babel-eslint/babylon-to-espree/toTokens.js' {
 declare module 'babel-eslint/index' {
   declare module.exports: $Exports<'babel-eslint'>;
 }
-declare module 'babel-eslint/index.js' {
+declare module 'babel-eslint/index.jsx' {
   declare module.exports: $Exports<'babel-eslint'>;
 }

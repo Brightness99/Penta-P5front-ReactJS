@@ -35,10 +35,10 @@ declare module 'redux-mock-store/test/mock/middleware' {
 }
 
 // Filename aliases
-declare module 'redux-mock-store/lib/index.js' {
+declare module 'redux-mock-store/lib/index.jsx' {
   declare module.exports: $Exports<'redux-mock-store/lib/index'>;
 }
-declare module 'redux-mock-store/test/index.js' {
+declare module 'redux-mock-store/test/index.jsx' {
   declare module.exports: $Exports<'redux-mock-store/test/index'>;
 }
 declare module 'redux-mock-store/test/mock/middleware.js' {

@@ -85,7 +85,7 @@ declare module 'react-hot-loader/babel.js' {
 declare module 'react-hot-loader/index' {
   declare module.exports: $Exports<'react-hot-loader'>;
 }
-declare module 'react-hot-loader/index.js' {
+declare module 'react-hot-loader/index.jsx' {
   declare module.exports: $Exports<'react-hot-loader'>;
 }
 declare module 'react-hot-loader/lib/AppContainer.dev.js' {
@@ -97,10 +97,10 @@ declare module 'react-hot-loader/lib/AppContainer.js' {
 declare module 'react-hot-loader/lib/AppContainer.prod.js' {
   declare module.exports: $Exports<'react-hot-loader/lib/AppContainer.prod'>;
 }
-declare module 'react-hot-loader/lib/babel/index.js' {
+declare module 'react-hot-loader/lib/babel/index.jsx' {
   declare module.exports: $Exports<'react-hot-loader/lib/babel/index'>;
 }
-declare module 'react-hot-loader/lib/index.js' {
+declare module 'react-hot-loader/lib/index.jsx' {
   declare module.exports: $Exports<'react-hot-loader/lib/index'>;
 }
 declare module 'react-hot-loader/lib/patch.dev.js' {
@@ -112,7 +112,7 @@ declare module 'react-hot-loader/lib/patch.js' {
 declare module 'react-hot-loader/lib/patch.prod.js' {
   declare module.exports: $Exports<'react-hot-loader/lib/patch.prod'>;
 }
-declare module 'react-hot-loader/lib/webpack/index.js' {
+declare module 'react-hot-loader/lib/webpack/index.jsx' {
   declare module.exports: $Exports<'react-hot-loader/lib/webpack/index'>;
 }
 declare module 'react-hot-loader/lib/webpack/makeIdentitySourceMap.js' {

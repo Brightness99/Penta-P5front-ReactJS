@@ -28,6 +28,6 @@ declare module 'scroll-doc' {
 declare module 'scroll-doc/index' {
   declare module.exports: $Exports<'scroll-doc'>;
 }
-declare module 'scroll-doc/index.js' {
+declare module 'scroll-doc/index.jsx' {
   declare module.exports: $Exports<'scroll-doc'>;
 }

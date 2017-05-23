@@ -97,7 +97,7 @@ declare module 'eslint-plugin-babel/ast-utils.js' {
 declare module 'eslint-plugin-babel/index' {
   declare module.exports: $Exports<'eslint-plugin-babel'>;
 }
-declare module 'eslint-plugin-babel/index.js' {
+declare module 'eslint-plugin-babel/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-babel'>;
 }
 declare module 'eslint-plugin-babel/rules/array-bracket-spacing.js' {

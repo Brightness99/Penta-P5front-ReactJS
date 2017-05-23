@@ -89,7 +89,7 @@ declare module 'redux-observable/lib/cjs/createEpicMiddleware.js' {
 declare module 'redux-observable/lib/cjs/EPIC_END.js' {
   declare module.exports: $Exports<'redux-observable/lib/cjs/EPIC_END'>;
 }
-declare module 'redux-observable/lib/cjs/index.js' {
+declare module 'redux-observable/lib/cjs/index.jsx' {
   declare module.exports: $Exports<'redux-observable/lib/cjs/index'>;
 }
 declare module 'redux-observable/lib/es/ActionsObservable.js' {
@@ -104,6 +104,6 @@ declare module 'redux-observable/lib/es/createEpicMiddleware.js' {
 declare module 'redux-observable/lib/es/EPIC_END.js' {
   declare module.exports: $Exports<'redux-observable/lib/es/EPIC_END'>;
 }
-declare module 'redux-observable/lib/es/index.js' {
+declare module 'redux-observable/lib/es/index.jsx' {
   declare module.exports: $Exports<'redux-observable/lib/es/index'>;
 }

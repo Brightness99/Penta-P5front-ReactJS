@@ -27,6 +27,6 @@ declare module 'babel-plugin-transform-decorators-legacy/lib/index' {
 }
 
 // Filename aliases
-declare module 'babel-plugin-transform-decorators-legacy/lib/index.js' {
+declare module 'babel-plugin-transform-decorators-legacy/lib/index.jsx' {
   declare module.exports: $Exports<'babel-plugin-transform-decorators-legacy/lib/index'>;
 }

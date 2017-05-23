@@ -28,6 +28,6 @@ declare module 'clean-webpack-plugin' {
 declare module 'clean-webpack-plugin/index' {
   declare module.exports: $Exports<'clean-webpack-plugin'>;
 }
-declare module 'clean-webpack-plugin/index.js' {
+declare module 'clean-webpack-plugin/index.jsx' {
   declare module.exports: $Exports<'clean-webpack-plugin'>;
 }

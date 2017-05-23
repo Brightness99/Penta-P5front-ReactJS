@@ -71,7 +71,7 @@ declare module 'redux-logger/src/index' {
 }
 
 // Filename aliases
-declare module 'redux-logger/dist/index.js' {
+declare module 'redux-logger/dist/index.jsx' {
   declare module.exports: $Exports<'redux-logger/dist/index'>;
 }
 declare module 'redux-logger/dist/index.min.js' {
@@ -89,7 +89,7 @@ declare module 'redux-logger/lib/diff.js' {
 declare module 'redux-logger/lib/helpers.js' {
   declare module.exports: $Exports<'redux-logger/lib/helpers'>;
 }
-declare module 'redux-logger/lib/index.js' {
+declare module 'redux-logger/lib/index.jsx' {
   declare module.exports: $Exports<'redux-logger/lib/index'>;
 }
 declare module 'redux-logger/src/core.js' {
@@ -104,6 +104,6 @@ declare module 'redux-logger/src/diff.js' {
 declare module 'redux-logger/src/helpers.js' {
   declare module.exports: $Exports<'redux-logger/src/helpers'>;
 }
-declare module 'redux-logger/src/index.js' {
+declare module 'redux-logger/src/index.jsx' {
   declare module.exports: $Exports<'redux-logger/src/index'>;
 }

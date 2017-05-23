@@ -9,9 +9,11 @@ import Router from 'modules/ReduxRouter';
 
 import Config from 'containers/Config';
 import Home from 'containers/Home';
+import Error404 from 'containers/Errors/404';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+
 
 type Props = {
   app: AppStore,
@@ -53,6 +55,8 @@ export class App extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/configuracao-:slug" component={Config} />
                 <Route exact path="/test" component={Home} />
+                <Route exact path="/404" component={Error404} />
+                <Route component={Error404} />
               </Switch>
             </main>
             <Footer screenSize={app.screenSize} />

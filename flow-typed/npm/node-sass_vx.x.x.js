@@ -160,7 +160,7 @@ declare module 'node-sass/lib/errors.js' {
 declare module 'node-sass/lib/extensions.js' {
   declare module.exports: $Exports<'node-sass/lib/extensions'>;
 }
-declare module 'node-sass/lib/index.js' {
+declare module 'node-sass/lib/index.jsx' {
   declare module.exports: $Exports<'node-sass/lib/index'>;
 }
 declare module 'node-sass/lib/render.js' {

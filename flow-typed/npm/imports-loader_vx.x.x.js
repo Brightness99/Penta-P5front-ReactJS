@@ -28,6 +28,6 @@ declare module 'imports-loader' {
 declare module 'imports-loader/index' {
   declare module.exports: $Exports<'imports-loader'>;
 }
-declare module 'imports-loader/index.js' {
+declare module 'imports-loader/index.jsx' {
   declare module.exports: $Exports<'imports-loader'>;
 }

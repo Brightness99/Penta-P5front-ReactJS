@@ -3,19 +3,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { productFetch } from 'actions';
+import { settingsFetch, settingsSourceFetch } from 'actions';
+
+import Loading from 'components/Loading';
 
 import ConfigBlock from './ConfigBlock';
-import CreationBlock from './CreationBlock';
+import SourcesBlock from './SourcesBlock';
 import OptionsBlock from './OptionsBlock';
 import MatrixBlock from './MatrixBlock';
+
 
 type Props = {
   app: AppStore,
   dispatch: () => {},
   locale: {},
   products: ProductStore,
-  productSettings: ProductSettingsStore,
+  productSettings: SettingsStore,
   router: RouterStore,
   match: {},
 };
@@ -24,12 +27,18 @@ export class Config extends React.Component {
   componentDidMount() {
     const { match: { params: { slug } }, dispatch } = this.props;
 
-    dispatch(productFetch(slug));
+    dispatch(settingsFetch(slug));
   }
 
   static props: Props;
 
-  render() {
+  handleSourceSelection = (ev) => {
+    const { productSettings: { finalProduct: { id } }, dispatch } = this.props;
+
+    dispatch(settingsSourceFetch(id, ev.target.value));
+  };
+
+  renderPage() {
     const {
       app: {
         config: {
@@ -38,19 +47,30 @@ export class Config extends React.Component {
         screenSize,
       },
       productSettings: {
-        settings,
+        product,
+        settings: {
+          showSteps,
+          selectedSource,
+        },
       },
       locale,
       dispatch,
     }
-    = this.props;
+      = this.props;
 
     const configLocale = locale.translate.page.product_settings;
-    console.log(settings);
     return (
       <div className="app__config container">
-        <h2>{configLocale.TITLE}: Cartão de Visita</h2>
-        {true && <CreationBlock locale={configLocale.creation} screenSize={screenSize} />}
+        <h2>{`${configLocale.TITLE}: ${product.title}`}</h2>
+        {showSteps.source &&
+          <SourcesBlock
+            locale={configLocale.creation}
+            screenSize={screenSize}
+            order="1"
+            dispatch={dispatch}
+            handleSourceSelection={this.handleSourceSelection}
+            selectedSource={selectedSource}
+          />}
         <ConfigBlock
           order="2"
           locale={configLocale.options}
@@ -68,6 +88,16 @@ export class Config extends React.Component {
         </ConfigBlock>
       </div>
     );
+  }
+
+  render() {
+    const { productSettings } = this.props;
+
+    if (productSettings.isRunning.settings || !productSettings.isLoaded.settings) {
+      return (<Loading />);
+    }
+
+    return this.renderPage();
   }
 }
 

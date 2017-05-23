@@ -944,7 +944,7 @@ declare module 'eslint-plugin-jsx-a11y/__tests__/src/util/schemas-test.js' {
 declare module 'eslint-plugin-jsx-a11y/flow/eslint.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/flow/eslint'>;
 }
-declare module 'eslint-plugin-jsx-a11y/lib/index.js' {
+declare module 'eslint-plugin-jsx-a11y/lib/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/lib/index'>;
 }
 declare module 'eslint-plugin-jsx-a11y/lib/rules/accessible-emoji.js' {
@@ -1100,7 +1100,7 @@ declare module 'eslint-plugin-jsx-a11y/lib/util/implicitRoles/hr.js' {
 declare module 'eslint-plugin-jsx-a11y/lib/util/implicitRoles/img.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/lib/util/implicitRoles/img'>;
 }
-declare module 'eslint-plugin-jsx-a11y/lib/util/implicitRoles/index.js' {
+declare module 'eslint-plugin-jsx-a11y/lib/util/implicitRoles/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/lib/util/implicitRoles/index'>;
 }
 declare module 'eslint-plugin-jsx-a11y/lib/util/implicitRoles/input.js' {
@@ -1184,7 +1184,7 @@ declare module 'eslint-plugin-jsx-a11y/scripts/boilerplate/test.js' {
 declare module 'eslint-plugin-jsx-a11y/scripts/create-rule.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/scripts/create-rule'>;
 }
-declare module 'eslint-plugin-jsx-a11y/src/index.js' {
+declare module 'eslint-plugin-jsx-a11y/src/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/src/index'>;
 }
 declare module 'eslint-plugin-jsx-a11y/src/rules/accessible-emoji.js' {
@@ -1340,7 +1340,7 @@ declare module 'eslint-plugin-jsx-a11y/src/util/implicitRoles/hr.js' {
 declare module 'eslint-plugin-jsx-a11y/src/util/implicitRoles/img.js' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/src/util/implicitRoles/img'>;
 }
-declare module 'eslint-plugin-jsx-a11y/src/util/implicitRoles/index.js' {
+declare module 'eslint-plugin-jsx-a11y/src/util/implicitRoles/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-jsx-a11y/src/util/implicitRoles/index'>;
 }
 declare module 'eslint-plugin-jsx-a11y/src/util/implicitRoles/input.js' {

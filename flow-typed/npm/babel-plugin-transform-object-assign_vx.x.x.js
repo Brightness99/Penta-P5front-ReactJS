@@ -27,6 +27,6 @@ declare module 'babel-plugin-transform-object-assign/lib/index' {
 }
 
 // Filename aliases
-declare module 'babel-plugin-transform-object-assign/lib/index.js' {
+declare module 'babel-plugin-transform-object-assign/lib/index.jsx' {
   declare module.exports: $Exports<'babel-plugin-transform-object-assign/lib/index'>;
 }
