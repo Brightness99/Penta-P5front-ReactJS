@@ -1,21 +1,43 @@
 // TODO: Transitions to input reselect
 
-@mixin input-hover-select() {
-  background-color: $color-printi;;
-  border-color: $color-printi;
-  color: $color-white;
-}
-
 .app__config__creation {
   display: flex;
   flex-direction: column;
   font-family: $font-family-open-sans-regular;
   padding: 2rem 1rem;
 
+  @include lg {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 1rem 3rem;
+  }
+
   > div {
     display: flex;
     flex-direction: column;
     margin-top: 0.5rem;
+
+    @include lg {
+      align-items: center;
+      display: inline-flex;
+      flex-direction: column;
+      padding: 0 0.5rem;
+      width: 33%;
+
+      &:first-child {
+        padding-left: 0;
+        padding-right: 1rem;
+      }
+
+      &:last-child {
+        padding-left: 1rem;
+        padding-right: 0;
+      }
+
+      > * {
+        max-width: 250px;
+      }
+    }
   }
 
   &-label {
@@ -30,6 +52,11 @@
     overflow: hidden;
     width: 100%;
 
+    @include lg {
+      flex-direction: column;
+      height: 275px;
+    }
+
     span {
       fill: $color-printi;
       padding: 0.2rem;
@@ -43,27 +70,6 @@
     }
   }
 
-  //
-  //input[type="radio"] {
-  //  opacity: 0;
-  //  width: 0;
-  //  height: 0;
-  //}
-  //
-  //input[type="radio"] ~ label {
-  //  span {
-  //    display: none;
-  //  }
-  //}
-  //
-  //input[type="radio"]:checked ~ label {
-  //  @include input-hover-select();
-  //
-  //  span {
-  //    display: block;
-  //  }
-  //}
-
   &-image {
     align-items: center;
     background-color: $white;
@@ -75,16 +81,27 @@
     img {
       max-height: 80%;
     }
+
+    @include lg {
+      border-right: none;
+      border-bottom: 0.1rem solid #dbdddf;
+      height: 100%;
+      width: 100%;
+    }
   }
 
   &-input {
     align-items: center;
     display: inline-flex;
     height: 100%;
+
+    @include lg {
+      height: 5rem;
+    }
   }
 
   &-radio {
-    background-color: #f8f8f8;
+    //background-color: #f8f8f8;
     border: 0.1rem solid #c1c1c1;
     border-radius: 1.2rem;
     height: 2.4rem;
@@ -97,5 +114,10 @@
     color: #878b94;
     font-size: $font-size-xs;
     line-height: 2rem;
+
+    @include lg {
+      padding: 0 0.5rem;
+      text-align: justify;
+    }
   }
 }

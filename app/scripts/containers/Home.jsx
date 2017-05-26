@@ -9,7 +9,7 @@ export default class Home extends React.Component {
 
   render() {
     return (<div>
-      <NavLink to="/configuracao-fbcard">Home Page</NavLink>
+      <NavLink to="/configuracao-catalogo">Home Page</NavLink>
     </div>);
   }
 }

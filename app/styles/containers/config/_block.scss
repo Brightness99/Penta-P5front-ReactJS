@@ -4,6 +4,10 @@
   margin-top: 2rem;
   width: 100%;
 
+  @include lg {
+    width: 75%;
+  }
+
   &-header {
     background-color: #f8f8f8;
     border-radius: 3px;

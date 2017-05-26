@@ -7,11 +7,15 @@ import SVG from 'react-inlinesvg';
 import { RadioButton } from 'components/Input';
 
 import { setViewType } from 'actions';
+import ConfigBlock from './ConfigBlock';
 
 type Props = {
   locale: {},
   viewType?: string,
+  screenSize: string,
+  order: number,
   dispatch: () => {},
+  options: []
 };
 
 type State = {
@@ -64,11 +68,11 @@ export default class OptionsBlock extends React.Component {
     );
   }
 
-  render() {
-    const { viewType } = this.props;
-
+  renderBlock() {
+    const { viewType, options } = this.props;
+    console.log(options);
     return (
-      <section className="app__config__options">
+      <div className="app__config__options">
         <button value="list" onClick={this.handleChangeView}>List</button>
         <button value="gallery" onClick={this.handleChangeView}>Gallery</button>
         <ul className={cx(viewType === 'list' && 'app__config__options--show-list')}>
@@ -103,7 +107,21 @@ export default class OptionsBlock extends React.Component {
             </ul>
           </li>
         </ul>
-      </section>
+      </div>
+    );
+  }
+
+  render() {
+    const { locale, screenSize, order } = this.props;
+
+    return (
+      <ConfigBlock
+        order="2"
+        locale={locale}
+        button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
+      >
+        {this.renderBlock()}
+      </ConfigBlock>
     );
   }
 }
