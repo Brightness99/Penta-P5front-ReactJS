@@ -19,7 +19,7 @@ type Props = {
   selectedSource: ?string,
 };
 
-export default class CreationBlock extends React.Component {
+export default class SourcesBlock extends React.Component {
   static props: Props;
 
   renderBlock(blockName, icon, locale) {
@@ -43,6 +43,7 @@ export default class CreationBlock extends React.Component {
               id={`config-${blockName}`}
               value={blockName}
               onChange={handleSourceSelection}
+              checked={selectedSource === blockName}
             />
             {locale.TITLE}
           </div>
@@ -58,7 +59,7 @@ export default class CreationBlock extends React.Component {
     const { locale, screenSize, order } = this.props;
 
     return (
-      <ConfigBlock locale={locale} screenSize={screenSize} order={order}>
+      <ConfigBlock locale={locale} screenSize={screenSize} order={order} className="app__config__creation">
         <div className="app__config__creation">
           {this.renderBlock('tweak', require('assets/media/svg-wannabe/Conf-Icon1.png'), locale.online)}
           {this.renderBlock('upload', require('assets/media/svg-wannabe/Conf-Icon3.png'), locale.art)}

@@ -30,55 +30,100 @@ export class Config extends React.Component {
     dispatch(settingsFetch(slug));
   }
 
+  componentDidUpdate(prevProps) {
+    const prevSelectedSource = prevProps.productSettings.settings.source.selectedSource;
+    const selectedSource = this.props.productSettings.settings.source.selectedSource;
+
+    if (prevSelectedSource !== selectedSource) {
+      window.scrollTo(0, document.querySelector('.app__config__options').offsetTop - 25);
+    }
+  }
+
   static props: Props;
 
   handleSourceSelection = (ev) => {
-    const { productSettings: { finalProduct: { id } }, dispatch } = this.props;
-
-    dispatch(settingsSourceFetch(id, ev.target.value));
+    const { productSettings: { finalProduct: { id }, settings: { selectedSource } }, dispatch } = this.props;
+    if (ev.target.value !== selectedSource) {
+      dispatch(settingsSourceFetch(id, ev.target.value));
+    }
   };
 
-  renderPage() {
+  renderSourceBlock() {
     const {
       app: {
-        config: {
-          viewType,
-        },
         screenSize,
       },
       productSettings: {
-        product,
         settings: {
-          showSteps,
-          selectedSource,
+          source: {
+            selectedSource,
+          },
         },
       },
       locale,
       dispatch,
-    }
-      = this.props;
+    } = this.props;
+
+    const configLocale = locale.translate.page.product_settings;
+
+    return (
+      <SourcesBlock
+        locale={configLocale.creation}
+        screenSize={screenSize}
+        order="1"
+        dispatch={dispatch}
+        handleSourceSelection={this.handleSourceSelection}
+        selectedSource={selectedSource}
+      />
+    );
+  }
+
+  renderOptionsBlock() {
+    const {
+      app: {
+        config: {
+          viewType
+        }
+      },
+      productSettings: {
+        options,
+      },
+      locale,
+      dispatch
+    } = this.props;
+    const configLocale = locale.translate.page.product_settings.options;
+
+    return (
+      <OptionsBlock
+        dispatch={dispatch}
+        viewType={viewType}
+        locale={configLocale}
+        order="2"
+        options={options}
+      />
+    );
+  }
+
+  renderPage() {
+    const {
+      productSettings: {
+        product,
+        settings: {
+          source: {
+            showSteps,
+            selectedSource
+          },
+        },
+      },
+      locale,
+    } = this.props;
 
     const configLocale = locale.translate.page.product_settings;
     return (
       <div className="app__config container">
         <h2>{`${configLocale.TITLE}: ${product.title}`}</h2>
-        {showSteps.source &&
-          <SourcesBlock
-            locale={configLocale.creation}
-            screenSize={screenSize}
-            order="1"
-            dispatch={dispatch}
-            handleSourceSelection={this.handleSourceSelection}
-            selectedSource={selectedSource}
-          />}
-        <ConfigBlock
-          order="2"
-          locale={configLocale.options}
-          className="app__config__options"
-          button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
-        >
-          <OptionsBlock dispatch={dispatch} viewType={viewType} />
-        </ConfigBlock>
+        {showSteps.source && this.renderSourceBlock()}
+        {showSteps.options && selectedSource && this.renderOptionsBlock()}
         <ConfigBlock
           order="3"
           locale={configLocale.matrix}

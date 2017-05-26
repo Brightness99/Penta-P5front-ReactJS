@@ -1,5 +1,7 @@
 // @flow
 
+// TODO: Add vendor scripts to open the certificates
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 

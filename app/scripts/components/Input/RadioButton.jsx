@@ -7,10 +7,15 @@ type Props = {
   id: string,
   name: string,
   value: any,
+  checked: boolean,
   onChange: () => {},
 };
 
 export class RadioButton extends React.Component {
+  static defaultProps = {
+    checked: false,
+  };
+
   static props: Props;
 
   onChange = (ev) => {
@@ -22,7 +27,8 @@ export class RadioButton extends React.Component {
   };
 
   render() {
-    const { id, name, value } = this.props;
+    const { id, name, value, checked } = this.props;
+
     return (
       <div className="app__input--radio">
         <input
@@ -31,6 +37,7 @@ export class RadioButton extends React.Component {
           id={id}
           value={value}
           onChange={this.onChange}
+          defaultChecked={checked}
         />
         <SVG src={require('assets/media/svg/icon_check.svg')} />
       </div>
