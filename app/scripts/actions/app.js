@@ -79,7 +79,7 @@ export function updateBrowserOptions(payload: Object, initial: boolean = false):
  * @param {Object} payload
  * @returns {Object}
  */
-export function setViewType(payload: Object): Object {
+export function setViewType(payload: Object): Object { // TODO: migrate this to settings actions
   return {
     type: AppConstants.UPDATE_CONFIG_VIEW_TYPE,
     payload,

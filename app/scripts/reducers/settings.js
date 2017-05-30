@@ -29,8 +29,7 @@ export const productSettingsState = {
     },
     options: {
       defaultCombinationCount: 0,
-      optionSectionInfo: [],
-      calculator: [],
+      list: [],
     },
   },
 };
@@ -98,12 +97,11 @@ export default {
         .map((item) => ({
           ...calculator[item],
           options: option_section_info[item]
-            .filter((obj) => obj.visible)
             .map((optionItem) => ({
               ...optionItem,
-              items: {
-                ...calculator[item].options[optionItem.key],
-              },
+              items: [
+                ...calculator[item].options[optionItem.key].sort((a, b) => a.position - b.position),
+              ],
             })),
         }));
       return {
@@ -120,8 +118,7 @@ export default {
           ...state.settings,
           options: {
             defaultCombinationCount: action.payload.default_combination_count,
-            optionSectionInfo: action.payload.option_section_info,
-            itens: options,
+            list: options,
           },
         },
         updatedAt: action.meta.updatedAt,

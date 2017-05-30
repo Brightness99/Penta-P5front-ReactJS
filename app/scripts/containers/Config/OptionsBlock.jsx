@@ -68,11 +68,22 @@ export default class OptionsBlock extends React.Component {
     );
   }
 
+  renderTotalPagesText() {
+    const { options: { parts: { total, parts } } } = this.props;
+
+    if (total > 1) {
+      return (<div className="app__config__totalPages">Este item possui {total} partes: {parts} </div>);
+    }
+
+    return '';
+  }
+
   renderBlock() {
     const { viewType, options } = this.props;
     console.log(options);
     return (
       <div className="app__config__options">
+        {this.renderTotalPagesText()}
         <button value="list" onClick={this.handleChangeView}>List</button>
         <button value="gallery" onClick={this.handleChangeView}>Gallery</button>
         <ul className={cx(viewType === 'list' && 'app__config__options--show-list')}>
@@ -112,13 +123,14 @@ export default class OptionsBlock extends React.Component {
   }
 
   render() {
-    const { locale, screenSize, order } = this.props;
+    const { locale,  } = this.props;
 
     return (
       <ConfigBlock
         order="2"
         locale={locale}
         button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
+        className="app__config__options-block"
       >
         {this.renderBlock()}
       </ConfigBlock>

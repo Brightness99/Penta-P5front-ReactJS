@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import cx from 'classnames';
 import MoreInfo from 'components/MoreInfo';
 
 type Props = {
@@ -43,7 +44,7 @@ const ConfigBlock = (props: Props) => {
 
   return (
     <section
-      className="app__config__block"
+      className={cx('app__config__block', props.className)}
     >
       {['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(props.screenSize)
         ? renderMobileHeader()

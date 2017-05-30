@@ -30,7 +30,7 @@ export default {
         ...action.payload,
       };
     },
-    [AppConstants.UPDATE_CONFIG_VIEW_TYPE](state, action) {
+    [AppConstants.UPDATE_CONFIG_VIEW_TYPE](state, action) { // TODO: migrate this to settings reducer
       return {
         ...state,
         config: {

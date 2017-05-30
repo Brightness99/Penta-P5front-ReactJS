@@ -51,3 +51,11 @@ a {
     width: 100%;
   }
 }
+
+.app__main {
+  padding-top: $header-height;
+
+  @include lg {
+    padding-top: ($header-height + $topbar-height);
+  }
+}

@@ -2,7 +2,13 @@
 
 .app__header {
   background-color: #ddd; // TODO: Remove this
-  height: 10rem;
+  height: $header-height;
+  position: absolute;
+  width: 100%;
+
+  @include lg {
+    height: ($header-height + $topbar-height);
+  }
 
   &__logo {
     text-align: center;
