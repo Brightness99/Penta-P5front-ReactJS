@@ -4,12 +4,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { settingsFetch, settingsSourceFetch } from 'actions';
+import { settingsSelector } from 'selectors';
 
 import Loading from 'components/Loading';
 
 import ConfigBlock from './ConfigBlock';
 import SourcesBlock from './SourcesBlock';
-import OptionsBlock from './OptionsBlock';
+import OptionsBlock from './Options';
 import MatrixBlock from './MatrixBlock';
 
 
@@ -21,6 +22,7 @@ type Props = {
   productSettings: SettingsStore,
   router: RouterStore,
   match: {},
+  options: {},
 };
 
 export class Config extends React.Component {
@@ -31,11 +33,14 @@ export class Config extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { app: { screenSize } } = this.props;
     const prevSelectedSource = prevProps.productSettings.settings.source.selectedSource;
     const selectedSource = this.props.productSettings.settings.source.selectedSource;
+    const prevScreenSize = prevProps.app.screenSize;
 
-    if (prevSelectedSource !== selectedSource) {
-      window.scrollTo(0, document.querySelector('.app__config__options').offsetTop - 25);
+    if (prevSelectedSource !== selectedSource || prevScreenSize !== screenSize) {
+      // const scrollTop = document.querySelector('.app__config__options').offsetTop - 25; // TODO: Fix this shit
+      // window.scrollTo(0, scrollTop);
     }
   }
 
@@ -82,14 +87,17 @@ export class Config extends React.Component {
     const {
       app: {
         config: {
-          viewType
-        }
+          viewType,
+        },
       },
       productSettings: {
-        options,
+        settings,
+        isRunning,
+        isLoaded,
       },
       locale,
-      dispatch
+      dispatch,
+      options,
     } = this.props;
     const configLocale = locale.translate.page.product_settings.options;
 
@@ -99,7 +107,9 @@ export class Config extends React.Component {
         viewType={viewType}
         locale={configLocale}
         order="2"
-        options={options}
+        options={{ ...settings.options, ...options }}
+        isSourceRunning={isRunning.source}
+        isSourceLoaded={isLoaded.source}
       />
     );
   }
@@ -111,7 +121,7 @@ export class Config extends React.Component {
         settings: {
           source: {
             showSteps,
-            selectedSource
+            selectedSource,
           },
         },
       },
@@ -148,13 +158,7 @@ export class Config extends React.Component {
 
 /* istanbul ignore next */
 function mapStateToProps(state) {
-  return {
-    app: state.app,
-    locale: state.locale,
-    route: state.route,
-    product: state.products,
-    productSettings: state.productSettings,
-  };
+  return settingsSelector(state);
 }
 
 /* istanbul ignore next */

@@ -59,7 +59,7 @@ export default class SourcesBlock extends React.Component {
     const { locale, screenSize, order } = this.props;
 
     return (
-      <ConfigBlock locale={locale} screenSize={screenSize} order={order} className="app__config__creation">
+      <ConfigBlock locale={locale} screenSize={screenSize} order={order} className="app__config__sources-block">
         <div className="app__config__creation">
           {this.renderBlock('tweak', require('assets/media/svg-wannabe/Conf-Icon1.png'), locale.online)}
           {this.renderBlock('upload', require('assets/media/svg-wannabe/Conf-Icon3.png'), locale.art)}
