@@ -7,7 +7,7 @@
 import { SettingsConstants } from 'constants/index';
 
 /**
- * sETTINGS Fetch
+ * Settings Fetch
  * @param {string} slug
  *
  * @returns {Object}
@@ -22,7 +22,7 @@ export function settingsFetch(slug: string): Object {
 }
 
 /**
- * Product Fetch
+ * Sources Fetch
  * @param {string} id
  * @param {string} source
  *
@@ -35,5 +35,18 @@ export function settingsSourceFetch(id: string, source: string): Object {
       id,
       source,
     },
+  };
+}
+
+/**
+ * Options Fetch
+ * @param {Object} selection
+ *
+ * @returns {Object}
+ */
+export function settingsOptionsFetch(selection: {}): Object {
+  return {
+    type: SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST,
+    payload: selection,
   };
 }

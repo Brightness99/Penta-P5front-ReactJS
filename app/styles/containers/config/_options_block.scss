@@ -1,8 +1,10 @@
+// TODO: Paddong on the blocks (same as the header)
+
 .app__config__options {
   display: flex;
   flex-direction: column;
 
-  > ul {
+  ul {
     padding: 0;
 
     li {
@@ -13,7 +15,7 @@
   &-header {
     padding: 2rem 1rem 0;
 
-    h3 {
+    h4 {
       font-size: 2.1rem;
       font-family: $font-family-nunito-regular;
       margin-bottom: 0;
