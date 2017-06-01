@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { settingsFetch, settingsSourceFetch } from 'actions';
+import { settingsFetch, settingsSourceFetch, settingsOptionsFetch } from 'actions';
 import { settingsSelector } from 'selectors';
 
 import Loading from 'components/Loading';
@@ -12,7 +12,6 @@ import ConfigBlock from './ConfigBlock';
 import SourcesBlock from './SourcesBlock';
 import OptionsBlock from './Options';
 import MatrixBlock from './MatrixBlock';
-
 
 type Props = {
   app: AppStore,
@@ -51,6 +50,31 @@ export class Config extends React.Component {
     if (ev.target.value !== selectedSource) {
       dispatch(settingsSourceFetch(id, ev.target.value));
     }
+  };
+
+  handleOptionSelection = (ev) => {
+    const { dispatch, productSettings: { selection } } = this.props;
+
+    const name = ev.target.name.split('-');
+
+    const selectionKeys = Object.keys(selection[name[0]]);
+
+    dispatch(settingsOptionsFetch({
+      selection: selectionKeys
+        // .slice(0, selectionKeys.indexOf(name[1]) + 1)
+        .map((item) => ({
+          key: item,
+          value: name[1] === item ? ev.target.value : selection[name[0]][item],
+        }))
+        .reduce((prevSelect, currentSelect) => ({
+          ...prevSelect,
+          [currentSelect.key]: selectionKeys
+            .slice(0, selectionKeys.indexOf(name[1]) + 1).includes(currentSelect.key)
+              ? currentSelect.value
+              : '',
+        }), {}),
+      id: name[0],
+    }));
   };
 
   renderSourceBlock() {
@@ -94,6 +118,7 @@ export class Config extends React.Component {
         settings,
         isRunning,
         isLoaded,
+        selection,
       },
       locale,
       dispatch,
@@ -101,6 +126,11 @@ export class Config extends React.Component {
     } = this.props;
     const configLocale = locale.translate.page.product_settings.options;
 
+    if (isRunning.source || !isLoaded.source) {
+      return (<Loading />);
+    }
+
+    // TODO: Options block loading
     return (
       <OptionsBlock
         dispatch={dispatch}
@@ -110,6 +140,8 @@ export class Config extends React.Component {
         options={{ ...settings.options, ...options }}
         isSourceRunning={isRunning.source}
         isSourceLoaded={isLoaded.source}
+        selection={selection}
+        onSelect={this.handleOptionSelection}
       />
     );
   }

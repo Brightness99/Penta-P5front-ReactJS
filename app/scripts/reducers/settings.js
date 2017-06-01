@@ -32,6 +32,7 @@ export const productSettingsState = {
       list: [],
     },
   },
+  selection: {},
 };
 
 export default {
@@ -104,6 +105,17 @@ export default {
               ],
             })),
         }));
+
+      const selection = Object.keys(action.payload.calculator)
+        .reduce((prevItem, currentItem) => ({
+          ...prevItem,
+          [currentItem]: Object.keys(action.payload.calculator[currentItem].options).reduce((prevOption, nextOption) => ({
+            ...prevOption,
+            [nextOption]: action.payload.calculator[currentItem].options[nextOption]
+              .filter((optionItem) => optionItem.default)
+              .reduce((prevOptionItem, nextOptionItem) => nextOptionItem.id, ''),
+          }), {}),
+        }), {});
       return {
         ...state,
         isRunning: {
@@ -121,7 +133,17 @@ export default {
             list: options,
           },
         },
+        selection,
         updatedAt: action.meta.updatedAt,
+      };
+    },
+    [SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST](state, action) {
+      return {
+        ...state,
+        selection: {
+          ...state.selection,
+          [action.payload.id]: action.payload.selection,
+        }
       };
     },
   }),

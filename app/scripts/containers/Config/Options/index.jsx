@@ -16,32 +16,20 @@ type Props = {
   screenSize: string,
   order: number,
   dispatch: () => {},
-  options: {}
-};
-
-type State = {
-  format: string,
+  options: {},
+  selection: {},
+  onSelect: () => {},
 };
 
 export default class OptionsBlock extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      format: '',
-    };
-  }
-
   static defaultProps = {
     viewType: 'gallery',
   };
 
   static props: Props;
 
-  static state: State;
-
   renderOptionList(optionsList) {
-    const { viewType, options: { parts } } = this.props;
+    const { viewType, options: { parts }, selection, onSelect } = this.props;
     let header = null;
 
     if (parts.total > 1) {
@@ -54,16 +42,23 @@ export default class OptionsBlock extends React.Component {
           {optionsList.options.filter((option) => option.visible).map((option) => (
             <li key={option.key}>
               <div className="app__config__options-header">
-                <h3>
+                <h4>
                   {option.name}
-                </h3>
+                </h4>
                 <div className="app__config__options-header__youtube">
                   <SVG src={require('assets/media/svg/icon_video.svg')} /> Vídeo explicativo
                 </div>
               </div>
               <ul className="app__config__options-body">
                 {option.items.map((optionItem) => (
-                  <ListItem item={optionItem} viewType={viewType} key={optionItem.id} optionKey={option.key} />
+                  <ListItem
+                    item={optionItem}
+                    viewType={viewType}
+                    key={optionItem.id}
+                    optionKey={`${optionsList.id}-${option.key}`}
+                    checked={optionItem.id === selection[optionsList.id][option.key]}
+                    onSelect={onSelect}
+                  />
                 ))}
               </ul>
             </li>
@@ -73,20 +68,8 @@ export default class OptionsBlock extends React.Component {
     );
   }
 
-  renderBlock() {
-    const { options: { parts, list }, dispatch } = this.props;
-
-    return (
-      <div className="app__config__options">
-        <PartsLabel total={parts.total} names={parts.names} />
-        <SelectView dispatch={dispatch} />
-        {list.map((item) => this.renderOptionList(item))}
-      </div>
-    );
-  }
-
   render() {
-    const { locale } = this.props;
+    const { locale, options: { parts, list }, dispatch } = this.props;
 
     return (
       <ConfigBlock
@@ -95,7 +78,11 @@ export default class OptionsBlock extends React.Component {
         button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
         className="app__config__options-block"
       >
-        {this.renderBlock()}
+        <div className="app__config__options">
+          <PartsLabel total={parts.total} names={parts.names} />
+          <SelectView dispatch={dispatch} />
+          {list.map((item) => this.renderOptionList(item))}
+        </div>
       </ConfigBlock>
     );
   }

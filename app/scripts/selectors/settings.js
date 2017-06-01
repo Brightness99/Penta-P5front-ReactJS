@@ -18,7 +18,7 @@ const optionsSelector = createSelector(
           return `${prevPart} e ${currentPart.name}`;
         }
         return currentPart.name;
-      }),
+      }, ''),
     },
     defaultCombinationCount: productSettings.settings.options.defaultCombinationCount,
   })
