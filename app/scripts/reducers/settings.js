@@ -11,16 +11,8 @@ import { SettingsConstants } from 'constants/index';
 export const productSettingsState = {
   rehydrated: false,
   updatedAt: 0,
-  isRunning: {
-    settings: false,
-    source: false,
-    options: false,
-  },
-  isLoaded: {
-    settings: false,
-    source: false,
-    options: false,
-  },
+  isRunning: false,
+  isLoaded: false,
   settings: {
     source: {
       enabledSources: {},
@@ -32,6 +24,16 @@ export const productSettingsState = {
       list: [],
     },
   },
+  source: {
+    enabledSources: {},
+    showSteps: {},
+    selectedSource: null,
+    isRunning: false,
+    isLoaded: false,
+  },
+  calculator: {},
+  finalProduct: {},
+  optionSectionInfo: {},
   selection: {},
 };
 
@@ -46,10 +48,7 @@ export default {
     [SettingsConstants.SETTINGS_FETCH_REQUEST]() {
       return {
         ...productSettingsState,
-        isRunning: {
-          ...productSettingsState.isRunning,
-          settings: true,
-        },
+        isRunning: true,
       };
     },
     [SettingsConstants.SETTINGS_FETCH_SUCCESS](state, action) {
@@ -65,14 +64,14 @@ export default {
             selectedSource: action.payload.settings.autoselect_source,
           },
         },
-        isRunning: {
-          ...state.isRunning,
-          settings: false,
+        source: {
+          ...state.source,
+          enabledSources: action.payload.settings.enabled_sources,
+          showSteps: action.payload.settings.show_steps,
+          selectedSource: action.payload.settings.autoselect_source,
         },
-        isLoaded: {
-          ...state.isRunning,
-          settings: true,
-        },
+        isRunning: false,
+        isLoaded: true,
         updatedAt: action.meta.updatedAt,
       };
     },
@@ -86,26 +85,14 @@ export default {
             selectedSource: action.payload.source,
           },
         },
-        isRunning: {
-          ...state.isRunning,
-          source: true,
+        source: {
+          ...state.settings.source,
+          selectedSource: action.payload.source,
+          isRunning: true,
         },
       };
     },
     [SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS](state, action) {
-      const { option_section_info, calculator } = action.payload;
-      const options = Object.keys(option_section_info)
-        .map((item) => ({
-          ...calculator[item],
-          options: option_section_info[item]
-            .map((optionItem) => ({
-              ...optionItem,
-              items: [
-                ...calculator[item].options[optionItem.key].sort((a, b) => a.position - b.position),
-              ],
-            })),
-        }));
-
       const selection = Object.keys(action.payload.calculator)
         .reduce((prevItem, currentItem) => ({
           ...prevItem,
@@ -118,21 +105,18 @@ export default {
         }), {});
       return {
         ...state,
-        isRunning: {
-          ...state.isRunning,
-          source: false,
-        },
-        isLoaded: {
-          ...state.isLoaded,
-          source: true,
-        },
         settings: {
           ...state.settings,
-          options: {
-            defaultCombinationCount: action.payload.default_combination_count,
-            list: options,
-          },
         },
+        source: {
+          ...state.source,
+          isRunning: false,
+          isLoaded: true,
+        },
+        calculator: action.payload.calculator,
+        finalProduct: action.payload.final_product,
+        optionSectionInfo: action.payload.option_section_info,
+        defaultCombinationCount: action.payload.default_combination_count,
         selection,
         updatedAt: action.meta.updatedAt,
       };
@@ -142,8 +126,57 @@ export default {
         ...state,
         selection: {
           ...state.selection,
-          [action.payload.id]: action.payload.selection,
-        }
+          [action.payload.partId]: action.payload.selection,
+        },
+      };
+    },
+    [SettingsConstants.SETTINGS_OPTIONS_FETCH_SUCCESS](state, action) {
+      // TODO: Fix fomart reselection when selecting new options to the second part
+
+      const calculator = Object.keys(state.calculator).map((calculate) => ({
+        ...state.calculator[calculate],
+        options: {
+          ...state.calculator[calculate].options,
+          ...action.payload.options[calculate],
+        },
+      }))
+        .reduce((prevValue, currentValue) => ({
+          ...prevValue,
+          [currentValue.id]: currentValue,
+        }), {});
+
+      const selection = Object.keys(action.payload.options).map((part) => ({
+        key: part,
+        value: Object.keys(action.payload.options[part]).map((select) => {
+          const thisSelection = action.payload.options[part][select];
+
+          if (thisSelection.length === 1) {
+            return {
+              key: select,
+              value: thisSelection[0].id,
+            };
+          }
+
+          return {
+            key: select,
+            value: '',
+          };
+        })
+          .reduce((prevValue, currentValue) => ({
+            ...prevValue,
+            [currentValue.key]: currentValue.value,
+          }), { ...state.selection[part] }),
+      }))
+        .reduce((prevValue, currentValue) => ({
+          ...prevValue,
+          [currentValue.key]: currentValue.value,
+        }), {});
+
+      return {
+        ...state,
+        calculator,
+        selection,
+        updatedAt: action.meta.updatedAt,
       };
     },
   }),
