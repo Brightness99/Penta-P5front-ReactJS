@@ -53,7 +53,21 @@ export class Config extends React.Component {
   };
 
   handleOptionSelection = (ev) => {
-    const { dispatch, productSettings: { selection } } = this.props;
+    const {
+      dispatch,
+      productSettings: {
+        selection,
+        calculator,
+        settings: {
+          source: {
+            selectedSource,
+          },
+        },
+        finalProduct: {
+          id,
+        },
+      },
+    }  = this.props;
 
     const name = ev.target.name.split('-');
 
@@ -61,7 +75,6 @@ export class Config extends React.Component {
 
     dispatch(settingsOptionsFetch({
       selection: selectionKeys
-        // .slice(0, selectionKeys.indexOf(name[1]) + 1)
         .map((item) => ({
           key: item,
           value: name[1] === item ? ev.target.value : selection[name[0]][item],
@@ -73,7 +86,10 @@ export class Config extends React.Component {
               ? currentSelect.value
               : '',
         }), {}),
-      id: name[0],
+      partId: name[0],
+      productId: id,
+      option: calculator,
+      selectedSource,
     }));
   };
 
@@ -115,18 +131,20 @@ export class Config extends React.Component {
         },
       },
       productSettings: {
-        settings,
-        isRunning,
-        isLoaded,
         selection,
+        source: {
+          isRunning,
+          isLoaded,
+        },
       },
+      productSettings,
       locale,
       dispatch,
       options,
     } = this.props;
     const configLocale = locale.translate.page.product_settings.options;
 
-    if (isRunning.source || !isLoaded.source) {
+    if (isRunning || !isLoaded) {
       return (<Loading />);
     }
 
@@ -137,9 +155,9 @@ export class Config extends React.Component {
         viewType={viewType}
         locale={configLocale}
         order="2"
-        options={{ ...settings.options, ...options }}
-        isSourceRunning={isRunning.source}
-        isSourceLoaded={isLoaded.source}
+        options={{ ...productSettings.options, ...options }}
+        isSourceRunning={isRunning}
+        isSourceLoaded={isLoaded}
         selection={selection}
         onSelect={this.handleOptionSelection}
       />
@@ -178,9 +196,9 @@ export class Config extends React.Component {
   }
 
   render() {
-    const { productSettings } = this.props;
-
-    if (productSettings.isRunning.settings || !productSettings.isLoaded.settings) {
+    const { productSettings: { isRunning, isLoaded, options } } = this.props;
+    console.log(options);
+    if (isRunning || !isLoaded) {
       return (<Loading />);
     }
 

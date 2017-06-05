@@ -90,5 +90,102 @@ export function settingsSourceFetch(action$) {
 }
 
 
-// /v1/calculator/finalproducts/fstbro/deny_rules/source/upload
+export function settingsOptionsFetch(action$) {
+  return action$.ofType(SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST)
+    .switchMap(action => {
+      const endpoint = `/v1/calculator/finalproducts/${action.payload.productId}/deny_rules/source/${action.payload.selectedSource}`;
+
+      return rxAjax({
+        endpoint,
+        payload: {
+          id: action.payload.partId,
+          selection: Object.keys(action.payload.selection)
+            .filter((item) => action.payload.selection[item] !== '')
+            .reduce((prevValue, currentValue) => ({
+              ...prevValue,
+              [currentValue]: action.payload.selection[currentValue],
+            }), {}),
+          type: 'product_part',
+          option: action.payload.option,
+        },
+        method: 'POST',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+            return {
+              type: SettingsConstants.SETTINGS_OPTIONS_FETCH_SUCCESS,
+              payload: data.response,
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: SettingsConstants.SETTINGS_OPTIONS_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: SettingsConstants.SETTINGS_SOURCE_FETCH_CANCEL })
+        .catch(error => {
+          if (error.status === 404) {
+            push('/404');
+          }
+
+          return ([{
+            type: SettingsConstants.SETTINGS_SOURCE_FETCH_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          }]);
+        });
+    });
+}
+
+export function settingsZipcodeFetch(action$) {
+  return action$.ofType(SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST, SettingsConstants.SETTINGS_SOURCE_FETCH_REQUEST)
+    .switchMap(action => {
+      const endpoint = `/v1/calculator/finalproducts/${action.payload.id}/source/${action.payload.source}`;
+
+      return [];
+
+      // return rxAjax({
+      //   endpoint,
+      //   method: 'GET',
+      // })
+      //   .map(data => {
+      //     if (data.status === 200 && data.response) {
+      //       return {
+      //         type: SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS,
+      //         payload: {
+      //           ...data.response,
+      //           selectedSource: action.payload.source,
+      //         },
+      //         meta: { updatedAt: getUnixtime() },
+      //       };
+      //     }
+      //
+      //     return {
+      //       type: SettingsConstants.SETTINGS_SOURCE_FETCH_FAILURE,
+      //       payload: { message: 'Algo de errado não está correto' },
+      //       meta: { updatedAt: getUnixtime() },
+      //     };
+      //   })
+      //   .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+      //   .defaultIfEmpty({ type: SettingsConstants.SETTINGS_SOURCE_FETCH_CANCEL })
+      //   .catch(error => {
+      //     if (error.status === 404) {
+      //       push('/404');
+      //     }
+      //
+      //     return ([{
+      //       type: SettingsConstants.SETTINGS_SOURCE_FETCH_FAILURE,
+      //       payload: { message: error.message, status: error.status },
+      //       meta: { updatedAt: getUnixtime() },
+      //     }]);
+      //   });
+    });
+}
+
+
+//
 
