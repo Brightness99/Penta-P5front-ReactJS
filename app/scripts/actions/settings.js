@@ -50,3 +50,18 @@ export function settingsOptionsFetch(selection: {}): Object {
     payload: selection,
   };
 }
+
+/**
+ * Matrix Fetch
+ * @param {number} zipcode
+ *
+ * @returns {Object}
+ */
+export function settingsMatrixFetch(zipcode: number): Object {
+  return {
+    type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_REQUEST,
+    payload: {
+      zipcode,
+    },
+  };
+}

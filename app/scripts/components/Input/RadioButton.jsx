@@ -12,7 +12,7 @@ type Props = {
   onChange: () => {},
 };
 
-export class RadioButton extends React.Component {
+export default class RadioButton extends React.Component {
   static defaultProps = {
     checked: false,
   };
@@ -44,5 +44,3 @@ export class RadioButton extends React.Component {
     );
   }
 }
-
-export default RadioButton;

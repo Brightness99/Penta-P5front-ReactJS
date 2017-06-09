@@ -1,6 +1,8 @@
 // @flow
 
 import React from 'react';
+import cx from 'classnames';
+
 import { RadioButton } from 'components/Input';
 
 type Props = {
@@ -17,7 +19,7 @@ type Props = {
 
 const ListItem = (props: Props) => (
   <li>
-    <label>
+    <label className={cx(props.checked && 'app__config__option--selected')}>
       {props.viewType === 'gallery' && <img src={`https://www.printi.com.br${props.item.image_small}`} alt="not-found" />}
       <div className="app__config__options-input">
         <RadioButton name={props.optionKey} value={props.item.id} checked={props.checked} onChange={props.onSelect} />

@@ -7,11 +7,10 @@ import { settingsFetch, settingsSourceFetch, settingsOptionsFetch } from 'action
 import { settingsSelector } from 'selectors';
 
 import Loading from 'components/Loading';
-
-import ConfigBlock from './ConfigBlock';
+import SummaryBlock from './Summary';
 import SourcesBlock from './SourcesBlock';
 import OptionsBlock from './Options';
-import MatrixBlock from './MatrixBlock';
+import MatrixBlock from './Matrix';
 
 type Props = {
   app: AppStore,
@@ -82,7 +81,8 @@ export class Config extends React.Component {
         .reduce((prevSelect, currentSelect) => ({
           ...prevSelect,
           [currentSelect.key]: selectionKeys
-            .slice(0, selectionKeys.indexOf(name[1]) + 1).includes(currentSelect.key)
+            .slice(0, selectionKeys.indexOf(name[1]) + 1)
+            .includes(currentSelect.key)
               ? currentSelect.value
               : '',
         }), {}),
@@ -164,6 +164,34 @@ export class Config extends React.Component {
     );
   }
 
+  renderMatrixBlock() {
+    const {
+      productSettings: {
+        settings: {
+          source: {
+            selectedSource,
+          },
+        },
+        selection,
+      },
+      dispatch,
+      locale,
+    } = this.props;
+
+    const configLocale = locale.translate.page.product_settings.matrix;
+
+    return (
+      <MatrixBlock
+        order="3"
+        locale={configLocale}
+        className="app__config__matrix"
+        dispatch={dispatch}
+        selection={selection}
+        selectedSource={selectedSource}
+      />
+    );
+  }
+
   renderPage() {
     const {
       productSettings: {
@@ -174,6 +202,7 @@ export class Config extends React.Component {
             selectedSource,
           },
         },
+        selection,
       },
       locale,
     } = this.props;
@@ -184,20 +213,15 @@ export class Config extends React.Component {
         <h2>{`${configLocale.TITLE}: ${product.title}`}</h2>
         {showSteps.source && this.renderSourceBlock()}
         {showSteps.options && selectedSource && this.renderOptionsBlock()}
-        <ConfigBlock
-          order="3"
-          locale={configLocale.matrix}
-          className="app__config__matrix"
-        >
-          <MatrixBlock />
-        </ConfigBlock>
+        {this.renderMatrixBlock()}
+        <SummaryBlock selection={selection} />
       </div>
     );
   }
 
   render() {
-    const { productSettings: { isRunning, isLoaded, options } } = this.props;
-    console.log(options);
+    const { productSettings: { isRunning, isLoaded } } = this.props;
+
     if (isRunning || !isLoaded) {
       return (<Loading />);
     }

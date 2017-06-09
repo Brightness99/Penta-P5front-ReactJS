@@ -7,6 +7,12 @@ Requirements
 - node ^6.x
 - npm ^3.x
 
+###NVM
+Changin node.js version can be hard sometimes and it's harder to navigate between old and new versions.
+
+So, use `nvm` https://github.com/creationix/nvm to navigate between node versions and install new versions.
+
+
 Installation
 ===
 

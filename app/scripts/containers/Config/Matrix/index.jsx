@@ -1,21 +1,33 @@
 // @flow
 
+// TODO:
+
 import React from 'react';
-import ConfigBlock from './ConfigBlock';
+
+import Zipcode from './Zipcode';
+import ConfigBlock from '../ConfigBlock';
 
 type Props = {
   locale: {},
   order: number,
   className: string,
+  selection: {},
+  selectedSource: string,
+  dispatch: () => {},
 };
 
 export default class MatrixBlock extends React.Component {
   static props: Props;
 
   renderMatrix() {
+    const { selection, selectedSource, dispatch } = this.props;
     return (
       <div className="app__config__matrix">
-        2
+        <Zipcode
+          selection={selection}
+          selectedSource={selectedSource}
+          dispatch={dispatch}
+        />
       </div>
     );
   }

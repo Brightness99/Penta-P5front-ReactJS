@@ -25,41 +25,40 @@ const optionsPartsSelector = createSelector(
 
 const optionsListSelector = createSelector(
   productSettingsSelector,
-  (productSettings) => {
-    return (
-      Object.keys(productSettings.optionSectionInfo)
-        .map((item) => {
-          let visibilityOverride = false;
+  (productSettings) => (
+    Object.keys(productSettings.optionSectionInfo)
+      .map((item) => {
+        let visibilityOverride = false;
 
-          return ({
-            ...productSettings.calculator[item],
-            options: productSettings.optionSectionInfo[item]
-              .map((optionItem, i) => {
-                let visibility = visibilityOverride ? false : optionItem.visible;
-                const key = i - 1;
+        return ({
+          ...productSettings.calculator[item],
+          options: productSettings.optionSectionInfo[item]
+            .filter((optionItem) => optionItem.visible)
+            .map((optionItem, i) => {
+              let visibility = visibilityOverride ? false : optionItem.visible;
+              const key = i - 1;
 
-                if (visibility && key > 0) {
-                  visibility =
-                    productSettings.optionSectionInfo[item][key].visible &&
-                    productSettings.selection[item][productSettings.optionSectionInfo[item][key].key] !== '';
-                }
+              if (visibility && key > 0) {
+                visibility =
+                  optionItem.visible &&
+                  productSettings.selection[item][productSettings.optionSectionInfo[item][key].key] !== '';
+              }
 
-                if (!visibility && !visibilityOverride) {
-                  visibilityOverride = true;
-                }
+              if (!visibility && !visibilityOverride) {
+                visibilityOverride = true;
+              }
 
-                return {
-                  ...optionItem,
-                  visible: visibility,
-                  items: [
-                    ...productSettings.calculator[item].options[optionItem.key].sort((a, b) => a.position - b.position),
-                  ],
-                };
-              }),
-          });
-        })
-    );
-  }
+              return {
+                ...optionItem,
+                visible: visibility,
+                items: [
+                  ...productSettings.calculator[item].options[optionItem.key].sort((a, b) => a.position - b.position),
+                ],
+              };
+            }),
+        });
+      })
+  )
 );
 
 const optionsSelector = createSelector(
