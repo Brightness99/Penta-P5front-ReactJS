@@ -131,8 +131,6 @@ export default {
       };
     },
     [SettingsConstants.SETTINGS_OPTIONS_FETCH_SUCCESS](state, action) {
-      // TODO: Fix fomart reselection when selecting new options to the second part
-
       const calculator = Object.keys(state.calculator).map((calculate) => ({
         ...state.calculator[calculate],
         options: {
@@ -147,7 +145,7 @@ export default {
 
       const selection = Object.keys(action.payload.options).map((part) => ({
         key: part,
-        value: Object.keys(action.payload.options[part]).map((select) => {
+        value: action.payload.partId === part ? Object.keys(action.payload.options[part]).map((select) => {
           const thisSelection = action.payload.options[part][select];
 
           if (thisSelection.length === 1) {
@@ -165,7 +163,7 @@ export default {
           .reduce((prevValue, currentValue) => ({
             ...prevValue,
             [currentValue.key]: currentValue.value,
-          }), { ...state.selection[part] }),
+          }), { ...state.selection[part] }) : state.selection[action.payload.partId],
       }))
         .reduce((prevValue, currentValue) => ({
           ...prevValue,

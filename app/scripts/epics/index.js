@@ -6,7 +6,13 @@
 import { combineEpics } from 'redux-observable';
 import { userNewsletter } from './user';
 import { productsFetch } from './products';
-import { settingsFetch, settingsOptionsFetch, settingsSourceFetch, settingsZipcodeFetch } from './settings';
+import {
+  settingsFetch,
+  settingsOptionsFetch,
+  settingsSourceFetch,
+  settingsZipcodeFetch,
+  settingsMatrixFetch
+} from './settings';
 
 export default combineEpics(
   userNewsletter,
@@ -15,4 +21,5 @@ export default combineEpics(
   settingsOptionsFetch,
   settingsSourceFetch,
   settingsZipcodeFetch,
+  settingsMatrixFetch,
 );

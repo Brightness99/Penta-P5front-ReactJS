@@ -40,21 +40,34 @@ export function rxAjax(action: Object = {}) {
   }
 
   /* istanbul ignore else */
+  if (action.headers) {
+    settings.headers = {
+      ...settings.headers,
+      ...action.headers,
+    };
+  }
+
+  /* istanbul ignore else */
   if (!action.url) {
     action.url = config.apiUrl;
+    settings.withCredentials = true;
+    settings.headers = {
+      ...settings.headers,
+      'Application-Source': 'react',
+    };
   }
 
   settings.url = `${action.url}${action.endpoint}`;
   settings.method = action.method;
   settings.crossDomain = true;
-  settings.withCredentials = true;
+
   settings.responseType = 'json';
   settings.user = 'printi';
   settings.password = '2016alphaprotect';
 
   settings.headers = {
+    ...settings.headers,
     'Content-Type': 'application/json',
-    'Application-Source': 'react',
   };
 
   if (action.method !== 'GET') {

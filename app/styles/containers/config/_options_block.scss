@@ -47,10 +47,12 @@
       display: inline-flex;
       max-width: 50%;
       padding: 1.5rem 0.5rem 0.8rem;
+      width: 18rem;
 
       label {
         background-color: $color-white;
         border: 0.1rem solid #eeeeee;
+        cursor: pointer;
         font-family: $font-family-nunito-regular;
         font-size: $font-size-sm;
         width: 100%;
@@ -60,7 +62,7 @@
         }
 
         &:hover,
-        &--selected {
+        &.app__config__option--selected {
           background-color: $color-printi;
           border-color: $color-printi;
           color: $color-white;

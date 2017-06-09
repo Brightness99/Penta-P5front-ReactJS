@@ -123,7 +123,7 @@ export default class OptionsBlock extends React.Component {
   }
 
   render() {
-    const { locale,  } = this.props;
+    const { locale } = this.props;
 
     return (
       <ConfigBlock
