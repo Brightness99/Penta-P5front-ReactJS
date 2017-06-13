@@ -32,8 +32,8 @@ export class Config extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { app: { screenSize } } = this.props;
-    const prevSelectedSource = prevProps.productSettings.settings.source.selectedSource;
-    const selectedSource = this.props.productSettings.settings.source.selectedSource;
+    const prevSelectedSource = prevProps.productSettings.source.selectedSource;
+    const selectedSource = this.props.productSettings.source.selectedSource;
     const prevScreenSize = prevProps.app.screenSize;
 
     if (prevSelectedSource !== selectedSource || prevScreenSize !== screenSize) {
@@ -99,10 +99,8 @@ export class Config extends React.Component {
         screenSize,
       },
       productSettings: {
-        settings: {
-          source: {
-            selectedSource,
-          },
+        source: {
+          selectedSource,
         },
       },
       locale,
@@ -147,8 +145,7 @@ export class Config extends React.Component {
     if (isRunning || !isLoaded) {
       return (<Loading />);
     }
-
-    // TODO: Options block loading
+    
     return (
       <OptionsBlock
         dispatch={dispatch}
@@ -156,8 +153,6 @@ export class Config extends React.Component {
         locale={configLocale}
         order="2"
         options={{ ...productSettings.options, ...options }}
-        isSourceRunning={isRunning}
-        isSourceLoaded={isLoaded}
         selection={selection}
         onSelect={this.handleOptionSelection}
       />
@@ -167,10 +162,8 @@ export class Config extends React.Component {
   renderMatrixBlock() {
     const {
       productSettings: {
-        settings: {
-          source: {
-            selectedSource,
-          },
+        source: {
+          selectedSource,
         },
         selection,
       },
@@ -197,10 +190,10 @@ export class Config extends React.Component {
       productSettings: {
         product,
         settings: {
-          source: {
-            showSteps,
-            selectedSource,
-          },
+          showSteps,
+        },
+        source: {
+          selectedSource,
         },
         selection,
       },
@@ -221,6 +214,8 @@ export class Config extends React.Component {
 
   render() {
     const { productSettings: { isRunning, isLoaded } } = this.props;
+
+    console.log(this.props.productSettings);
 
     if (isRunning || !isLoaded) {
       return (<Loading />);

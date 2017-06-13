@@ -1,7 +1,5 @@
 // @flow
 
-// TODO:
-
 import React from 'react';
 
 import Zipcode from './Zipcode';

@@ -76,6 +76,27 @@ const optionsSelector = createSelector(
   })
 );
 
+const optionsReadySelector = createSelector(
+  selectionSelector,
+  (selection) => {
+    if (Object.keys(selection) <= 0) {
+      return false;
+    }
+
+    let optionsReady = true;
+
+    Object.keys(selection)
+      .forEach((partKey) => {
+        Object.keys(selection[partKey])
+          .forEach((selectionItem) => {
+            console.log('123', selectionItem, selection[partKey][selectionItem]);
+            optionsReady = selection[partKey][selectionItem] ? optionsReady : false;
+          });
+      });
+    return optionsReady;
+  }
+);
+
 const settingsSelector = createSelector(
   appSelector,
   localeSelector,
@@ -84,6 +105,7 @@ const settingsSelector = createSelector(
   productSettingsSelector,
   optionsSelector,
   selectionSelector,
+  optionsReadySelector,
   (
     app,
     locale,
@@ -91,7 +113,8 @@ const settingsSelector = createSelector(
     product,
     productSettings,
     options,
-    selection
+    selection,
+    optionsReady
   ) => ({
     app,
     locale,
@@ -101,6 +124,10 @@ const settingsSelector = createSelector(
       ...productSettings,
       options,
       selection,
+      settings: {
+        ...productSettings.settings,
+        optionsReady,
+      }
     },
   })
 );
