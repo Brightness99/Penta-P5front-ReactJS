@@ -93,9 +93,11 @@ export function settingsSourceFetch(action$) {
 export function settingsOptionsFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST)
     .switchMap(action => {
+      const url = 'http://www.printi.com.br';
       const endpoint = `/v1/calculator/finalproducts/${action.payload.productId}/deny_rules/source/${action.payload.selectedSource}`;
 
       return rxAjax({
+        url,
         endpoint,
         payload: {
           id: action.payload.partId,
@@ -111,6 +113,7 @@ export function settingsOptionsFetch(action$) {
         method: 'POST',
       })
         .map(data => {
+          console.log(data);
           if (data.status === 200 && data.response) {
             return {
               type: SettingsConstants.SETTINGS_OPTIONS_FETCH_SUCCESS,

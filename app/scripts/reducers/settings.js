@@ -14,20 +14,22 @@ export const productSettingsState = {
   isRunning: false,
   isLoaded: false,
   settings: {
-    source: {
-      enabledSources: {},
-      showSteps: {},
-      selectedSource: null,
-    },
-    options: {
-      defaultCombinationCount: 0,
-      list: [],
+    showSteps: {
+      source: false,
+      options: false,
+      matrix: false,
+      additional_options: false,
     },
   },
   source: {
     enabledSources: {},
-    showSteps: {},
     selectedSource: null,
+    isRunning: false,
+    isLoaded: false,
+  },
+  options: {
+    defaultCombinationCount: 0,
+    list: [],
     isRunning: false,
     isLoaded: false,
   },
@@ -56,19 +58,13 @@ export default {
         ...state,
         product: action.payload.product,
         finalProduct: action.payload.finalProduct,
-        settings: {
-          ...state.settings,
-          source: {
-            enabledSources: action.payload.settings.enabled_sources,
-            showSteps: action.payload.settings.show_steps,
-            selectedSource: action.payload.settings.autoselect_source,
-          },
-        },
         source: {
           ...state.source,
           enabledSources: action.payload.settings.enabled_sources,
-          showSteps: action.payload.settings.show_steps,
           selectedSource: action.payload.settings.autoselect_source,
+        },
+        settings: {
+          showSteps: action.payload.settings.show_steps,
         },
         isRunning: false,
         isLoaded: true,
@@ -105,9 +101,6 @@ export default {
         }), {});
       return {
         ...state,
-        settings: {
-          ...state.settings,
-        },
         source: {
           ...state.source,
           isRunning: false,
