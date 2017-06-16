@@ -17,8 +17,6 @@ const Modal = (props: Props) => {
     if (typeof onClose === 'function') {
       onClose();
     }
-
-    console.log('123');
   };
 
   return (

@@ -74,7 +74,5 @@ export function rxAjax(action: Object = {}) {
     settings.body = action.payload;
   }
 
-  console.log(settings);
-
   return Observable.ajax(settings);
 }

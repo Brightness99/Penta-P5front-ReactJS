@@ -6,7 +6,7 @@
 import { REHYDRATE } from 'redux-persist/constants';
 import { createReducer } from 'utils';
 
-import { UserConstants } from 'constants/index';
+import { UserConstants, SettingsConstants } from 'constants/index';
 
 export const userState = {
   rehydrated: false,
@@ -16,6 +16,9 @@ export const userState = {
     isRunning: false,
     message: '',
     subscribed: false,
+  },
+  address: {
+    zipcode: '',
   },
   updatedAt: 0,
 };
@@ -61,6 +64,15 @@ export default {
           subscribed: false,
         },
         updatedAt: action.meta.updatedAt,
+      };
+    },
+    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        address: {
+          ...state.matrix,
+          zipcode: action.payload.zipcode,
+        },
       };
     },
   }),

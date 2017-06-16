@@ -4,7 +4,7 @@
  */
 
 import { REHYDRATE } from 'redux-persist/constants';
-import { createReducer } from 'utils';
+import { createReducer, updateSelection } from 'utils';
 
 import { SettingsConstants } from 'constants/index';
 
@@ -13,6 +13,19 @@ export const productSettingsState = {
   updatedAt: 0,
   isRunning: false,
   isLoaded: false,
+  config: {
+    showSteps: {
+      source: false,
+      options: false,
+      matrix: false,
+      additional_options: false,
+    },
+    isFulfilled: {
+      source: false,
+      options: false,
+      matrix: false,
+    },
+  },
   settings: {
     showSteps: {
       source: false,
@@ -56,6 +69,14 @@ export default {
     [SettingsConstants.SETTINGS_FETCH_SUCCESS](state, action) {
       return {
         ...state,
+        config: {
+          ...state.config,
+          showSteps: action.payload.settings.show_steps,
+          isFulfilled: {
+            ...state.config.isFulfilled,
+            source: !!action.payload.settings.autoselect_source,
+          },
+        },
         product: action.payload.product,
         finalProduct: action.payload.finalProduct,
         source: {
@@ -74,6 +95,13 @@ export default {
     [SettingsConstants.SETTINGS_SOURCE_FETCH_REQUEST](state, action) {
       return {
         ...state,
+        config: {
+          ...state.config,
+          isFulfilled: {
+            ...state.config.isFulfilled,
+            source: true,
+          },
+        },
         settings: {
           ...state.settings,
           source: {
@@ -115,12 +143,31 @@ export default {
       };
     },
     [SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST](state, action) {
+      const actionSelection = Object.keys(state.optionSectionInfo)
+        .map((part) => ({
+          key: part,
+          values: state.optionSectionInfo[part]
+            .reduce((prevSection, currentSection) => {
+              let sectionValue = '';
+
+              if (action.payload.partId === part) {
+                sectionValue = action.payload.selection[currentSection.key] || '';
+              }
+
+              return {
+                ...prevSection,
+                [currentSection.key]: sectionValue,
+              };
+            }, {}),
+        }))
+        .reduce((prevValue, currentValue) => ({
+          ...prevValue,
+          [currentValue.key]: currentValue.values,
+        }), {});
+
       return {
         ...state,
-        selection: {
-          ...state.selection,
-          [action.payload.partId]: action.payload.selection,
-        },
+        selection: updateSelection(state.selection, actionSelection),
       };
     },
     [SettingsConstants.SETTINGS_OPTIONS_FETCH_SUCCESS](state, action) {
@@ -136,28 +183,35 @@ export default {
           [currentValue.id]: currentValue,
         }), {});
 
-      const selection = Object.keys(action.payload.options).map((part) => ({
-        key: part,
-        value: action.payload.partId === part ? Object.keys(action.payload.options[part]).map((select) => {
-          const thisSelection = action.payload.options[part][select];
+      const actionSelection = Object.keys(state.selection)
+        .map((part) => ({
+          key: part,
+          value: Object.keys(action.payload.options[part])
+            .map((select) => {
+              if (action.payload.options[part][select].length === 1) {
+                return {
+                  key: select,
+                  value: action.payload.options[part][select][0].id,
+                };
+              }
 
-          if (thisSelection.length === 1) {
-            return {
-              key: select,
-              value: thisSelection[0].id,
-            };
-          }
+              if (action.payload.partId === part && action.payload.selection[select]) {
+                return {
+                  key: select,
+                  value: action.payload.selection[select],
+                };
+              }
 
-          return {
-            key: select,
-            value: '',
-          };
-        })
-          .reduce((prevValue, currentValue) => ({
-            ...prevValue,
-            [currentValue.key]: currentValue.value,
-          }), { ...state.selection[part] }) : state.selection[action.payload.partId],
-      }))
+              return {
+                key: select,
+                value: '',
+              };
+            })
+            .reduce((prevValue, currentValue) => ({
+              ...prevValue,
+              [currentValue.key]: currentValue.value,
+            }), {}),
+        }))
         .reduce((prevValue, currentValue) => ({
           ...prevValue,
           [currentValue.key]: currentValue.value,
@@ -166,7 +220,7 @@ export default {
       return {
         ...state,
         calculator,
-        selection,
+        selection: updateSelection(state.selection, actionSelection),
         updatedAt: action.meta.updatedAt,
       };
     },

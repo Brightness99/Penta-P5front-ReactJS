@@ -76,7 +76,7 @@ const optionsSelector = createSelector(
   })
 );
 
-const optionsReadySelector = createSelector(
+const optionsFilledSelector = createSelector(
   selectionSelector,
   (selection) => {
     if (Object.keys(selection) <= 0) {
@@ -89,7 +89,6 @@ const optionsReadySelector = createSelector(
       .forEach((partKey) => {
         Object.keys(selection[partKey])
           .forEach((selectionItem) => {
-            console.log('123', selectionItem, selection[partKey][selectionItem]);
             optionsReady = selection[partKey][selectionItem] ? optionsReady : false;
           });
       });
@@ -97,7 +96,22 @@ const optionsReadySelector = createSelector(
   }
 );
 
-const settingsSelector = createSelector(
+const configSelector = createSelector(
+  productSettingsSelector,
+  optionsFilledSelector,
+  (
+    productSettings,
+    optionsFilled
+  ) => ({
+    ...productSettings.config,
+    isFulfilled: {
+      source: !!productSettings.source.selectedSource,
+      options: optionsFilled,
+    },
+  })
+);
+
+const settingsPageSelector = createSelector(
   appSelector,
   localeSelector,
   routerSelector,
@@ -105,7 +119,8 @@ const settingsSelector = createSelector(
   productSettingsSelector,
   optionsSelector,
   selectionSelector,
-  optionsReadySelector,
+  optionsFilledSelector,
+  configSelector,
   (
     app,
     locale,
@@ -114,7 +129,8 @@ const settingsSelector = createSelector(
     productSettings,
     options,
     selection,
-    optionsReady
+    optionsFilled,
+    config
   ) => ({
     app,
     locale,
@@ -124,12 +140,9 @@ const settingsSelector = createSelector(
       ...productSettings,
       options,
       selection,
-      settings: {
-        ...productSettings.settings,
-        optionsReady,
-      }
+      config,
     },
   })
 );
 
-export default settingsSelector;
+export default settingsPageSelector;

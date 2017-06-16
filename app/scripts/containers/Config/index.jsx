@@ -57,10 +57,8 @@ export class Config extends React.Component {
       productSettings: {
         selection,
         calculator,
-        settings: {
-          source: {
-            selectedSource,
-          },
+        source: {
+          selectedSource,
         },
         finalProduct: {
           id,
@@ -145,7 +143,6 @@ export class Config extends React.Component {
     if (isRunning || !isLoaded) {
       return (<Loading />);
     }
-    
     return (
       <OptionsBlock
         dispatch={dispatch}
@@ -189,11 +186,9 @@ export class Config extends React.Component {
     const {
       productSettings: {
         product,
-        settings: {
+        config: {
           showSteps,
-        },
-        source: {
-          selectedSource,
+          isFulfilled,
         },
         selection,
       },
@@ -205,8 +200,8 @@ export class Config extends React.Component {
       <div className="app__config container">
         <h2>{`${configLocale.TITLE}: ${product.title}`}</h2>
         {showSteps.source && this.renderSourceBlock()}
-        {showSteps.options && selectedSource && this.renderOptionsBlock()}
-        {this.renderMatrixBlock()}
+        {showSteps.options && isFulfilled.source && this.renderOptionsBlock()}
+        {showSteps.matrix && isFulfilled.options && this.renderMatrixBlock()}
         <SummaryBlock selection={selection} />
       </div>
     );
@@ -214,8 +209,6 @@ export class Config extends React.Component {
 
   render() {
     const { productSettings: { isRunning, isLoaded } } = this.props;
-
-    console.log(this.props.productSettings);
 
     if (isRunning || !isLoaded) {
       return (<Loading />);
