@@ -93,33 +93,31 @@ export function settingsSourceFetch(action$) {
 export function settingsOptionsFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST)
     .switchMap(action => {
-      const url = 'http://www.printi.com.br';
       const endpoint = `/v1/calculator/finalproducts/${action.payload.productId}/deny_rules/source/${action.payload.selectedSource}`;
-
+      const selection = Object.keys(action.payload.selection)
+        .filter((item) => action.payload.selection[item] !== '')
+        .reduce((prevValue, currentValue) => ({
+          ...prevValue,
+          [currentValue]: action.payload.selection[currentValue],
+        }), {});
       return rxAjax({
-        url,
         endpoint,
         payload: {
           id: action.payload.partId,
-          selection: Object.keys(action.payload.selection)
-            .filter((item) => action.payload.selection[item] !== '')
-            .reduce((prevValue, currentValue) => ({
-              ...prevValue,
-              [currentValue]: action.payload.selection[currentValue],
-            }), {}),
+          selection,
           type: 'product_part',
           option: action.payload.option,
         },
         method: 'POST',
       })
         .map(data => {
-          console.log(data);
           if (data.status === 200 && data.response) {
             return {
               type: SettingsConstants.SETTINGS_OPTIONS_FETCH_SUCCESS,
               payload: {
                 ...data.response,
                 partId: action.payload.partId,
+                selection,
               },
               meta: { updatedAt: getUnixtime() },
             };
@@ -133,17 +131,13 @@ export function settingsOptionsFetch(action$) {
         })
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
         .defaultIfEmpty({ type: SettingsConstants.SETTINGS_SOURCE_FETCH_CANCEL })
-        .catch(error => {
-          if (error.status === 404) {
-            push('/404');
-          }
-
-          return ([{
+        .catch(error => (
+          [{
             type: SettingsConstants.SETTINGS_SOURCE_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
-          }]);
-        });
+          }]
+        ));
     });
 }
 
@@ -181,17 +175,13 @@ export function settingsZipcodeFetch(action$) {
         })
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
         .defaultIfEmpty({ type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_CANCEL })
-        .catch(error => {
-          if (error.status === 404) {
-            push('/404');
-          }
-
-          return ([{
+        .catch(error => (
+          [{
             type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
-          }]);
-        });
+          }]
+        ));
     });
 }
 
@@ -229,16 +219,12 @@ export function settingsMatrixFetch(action$, store) {
         })
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
         .defaultIfEmpty({ type: SettingsConstants.SETTINGS_MATRIX_FETCH_CANCEL })
-        .catch(error => {
-          if (error.status === 404) {
-            push('/404');
-          }
-
-          return ([{
+        .catch(error => (
+          [{
             type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
-          }]);
-        });
+          }]
+        ));
     });
 }

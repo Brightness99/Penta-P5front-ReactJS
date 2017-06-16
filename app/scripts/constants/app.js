@@ -16,6 +16,7 @@ export const AppConstants = keyMirror({
   SHOW_ALERT: undefined,
   UPDATE_BROWSER_OPTIONS: undefined,
   UPDATE_CONFIG_VIEW_TYPE: undefined,
+  CANCEL_FETCH: undefined,
 });
 
 /**
