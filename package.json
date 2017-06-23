@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "test:ui": "nightwatch -c test/lib/nightwatch.conf.js",
     "test:ui:start": "npm start -- test:ui",
-    "precommit": "node config/tools commits && npm run lint && npm run lint:styles",
+    "precommit": "node config/tools commits && npm run lint",
     "postmerge": "node config/tools update && npm update",
     "fulltest": "npm run precommit && npm run flow && npm test"
   },

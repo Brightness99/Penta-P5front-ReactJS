@@ -1,7 +1,5 @@
 // @flow
 
-// TODO: When art_creation source is selected, show in business days
-
 import React from 'react';
 import moment from 'moment';
 import cx from 'classnames';
