@@ -15,7 +15,7 @@ const SelectView = (props: Props) => {
   };
 
   return (
-    <div className="app__config__view-type">
+    <div className="app__config__options-view-type">
       <button value="list" onClick={handleChangeView}>List</button>
       <button value="gallery" onClick={handleChangeView}>Gallery</button>
     </div>

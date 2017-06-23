@@ -1,8 +1,19 @@
-// TODO: Paddong on the blocks (same as the header)
+// TODO: Padding on the blocks (same as the header)
 
 .app__config__options {
   display: flex;
   flex-direction: column;
+
+  &-parts {
+    background-color: $color-printi;
+    color: $white;
+    padding: 1rem 1.5rem;
+    text-align: center;
+  }
+
+  &-view-type {
+
+  }
 
   ul {
     padding: 0;

@@ -37,7 +37,7 @@ export default class RadioButton extends React.Component {
           id={id}
           value={value}
           onChange={this.onChange}
-          defaultChecked={checked}
+          checked={checked}
         />
         <SVG src={require('assets/media/svg/icon_check.svg')} />
       </div>

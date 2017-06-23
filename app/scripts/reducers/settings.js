@@ -50,6 +50,12 @@ export const productSettingsState = {
   finalProduct: {},
   optionSectionInfo: {},
   selection: {},
+  matrix: {
+    rows: {},
+    dates: {},
+    isRunning: false,
+    isLoaded: false,
+  },
 };
 
 export default {
@@ -87,6 +93,8 @@ export default {
         settings: {
           showSteps: action.payload.settings.show_steps,
         },
+        options: productSettingsState.options,
+        matrix: productSettingsState.matrix,
         isRunning: false,
         isLoaded: true,
         updatedAt: action.meta.updatedAt,
@@ -222,6 +230,33 @@ export default {
         calculator,
         selection: updateSelection(state.selection, actionSelection),
         updatedAt: action.meta.updatedAt,
+      };
+    },
+    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        matrix: productSettingsState.matrix,
+      };
+    },
+    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_SUCCESS](state) {
+      return {
+        ...state,
+        matrix: {
+          ...state.matrix,
+          isRunning: true,
+          isLoaded: false,
+        }
+      };
+    },
+    [SettingsConstants.SETTINGS_MATRIX_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        matrix: {
+          rows: action.payload.rows,
+          dates: action.payload.dates,
+          isRunning: false,
+          isLoaded: true,
+        },
       };
     },
   }),

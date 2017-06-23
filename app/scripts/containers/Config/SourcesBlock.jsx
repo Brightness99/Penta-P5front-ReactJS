@@ -1,29 +1,38 @@
 // @flow
 
+// TODO: Fix reselection not working
+
 import React from 'react';
 import cx from 'classnames';
+
+import { settingsSourceFetch } from 'actions';
 
 import { RadioButton } from 'components/Input';
 
 import ConfigBlock from './ConfigBlock';
 
 type Props = {
-  locale: {},
+  locale: LocaleState,
   screenSize: string,
   order: number,
-  finalProduct: {
-    id: string,
-  },
+  finalProductId: string,
   dispatch: () => {},
-  handleSourceSelection: () => {},
   selectedSource: ?string,
 };
 
 export default class SourcesBlock extends React.Component {
   static props: Props;
 
+  handleSourceSelection = (ev) => {
+    const { finalProductId, dispatch, selectedSource } = this.props;
+
+    if (ev.target.value !== selectedSource) {
+      dispatch(settingsSourceFetch(finalProductId, ev.currentTarget.value));
+    }
+  };
+
   renderBlock(blockName, icon, locale) {
-    const { handleSourceSelection, selectedSource } = this.props;
+    const { selectedSource } = this.props;
 
     return (
       <div className={`app__config__creation-${blockName}`}>
@@ -42,7 +51,7 @@ export default class SourcesBlock extends React.Component {
               name="config-creation"
               id={`config-${blockName}`}
               value={blockName}
-              onChange={handleSourceSelection}
+              onChange={this.handleSourceSelection}
               checked={selectedSource === blockName}
             />
             {locale.TITLE}

@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Footer should render properly 1`] = `"<footer class=\\"app__footer\\"><div class=\\"app__footer__newsletter\\"><div class=\\"app__footer__newsletter__icon\\"><span class=\\"isvg failed\\"></span></div><div class=\\"app__footer__newsletter__text\\"><h3>Inscreva-se em nossa newsletter</h3><p>para receber nossas últimas notícias e descontos exclusivos</p></div><div>Newsletter</div></div></footer>"`;
