@@ -8,16 +8,18 @@ type Props = {
   locale: {},
   order: number,
   className: string,
-  dispatch: () => {},
+  onZipcodeValid: () => {},
 };
 
 export default class MatrixZipcode extends React.Component {
   static props: Props;
 
   onValid = (zipcode: number) => {
-    const { dispatch } = this.props;
+    const { onZipcodeValid } = this.props;
 
-    dispatch(settingsMatrixFetch(zipcode));
+    if (typeof onZipcodeValid === 'function') {
+      onZipcodeValid(zipcode);
+    }
   };
 
   render() {

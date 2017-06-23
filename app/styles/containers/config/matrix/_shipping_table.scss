@@ -1,0 +1,140 @@
+.app__config__shipping{
+
+  &-datepicker {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2rem 0;
+    width: 100%;
+
+    li {
+      margin-top: 4%;
+      display: inline-flex;
+      width: 48%;
+
+      button {
+        align-items: center;
+        background-color: #f9f9f9;
+        border: 1px solid #dbdddf;
+        border-radius: 0.3rem;
+        color: $color-printi;
+        display: flex;
+        flex-direction: column;
+        font-family: $font-family-open-sans-regular;
+        line-height: 1.2;
+        outline: none;
+        padding: 1rem 0 0.6rem;
+        text-transform: lowercase;
+        width: 100%;
+
+        .app__config__shipping--datepicker__weekday {
+          color: #6a6f7a;
+          font-size: 1.2rem;
+        }
+
+        .app__config__shipping--datepicker__date {
+          align-items: center;
+          display: flex;
+          font-family: $font-family-open-sans-bold;
+
+          span {
+            font-size: 4.8rem;
+            padding-right: 1rem;
+          }
+        }
+
+        &.selected {
+          background-color: $color-printi;
+
+          > * {
+            color: $color-white;
+          }
+        }
+      }
+    }
+  }
+
+  &-table {
+    width: 100%;
+
+    thead {
+      background: #eee;
+      border: 1px solid #dbdddf;
+      border-radius: 3px 0;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    th {
+      border-right: 1px solid #dbdddf;
+      color: #6a6f7a;
+      text-align: center;
+      padding: 0.5rem;
+
+      &:last-child {
+        border: none;
+      }
+    }
+
+    tbody {
+      border-left: 0.1rem solid #dbdddf;
+      border-right: 0.1rem solid #dbdddf;
+    }
+
+    tr {
+      border-bottom: 0.1rem solid #dbdddf;
+
+      &:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      &.selected {
+        background-color: $color-printi;
+        color: $color-white;
+
+        span {
+          color: $color-white;
+        }
+      }
+
+      td {
+
+        label {
+          display: flex;
+          padding: 0.5rem 0;
+          width: 100%;
+
+          .app__input__radio {
+            justify-content: center;
+            width: 7rem;
+          }
+        }
+
+        &:first-child {
+          font-size: 1.2rem;
+          text-align: center;
+          border-right: 0.1rem solid #dbdddf;
+
+          span {
+            font-weight: bold;
+            font-size: 1.8rem;
+          }
+        }
+      }
+    }
+  }
+
+  &-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    width: 100%;
+
+    span {
+      color: #878b94;
+      display: flex;
+      font-weight: normal;
+      font-size: 1.2rem;
+    }
+  }
+}

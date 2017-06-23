@@ -69,11 +69,11 @@ export default class OptionsBlock extends React.Component {
   }
 
   render() {
-    const { locale, options: { parts, list }, dispatch } = this.props;
+    const { locale, options: { parts, list }, dispatch, order } = this.props;
 
     return (
       <ConfigBlock
-        order="2"
+        order={order}
         locale={locale}
         button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
         className="app__config__options-block"

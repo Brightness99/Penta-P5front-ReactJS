@@ -1,3 +1,5 @@
+// TODO: BLOCK FLOATING TO PREVENT ROMULO'S SHITS
+
 {
   "extends": "stylelint-config-standard",
   "plugins": [

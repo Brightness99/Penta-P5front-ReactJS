@@ -13,7 +13,7 @@ html {
 
 body {
   // background-color: #e6e6e6;
-  background: url('../../assets/media/images/3.0-Configuracoes.jpg');
+  //background: url('../../assets/media/images/3.0-Configuracoes.jpg');
   min-height: 100%;
 }
 
@@ -54,9 +54,14 @@ a {
 }
 
 .app__main {
-  padding-top: $header-height;
+  padding-top: $header-height + 2rem;
+  padding-bottom: 2rem;
 
   @include lg {
     padding-top: ($header-height + $topbar-height);
   }
+}
+
+label {
+  margin: 0;
 }

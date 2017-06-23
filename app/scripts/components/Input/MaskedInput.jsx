@@ -27,7 +27,7 @@ export default class MaskedInput extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { inputValue } = this.state;
 
-    if (inputValue.length >= 8 && prevState.inputValue !== inputValue) {
+    if (prevState.inputValue !== inputValue) {
       this.handleFetch();
     }
   }
@@ -40,7 +40,7 @@ export default class MaskedInput extends React.Component {
     const { onValid } = this.props;
     const { inputValue } = this.state;
 
-    if (typeof onValid === 'function') {
+    if (inputValue.length >= 8 && typeof onValid === 'function') {
       onValid(inputValue);
     }
   };

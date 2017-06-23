@@ -18,6 +18,7 @@ export const userState = {
     subscribed: false,
   },
   address: {
+    isZipcodeValid: false,
     zipcode: '',
   },
   updatedAt: 0,

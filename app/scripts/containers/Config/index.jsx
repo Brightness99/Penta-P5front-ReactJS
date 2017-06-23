@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { settingsFetch, settingsSourceFetch, settingsOptionsFetch } from 'actions';
+import { settingsFetch, settingsOptionsFetch } from 'actions';
 import { settingsSelector } from 'selectors';
 
 import Loading from 'components/Loading';
@@ -43,13 +43,6 @@ export class Config extends React.Component {
   }
 
   static props: Props;
-
-  handleSourceSelection = (ev) => {
-    const { productSettings: { finalProduct: { id }, settings: { selectedSource } }, dispatch } = this.props;
-    if (ev.target.value !== selectedSource) {
-      dispatch(settingsSourceFetch(id, ev.target.value));
-    }
-  };
 
   handleOptionSelection = (ev) => {
     const {
@@ -100,6 +93,9 @@ export class Config extends React.Component {
         source: {
           selectedSource,
         },
+        finalProduct: {
+          id,
+        }
       },
       locale,
       dispatch,
@@ -112,8 +108,8 @@ export class Config extends React.Component {
         locale={configLocale.creation}
         screenSize={screenSize}
         order="1"
+        finalProductId={id}
         dispatch={dispatch}
-        handleSourceSelection={this.handleSourceSelection}
         selectedSource={selectedSource}
       />
     );
@@ -132,6 +128,9 @@ export class Config extends React.Component {
           isRunning,
           isLoaded,
         },
+        settings: {
+          showSteps,
+        }
       },
       productSettings,
       locale,
@@ -143,12 +142,13 @@ export class Config extends React.Component {
     if (isRunning || !isLoaded) {
       return (<Loading />);
     }
+
     return (
       <OptionsBlock
         dispatch={dispatch}
         viewType={viewType}
         locale={configLocale}
-        order="2"
+        order={showSteps.source ? 2 : 1}
         options={{ ...productSettings.options, ...options }}
         selection={selection}
         onSelect={this.handleOptionSelection}
@@ -162,10 +162,14 @@ export class Config extends React.Component {
         source: {
           selectedSource,
         },
+        matrix,
         selection,
       },
       dispatch,
       locale,
+      app: {
+        screenSize,
+      },
     } = this.props;
 
     const configLocale = locale.translate.page.product_settings.matrix;
@@ -178,6 +182,8 @@ export class Config extends React.Component {
         dispatch={dispatch}
         selection={selection}
         selectedSource={selectedSource}
+        screenSize={screenSize}
+        matrix={matrix}
       />
     );
   }
