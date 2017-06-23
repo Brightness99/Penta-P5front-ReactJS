@@ -7,6 +7,8 @@ import { settingsMatrixFetch, settingsZipcodeReset } from 'actions';
 import { RoundedTransparentButton } from 'atoms/Buttons';
 import { PlusCircleIcon } from 'components/Icons';
 
+import Loading from 'components/Loading';
+
 import Zipcode from './Zipcode';
 import ShippingTable from './ShippingTable';
 import ConfigBlock from '../ConfigBlock';
@@ -52,6 +54,7 @@ export default class MatrixBlock extends React.Component {
 
   renderMatrix() {
     const { selection, dispatch, screenSize, matrix, templates, product, user, isCustomEnabled } = this.props;
+
     return (
       <div className="app__config__matrix">
         <Zipcode
