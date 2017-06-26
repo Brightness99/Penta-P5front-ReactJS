@@ -36,6 +36,7 @@ var config = merge.smart(webpackConfig, {
     new CopyPlugin([
       { from: '.htaccess' },
       { from: 'robots.txt' },
+      { from: 'deploy.php' },
     ]),
     new ExtractText('styles/app.[hash].css'),
     new HtmlPlugin({
