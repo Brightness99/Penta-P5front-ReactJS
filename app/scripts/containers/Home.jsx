@@ -9,9 +9,11 @@ export default class Home extends React.Component {
 
   render() {
     return (<div>
-      <NavLink to="/configuracao-catalogo">Home Page</NavLink>
+      <NavLink to="/produtos-catalogo">Catálogo</NavLink>
       <br />
-      <NavLink to="/produtos-banner">Produto Banner</NavLink>
+      <NavLink to="/produtos-banner">Banner</NavLink>
+      <br />
+      <NavLink to="/produtos-cartao-de-visita">Cartão de Visita</NavLink>
     </div>);
   }
 }
