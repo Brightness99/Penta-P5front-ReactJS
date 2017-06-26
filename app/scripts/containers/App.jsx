@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import Modernizr from 'modernizr';
 import { getScreenSize } from 'utils/helpers';
 import { updateBrowserOptions } from 'actions';
 import Router from 'modules/ReduxRouter';
