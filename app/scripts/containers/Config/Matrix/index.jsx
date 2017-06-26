@@ -41,7 +41,11 @@ export default class MatrixBlock extends React.Component {
         />
         { !matrix.isLoaded && !matrix.isRunning
         ? null
-        : <ShippingTable screenSize={screenSize} matrix={matrix} />}
+        : <ShippingTable
+            dispatch={dispatch}
+            screenSize={screenSize}
+            matrix={matrix}
+          />}
       </div>
     );
   }
