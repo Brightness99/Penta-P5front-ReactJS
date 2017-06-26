@@ -30,4 +30,5 @@ export const SettingsConstants = keyMirror({
   SETTINGS_MATRIX_FETCH_SUCCESS: undefined,
   SETTINGS_MATRIX_FETCH_FAILURE: undefined,
   SETTINGS_MATRIX_FETCH_CANCEL: undefined,
+  SETTINGS_MATRIX_SELECT_QUANTITY: undefined,
 });

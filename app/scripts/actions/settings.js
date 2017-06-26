@@ -65,3 +65,20 @@ export function settingsMatrixFetch(zipcode: number): Object {
     },
   };
 }
+
+/**
+ * Matrix Selection
+ * @param {number} date
+ * @param {number} quantity
+ *
+ * @returns {Object}
+ */
+export function settingsMatrixSelect(date: number, quantity: number = 0): Object {
+  return {
+    type: SettingsConstants.SETTINGS_MATRIX_SELECT_QUANTITY,
+    payload: {
+      date,
+      quantity,
+    },
+  };
+}
