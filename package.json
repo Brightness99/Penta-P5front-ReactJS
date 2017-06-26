@@ -4,6 +4,7 @@
   "description": "Printi Alpha Front-End Application",
   "main": "index.js",
   "scripts": {
+    "build": "NODE_ENV=production webpack --config config/webpack.prod.js",
     "start": "node config/webpack.server.js",
     "lint": "eslint  --ext .js --ext .jsx app/scripts config test",
     "lint:styles": "stylelint app/styles/**/*.scss",
@@ -12,7 +13,7 @@
     "test:watch": "jest --watch",
     "test:ui": "nightwatch -c test/lib/nightwatch.conf.js",
     "test:ui:start": "npm start -- test:ui",
-    "precommit": "node config/tools commits && npm run lint",
+    "precommit": "node config/tools commits && npm run lint && npm run lint:styles",
     "postmerge": "node config/tools update && npm update",
     "fulltest": "npm run precommit && npm run flow && npm test"
   },

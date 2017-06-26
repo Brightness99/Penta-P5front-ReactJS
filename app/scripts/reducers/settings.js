@@ -53,6 +53,10 @@ export const productSettingsState = {
   matrix: {
     rows: {},
     dates: {},
+    selection: {
+      date: 0,
+      quantity: 0,
+    },
     isRunning: false,
     isLoaded: false,
   },
@@ -122,6 +126,8 @@ export default {
           selectedSource: action.payload.source,
           isRunning: true,
         },
+        options: productSettingsState.options,
+        matrix: productSettingsState.matrix,
       };
     },
     [SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS](state, action) {
@@ -252,10 +258,20 @@ export default {
       return {
         ...state,
         matrix: {
+          ...state.matrix,
           rows: action.payload.rows,
           dates: action.payload.dates,
           isRunning: false,
           isLoaded: true,
+        },
+      };
+    },
+    [SettingsConstants.SETTINGS_MATRIX_SELECT_QUANTITY](state, action) {
+      return {
+        ...state,
+        matrix: {
+          ...state.matrix,
+          selection: action.payload,
         },
       };
     },
