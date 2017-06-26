@@ -4,6 +4,8 @@ import React from 'react';
 import moment from 'moment';
 import cx from 'classnames';
 
+import { settingsMatrixSelect } from 'actions';
+
 import { RadioButton } from 'components/Input';
 import Loading from 'components/Loading';
 
@@ -18,47 +20,35 @@ type Props = {
   dispatch: () => {},
 };
 
-type State = {
-  selectedDay: number,
-};
-
 export default class MatrixShippingTable extends React.Component {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      selectedDay: 0,
-    };
-  }
-
   componentWillUpdate(nextProps) {
     const currentProps = this.props;
 
     if (Object.keys(currentProps.matrix.dates).length <= 0 && Object.keys(nextProps.matrix.dates).length > 0) {
-      this.setState({
-        selectedDay: Object.keys(nextProps.matrix.dates)[0],
-      });
+      this.handleMatrixSelection(Object.keys(nextProps.matrix.dates)[0]);
     }
   }
 
   static props: Props;
 
-  static state: State;
+  handleMatrixSelection = (selectedDate: number, selectedQuantity: number = 0 ) => {
+    const { dispatch } = this.props;
+
+    dispatch(settingsMatrixSelect(selectedDate, selectedQuantity));
+  };
 
   handleMobileDate = (ev) => {
-    this.setState({
-      selectedDay: ev.currentTarget.name,
-    });
+    this.handleMatrixSelection(ev.currentTarget.name);
   };
 
   renderMobileDayChoser(timestamp: number) {
     const date = moment(new Date(timestamp * 1000));
-    const { selectedDay } = this.state;
+    const { matrix: { selection } } = this.props;
 
     return (
       <li key={timestamp}>
         <button
-          className={cx(selectedDay === timestamp && 'selected')}
+          className={cx(selection.date === timestamp && 'selected')}
           name={timestamp}
           onClick={this.handleMobileDate}
         >
@@ -74,17 +64,12 @@ export default class MatrixShippingTable extends React.Component {
   }
 
   renderMobileTable() {
-    const { matrix: { rows } } = this.props;
-    const { selectedDay } = this.state;
-
-    console.log(Object.keys(rows)
-      .filter((quantity) => !Array.isArray(rows[quantity][selectedDay])), selectedDay);
+    const { matrix: { rows, selection } } = this.props;
 
     return Object.keys(rows)
-      .filter((quantity) => rows[quantity][selectedDay] && !Array.isArray(rows[quantity][selectedDay]))
+      .filter((quantity) => rows[quantity][selection.date] && !Array.isArray(rows[quantity][selection.date]))
       .map((quantity) => {
-        console.log(rows, quantity, selectedDay, Array.isArray(rows[quantity][selectedDay]));
-        const prices = rows[quantity][selectedDay].prices;
+        const prices = rows[quantity][selection.date].prices;
 
         return (
           <tr key={quantity}>

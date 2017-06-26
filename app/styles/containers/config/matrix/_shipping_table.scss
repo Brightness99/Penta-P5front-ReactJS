@@ -55,6 +55,7 @@
   }
 
   &-table {
+    table-layout: fixed;
     width: 100%;
 
     thead {
@@ -71,9 +72,11 @@
       color: #6a6f7a;
       text-align: center;
       padding: 0.5rem;
+      width: 40%;
 
       &:last-child {
         border: none;
+        width: 60%;
       }
     }
 
