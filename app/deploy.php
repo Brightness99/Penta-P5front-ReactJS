@@ -20,8 +20,8 @@ $cmdIn3 = 'git log -1 2>&1';
 
 // Post-deploy scripts
 $npmCommands = [
-    'npm run postmerge',
-    'npm run build',
+    'sudo npm run postmerge',
+    'sudo npm run build',
 ];
 
 $st1 = $st2 = $st3 = $st4 = 0;
