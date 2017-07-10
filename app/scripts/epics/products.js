@@ -9,7 +9,7 @@ import { push } from 'modules/ReduxRouter';
 export function productsFetch(action$) {
   return action$.ofType(ProductConstants.PRODUCT_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v1/product-settings/${action.payload.slug}`;
+      const endpoint = `/v1/product/${action.payload.slug}`;
 
       return rxAjax({
         endpoint,

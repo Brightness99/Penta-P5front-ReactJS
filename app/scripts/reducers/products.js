@@ -11,6 +11,9 @@ import { ProductConstants } from 'constants/index';
 export const productsState = {
   rehydrated: false,
   updatedAt: 0,
+  product: {},
+  isRunning: false,
+  isLoaded: false,
 };
 
 export default {
@@ -21,10 +24,21 @@ export default {
         rehydrated: true,
       };
     },
-    [ProductConstants.PRODUCT_FETCH_REQUEST](state) {
+    [ProductConstants.PRODUCT_FETCH_REQUEST](state, action) {
       return {
         ...state,
+        isRunning: true,
+        isLoaded: false,
+      };
+    },
+    [ProductConstants.PRODUCT_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        ...action.payload,
+        isRunning: false,
+        isLoaded: true,
       };
     },
   }),
 };
+

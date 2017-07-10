@@ -17,3 +17,4 @@ export TimesCircleIcon from './TimesCircle';
 export SettingsArtCreationIcon from './SettingsArtCreation';
 export SettingsTweakIcon from './SettingsTweak';
 export SettingsUploadIcon from './SettingsUpload';
+export StarIcon from './Star';
