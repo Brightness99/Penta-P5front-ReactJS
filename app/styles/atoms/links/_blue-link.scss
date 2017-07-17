@@ -1,0 +1,17 @@
+.atm-blue-link {
+  align-items: center;
+  color: $color-printi;
+  cursor: pointer;
+  display: flex;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  position: relative;
+
+  svg {
+    fill: $color-printi;
+    height: $font-size-xxs;
+    margin-right: 0.3rem;
+    width: $font-size-xxs;
+    vertical-align: top;
+  }
+}

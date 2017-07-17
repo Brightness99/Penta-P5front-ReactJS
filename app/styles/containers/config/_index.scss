@@ -3,18 +3,30 @@
 @import 'options_block';
 @import "matrix/index";
 @import "summary/index";
+@import "options/index";
+@import "pre-press-template";
+@import "warning";
 
 .app__config {
   padding-top: 2rem;
+  position: relative;
 
-  h2 {
-    font-family: $font-family-open-sans-bold;
-    font-size: 1.8rem;
-    line-height: 3rem;
-    text-transform: uppercase;
-  }
+  &__content{
+    position: relative;
+    > main {
+      width: 100%;
 
-  .app__loading {
-    padding-top: 2rem;
+      @include lg {
+        width: 74.5%;
+      }
+    }
+
+    .app__loading {
+      padding-top: 2rem;
+    }
+
+    .app__config__warning {
+      margin: $grid-gutter-width 0 0;
+    }
   }
 }

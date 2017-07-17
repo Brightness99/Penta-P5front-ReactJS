@@ -82,3 +82,15 @@ export function settingsMatrixSelect(date: number, quantity: number = 0): Object
     },
   };
 }
+
+/**
+ * PrePress Template Fetch
+ *
+ * @returns {Object}
+ */
+export function prePressTemplateFetch(): Object {
+  return {
+    type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_REQUEST,
+    payload: {},
+  };
+}

@@ -6,11 +6,14 @@ import { connect } from 'react-redux';
 import { settingsFetch, settingsOptionsFetch } from 'actions';
 import { settingsSelector } from 'selectors';
 
+import { PageTitle } from 'atoms/Titles';
+
 import Loading from 'components/Loading';
 import SummaryBlock from './Summary';
-import SourcesBlock from './SourcesBlock';
+import SourcesBlock from './Sources';
 import OptionsBlock from './Options';
 import MatrixBlock from './Matrix';
+import Warning from './Warning';
 
 type Props = {
   app: AppStore,
@@ -90,12 +93,10 @@ export class Config extends React.Component {
         screenSize,
       },
       productSettings: {
-        source: {
-          selectedSource,
-        },
+        source,
         finalProduct: {
           id,
-        }
+        },
       },
       locale,
       dispatch,
@@ -110,7 +111,7 @@ export class Config extends React.Component {
         order="1"
         finalProductId={id}
         dispatch={dispatch}
-        selectedSource={selectedSource}
+        source={source}
       />
     );
   }
@@ -121,6 +122,7 @@ export class Config extends React.Component {
         config: {
           viewType,
         },
+        screenSize,
       },
       productSettings: {
         selection,
@@ -130,7 +132,7 @@ export class Config extends React.Component {
         },
         settings: {
           showSteps,
-        }
+        },
       },
       productSettings,
       locale,
@@ -151,6 +153,7 @@ export class Config extends React.Component {
         order={showSteps.source ? 2 : 1}
         options={{ ...productSettings.options, ...options }}
         selection={selection}
+        screenSize={screenSize}
         onSelect={this.handleOptionSelection}
       />
     );
@@ -164,6 +167,7 @@ export class Config extends React.Component {
         },
         matrix,
         selection,
+        templates,
       },
       dispatch,
       locale,
@@ -184,6 +188,7 @@ export class Config extends React.Component {
         selectedSource={selectedSource}
         screenSize={screenSize}
         matrix={matrix}
+        templates={templates}
       />
     );
   }
@@ -197,6 +202,9 @@ export class Config extends React.Component {
           isFulfilled,
         },
         selection,
+        templates,
+        optionSectionInfo,
+        calculator,
       },
       locale,
     } = this.props;
@@ -204,11 +212,16 @@ export class Config extends React.Component {
     const configLocale = locale.translate.page.product_settings;
     return (
       <div className="app__config container">
-        <h2>{`${configLocale.TITLE}: ${product.title}`}</h2>
-        {showSteps.source && this.renderSourceBlock()}
-        {showSteps.options && isFulfilled.source && this.renderOptionsBlock()}
-        {showSteps.matrix && isFulfilled.options && this.renderMatrixBlock()}
-        <SummaryBlock selection={selection} />
+        <PageTitle>{`${configLocale.TITLE}: ${product.title}`}</PageTitle>
+        <div className="app__config__content">
+          <main>
+            {showSteps.source && this.renderSourceBlock()}
+            {showSteps.options && isFulfilled.source && this.renderOptionsBlock()}
+            {showSteps.matrix && isFulfilled.options && this.renderMatrixBlock()}
+            <Warning templates={templates} />
+          </main>
+          <SummaryBlock selection={selection} optionSectionInfo={optionSectionInfo} calculator={calculator} />
+        </div>
       </div>
     );
   }

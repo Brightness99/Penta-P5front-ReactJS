@@ -1,0 +1,61 @@
+.mol-matrix-zipcode {
+  h4 {
+    align-self: center;
+    color: $color-black;
+    display: flex;
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-lg;
+    font-weight: normal;
+    letter-spacing: -0.04rem;
+
+    > div {
+      letter-spacing: 0;
+    }
+  }
+
+  .app__zipcode__validation {
+    display: flex;
+    margin-top: 1.5rem;
+
+    .atm-success-text {
+      padding-left: 1rem;
+    }
+
+    .app__input__masked {
+      display: inline-flex;
+      position: relative;
+
+      input{
+        border-radius: 3px;
+        background-color: #f8f8f8;
+        border: solid 1px #dbdddf;
+        color: #151617;
+        font-family: $font-family-open-sans;
+        font-size: 16px;
+        height: 40px;
+        padding: 0 2rem 0 1rem;
+        text-align: center;
+        width: 14rem;
+      }
+
+      .app__reset_zipcode {
+        border: none;
+        background-color: transparent;
+        color: #cbced2;
+        height: 1.6rem;
+        line-height: 1;
+        outline: none;
+        position: absolute;
+        padding: 0;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1.6rem;
+
+        svg {
+          fill: currentColor;
+        }
+      }
+    }
+  }
+}

@@ -5,9 +5,9 @@ import cx from 'classnames';
 import Overlay from 'components/Overlay';
 
 type Props = {
-  onClose: () => {},
   className: string,
-
+  children: any,
+  onClose: () => {},
 };
 
 const Modal = (props: Props) => {
@@ -24,6 +24,12 @@ const Modal = (props: Props) => {
       className={cx('app__modal', props.className)}
     >
       <Overlay onClick={handleClose} />
+      <div className="app__modal__container">
+        <button onClick={handleClose}>X</button>
+        <div className="app__modal__body">
+          {props.children}
+        </div>
+      </div>
     </div>
   );
 };

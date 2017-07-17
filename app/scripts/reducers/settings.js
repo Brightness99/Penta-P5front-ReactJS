@@ -46,6 +46,21 @@ export const productSettingsState = {
     isRunning: false,
     isLoaded: false,
   },
+  templates: {
+    options: {
+      vertical: ['illustrator', 'photoshop'],
+      horizontal: ['illustrator', 'photoshop'],
+    },
+    url: {
+      vertical: {},
+      horizontal: {},
+    },
+    pbcard: {
+      guideCombinationId: 25,
+      fileCombinationId: 27,
+    },
+    selectedOption: 'vertical',
+  },
   calculator: {},
   finalProduct: {},
   optionSectionInfo: {},
@@ -122,7 +137,7 @@ export default {
           },
         },
         source: {
-          ...state.settings.source,
+          ...state.source,
           selectedSource: action.payload.source,
           isRunning: true,
         },
@@ -131,16 +146,6 @@ export default {
       };
     },
     [SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS](state, action) {
-      const selection = Object.keys(action.payload.calculator)
-        .reduce((prevItem, currentItem) => ({
-          ...prevItem,
-          [currentItem]: Object.keys(action.payload.calculator[currentItem].options).reduce((prevOption, nextOption) => ({
-            ...prevOption,
-            [nextOption]: action.payload.calculator[currentItem].options[nextOption]
-              .filter((optionItem) => optionItem.default)
-              .reduce((prevOptionItem, nextOptionItem) => nextOptionItem.id, ''),
-          }), {}),
-        }), {});
       return {
         ...state,
         source: {
@@ -152,7 +157,7 @@ export default {
         finalProduct: action.payload.final_product,
         optionSectionInfo: action.payload.option_section_info,
         defaultCombinationCount: action.payload.default_combination_count,
-        selection,
+        selection: action.payload.selection,
         updatedAt: action.meta.updatedAt,
       };
     },
@@ -251,7 +256,7 @@ export default {
           ...state.matrix,
           isRunning: true,
           isLoaded: false,
-        }
+        },
       };
     },
     [SettingsConstants.SETTINGS_MATRIX_FETCH_SUCCESS](state, action) {

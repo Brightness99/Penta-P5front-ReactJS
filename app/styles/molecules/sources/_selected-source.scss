@@ -1,0 +1,52 @@
+.org-selected-source {
+  padding: 2rem 3rem;
+
+  .mol-selected-source {
+    align-items: center;
+    display: flex;
+    height: 6rem;
+    width: 100%;
+    .atm-settings-image {
+      align-items: center;
+      border-radius: 0.3rem;
+      background-color: $color-white;
+      border: solid 0.1rem #dbdddf;
+      display: inline-flex;
+      height: 6rem;
+      justify-content: center;
+      width: 6rem;
+
+      > img {
+        max-height: 80%;
+        max-width: 80%;
+      }
+    }
+
+    span {
+      display: inline-flex;
+      color: #151617;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-lg;
+      padding-left: 2rem;
+      width: calc(50% - 3rem);
+    }
+
+    p {
+      align-items: center;
+      border-radius: 0.3rem;
+      background-color: #d7e0ea;
+      color: #537599;
+      display: inline-flex;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      line-height: 1.67;
+      height: 6rem;
+      margin: 0;
+      padding: 0 1.5rem;
+      width: calc(50% - 3rem);
+    }
+  }
+  .atm-blue-link {
+    margin-top: 3rem;
+  }
+}

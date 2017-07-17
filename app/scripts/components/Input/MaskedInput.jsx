@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { TimesCircleIcon } from 'components/Icons';
 
 type Props = {
   id?: string,
@@ -60,7 +61,9 @@ export default class MaskedInput extends React.Component {
           onChange={this.onChange}
           value={inputValue}
         />
-        <button onClick={this.handleFetch}>Ok</button>
+        <button className="app__reset_zipcode">
+          <TimesCircleIcon />
+        </button>
       </div>
     );
   }
