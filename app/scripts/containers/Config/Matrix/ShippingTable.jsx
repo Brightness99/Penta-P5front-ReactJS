@@ -1,5 +1,7 @@
 // @flow
 
+// TODO: When art_creation source is selected, show in business days
+
 import React from 'react';
 import moment from 'moment';
 import cx from 'classnames';
@@ -16,6 +18,7 @@ type Props = {
   matrix: {
     dates: {},
     rows: {},
+    selections: {},
   },
   dispatch: () => {},
 };
@@ -31,7 +34,7 @@ export default class MatrixShippingTable extends React.Component {
 
   static props: Props;
 
-  handleMatrixSelection = (selectedDate: number, selectedQuantity: number = 0 ) => {
+  handleMatrixSelection = (selectedDate: number, selectedQuantity: number = 0) => {
     const { dispatch } = this.props;
 
     dispatch(settingsMatrixSelect(selectedDate, selectedQuantity));
@@ -41,72 +44,80 @@ export default class MatrixShippingTable extends React.Component {
     this.handleMatrixSelection(ev.currentTarget.name);
   };
 
-  renderMobileDayChoser(timestamp: number) {
-    const date = moment(new Date(timestamp * 1000));
-    const { matrix: { selection } } = this.props;
+  renderTdPrice(prices, date) {
+    if (typeof prices === 'undefined') {
+      return (<td key={`price-${date}`}>---</td>);
+    }
 
     return (
-      <li key={timestamp}>
-        <button
-          className={cx(selection.date === timestamp && 'selected')}
-          name={timestamp}
-          onClick={this.handleMobileDate}
-        >
-          <div className="app__config__shipping--datepicker__weekday">
-            {date.format('dddd')}
+      <td key={`price-${date}`}>
+        <label>
+          <RadioButton />
+          <div className="app__config__shipping-table__price">
+            {`R$ ${prices.total.toFixed(2)}`}
+            <span>{`R$ ${prices.unit.toFixed(2)} / un`}</span>
           </div>
-          <div className="app__config__shipping--datepicker__date">
-            <span>{date.format('DD')}</span> {date.format('MMM')}
-          </div>
-        </button>
-      </li>
+        </label>
+      </td>
     );
   }
 
-  renderMobileTable() {
-    const { matrix: { rows, selection } } = this.props;
+  renderTdDate(quantity: number) {
+    return (
+      <td key={`quantity-${quantity}`}><span>{quantity}</span> un</td>
+    );
+  }
 
-    return Object.keys(rows)
-      .filter((quantity) => rows[quantity][selection.date] && !Array.isArray(rows[quantity][selection.date]))
-      .map((quantity) => {
-        const prices = rows[quantity][selection.date].prices;
-
-        return (
-          <tr key={quantity}>
-            <td><span>{quantity}</span> un</td>
-            <td>
-              <label>
-                <RadioButton />
-                <div className="app__config__shipping-price">
-                  {`R$ ${prices.total.toFixed(2)}`}
-                  <span>{`R$ ${prices.unit.toFixed(2)} / un`}</span>
-                </div>
-              </label>
-            </td>
-          </tr>
-        );
-      });
+  renderTrDate(timestamp: number) {
+    const date = moment(new Date(timestamp * 1000));
+    return (
+      <div>
+        <div className="app__config__shipping-table__date-day">
+          <span>{date.format('DD')}</span> {date.format('MMM')}
+        </div>
+        <div className="app__config__shipping-table__date-weekday">
+          {date.format('dddd')}
+        </div>
+      </div>
+    );
   }
 
   renderMobile() {
-    const { matrix } = this.props;
+    const { matrix: { dates, rows, selection } } = this.props;
 
     return (
-      <div className="app__config__shipping">
+      <div className="app__config__shipping app__config__shipping--mobile">
         <ul className="app__config__shipping-datepicker">
           {
-            Object.keys(matrix.dates).map((timestamp) => this.renderMobileDayChoser(timestamp))
+            Object.keys(dates).map((timestamp) => (
+              <li key={timestamp}>
+                <button
+                  className={cx(selection.date === timestamp && 'selected')}
+                  name={timestamp}
+                  onClick={this.handleMobileDate}
+                >
+                  {this.renderTrDate(timestamp)}
+                </button>
+              </li>
+            ))
           }
         </ul>
         <table className="app__config__shipping-table">
           <thead>
             <tr>
-              <th>Quantidade</th>
-              <th>Valor</th>
+              <th className="app__config__shipping-table__quantity app__config__shipping-table--th app__config__shipping-table--th-gray">Quantidade</th>
+              <th className="app__config__shipping-table--th app__config__shipping-table--th-gray">Valor</th>
             </tr>
           </thead>
           <tbody>
-            { this.renderMobileTable() }
+            {Object.keys(rows)
+              .filter((quantity) => rows[quantity][selection.date] && !Array.isArray(rows[quantity][selection.date]))
+              .map((quantity) => (
+                <tr key={quantity}>
+                  {this.renderTdDate(quantity)}
+                  {this.renderTdPrice(rows[quantity][selection.date].prices, selection.date)}
+                </tr>
+                ))}
           </tbody>
         </table>
       </div>
@@ -114,11 +125,58 @@ export default class MatrixShippingTable extends React.Component {
   }
 
   renderDesktop() {
+    const { matrix: { rows, dates } } = this.props;
+
     return (
-      <table>
-        <thead />
-        <tbody />
-      </table>
+      <div className="app__config__shipping app__config__shipping--desktop">
+        <table className="app__config__shipping-table">
+          <thead>
+            <tr>
+              <th className="app__config__shipping-table__logo" rowSpan={4}>
+                Logo
+              </th>
+              <th
+                className="app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-yellow app__config__shipping-table--th app__config__shipping-table--th-round"
+              >
+                SuperExpres
+              </th>
+              <th colSpan={Object.keys(dates).length - 2} />
+              <th
+                className="app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-green"
+              >
+                Frete <span>Grátis</span>
+              </th>
+            </tr>
+            <tr>
+              <th
+                className="app__config__shipping-table--th app__config__shipping-table--th-gray"
+                colSpan={Object.keys(dates).length}
+              >
+                PREVISÃO DE ENTREGA E VALORES
+              </th>
+            </tr>
+            <tr>
+              {Object.keys(dates).map((timestamp) => (
+                <th className="app__config__shipping-table__date" rowSpan={3} key={timestamp}>{this.renderTrDate(timestamp)}</th>
+              ))}
+            </tr>
+            <tr />
+            <tr>
+              <th className="app__config__shipping-table__quantity app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-gray">Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(rows).map((quantity) => (
+              <tr key={quantity}>
+                {this.renderTdDate(quantity)}
+                {Object.keys(dates).map((date) => (
+                  this.renderTdPrice(rows[quantity][date].prices, date)
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   }
 

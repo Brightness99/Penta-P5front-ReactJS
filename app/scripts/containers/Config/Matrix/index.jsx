@@ -4,11 +4,13 @@ import React from 'react';
 
 import { settingsMatrixFetch } from 'actions';
 
-import Loading from 'components/Loading';
+import { RoundedTransparentButton } from 'atoms/Buttons';
+import { PlusCircleIcon } from 'components/Icons';
 
 import Zipcode from './Zipcode';
 import ShippingTable from './ShippingTable';
 import ConfigBlock from '../ConfigBlock';
+import Warning from '../Warning';
 
 type Props = {
   locale: {},
@@ -18,6 +20,7 @@ type Props = {
   screenSize: string,
   matrix: {},
   zipcode: number,
+  templates: {},
   dispatch: () => {},
 };
 
@@ -31,7 +34,7 @@ export default class MatrixBlock extends React.Component {
   };
 
   renderMatrix() {
-    const { selection, dispatch, screenSize, matrix } = this.props;
+    const { selection, dispatch, screenSize, matrix, templates } = this.props;
     return (
       <div className="app__config__matrix">
         <Zipcode
@@ -40,12 +43,17 @@ export default class MatrixBlock extends React.Component {
           dispatch={dispatch}
         />
         { !matrix.isLoaded && !matrix.isRunning
-        ? null
-        : <ShippingTable
+          ? null
+          : <ShippingTable
             dispatch={dispatch}
             screenSize={screenSize}
             matrix={matrix}
           />}
+        <RoundedTransparentButton>
+          <PlusCircleIcon />
+          <span>Adicionar outra quantidade</span>
+        </RoundedTransparentButton>
+        <Warning templates={templates} />
       </div>
     );
   }

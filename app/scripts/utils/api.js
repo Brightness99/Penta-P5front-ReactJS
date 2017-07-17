@@ -54,6 +54,7 @@ export function rxAjax(action: Object = {}) {
     settings.headers = {
       ...settings.headers,
       'Application-Source': 'react',
+      'api-key': config.apiKey,
     };
   }
 

@@ -1,6 +1,32 @@
 .app__settings__summary {
-  width: 25%;
-  position: fixed;
-  top: 0;
+  background-color: $color-white;
+  box-shadow: 1rem 1rem 3rem -0.5rem rgba(0,0,0,0.3);
+  width: 23%;
+  padding: 2rem;
+  position: absolute;
   right: 0;
+  top: 0;
+
+  h3 {
+    color: #151617;
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-lg;
+    font-weight: normal;
+    line-height: 1.67;
+  }
+
+  div {
+    padding: 1rem 0.1rem;
+
+    li {
+      color: #6a6f7a;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      line-height: 1.67;
+
+      span {
+        color: #151617;
+      }
+    }
+  }
 }

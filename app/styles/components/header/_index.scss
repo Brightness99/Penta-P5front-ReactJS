@@ -3,8 +3,9 @@
 .app__header {
   background-color: #ddd; // TODO: Remove this
   height: $header-height;
-  position: absolute;
+  position: fixed;
   width: 100%;
+  z-index: 2;
 
   @include lg {
     height: ($header-height + $topbar-height);

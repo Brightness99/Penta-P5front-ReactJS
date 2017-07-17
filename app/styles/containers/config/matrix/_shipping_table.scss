@@ -1,143 +1,227 @@
-.app__config__shipping{
+ .app__config__shipping {
+  margin-top: 2.7rem;
+  width: 100%;
 
-  &-datepicker {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 2rem 0;
+  &-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
     width: 100%;
 
-    li {
-      margin-top: 4%;
-      display: inline-flex;
-      width: 48%;
+    &__logo {
+      border: none;
+      width: 17.9%;
+    }
 
-      button {
-        align-items: center;
-        background-color: #f9f9f9;
-        border: 1px solid #dbdddf;
-        border-radius: 0.3rem;
-        color: $color-printi;
-        display: flex;
-        flex-direction: column;
-        font-family: $font-family-open-sans-regular;
-        line-height: 1.2;
-        outline: none;
-        padding: 1rem 0 0.6rem;
-        text-transform: lowercase;
-        width: 100%;
+    &--th {
+      border-spacing: 0;
+      color: #151617;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      font-weight: bold;
+      height: 3rem;
+      text-align: center;
+      text-transform: uppercase;
 
-        .app__config__shipping--datepicker__weekday {
-          color: #6a6f7a;
-          font-size: 1.2rem;
+      &-gray {
+        background-color: #eeeeee;
+        border: 0.1rem solid #dbdddf;
+        color: currentColor;
+      }
+
+      &-green {
+        background-color: #36c265;
+        color: #ffffff;
+        letter-spacing: 0.12rem;
+
+        span {
+          color: #f4dd1d;
         }
+      }
 
-        .app__config__shipping--datepicker__date {
-          align-items: center;
-          display: flex;
-          font-family: $font-family-open-sans-bold;
+      &-yellow {
+        background-color: #f4dd1d;
+        color: #006ee3;
+        letter-spacing: 0.12rem;
+      }
 
-          span {
-            font-size: 4.8rem;
-            padding-right: 1rem;
+      &-rounded {
+        border-radius: 0.3rem 0.3rem 0 0;
+        display: block;
+        line-height: 2.5rem;
+        width: 100%;
+        height: 2.5rem;
+      }
+    }
+
+    &__quantity {
+      border-right: none;
+    }
+
+    tbody {
+      tr {
+        td {
+          border-left: 0.1rem solid #dbdddf;
+          background-color: #f8f8f8;
+          height: 7rem;
+          text-align: center;
+
+          &:first-child {
+            font-size: 1.2rem;
+            text-align: center;
+
+            span {
+              font-weight: bold;
+              font-size: 1.8rem;
+            }
+          }
+
+          &:nth-child(2) {
+            background-color: #f4f3e5;
+          }
+
+          &:last-child {
+            border-right: 0.1rem solid #dbdddf;
+          }
+
+          label {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            height: 100%;
+            width: 100%;
+          }
+
+          &:not(:first-child) {
+            &:hover {
+              background-color: $color-printi;
+              color: $color-white;
+
+              span {
+                color: $color-white;
+              }
+            }
           }
         }
 
-        &.selected {
-          background-color: $color-printi;
+        &:last-child {
+          td {
+            border-bottom: 0.1rem solid #dbdddf;
+          }
+        }
 
-          > * {
+        &:hover {
+          td:first-child {
+            background-color: $color-printi;
             color: $color-white;
           }
         }
       }
+
     }
-  }
 
-  &-table {
-    table-layout: fixed;
-    width: 100%;
-
-    thead {
-      background: #eee;
-      border: 1px solid #dbdddf;
-      border-radius: 3px 0;
+    &__quantity {
+      align-self: center;
+      border-top-right-radius: 0;
       font-weight: bold;
-      font-size: 1.2rem;
-      text-transform: uppercase;
+      height: 3rem;
+      letter-spacing: 1.2px;
+      text-align: center;
+      color: #151617;
     }
 
-    th {
-      border-right: 1px solid #dbdddf;
-      color: #6a6f7a;
-      text-align: center;
-      padding: 0.5rem;
-      width: 40%;
+    &__date {
+      align-items: center;
+      background-color: #f8f8f8;
+      border: 1px solid #dbdddf;
+      color: $color-printi;
+      font-family: $font-family-open-sans-regular;
+      line-height: 1.9;
+      text-transform: lowercase;
+      width: 100%;
+
+      &:first-child {
+        background-color: #f4f3e5;
+      }
 
       &:last-child {
-        border: none;
-        width: 60%;
-      }
-    }
-
-    tbody {
-      border-left: 0.1rem solid #dbdddf;
-      border-right: 0.1rem solid #dbdddf;
-    }
-
-    tr {
-      border-bottom: 0.1rem solid #dbdddf;
-
-      &:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: #e5f4ea;
       }
 
-      &.selected {
-        background-color: $color-printi;
-        color: $color-white;
+      > div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-weekday {
+        color: #6a6f7a;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      &-day {
+        align-items: center;
+        display: flex;
+        font-family: $font-family-open-sans-bold;
+        line-height: 1.1;
+        justify-content: center;
 
         span {
-          color: $color-white;
+          font-size: 4rem;
+          padding-right: 1rem;
         }
       }
+    }
 
-      td {
+    &__price {
+      font-size: $font-size-lg;
+      font-weight: bold;
+      line-height: 1.4;
+      text-align: left;
+      width: 100%;
 
-        label {
-          display: flex;
-          padding: 0.5rem 0;
-          width: 100%;
+      span {
+        color: #878b94;
+        display: flex;
+        font-weight: normal;
+        font-size: $font-size-sm;
+      }
+    }
+  }
 
-          .app__input__radio {
-            justify-content: center;
-            width: 7rem;
-          }
-        }
+  &--desktop {
 
-        &:first-child {
-          font-size: 1.2rem;
-          text-align: center;
-          border-right: 0.1rem solid #dbdddf;
+    td {
+      border-top: none;
+      width: 20%;
 
-          span {
-            font-weight: bold;
-            font-size: 1.8rem;
-          }
+      &:last-child {
+        background-color: #e5f4ea;
+      }
+    }
+
+    .app__config__shipping-table {
+      &__date {
+        border-right: none;
+        border-top: none;
+
+        &:last-child {
+          border-right: 1px solid #dbdddf;
         }
       }
     }
   }
 
-  &-price {
-    font-size: 1.8rem;
-    font-weight: bold;
-    width: 100%;
+  &--mobile {
+    thead {
+      th {
+        border-top-left-radius: 0.3rem;
 
-    span {
-      color: #878b94;
-      display: flex;
-      font-weight: normal;
-      font-size: 1.2rem;
+        &:last-child {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0.3rem;
+        }
+      }
     }
   }
 }

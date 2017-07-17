@@ -1,4 +1,5 @@
-// @flow
+// @flow height: 4rem;
+
 
 import React from 'react';
 import cx from 'classnames';
@@ -15,38 +16,44 @@ type Props = {
 };
 
 const ConfigBlock = (props: Props) => {
-  const { locale, children, order, button } = props;
-  const renderMobileHeader = () => (
-    <div className="app__config__block-header">
-      <div className="app__config__block-header__order">
-        {order}
-      </div>
-      <div className="app__config__block-header__title">
-        <h3>{locale.TITLE}</h3>
-        <MoreInfo text={locale.MORE_INFO_TEXT} />
-        {button}
-      </div>
-    </div>
-  );
+  const { locale, children, order, button, screenSize } = props;
 
-  const renderDesktopHeader = () => (
+  const renderMobileHeader = () => {
+    console.log('mobile');
+    return (
     <div className="app__config__block-header">
       <div className="app__config__block-header__order">
         {order}
       </div>
       <div className="app__config__block-header__title">
         <h3>{locale.TITLE}</h3>
+        <MoreInfo text={locale.MORE_INFO_TEXT} />
         {button}
+      </div>
+    </div>
+    );
+  };
+
+  const renderDesktopHeader = () => {
+    console.log('desktop');
+    return (
+    <div className="app__config__block-header">
+      <div className="app__config__block-header__order">
+        {order}
+      </div>
+      <div className="app__config__block-header__title">
+        <h3>{locale.TITLE} {button}</h3>
         <MoreInfo text={locale.MORE_INFO_TEXT} />
       </div>
     </div>
-  );
+    );
+  };
 
   return (
     <section
       className={cx('app__config__block', props.className)}
     >
-      {['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(props.screenSize)
+      {['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
         ? renderMobileHeader()
         : renderDesktopHeader()}
       {React.cloneElement(children)}

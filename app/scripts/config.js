@@ -5,7 +5,7 @@
 
 import NPMPackage from '../../package.json';
 
-const apiUrl = 'http://54.94.181.183';
+const apiUrl = 'http://dev-cms.printi.com.br';
 
 const config = {
   name: NPMPackage.name,

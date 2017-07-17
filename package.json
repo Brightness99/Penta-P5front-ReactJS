@@ -142,6 +142,7 @@
     "sass-mediaqueries": "^1.6.1",
     "scroll": "^2.0.0",
     "scroll-doc": "^0.1.3",
+    "sprintf-js": "^1.1.1",
     "string-mask": "^0.3.0"
   },
   "engines": {

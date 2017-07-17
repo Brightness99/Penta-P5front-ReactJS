@@ -36,7 +36,7 @@ export default class OptionsBlock extends React.Component {
       header = <div>{optionsList.name}</div>;
     }
     return (
-      <div key={optionsList.id}>
+      <div className="app__config__options-listing" key={optionsList.id}>
         <h3>{header}</h3>
         <ul className={cx(viewType === 'list' && 'app__config__options--show-list')}>
           {optionsList.options.filter((option) => option.visible).map((option) => (
@@ -69,18 +69,19 @@ export default class OptionsBlock extends React.Component {
   }
 
   render() {
-    const { locale, options: { parts, list }, dispatch, order } = this.props;
+    const { viewType, locale, options: { parts, list }, dispatch, order, screenSize } = this.props;
 
     return (
       <ConfigBlock
         order={order}
         locale={locale}
+        screenSize={screenSize}
         button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
         className="app__config__options-block"
       >
         <div className="app__config__options">
-          <PartsLabel total={parts.total} names={parts.names} />
-          <SelectView dispatch={dispatch} />
+          <PartsLabel locale={locale} total={parts.total} names={parts.names} />
+          <SelectView locale={locale} dispatch={dispatch} viewType={viewType} />
           {list.map((item) => this.renderOptionList(item))}
         </div>
       </ConfigBlock>

@@ -1,7 +1,9 @@
 .app__more-infos {
   align-items: center;
   color: $color-printi;
+  cursor: help;
   display: flex;
+  font-family: $font-family-open-sans;
   font-size: $font-size-xs;
   position: relative;
 
