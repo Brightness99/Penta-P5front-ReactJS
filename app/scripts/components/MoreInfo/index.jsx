@@ -18,7 +18,7 @@ export class Newsletter extends React.Component {
   static props: Props;
 
   render() {
-    const { locale: { MORE_INFOS }, className } = this.props;
+    const { locale: { MORE_INFOS }, className, text } = this.props;
 
     return (
       <div
@@ -28,6 +28,9 @@ export class Newsletter extends React.Component {
         )}
       >
         <SVG src={require('assets/media/svg/icon_info.svg')} /> {MORE_INFOS}
+        <div className="atm-more-info-content">
+          {text}
+        </div>
       </div>
     );
   }

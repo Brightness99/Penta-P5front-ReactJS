@@ -97,7 +97,7 @@ export default class SummaryBlock extends React.Component {
         <h3>Resumo do produto</h3>
         {Object.keys(selection).map((option) => (
           <div key={option}>
-            <span>{option}</span>
+            {Object.keys(selection).length > 1 && <span>{calculator[option].name}</span>}
             {Object.keys(selection) > 1 && <b>{option}:</b>}
             <ul>
               {Object.keys(selection[option]).map((item) => (

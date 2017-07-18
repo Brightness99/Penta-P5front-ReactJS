@@ -5,15 +5,16 @@
   display: flex;
   flex-direction: column;
 
+  h3 {
+    font-size: $font-size-il;
+    padding-left: 1rem;
+  }
+
   &-parts {
     background-color: $color-printi;
     color: $white;
     padding: 1rem 1.5rem;
     text-align: center;
-  }
-
-  &-view-type {
-
   }
 
   ul {
@@ -62,14 +63,28 @@
   }
 
   &-listing {
-    padding: 0 1rem;
-
-    > ul > li {
-      padding-bottom: 1rem;
-    }
+    padding: 1rem;
 
     @include lg {
-      padding: 0 2rem;
+      padding: 3rem 2rem;
+    }
+
+    > h3 {
+      position: relative;
+      width: 100%;
+
+      > span {
+        color: #ea0000;
+        font-size: $font-size-ix;
+        position: absolute;
+        right: 0;
+        text-decoration: underline;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    > h3:not(:first-child){
+      margin-top: 2rem;
     }
   }
 
