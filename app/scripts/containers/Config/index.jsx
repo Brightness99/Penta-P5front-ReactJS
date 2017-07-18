@@ -97,6 +97,9 @@ export class Config extends React.Component {
         finalProduct: {
           id,
         },
+        config: {
+          isFulfilled,
+        },
       },
       locale,
       dispatch,
@@ -109,6 +112,7 @@ export class Config extends React.Component {
         locale={configLocale.creation}
         screenSize={screenSize}
         order="1"
+        isComplete={isFulfilled.source}
         finalProductId={id}
         dispatch={dispatch}
         source={source}
@@ -133,6 +137,9 @@ export class Config extends React.Component {
         settings: {
           showSteps,
         },
+        config: {
+          isFulfilled,
+        },
       },
       productSettings,
       locale,
@@ -151,6 +158,7 @@ export class Config extends React.Component {
         viewType={viewType}
         locale={configLocale}
         order={showSteps.source ? 2 : 1}
+        isComplete={isFulfilled.options}
         options={{ ...productSettings.options, ...options }}
         selection={selection}
         screenSize={screenSize}
@@ -164,6 +172,9 @@ export class Config extends React.Component {
       productSettings: {
         source: {
           selectedSource,
+        },
+        config: {
+          isFulfilled,
         },
         matrix,
         selection,
@@ -181,6 +192,7 @@ export class Config extends React.Component {
     return (
       <MatrixBlock
         order="3"
+        isComplete={isFulfilled.matrix}
         locale={configLocale}
         className="app__config__matrix"
         dispatch={dispatch}

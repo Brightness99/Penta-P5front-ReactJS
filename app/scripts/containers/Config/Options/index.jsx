@@ -3,6 +3,9 @@
 import React from 'react';
 import cx from 'classnames';
 import SVG from 'react-inlinesvg';
+import { Accordion, AccordionItem } from 'components/Accordion';
+
+import { removePartSelection } from 'actions';
 
 import ConfigBlock from 'containers/Config/ConfigBlock';
 
@@ -28,16 +31,18 @@ export default class OptionsBlock extends React.Component {
 
   static props: Props;
 
-  renderOptionList(optionsList) {
-    const { viewType, options: { parts }, selection, onSelect } = this.props;
-    let header = null;
+  handlePartRemove = (part: string) => {
+    console.log('handlePartRemove');
+    const { selection, dispatch } = this.props;
 
-    if (parts.total > 1) {
-      header = <div>{optionsList.name}</div>;
-    }
+    dispatch(removePartSelection(part, selection));
+  };
+
+  renderOption(optionsList) {
+    const { viewType, selection, onSelect } = this.props;
+
     return (
-      <div className="app__config__options-listing" key={optionsList.id}>
-        <h3>{header}</h3>
+      <div>
         <ul className={cx(viewType === 'list' && 'app__config__options--show-list')}>
           {optionsList.options.filter((option) => option.visible).map((option) => (
             <li key={option.key}>
@@ -68,8 +73,43 @@ export default class OptionsBlock extends React.Component {
     );
   }
 
+  renderOptionList() {
+    const { options: { parts, list } } = this.props;
+    console.log(list);
+    if (parts.total === 1) {
+      return (
+        <div className="app__config__options-listing">
+          {this.renderOption(list[0])}
+        </div>
+      );
+    }
+    return (
+      <Accordion className="app__config__options-listing">
+        {list.map((item, index) => (
+          <AccordionItem key={item.id}>
+            <h3>
+              {item.name}
+              {index > 0 &&
+                <span
+                  role="link"
+                  onClick={(ev) => {
+                    ev.stopPropagation();
+                    return this.handlePartRemove(item.id);
+                  }}
+                >
+                  Remover
+                </span>
+              }
+            </h3>
+            {this.renderOption(item)}
+          </AccordionItem>
+        ))}
+      </Accordion>
+    );
+  }
+
   render() {
-    const { viewType, locale, options: { parts, list }, dispatch, order, screenSize } = this.props;
+    const { viewType, locale, options: { parts }, dispatch, order, screenSize } = this.props;
 
     return (
       <ConfigBlock
@@ -82,7 +122,7 @@ export default class OptionsBlock extends React.Component {
         <div className="app__config__options">
           <PartsLabel locale={locale} total={parts.total} names={parts.names} />
           <SelectView locale={locale} dispatch={dispatch} viewType={viewType} />
-          {list.map((item) => this.renderOptionList(item))}
+          {this.renderOptionList()}
         </div>
       </ConfigBlock>
     );

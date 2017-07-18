@@ -35,4 +35,5 @@ export const SettingsConstants = keyMirror({
   PRE_PRESS_TEMPLATE_FETCH_SUCCESS: undefined,
   PRE_PRESS_TEMPLATE_FETCH_FAILURE: undefined,
   PRE_PRESS_TEMPLATE_FETCH_CANCEL: undefined,
+  REMOVE_SELECTION_PART: undefined,
 });

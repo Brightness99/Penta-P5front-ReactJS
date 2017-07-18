@@ -18,6 +18,7 @@ type Props = {
   finalProductId: string,
   dispatch: () => {},
   source: {},
+  isComplete: boolean,
 };
 
 type State = {
@@ -125,7 +126,7 @@ export default class SourcesBlock extends React.Component {
   }
 
   render() {
-    const { source: { selectedSource }, locale, screenSize, order } = this.props;
+    const { source: { selectedSource }, locale, screenSize, order, isComplete } = this.props;
     const { reselection } = this.state;
 
     let block = null;
@@ -137,7 +138,13 @@ export default class SourcesBlock extends React.Component {
     }
 
     return (
-      <ConfigBlock locale={locale} screenSize={screenSize} order={order} className="app__config__sources-block">
+      <ConfigBlock
+        locale={locale}
+        screenSize={screenSize}
+        order={order}
+        isComplete={isComplete}
+        className="app__config__sources-block"
+      >
         {block}
       </ConfigBlock>
     );

@@ -94,3 +94,19 @@ export function prePressTemplateFetch(): Object {
     payload: {},
   };
 }
+
+/**
+ * Remove Part
+ * @param {string} part
+ *
+ * @returns {Object}
+ */
+export function removePartSelection(part): Object {
+  console.log('1234567890');
+  return {
+    type: SettingsConstants.REMOVE_SELECTION_PART,
+    payload: {
+      part,
+    },
+  };
+}

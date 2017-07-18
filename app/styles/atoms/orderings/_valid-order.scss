@@ -1,0 +1,23 @@
+.atm-valid-order {
+  align-items: center;
+  background-color: $color-printi;
+  border-radius: 1.5rem;
+  color: #fff;
+  display: inline-flex;
+  font-family: $font-family-nunito-regular;
+  font-size: 18px;
+  justify-content: center;
+  max-height: 3rem;
+  min-height: 3rem;
+  max-width: 3rem;
+  min-width: 3rem;
+
+  svg {
+    fill: currentColor;
+    width: 50%;
+  }
+
+  &.completed {
+    background-color: #41ce75;
+  }
+}

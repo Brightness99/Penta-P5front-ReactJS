@@ -280,5 +280,28 @@ export default {
         },
       };
     },
+    [SettingsConstants.REMOVE_SELECTION_PART](state, action) {
+      return {
+        ...state,
+        selection: Object.keys(state.selection)
+          .filter((obj) => obj !== action.payload.part)
+          .reduce((prevValue, currentValue) => ({
+            ...prevValue,
+            [currentValue]: state.selection[currentValue]
+          }), {}),
+        calculator: Object.keys(state.calculator)
+          .filter((obj) => obj !== action.payload.part)
+          .reduce((prevValue, currentValue) => ({
+            ...prevValue,
+            [currentValue]: state.calculator[currentValue]
+          }), {}),
+        optionSectionInfo: Object.keys(state.optionSectionInfo)
+          .filter((obj) => obj !== action.payload.part)
+          .reduce((prevValue, currentValue) => ({
+            ...prevValue,
+            [currentValue]: state.optionSectionInfo[currentValue]
+          }), {}),
+      };
+    },
   }),
 };

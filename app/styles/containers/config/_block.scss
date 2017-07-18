@@ -7,7 +7,7 @@
     background-color: #f8f8f8;
     border-radius: 3px;
     display: flex;
-    padding: 1rem;
+    padding: 2rem;
 
     &__order {
       align-items: center;
@@ -33,9 +33,10 @@
       width: 100%;
 
       > h3 {
+        color: #151617;
         display: inline-flex;
-        font-family: $font-family-nunito-regular;
-        font-size: 2.1rem;
+        font-family: $font-family-nunito-light;
+        font-size: $font-size-xl;
         font-weight: normal;
         padding-top: 0.5rem;
       }
