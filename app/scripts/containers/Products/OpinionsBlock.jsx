@@ -1,8 +1,5 @@
 // @flow
 
-//botão para mostrar de 6 em 6
-//listar apenas 6 em 6
-
 import React from 'react';
 import cx from 'classnames';
 
@@ -29,6 +26,10 @@ export default class OpinionsBlock extends React.Component {
       load: 6,
       visible: 2,
     };
+  }
+
+  static defaultProps = {
+    screenSize: 'xs',
   }
 
   props: Props;
@@ -60,6 +61,16 @@ export default class OpinionsBlock extends React.Component {
     })
   )
 
+  starSubtitle() {
+    const { opinions } = this.props;
+
+    return (
+      <ul className="opinion-stars">
+        {this.renderStars(opinions.avgNumber)}
+      </ul>
+    );
+  }
+
   renderListOpinions() {
     const { opinions: { list } } = this.props;
     const { visible } = this.state;
@@ -78,37 +89,36 @@ export default class OpinionsBlock extends React.Component {
   }
 
   renderListTotalOpinions() {
-    const { opinions: { stars, list } } = this.props;
-    const map = new Map(Object.entries(stars));
-  
-    //https://pt.stackoverflow.com/questions/173293/como-percorrer-um-objeto-em-javascript
-    //for (let [key, value] of Object.entries(stars)) {
-      //console.log(key + ' ' + value);
-    //}
+    const { opinions: { stars } } = this.props;
 
-    console.log(stars);
-    console.log('map', map);
-    //console.log('Object Entries', Object.entries(stars));
+    return [1, 2, 3, 4, 5]
+      .sort((a, b) => b - a)
+      .map((item) => (
+        <div key={item.id} name={item} className="opinions-percentual-stars">
+          <ul className="opinion-stars">
+            {this.renderStars(item)}
+          </ul>
+          {this.loaderStars(stars[item])}
+          <p>{stars[item] || 0}</p>
+        </div>
+      )
+    );
+  }
 
-    //Object.keys(stars).forEach((value) => (
-      //console.log('Stars', value + ' ' + stars[value])
-    //));
+  loaderStars(item = 0) {
+    const { opinions } = this.props;
+    const percentual = (item * 100) / opinions.count;
 
-    return Object.entries(stars).map((item, key) => (
-      <div key={item.id} name={key}>
-        <ul className="opinion-stars">{this.renderStars(item.stars)}</ul>
+    return (
+      <div key={item.id} name={item} className="loader">
+        <div className={`linePercentual star-${percentual}`} />
       </div>
-    ));
+    );
   }
 
   render() {
     const { opinions } = this.props;
     const { visible, load } = this.state;
-
-    console.log(opinions);
-    console.log('nota de avaliação', opinions.avgNumber);
-    console.log('total de avaliações', opinions.count);
-    console.log('avaliações com estrelas', opinions.stars);
 
     return (
       <section className="container-opinions">
@@ -116,12 +126,17 @@ export default class OpinionsBlock extends React.Component {
         <div className="container-boxOpinions">
           <div className="box-opinions">
             <h5 className="opinion-titleNumber"><span>94</span>% dos clientes recomendam este produto</h5>
-            <p>Avaliação geral: {opinions.avgNumber} de {opinions.count} avaliações</p>
-            <p>{this.renderListTotalOpinions()}</p>
+            <p>Avaliação geral: {this.starSubtitle()} de {opinions.count} avaliações</p>
+            {this.renderListTotalOpinions()}
           </div>
           <div className="box-opinions">
-            <h5 className="opnions-subtitle">E você, o que achou?</h5>
-            <input type="text" placeholder="Envie a sua opinião..." />
+            <div className="box-formOpinions">
+              <h5 className="opnions-subtitle">E você, o que achou?</h5>
+              <form>
+                <input type="text" className="input-text" placeholder="Envie a sua opinião..." />
+                <input type="submit" className="btn-default btn-secondary btn-lg input-submit" name="opinions" value="Enviar" />
+              </form>
+            </div>
             <div className="container-boxOpinions">
               {this.renderListOpinions()}
             </div>

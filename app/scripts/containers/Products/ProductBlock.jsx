@@ -11,6 +11,10 @@ type Props = {
   product: {}
 };
 
+type State = {
+  currentImage: 2
+}
+
 export class ProductBlock extends React.Component {
 
   static defaultProps = {
@@ -18,6 +22,7 @@ export class ProductBlock extends React.Component {
   };
 
   props: Props;
+  static state: State;
 
   renderList() {
     return (

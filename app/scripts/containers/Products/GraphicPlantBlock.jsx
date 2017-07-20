@@ -7,6 +7,7 @@ type Props = {
   className: string,
   locale: {},
   button?: typeof React.Component,
+  graphic_plant: {},
 };
 
 export class GraphicPlantBlock extends React.Component {
@@ -16,43 +17,45 @@ export class GraphicPlantBlock extends React.Component {
 
   props: Props;
 
+
+  renderListGraphic() {
+    const { graphic_plant } = this.props;
+
+    return graphic_plant.LIST.map((item) => (
+      <ul className="list-item awol-pdd awol-list-style">
+        <li>{item}</li>
+      </ul>
+    ));
+  }
+
   renderMobile() {
+    const { graphic_plant } = this.props;
     return (
       <section className="container-graphicPlant">
-        <h4 className="graphicPlant-title">Parque Gráfico</h4>
+        <h4 className="graphicPlant-title">{graphic_plant.OVER_TITLE}</h4>
         <div className="box-graphicPlant">
           <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico" />
         </div>
         <div className="box-graphicPlant">
-          <h4 className="graphicPlant-subtitle">Nossa gráfica produz impressão offset de alta qualidade!</h4>
-          <p className="fnt-text">Produzimos altas tiragens e grandes formatos com os preços mais baixos do mercado. Veja nosso parque gráfico ao lado com seus próprios olhos.</p>
-          <ul className="list-item">
-            <li>Maquinário avançado;</li>
-            <li>Impressão offset e digital;</li>
-            <li>Grandes formatos;</li>
-            <li>Altas tiragens;</li>
-            <li>Variedade de acabamentos.</li>
-          </ul>
+          <h4 className="graphicPlant-subtitle">{graphic_plant.TITLE}</h4>
+          <p className="fnt-text">{graphic_plant.PARAGRAPH}</p>
+          {this.renderListGraphic()}
         </div>
       </section>
     );
   }
 
   renderDesktop() {
+    const { graphic_plant } = this.props;
+
     return (
       <section className="container-graphicPlant">
-        <h4 className="graphicPlant-title">Parque Gráfico</h4>
+        <h4 className="graphicPlant-title">{graphic_plant.OVER_TITLE}</h4>
         <div className="container-graphicPlant-block">
           <div className="box-graphicPlant">
-            <h4 className="graphicPlant-subtitle">Nossa gráfica produz impressão offset de alta qualidade!</h4>
-            <p className="fnt-text">Produzimos altas tiragens e grandes formatos com os preços mais baixos do mercado. Veja nosso parque gráfico ao lado com seus próprios olhos.</p>
-            <ul className="list-item">
-              <li>Maquinário avançado;</li>
-              <li>Impressão offset e digital;</li>
-              <li>Grandes formatos;</li>
-              <li>Altas tiragens;</li>
-              <li>Variedade de acabamentos.</li>
-            </ul>
+            <h4 className="graphicPlant-subtitle">{graphic_plant.TITLE}</h4>
+            <p className="fnt-text">{graphic_plant.PARAGRAPH}</p>
+            {this.renderListGraphic()}
           </div>
           <div className="box-graphicPlant">
             <Carousel>
