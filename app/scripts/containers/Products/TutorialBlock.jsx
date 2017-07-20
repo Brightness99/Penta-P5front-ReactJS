@@ -44,12 +44,6 @@ export default class TutorialBlock extends React.Component {
   }
 
   render() {
-    const { tutorials } = this.props;
-
-    //console.log(tutorials);
-    //console.log(tutorials.small_box);
-    //console.log(tutorials.big_box.videos);
-    
     return (
       <section className="container-tutorial">
         <h4 className="tutorial-title">Tutoriais</h4>

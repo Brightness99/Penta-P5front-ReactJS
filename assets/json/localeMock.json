@@ -205,52 +205,6 @@
           "QUESTIONS": "Ainda tem dúvidas? Ligue já (11) 4130-3799"
         }
       },
-      "product_landing_page": {
-        "common": {
-          "CONFIGURE_PRODUCT": "CONFIGURE AQUI",
-        },
-        "description": {
-          "STARTING_FROM": "A partir de",
-          "NEXT_PAGE": "Na próxima tela você pode configurar as especificações do seu produto e conferir o preço",
-        },
-        "informations": {
-          "TITLE": "Informações do produto",
-          "HINTS": "Dicas",
-          "HOW_TO_USE": "Como utilizar",
-        },
-        "advantages": {
-          "TITLE": "VANTAGENS",
-          "OTHER_ONLINE_PRINTING_COMPANIES": "OUTRAS GRÁFICAS ONLINE",
-          "TRADITIONAL_PRINTING_COMPANIES": "GRÁFICAS TRADICIONAIS",
-          "LIST": [
-            "Pedidos 24h e Orçamento online",
-            "Entrega no mesmo dia*",
-            "Download de Gabaritos Grátis",
-            "Impressão de Baixa e Alta tiragem",
-            "Escolha do dia de recebimento",
-            "Atendimento especializado",
-            "Qualidade offset a preços baixos",
-            "Parque Gráfico próprio",
-          ],
-          "CHECK_AVAILABLE_PRODUCTS": "* Consulte os produtos disponíveis"
-        },
-        "graphic_plant": {
-          "OVER_TITLE": "Parque gráfico",
-          "TITLE": "Nossa gráfica produz impressão offset de alta qualidade!",
-          "PARAGRAPH": "Produzimos altas tiragens e grandes formatos com os preços mais baixos do mercado. Veja nosso parque gráfico ao lado com seus próprios olhos.",
-          "LIST": [
-            "• Maquinário avançado;",
-            "• Impressão offset e digital;",
-            "• Grandes formatos;",
-            "• Altas tiragens;",
-            "• Variedade de acabamentos."
-          ]
-        },
-        "print": {
-          "TITLE": "Imprima já o seu %s pelo melhor preço",
-          "QUESTIONS": "Ainda tem dúvidas? Ligue já (11) 4130-3799"
-        }
-      },
       "product_settings": {
         "BREADCRUMB_TITLE": "Configure",
         "TITLE": "Configure seu produto",

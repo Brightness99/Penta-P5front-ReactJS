@@ -104,6 +104,24 @@
   display: flex;
   flex-direction: column;
   .box-productInformation {
+    .carousel{
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 433px; 
+      &__prev, &__next{
+        svg{
+          path{
+            fill: black;
+          }
+        }
+      }
+      .carousel__slide{
+        div{
+          position: inherit;
+        }
+      }
+    }
     .productInformation-title {
       text-transform: uppercase;
       font-size: $font-size-h4;
@@ -112,7 +130,6 @@
     .list-item {
       display: flex;
       flex-direction: row;
-      max-width: 53%;
       margin: 0 auto;
       color: $color-darkGray;
       text-transform: uppercase;
@@ -123,6 +140,7 @@
         height: 25px;
         margin-right: 5px;
         font-family: $font-family-open-sans; 
+        border: 2px solid transparent;
         cursor: pointer;
         &:last-of-type {
           margin-right: 0;
@@ -130,8 +148,22 @@
         &:hover{
           color: $color-printi;
           border: 2px solid;
+          transition: border 0.4s;
+          button{
+            color: $color-printi;
+            text-transform: uppercase;
+          }
+        }
+        button{
+          background: none;
+          border: none;
+          text-transform: uppercase;
+          color: $color-gray;
         }
       }  
+      @include lg {
+        max-width: 53%; 
+      }
     }
     .card-productInformation {
       display: flex;
@@ -163,23 +195,28 @@
   }
   .container-boxTutorial{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     .box-tutorial{
       position: relative;
       flex: 2;
       &:last-of-type{
         flex:1;
-        height: 420px;
-        box-sizing: border-box;
-        padding: 2rem;
         overflow: auto;
-        background-color: $color-white;
+        @include lg {
+          background-color: $color-white;
+          height: 420px;
+          box-sizing: border-box;
+          padding: 2rem;
+        }
       }
-      .tutorial-legendImg{
-        position: absolute;
-        bottom: 7%;
-        left: 4%;
+      .tutorial-legendImg {
+        position: relative;
         color: $color-white;
+        @include lg {
+          position: absolute;
+          bottom: 7%;
+          left: 4%;
+        }
         .tutorial-legendImg-category{
           font-size: $font-size-xxs;
           text-align: center;
@@ -196,6 +233,9 @@
           font-size: $font-size-il;
         }
       }
+    }
+    @include lg{
+      flex-direction: row;
     }
   }
 }
@@ -239,6 +279,7 @@
     flex: 1;
     background-color: $color-white;
     position: relative;
+    margin-top: 2rem;
     >div{
       .btn-default{
         font-size: $font-size-xxs;
@@ -250,6 +291,9 @@
         left: 50%;
         transform: translate(-50%,-50%);
       }
+    }
+    @include lg{
+      margin-top: 0;
     }
   }
   @include lg{
@@ -287,14 +331,43 @@
         text-align: center;
         box-sizing: border-box;
         padding: 1rem 0;
-        font-size: $font-size-sm;
+        font-size: $font-size-xxs;
         color: $color-darkGray;
         &:nth-of-type(2n-1) {
           background: #f9f9f9;
         }
+        @include lg {
+          font-size: $font-size-sm;
+        }
+        .checkIcon {
+          svg {
+            width: 22px;
+            path {
+              fill: $color-green;
+            }
+          }
+          @include lg {
+            svg {
+              width: 16px;
+            }
+          }
+        }  
+        .closeIcon {
+          svg {
+            width:18px;
+            path {
+              fill: $color-red;
+            }
+          }
+          @include lg {
+            svg {
+              width: 16px;
+            }
+          }
+        }
       }
       &:nth-of-type(2n){
-        height: 522px;
+        height: 535px;
         box-shadow: 0px 3px 5px 6px $color-lightGray2;
         z-index: 999;
         .benefitsCard-title{
@@ -306,7 +379,19 @@
         }
         p{
           text-align: left;
-          padding: 1rem 5rem;
+          padding: 1.1rem 2rem;
+          @include lg {
+          padding: 1.1rem 3rem;
+
+          }
+        }
+        .checkIcon{
+          margin-left: 0;
+          margin-right: 1rem;
+          float: left;
+          @include lg {
+            margin-right: 2rem;
+          }
         }
       }
       &:nth-of-type(2n-1){
@@ -397,21 +482,23 @@
         font-size: $font-size-sm;
       }
       .commentClient-img{
-        display: flex;
-        align-items: center;
+        bottom: -85px;
         position: absolute;
-         max-width: 170px;
-        bottom: -45%;
-        left: 50%;
-        margin-left: -74px;
+        width: 100%;
+        img{
+          display: block;
+          margin: 0 auto;
+        }
         @include lg{
-          flex-direction: column;
+          //flex-direction: column;
         }
         .commentClient-name{
           font-weight: bold;
+          text-align: center;
+          margin-bottom: 0;
         }
         .commentClient-profession{
-
+          text-align: center;
         }
       }
       @include lg{
@@ -470,8 +557,13 @@
   }
 }
 
-.opinion-stars {
+.opinions-percentual-stars{
   display: flex;
+}
+
+.opinion-stars {
+  //display: flex;
+  display: inline-flex;
   padding:0;
   &-item {
     display: inline-flex;
@@ -481,13 +573,62 @@
     svg{
       width: 100%;
       height: 100%;
+      path{
+        fill: $color-printi;
+      }
     }
     svg path:first-child {
       fill: transparent;
     }
     &-filled svg path:first-child {
-      fill: black;
+      fill:$color-printi;
     }
+  }
+}
+
+.loader{
+  width: 230px;
+  height: 8px;
+  border-radius: 4px;
+  margin: 8px 6px;
+  background-color: #d2d2d2; 
+  .linePercentual{
+    height: 8px;
+    border-radius: 4px;
+    background-color: $color-printi;
+  }
+  .star-0{
+    width: 0%;
+  }
+  .star-10{
+    width: 10%;
+  }
+  .star-20{
+    width: 20%;
+  }
+  .star-30{
+    width: 30%;
+  }
+  .star-40{
+    width: 40%;
+  }
+  .star-50{
+    width: 50%;
+  }
+  .star-60{
+    width: 60%;
+  }
+  .star-70{
+    width: 70%;
+  }
+  .star-80{
+    width: 80%;
+  }
+  .star-90{
+    width: 90%;
+  }
+  .star-100{
+    width: 100%;
   }
 }
 
@@ -507,13 +648,50 @@
   .container-boxOpinions{
     display: flex;
     flex-direction: column;
+    overflow: auto;
     .box-opinions{
       flex: 1;
-      input{
-        width: 100%;
-        border: none;
-        box-sizing: border-box;
-        padding: 0.6rem;
+      &:first-of-type {
+        border-bottom: 1px solid $color-hrLightGray;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+      }
+      .box-opinionsMobile{
+        display: flex;
+        .opinionsMobile{
+          flex: 1;
+          &:last-of-type{
+            flex: 4;
+          }
+          .title-opinionsMobile{
+            font-size: $font-size-h1;
+            font-weight: 500;
+          }
+          p{
+            margin-bottom: 0;
+            .opinion-stars{
+              margin-bottom: 0; 
+            }
+          }
+        }
+      }
+      .box-formOpinions{
+        margin-top: 2rem;
+        form{
+          display: flex;
+          .input-text{
+            flex:5;
+            border: none;
+            box-sizing: border-box;
+            padding: 0.6rem;
+          }
+          .input-submit{
+            flex: 1;
+          }
+        }
+        @include lg{
+          margin-top: 0;
+        }
       }
       .opinion-titleNumber{
         font-weight: 500;
@@ -523,7 +701,9 @@
         }
       }
       .opinion-boxText{
-        margin: 4rem 0;
+        margin: 2rem 0 0rem 0;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid $color-hrLightGray;
         .opinion-title{
           font-weight: bold;
           font-size: $font-size-base;
@@ -531,12 +711,30 @@
         sub{
           font-style: italic;
         }
+        @include lg{
+          margin: 2rem 0;
+          padding-bottom: 0rem;
+          border-bottom: 0px solid transparent;
+        }
       }
       .container-boxOpinions{
-        height: 450px;
+        height: 384px;
         overflow: auto;
         display: flex;
         flex-direction: column;
+        margin-top: 2rem
+      }
+      @include lg{
+        &:first-of-type{
+          border-bottom: 1px solid transparent;
+          margin-bottom: 0rem;
+          padding-bottom: 0rem;
+        }
+        &:last-of-type {
+          flex: 2;
+          padding-left: 10rem;
+          box-sizing: border-box;
+        }
       }
     }
     @include lg{
@@ -677,6 +875,36 @@
   }
 }
 
+//slider
+.slider {
+  margin-bottom: 4rem;
+  .slider-wrapper {
+    width: 100%;
+    height: 400px;
+    //margin-left: auto;
+    //margin-right: auto;
+    //margin-top: 0px;
+    overflow: hidden;
+    .slider-images {
+      width: 2400px;
+      height: 400px;
+      clear: both;
+      position: relative;            
+      -webkit-transition: left 2s;
+      -moz-transition: left 2s;
+      -o-transition: left 2s;
+      transition: left 2s;
+      li{
+        float: left;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+        list-style: none;
+        margin-right: 2rem;
+      }
+    }
+  }
+}
 
 //carousel
 .carousel{
@@ -687,6 +915,15 @@
   @include lg{
     //width: 530px; 
     //height: 420px;
+  }
+  button{
+    fill: $color-white;
+    fill-rule:evenodd;
+    opacity:.3;
+    &:hover{
+      opacity: 1;
+      transition: all 0.3s ease;
+    }
   }
   .carouselBullet{
     position: absolute;
@@ -706,12 +943,24 @@
       box-sizing: inherit;
       &:hover{
         opacity: 1;
+        transition: all 0.3s ease;
       }
     }
   }
   .carousel__slide{
     img{
       width: 100%;
+    }
+    .card-productInformation{
+      display: flex;
+      flex-direction: column;
+      margin: 4.5rem 0;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding: 4rem;
+      @include lg {
+        flex-direction: row;
+      }
     }
   }
   
@@ -723,8 +972,8 @@
     border: none;
     font-size: 32px;
     color: white;
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 83px;
     text-align: center;
     line-height: 60px;
     top: 50%;
@@ -735,6 +984,7 @@
   &__prev{
     //left: 40px;
     left: 0;
+    transform: rotate(180deg)
   }
   
   &__next{
