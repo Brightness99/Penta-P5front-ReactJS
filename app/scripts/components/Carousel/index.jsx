@@ -2,10 +2,17 @@
 import React from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 
+import { ArrowCarousel } from 'components/Icons';
+
 type Props = {
   transition: string,
   apperTransition: true,
   children?: ?[],
+  activeSlide?: number,
+}
+
+type State = {
+  counter: number,
 }
 
 export default class Carousel extends React.Component {
@@ -13,8 +20,18 @@ export default class Carousel extends React.Component {
     super(props);
 
     this.state = {
-      counter: 0,
+      counter: props.activeSlide || 0,
     };
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { activeSlide } = this.props;
+
+    if (activeSlide !== nextProps.activeSlide) {
+      this.setState({
+        counter: nextProps.activeSlide,
+      });
+    }
   }
 
   static defaultProps = {
@@ -22,6 +39,8 @@ export default class Carousel extends React.Component {
   };
 
   static props: Props;
+
+  static state: State;
 
   handleNavigation = (ev) => {
     this.setState({
@@ -51,9 +70,7 @@ export default class Carousel extends React.Component {
         key={item.src}
         name={key}
         onClick={this.handleNavigation}
-      >
-        {key}
-      </button>
+      />
     ));
   }
 
@@ -62,12 +79,17 @@ export default class Carousel extends React.Component {
     const { counter } = this.state;
 
     return (
+
       <div className="carousel">
         <div className="carouselBullet">
           {this.pager()}
         </div>
-        <button className="carousel__prev" onClick={this.prevSlide}>◀</button>
-        <button className="carousel__next" onClick={this.nextSlide}>▶︎</button>
+        <button className="carousel__prev" onClick={this.prevSlide}>
+          <ArrowCarousel />
+        </button>
+        <button className="carousel__next" onClick={this.nextSlide}>
+           <ArrowCarousel />
+        </button>
         <CSSTransitionGroup
           transitionName="animate"
           transitionEnterTimeout={500}

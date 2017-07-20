@@ -9,11 +9,7 @@ type Props = {
   screenSize: string,
   products: {},
   product: {},
-  warrantInformation: {},
-  settingsPageLink: {},
-  informations: {},
-  categories: {},
-  tutorials: {},
+  print: {},
 };
 
 export class PrintiProductBlock extends React.Component {
@@ -27,18 +23,15 @@ export class PrintiProductBlock extends React.Component {
     return false;
   }
 
+  textTitle() {
+    const { product, print } = this.props;
+    return (
+      print.TITLE.replace('%s', product.title)
+    );
+  }
+
   renderDesktop() {
-    const { product, warrantInformation, settingsPageLink, informations, categories, tutorials } = this.props;
-    //informations é a parte de dicas, como utilizar ...
-    //settingsPageLink é o link que vai para a página de configurações
-    //warrantInformation
-    //categories
-    //console.log('product', product);
-    //console.log('warrantInformation', warrantInformation);
-    //console.log('settingsPageLink', settingsPageLink);
-    //console.log('informações', informations);
-    //console.log('categorias', categories);
-    //console.log('tutorial', tutorials);
+    const { print } = this.props;
 
     const styles = {
       backgroundImage: `url('${require('../../../../assets/media/images/bg-imprima.png')}')`,
@@ -47,7 +40,7 @@ export class PrintiProductBlock extends React.Component {
 
     return (
       <section className="container-printiProduct" style={styles}>
-        <h4 className="printiProduct-title">Imprima já o seu {product.title} pelo melhor preço</h4>
+        <h4 className="printiProduct-title">{this.textTitle()}</h4>
         <div className="box-btn-printiProduct">
           <button className="btn-default btn-primary btn-lg">
             <Link to="{'settingsPageLink'}">
@@ -55,7 +48,7 @@ export class PrintiProductBlock extends React.Component {
             </Link>
           </button>
         </div>
-        <p className="fnt-text">Ainda tem dúvida? Ligue já (11) 4130-3799</p>
+        <p className="fnt-text">{print.QUESTIONS}</p>
       </section>
     );
   }
