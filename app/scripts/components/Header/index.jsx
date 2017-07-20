@@ -30,6 +30,7 @@ export class Header extends React.Component {
         <Topbar />
         <div className="app__header__container container">
           <Logo />
+          <p>dadasdasdasd</p>
         </div>
       </header>
     );
