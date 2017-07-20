@@ -93,6 +93,11 @@
         box-sizing: border-box;
         padding-left: 2rem;
         margin-top: 1.5rem;
+        .list-item {
+          .awol-list-style{
+            margin-top: 3rem;
+          }
+        }
       }
     }
   }
@@ -179,6 +184,11 @@
         flex: 3;
         .card-productInformation-title {
           font-size: $font-size-h4;
+        }
+        @include lg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
       }
     }
