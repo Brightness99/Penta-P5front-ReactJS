@@ -38,7 +38,8 @@ export class Products extends React.Component {
   static props: Props;
 
   renderMobile = () => {
-    const { products: { product, warrantInformation, opinions, tutorials, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { products: { product, warrantInformation, settingsPageLink, informations, categories, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
@@ -51,16 +52,16 @@ export class Products extends React.Component {
         </div>
         <div className="bgProduct">
           <div className="container">
-            <InformationBlock screenSize={screenSize} />
+            <InformationBlock screenSize={screenSize} informations={informations} />
             <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
             <WarrantyBlock screenSize={screenSize} />
-            <BenefitsBlock screenSize={screenSize} />
-            <GraphicPlantBlock screenSize={screenSize} />
-            <CustomersRelyBlock screenSize={screenSize} />
+            <BenefitsBlock screenSize={screenSize} advantages={advantages} />
+            <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
+            <CustomersRelyBlock screenSize={screenSize} clients={clients} testimonials={testimonials} />
             <BlogBlock />
             <OpinionsBlock screenSize={screenSize} opinions={opinions} />
             <DetailsProductBlock product={product} screenSize={screenSize} />
-            <PrintProductBlock product={product} warrantInformation={warrantInformation} screenSize={screenSize} />
+            <PrintProductBlock product={product} print={print} screenSize={screenSize} />
           </div>
         </div>
       </div>
@@ -69,6 +70,7 @@ export class Products extends React.Component {
 
   renderDesktop = () => {
     const { products: { product, warrantInformation, settingsPageLink, informations, categories, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
@@ -81,16 +83,16 @@ export class Products extends React.Component {
         </div>
         <div className="bgProduct">
           <div className="container">
-            <InformationBlock screenSize={screenSize} />
+            <InformationBlock screenSize={screenSize} informations={informations} />
             <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
             <WarrantyBlock screenSize={screenSize} />
-            <BenefitsBlock screenSize={screenSize} />
-            <GraphicPlantBlock screenSize={screenSize} />
-            <CustomersRelyBlock screenSize={screenSize} />
+            <BenefitsBlock screenSize={screenSize} advantages={advantages} />
+            <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
+            <CustomersRelyBlock screenSize={screenSize} clients={clients} testimonials={testimonials} />
             <BlogBlock />
             <OpinionsBlock screenSize={screenSize} opinions={opinions} />
             <DetailsProductBlock product={product} screenSize={screenSize} />
-            <PrintProductBlock product={product} warrantInformation={warrantInformation} informations={informations} settingsPageLink={settingsPageLink} categories={categories} tutorials={tutorials} screenSize={screenSize} />
+            <PrintProductBlock product={product} print={print} screenSize={screenSize} />
           </div>
         </div>
       </div>

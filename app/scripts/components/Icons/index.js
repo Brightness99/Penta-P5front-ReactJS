@@ -18,3 +18,6 @@ export SettingsArtCreationIcon from './SettingsArtCreation';
 export SettingsTweakIcon from './SettingsTweak';
 export SettingsUploadIcon from './SettingsUpload';
 export StarIcon from './Star';
+export ArrowCarousel from './ArrowCarousel';
+export CheckIcon from './CheckIcon';
+export CloseIcon from './CloseIcon';

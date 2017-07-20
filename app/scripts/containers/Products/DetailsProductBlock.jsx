@@ -23,7 +23,7 @@ export class DetailsProductBlock extends React.Component {
 
   renderDesktop() {
     const { product } = this.props;
-    
+
     return (
       <section className="container-detailsProduct">
         <h4 className="detailsProduct-title">Detalhes do produto</h4>
