@@ -3,27 +3,73 @@
 import React from 'react';
 import { MaskedInput } from 'components/Input';
 import SVG from 'react-inlinesvg';
-import { SuccessText } from 'atoms/Texts';
+import { SuccessText, ErrorText } from 'atoms/Texts';
 
 type Props = {
   locale: {},
   order: number,
   className: string,
+  defaultValue: string,
   onZipcodeValid: () => {},
+  onReset: () => {},
+  isZipcodeValid: boolean,
+  errorMessage: string,
+};
+
+type State = {
+  isCompleted: boolean,
 };
 
 export default class MatrixZipcode extends React.Component {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      isCompleted: false,
+    };
+  }
+
   static props: Props;
+
+  static state: State;
 
   onValid = (zipcode: number) => {
     const { onZipcodeValid } = this.props;
+
+    this.setState({
+      isCompleted: true,
+    });
 
     if (typeof onZipcodeValid === 'function') {
       onZipcodeValid(zipcode);
     }
   };
 
+  onUncompleted = (isCompleted) => {
+    if (!isCompleted) {
+      this.setState({
+        isCompleted: false,
+      });
+    }
+  };
+
+  renderValidation() {
+    const { defaultValue, isZipcodeValid, errorMessage } = this.props;
+    const { isCompleted } = this.state;
+
+    if (defaultValue === '' || !isCompleted) {
+      return null;
+    }
+
+    if (isZipcodeValid) {
+      return <SuccessText>CEP encontrado</SuccessText>;
+    }
+
+    return <ErrorText>{errorMessage}</ErrorText>;
+  }
+
   render() {
+    const { defaultValue, onReset } = this.props;
     return (
       <div className="mol-matrix-zipcode">
         <h4>
@@ -33,8 +79,14 @@ export default class MatrixZipcode extends React.Component {
           </div>
         </h4>
         <div className="app__zipcode__validation">
-          <MaskedInput mask="99999-999" onValid={this.onValid} />
-          <SuccessText>CEP encontrado</SuccessText>
+          <MaskedInput
+            mask="99999-999"
+            onValid={this.onValid}
+            checkCompleted={this.onUncompleted}
+            defaultValue={defaultValue}
+            onReset={onReset}
+          />
+          {this.renderValidation()}
         </div>
       </div>
     );

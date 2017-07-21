@@ -9,7 +9,7 @@ type Props = {
 }
 
 const ErrorText = (props: Props) => (
-  <div className="atm-success-text">
+  <div className="atm-error-text">
     <TimesCircleIcon /> <span>{props.children}</span>
   </div>
 );

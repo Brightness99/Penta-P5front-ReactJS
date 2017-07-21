@@ -9,7 +9,7 @@ type Props = {
 
 const RoundedTransparentButton = (props: Props) => {
   const onButtonClick = (ev) => {
-    const { onClick } = this.props;
+    const { onClick } = props;
 
     if (typeof onClick === 'function') {
       onClick(ev);

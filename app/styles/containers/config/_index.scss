@@ -19,6 +19,16 @@
       @include lg {
         width: 74.5%;
       }
+
+      > .app__config__submit-button {
+        display: flex;
+        justify-content: flex-end;
+
+        > .atm-button-rounded {
+          min-width: 30rem;
+          max-width: 30rem;
+        }
+      }
     }
 
     .app__loading {

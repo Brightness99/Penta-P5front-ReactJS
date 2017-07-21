@@ -39,6 +39,17 @@ export function settingsSourceFetch(id: string, source: string): Object {
 }
 
 /**
+ * Zipcode Reset
+ *
+ * @returns {Object}
+ */
+export function settingsSourceReset(): Object {
+  return {
+    type: SettingsConstants.SETTINGS_SOURCE_RESET,
+  };
+}
+
+/**
  * Options Fetch
  * @param {Object} selection
  *
@@ -63,6 +74,17 @@ export function settingsMatrixFetch(zipcode: number): Object {
     payload: {
       zipcode,
     },
+  };
+}
+
+/**
+ * Zipcode Reset
+ *
+ * @returns {Object}
+ */
+export function settingsZipcodeReset(): Object {
+  return {
+    type: SettingsConstants.SETTINGS_ZIPCODE_RESET,
   };
 }
 
@@ -101,12 +123,45 @@ export function prePressTemplateFetch(): Object {
  *
  * @returns {Object}
  */
-export function removePartSelection(part): Object {
-  console.log('1234567890');
+export function removePartSelection(part: string): Object {
   return {
     type: SettingsConstants.REMOVE_SELECTION_PART,
     payload: {
       part,
+    },
+  };
+}
+
+/**
+ * Select Prepress Template Orientation
+ * @param {string} orientation
+ *
+ * @returns {Object}
+ */
+export function selectPrepressOrientation(orientation: string): Object {
+  return {
+    type: SettingsConstants.SELECT_PREPRESS_ORIENTATION,
+    payload: {
+      orientation,
+    },
+  };
+}
+
+/**
+ * Prepress Template Download
+ * @param {string} orientation
+ * @param {string} extension
+ * @param {string} fileName
+ *
+ * @returns {Object}
+ */
+export function prepressDownloadFetch(orientation: string, extension: string, fileName: string): Object {
+  return {
+    type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_REQUEST,
+    payload: {
+      orientation,
+      extension,
+      fileName,
     },
   };
 }
