@@ -3,6 +3,7 @@
 import React from 'react';
 import cx from 'classnames';
 import SVG from 'react-inlinesvg';
+import Modal from 'components/Modal';
 import { Accordion, AccordionItem } from 'components/Accordion';
 
 import { removePartSelection } from 'actions';
@@ -22,9 +23,23 @@ type Props = {
   options: {},
   selection: {},
   onSelect: () => {},
+  calculator: {},
 };
 
 export default class OptionsBlock extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modal: {
+        isOpen: false,
+        partId: '',
+        optionId: '',
+        itemId: '',
+      },
+    };
+  }
+
   static defaultProps = {
     viewType: 'gallery',
   };
@@ -32,11 +47,64 @@ export default class OptionsBlock extends React.Component {
   static props: Props;
 
   handlePartRemove = (part: string) => {
-    console.log('handlePartRemove');
-    const { selection, dispatch } = this.props;
+    const { dispatch } = this.props;
 
-    dispatch(removePartSelection(part, selection));
+    dispatch(removePartSelection(part));
   };
+
+  handleZoomClick = (ev) => {
+    const part = ev.currentTarget.name.split('-');
+
+    this.setState({
+      modal: {
+        isOpen: true,
+        partId: part[0],
+        optionId: part[1],
+        itemId: ev.currentTarget.value,
+      },
+    });
+  };
+
+  handleCloseModal = () => {
+    const { modal } = this.state;
+
+    this.setState({
+      modal: {
+        ...modal,
+        isOpen: false,
+      },
+    });
+  };
+
+  handleModal() {
+    const { options: { list } } = this.props;
+    const { modal: { optionId, partId, itemId } } = this.state;
+
+    let altText = '';
+
+    const imgSrc = list
+      .filter((part) => part.id === partId)
+      .reduce((prevPart, currentPart) => {
+        altText += `${currentPart.name} `;
+        return currentPart.options
+        .filter((option) => option.key === optionId)
+          .reduce((prevOption, currentOption) => {
+            altText += `- ${currentOption.name} `;
+            return currentOption.items
+              .filter((item) => item.id === itemId)
+              .reduce((prevItem, currentItem) => {
+                altText += `- ${currentItem.name}`;
+                return currentItem.image_big;
+              }, '');
+          }, '');
+      }, '');
+
+    return (
+      <Modal handleCloseModal={this.handleCloseModal}>
+        <img src={`http://printi.com.br${imgSrc}`} alt={altText} />
+      </Modal>
+    );
+  }
 
   renderOption(optionsList) {
     const { viewType, selection, onSelect } = this.props;
@@ -63,6 +131,8 @@ export default class OptionsBlock extends React.Component {
                     optionKey={`${optionsList.id}-${option.key}`}
                     checked={optionItem.id === selection[optionsList.id][option.key]}
                     onSelect={onSelect}
+                    partId={optionsList.id}
+                    onZoomClick={this.handleZoomClick}
                   />
                 ))}
               </ul>
@@ -110,6 +180,7 @@ export default class OptionsBlock extends React.Component {
 
   render() {
     const { viewType, locale, options: { parts }, dispatch, order, screenSize } = this.props;
+    const { modal } = this.state;
 
     return (
       <ConfigBlock
@@ -123,6 +194,7 @@ export default class OptionsBlock extends React.Component {
           <PartsLabel locale={locale} total={parts.total} names={parts.names} />
           <SelectView locale={locale} dispatch={dispatch} viewType={viewType} />
           {this.renderOptionList()}
+          {modal.isOpen && this.handleModal()}
         </div>
       </ConfigBlock>
     );

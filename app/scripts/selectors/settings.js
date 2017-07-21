@@ -9,6 +9,7 @@ const productSelector = state => state.product;
 const productSettingsSelector = state => state.productSettings;
 const defaultCombinationCountSelector = state => state.productSettings.defaultCombinationCount;
 const selectionSelector = state => state.productSettings.selection;
+const userSelector = state => state.user;
 
 const optionsPartsSelector = createSelector(
   productSettingsSelector,
@@ -116,6 +117,7 @@ const settingsPageSelector = createSelector(
   localeSelector,
   routerSelector,
   productSelector,
+  userSelector,
   productSettingsSelector,
   optionsSelector,
   selectionSelector,
@@ -126,6 +128,7 @@ const settingsPageSelector = createSelector(
     locale,
     route,
     product,
+    user,
     productSettings,
     options,
     selection,
@@ -136,6 +139,7 @@ const settingsPageSelector = createSelector(
     locale,
     route,
     product,
+    user,
     productSettings: {
       ...productSettings,
       options,

@@ -1,0 +1,16 @@
+.app__breadcrumb {
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  letter-spacing: -0.2px;
+  color: $color-printi;
+
+  span.separator {
+    color: #878b94;
+    padding: 0 0.5rem;
+  }
+
+  a {
+    color: #878b94;
+    text-decoration: underline;
+  }
+}

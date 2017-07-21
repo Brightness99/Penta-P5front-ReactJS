@@ -7,7 +7,8 @@ import { settingsFetch, settingsOptionsFetch } from 'actions';
 import { settingsSelector } from 'selectors';
 
 import { PageTitle } from 'atoms/Titles';
-
+import { RoundedConfirmationButton } from 'atoms/Buttons';
+import Breadcrumbs from 'components/Breadcrumbs';
 import Loading from 'components/Loading';
 import SummaryBlock from './Summary';
 import SourcesBlock from './Sources';
@@ -24,6 +25,7 @@ type Props = {
   router: RouterStore,
   match: {},
   options: {},
+  user: {},
 };
 
 export class Config extends React.Component {
@@ -140,6 +142,7 @@ export class Config extends React.Component {
         config: {
           isFulfilled,
         },
+        calculator,
       },
       productSettings,
       locale,
@@ -162,6 +165,7 @@ export class Config extends React.Component {
         options={{ ...productSettings.options, ...options }}
         selection={selection}
         screenSize={screenSize}
+        calculator={calculator}
         onSelect={this.handleOptionSelection}
       />
     );
@@ -179,19 +183,29 @@ export class Config extends React.Component {
         matrix,
         selection,
         templates,
+        product,
+        finalProduct: {
+          custom_qty
+        },
+        settings: {
+          showSteps,
+        },
       },
       dispatch,
       locale,
       app: {
         screenSize,
       },
+      user,
     } = this.props;
 
     const configLocale = locale.translate.page.product_settings.matrix;
 
+    const order = Object.keys(showSteps).filter((obj) => obj !== 'matrix' && obj !== 'additional_options').length;
+
     return (
       <MatrixBlock
-        order="3"
+        order={order + 1}
         isComplete={isFulfilled.matrix}
         locale={configLocale}
         className="app__config__matrix"
@@ -201,6 +215,9 @@ export class Config extends React.Component {
         screenSize={screenSize}
         matrix={matrix}
         templates={templates}
+        product={product}
+        user={user}
+        isCustomEnabled={custom_qty === '1'}
       />
     );
   }
@@ -218,19 +235,41 @@ export class Config extends React.Component {
         optionSectionInfo,
         calculator,
       },
+      dispatch,
       locale,
     } = this.props;
 
     const configLocale = locale.translate.page.product_settings;
+
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: product.title,
+        url: `/produto-${product.slug}`,
+      },
+      {
+        title: 'Configure',
+      },
+    ];
+
     return (
       <div className="app__config container">
+        <Breadcrumbs links={breadcrumb} />
         <PageTitle>{`${configLocale.TITLE}: ${product.title}`}</PageTitle>
         <div className="app__config__content">
           <main>
             {showSteps.source && this.renderSourceBlock()}
             {showSteps.options && isFulfilled.source && this.renderOptionsBlock()}
             {showSteps.matrix && isFulfilled.options && this.renderMatrixBlock()}
-            <Warning templates={templates} />
+            <Warning templates={templates} dispatch={dispatch} product={product} />
+            <div className="app__config__submit-button">
+              <RoundedConfirmationButton>
+                CONTINUAR
+              </RoundedConfirmationButton>
+            </div>
           </main>
           <SummaryBlock selection={selection} optionSectionInfo={optionSectionInfo} calculator={calculator} />
         </div>

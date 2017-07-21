@@ -15,17 +15,28 @@ type Props = {
   viewType: string,
   optionKey: string,
   checked: boolean,
+  partId: string,
   onSelect: () => {},
+  onZoomClick: () => {},
 };
 
 const ListItem = (props: Props) => {
   const handleClick = (ev) => {
-    console.log(1123);
+    const { onZoomClick } = props;
+
+    if (typeof onZoomClick === 'function') {
+      onZoomClick(ev);
+    }
   };
 
   return (
     <li>
-      {props.viewType === 'photos' && <button onClick={handleClick} className="app__zoom__open">
+      {props.viewType === 'photos' && <button
+        onClick={handleClick}
+        name={props.optionKey}
+        value={props.item.id}
+        className="app__zoom__open"
+      >
         <SearchPlusIcon />
       </button>}
       <label className={cx(props.checked && 'app__config__option--selected')}>

@@ -1,4 +1,4 @@
 // @flow
 
-export ErrorText from './Success';
+export ErrorText from './Error';
 export SuccessText from './Success';

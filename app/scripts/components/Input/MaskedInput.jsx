@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import Inputmask from 'inputmask';
 import { TimesCircleIcon } from 'components/Icons';
 
 type Props = {
@@ -9,7 +10,10 @@ type Props = {
   name?: string,
   placeholder?: string,
   mask?: string,
+  defaultValue?: string,
   onValid: () => {},
+  onReset: () => {},
+  checkCompleted: () => {},
 };
 
 type State = {
@@ -21,8 +25,21 @@ export default class MaskedInput extends React.Component {
     super(props);
 
     this.state = {
-      inputValue: '',
+      inputValue: props.defaultValue || '',
     };
+  }
+
+  componentDidMount() {
+    const { mask } = this.props;
+    Inputmask(mask).mask(this._input);
+  }
+
+  componentWillUpdate(nextProps) {
+    if (this.props.defaultValue !== nextProps.defaultValue) {
+      this.setState({
+        inputValue: nextProps.defaultValue,
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -38,11 +55,19 @@ export default class MaskedInput extends React.Component {
   static state: State;
 
   handleFetch = () => {
-    const { onValid } = this.props;
+    const { onValid, checkCompleted } = this.props;
     const { inputValue } = this.state;
 
-    if (inputValue.length >= 8 && typeof onValid === 'function') {
-      onValid(inputValue);
+    if (inputValue.length >= 8) {
+      if (typeof onValid === 'function') {
+        onValid(inputValue);
+      }
+
+      if (typeof checkCompleted === 'function') {
+        checkCompleted(true);
+      }
+    } else if (typeof checkCompleted === 'function') {
+      checkCompleted(false);
     }
   };
 
@@ -50,6 +75,14 @@ export default class MaskedInput extends React.Component {
     this.setState({
       inputValue: ev.target.value.replace(/[^0-9]/g, '').slice(0, 8),
     });
+  };
+
+  onClick = () => {
+    const { onReset } = this.props;
+
+    if (typeof onReset === 'function') {
+      onReset();
+    }
   };
 
   render() {
@@ -60,8 +93,9 @@ export default class MaskedInput extends React.Component {
           type="text"
           onChange={this.onChange}
           value={inputValue}
+          ref={(c) => (this._input = c)}
         />
-        <button className="app__reset_zipcode">
+        <button onClick={this.onClick} className="app__reset_zipcode">
           <TimesCircleIcon />
         </button>
       </div>

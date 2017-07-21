@@ -66,10 +66,7 @@ export function settingsSourceFetch(action$) {
                   ...prevOption,
                   [nextOption]: data.response.calculator[currentItem].options[nextOption]
                     .filter((optionItem) => optionItem.default)
-                    .reduce((prevOptionItem, nextOptionItem, array) => {
-                      console.log('caraca', prevOptionItem, nextOptionItem, array);
-                      return nextOptionItem.id;
-                    }, ''),
+                    .reduce((prevOptionItem, nextOptionItem) => nextOptionItem.id, ''),
                 }), {}),
               }), {});
 
@@ -177,7 +174,7 @@ export function settingsZipcodeFetch(action$) {
         method: 'GET',
       })
         .map(data => {
-          if (data.status === 200 && data.response) {
+          if (data.status === 200 && data.response.status === "OK" && data.response.messages.length === 0) {
             return {
               type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_SUCCESS,
               payload: {
@@ -190,7 +187,10 @@ export function settingsZipcodeFetch(action$) {
 
           return {
             type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE,
-            payload: { message: 'Algo de errado não está correto' },
+            payload: {
+              zipcode: action.payload.zipcode,
+              message: data.response.messages[0].text
+            },
             meta: { updatedAt: getUnixtime() },
           };
         })
@@ -254,7 +254,7 @@ export function settingsPrePressFetch(action$, store) {
   return action$.ofType(SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_REQUEST)
     .switchMap(action => {
       const productSettings = store.getState().productSettings;
-      const endpoint = `/v1/prepress_template/download_options/${productSettings.finalProduct.id}s`;
+      const endpoint = `/v1/prepress_template/download_options/${productSettings.finalProduct.id}`;
 
       return rxAjax({
         endpoint,
@@ -287,6 +287,51 @@ export function settingsPrePressFetch(action$, store) {
         .catch(error => (
           [{
             type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          }]
+        ));
+    });
+}
+
+export function prepressDownloadFetch(action$, store) {
+  return action$.ofType(SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_REQUEST)
+    .switchMap(action => {
+      const endpoint = `/v1/prepress_template/filepackage_download/${action.payload.extension}/${action.payload.orientation}`;
+      const parts = store.getState().productSettings.templates.parts;
+
+      return rxAjax({
+        endpoint,
+        payload: {
+          packageName: action.payload.fileName,
+          parts,
+        },
+        method: 'POST',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+            return {
+              type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_SUCCESS,
+              payload: {
+                extension: action.payload.extension,
+                orientation: action.payload.orientation,
+                ...data.response,
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_CANCEL })
+        .catch(error => (
+          [{
+            type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
           }]

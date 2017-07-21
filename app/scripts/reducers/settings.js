@@ -48,18 +48,20 @@ export const productSettingsState = {
   },
   templates: {
     options: {
-      vertical: ['illustrator', 'photoshop'],
-      horizontal: ['illustrator', 'photoshop'],
+      vertical: ['illustrator', 'photoshop', 'photoshop'],
+      horizontal: ['illustrator', 'photoshop', 'photoshop'],
     },
-    url: {
+    downloadUrls: {
       vertical: {},
       horizontal: {},
     },
-    pbcard: {
-      guideCombinationId: 25,
-      fileCombinationId: 27,
+    parts: {
+      pbcard: {
+        guideCombinationId: 25,
+        fileCombinationId: 27,
+      },
     },
-    selectedOption: 'vertical',
+    selectedOrientation: 'vertical',
   },
   calculator: {},
   finalProduct: {},
@@ -161,6 +163,15 @@ export default {
         updatedAt: action.meta.updatedAt,
       };
     },
+    [SettingsConstants.SETTINGS_SOURCE_RESET](state) {
+      return {
+        ...state,
+        source: {
+          ...state.source,
+          selectedSource: '',
+        },
+      };
+    },
     [SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST](state, action) {
       const actionSelection = Object.keys(state.optionSectionInfo)
         .map((part) => ({
@@ -259,6 +270,18 @@ export default {
         },
       };
     },
+    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE](state) {
+      return {
+        ...state,
+        matrix: productSettingsState.matrix,
+      };
+    },
+    [SettingsConstants.SETTINGS_ZIPCODE_RESET](state) {
+      return {
+        ...state,
+        matrix: productSettingsState.matrix,
+      };
+    },
     [SettingsConstants.SETTINGS_MATRIX_FETCH_SUCCESS](state, action) {
       return {
         ...state,
@@ -287,20 +310,44 @@ export default {
           .filter((obj) => obj !== action.payload.part)
           .reduce((prevValue, currentValue) => ({
             ...prevValue,
-            [currentValue]: state.selection[currentValue]
+            [currentValue]: state.selection[currentValue],
           }), {}),
         calculator: Object.keys(state.calculator)
           .filter((obj) => obj !== action.payload.part)
           .reduce((prevValue, currentValue) => ({
             ...prevValue,
-            [currentValue]: state.calculator[currentValue]
+            [currentValue]: state.calculator[currentValue],
           }), {}),
         optionSectionInfo: Object.keys(state.optionSectionInfo)
           .filter((obj) => obj !== action.payload.part)
           .reduce((prevValue, currentValue) => ({
             ...prevValue,
-            [currentValue]: state.optionSectionInfo[currentValue]
+            [currentValue]: state.optionSectionInfo[currentValue],
           }), {}),
+      };
+    },
+    [SettingsConstants.SELECT_PREPRESS_ORIENTATION](state, action) {
+      return {
+        ...state,
+        templates: {
+          ...state.templates,
+          selectedOrientation: action.payload.orientation,
+        },
+      };
+    },
+    [SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        templates: {
+          ...state.templates,
+          downloadUrls: {
+            ...state.templates.downloadUrls,
+            [action.payload.orientation]: {
+              ...state.templates.downloadUrls[action.payload.orientation],
+              [action.payload.extension]: action.payload.filePackageUrl,
+            },
+          },
+        },
       };
     },
   }),

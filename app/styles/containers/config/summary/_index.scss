@@ -2,10 +2,9 @@
   background-color: $color-white;
   box-shadow: 1rem 1rem 3rem -0.5rem rgba(0,0,0,0.3);
   padding: 2rem;
-  position: absolute;
   right: 0;
   top: 0;
-  width: 23%;
+  width: 100%;
 
   h3 {
     color: #151617;
@@ -31,5 +30,14 @@
         color: #151617;
       }
     }
+  }
+}
+
+.app__config__submit-button {
+  width: 100%;
+
+  .atm-button-rounded {
+    min-width: 100%;
+    max-width: 100%;
   }
 }

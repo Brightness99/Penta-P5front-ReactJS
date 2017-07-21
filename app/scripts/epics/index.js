@@ -11,7 +11,8 @@ import {
   settingsOptionsFetch,
   settingsSourceFetch,
   settingsZipcodeFetch,
-  settingsMatrixFetch
+  settingsMatrixFetch,
+  prepressDownloadFetch,
 } from './settings';
 
 export default combineEpics(
@@ -22,4 +23,5 @@ export default combineEpics(
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
+  prepressDownloadFetch,
 );

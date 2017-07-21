@@ -10,12 +10,12 @@ type Props = {
   name: string,
   value: any,
   checked?: boolean,
-  onCLick?: () => {},
+  onClick?: () => {},
   children?: any,
 };
 
 const BoxRadio = (props: Props) => {
-  const { id, name, value, checked, onCLick, children } = props;
+  const { id, name, value, checked, onClick, children } = props;
 
   return (
     <label className={cx('atm-box-radio', props.checked && 'atm-box-radio--selected')}>
@@ -23,7 +23,7 @@ const BoxRadio = (props: Props) => {
         name={name}
         id={id}
         value={value}
-        onCLick={onCLick}
+        onCLick={onClick}
         checked={checked}
       />
       {children}

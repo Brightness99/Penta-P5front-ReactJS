@@ -12,6 +12,7 @@ export PlusCircleIcon from './PlusCircle';
 export PlusSquareOIcon from './PlusSquareO';
 export RefreshIcon from './Refresh';
 export SearchPlusIcon from './SearchPlus';
+export TimesIcon from './Times';
 export TimesCircleIcon from './TimesCircle';
 export SettingsArtCreationIcon from './SettingsArtCreation';
 export SettingsTweakIcon from './SettingsTweak';
