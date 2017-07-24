@@ -4,7 +4,8 @@
  */
 import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, SettingsConstants } from 'constants/index';
-import { push } from 'modules/ReduxRouter';
+import { prePressTemplateFetch } from 'actions';
+import { replace } from 'modules/ReduxRouter';
 
 export function settingsFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_FETCH_REQUEST)
@@ -34,7 +35,7 @@ export function settingsFetch(action$) {
         .defaultIfEmpty({ type: SettingsConstants.SETTINGS_FETCH_CANCEL })
         .catch(error => {
           if (error.status === 404) {
-            push('/404');
+            replace('/404');
           }
 
           return ([{
@@ -57,10 +58,27 @@ export function settingsSourceFetch(action$) {
       })
         .map(data => {
           if (data.status === 200 && data.response) {
+            let hasDefaultSelection = true;
+            const selection = Object.keys(data.response.calculator)
+              .reduce((prevItem, currentItem) => ({
+                ...prevItem,
+                [currentItem]: Object.keys(data.response.calculator[currentItem].options).reduce((prevOption, nextOption) => ({
+                  ...prevOption,
+                  [nextOption]: data.response.calculator[currentItem].options[nextOption]
+                    .filter((optionItem) => optionItem.default)
+                    .reduce((prevOptionItem, nextOptionItem) => nextOptionItem.id, ''),
+                }), {}),
+              }), {});
+
+            // if (action.payload.source === 'upload') {
+            //   prePressTemplateFetch();
+            // }
+
             return {
               type: SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS,
               payload: {
                 ...data.response,
+                selection,
                 selectedSource: action.payload.source,
               },
               meta: { updatedAt: getUnixtime() },
@@ -77,7 +95,7 @@ export function settingsSourceFetch(action$) {
         .defaultIfEmpty({ type: SettingsConstants.SETTINGS_SOURCE_FETCH_CANCEL })
         .catch(error => {
           if (error.status === 404) {
-            push('/404');
+            replace('/404');
           }
 
           return ([{
@@ -156,7 +174,7 @@ export function settingsZipcodeFetch(action$) {
         method: 'GET',
       })
         .map(data => {
-          if (data.status === 200 && data.response) {
+          if (data.status === 200 && data.response.status === "OK" && data.response.messages.length === 0) {
             return {
               type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_SUCCESS,
               payload: {
@@ -169,7 +187,10 @@ export function settingsZipcodeFetch(action$) {
 
           return {
             type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE,
-            payload: { message: 'Algo de errado não está correto' },
+            payload: {
+              zipcode: action.payload.zipcode,
+              message: data.response.messages[0].text
+            },
             meta: { updatedAt: getUnixtime() },
           };
         })
@@ -222,6 +243,95 @@ export function settingsMatrixFetch(action$, store) {
         .catch(error => (
           [{
             type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          }]
+        ));
+    });
+}
+
+export function settingsPrePressFetch(action$, store) {
+  return action$.ofType(SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_REQUEST)
+    .switchMap(action => {
+      const productSettings = store.getState().productSettings;
+      const endpoint = `/v1/prepress_template/download_options/${productSettings.finalProduct.id}`;
+
+      return rxAjax({
+        endpoint,
+        payload: {
+          combination: productSettings.selection,
+          source: productSettings.source.selectedSource,
+          zipcode: action.payload.zipcode,
+        },
+        method: 'POST',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+            return {
+              type: SettingsConstants.SETTINGS_MATRIX_FETCH_SUCCESS,
+              payload: {
+                ...data.response,
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: SettingsConstants.SETTINGS_MATRIX_FETCH_CANCEL })
+        .catch(error => (
+          [{
+            type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          }]
+        ));
+    });
+}
+
+export function prepressDownloadFetch(action$, store) {
+  return action$.ofType(SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_REQUEST)
+    .switchMap(action => {
+      const endpoint = `/v1/prepress_template/filepackage_download/${action.payload.extension}/${action.payload.orientation}`;
+      const parts = store.getState().productSettings.templates.parts;
+
+      return rxAjax({
+        endpoint,
+        payload: {
+          packageName: action.payload.fileName,
+          parts,
+        },
+        method: 'POST',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+            return {
+              type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_SUCCESS,
+              payload: {
+                extension: action.payload.extension,
+                orientation: action.payload.orientation,
+                ...data.response,
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_CANCEL })
+        .catch(error => (
+          [{
+            type: SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
           }]

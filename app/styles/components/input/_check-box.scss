@@ -1,0 +1,41 @@
+.app__input__checkbox {
+  align-content: center;
+  display: inline-flex;
+  height: auto;
+  width: auto;
+
+  input{
+    display: none;
+    height: 0;
+    opacity: 0;
+    width: 0;
+  }
+
+  span {
+    background-color: #f8f8f8;
+    border: 0.1rem solid #c1c1c1;
+    border-radius: 0.3rem;
+    fill: $color-printi;
+    height: 2rem;
+    margin-right: 2rem;
+    padding: 0.2rem;
+    width: 2rem;
+
+    svg {
+      display: none;
+    }
+  }
+
+  &--checked {
+    span {
+      svg {
+        display: block;
+      }
+    }
+  }
+}
+
+
+
+
+

@@ -1,0 +1,19 @@
+.atm-success-text {
+  align-self: center;
+  display: inline-flex;
+  font-family: $font-family-open-sans;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: left;
+  color: #36c265;
+
+  svg {
+    fill: currentColor;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  span {
+    padding-left: 1rem;
+  }
+}

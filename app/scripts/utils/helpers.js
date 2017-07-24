@@ -109,3 +109,16 @@ export function getScreenSize() {
 
   return screenSize;
 }
+
+/**
+ * Check if is mobile
+ * @param {string} screenSize
+ * @returns {boolean}
+ */
+export function isMobile(screenSize: string): boolean {
+  if (!screenSize) {
+    console.warn('isMobile: screenSize param is empty, returning true for mobile first reasons');
+  }
+
+  return !['lg', 'xl', 'xxl'].includes(screenSize);
+}

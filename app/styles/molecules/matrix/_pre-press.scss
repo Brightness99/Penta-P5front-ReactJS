@@ -1,0 +1,23 @@
+.atm-prepress-step {
+  color: #6a6f7a;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-sm;
+  padding-bottom: 0.5rem;
+}
+
+.mol-prepress-files,
+.mol-prepress-orientarion {
+  flex-direction: column;
+  display: flex;
+}
+
+.mol-prepress-orientarion {
+  padding-bottom: 1rem;
+  > div {
+    display: flex;
+    justify-content: space-around;
+    > label {
+      width: 46%;
+    }
+  }
+}

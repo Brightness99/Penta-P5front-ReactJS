@@ -1,0 +1,236 @@
+ .app__config__shipping {
+  margin-top: 2.7rem;
+  width: 100%;
+
+  &-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+
+    &__logo {
+      border: none;
+      width: 17.9%;
+    }
+
+    &--th {
+      border-spacing: 0;
+      color: #151617;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      font-weight: bold;
+      height: 3rem;
+      text-align: center;
+      text-transform: uppercase;
+
+      &-gray {
+        background-color: #eeeeee;
+        border: 0.1rem solid #dbdddf;
+        color: currentColor;
+      }
+
+      &-green {
+        background-color: #36c265;
+        color: #ffffff;
+        letter-spacing: 0.12rem;
+
+        span {
+          color: #f4dd1d;
+        }
+      }
+
+      &-yellow {
+        background-color: #f4dd1d;
+        color: #006ee3;
+        letter-spacing: 0.12rem;
+      }
+
+      &-rounded {
+        border-radius: 0.3rem 0.3rem 0 0;
+        display: block;
+        line-height: 2.5rem;
+        width: 100%;
+        height: 2.5rem;
+      }
+    }
+
+    &__quantity {
+      border-right: none;
+    }
+
+    tbody {
+      tr {
+        td {
+          border-left: 0.1rem solid #dbdddf;
+          background-color: #f8f8f8;
+          height: 7rem;
+          text-align: center;
+
+          &:first-child {
+            font-size: 1.2rem;
+            text-align: center;
+
+            span {
+              font-weight: bold;
+              font-size: 1.8rem;
+            }
+          }
+
+          &:nth-child(2) {
+            background-color: #f4f3e5;
+          }
+
+          &:last-child {
+            border-right: 0.1rem solid #dbdddf;
+          }
+
+          label {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            height: 100%;
+            width: 100%;
+          }
+
+          &:not(:first-child) {
+            &:hover {
+              background-color: $color-printi;
+              color: $color-white;
+
+              span {
+                color: $color-white;
+              }
+            }
+          }
+
+          &.active {
+            background-color: $color-printi;
+            color: $color-white;
+
+            span {
+              color: $color-white;
+            }
+          }
+        }
+
+        &:last-child {
+          td {
+            border-bottom: 0.1rem solid #dbdddf;
+          }
+        }
+
+        &:hover {
+          td:first-child {
+            background-color: $color-printi;
+            color: $color-white;
+          }
+        }
+      }
+
+    }
+
+    &__quantity {
+      align-self: center;
+      border-top-right-radius: 0;
+      font-weight: bold;
+      height: 3rem;
+      letter-spacing: 1.2px;
+      text-align: center;
+      color: #151617;
+    }
+
+    &__date {
+      align-items: center;
+      background-color: #f8f8f8;
+      border: 1px solid #dbdddf;
+      color: $color-printi;
+      font-family: $font-family-open-sans-regular;
+      line-height: 1.9;
+      text-transform: lowercase;
+      width: 100%;
+
+      &:first-child {
+        background-color: #f4f3e5;
+      }
+
+      &:last-child {
+        background-color: #e5f4ea;
+      }
+
+      > div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-weekday {
+        color: #6a6f7a;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      &-day {
+        align-items: center;
+        display: flex;
+        font-family: $font-family-open-sans-bold;
+        line-height: 1.1;
+        justify-content: center;
+
+        span {
+          font-size: 4rem;
+          padding-right: 1rem;
+        }
+      }
+    }
+
+    &__price {
+      font-size: $font-size-lg;
+      font-weight: bold;
+      line-height: 1.4;
+      text-align: left;
+      width: 100%;
+
+      span {
+        color: #878b94;
+        display: flex;
+        font-weight: normal;
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  &--desktop {
+
+    td {
+      border-top: none;
+      width: 20%;
+
+      &:last-child {
+        background-color: #e5f4ea;
+      }
+    }
+
+    .app__config__shipping-table {
+      &__date {
+        border-right: none;
+        border-top: none;
+
+        &:last-child {
+          border-right: 1px solid #dbdddf;
+        }
+      }
+    }
+  }
+
+  &--mobile {
+    thead {
+      th {
+        border-top-left-radius: 0.3rem;
+
+        &:last-child {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0.3rem;
+        }
+      }
+    }
+  }
+}

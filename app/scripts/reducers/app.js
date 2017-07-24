@@ -12,7 +12,7 @@ import { AppConstants } from 'constants/index';
 export const appState = {
   screenSize: getScreenSize(),
   config: {
-    viewType: 'gallery',
+    viewType: 'photos',
   },
   rehydrated: false,
 };

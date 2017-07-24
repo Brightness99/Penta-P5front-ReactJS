@@ -1,0 +1,45 @@
+.app__config__warning {
+  background-color: #f6f5e3;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+
+  @include lg {
+    flex-direction: row;
+  }
+
+  div {
+    display: inline-flex;
+  }
+
+  &-block {
+    flex: 1;
+    padding: $grid-gutter-width / 2;
+  }
+
+  &__logo svg{
+    height: 3.8rem;
+    width: 3.8rem;
+  }
+
+  &__infos {
+    flex-direction: column;
+    padding-left: $grid-gutter-width / 1.5;
+    width: calc(100% - 3.8rem);
+  }
+
+  &__title {
+    color: #000000;
+    font-family: $font-family-nunito-regular;
+    letter-spacing: -0.03rem;
+    padding: $grid-gutter-width / 3 0 $grid-gutter-width / 6 0;
+  }
+
+  &__text {
+    color: #6a6f7a;
+    font-family: $font-family-open-sans;
+    font-size: $font-size-xs;
+  }
+}

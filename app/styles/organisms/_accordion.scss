@@ -1,0 +1,19 @@
+.atm-accordion-title {
+  align-items: center;
+  display: inline-flex;
+
+  svg {
+    fill: $color-printi;
+    height: 1.6rem;
+    margin-right: 1rem;
+    width: 1.6rem;
+  }
+
+  h3 {
+    display: inline-flex;
+  }
+}
+
+.atm-accordion-item {
+  overflow: hidden;
+}

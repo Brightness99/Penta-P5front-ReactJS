@@ -1,8 +1,21 @@
-// TODO: Paddong on the blocks (same as the header)
+// TODO: Padding on the blocks (same as the header)
 
 .app__config__options {
+  background-color: $color-white;
   display: flex;
   flex-direction: column;
+
+  h3 {
+    font-size: $font-size-il;
+    padding-left: 1rem;
+  }
+
+  &-parts {
+    background-color: $color-printi;
+    color: $white;
+    padding: 1rem 1.5rem;
+    text-align: center;
+  }
 
   ul {
     padding: 0;
@@ -13,20 +26,32 @@
   }
 
   &-header {
-    padding: 2rem 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem 0;
+
+    @include lg {
+      justify-content: flex-start;
+    }
 
     h4 {
-      font-size: 2.1rem;
+      display: inline-flex;
       font-family: $font-family-nunito-regular;
+      font-size: $font-size-lg;
+      font-weight: normal;
       margin-bottom: 0;
     }
 
     &__youtube {
       align-items: center;
       color: $color-printi;
-      display: flex;
+      display: inline-flex;
       font-family: $font-family-open-sans-regular;
-      font-size: $font-size-xxxs;
+      font-size: $font-size-xs;
+
+      @include lg {
+        padding-left: 2rem;
+      }
 
       span {
         display: inline-flex;
@@ -37,25 +62,63 @@
     }
   }
 
+  &-listing {
+    padding: 1rem;
+
+    @include lg {
+      padding: 3rem 2rem;
+    }
+
+    > h3 {
+      position: relative;
+      width: 100%;
+
+      > span {
+        color: #ea0000;
+        font-size: $font-size-ix;
+        position: absolute;
+        right: 0;
+        text-decoration: underline;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    > h3:not(:first-child){
+      margin-top: 2rem;
+    }
+  }
+
   &-body {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 0.5rem;
 
     > li {
+      position: relative;
       border-radius: 0.3rem;
       display: inline-flex;
-      max-width: 50%;
-      padding: 1.5rem 0.5rem 0.8rem;
-      width: 18rem;
+      padding: 1.6rem 1rem 0;
+      width: 50%;
+
+      @include lg {
+        width: 25%;
+      }
+
+      @include xl {
+        width: 20%;
+      }
 
       label {
         background-color: $color-white;
         border: 0.1rem solid #eeeeee;
         cursor: pointer;
         font-family: $font-family-nunito-regular;
-        font-size: $font-size-sm;
+        font-size: $font-size-xs;
+        position: relative;
         width: 100%;
+
+        img {
+          width: 100%;
+        }
 
         img ~ div {
           border-top: 0.1rem solid #eeeeee;
@@ -75,26 +138,47 @@
     }
   }
 
-  &-input {
-    align-items: center;
-    display: flex;
-
-    height: 5rem;
-  }
-
   &--show-list {
-    max-width: 100%;
-    width: 100%;
+    > li > ul > li {
+      width: 100%;
 
-    .app__config__options-body {
-      padding-top: 1rem;
+      @include lg {
+        width: 25%;
+      }
 
-       > li {
-         max-width: 100%;
-         padding: 0.5rem;
-         width: 100%;
-       }
+      @include xl {
+        width: 20%;
+      }
     }
   }
 
+  &-input {
+    align-items: center;
+    display: flex;
+    height: 4.1rem;
+  }
+
+  .app__zoom__open {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-bottom-left-radius: 100%;
+    cursor: zoom-in;
+    display: flex;
+    height: 4.2rem;
+    outline: none;
+    position: absolute;
+    right: 1.1rem;
+    top: 1.7rem;
+    width: 4.2rem;
+    z-index: 1;
+
+    svg {
+      fill: $color-printi;
+      height: 2.4rem;
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      width: 2.4rem;
+    }
+  }
 }

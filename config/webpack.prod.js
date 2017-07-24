@@ -36,6 +36,7 @@ var config = merge.smart(webpackConfig, {
     new CopyPlugin([
       { from: '.htaccess' },
       { from: 'robots.txt' },
+      { from: 'deploy.php' },
     ]),
     new ExtractText('styles/app.[hash].css'),
     new HtmlPlugin({
@@ -47,6 +48,9 @@ var config = merge.smart(webpackConfig, {
       mobile: true,
       template: './index.ejs',
       title: NPMPackage.title,
+      googleAnalytics: {
+        trackingId: 'UA-33899521-1',
+      }
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),

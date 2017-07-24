@@ -57,6 +57,13 @@ $position: left) {
   }
 }
 
+@mixin center-child-flex() {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 @mixin vertical-align($top: 50%) {
   position: relative;
   top: $top;
