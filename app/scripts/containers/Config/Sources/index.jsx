@@ -119,8 +119,10 @@ export default class SourcesBlock extends React.Component {
     return (
       <div className="org-selected-source">
         <div className="mol-selected-source">
-          <div className="atm-settings-image">{images[selectedSource]}</div>
-          <span>{locale[selectedSource].TITLE}</span>
+          <div>
+            <div className="atm-settings-image">{images[selectedSource]}</div>
+            <span>{locale[selectedSource].TITLE}</span>
+          </div>
           <p>{locale[selectedSource].SUBTITLE}</p>
         </div>
         <div className="atm-blue-link" onClick={this.handleReselection} role="link">
