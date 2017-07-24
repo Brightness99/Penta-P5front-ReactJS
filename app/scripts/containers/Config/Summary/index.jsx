@@ -96,35 +96,7 @@ export default class SummaryBlock extends React.Component {
 
     return (
       <div className="app__sidebar" style={this.state}>
-        <div className="app__settings__summary">
-          <h3>Resumo do produto</h3>
-          {Object.keys(selection).map((option) => (
-            <div key={option}>
-              {Object.keys(selection).length > 1 && <span>{calculator[option].name}</span>}
-              {Object.keys(selection) > 1 && <b>{option}:</b>}
-              <ul>
-                {Object.keys(selection[option]).map((item) => (
-                  <li key={item}>
-                  <span>{
-                    optionSectionInfo[option]
-                      .filter(obj => obj.key === item)
-                      .reduce((prevValue, currentValue) => currentValue.name, '')
-                  }</span>: {
-                    calculator[option].options[item]
-                      .filter(obj => obj.id === selection[option][item])
-                      .reduce((prevValue, currentValue) => currentValue.name, '')
-                  }
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="app__config__submit-button">
-          <RoundedConfirmationButton>
-            CONTINUAR
-          </RoundedConfirmationButton>
-        </div>
+        123
       </div>
     );
   }

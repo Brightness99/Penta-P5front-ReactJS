@@ -102,6 +102,15 @@
               }
             }
           }
+
+          &.active {
+            background-color: $color-printi;
+            color: $color-white;
+
+            span {
+              color: $color-white;
+            }
+          }
         }
 
         &:last-child {

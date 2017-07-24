@@ -1,0 +1,64 @@
+.org-sidebar {
+  height: auto;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+
+  @include lg {
+    left: initial;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 23%;
+    z-index: 0;
+  }
+
+  .org-sidebar-mobile {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    transform: translateX(calc(100% - 3rem));
+    transition: 0.1s transform linear;
+    width: 28rem;
+    z-index: 2;
+
+    .atm-sidebar-action {
+      @include center-child-flex;
+      background-color: $color-white;
+      border: transparent;
+      border-radius: 0.3rem 0 0 0.3rem;
+      height: 3rem;
+      left: 0;
+      position: absolute;
+      top: 12rem;
+      width: 3rem;
+
+      > svg {
+        max-height: 50%;
+        max-width: 50%;
+      }
+    }
+
+    .mol-sidebar-main {
+      height: auto;
+      position: absolute;
+      right: 0;
+      top: 1rem;
+      width: calc(100% - 3rem);
+    }
+  }
+
+  .org-sidebar-desktop {
+    position: fixed;
+  }
+
+  &--active {
+    height: 100%;
+
+    .org-sidebar-mobile {
+      transform: translateX(0);
+    }
+  }
+}
