@@ -1,4 +1,5 @@
 // @flow
+// TODO: Carousel on mobile
 import React from 'react';
 import Logo from 'components/Logo';
 

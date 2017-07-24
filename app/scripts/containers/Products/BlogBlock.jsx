@@ -1,4 +1,5 @@
 // @flow
+// TODO: Carousel on mobile
 import React from 'react';
 import { connect } from 'react-redux';
 import { blogFetch } from 'actions';
@@ -26,13 +27,16 @@ export class BlogBlock extends React.Component {
     const { blog: { blog } } = this.props;
 
     return blog.map((item) => (
-      <div className="blogCard" key={item.id}>
-        <span>Biblioteca</span>
+      <div className="blogCard" key={item.id} name={item.id}>
+        <span className="titleCategory">Biblioteca</span>
         <img src={item.image} alt="Papel" />
         <div className="blogCard-text">
           <h5 className="titlePost">{item.title}</h5>
           <p>{item.content}</p>
-          <sub><HourglassIcon />{item.reading_time}</sub>
+          <sub className="hourglassText">
+            <HourglassIcon />
+            <span>{item.reading_time}</span>
+          </sub>
         </div>
       </div>
     ));
