@@ -57,6 +57,6 @@ a {
   padding-top: $header-height;
 
   @include lg {
-    padding-top: ($header-height + $topbar-height);
+    // padding-top: ($header-height + $topbar-height);
   }
 }
