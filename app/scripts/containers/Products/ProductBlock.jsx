@@ -1,4 +1,5 @@
 // @flow
+// TODO: Carousel this
 import React from 'react';
 import Carousel from 'components/Carousel';
 
@@ -10,10 +11,6 @@ type Props = {
   button?: typeof React.Component,
   product: {}
 };
-
-type State = {
-  currentImage: 2
-}
 
 export class ProductBlock extends React.Component {
 

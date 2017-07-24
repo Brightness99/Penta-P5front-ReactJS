@@ -1,11 +1,14 @@
 .app__main{
-  background-color: white;
+  background-color: #eeeeee;
 }
 
 .bgProduct{
   box-sizing: border-box;
-  padding: 1rem 0 4rem 0;
-  background-color: #eeeeee;
+  padding: 0.1rem 0 0.1rem 0;
+  background: $color-white;
+  @include lg {
+    padding: 1rem 0 1rem 0;
+  }
 }
 
 .container-product{
@@ -182,8 +185,12 @@
       }
       .card-productInformation-text {
         flex: 3;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
         .card-productInformation-title {
           font-size: $font-size-h4;
+          width: 100%;
         }
         @include lg {
           display: flex;
@@ -325,7 +332,7 @@
     display:flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 0 6.2rem;
+    padding: 0 1rem;
     .box-benefitsCard{
       flex: 1;
       .benefitsCard-title{
@@ -377,7 +384,7 @@
         }
       }
       &:nth-of-type(2n){
-        height: 535px;
+        height: 496px;
         box-shadow: 0px 3px 5px 6px $color-lightGray2;
         z-index: 999;
         .benefitsCard-title{
@@ -403,9 +410,16 @@
             margin-right: 2rem;
           }
         }
+        @include lg {
+          height: 535px;
+        }
       }
       &:nth-of-type(2n-1){
-        margin-top: 5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        @include lg {
+          margin-top: 5rem;
+        }
       }
       .benefitsCard-btn{
         display: flex;
@@ -416,13 +430,19 @@
     }
     @include lg{
       flex-direction: row;
+      padding: 0 6.2rem;
     }
   }
   sub{
     position: absolute;
-    right: 12%;
-    bottom: 8%;
+    left: 2rem;
+    bottom: -1rem;
     color: $color-darkGray;
+    @include lg {
+      right: 12%;
+      bottom: 8%;
+      left: inherit;
+    }
   }
 }
 
@@ -480,10 +500,11 @@
   .container-commentsClients{
     display: flex;
     flex-direction: column;
-    margin-bottom: 12rem;
+    //margin-bottom: 12rem;
     .box-commentClient{
       flex: 1;
       position: relative;
+      margin-bottom: 9rem;
       .commentClient-text{
         box-sizing: border-box;
         padding: 3.2rem 2rem;
@@ -520,34 +541,35 @@
     }
     @include lg{
       flex-direction: row;
+      margin-bottom: 0rem;
     }
   }
 } 
 
 //Blog cards
-.container-blog{
+.container-blog {
    margin: 4.5rem 0;
-   .blog-title{
+   .blog-title {
     text-transform: uppercase;
     font-size: $font-size-h4;
     font-family: $font-family-open-sans; 
    }
-  .box-blogCards{
+  .box-blogCards {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    .blogCard{
+    .blogCard {
       flex: 1;
       height: 420px;
       position: relative;
       background-color: $color-white; 
       box-sizing: border-box;
-      margin-right: 2rem; 
+      margin-right: 0; 
       position: relative;
       &:last-of-type{
         margin-right: 0;
       }
-      span{
+      .titleCategory {
         position: absolute;
         color: $color-white;
         border-radius: 10px;
@@ -558,31 +580,43 @@
         padding: 0.1rem 2rem;
         font-size: $font-size-xxs;
       }
-      img{
+      img {
         width: 100%;
         height: 210px;
       }
-      .blogCard-text{
+      .blogCard-text {
         box-sizing: border-box;
         padding: 2rem;
         height: auto;
-        .titlePost{
+        .titlePost {
           font-size: $font-size-base;
           margin-bottom: 1.5rem;
         }
-        p{
+        p {
           font-size: $font-size-xs;
         }
       }
-      sub{
+      .hourglassText {
         position: absolute;
-        bottom: 2rem;
+        bottom: 1.5rem;
+        display: table;
+        span{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+        }
       }
+      @include lg{
+        margin-right: 2rem;
+      }
+    }
+    @include lg{
+      flex-direction: row;
     }
   }
 }
 
-.hourglassIcon{
+.hourglassIcon {
   width: 12px;
   margin-right: 1rem;
 }
@@ -664,7 +698,7 @@
 
 //Opinions
 .container-opinions{
-  margin: 4.5rem 0;
+  margin: 6rem 0;
   .opinions-title {   
     text-transform: uppercase;
     font-size: $font-size-h4;
@@ -717,6 +751,9 @@
           }
           .input-submit{
             flex: 1;
+            &.btn-lg{
+              padding: 1.25rem 1.25rem;
+            }
           }
         }
         @include lg{
@@ -841,7 +878,7 @@
 
 // BUTTONS
 .btn-default {
-  width:100%;
+  width: 100%;
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -882,7 +919,10 @@
   &.btn-lg {
     box-sizing: border-box;
     padding: 1.25rem 2.5rem;
-    font-size: $font-size-sm;
+    font-size: $font-size-xs;
+    @include lg {
+      font-size: $font-size-sm;
+    }
   }
   //200px
   &.btn-sm {

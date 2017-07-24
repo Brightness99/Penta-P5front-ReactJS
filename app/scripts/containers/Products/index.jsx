@@ -48,10 +48,12 @@ export class Products extends React.Component {
 
     return (
       <div>
-        <div className="container">
-          <ProductBlock product={product} screenSize={screenSize} />
-        </div>
         <div className="bgProduct">
+          <div className="container">
+            <ProductBlock product={product} screenSize={screenSize} />
+          </div>
+        </div>
+        <div>
           <div className="container">
             <InformationBlock screenSize={screenSize} informations={informations} />
             <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
@@ -70,7 +72,7 @@ export class Products extends React.Component {
   };
 
   renderDesktop = () => {
-    const { products: { product, warrantInformation, settingsPageLink, informations, categories, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
     const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
     const { blog } = this.props;
 
@@ -80,10 +82,12 @@ export class Products extends React.Component {
 
     return (
       <div>
-        <div className="container">
-          <ProductBlock product={product} screenSize={screenSize} />
-        </div>
         <div className="bgProduct">
+          <div className="container">
+            <ProductBlock product={product} screenSize={screenSize} />
+          </div>
+        </div>
+        <div>
           <div className="container">
             <InformationBlock screenSize={screenSize} informations={informations} />
             <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
