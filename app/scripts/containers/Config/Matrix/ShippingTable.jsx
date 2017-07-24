@@ -16,7 +16,7 @@ type Props = {
   matrix: {
     dates: {},
     rows: {},
-    selections: {},
+    selection: {},
   },
   dispatch: () => {},
 };
@@ -42,15 +42,30 @@ export default class MatrixShippingTable extends React.Component {
     this.handleMatrixSelection(ev.currentTarget.name);
   };
 
-  renderTdPrice(prices, date) {
+  handleDateSelection = (ev) => {
+    this.handleMatrixSelection(ev.currentTarget.value, ev.currentTarget.name);
+  };
+
+  renderTdPrice(prices, date, quantity) {
+    const { matrix: { selection } } = this.props;
+
     if (typeof prices === 'undefined') {
       return (<td key={`price-${date}`}>---</td>);
     }
 
+    console.log(selection.date, date, selection.quantity, quantity);
+
+    const isChecked = selection.date === date && selection.quantity === quantity;
+
     return (
-      <td key={`price-${date}`}>
+      <td key={`price-${date}`} className={cx(isChecked && 'active')}>
         <label>
-          <RadioButton />
+          <RadioButton
+            name={quantity}
+            value={date}
+            checked={isChecked}
+            onChange={this.handleDateSelection}
+          />
           <div className="app__config__shipping-table__price">
             {`R$ ${prices.total.toFixed(2)}`}
             <span>{`R$ ${prices.unit.toFixed(2)} / un`}</span>
@@ -113,7 +128,7 @@ export default class MatrixShippingTable extends React.Component {
               .map((quantity) => (
                 <tr key={quantity}>
                   {this.renderTdDate(quantity)}
-                  {this.renderTdPrice(rows[quantity][selection.date].prices, selection.date)}
+                  {this.renderTdPrice(rows[quantity][selection.date].prices, selection.date, quantity)}
                 </tr>
                 ))}
           </tbody>
@@ -168,7 +183,7 @@ export default class MatrixShippingTable extends React.Component {
               <tr key={quantity}>
                 {this.renderTdDate(quantity)}
                 {Object.keys(dates).map((date) => (
-                  this.renderTdPrice(rows[quantity][date].prices, date)
+                  this.renderTdPrice(rows[quantity][date].prices, date, quantity)
                 ))}
               </tr>
             ))}
@@ -179,6 +194,7 @@ export default class MatrixShippingTable extends React.Component {
   }
 
   render() {
+    console.log('updated');
     const { screenSize, matrix: { isRunning, isLoaded } } = this.props;
 
     if (isRunning || !isLoaded) {

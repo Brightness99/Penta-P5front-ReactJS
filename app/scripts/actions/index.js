@@ -7,5 +7,6 @@
 
 export * from './app';
 export * from './products';
+export * from './blog';
 export * from './user';
 export * from './settings';

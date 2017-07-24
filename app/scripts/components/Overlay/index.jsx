@@ -1,5 +1,7 @@
 // @flow
 
+// TODO: fade-in && fade-out
+
 import React from 'react';
 import cx from 'classnames';
 

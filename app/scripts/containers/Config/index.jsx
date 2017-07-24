@@ -2,15 +2,18 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { settingsFetch, settingsOptionsFetch } from 'actions';
+import { isMobile } from 'utils/helpers';
 import { settingsSelector } from 'selectors';
 
 import { PageTitle } from 'atoms/Titles';
 import { RoundedConfirmationButton } from 'atoms/Buttons';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Loading from 'components/Loading';
-import SummaryBlock from './Summary';
+import SideBar from 'organisms/SideBar';
+import { TruckIcon } from 'components/Icons';
 import SourcesBlock from './Sources';
 import OptionsBlock from './Options';
 import MatrixBlock from './Matrix';
@@ -48,6 +51,48 @@ export class Config extends React.Component {
   }
 
   static props: Props;
+
+  renderSummary() {
+    const { productSettings: { selection, optionSectionInfo, calculator, matrix } } = this.props;
+
+    let selectedDate = '';
+
+    if (matrix.selection.date !== 0) {
+      selectedDate = moment(new Date(matrix.selection.date * 1000));
+    }
+
+    console.log(selectedDate);
+
+    return (
+    <div className="app__settings__summary">
+      <h3>Resumo do produto</h3>
+      {Object.keys(selection).map((option) => (
+        <div key={option}>
+          {Object.keys(selection).length > 1 && <span>{calculator[option].name}</span>}
+          {Object.keys(selection) > 1 && <b>{option}:</b>}
+          <ul>
+            {Object.keys(selection[option]).map((item) => (
+              <li key={item}>
+                  <span>{
+                    optionSectionInfo[option]
+                      .filter(obj => obj.key === item)
+                      .reduce((prevValue, currentValue) => currentValue.name, '')
+                  }</span>: {
+                calculator[option].options[item]
+                  .filter(obj => obj.id === selection[option][item])
+                  .reduce((prevValue, currentValue) => currentValue.name, '')
+              }
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      {!!matrix.selection.date && !!matrix.selection.quantity && <div className="atm-summary-warning">
+        <TruckIcon />Previsão de entrega: {selectedDate.format('DD/MM/YYYY')}
+      </div>}
+    </div>
+    );
+  }
 
   handleOptionSelection = (ev) => {
     const {
@@ -143,6 +188,7 @@ export class Config extends React.Component {
           isFulfilled,
         },
         calculator,
+        finalProduct,
       },
       productSettings,
       locale,
@@ -166,6 +212,7 @@ export class Config extends React.Component {
         selection={selection}
         screenSize={screenSize}
         calculator={calculator}
+        finalProduct={finalProduct}
         onSelect={this.handleOptionSelection}
       />
     );
@@ -224,6 +271,9 @@ export class Config extends React.Component {
 
   renderPage() {
     const {
+      app: {
+        screenSize,
+      },
       productSettings: {
         product,
         config: {
@@ -271,7 +321,19 @@ export class Config extends React.Component {
               </RoundedConfirmationButton>
             </div>
           </main>
-          <SummaryBlock selection={selection} optionSectionInfo={optionSectionInfo} calculator={calculator} />
+          <SideBar
+            screenSize={screenSize}
+            selection={selection}
+            optionSectionInfo={optionSectionInfo}
+            calculator={calculator}
+          >
+            {this.renderSummary()}
+            {!isMobile(screenSize) && <div className="app__config__submit-button">
+              <RoundedConfirmationButton>
+                CONTINUAR
+              </RoundedConfirmationButton>
+            </div>}
+          </SideBar>
         </div>
       </div>
     );

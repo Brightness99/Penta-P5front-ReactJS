@@ -24,6 +24,7 @@ type Props = {
   selection: {},
   onSelect: () => {},
   calculator: {},
+  finalProduct: {},
 };
 
 export default class OptionsBlock extends React.Component {
@@ -106,6 +107,41 @@ export default class OptionsBlock extends React.Component {
     );
   }
 
+  renderCustomQuantity(option) {
+    const { finalProduct } = this.props;
+
+    console.log(option);
+
+    switch (option) {
+      case 'format':
+        return this.renderCustomFormat();
+      default:
+        return null;
+    }
+  }
+
+  renderCustomFormat() {
+    const { viewType } = this.props;
+
+    const item = {
+      id: 'custom',
+      image_small: '/previews.php?img=fallback-image180x180-final.jpg&type=icon',
+      name: 'Personalizar',
+    };
+    return (
+      <ListItem
+        item={item}
+        viewType={viewType}
+        key={item.id}
+        optionKey={`${item.id}`}
+        checked={false}
+        onSelect={(ev) => console.log(ev)}
+        partId={'format'}
+        enableZoom={false}
+      />
+    );
+  }
+
   renderOption(optionsList) {
     const { viewType, selection, onSelect } = this.props;
 
@@ -133,8 +169,10 @@ export default class OptionsBlock extends React.Component {
                     onSelect={onSelect}
                     partId={optionsList.id}
                     onZoomClick={this.handleZoomClick}
+                    enableZoom={true}
                   />
                 ))}
+                {this.renderCustomQuantity(option.key)}
               </ul>
             </li>
           ))}
