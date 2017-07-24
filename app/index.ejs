@@ -14,13 +14,17 @@
   <% if (htmlWebpackPlugin.options.mobile) { %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
   <% } %>
-  <meta property="og:title" content="React-Redux-Observables Boilerplate" />
-  <meta property="og:url" content="http://react-redux-observables-boilerplate.gilbarbara.com/" />
-  <meta property="og:description" content="Provides: react ^15.x, react-router ^2.x, redux ^3.x, redux-observables ^0.12" />
-  <meta property="og:image" content="http://react-redux-observables-boilerplate.gilbarbara.com/media/og-image-v1.png" />
+  <meta name="copyright" content="Printi" />
+  <meta name="abstract" content="Gráfica Online | Impressão Digital e Offset | Printi" />
+  <meta name="description" content="A Printi é um modelo inovador de gráfica online com impressão digital e offset de alta qualidade a preços acessíveis.">
   <meta property="og:type" content="website" />
-  <% require('assets/media/images/og-image-v1.png') %>
-  <link rel="shortcut icon" href="<%- require('assets/media/favicon.ico') %>">
+  <meta property="og:title" content="Gráfica Online | Impressão Digital e Offset | Printi" />
+  <meta property="og:url" content="https://www.printi.com.br/" />
+  <meta property="og:site_name" content="Printi" />
+  <meta property="og:image" content="https://www.printi.com.br/assets/final/img/Printi-simbolo.png" />
+  <meta property="fb:admins" content="627008" />
+  <meta property="fb:page_id" content="312936488776247" />
+  <link rel="shortcut icon" href="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/favicon.ico">
 
   <% if (htmlWebpackPlugin.options.baseHref) { %>
   <base href="<%= htmlWebpackPlugin.options.baseHref %>" />
@@ -175,7 +179,6 @@
     a.src = g;
     m.parentNode.insertBefore(a, m)
   })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
 
   <% if (htmlWebpackPlugin.options.googleAnalytics.trackingId) { %>
   ga('create', '<%= htmlWebpackPlugin.options.googleAnalytics.trackingId %>', 'auto');

@@ -1,0 +1,20 @@
+.atm-button-rounded {
+  background-color: #dbdddf;
+  border: none;
+  border-radius: 0.3rem;
+  color: $color-white;
+  cursor: not-allowed;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xxxs;
+  font-weight: bold;
+  height: 4rem;
+  letter-spacing: 0.1rem;
+  margin-top: 3rem;
+  outline: none;
+  text-transform: uppercase;
+
+  &--enabled {
+    background-color: #36c265;
+    cursor: pointer;
+  }
+}

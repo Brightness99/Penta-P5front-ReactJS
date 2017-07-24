@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Logo from 'components/Logo';
-
+import { Link } from 'react-router-dom';
 import { CheckIcon, CloseIcon } from 'components/Icons';
 
 type Props = {
@@ -47,7 +47,7 @@ export default class BenefitsBlock extends React.Component {
             </p>
             {this.renderListAdvantages()}
             <div className="benefitsCard-btn">
-              <button className="btn-default btn-primary btn-lg">Configure este produto</button>
+              <Link to={{ pathname: `/configuracao-banner` }} className="btn-default btn-primary btn-lg">Configure este produto</Link>
             </div>
           </div>
           <div className="box-benefitsCard">

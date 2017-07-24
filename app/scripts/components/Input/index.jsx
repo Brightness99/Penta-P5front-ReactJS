@@ -1,4 +1,5 @@
 // @flow
 
-export RadioButton from './RadioButton';
+export CheckBox from './CheckBox';
 export MaskedInput from './MaskedInput';
+export RadioButton from './RadioButton';

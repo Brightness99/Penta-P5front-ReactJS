@@ -18,7 +18,9 @@ export const userState = {
     subscribed: false,
   },
   address: {
+    isZipcodeValid: false,
     zipcode: '',
+    zipcodeErrorMessage: '',
   },
   updatedAt: 0,
 };
@@ -70,8 +72,31 @@ export default {
       return {
         ...state,
         address: {
-          ...state.matrix,
+          ...state.address,
+          isZipcodeValid: true,
           zipcode: action.payload.zipcode,
+        },
+      };
+    },
+    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        address: {
+          ...state.address,
+          isZipcodeValid: false,
+          zipcode: action.payload.zipcode,
+          zipcodeErrorMessage: action.payload.message,
+        },
+      };
+    },
+    [SettingsConstants.SETTINGS_ZIPCODE_RESET](state) {
+      return {
+        ...state,
+        address: {
+          ...state.address,
+          isZipcodeValid: false,
+          zipcode: '',
+          zipcodeErrorMessage: '',
         },
       };
     },

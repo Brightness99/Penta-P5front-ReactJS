@@ -13,6 +13,7 @@
 ./flow-typed/
 
 [options]
+module.name_mapper='^atoms\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/atoms/\1'
 module.name_mapper='^actions\/\(.*\)$' -> '<PROJECT_ROOT>/app/scripts/actions/\1'
 module.name_mapper='^assets\/\(.*\)$' -> '<PROJECT_ROOT>/assets/\1'
 module.name_mapper='^config$' -> '<PROJECT_ROOT>/app/scripts/'

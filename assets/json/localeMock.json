@@ -211,23 +211,28 @@
         "creation": {
           "TITLE": "Escolher a forma de criar seu produto",
           "MORE_INFO_TEXT": "Nesta opção você pode encontrar três formas de criação e envio da sua arte. Elas podem mudar de acordo com o produto escolhido. Selecione a maneira como deseja criar seu material para que os próximos passos sejam disponibilizados.",
-          "art": {
+          "upload": {
             "TITLE": "Enviar minha arte final",
             "SUBTITLE": "Faça upload de um arquivo finalizado para a impressão nos formatos suportados"
           },
-          "online": {
+          "template": {
             "TITLE": "Criar modelo online",
             "SUBTITLE": "Escolha um design e inclua suas informações e imagens na nossa ferramenta de edição"
           },
-          "hire": {
+          "art_creation": {
             "TITLE": "Contratar criação",
             "SUBTITLE": "Contrate um profissional de design da Printi e tenha uma arte totalmente personalizada"
           }
         },
         "options": {
           "TITLE": "Selecione as opções",
-          "BUTTON_HELP": "Me ajude a configurar",
-          "MORE_INFO_TEXT": "Este passo a passo vai te ajudar com a montagem do seu produto. Crie a configuração ideal para a produção e impressão do seu material seguindo as indicações abaixo. Comece pelo formato, selecionando as medidas, em seguida o tipo de material ou tipo impressão e as opções extras disponíveis, como corte, acabamento e outros. Esses campos podem mudar de acordo com o produto escolhido."
+          "COMBINATIONS": "Me ajude a configurar",
+          "MORE_INFO_TEXT": "Este passo a passo vai te ajudar com a montagem do seu produto. Crie a configuração ideal para a produção e impressão do seu material seguindo as indicações abaixo. Comece pelo formato, selecionando as medidas, em seguida o tipo de material ou tipo impressão e as opções extras disponíveis, como corte, acabamento e outros. Esses campos podem mudar de acordo com o produto escolhido.",
+          "TWO_PART_PRODUCT": "Este produto tem duas partes",
+          "VIEW_MODE": "Modo de visualização",
+          "LIST": "Lista",
+          "PHOTOS": "Fotos",
+          "CUSTOM_OPTION": "Personalizar"
         },
         "matrix": {
           "TITLE": "Calcule o frete e a previsão de entrega",

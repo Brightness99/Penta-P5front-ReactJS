@@ -1,0 +1,107 @@
+.app__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+
+  &__container {
+    background-color: rgba($white, 0.2);
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    position: fixed;
+    transition: all 0.4s;
+    transition-delay: 0.1s;
+    will-change: left, right, top, height;
+    z-index: 5;
+
+    &--is-mounted {
+      background-color: $color-white;
+      height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+
+      @include md {
+        height: auto;
+        left: 50%;
+        margin: 0;
+        max-height: 80%;
+        max-width: 80%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: auto;
+      }
+    }
+
+    &__close {
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      @include md {
+        top: -4rem;
+      }
+
+      a {
+        @include center-child-flex();
+        color: $color-black;
+        font-size: $font-size-base;
+        height: 3rem;
+        pointer-events: all;
+        width: 3rem;
+
+        svg {
+          background-color: $color-white;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+
+        @include md {
+          left: auto;
+          right: 0;
+        }
+      }
+    }
+
+    &__content {
+      flex: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    &.has-title {
+      .app__modal__header {
+        border-bottom: 0.1rem solid #ccc;
+        height: 3rem;
+        margin-bottom: $grid-gutter-width / 3;
+
+        &__content {
+          background-color: rgba($white, 0.7);
+          padding: ($grid-gutter-width / 3) ($grid-gutter-width / 2);
+        }
+      }
+
+      .app__modal__content {
+        height: calc(100% - #{3rem + ($grid-gutter-width / 3)});
+      }
+    }
+
+    &--is-ready {
+      .app__modal__header__content {
+        top: 0;
+      }
+    }
+
+    .app__container {
+      padding-left: $grid-gutter-width / 2 !important;
+      padding-right: $grid-gutter-width / 2 !important;
+    }
+  }
+}

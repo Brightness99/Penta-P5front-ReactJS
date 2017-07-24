@@ -1,0 +1,45 @@
+.app__config__pre-press {
+  display: flex;
+  margin: 0;
+  padding-left: 0.5rem;
+  padding-bottom: 1rem;
+
+  li {
+    display: inline-flex;
+    position: relative;
+    svg {
+      height: 3.2rem;
+      position: relative;
+      width: 3.2rem;
+
+      path {
+        fill: $color-printi;
+        height: 100%;
+        transform: translate(0%, 100%) scale(1, -1);
+        width: 100%;
+      }
+    }
+
+    span {
+      align-items: center;
+      color: #006ee3;
+      display: block;
+      font-family: $font-family-open-sans-bold;
+      font-size: 11px;
+      height: 100%;
+      line-height: 2.3;
+      position: absolute;
+      text-align: center;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  .atm-prepress-item {
+    cursor: pointer;
+  }
+}
+
+.app__pre-press__download {
+  display: none;
+}

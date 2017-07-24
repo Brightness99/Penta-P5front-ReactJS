@@ -1,0 +1,36 @@
+@import "shipping_table";
+
+.app__config__matrix {
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+
+  ul {
+    list-style: none;
+  }
+
+  .app__config__warning{
+    margin-top: $grid-gutter-width / 2;
+  }
+
+  .atm-button-transparent {
+    align-items: center;
+    align-self: center;
+    display: flex;
+    height: 4rem;
+    justify-content: space-around;
+    margin-top: 3rem;
+    width: 24rem;
+
+    svg {
+      fill: currentColor;
+      height: 2rem;
+      width: 2rem;
+    }
+
+    span {
+      padding-left: 0.5rem;
+    }
+  }
+}

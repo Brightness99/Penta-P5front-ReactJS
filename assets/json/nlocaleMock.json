@@ -1,0 +1,450 @@
+{
+  "common": {
+    "WARNING": "Atenção",
+    "OOPS": "Ops!",
+    "PROMPT_YES": "Sim",
+    "PROMPT_NO": "Não",
+    "MORE_INFO": "Mais informações",
+    "EDIT": "Editar",
+    "OR": "Ou",
+    "VIEW_MORE": "Ver mais..."
+  },
+  "locale_select_modal": {
+    "TITLE": "Confirme sua localização",
+    "DESCRIPTION": "Você acessou <strong>%s</strong>, mas notamos que você está no <strong>%s</strong>. Por favor, escolha se quer permanecer em <strong>%s</strong> or ir para <strong>%s</strong>"
+  },
+  "header": {
+    "MENU": "Menu",
+    "PRODUCTS": "Produtos",
+    "SEARCH_PLACEHOLDER": "Procure por produtos ou informações",
+    "GREETING": "Olá",
+    "HELP_CENTER": "Central de ajuda",
+    "MY_ACCOUNT": "Minha conta",
+    "LOGOUT": "Sair",
+    "SIGN_IN": "Entrar",
+    "SIGN_UP": "Cadastrar"
+  },
+  "footer": {
+    "RIGHTS_RESERVED": "Todos os direitos reservados",
+    "SOCIAL": "Nossas redes sociais",
+    "VIEW_ALL_LINKS": "Ver todos os links",
+    "SUPPORT": "Apoio",
+    "PAYMENT_METHODS": "Formas de pagamento",
+    "COMPANY_INFO": "FM Impressos Personalizados Ltda. - CNPJ 13.555.994/0001-54",
+    "security": {
+      "SAFE_SITE": "Site Seguro",
+      "CERTISIGN_MSG": "Um site validado pela Certisign indica que nossa empresa concluiu satisfatoriamente todos os procedimentos para determinar que o domínio validado é de propriedade ou se encontra registrado por uma empresa ou organização autorizada a negociar por ela ou exercer qualquer atividade lícita em seu nome."
+    }
+  },
+  "form": {
+    "common": {
+      "CANCEL": "Cancelar",
+      "EDIT": "Editar",
+      "REMOVE": "Excluir"
+    },
+    "address": {
+      "ADDRESS": "Endereço",
+      "RECEIVER_NAME": "Nome",
+      "ZIPCODE": "CEP",
+      "ZIPCODE_HELPER": "Não sei meu CEP",
+      "STREET_ADDRESS": "Endereço",
+      "NUMBER": "Número",
+      "ADDITIONAL_ADDRESS": "Complemento",
+      "NEIGHBORHOOD": "Bairro",
+      "CITY": "Cidade",
+      "STATE": "Estado",
+      "CITY_STATE": "Cidade/UF",
+      "SAVE": "Save address"
+    },
+    "customer": {
+      "EMAIL": "E-mail",
+      "EMAIL_CONFIRM": "Confirmar e-mail",
+      "PASSWORD": "Password",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "FULL_NAME": "Full Name",
+      "GENDER": "Gender",
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "PHONE": "Phone",
+      "SAVE": "Save customer"
+    },
+    "payment": {
+      "CREDIT_CARD": "Cartão de crédito",
+      "BOLETO": "Boleto bancário",
+      "FATURA": "Fatura",
+      "PAY_WITH_SAVED_CARD": "Pagar com um cartão salvo",
+      "USE_SAVED_CARD": "Usar cartão salvo",
+      "USE_ANOTHER_CARD": "Usar outro cartão",
+      "SAVE_CARD": "Salvar cartão",
+      "SAVED_CARD_MSG": "Em sua próxima compra na Printi, você poderá utilizar este mesmo cartão de crédito sem a necessidade de inserir as informações novamente. A Printi garante a segurança: seu cartão será salvo criptografado e somente você poderá realizar compras com ele.",
+      "CARD_NUMBER": "Nº do cartão",
+      "HOLDER_NAME": "Nome",
+      "EXP_MONTH": "Mês",
+      "EXP_YEAR": "Ano",
+      "CVC": "Cód.CVV",
+      "SECURE_PURCHASE": "Compra 100% segura",
+      "INVALID_VOUCHER_MSG": "Seu cupom de desconto não é válido. Se desejar, retorne ao carrinho e tente inserir novamente."
+    }
+  },
+  "page": {
+    "login": {
+      "TITLE": "Login",
+      "SIGN_IN_WITH": "Acesse com: ",
+      "HAVE_AN_ACCOUNT": "Já sou cadastrado",
+      "NEW_CUSTOMER": "Sou novo cliente",
+      "SIGN_IN": "Entrar",
+      "SIGN_UP": "Cadastrar",
+      "STAY_CONNECTED": "Permanecer conectado",
+      "FORGOT_PASSWORD": "Esqueci minha senha",
+      "VIEW_PASSWORD": "Visualizar senha",
+      "HIDE_PASSWORD": "Esconder senha",
+      "NEWSLETTER_REGISTER": "Quero receber ofertas exclusivas e novidades por e-mail"
+    },
+    "home": {
+      "carousel": {
+        "STARTING_FROM": "A partir de"
+      },
+      "highlights": {
+        "TITLE": "Destaques",
+        "list": [
+          {
+            "TITLE": "SAIBA COMO PAGAR FATURADO",
+            "TEXT": "Conte com os benefícios e facilidades do pagamento faturado. Veja como solicitar o seu."
+          }
+        ]
+      },
+      "clients": {
+        "TITLE": "MAIS DE 50 MIL CLIENTES CONFIAM NA PRINTI"
+      },
+      "testimonials": [
+        {
+          "TEXT": "O atendimento personalizado e a atenção especial que a gráfica online oferece transformou a Printi não apenas em fornecedores, mas em grandes parceiros para o nosso negócio.",
+          "NAME": "Adriano Alcalde",
+          "WORK_TITLE": "CFO - Netshoes",
+          "IMAGE": "/final/img/cliente-2.jpg"
+        },
+        {
+          "TEXT": "A parceria com a Printi é importante para nós que precisamos de soluções para impressão em offset. Isto só foi possível pelo alto grau de responsabilidade e competência que nos foi oferecido.",
+          "NAME": "Marcelo Froes",
+          "WORK_TITLE": "Comprador Pleno - Certisign",
+          "IMAGE": "/final/img/cliente-1.jpg"
+        },
+        {
+          "TEXT": "A Printi nos permitiu economizar entre 15 e 20% de nossos custos de impressão offset, além da economia de tempo. Do ponto de vista financeiro, vale a pena ser cliente da Printi.",
+          "NAME": "Florian Otto",
+          "WORK_TITLE": "Sócio-Diretor - Groupon",
+          "IMAGE": "/final/img/cliente-3.jpg"
+        }
+      ]
+    },
+    "product_landing_page": {
+      "common": {
+        "CONFIGURE_PRODUCT": "CONFIGURE AQUI"
+      },
+      "description": {
+        "STARTING_FROM": "A partir de",
+        "NEXT_PAGE": "Na próxima tela você pode configurar as especificações do seu produto e conferir o preço"
+      },
+      "advantages": {
+        "TITLE": "VANTAGENS",
+        "OTHER_ONLINE_PRINTING_COMPANIES": "OUTRAS GRÁFICAS ONLINE",
+        "TRADITIONAL_PRINTING_COMPANIES": "GRÁFICAS TRADICIONAIS",
+        "LIST": [
+          "Pedidos 24h e Orçamento online",
+          "Entrega no mesmo dia*",
+          "Download de Gabaritos Grátis",
+          "Impressão de Baixa e Alta tiragem",
+          "Escolha do dia de recebimento",
+          "Atendimento especializado",
+          "Qualidade offset a preços baixos",
+          "Parque Gráfico próprio"
+        ],
+        "CHECK_AVAILABLE_PRODUCTS": "* Consulte os produtos disponíveis"
+      },
+      "graphic_plant": {
+        "OVER_TITLE": "Parque gráfico",
+        "TITLE": "Nossa gráfica produz impressão offset de alta qualidade!",
+        "PARAGRAPH": "Produzimos altas tiragens e grandes formatos com os preços mais baixos do mercado. Veja nosso parque gráfico ao lado com seus próprios olhos.",
+        "LIST": [
+          "• Maquinário avançado;",
+          "• Impressão offset e digital;",
+          "• Grandes formatos;",
+          "• Altas tiragens;",
+          "• Variedade de acabamentos."
+        ]
+      },
+      "print": {
+        "TITLE": "Imprima já o seu %s pelo melhor preço",
+        "QUESTIONS": "Ainda tem dúvidas? Ligue já (11) 4130-3799"
+      }
+    },
+    "product_settings": {
+      "seo": {
+        "PAGE_TITLE": "Configurar %s | Printi",
+        "META_DESCRIPTION": "Configure seu produto %s. Selecione suas configurações, a quantidade e data que deseja receber seu produto."
+      },
+      "BREADCRUMB_TITLE": "Configure",
+      "TITLE": "Configure seu produto",
+      "ADD_TO_CART": "Ccontinuar",
+      "options": {
+        "TITLE": "Selecione as opções",
+        "COMBINATIONS": "Me ajude a configurar",
+        "MORE_INFO_TEXT": "Este passo a passo vai te ajudar com a montagem do seu produto. Crie a configuração ideal para a produção e impressão do seu material seguindo as indicações abaixo. Comece pelo formato, selecionando as medidas, em seguida o tipo de material ou tipo impressão e as opções extras disponíveis, como corte, acabamento e outros. Esses campos podem mudar de acordo com o produto escolhido.",
+        "TWO_PART_PRODUCT": "Este produto tem duas partes",
+        "VIEW_MODE": "Modo de visualização",
+        "LIST": "Lista",
+        "PHOTOS": "Fotos",
+        "CUSTOM_OPTION": "Personalizar"
+      },
+      "matrix": {
+        "TITLE": "Calcule o frete e a previsão de entrega",
+        "MORE_INFO_TEXT": "Nesta área você deverá selecionar a quantidade que deseja produzir. Escolha a data limite que deseja receber o material e veja o valor da sua compra com frete ou com frete grátis.",
+        "QTY_DATE_PRICE": "Quantidade, previsão de entrega e valores",
+        "FREE": "Grátis",
+        "SHIPPING": "Frete",
+        "QUANTITY": "Quantidade",
+        "BUSINESS_DAYS": "Dias úteis",
+        "CUSTOM_QUANTITY": "Adicionar outra quantidade"
+      },
+      "additional_options": {
+        "TITLE": "Configurações Adicionais",
+        "MORE_INFO_TEXT": "Escolha o formato do arquivo entre aberto ou fechado. Em seguida, selecione por qual tipo de checagem quer que o seu arquivo passe: padrão ou profissional. A checagem serve para avaliar se o seu material está dentro dos parâmetros ideais para impressão. Não haverá revisões de texto ou conteúdo do seu produto. Dica: arquivos PDF ou fechados para impressão chegam mais rápido à produção.",
+        "FREE": "GRÁTIS"
+      },
+      "sidebar": {
+        "TITLE": "Resumo",
+        "ESTIMATED_DELIVERY": "Previsão de entrega",
+        "QUANTITY": "Quantidade"
+      },
+      "prepress_template": {
+        "TITLE": "Saiba como montar seu arquivo",
+        "SUB_TITLE": "Baixe o Gabarito e a Instrução",
+        "ORIENTATION_CHOICE": "Escolha a orientação",
+        "orientation": {
+          "UNIQUE": "Única",
+          "LANDSCAPE": "Paisagem",
+          "PORTRAIT": "Retrato"
+        },
+        "SOFTWARE_CHOICE": "Escolha o software"
+      }
+    },
+    "cart": {
+      "seo": {
+        "PAGE_TITLE": "Meu Carrinho | Printi",
+        "META_DESCRIPTION": "Meu Carrinho - Printi"
+      },
+      "TITLE": "Seu carrinho",
+      "GO_TO_HOMEPAGE": "Voltar para a home",
+      "EMPTY_CART": "Seu carrinho está vazio!",
+      "PROCEED_TO_CHECKOUT": "Continuar",
+      "KEEP_BUYING": "Continuar comprando",
+      "product_list": {
+        "PRODUCT": "Produto",
+        "ESTIMATED_DELIVERY": "Previsão de entrega",
+        "AFTER_ART_APPROVAL": "Após aprovação da arte final",
+        "QUANTITY": "Quantidade",
+        "PRICE": "Valor",
+        "actions": {
+          "DUPLICATE": "Duplicar",
+          "EDIT": "Editar",
+          "EDIT_TEMPLATE": "Editar modelo",
+          "CHOOSE_TEMPLATE": "Escolher modelo",
+          "CHANGE_TEMPLATE": "Trocar modelo",
+          "CHOOSE_CHILI_TEMPLATE": "Escolher arte",
+          "CHANGE_CHILI_TEMPLATE": "Trocar arte",
+          "REMOVE": "Excluir"
+        }
+      },
+      "voucher": {
+        "TITLE": "Cupom de desconto",
+        "PLACEHOLDER": "Adicionar código",
+        "VALIDATE": "Validar",
+        "REMOVE": "Remover"
+      },
+      "values": {
+        "TOTAL": "Total",
+        "DISCOUNT": "Desconto",
+        "SUBTOTAL": "Subtotal"
+      },
+      "sidebar": {
+        "TITLE": "Resumo",
+        "TOTAL": "Total"
+      }
+    },
+    "checkout": {
+      "TITLE": "Finalizar compra",
+      "sidebar": {
+        "TITLE": "Resumo",
+        "SUBTOTAL": "Subtotal",
+        "TOTAL": "Total",
+        "PRODUCTS": "Produtos",
+        "DISCOUNT": "Desconto",
+        "VIEW_ALL_PRODUCTS": "Ver todos os produtos",
+        "ITEMS": "Itens"
+      },
+      "all_items_modal": {
+        "TITLE": "Todos os produtos",
+        "QUANTITY": "Quantidade",
+        "ESTIMATED_DELIVERY": "Previsão de entrega",
+        "BUSINESS_DAYS": "Dias úteis",
+        "AFTER_ART_APPROVAL": "Após aprovação da arte final",
+        "TOTAL": "Total",
+        "ADDITIONAL_OPTIONS": "Configurações adicionais"
+      },
+      "customer_data": {
+        "TITLE": "Dados",
+        "DESCRIPTION": "Complete seus dados para seguir em frente. Esses dados serão solicitados apenas uma vez. Suas próximas compras serão muito mais rápidas e fáceis."
+      },
+      "address_data": {
+        "TITLE": "Selecione o Endereço",
+        "SHIPPING": "Entrega",
+        "BILLING": "Cobrança",
+        "USE_SAME_AS_SHIPPING": "Endereço de cobrança igual ao de entrega",
+        "CONFIRM_ADDRESSES": "Confirmar endereço",
+        "NEW_ADDRESS": "Novo endereço",
+        "USE_ADDRESS": "Usar este endereço",
+        "VIEW_ALL_SHIPPING": "Ver todos os endereços de entrega",
+        "VIEW_ALL_BILLING": "Ver todos os endereços de cobrança"
+      },
+      "payment": {
+        "TITLE": "Selecione a forma de pagamento",
+        "PLACE_ORDER": "Finalizar compra"
+      }
+    },
+    "upload": {
+      "seo": {
+        "PAGE_TITLE": "Faça o upload de seu impresso | Gráfica Online | Printi",
+        "META_DESCRIPTION": "Faça o upload de seu arquivo, aberto ou fechado e imprima na melhor gráfica online do Brasil."
+      },
+      "TITLE": "Envie sua arte final",
+      "BREADCRUMB_TITLE": "Enviar arte",
+      "sidebar": {
+        "TITLE": "Resumo do seu pedido",
+        "ESTIMATED_DELIVERY": "Previsão de entrega"
+      },
+      "box_strategy": {
+        "TITLE": "Quando você quer enviar a sua arte?",
+        "MORE_INFO_TEXT": "Nesta opção você pode encontrar três formas de criação e envio da sua arte. Elas podem mudar de acordo com o produto escolhido. Selecione a maneira como deseja criar seu material para que os próximos passos sejam disponibilizados.",
+        "CHANGE_STRATEGY": "Alterar a forma de enviar a arte",
+        "send_later": {
+          "TITLE": "Enviar mais tarde",
+          "DESCRIPTION": "Você pode concluir seu pedido e enviar a arte mais tarde."
+        },
+        "send_one_file": {
+          "TITLE": "Enviar agora sua arte em um arquivo",
+          "DESCRIPTION": "Enviar a sua arte em um único arquivo"
+        },
+        "send_two_files": {
+          "TITLE": "Enviiar agora sua arte em dois arquivos",
+          "DESCRIPTION": "Enviar a sua arte em mais de um arquivo"
+        },
+        "send_multiple_files": {
+          "TITLE": "Enviar agora sua arte em múltiplos arquivos",
+          "DESCRIPTION": "Enviar a sua arte em mais de um arquivo."
+        }
+      },
+      "box_upload": {
+        "TITLE": "Selecione seu arquivo",
+        "MORE_INFO_TEXT": "Nesta opção você pode encontrar três formas de criação e envio da sua arte. Elas podem mudar de acordo com o produto escolhido. Selecione a maneira como deseja criar seu material para que os próximos passos sejam disponibilizados.",
+        "CHOOSE_FILE": "Procurar arquivo",
+        "PREVIEW_UPLOAD": "Visualizar",
+        "ADD_ANOTHER_FILE": "Clique aqui para adicionar outro arquivo",
+        "ADD_ANOTHER_FILE_MSG": [
+          "(Somente se precisar enviar o arquivo de Verso e/ou Máscara UV.",
+          "Desconsidere se o Verso e/ou Máscara UV já estiverem no arquivo previamente enviado.)"
+        ],
+        "SEND_FILES": "Enviar arte final",
+        "SEND_LATER": "Enviar mais tarde",
+        "UPLOAD_MISSING": "É necessário fazer o upload de um arquivo para poder enviar sua arte final",
+        "TERMS_MISSING": "É necessário aceitar os termos citados acima para continuar.",
+        "UPLOAD_TERMS": "Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer outro ajuste.",
+        "SEND_TO_PRODUCTION_WARNING": "Para enviar o arquivo para produção, aceite os termos e clique no botão \"Enviar arte final\"."
+      }
+    }
+  },
+  "account": {
+    "TITLE": "Minha Conta",
+    "GREETING": "Olá, ",
+    "LOGOUT": "Sair",
+    "my_orders": {
+      "TITLE": "Meus Pedidos",
+      "SUB_TITLE": "Acompanhe os status dos seus pedidos",
+      "NO_ORDERS": "Você ainda não tem pedidos! :(",
+      "ticket": {
+        "ORDER": "Pedido",
+        "ORDER_NUMBER": "Nº ",
+        "ORDER_ITEMS": "Itens do pedido",
+        "PRODUCT": "produto",
+        "PRODUCTS": "produtos",
+        "ORDER_TOTAL": "Valor total",
+        "ORDER_DATE": "Pedido feito em",
+        "ORDER_STATUS": "Status",
+        "VIEW_DETAILS": "Ver detalhes"
+      },
+      "order_details": {
+        "ORDER": "Pedido",
+        "ORDER_NUMBER": "Nº ",
+        "ORDER_ITEMS": "Itens do pedido",
+        "PRODUCT": "produto",
+        "PRODUCTS": "produtos",
+        "ORDER_TOTAL": "Valor total",
+        "ORDER_DATE": "Pedido feito em",
+        "ORDER_STATUS": "Status",
+        "DISCOUNT": "Desconto",
+        "actions": {
+          "TITLE": "Ações",
+          "PRINT_BOLETO": "Imprimir boleto",
+          "GENERATE_NEW_BOLETO": "Gerar novo boleto",
+          "CHECK_INVOICE": "Ver NFe",
+          "CHANGE_DELIVERY_ADDRESS": "Mudar endereço"
+        },
+        "payment_data": {
+          "TITLE": "Pagamento",
+          "PAYMENT_METHOD": "Método de pagamento",
+          "PAYMENT_METHOD_CHANGE": "Mudar método de pagamento",
+          "ORDER_PAID": "Pago"
+        },
+        "delivery_data": {
+          "TITLE": "Entrega"
+        },
+        "item_details": {
+          "headers": {
+            "FILE": "Arquivo",
+            "DESCRIPTION": "Descrição",
+            "DATES": "Datas",
+            "ACTIONS": "Ações"
+          },
+          "UNIT": "unid.",
+          "ITEM_STATUS": "Status do item",
+          "ESTIMATED_DELIVERY": "Previsão de entrega",
+          "AFTER_ART_APPROVAL": "Após aprovação da arte final",
+          "UPLOAD_DUE_DATE": "Prazo de upload da arte",
+          "SEND_FILE": "Enviar arquivo",
+          "CHANGE_FILE": "Alterar arquivo",
+          "ALREADY_IN_PRODUCTION": "Este item já está em produção!",
+          "TRACKING": "Rastreio",
+          "ADDITIONAL_COST": "Custo adicional",
+          "FILE_CREATED_BY_DESIGNER": "O arquivo será criato pelo designer",
+          "SEND_BRIEFING": "Enviar briefing",
+          "VIEW_BRIEFING": "Ver briefing enviado",
+          "VIEW_ART_CREATION_PROPOSALS": "Ver propostas de arte"
+        },
+        "warning": {
+          "WAITING_UPLOAD": "Você ainda não enviou o arquivo de alguns itens. A previsão de entrega está sujeita a alteração caso o arquivo não seja enviado dentro do prazo de upload",
+          "WAITING_PAYMENT": "Você ainda não efetuou o pagamento do boleto! Isso pode alterar o prazo de entrega do seu pedido! (Desconsidere essa mensagem se o pagamento já foi realizado. A compensação pode demorar até 2 dias úteis)."
+        }
+      }
+    },
+    "my_addresses": {
+      "TITLE": "Meus Endereços",
+      "SHIPPING_ADDRESSES": "Endereços de entrega",
+      "BILLING_ADDRESSES": "Endereços de cobrança",
+      "NEW_SHIPPING_ADDRESS": "Novo endereço de entrega",
+      "NEW_BILLING_ADDRESS": "Novo endereço de cobrança"
+    },
+    "my_register_data": {
+      "TITLE": "Meus dados"
+    }
+  }
+}

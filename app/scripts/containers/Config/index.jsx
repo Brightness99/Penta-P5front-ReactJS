@@ -2,15 +2,22 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
-import { settingsFetch, settingsSourceFetch, settingsOptionsFetch } from 'actions';
+import { settingsFetch, settingsOptionsFetch } from 'actions';
+import { isMobile } from 'utils/helpers';
 import { settingsSelector } from 'selectors';
 
+import { PageTitle } from 'atoms/Titles';
+import { RoundedConfirmationButton } from 'atoms/Buttons';
+import Breadcrumbs from 'components/Breadcrumbs';
 import Loading from 'components/Loading';
-import SummaryBlock from './Summary';
-import SourcesBlock from './SourcesBlock';
+import SideBar from 'organisms/SideBar';
+import { TruckIcon } from 'components/Icons';
+import SourcesBlock from './Sources';
 import OptionsBlock from './Options';
 import MatrixBlock from './Matrix';
+import Warning from './Warning';
 
 type Props = {
   app: AppStore,
@@ -21,6 +28,7 @@ type Props = {
   router: RouterStore,
   match: {},
   options: {},
+  user: {},
 };
 
 export class Config extends React.Component {
@@ -44,12 +52,47 @@ export class Config extends React.Component {
 
   static props: Props;
 
-  handleSourceSelection = (ev) => {
-    const { productSettings: { finalProduct: { id }, settings: { selectedSource } }, dispatch } = this.props;
-    if (ev.target.value !== selectedSource) {
-      dispatch(settingsSourceFetch(id, ev.target.value));
+  renderSummary() {
+    const { productSettings: { selection, optionSectionInfo, calculator, matrix } } = this.props;
+
+    let selectedDate = '';
+
+    if (matrix.selection.date !== 0) {
+      selectedDate = moment(new Date(matrix.selection.date * 1000));
     }
-  };
+
+    console.log(selectedDate);
+
+    return (
+    <div className="app__settings__summary">
+      <h3>Resumo do produto</h3>
+      {Object.keys(selection).map((option) => (
+        <div key={option}>
+          {Object.keys(selection).length > 1 && <span>{calculator[option].name}</span>}
+          {Object.keys(selection) > 1 && <b>{option}:</b>}
+          <ul>
+            {Object.keys(selection[option]).map((item) => (
+              <li key={item}>
+                  <span>{
+                    optionSectionInfo[option]
+                      .filter(obj => obj.key === item)
+                      .reduce((prevValue, currentValue) => currentValue.name, '')
+                  }</span>: {
+                calculator[option].options[item]
+                  .filter(obj => obj.id === selection[option][item])
+                  .reduce((prevValue, currentValue) => currentValue.name, '')
+              }
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      {!!matrix.selection.date && !!matrix.selection.quantity && <div className="atm-summary-warning">
+        <TruckIcon />Previsão de entrega: {selectedDate.format('DD/MM/YYYY')}
+      </div>}
+    </div>
+    );
+  }
 
   handleOptionSelection = (ev) => {
     const {
@@ -97,8 +140,12 @@ export class Config extends React.Component {
         screenSize,
       },
       productSettings: {
-        source: {
-          selectedSource,
+        source,
+        finalProduct: {
+          id,
+        },
+        config: {
+          isFulfilled,
         },
       },
       locale,
@@ -112,9 +159,10 @@ export class Config extends React.Component {
         locale={configLocale.creation}
         screenSize={screenSize}
         order="1"
+        isComplete={isFulfilled.source}
+        finalProductId={id}
         dispatch={dispatch}
-        handleSourceSelection={this.handleSourceSelection}
-        selectedSource={selectedSource}
+        source={source}
       />
     );
   }
@@ -125,6 +173,7 @@ export class Config extends React.Component {
         config: {
           viewType,
         },
+        screenSize,
       },
       productSettings: {
         selection,
@@ -132,6 +181,14 @@ export class Config extends React.Component {
           isRunning,
           isLoaded,
         },
+        settings: {
+          showSteps,
+        },
+        config: {
+          isFulfilled,
+        },
+        calculator,
+        finalProduct,
       },
       productSettings,
       locale,
@@ -143,14 +200,19 @@ export class Config extends React.Component {
     if (isRunning || !isLoaded) {
       return (<Loading />);
     }
+
     return (
       <OptionsBlock
         dispatch={dispatch}
         viewType={viewType}
         locale={configLocale}
-        order="2"
+        order={showSteps.source ? 2 : 1}
+        isComplete={isFulfilled.options}
         options={{ ...productSettings.options, ...options }}
         selection={selection}
+        screenSize={screenSize}
+        calculator={calculator}
+        finalProduct={finalProduct}
         onSelect={this.handleOptionSelection}
       />
     );
@@ -162,28 +224,56 @@ export class Config extends React.Component {
         source: {
           selectedSource,
         },
+        config: {
+          isFulfilled,
+        },
+        matrix,
         selection,
+        templates,
+        product,
+        finalProduct: {
+          custom_qty
+        },
+        settings: {
+          showSteps,
+        },
       },
       dispatch,
       locale,
+      app: {
+        screenSize,
+      },
+      user,
     } = this.props;
 
     const configLocale = locale.translate.page.product_settings.matrix;
 
+    const order = Object.keys(showSteps).filter((obj) => obj !== 'matrix' && obj !== 'additional_options').length;
+
     return (
       <MatrixBlock
-        order="3"
+        order={order + 1}
+        isComplete={isFulfilled.matrix}
         locale={configLocale}
         className="app__config__matrix"
         dispatch={dispatch}
         selection={selection}
         selectedSource={selectedSource}
+        screenSize={screenSize}
+        matrix={matrix}
+        templates={templates}
+        product={product}
+        user={user}
+        isCustomEnabled={custom_qty === '1'}
       />
     );
   }
 
   renderPage() {
     const {
+      app: {
+        screenSize,
+      },
       productSettings: {
         product,
         config: {
@@ -191,18 +281,60 @@ export class Config extends React.Component {
           isFulfilled,
         },
         selection,
+        templates,
+        optionSectionInfo,
+        calculator,
       },
+      dispatch,
       locale,
     } = this.props;
 
     const configLocale = locale.translate.page.product_settings;
+
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: product.title,
+        url: `/produto-${product.slug}`,
+      },
+      {
+        title: 'Configure',
+      },
+    ];
+
     return (
       <div className="app__config container">
-        <h2>{`${configLocale.TITLE}: ${product.title}`}</h2>
-        {showSteps.source && this.renderSourceBlock()}
-        {showSteps.options && isFulfilled.source && this.renderOptionsBlock()}
-        {showSteps.matrix && isFulfilled.options && this.renderMatrixBlock()}
-        <SummaryBlock selection={selection} />
+        <Breadcrumbs links={breadcrumb} />
+        <PageTitle>{`${configLocale.TITLE}: ${product.title}`}</PageTitle>
+        <div className="app__config__content">
+          <main>
+            {showSteps.source && this.renderSourceBlock()}
+            {showSteps.options && isFulfilled.source && this.renderOptionsBlock()}
+            {showSteps.matrix && isFulfilled.options && this.renderMatrixBlock()}
+            <Warning templates={templates} dispatch={dispatch} product={product} />
+            <div className="app__config__submit-button">
+              <RoundedConfirmationButton>
+                CONTINUAR
+              </RoundedConfirmationButton>
+            </div>
+          </main>
+          <SideBar
+            screenSize={screenSize}
+            selection={selection}
+            optionSectionInfo={optionSectionInfo}
+            calculator={calculator}
+          >
+            {this.renderSummary()}
+            {!isMobile(screenSize) && <div className="app__config__submit-button">
+              <RoundedConfirmationButton>
+                CONTINUAR
+              </RoundedConfirmationButton>
+            </div>}
+          </SideBar>
+        </div>
       </div>
     );
   }
