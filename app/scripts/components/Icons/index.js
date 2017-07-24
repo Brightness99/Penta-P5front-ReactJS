@@ -1,5 +1,8 @@
 // @flow
 
+export ArrowCarousel from './ArrowCarousel';
+export CloseIcon from './CloseIcon';
+export HourglassIcon from './Hourglass';
 export BulletListIcon from './BulletList';
 export CalendarIcon from './Calendar';
 export CheckIcon from './Check';
@@ -14,9 +17,8 @@ export RefreshIcon from './Refresh';
 export SearchPlusIcon from './SearchPlus';
 export TimesIcon from './Times';
 export TimesCircleIcon from './TimesCircle';
+export TruckIcon from './Truck';
 export SettingsArtCreationIcon from './SettingsArtCreation';
 export SettingsTweakIcon from './SettingsTweak';
 export SettingsUploadIcon from './SettingsUpload';
 export StarIcon from './Star';
-export ArrowCarousel from './ArrowCarousel';
-export CloseIcon from './CloseIcon';

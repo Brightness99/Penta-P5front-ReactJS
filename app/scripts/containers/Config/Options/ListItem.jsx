@@ -18,6 +18,7 @@ type Props = {
   partId: string,
   onSelect: () => {},
   onZoomClick: () => {},
+  enableZoom: boolean,
 };
 
 const ListItem = (props: Props) => {
@@ -31,7 +32,7 @@ const ListItem = (props: Props) => {
 
   return (
     <li>
-      {props.viewType === 'photos' && <button
+      {props.viewType === 'photos' && props.enableZoom && <button
         onClick={handleClick}
         name={props.optionKey}
         value={props.item.id}

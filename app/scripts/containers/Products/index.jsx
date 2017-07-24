@@ -26,6 +26,7 @@ type Props = {
   match: {},
   products: {},
   dispatch: () => {},
+  blog: {},
 };
 
 export class Products extends React.Component {
@@ -71,6 +72,7 @@ export class Products extends React.Component {
   renderDesktop = () => {
     const { products: { product, warrantInformation, settingsPageLink, informations, categories, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
     const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
+    const { blog } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
@@ -89,7 +91,7 @@ export class Products extends React.Component {
             <BenefitsBlock screenSize={screenSize} advantages={advantages} />
             <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
             <CustomersRelyBlock screenSize={screenSize} clients={clients} testimonials={testimonials} />
-            <BlogBlock />
+            <BlogBlock blog={blog} />
             <OpinionsBlock screenSize={screenSize} opinions={opinions} />
             <DetailsProductBlock product={product} screenSize={screenSize} />
             <PrintProductBlock product={product} print={print} screenSize={screenSize} />
@@ -101,7 +103,7 @@ export class Products extends React.Component {
 
   render() {
     //const { app: { screenSize } } = this.props;
-    const { products: { product, warrantInformation, informations, categories, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { products: { isRunning, isLoaded }, app: { screenSize } } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;

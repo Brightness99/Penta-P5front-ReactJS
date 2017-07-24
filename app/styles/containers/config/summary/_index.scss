@@ -1,43 +1,51 @@
-.app__settings__summary {
-  background-color: $color-white;
-  box-shadow: 1rem 1rem 3rem -0.5rem rgba(0,0,0,0.3);
-  padding: 2rem;
-  right: 0;
-  top: 0;
-  width: 100%;
-
-  h3 {
-    color: #151617;
-    font-family: $font-family-nunito-regular;
-    font-size: $font-size-lg;
-    font-weight: normal;
-    line-height: 1.67;
+.org-sidebar {
+  .org-sidebar-mobile {
+    .app__settings__summary {
+      border-radius: 0.3rem;
+      min-height: 20rem;
+    }
   }
+  .app__settings__summary {
+    background-color: $color-white;
+    box-shadow: 1rem 1rem 3rem -0.5rem rgba(0,0,0,0.3);
+    padding: 2rem;
+    right: 0;
+    top: 0;
+    width: 100%;
 
-  div {
-    > span {
-      font-size: $font-size-ix;
-      font-weight: bold;
+    h3 {
+      color: #151617;
+      font-family: $font-family-nunito-regular;
+      font-size: $font-size-lg;
+      font-weight: normal;
+      line-height: 1.67;
     }
 
-    li {
-      color: #6a6f7a;
-      font-family: $font-family-open-sans;
-      font-size: $font-size-xs;
-      line-height: 1.67;
+    div {
+      > span {
+        font-size: $font-size-ix;
+        font-weight: bold;
+      }
 
-      span {
-        color: #151617;
+      li {
+        color: #6a6f7a;
+        font-family: $font-family-open-sans;
+        font-size: $font-size-xs;
+        line-height: 1.67;
+
+        span {
+          color: #151617;
+        }
       }
     }
   }
-}
 
-.app__config__submit-button {
-  width: 100%;
+  .app__config__submit-button {
+    width: 100%;
 
-  .atm-button-rounded {
-    min-width: 100%;
-    max-width: 100%;
+    .atm-button-rounded {
+      min-width: 100%;
+      max-width: 100%;
+    }
   }
 }
