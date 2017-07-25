@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
+import Blog from 'containers/Blog/Blog';
 import Loading from 'components/Loading';
 
 import ProductBlock from './ProductBlock';
@@ -17,7 +18,6 @@ import CustomersRelyBlock from './CustomersRelyBlock';
 import OpinionsBlock from './OpinionsBlock';
 import DetailsProductBlock from './DetailsProductBlock';
 import PrintProductBlock from './PrintProductBlock';
-import BlogBlock from './BlogBlock';
 
 type Props = {
   app: AppStore,
@@ -26,12 +26,12 @@ type Props = {
   match: {},
   products: {},
   dispatch: () => {},
-  blog: {},
+  // blog: {},
 };
 
 export class Products extends React.Component {
   componentDidMount() {
-    const { match: { params: { slug } }, dispatch, app: { screenSize } } = this.props;
+    const { match: { params: { slug } }, dispatch } = this.props;
 
     dispatch(productFetch(slug));
   }
@@ -39,7 +39,7 @@ export class Products extends React.Component {
   static props: Props;
 
   renderMobile = () => {
-    const { products: { product, warrantInformation, settingsPageLink, informations, categories, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
     const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
 
     if (isRunning || !isLoaded) {
@@ -61,7 +61,7 @@ export class Products extends React.Component {
             <BenefitsBlock screenSize={screenSize} advantages={advantages} />
             <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
             <CustomersRelyBlock screenSize={screenSize} clients={clients} testimonials={testimonials} />
-            <BlogBlock />
+            <Blog />
             <OpinionsBlock screenSize={screenSize} opinions={opinions} />
             <DetailsProductBlock product={product} screenSize={screenSize} />
             <PrintProductBlock product={product} print={print} screenSize={screenSize} />
@@ -74,7 +74,6 @@ export class Products extends React.Component {
   renderDesktop = () => {
     const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
     const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
-    const { blog } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
@@ -95,7 +94,7 @@ export class Products extends React.Component {
             <BenefitsBlock screenSize={screenSize} advantages={advantages} />
             <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
             <CustomersRelyBlock screenSize={screenSize} clients={clients} testimonials={testimonials} />
-            <BlogBlock blog={blog} />
+            <Blog />
             <OpinionsBlock screenSize={screenSize} opinions={opinions} />
             <DetailsProductBlock product={product} screenSize={screenSize} />
             <PrintProductBlock product={product} print={print} screenSize={screenSize} />
@@ -106,7 +105,7 @@ export class Products extends React.Component {
   }
 
   render() {
-    //const { app: { screenSize } } = this.props;
+    // const { app: { screenSize } } = this.props;
     const { products: { isRunning, isLoaded }, app: { screenSize } } = this.props;
 
     if (isRunning || !isLoaded) {

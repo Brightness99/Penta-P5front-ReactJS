@@ -25,11 +25,11 @@ export class BlogBlock extends React.Component {
 
   renderPost() {
     const { blog: { blog } } = this.props;
-
+    //console.log(blog);
     return blog.map((item) => (
       <div className="blogCard" key={item.id}>
         <span className="titleCategory">Biblioteca</span>
-        <img src={item.image} alt="Papel" />
+        <img src={item.image} alt={item.title} />
         <div className="blogCard-text">
           <h5 className="titlePost">{item.title}</h5>
           <p>{item.content}</p>
@@ -52,7 +52,6 @@ export class BlogBlock extends React.Component {
       </section>
     );
   }
-
 }
 
 function mapStateToProps(state) {
