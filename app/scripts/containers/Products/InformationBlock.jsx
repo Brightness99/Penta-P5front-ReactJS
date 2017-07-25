@@ -13,10 +13,6 @@ type Props = {
   informations: {},
 };
 
-type State = {
-  activeSlide: number,
-}
-
 export class InformationBlock extends React.Component {
   constructor(props) {
     super(props);

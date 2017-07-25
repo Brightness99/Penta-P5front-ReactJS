@@ -14,7 +14,6 @@ type Props = {
 
 type State = {
   counter: number,
-  //slideToShow: number,
 }
 
 export default class CustomersRelyBlock extends React.Component {
@@ -24,7 +23,6 @@ export default class CustomersRelyBlock extends React.Component {
 
   renderTestimonials() {
     const { testimonials } = this.props;
-    //const { slideToShow } = this.state;
 
     return testimonials.map((item, key) => (
       <div className="box-commentClient" name={key}>
