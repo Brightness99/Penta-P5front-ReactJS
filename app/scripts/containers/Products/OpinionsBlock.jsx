@@ -77,8 +77,8 @@ export default class OpinionsBlock extends React.Component {
 
     return list
       .slice(0, visible)
-      .map((item, key) => (
-        <div className="opinion-boxText" key={item.id} name={key}>
+      .map((item) => (
+        <div className="opinion-boxText" key={item.id}>
           <p className="opinion-title">{item.title}</p>
           <ul className="opinion-stars">{this.renderStars(item.stars)}</ul>
           <p>"{item.content}"</p>
@@ -94,7 +94,7 @@ export default class OpinionsBlock extends React.Component {
     return [1, 2, 3, 4, 5]
       .sort((a, b) => b - a)
       .map((item) => (
-        <div key={item.id} name={item} className="opinions-percentual-stars">
+        <div key={`opinons-stars-${item}`} className="opinions-percentual-stars">
           <ul className="opinion-stars">
             {this.renderStars(item)}
           </ul>
@@ -110,7 +110,7 @@ export default class OpinionsBlock extends React.Component {
     const percentual = (item * 100) / opinions.count;
 
     return (
-      <div key={item.id} name={item} className="loader">
+      <div className="loader">
         <div className={`linePercentual star-${percentual}`} />
       </div>
     );

@@ -25,9 +25,9 @@ export class BlogBlock extends React.Component {
 
   renderPost() {
     const { blog: { blog } } = this.props;
-    //console.log(blog);
+
     return blog.map((item) => (
-      <div className="blogCard" key={item.id}>
+      <div className="blogCard" key={`blogCard-${item.title}`}>
         <span className="titleCategory">Biblioteca</span>
         <img src={item.image} alt={item.title} />
         <div className="blogCard-text">
