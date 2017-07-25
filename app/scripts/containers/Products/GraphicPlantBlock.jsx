@@ -22,7 +22,7 @@ export class GraphicPlantBlock extends React.Component {
     const { graphic_plant } = this.props;
 
     return graphic_plant.LIST.map((item) => (
-      <ul className="list-item awol-pdd awol-list-style">
+      <ul className="list-item awol-pdd awol-list-style" key={`list-${item}`}>
         <li>{item}</li>
       </ul>
     ));

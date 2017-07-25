@@ -1,4 +1,5 @@
 // @flow
+// TODO: Carousel this
 import React from 'react';
 
 import Carousel from 'components/Carousel';
@@ -11,10 +12,6 @@ type Props = {
   button?: typeof React.Component,
   informations: {},
 };
-
-type State = {
-  activeSlide: number,
-}
 
 export class InformationBlock extends React.Component {
   constructor(props) {
@@ -74,23 +71,21 @@ export class InformationBlock extends React.Component {
     return (
       <section className="container-productInformation">
         <div className="box-productInformation">
-          <div>
-            <ul className="list-item awol-pdd awol-list-style">
-              <li>Dicas</li>
-              <li>Como utilizar</li>
-              <li>Especificações</li>
-              <li>Gabaritos</li>
-            </ul>
 
-            <Carousel>
+          <div>
+            <TabNavigation>
+              <span>Dicas</span>
+              <span>Como Utilizar</span>
+            </TabNavigation>
+            <div className="contentNavigation">
               <div id="tips">
-                {this.renderTips()}
+                <Carousel>
+                  {this.renderTips()}
+                </Carousel>
               </div>
-              <div id="utilizations">
-                {this.renderUtilizations()}
-              </div>
-            </Carousel>
+            </div>
           </div>
+
         </div>
       </section>
     );
