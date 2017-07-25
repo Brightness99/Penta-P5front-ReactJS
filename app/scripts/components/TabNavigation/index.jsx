@@ -30,7 +30,6 @@ export default class TabNavigation extends React.Component {
   static props: Props;
 
   handleTabsNavigation = (ev) => {
-    console.log(this);
     this.setState({
       activeSlide: ev.currentTarget.name,
     });
@@ -39,8 +38,8 @@ export default class TabNavigation extends React.Component {
   renderLis() {
     const { children } = this.props;
 
-    return children.map((item, key) => (
-      <li name={key}>
+    return children.map((item) => (
+      <li>
         {item}
       </li>
     ));

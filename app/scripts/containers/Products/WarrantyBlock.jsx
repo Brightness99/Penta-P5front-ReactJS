@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type Props = {
   screenSize: string,
@@ -24,8 +25,8 @@ export class WarrantyBlock extends React.Component {
         </div>
         <div className="box-btn-warranty">
           <div>
-            <button className="btn-default btn-primary btn-lg">Configure aqui</button>
-          </div>
+            <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">Configure aqui</Link>
+          </div>  
         </div>
       </section>
     );

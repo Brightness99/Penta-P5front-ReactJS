@@ -1,4 +1,5 @@
 // @flow
+// TODO: Carousel on mobile
 import React from 'react';
 import Logo from 'components/Logo';
 import { Link } from 'react-router-dom';
@@ -20,7 +21,7 @@ export default class BenefitsBlock extends React.Component {
     const { advantages } = this.props;
 
     return advantages.LIST.map((item) => (
-      <p><i className="checkIcon"><CheckIcon /></i>{item}</p>
+      <p key={`advantages-${item}`}><i className="checkIcon"><CheckIcon /></i>{item}</p>
     ));
   }
 

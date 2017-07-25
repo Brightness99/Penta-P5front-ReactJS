@@ -1,5 +1,8 @@
 // @flow
+// TODO: Carousel this
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Carousel from 'components/Carousel';
 
 
@@ -10,10 +13,6 @@ type Props = {
   button?: typeof React.Component,
   product: {}
 };
-
-type State = {
-  currentImage: 2
-}
 
 export class ProductBlock extends React.Component {
 
@@ -53,7 +52,9 @@ export class ProductBlock extends React.Component {
             <p className="p-fnt-price">A partir de</p>
             <p className="fnt-price">R${product.minimum_price}</p>
           </div>
-          <button className="btn-default btn-primary btn-lg">Configure este produto</button>
+          <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">
+            Configure este produto
+          </Link>
           <span className="spec-product">Na próxima tela você pode configurar as especificações do seu produto e conferir o preço.</span>
         </div>
       </section>
@@ -80,7 +81,9 @@ export class ProductBlock extends React.Component {
             <p className="p-fnt-price">A partir de</p>
             <p className="fnt-price">R${product.minimum_price} <span className="fnt-unit">/100 un</span></p>
           </div>
-          <button className="btn-default btn-primary btn-lg">Configure este produto</button>
+          <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">
+            Configure este produto
+          </Link>
           <span className="spec-product">Na próxima tela você pode configurar as especificações do seu produto e conferir o preço.</span>
         </div>
       </section>
