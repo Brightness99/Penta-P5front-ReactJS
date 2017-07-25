@@ -43,7 +43,7 @@
     text-transform: uppercase;
   }  
   .box-product{
-    flex: 2;
+    flex: 1;
     .product-price{
       width: 220px;
       margin: 0 auto;
@@ -100,6 +100,11 @@
           .awol-list-style{
             margin-top: 3rem;
           }
+        }
+      }
+      .carousel__slide {
+        img {
+          height: 370px;
         }
       }
     }
@@ -542,6 +547,14 @@
     @include lg{
       flex-direction: row;
       margin-bottom: 0rem;
+      margin-top: 2rem;
+    }
+  }
+  @include lg {
+    .carousel__slide {
+      img {
+        height: 370px;
+      }
     }
   }
 } 

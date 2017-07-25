@@ -42,11 +42,9 @@ export class PrintiProductBlock extends React.Component {
       <section className="container-printiProduct" style={styles}>
         <h4 className="printiProduct-title">{this.textTitle()}</h4>
         <div className="box-btn-printiProduct">
-          <button className="btn-default btn-primary btn-lg">
-            <Link to="{'settingsPageLink'}">
-            configure aqui
-            </Link>
-          </button>
+          <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">
+          configure aqui
+          </Link>
         </div>
         <p className="fnt-text">{print.QUESTIONS}</p>
       </section>

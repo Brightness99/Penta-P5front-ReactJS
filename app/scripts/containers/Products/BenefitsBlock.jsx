@@ -20,7 +20,7 @@ export default class BenefitsBlock extends React.Component {
     const { advantages } = this.props;
 
     return advantages.LIST.map((item) => (
-      <p><i className="checkIcon"><CheckIcon /></i>{item}</p>
+      <p key={`advantages-${item}`}><i className="checkIcon"><CheckIcon /></i>{item}</p>
     ));
   }
 

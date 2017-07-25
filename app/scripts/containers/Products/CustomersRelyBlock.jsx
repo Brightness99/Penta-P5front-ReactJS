@@ -24,8 +24,8 @@ export default class CustomersRelyBlock extends React.Component {
   renderTestimonials() {
     const { testimonials } = this.props;
 
-    return testimonials.map((item, key) => (
-      <div className="box-commentClient" name={key}>
+    return testimonials.map((item) => (
+      <div className="box-commentClient" key={`commentClient-${item.NAME}`}>
         <p className="commentClient-text">"{item.TEXT}"</p>
         <div className="commentClient-img">
           <img src={'https://d2ofpir5gh0cbr.cloudfront.net/assets' + item.IMAGE} alt={item.name} />
