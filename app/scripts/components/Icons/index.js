@@ -7,6 +7,7 @@ export BulletListIcon from './BulletList';
 export CalendarIcon from './Calendar';
 export CheckIcon from './Check';
 export CheckCircleIcon from './CheckCircle';
+export ChevronLeftIcon from './ChevronLeft';
 export FileIcon from './File';
 export GalleryIcon from './Gallery';
 export HelpIcon from './Help';
