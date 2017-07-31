@@ -9,17 +9,17 @@ type Props = {
   name: string,
   value: any,
   checked: boolean,
-  onCLick?: () => {},
+  onClick?: () => {},
 };
 
 const InputRadio = (props: Props) => {
   const { id, name, value, checked } = props;
 
   const onChange = (ev) => {
-    const { onCLick } = props;
+    const { onClick } = props;
 
-    if (typeof onCLick === 'function') {
-      onCLick(ev);
+    if (typeof onClick === 'function') {
+      onClick(ev);
     }
   };
 
