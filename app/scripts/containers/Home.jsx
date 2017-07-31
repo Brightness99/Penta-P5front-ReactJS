@@ -12,6 +12,8 @@ export default class Home extends React.Component {
       <NavLink to="/configuracao-catalogo">Home Page</NavLink>
       <br />
       <NavLink to="/produtos-banner">Produto Banner</NavLink>
+      <br />
+      <NavLink to="/login-cadastro">ENTRA AÍ</NavLink>
     </div>);
   }
 }
