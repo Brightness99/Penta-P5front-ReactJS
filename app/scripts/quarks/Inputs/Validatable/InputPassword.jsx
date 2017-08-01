@@ -2,7 +2,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-import { InputGeneric } from 'quarks/Inputs/Validatable';
+import { InputRegex } from 'quarks/Inputs/Validatable';
 
 type Props = {
   id: string,
@@ -62,7 +62,7 @@ export default class InputPassword extends React.Component {
     const pattern = /^([a-zA-Z0-9_-]){6,99}$/;
 
     return (
-      <InputGeneric
+      <InputRegex
         className={cx(valid ? 'valid' : 'invalid')}
         type="password"
         pattern={pattern}

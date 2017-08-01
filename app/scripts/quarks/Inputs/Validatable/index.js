@@ -1,5 +1,5 @@
 // @flow
-export InputGeneric from './InputGeneric';
+export InputRegex from './InputRegex';
 export InputEmail from './InputEmail';
 export InputPassword from './InputPassword';
 export InputFullName from './InputFullName';
