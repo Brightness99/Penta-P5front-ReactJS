@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
-import cx from 'classnames';
-import { Input } from 'quarks/Inputs';
+import { connect } from 'react-redux';
 
 import { BlockTitle } from 'atoms/Titles';
+import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
+import { Button } from 'quarks/Inputs';
 
 type Props = {
   app: AppStore,
@@ -12,15 +13,15 @@ type Props = {
   dispatch: () => {},
 };
 
-export default class SignInBlock extends React.Component {
+export class SignInBlock extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      validEmail: false,
-      validPassword: false,
-      valueEmail: '',
-      valuePassword: '',
+      form: {
+        email: { valid: false, value: '' },
+        password: { valid: false, value: '' },
+      },
     };
   }
 
@@ -29,65 +30,67 @@ export default class SignInBlock extends React.Component {
 
   handleSignIn = (ev) => {
     ev.preventDefault();
+    const { form, canSubmit } = this.state;
   };
 
-  handleEmailChange = (ev) => {
-    const email = ev.target.value;
-    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const valid = regex.test(email);
+  handleValidatedInput = (ev, inputName, isValid) => {
+    const { form } = this.state;
+    const newState = { form };
 
-    this.setState({
-      validEmail: valid,
-      valueEmail: email,
-      canSubmit: (valid && this.state.validPassword),
+    let canSubmit = true;
+
+    newState.form[inputName].valid = isValid;
+    newState.form[inputName].value = ev.target.value;
+
+    Object.keys(newState.form).forEach((index) => {
+      if (newState.form[index].valid !== true) {
+        canSubmit = false;
+      }
     });
-  };
 
-  handlePasswordChange = (ev) => {
-    const password = ev.target.value;
-    const valid = password.length > 3;
-
-    this.setState({
-      validPassword: valid,
-      valuePassword: password,
-      canSubmit: (this.state.validEmail && valid),
-    });
+    this.setState({ form: newState.form, canSubmit });
   };
 
   render() {
-    const { canSubmit, validEmail, validPassword, valueEmail, valuePassword } = this.state;
+    // const { locale } = this.props;
+    const { canSubmit } = this.state;
 
     return (
       <div className="authentication__block">
         <BlockTitle>Entrar</BlockTitle>
         <hr />
-        <form
-          className="authentication__block__form"
-          onSubmit={this.handleSignIn}
-        >
-          <Input
-            className={cx(!validEmail ? 'invalid' : 'valid')}
+        <form className="authentication__block__form" onSubmit={this.handleSignIn}>
+          <InputEmail
             type="email"
-            placeholder="Email"
-            onChange={this.handleEmailChange}
-            value={valueEmail}
+            name="email"
+            placeholder="E-mail"
+            onChange={this.handleValidatedInput}
           />
-          <Input
-            className={cx(!validPassword ? 'invalid' : 'valid')}
-            type="password"
+          <InputPassword
+            name="password"
             placeholder="Senha"
-            onChange={this.handlePasswordChange}
-            value={valuePassword}
+            onChange={this.handleValidatedInput}
           />
-          <input
-            className=""
+          <Button
             type="submit"
-            name="submit"
+            kind="success"
             disabled={!canSubmit}
-            value="ENTRAR"
-          />
+          >
+          Entrar
+          </Button>
         </form>
       </div>
     );
   }
 }
+
+/* istanbul ignore next */
+function mapStateToProps(state) {
+  return {
+    app: state.app,
+    router: state.router,
+    locale: state.locale,
+  };
+}
+
+export default connect(mapStateToProps)(SignInBlock);

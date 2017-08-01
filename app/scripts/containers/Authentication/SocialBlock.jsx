@@ -1,5 +1,7 @@
 // @flow
 import React from 'react';
+import SVG from 'react-inlinesvg';
+import { Button } from 'quarks/Inputs';
 
 type Props = {
   app: AppStore,
@@ -14,14 +16,12 @@ export default class SocialBlock extends React.Component {
   render() {
     return (
       <div className="authentication__social">
-        <button className="google btn btn-md">
-          <i className="fa fa-google" />
-          Google
-        </button>
-        <button className="facebook btn btn-md">
-          <i className="fa fa-facebook" />
-          Facebook
-        </button>
+        <Button className="authentication__social__button facebook">
+          <SVG src={require('assets/media/svg/social_facebook.svg')} />
+        </Button>
+        <Button className="authentication__social__button google">
+          <SVG src={require('assets/media/svg/social_googleplus.svg')} />
+        </Button>
       </div>
     );
   }

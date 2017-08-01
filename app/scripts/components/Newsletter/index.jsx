@@ -9,6 +9,7 @@ import cx from 'classnames';
 
 import { connect } from 'react-redux';
 import { userNewsletterSignup } from 'actions';
+import { Button } from 'quarks/Inputs';
 
 type Props = {
   locale: LocaleNewsletter,

@@ -1,13 +1,40 @@
-.qrk-input-container {
-  > input {
-    border-radius: 3px;
-    border: 1px solid $color-hrLightGray;
-    color: $color-lightGray;
-    font-family: $font-family-open-sans-light;
-    font-size: $font-size-sm;
+.app__qrk {
+  &__input-container {
+    > input {
+      border-radius: 0.3rem;
+      border: 0.1rem solid $color-hrLightGray;
+      color: $color-black;
+      font-family: $font-family-open-sans-light;
+      font-size: $font-size-sm;
+      height: 4rem;
+      margin-bottom: 1rem;
+      outline-color: transparent;
+      text-indent: 1.2rem;
+      width: 100%;
+      &:focus {
+        border-color: lighten($color-printi, 20%);
+        @include box-shadows(0px, 0px, 5px, lighten($color-printi, 20%));
+      }
+      &.invalid {
+        border-color: $color-red;
+      }
+    }
+  }
+  &__button {
+    border-radius: 0.3rem;
+    border: none;
+    color: $color-white;
+    font-family: $font-family-open-sans-bold;
+    font-size: 1.2rem;
+    font-weight: bold;
     height: 4rem;
-    margin-bottom: 1rem;
-    text-indent: 1.2rem;
-    width: 100%;
+    outline: none;
+    text-transform: uppercase;
+    &.success {
+      @include button-background-color($color-green);
+    }
+    &.info {
+      @include button-background-color($color-printi);
+    }
   }
 }

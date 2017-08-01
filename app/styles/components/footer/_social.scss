@@ -69,23 +69,23 @@
     }
 
     &--facebook:hover {
-      @include social-icon-color(#3b5998);
+      @include social-icon-color($color-facebook);
     }
 
     &--twitter:hover {
-     @include social-icon-color(#00aced);
+     @include social-icon-color($color-twitter);
     }
 
     &--linkedin:hover {
-      @include social-icon-color(#0077B5);
+      @include social-icon-color($color-linkedin);
     }
 
     &--google-plus:hover {
-      @include social-icon-color(#d34836);
+      @include social-icon-color($color-google);
     }
 
     &--instagram:hover {
-      @include social-icon-color(#ed4956);
+      @include social-icon-color($color-instagram);
     }
   }
 }

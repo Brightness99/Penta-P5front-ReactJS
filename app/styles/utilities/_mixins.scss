@@ -70,6 +70,32 @@ $position: left) {
   transform: translateY(-$top);
 }
 
+@mixin box-shadows($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin button-background-color($color, $hover-darken: 3%) {
+  background-color: $color;
+  &:hover {
+    background-color: darken($color, $hover-darken);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: lighten($color, 20%);
+    &:hover {
+      background-color: lighten($color, 20%);
+    }
+  }
+}
+
 @mixin app-container($opts: ()) {
   $defaults: (
     xs: $grid-gutter-width / 2,

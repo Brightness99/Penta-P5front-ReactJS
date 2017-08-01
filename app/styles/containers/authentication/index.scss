@@ -4,8 +4,34 @@
     background-color: $color-white;
     justify-content: center;
     padding: 1rem;
-    > button {
+    &__button {
+      align-items: center;
+      height: 4rem;
       text-align: center;
+      width: 4rem;
+      &:first-child {
+        margin-right: 1rem;
+      }
+      > span {
+        color: $color-white;
+        fill: currentcolor;
+        width: 90%;
+        margin-top: -0.5rem;
+        svg {
+          height: auto;
+          max-height: 100%;
+          width: 100%;
+        }
+      }
+      &.facebook {
+        @include button-background-color($color-facebook, 15%);
+      }
+      &.google {
+        > span {
+          max-width: 3rem;
+        }
+        @include button-background-color($color-google, 15%);
+      }
     }
   }
   &__wrapper {
