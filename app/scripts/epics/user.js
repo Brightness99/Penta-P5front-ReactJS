@@ -46,3 +46,33 @@ export function userNewsletter(action$) {
         ]);
     });
 }
+
+export function userSignIn(action$) {
+  return action$.ofType(UserConstants.USER_AUTH_SIGN_IN_REQUEST)
+    .switchMap(action => {
+      const endpoint = '/v1/customers/login';
+
+      return rxAjax({
+        endpoint,
+        payload: {
+          email: action.payload.email,
+          password: action.payload.password,
+        },
+        method: 'POST',
+      })
+      .map(data => {
+        console.log(data.response);
+
+        return null;
+      })
+      .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+      .defaultIfEmpty({ type: UserConstants.USER_AUTH_SIGN_IN_CANCEL })
+      .catch(error => [
+        {
+          type: UserConstants.USER_AUTH_SIGN_IN_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        },
+      ]);
+    });
+}

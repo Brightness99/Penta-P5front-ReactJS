@@ -16,32 +16,37 @@ type Props = {
   type: string,
   placeholder: string,
   showLabel: boolean,
+  required: boolean,
+  equalsTo: any,
   onClick?: () => {},
   onChange?: () => {},
   onFocus?: () => {},
   onBlur?: () => {},
+  onValidate?: () => {},
 };
 
 export class InputRegex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', valid: false };
+    this.state = {
+      value: '',
+      valid: false,
+      dirty: false,
+    };
+    this.handleValidation = this.handleValidation.bind(this);
   }
 
-  static props: Props;
-  static state: State;
+  componentWillUpdate(nextProps) {
+    const { equalsTo } = this.props;
 
-  handleClick = (ev) => {
-    const { onClick } = this.props;
-
-    if (typeof onClick === 'function') {
-      onClick(ev);
+    if (equalsTo && equalsTo !== nextProps.equalsTo) {
+      this.setState(this.handleValidation(this.state.value, nextProps.equalsTo));
     }
-  };
+  }
 
-  handleChange = (ev) => {
-    const { name, onChange, pattern } = this.props;
-    const value = ev.target.value;
+  handleValidation(value, equalsTo) {
+    const { onValidate, pattern, required, name } = this.props;
+
     let valid = true;
 
     try {
@@ -50,10 +55,51 @@ export class InputRegex extends React.Component {
       valid = false;
     }
 
-    this.setState({ value, valid });
+    if (valid === true && required === true) {
+      valid = (value && value !== null && value.length > 0);
+    }
+
+    if (valid === true && equalsTo) {
+      valid = (value === equalsTo);
+    }
+
+    if (typeof onValidate === 'function') {
+      onValidate(name, value, valid);
+    }
+
+    return { value, valid, dirty: true };
+  }
+
+  static props: Props;
+  static state: State;
+
+  handleChange = (ev) => {
+    const { onChange, equalsTo } = this.props;
+    const validated = this.handleValidation(ev.target.value, equalsTo);
+
+    this.setState(validated);
 
     if (typeof onChange === 'function') {
-      onChange(ev, name, valid);
+      onChange(ev);
+    }
+  };
+
+  handleBlur = (ev) => {
+    const { onBlur, equalsTo } = this.props;
+    const validated = this.handleValidation(ev.target.value, equalsTo);
+
+    this.setState(validated);
+
+    if (typeof onBlur === 'function') {
+      onBlur(ev);
+    }
+  };
+
+  handleClick = (ev) => {
+    const { onClick } = this.props;
+
+    if (typeof onClick === 'function') {
+      onClick(ev);
     }
   };
 
@@ -65,27 +111,19 @@ export class InputRegex extends React.Component {
     }
   };
 
-  handleBlur = (ev) => {
-    const { onBlur } = this.props;
-
-    if (typeof onBlur === 'function') {
-      onBlur(ev);
-    }
-  };
-
   render() {
     const { id, name, type, showLabel, placeholder } = this.props;
-    const { value, valid } = this.state;
+    const { value, valid, dirty } = this.state;
 
     return (
       <Input
-        className={cx(valid ? 'valid' : 'invalid')}
-        type={type}
-        name={name}
+        className={cx(valid ? 'valid' : 'invalid', dirty && 'dirty')}
         id={id}
-        value={value}
+        name={name}
         placeholder={placeholder}
         showLabel={showLabel}
+        type={type}
+        value={value}
         onClick={this.handleClick}
         onChange={this.handleChange}
         onFocus={this.handleFocus}

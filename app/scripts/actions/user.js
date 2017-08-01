@@ -31,3 +31,18 @@ export function userNewsletterSignup(
     },
   };
 }
+
+/**
+ * Customer authentication
+ *
+ * @param {string} email
+ * @param {string} password
+ *
+ * @returns {Object}
+ */
+export function userSignIn(email: string, password: string): Object {
+  return {
+    type: UserConstants.USER_AUTH_SIGN_IN_REQUEST,
+    payload: { email, password },
+  };
+}

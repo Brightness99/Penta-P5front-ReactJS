@@ -29,86 +29,59 @@ export default class SignUpBlock extends React.Component {
   static props: Props;
   static state: State;
 
-  handleSignUp = (ev) => {
+  handleSubmit = (ev) => {
     ev.preventDefault();
   };
 
-  handleNameChange = (ev) => {
-    ev.preventDefault();
-  };
-
-  handleValidatedInput = (ev, inputName, isValid) => {
+  handleValidatedInput = (name, value, valid) => {
     const { form } = this.state;
     const newState = { form };
 
     let canSubmit = true;
 
-    newState.form[inputName].valid = isValid;
-    newState.form[inputName].value = ev.target.value;
+    newState.form[name].valid = valid;
+    newState.form[name].value = value;
 
-    Object.keys(newState.form).forEach((index) => {
-      if (newState.form[index].valid !== true) {
-        canSubmit = false;
-      }
-    });
+    if (canSubmit === true) {
+      Object.keys(newState.form).forEach((index) => {
+        if (newState.form[index].valid !== true) {
+          canSubmit = false;
+        }
+      });
+    }
 
     this.setState({ form: newState.form, canSubmit });
   };
 
-  handleEmailChange = (ev, isValid) => {
-    const { form } = this.state;
-
-    this.setState({
-      form: { ...form, email: { valid: isValid, value: ev.target.value } },
-      canSubmit: (isValid && form.password.valid),
-    });
-  };
-
-  handleEmailRepeatChange = (ev, isValid) => {
-    const { form } = this.state;
-
-    this.setState({
-      form: { ...form, email_repeat: { valid: isValid, value: ev.target.value } },
-      canSubmit: (isValid && form.password.valid),
-    });
-  };
-
-  handlePasswordChange = (ev, isValid) => {
-    const { form } = this.state;
-
-    this.setState({
-      form: { ...form, password: { valid: isValid, value: ev.target.value } },
-      canSubmit: (form.email.valid && isValid),
-    });
-  };
-
   render() {
     const { canSubmit } = this.state;
+    const { form } = this.state;
 
     return (
       <div className="authentication__block">
         <BlockTitle>Cadastrar</BlockTitle>
         <hr />
-        <form className="authentication__block__form" onSubmit={this.handleSignUp}>
+        <form className="authentication__block__form" onSubmit={this.handleSubmit}>
           <InputFullName
             name="full_name"
             placeholder="Nome completo"
-            onChange={this.handleValidatedInput}
+            onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email"
             placeholder="E-mail"
-            onChange={this.handleValidatedInput}
+            onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email_repeat"
             placeholder="Repetir e-mail"
-            onChange={this.handleValidatedInput}
+            equalsTo={form.email.value}
+            onValidate={this.handleValidatedInput}
           />
           <InputPassword
             name="password"
             placeholder="Senha"
-            onChange={this.handleValidatedInput}
+            onValidate={this.handleValidatedInput}
           />
           <Button
             type="submit"
