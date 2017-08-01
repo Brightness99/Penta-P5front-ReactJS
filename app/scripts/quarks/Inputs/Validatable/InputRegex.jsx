@@ -22,7 +22,7 @@ type Props = {
   onBlur?: () => {},
 };
 
-export class InputEmail extends React.Component {
+export class InputRegex extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: '', valid: false };
@@ -104,4 +104,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(InputEmail);
+export default connect(mapStateToProps)(InputRegex);

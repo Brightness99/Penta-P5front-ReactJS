@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
-import { InputGeneric } from 'quarks/Inputs/Validatable';
+import { InputRegex } from 'quarks/Inputs/Validatable';
 
 type Props = {
   dispatch: () => {},
@@ -64,7 +64,7 @@ export default class InputEmail extends React.Component {
     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     return (
-      <InputGeneric
+      <InputRegex
         className={cx(valid ? 'valid' : 'invalid')}
         type="email"
         pattern={pattern}
