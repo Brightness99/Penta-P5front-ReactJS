@@ -1,28 +1,23 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
-import cx from 'classnames';
 
 import { InputRegex } from 'quarks/Inputs/Validatable';
 
 type Props = {
-  dispatch: () => {},
   id: string,
   name: string,
   placeholder: string,
   showLabel: boolean,
+  required: boolean,
+  equalsTo: any,
   onClick?: () => {},
   onChange?: () => {},
   onFocus?: () => {},
   onBlur?: () => {},
+  onValidate?: () => {},
 };
 
 export default class InputEmail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '', valid: false };
-  }
-
   static props: Props;
   static state: State;
 
@@ -31,14 +26,6 @@ export default class InputEmail extends React.Component {
 
     if (typeof onClick === 'function') {
       onClick(ev);
-    }
-  };
-
-  handleChange = (ev, inputName, valid) => {
-    const { onChange } = this.props;
-
-    if (typeof onChange === 'function') {
-      onChange(ev, inputName, valid);
     }
   };
 
@@ -58,25 +45,40 @@ export default class InputEmail extends React.Component {
     }
   };
 
+  handleChange = (ev, inputName, valid) => {
+    const { onChange } = this.props;
+
+    if (typeof onChange === 'function') {
+      onChange(ev, inputName, valid);
+    }
+  };
+
+  handleValidation = (name, value, valid) => {
+    const { onValidate } = this.props;
+
+    if (typeof onValidate === 'function') {
+      onValidate(name, value, valid);
+    }
+  };
+
   render() {
-    const { id, name, showLabel, placeholder } = this.props;
-    const { value, valid } = this.state;
+    const { id, name, showLabel, placeholder, equalsTo, required } = this.props;
     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     return (
       <InputRegex
-        className={cx(valid ? 'valid' : 'invalid')}
-        type="email"
-        pattern={pattern}
-        name={name}
+        equalsTo={equalsTo}
         id={id}
-        value={value}
+        name={name}
+        pattern={pattern}
         placeholder={placeholder}
+        required={required}
         showLabel={showLabel}
         onClick={this.handleClick}
         onChange={this.handleChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
+        onValidate={this.handleValidation}
       />
     );
   }

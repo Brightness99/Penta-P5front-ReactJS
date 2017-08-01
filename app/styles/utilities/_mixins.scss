@@ -82,9 +82,9 @@ $position: left) {
   }
 }
 
-@mixin button-background-color($color, $hover-darken: 3%) {
+@mixin button-background-color($color, $hover-darken: 5%) {
   background-color: $color;
-  &:hover {
+  &:hover, &:focus {
     background-color: darken($color, $hover-darken);
   }
   &:disabled {
@@ -94,6 +94,14 @@ $position: left) {
       background-color: lighten($color, 20%);
     }
   }
+}
+
+@mixin transition($args) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
 }
 
 @mixin app-container($opts: ()) {

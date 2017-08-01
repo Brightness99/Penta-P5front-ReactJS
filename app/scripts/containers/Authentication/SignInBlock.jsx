@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { userSignIn } from 'actions';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
@@ -30,23 +31,31 @@ export class SignInBlock extends React.Component {
 
   handleSignIn = (ev) => {
     ev.preventDefault();
+
     const { form, canSubmit } = this.state;
+    const { dispatch } = this.props;
+
+    if (canSubmit === true) {
+      dispatch(userSignIn(form.email.value, form.password.value));
+    }
   };
 
-  handleValidatedInput = (ev, inputName, isValid) => {
+  handleValidatedInput = (name, value, valid) => {
     const { form } = this.state;
     const newState = { form };
 
     let canSubmit = true;
 
-    newState.form[inputName].valid = isValid;
-    newState.form[inputName].value = ev.target.value;
+    newState.form[name].value = value;
+    newState.form[name].valid = valid;
 
-    Object.keys(newState.form).forEach((index) => {
-      if (newState.form[index].valid !== true) {
-        canSubmit = false;
-      }
-    });
+    if (canSubmit === true) {
+      Object.keys(newState.form).forEach((index) => {
+        if (newState.form[index].valid !== true) {
+          canSubmit = false;
+        }
+      });
+    }
 
     this.setState({ form: newState.form, canSubmit });
   };
@@ -61,15 +70,14 @@ export class SignInBlock extends React.Component {
         <hr />
         <form className="authentication__block__form" onSubmit={this.handleSignIn}>
           <InputEmail
-            type="email"
             name="email"
             placeholder="E-mail"
-            onChange={this.handleValidatedInput}
+            onValidate={this.handleValidatedInput}
           />
           <InputPassword
             name="password"
             placeholder="Senha"
-            onChange={this.handleValidatedInput}
+            onValidate={this.handleValidatedInput}
           />
           <Button
             type="submit"

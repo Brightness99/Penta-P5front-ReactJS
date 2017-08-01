@@ -14,4 +14,12 @@ export const UserConstants = keyMirror({
   USER_NEWSLETTER_SUCCESS: undefined,
   USER_NEWSLETTER_FAILURE: undefined,
   USER_NEWSLETTER_CANCEL: undefined,
+  USER_AUTH_SIGN_IN_REQUEST: undefined,
+  USER_AUTH_SIGN_IN_SUCCESS: undefined,
+  USER_AUTH_SIGN_IN_FAILURE: undefined,
+  USER_AUTH_SIGN_IN_CANCEL: undefined,
+  USER_AUTH_SIGN_UP_REQUEST: undefined,
+  USER_AUTH_SIGN_UP_SUCCESS: undefined,
+  USER_AUTH_SIGN_UP_FAILURE: undefined,
+  USER_AUTH_SIGN_UP_CANCEL: undefined,
 });
