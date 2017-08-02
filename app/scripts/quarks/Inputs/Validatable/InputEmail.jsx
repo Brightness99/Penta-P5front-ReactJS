@@ -45,11 +45,11 @@ export default class InputEmail extends React.Component {
     }
   };
 
-  handleChange = (ev, inputName, valid) => {
+  handleChange = (ev) => {
     const { onChange } = this.props;
 
     if (typeof onChange === 'function') {
-      onChange(ev, inputName, valid);
+      onChange(ev);
     }
   };
 

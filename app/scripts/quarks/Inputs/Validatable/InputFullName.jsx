@@ -45,19 +45,19 @@ export default class InputFullName extends React.Component {
     }
   };
 
-  handleChange = (ev, inputName, valid) => {
+  handleChange = (ev) => {
     const { onChange } = this.props;
 
     if (typeof onChange === 'function') {
-      onChange(ev, inputName, valid);
+      onChange(ev);
     }
   };
 
-  handleValidation = (ev) => {
+  handleValidation = (name, value, valid) => {
     const { onValidate } = this.props;
 
     if (typeof onValidate === 'function') {
-      onValidate(ev);
+      onValidate(name, value, valid);
     }
   };
 
