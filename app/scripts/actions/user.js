@@ -41,6 +41,7 @@ export function userNewsletterSignup(
  * @returns {Object}
  */
 export function userSignIn(email: string, password: string): Object {
+  console.log('action userSignIn');
   return {
     type: UserConstants.USER_AUTH_SIGN_IN_REQUEST,
     payload: { email, password },

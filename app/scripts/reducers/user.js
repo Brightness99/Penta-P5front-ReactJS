@@ -17,6 +17,16 @@ export const userState = {
     message: '',
     subscribed: false,
   },
+  authentication: {
+    isRunning: false,
+    error: false,
+    message: '',
+    signInForm: {
+      email: '',
+      password: '',
+    },
+    customerInfo: {},
+  },
   address: {
     isZipcodeValid: false,
     zipcode: '',
@@ -98,6 +108,39 @@ export default {
           zipcode: '',
           zipcodeErrorMessage: '',
         },
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_IN_REQUEST](state, action) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          signInForm: action.payload,
+          isRunning: true,
+        },
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_IN_SUCCESS](state, action) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          isRunning: false,
+          customerInfo: action.payload,
+        },
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_IN_FAILURE](state, action) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          error: true,
+          isRunning: false,
+          message: action.payload.message,
+        },
+        updatedAt: action.meta.updatedAt,
       };
     },
   }),

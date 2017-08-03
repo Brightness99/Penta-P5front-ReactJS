@@ -62,18 +62,16 @@ export default class InputEmail extends React.Component {
   };
 
   render() {
-    const { id, name, showLabel, placeholder, equalsTo, required } = this.props;
     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const elementProps = {
+      ...this.props,
+      type: 'email',
+      pattern,
+    };
 
     return (
       <InputRegex
-        equalsTo={equalsTo}
-        id={id}
-        name={name}
-        pattern={pattern}
-        placeholder={placeholder}
-        required={required}
-        showLabel={showLabel}
+        {...elementProps}
         onClick={this.handleClick}
         onChange={this.handleChange}
         onFocus={this.handleFocus}
