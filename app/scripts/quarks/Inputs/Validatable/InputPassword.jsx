@@ -45,11 +45,11 @@ export default class InputPassword extends React.Component {
     }
   };
 
-  handleChange = (ev, inputName, valid) => {
+  handleChange = (ev) => {
     const { onChange } = this.props;
 
     if (typeof onChange === 'function') {
-      onChange(ev, inputName, valid);
+      onChange(ev);
     }
   };
 
@@ -62,19 +62,16 @@ export default class InputPassword extends React.Component {
   };
 
   render() {
-    const { id, name, showLabel, placeholder, equalsTo, required } = this.props;
     const pattern = /^([a-zA-Z0-9_-]){6,99}$/;
+    const elementProps = {
+      ...this.props,
+      type: 'password',
+      pattern,
+    };
 
     return (
       <InputRegex
-        type="password"
-        equalsTo={equalsTo}
-        id={id}
-        name={name}
-        pattern={pattern}
-        placeholder={placeholder}
-        required={required}
-        showLabel={showLabel}
+        {...elementProps}
         onClick={this.handleClick}
         onChange={this.handleChange}
         onFocus={this.handleFocus}

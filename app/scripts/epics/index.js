@@ -4,7 +4,7 @@
  */
 
 import { combineEpics } from 'redux-observable';
-import { userNewsletter } from './user';
+import { userNewsletter, userSignIn } from './user';
 import { productsFetch } from './products';
 import { blogFetch } from './blog';
 import {
@@ -26,4 +26,5 @@ export default combineEpics(
   settingsZipcodeFetch,
   settingsMatrixFetch,
   prepressDownloadFetch,
+  userSignIn,
 );

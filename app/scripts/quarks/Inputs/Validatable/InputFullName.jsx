@@ -62,17 +62,16 @@ export default class InputFullName extends React.Component {
   };
 
   render() {
-    const { id, name, showLabel, placeholder } = this.props;
     const pattern = /^[a-zA-Z]+\s+[a-zA-Z]+$/;
+    const elementProps = {
+      ...this.props,
+      type: 'text',
+      pattern,
+    };
 
     return (
       <InputRegex
-        type="text"
-        pattern={pattern}
-        name={name}
-        id={id}
-        placeholder={placeholder}
-        showLabel={showLabel}
+        {...elementProps}
         onClick={this.handleClick}
         onChange={this.handleChange}
         onFocus={this.handleFocus}

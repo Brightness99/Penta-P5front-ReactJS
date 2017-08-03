@@ -14,6 +14,16 @@ type Props = {
   dispatch: () => {},
 };
 
+type State = {
+  canSubmit: boolean,
+  isSubmitted: boolean,
+  isRunning: boolean,
+  authentication: {
+    customerInfo: {},
+  },
+  form: {},
+};
+
 export class SignInBlock extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +33,15 @@ export class SignInBlock extends React.Component {
         email: { valid: false, value: '' },
         password: { valid: false, value: '' },
       },
+      canSubmit: false,
+      isSubmitted: false,
+      isRunning: false,
     };
+  }
+
+  componentWillUpdate(nextProps: Props, nextState: State) {
+    console.log('nextState');
+    console.log(nextState);
   }
 
   static props: Props;
@@ -57,7 +75,7 @@ export class SignInBlock extends React.Component {
       });
     }
 
-    this.setState({ form: newState.form, canSubmit });
+    this.setState({ ...this.state, form: newState.form, canSubmit });
   };
 
   render() {
@@ -101,4 +119,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SignInBlock);
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInBlock);

@@ -33,10 +33,9 @@ export class InputRegex extends React.Component {
       valid: false,
       dirty: false,
     };
-    this.handleValidation = this.handleValidation.bind(this);
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     const { equalsTo } = this.props;
 
     if (equalsTo && equalsTo !== nextProps.equalsTo) {
@@ -49,10 +48,12 @@ export class InputRegex extends React.Component {
 
     let valid = true;
 
-    try {
-      valid = pattern.test(value);
-    } catch (e) {
-      valid = false;
+    if (pattern) {
+      try {
+        valid = pattern.test(value);
+      } catch (e) {
+        valid = false;
+      }
     }
 
     if (valid === true && required === true) {
@@ -67,7 +68,7 @@ export class InputRegex extends React.Component {
       onValidate(name, value, valid);
     }
 
-    return { value, valid, dirty: true };
+    return { value, valid };
   }
 
   static props: Props;
@@ -77,7 +78,7 @@ export class InputRegex extends React.Component {
     const { onChange, equalsTo } = this.props;
     const validated = this.handleValidation(ev.target.value, equalsTo);
 
-    this.setState(validated);
+    this.setState({ ...validated, dirty: true });
 
     if (typeof onChange === 'function') {
       onChange(ev);
@@ -88,7 +89,7 @@ export class InputRegex extends React.Component {
     const { onBlur, equalsTo } = this.props;
     const validated = this.handleValidation(ev.target.value, equalsTo);
 
-    this.setState(validated);
+    this.setState({ ...validated, dirty: true });
 
     if (typeof onBlur === 'function') {
       onBlur(ev);
