@@ -32,6 +32,10 @@ export class App extends React.Component {
     this.handleScreenResize(true);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleScreenResize);
+  }
+
   static props: Props;
 
   handleScreenResize = (initial) => {
@@ -58,7 +62,7 @@ export class App extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/configuracao-:slug" component={Config} />
                 <Route path="/produtos-:slug" component={Products} />
-                <Route path="/carrinho" component={Cart} />
+                <Route path="/meu-carrinho" component={Cart} />
                 <Route exact path="/404" component={Error404} />
                 <Route component={Error404} />
               </Switch>

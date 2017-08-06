@@ -2,10 +2,13 @@
 
 import React from 'react';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { IntlMoney } from 'components/Intl';
 
 type Props = {
   screenSize: string,
-}
+  totalPrice: number,
+  totalItems: number,
+};
 
 export default class CartHeader extends React.Component {
   constructor(props) {
@@ -18,7 +21,13 @@ export default class CartHeader extends React.Component {
   static props: Props;
 
   renderMobile() {
-    return <div className="mol-cart-header--mobile">R$ 120,00 <span>(2 itens)</span></div>;
+    const { totalPrice, totalItems } = this.props;
+    return (
+      <div className="mol-cart-header mol-cart-header--mobile">
+        <IntlMoney className="atm-cart-totalPrice">{totalPrice}</IntlMoney>
+        <span className="atm-cart-totalItems">({totalItems} itens)</span>
+      </div>
+    );
   }
 
   renderDesktop() {

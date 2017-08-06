@@ -1,3 +1,4 @@
 // @flow
 
-export * from './RadioButton/index';
+export * from './RadioButton';
+export * from './Text';

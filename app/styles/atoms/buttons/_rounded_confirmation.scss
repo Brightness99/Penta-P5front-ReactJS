@@ -5,12 +5,12 @@
   color: $color-white;
   cursor: not-allowed;
   font-family: $font-family-open-sans;
-  font-size: $font-size-xxxs;
+  font-size: $font-size-xs;
   font-weight: bold;
   height: 4rem;
   letter-spacing: 0.1rem;
-  margin-top: 3rem;
   outline: none;
+  padding: 0 2rem;
   text-transform: uppercase;
 
   &--enabled {

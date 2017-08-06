@@ -2,9 +2,12 @@
 
 import React from 'react';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { IntlMoney } from 'components/Intl';
 
 type Props = {
   screenSize: string,
+  totalItems: number,
+  totalPrice: number,
 };
 
 type State = {
@@ -27,17 +30,19 @@ export default class CartSummary extends React.Component {
   }
 
   renderMobile() {
+    const { totalItems, totalPrice } = this.props;
+
     return (
-      <div>
-        <div>
-          Resumo do seu carrinho <span>(2 itens)</span>
+      <div className="org-cart-summary">
+        <div className="mol-cart-summary-title">
+          Resumo do seu carrinho <span className="atm-cart-totalItems">({totalItems} itens)</span>
         </div>
-        <div>
-          <div>subtotal <span>R$150,00</span></div>
-          <div>desconto <span>- R$30,00</span></div>
+        <div className="mol-cart-summary-off">
+          <div>subtotal <IntlMoney>{150}</IntlMoney></div>
+          <div>desconto <IntlMoney>{-30}</IntlMoney></div>
         </div>
-        <div>
-          Total <span>R$120,00</span>
+        <div className="mol-cart-summary-total">
+          Total <IntlMoney>{totalPrice}</IntlMoney>
         </div>
       </div>
     );

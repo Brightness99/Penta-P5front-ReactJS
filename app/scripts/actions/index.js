@@ -8,5 +8,6 @@
 export * from './app';
 export * from './products';
 export * from './blog';
+export * from './cart';
 export * from './user';
 export * from './settings';
