@@ -56,7 +56,7 @@ export class App extends React.Component {
       html = (
         <Router dispatch={dispatch} router={router}>
           <div key="app" className="app">
-            <Header screenSize={app.screenSize} />
+            <Header screenSize={app.screenSize} dispatch={dispatch} />
             <main className="app__main">
               <Switch>
                 <Route exact path="/" component={Home} />

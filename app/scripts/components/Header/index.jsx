@@ -9,7 +9,8 @@ import Bag from './Bag';
 
 type Props = {
   screenSize: string,
-  links: {}
+  links: {},
+  dispatch: () => {},
 };
 
 type State = {
@@ -63,6 +64,7 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
+    const { dispatch } = this.props;
 
     return (
       <header className="app__header">
@@ -90,7 +92,7 @@ export class Header extends React.Component {
               <Account />
             </div>
             <div>
-              <Cart />
+              <Cart dispatch={dispatch} />
             </div>
           </div>
         </div>

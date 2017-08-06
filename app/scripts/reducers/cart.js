@@ -24,6 +24,16 @@ export default {
         rehydrated: true,
       });
     },
+    [CartConstants.CART_BASIC_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          zipcode: action.payload.zipcode,
+        },
+        count: action.payload.count,
+      };
+    },
     [CartConstants.CART_FETCH_REQUEST]() {
       return {
         ...cartState,
@@ -31,7 +41,6 @@ export default {
       };
     },
     [CartConstants.CART_FETCH_SUCCESS](state, action) {
-      console.log();
       return {
         ...state,
         data: action.payload,
