@@ -1,0 +1,16 @@
+.atm-button-text {
+  background-color: transparent;
+  border: transparent;
+  color: $color-printi;
+  cursor: pointer;
+  font-family: $font-family-open-sans;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  margin-right: $grid-gutter-width / 2;
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -23,3 +23,8 @@ export SettingsArtCreationIcon from './SettingsArtCreation';
 export SettingsTweakIcon from './SettingsTweak';
 export SettingsUploadIcon from './SettingsUpload';
 export StarIcon from './Star';
+export FilesIcon from './Files';
+export FileTextOIcon from './FileTextO';
+export PencilIcon from './Pencil';
+export TrashIcon from './Trash';
+export ChevronRightIcon from './ChevronRight';
