@@ -37,11 +37,11 @@ export class InformationBlock extends React.Component {
 
   renderTips() {
     const { informations: { tips } } = this.props;
-
+    // <img src={item.image.file} alt={item.image.title} />
     return tips.map((item, key) => (
       <div className="card-productInformation" key={item.id} name={key}>
         <div className="card-productInformation-image">
-          <img src={item.image.file} alt={item.image.title} />
+          <img src="https://www.printi.com.br/thumbs/272x269c/2016-06/banner-dica1.jpg" alt="Banner" />
         </div>
         <div className="card-productInformation-text">
           <h4 className="card-productInformation-title">{item.name}</h4>
@@ -53,11 +53,11 @@ export class InformationBlock extends React.Component {
 
   renderUtilizations() {
     const { informations: { utilizations } } = this.props;
-
+    // <img src={item.image.file} alt={item.image.title} />
     return utilizations.map((item, key) => (
       <div className="card-productInformation" key={item.id} name={key}>
         <div className="card-productInformation-image">
-          <img src={item.image.file} alt={item.image.title} />
+          <img src="https://www.printi.com.br/thumbs/272x269c/2016-06/banner-dica1.jpg" alt="Banner" />
         </div>
         <div className="card-productInformation-text">
           <h4 className="card-productInformation-title">{item.name}</h4>

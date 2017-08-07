@@ -1,4 +1,41 @@
 .app__header__topbar {
   background-color: #eee;
-  height: 2rem;
+  height: $topbar-height;
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    box-sizing: border-box;
+    padding: 0.5rem 0;
+    margin-bottom: 0;
+    font-size: $font-size-xs;
+    li {
+      box-sizing: border-box;
+      padding: 0 2rem;
+      border-right: 1px solid $color-hrLightGray;
+      &:last-of-type{
+        border-right: none;
+        padding-right: 0; 
+      }
+      a {
+        color: $color-black;
+      }
+      .helpCenterIcon { 
+        width: 15px;
+        height: 15px;
+        svg {
+          margin: -3px 0;
+        }
+      }
+      &:hover {
+        a {
+          color: $color-printi;
+          text-decoration: none;
+          svg {
+            path { fill: $color-printi;}
+          }
+        }
+      }
+    }
+  }
 }

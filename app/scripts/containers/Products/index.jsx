@@ -6,6 +6,7 @@ import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
 import Blog from 'containers/Blog/Blog';
+import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
 import Loading from 'components/Loading';
 
 import ProductBlock from './ProductBlock';
@@ -14,7 +15,6 @@ import TutorialBlock from './TutorialBlock';
 import WarrantyBlock from './WarrantyBlock';
 import BenefitsBlock from './BenefitsBlock';
 import GraphicPlantBlock from './GraphicPlantBlock';
-import CustomersRelyBlock from './CustomersRelyBlock';
 import OpinionsBlock from './OpinionsBlock';
 import DetailsProductBlock from './DetailsProductBlock';
 import PrintProductBlock from './PrintProductBlock';
@@ -26,7 +26,6 @@ type Props = {
   match: {},
   products: {},
   dispatch: () => {},
-  // blog: {},
 };
 
 export class Products extends React.Component {
@@ -60,7 +59,7 @@ export class Products extends React.Component {
             <WarrantyBlock screenSize={screenSize} />
             <BenefitsBlock screenSize={screenSize} advantages={advantages} />
             <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
-            <CustomersRelyBlock screenSize={screenSize} clients={clients} testimonials={testimonials} />
+            <CustomersRelyBlock />
             <Blog />
             <OpinionsBlock screenSize={screenSize} opinions={opinions} />
             <DetailsProductBlock product={product} screenSize={screenSize} />
@@ -93,7 +92,7 @@ export class Products extends React.Component {
             <WarrantyBlock screenSize={screenSize} />
             <BenefitsBlock screenSize={screenSize} advantages={advantages} />
             <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
-            <CustomersRelyBlock screenSize={screenSize} clients={clients} testimonials={testimonials} />
+            <CustomersRelyBlock />
             <Blog />
             <OpinionsBlock screenSize={screenSize} opinions={opinions} />
             <DetailsProductBlock product={product} screenSize={screenSize} />
@@ -125,6 +124,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
 
