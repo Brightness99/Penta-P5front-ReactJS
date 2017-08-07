@@ -5,9 +5,8 @@
  */
 
 import { REHYDRATE } from 'redux-persist/constants';
-import { createReducer, getScreenSize } from 'utils/helpers';
+import { createReducer } from 'utils/helpers';
 import { CartConstants } from 'constants/index';
-// import cartState from 'assets/json/cartMock.json';
 
 const cartState = {
   data: {},
@@ -65,8 +64,8 @@ export default {
           items: {
             ...state.data.items,
             [action.payload.itemId]: state.data.items[action.payload.originalItemId],
-          }
-        }
+          },
+        },
       };
     },
     [CartConstants.CART_DELETE_FETCH_SUCCESS](state, action) {
@@ -79,8 +78,8 @@ export default {
             .reduce((prevItem, currentItem) => ({
               ...prevItem,
               [currentItem]: state.data.items[currentItem],
-            }), {})
-        }
+            }), {}),
+        },
       };
     },
   }),
