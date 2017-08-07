@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { Glass } from 'components/Icons';
 import LogoScroll from 'components/LogoScroll';
@@ -92,7 +92,7 @@ export class Header extends React.Component {
   }
 
   renderMobile() {
-    const { screenSize } = this.props;
+    const { screenSize, dispatch } = this.props;
     const { showProduct, showProfile, sideBar } = this.state;
 
     const styles = {
@@ -116,14 +116,12 @@ export class Header extends React.Component {
             </div>
             <div>
               <div>
-                <Link to="#" className="cartIcon">
-                  <Cart />
-                </Link>
+                <Cart dispatch={dispatch} />
               </div>
               <div>
-                <Link to="#" className="accountIcon" id="profile" onClick={this.showToggleNav}>
+                <NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>
                   <Account />
-                </Link>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -186,14 +184,12 @@ export class Header extends React.Component {
                 </Link>
               </div>
               <div>
-                <Link to="#" className="accountIcon" id="profile" onClick={this.showToggleNav}>
+                <NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>
                   <Account />
-                </Link>
+                </NavLink>
               </div>
               <div>
-                <Link to="#" className="cartIcon">
-                  <Cart dispatch={dispatch} />
-                </Link>
+                <Cart dispatch={dispatch} />
               </div>
             </div>
           </div>
