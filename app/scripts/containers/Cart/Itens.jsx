@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import swal from 'sweetalert2';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { NavLink } from 'react-router-dom';
 import { cartDuplicateFetch, cartDeleteFetch } from 'actions';
@@ -117,8 +118,18 @@ export default class CartItens extends React.Component {
 
   handleDelete = (ev) => {
     const { dispatch } = this.props;
-
-    dispatch(cartDeleteFetch(ev.currentTarget.value));
+    const targetValue = ev.currentTarget.value;
+    swal({
+      title: "Você tem certeza?",
+      text: "Ao remover este produto ele não estará mais disponível no carrinho!",
+      type: "warning",
+      confirmButtonColor: "#2cac57",
+      confirmButtonText: "Sim",
+      cancelButtonText: "Não",
+      showCancelButton: true,
+      reverseButtons: true,
+    })
+      .then(() => dispatch(cartDeleteFetch(targetValue)));
   };
 
   renderActions(item, itemId) {
