@@ -120,5 +120,5 @@ export function isMobile(screenSize: string): boolean {
     console.warn('isMobile: screenSize param is empty, returning true for mobile first reasons'); // eslint-disable-line no-console
   }
 
-  return !['lg', 'xl', 'xxl'].includes(screenSize);
+  return !['lg', 'xl', 'xxl', 'xxxl'].includes(screenSize);
 }
