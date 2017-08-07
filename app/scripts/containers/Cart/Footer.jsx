@@ -1,39 +1,50 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { RoundedTransparentButton } from 'atoms/Buttons';
 import { FileTextOIcon } from 'components/Icons';
 
 type Props = {
   screenSize: string,
-};
-
-type State = {
+  dispatch: () => {},
 };
 
 export default class CartFooter extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {};
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
-  static state: State;
-
   renderDesktop() {
-    return null;
+    return (
+      <div className="org-cart-footer org-cart-footer--desktop">
+        <div>
+          <NavLink
+            to="http://dev-cms.printi.com.br/v1/customers/pdf_quotation/download"
+            target="new"
+            className="atm-button-transparent"
+          >
+            <FileTextOIcon /> Baixar Orçamento
+          </NavLink>
+        </div>
+        <NavLink to="/" className="atm-cart-shopping">Continuar comprando</NavLink>
+        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled">CONTINUAR</NavLink>
+      </div>
+    );
   }
 
   renderMobile() {
     return (
       <div className="org-cart-footer">
-        <Link to={{ pathname: '/' }} className="atm-cart-shopping">Continuar comprando</Link>
-        <RoundedTransparentButton><FileTextOIcon /> Baixar Orçamento</RoundedTransparentButton>
+        <NavLink to="/" className="atm-cart-shopping">Continuar comprando</NavLink>
+        <NavLink
+          to="http://dev-cms.printi.com.br/v1/customers/pdf_quotation/download"
+          target="new"
+          className="atm-button-transparent"
+        >
+          <FileTextOIcon /> Baixar Orçamento
+        </NavLink>
+        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled atm-button-stick-bottom">CONTINUAR</NavLink>
       </div>
     );
   }
