@@ -22,3 +22,6 @@ export SettingsArtCreationIcon from './SettingsArtCreation';
 export SettingsTweakIcon from './SettingsTweak';
 export SettingsUploadIcon from './SettingsUpload';
 export StarIcon from './Star';
+export HelpCenterIcon from './HelpCenterIcon';
+export Glass from './Glass';
+export Arrow from './Arrow';

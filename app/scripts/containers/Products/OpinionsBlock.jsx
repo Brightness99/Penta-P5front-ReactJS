@@ -81,7 +81,7 @@ export default class OpinionsBlock extends React.Component {
         <div className="opinion-boxText" key={item.id}>
           <p className="opinion-title">{item.title}</p>
           <ul className="opinion-stars">{this.renderStars(item.stars)}</ul>
-          <p>"{item.content}"</p>
+          <p className="opinion-text">"{item.content}"</p>
           <sub>{item.author}</sub>
         </div>
       )
@@ -99,7 +99,7 @@ export default class OpinionsBlock extends React.Component {
             {this.renderStars(item)}
           </ul>
           {this.loaderStars(stars[item])}
-          <p>{stars[item] || 0}</p>
+          <p className="opinions-star-number">{stars[item] || 0}</p>
         </div>
       )
     );
@@ -126,7 +126,7 @@ export default class OpinionsBlock extends React.Component {
         <div className="container-boxOpinions">
           <div className="box-opinions">
             <h5 className="opinion-titleNumber"><span>94</span>% dos clientes recomendam este produto</h5>
-            <p>Avaliação geral: {this.starSubtitle()} de {opinions.count} avaliações</p>
+            <p className="opinion-textEvaluation">Avaliação geral: {this.starSubtitle()} de {opinions.count} avaliações.</p>
             {this.renderListTotalOpinions()}
           </div>
           <div className="box-opinions">
