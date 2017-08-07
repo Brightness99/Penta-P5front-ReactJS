@@ -7,7 +7,6 @@ import { AppConstants, CartConstants } from 'constants/index';
 import cartAddPayloadMock from 'assets/json/mockCartAddPayload.json';
 import { push } from 'modules/ReduxRouter';
 
-const cartAddBody = cartAddPayloadMock;
 
 export function cartBasicFetch(action$) {
   return action$.ofType(CartConstants.CART_BASIC_FETCH_REQUEST)
@@ -88,7 +87,6 @@ export function cartAddFetch(action$) {
         method: 'POST',
       })
         .map(data => {
-          console.log(data);
           if (data.status === 201) {
             push('/meu-carrinho');
 
@@ -128,7 +126,6 @@ export function cartDuplicateFetch(action$) {
         method: 'PUT',
       })
         .map(data => {
-          console.log(data);
           if (data.status === 201) {
             return {
               type: CartConstants.CART_DUPLICATE_FETCH_SUCCESS,
@@ -169,12 +166,11 @@ export function cartDeleteFetch(action$) {
         method: 'DELETE',
       })
         .map(data => {
-          console.log(data);
           if (data.status === 204) {
             return {
               type: CartConstants.CART_DELETE_FETCH_SUCCESS,
               payload: {
-                itemId: itemId,
+                itemId,
               },
               meta: { updatedAt: getUnixtime() },
             };

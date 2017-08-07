@@ -13,7 +13,7 @@ import {
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
-  prepressDownloadFetch,
+  prepressDownloadFetch
 } from './settings';
 
 import {
@@ -21,7 +21,7 @@ import {
   cartFetch,
   cartAddFetch,
   cartDeleteFetch,
-  cartDuplicateFetch,
+  cartDuplicateFetch
 } from './cart';
 
 export default combineEpics(
