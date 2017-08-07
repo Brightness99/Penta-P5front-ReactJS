@@ -50,7 +50,7 @@ var config = merge.smart(webpackConfig, {
       title: NPMPackage.title,
       googleAnalytics: {
         trackingId: 'UA-33899521-1',
-      }
+      },
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),

@@ -1,0 +1,30 @@
+{
+  "zipcode":"05308000",
+  "sales_user_id":null,
+  "item":{
+    "final_product_id":"fbcard",
+    "type":"upload",
+    "product_parts":{
+      "pbcard":{
+        "format":"BizCard1",
+        "page":"02P",
+        "color":"4-4",
+        "stock":"couche_300m_cartao_4x4",
+        "finishing":"cuttg",
+        "refinement":"nof",
+        "extra":"ppnop"
+      }
+    },
+    "quantity":"5000",
+    "options":{
+      "production_type":"nprod",
+      "delivery_method":{
+        "id":"correios_sedex",
+        "business_days":3,
+        "price":0.99
+      },
+      "proof":"woprf",
+      "file_format":"ppdf"
+    }
+  }
+}

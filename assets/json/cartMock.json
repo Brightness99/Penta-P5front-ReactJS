@@ -1,0 +1,596 @@
+{
+  "items": {
+    "i_0": {
+      "final_product": {
+        "id": "fbcard",
+        "name": "Cartão de Visita"
+      },
+      "type": "upload",
+      "customized_template_id": null,
+      "chili_original_template_id": null,
+      "chili_final_template_id": null,
+      "chili_thumbnail": null,
+      "document_reference_url": null,
+      "is_cimpress_designer": false,
+      "thumbnail": null,
+      "project_name": "Cartão de Visita",
+      "upload_strategy": null,
+      "product_parts": {
+        "pbcard": {
+          "id": "pbcard",
+          "name": "Cartão de Visita",
+          "options": {
+            "format": {
+              "id": "BizCard1",
+              "name": "90 x 50 mm"
+            },
+            "page": {
+              "id": "02P",
+              "name": "Frente e Verso"
+            },
+            "color": {
+              "id": "4-4",
+              "name": "4x4 (colorido)"
+            },
+            "stock": {
+              "id": "couche_300m_cartao_4x4",
+              "name": "Couché Fosco 300g"
+            },
+            "finishing": {
+              "id": "cuttg",
+              "name": "Refile"
+            },
+            "refinement": {
+              "id": "nof",
+              "name": "Sem Enobrecimento"
+            },
+            "extra": {
+              "id": "ppnop",
+              "name": "Sem Extras"
+            }
+          }
+        }
+      },
+      "additional_options": {
+        "delivery_method": {
+          "id": "correios_sedex",
+          "name": "correios_sedex",
+          "business_days": 3
+        },
+        "file_format": {
+          "id": "ppdf",
+          "name": "Arquivo PDF (fechado p/ impressão)"
+        },
+        "production_type": {
+          "id": "nprod",
+          "name": "Normal",
+          "production_time": 4
+        },
+        "proof": {
+          "id": "woprf",
+          "name": "Checagem Padrão"
+        }
+      },
+      "zipcode": null,
+      "quantity": "5000",
+      "weight": 7.7625,
+      "business_days": 0,
+      "prices": {
+        "product": 118.995525,
+        "art_creation_price": 0,
+        "sales_extras": 0,
+        "additional_options": {
+          "delivery_method": 0.99,
+          "file_format": 0,
+          "production_type": 0,
+          "proof": 0
+        },
+        "total": 119.985525
+      },
+      "uploads": {},
+      "expected_delivery_date": "2017-07-28",
+      "production_due_date": "2017-07-25",
+      "upload_deadline_date": "2017-07-19",
+      "upload_deadline_time": "20:00:00",
+      "product_slug": {
+        "slug": "cartao-de-visita"
+      }
+    },
+    "i_1": {
+      "final_product": {
+        "id": "fbcard",
+        "name": "Cartão de Visita"
+      },
+      "type": "upload",
+      "customized_template_id": null,
+      "chili_original_template_id": null,
+      "chili_final_template_id": null,
+      "chili_thumbnail": null,
+      "document_reference_url": null,
+      "is_cimpress_designer": false,
+      "thumbnail": null,
+      "project_name": "Cartão de Visita",
+      "upload_strategy": null,
+      "product_parts": {
+        "pbcard": {
+          "id": "pbcard",
+          "name": "Cartão de Visita",
+          "options": {
+            "format": {
+              "id": "BizCard1",
+              "name": "90 x 50 mm"
+            },
+            "page": {
+              "id": "02P",
+              "name": "Frente e Verso"
+            },
+            "color": {
+              "id": "4-4",
+              "name": "4x4 (colorido)"
+            },
+            "stock": {
+              "id": "couche_300m_cartao_4x4",
+              "name": "Couché Fosco 300g"
+            },
+            "finishing": {
+              "id": "cuttg",
+              "name": "Refile"
+            },
+            "refinement": {
+              "id": "nof",
+              "name": "Sem Enobrecimento"
+            },
+            "extra": {
+              "id": "ppnop",
+              "name": "Sem Extras"
+            }
+          }
+        }
+      },
+      "additional_options": {
+        "delivery_method": {
+          "id": "correios_sedex",
+          "name": "correios_sedex",
+          "business_days": 3
+        },
+        "file_format": {
+          "id": "ppdf",
+          "name": "Arquivo PDF (fechado p/ impressão)"
+        },
+        "production_type": {
+          "id": "nprod",
+          "name": "Normal",
+          "production_time": 4
+        },
+        "proof": {
+          "id": "woprf",
+          "name": "Checagem Padrão"
+        }
+      },
+      "zipcode": null,
+      "quantity": "5000",
+      "weight": 7.7625,
+      "business_days": 0,
+      "prices": {
+        "product": 118.995525,
+        "art_creation_price": 0,
+        "sales_extras": 0,
+        "additional_options": {
+          "delivery_method": 0.99,
+          "file_format": 0,
+          "production_type": 0,
+          "proof": 0
+        },
+        "total": 119.985525
+      },
+      "uploads": {},
+      "expected_delivery_date": "2017-07-28",
+      "production_due_date": "2017-07-25",
+      "upload_deadline_date": "2017-07-19",
+      "upload_deadline_time": "20:00:00",
+      "product_slug": {
+        "slug": "cartao-de-visita"
+      }
+    },
+    "i_2": {
+      "final_product": {
+        "id": "fbcard",
+        "name": "Cartão de Visita"
+      },
+      "type": "upload",
+      "customized_template_id": null,
+      "chili_original_template_id": null,
+      "chili_final_template_id": null,
+      "chili_thumbnail": null,
+      "document_reference_url": null,
+      "is_cimpress_designer": false,
+      "thumbnail": null,
+      "project_name": "Cartão de Visita",
+      "upload_strategy": null,
+      "product_parts": {
+        "pbcard": {
+          "id": "pbcard",
+          "name": "Cartão de Visita",
+          "options": {
+            "format": {
+              "id": "BizCard1",
+              "name": "90 x 50 mm"
+            },
+            "page": {
+              "id": "02P",
+              "name": "Frente e Verso"
+            },
+            "color": {
+              "id": "4-4",
+              "name": "4x4 (colorido)"
+            },
+            "stock": {
+              "id": "couche_300m_cartao_4x4",
+              "name": "Couché Fosco 300g"
+            },
+            "finishing": {
+              "id": "cuttg",
+              "name": "Refile"
+            },
+            "refinement": {
+              "id": "nof",
+              "name": "Sem Enobrecimento"
+            },
+            "extra": {
+              "id": "ppnop",
+              "name": "Sem Extras"
+            }
+          }
+        }
+      },
+      "additional_options": {
+        "delivery_method": {
+          "id": "correios_sedex",
+          "name": "correios_sedex",
+          "business_days": 3
+        },
+        "file_format": {
+          "id": "ppdf",
+          "name": "Arquivo PDF (fechado p/ impressão)"
+        },
+        "production_type": {
+          "id": "nprod",
+          "name": "Normal",
+          "production_time": 4
+        },
+        "proof": {
+          "id": "woprf",
+          "name": "Checagem Padrão"
+        }
+      },
+      "zipcode": null,
+      "quantity": "5000",
+      "weight": 7.7625,
+      "business_days": 0,
+      "prices": {
+        "product": 118.995525,
+        "art_creation_price": 0,
+        "sales_extras": 0,
+        "additional_options": {
+          "delivery_method": 0.99,
+          "file_format": 0,
+          "production_type": 0,
+          "proof": 0
+        },
+        "total": 119.985525
+      },
+      "uploads": {},
+      "expected_delivery_date": "2017-07-28",
+      "production_due_date": "2017-07-25",
+      "upload_deadline_date": "2017-07-19",
+      "upload_deadline_time": "20:00:00",
+      "product_slug": {
+        "slug": "cartao-de-visita"
+      }
+    },
+    "i_3": {
+      "final_product": {
+        "id": "fbcard",
+        "name": "Cartão de Visita"
+      },
+      "type": "upload",
+      "customized_template_id": null,
+      "chili_original_template_id": null,
+      "chili_final_template_id": null,
+      "chili_thumbnail": null,
+      "document_reference_url": null,
+      "is_cimpress_designer": false,
+      "thumbnail": null,
+      "project_name": "Cartão de Visita",
+      "upload_strategy": null,
+      "product_parts": {
+        "pbcard": {
+          "id": "pbcard",
+          "name": "Cartão de Visita",
+          "options": {
+            "format": {
+              "id": "BizCard1",
+              "name": "90 x 50 mm"
+            },
+            "page": {
+              "id": "02P",
+              "name": "Frente e Verso"
+            },
+            "color": {
+              "id": "4-4",
+              "name": "4x4 (colorido)"
+            },
+            "stock": {
+              "id": "couche_300m_cartao_4x4",
+              "name": "Couché Fosco 300g"
+            },
+            "finishing": {
+              "id": "cuttg",
+              "name": "Refile"
+            },
+            "refinement": {
+              "id": "nof",
+              "name": "Sem Enobrecimento"
+            },
+            "extra": {
+              "id": "ppnop",
+              "name": "Sem Extras"
+            }
+          }
+        }
+      },
+      "additional_options": {
+        "delivery_method": {
+          "id": "correios_sedex",
+          "name": "correios_sedex",
+          "business_days": 3
+        },
+        "file_format": {
+          "id": "ppdf",
+          "name": "Arquivo PDF (fechado p/ impressão)"
+        },
+        "production_type": {
+          "id": "nprod",
+          "name": "Normal",
+          "production_time": 4
+        },
+        "proof": {
+          "id": "woprf",
+          "name": "Checagem Padrão"
+        }
+      },
+      "zipcode": null,
+      "quantity": "5000",
+      "weight": 7.7625,
+      "business_days": 0,
+      "prices": {
+        "product": 118.995525,
+        "art_creation_price": 0,
+        "sales_extras": 0,
+        "additional_options": {
+          "delivery_method": 0.99,
+          "file_format": 0,
+          "production_type": 0,
+          "proof": 0
+        },
+        "total": 119.985525
+      },
+      "uploads": {},
+      "expected_delivery_date": "2017-07-28",
+      "production_due_date": "2017-07-25",
+      "upload_deadline_date": "2017-07-19",
+      "upload_deadline_time": "20:00:00",
+      "product_slug": {
+        "slug": "cartao-de-visita"
+      }
+    },
+    "i_4": {
+      "final_product": {
+        "id": "fbcard",
+        "name": "Cartão de Visita"
+      },
+      "type": "upload",
+      "customized_template_id": null,
+      "chili_original_template_id": null,
+      "chili_final_template_id": null,
+      "chili_thumbnail": null,
+      "document_reference_url": null,
+      "is_cimpress_designer": false,
+      "thumbnail": null,
+      "project_name": "Cartão de Visita",
+      "upload_strategy": null,
+      "product_parts": {
+        "pbcard": {
+          "id": "pbcard",
+          "name": "Cartão de Visita",
+          "options": {
+            "format": {
+              "id": "BizCard1",
+              "name": "90 x 50 mm"
+            },
+            "page": {
+              "id": "02P",
+              "name": "Frente e Verso"
+            },
+            "color": {
+              "id": "4-4",
+              "name": "4x4 (colorido)"
+            },
+            "stock": {
+              "id": "couche_300m_cartao_4x4",
+              "name": "Couché Fosco 300g"
+            },
+            "finishing": {
+              "id": "cuttg",
+              "name": "Refile"
+            },
+            "refinement": {
+              "id": "nof",
+              "name": "Sem Enobrecimento"
+            },
+            "extra": {
+              "id": "ppnop",
+              "name": "Sem Extras"
+            }
+          }
+        }
+      },
+      "additional_options": {
+        "delivery_method": {
+          "id": "correios_sedex",
+          "name": "correios_sedex",
+          "business_days": 3
+        },
+        "file_format": {
+          "id": "ppdf",
+          "name": "Arquivo PDF (fechado p/ impressão)"
+        },
+        "production_type": {
+          "id": "nprod",
+          "name": "Normal",
+          "production_time": 4
+        },
+        "proof": {
+          "id": "woprf",
+          "name": "Checagem Padrão"
+        }
+      },
+      "zipcode": null,
+      "quantity": "5000",
+      "weight": 7.7625,
+      "business_days": 0,
+      "prices": {
+        "product": 118.995525,
+        "art_creation_price": 0,
+        "sales_extras": 0,
+        "additional_options": {
+          "delivery_method": 0.99,
+          "file_format": 0,
+          "production_type": 0,
+          "proof": 0
+        },
+        "total": 119.985525
+      },
+      "uploads": {},
+      "expected_delivery_date": "2017-07-28",
+      "production_due_date": "2017-07-25",
+      "upload_deadline_date": "2017-07-19",
+      "upload_deadline_time": "20:00:00",
+      "product_slug": {
+        "slug": "cartao-de-visita"
+      }
+    },
+    "i_5": {
+      "final_product": {
+        "id": "fbcard",
+        "name": "Cartão de Visita"
+      },
+      "type": "upload",
+      "customized_template_id": null,
+      "chili_original_template_id": null,
+      "chili_final_template_id": null,
+      "chili_thumbnail": null,
+      "document_reference_url": null,
+      "is_cimpress_designer": false,
+      "thumbnail": null,
+      "project_name": "Cartão de Visita",
+      "upload_strategy": null,
+      "product_parts": {
+        "pbcard": {
+          "id": "pbcard",
+          "name": "Cartão de Visita",
+          "options": {
+            "format": {
+              "id": "BizCard1",
+              "name": "90 x 50 mm"
+            },
+            "page": {
+              "id": "02P",
+              "name": "Frente e Verso"
+            },
+            "color": {
+              "id": "4-4",
+              "name": "4x4 (colorido)"
+            },
+            "stock": {
+              "id": "couche_300m_cartao_4x4",
+              "name": "Couché Fosco 300g"
+            },
+            "finishing": {
+              "id": "cuttg",
+              "name": "Refile"
+            },
+            "refinement": {
+              "id": "nof",
+              "name": "Sem Enobrecimento"
+            },
+            "extra": {
+              "id": "ppnop",
+              "name": "Sem Extras"
+            }
+          }
+        }
+      },
+      "additional_options": {
+        "delivery_method": {
+          "id": "correios_sedex",
+          "name": "correios_sedex",
+          "business_days": 3
+        },
+        "file_format": {
+          "id": "ppdf",
+          "name": "Arquivo PDF (fechado p/ impressão)"
+        },
+        "production_type": {
+          "id": "nprod",
+          "name": "Normal",
+          "production_time": 4
+        },
+        "proof": {
+          "id": "woprf",
+          "name": "Checagem Padrão"
+        }
+      },
+      "zipcode": null,
+      "quantity": "5000",
+      "weight": 7.7625,
+      "business_days": 0,
+      "prices": {
+        "product": 118.995525,
+        "art_creation_price": 0,
+        "sales_extras": 0,
+        "additional_options": {
+          "delivery_method": 0.99,
+          "file_format": 0,
+          "production_type": 0,
+          "proof": 0
+        },
+        "total": 119.985525
+      },
+      "uploads": {},
+      "expected_delivery_date": "2017-07-28",
+      "production_due_date": "2017-07-25",
+      "upload_deadline_date": "2017-07-19",
+      "upload_deadline_time": "20:00:00",
+      "product_slug": {
+        "slug": "cartao-de-visita"
+      }
+    }
+  },
+  "zipcode": "05308000",
+  "error": null,
+  "weight": 46.575,
+  "prices": {
+    "product": 713.97315,
+    "art_creation_price": 0,
+    "sales_extras_price": 0,
+    "additional_options": {
+      "delivery_method": 5.94,
+      "file_format": 0,
+      "production_type": 0,
+      "proof": 0
+    },
+    "total": 719.91315
+  },
+  "count": 6
+}

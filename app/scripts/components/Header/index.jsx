@@ -22,7 +22,8 @@ import ProfileMenu from './ProfileMenu';
 
 type Props = {
   screenSize: string,
-  links: {}
+  links: {},
+  dispatch: () => {},
 };
 
 type State = {
@@ -141,7 +142,7 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize } = this.props;
+    const { screenSize, dispatch } = this.props;
     const { showProduct, showProfile, sideBar } = this.state;
     const { logoScroll, logo } = this.state;
 
@@ -191,7 +192,7 @@ export class Header extends React.Component {
               </div>
               <div>
                 <Link to="#" className="cartIcon">
-                  <Cart />
+                  <Cart dispatch={dispatch} />
                 </Link>
               </div>
             </div>

@@ -5,6 +5,7 @@
 
 import app from './app';
 import blog from './blog';
+import cart from './cart';
 import locale from './locale';
 import products from './products';
 import settings from './settings';
@@ -14,6 +15,7 @@ import user from './user';
 export default {
   ...app,
   ...blog,
+  ...cart,
   ...locale,
   ...products,
   ...settings,

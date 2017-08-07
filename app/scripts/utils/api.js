@@ -68,7 +68,7 @@ export function rxAjax(action: Object = {}) {
 
   settings.headers = {
     ...settings.headers,
-    'Content-Type': 'application/json',
+    'Content-Type': settings.headers['Content-Type'] || 'application/json',
   };
 
   if (action.method !== 'GET') {
