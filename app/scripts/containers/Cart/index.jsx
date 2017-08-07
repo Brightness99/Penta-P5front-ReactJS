@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
-import { cartFetch, cartAddFetch } from 'actions';
+import { cartFetch } from 'actions';
 
 import Breadcrumbs from 'components/Breadcrumbs';
 import { PageTitle } from 'atoms/Titles';
@@ -31,12 +31,6 @@ export class Cart extends React.Component {
 
   static props: Props;
 
-  handleFakeAddToCart = () => {
-    const { dispatch } = this.props;
-
-    dispatch(cartAddFetch());
-  };
-
   renderContent() {
     const { app: { screenSize } } = this.props;
 
@@ -54,7 +48,7 @@ export class Cart extends React.Component {
           <CartCrossSell screenSize={screenSize} />
           <CartVoucher screenSize={screenSize} />
           <CartSummary screenSize={screenSize} totalItems={count} totalPrice={prices.total} />
-          <CartFooter screenSize={screenSize} />
+          <CartFooter screenSize={screenSize} dispatch={dispatch} />
         </main>
       </div>
     );
@@ -95,7 +89,6 @@ export class Cart extends React.Component {
         <Breadcrumbs links={breadcrumb} />
         <PageTitle>Seu Carrinho</PageTitle>
         { count > 0 ? this.renderContent() : <CartEmpty /> }
-        <button onClick={this.handleFakeAddToCart}>Add product to cart</button>
       </div>
     );
   }

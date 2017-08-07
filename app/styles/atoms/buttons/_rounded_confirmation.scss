@@ -1,13 +1,16 @@
 .atm-button-rounded {
+  align-items: center;
   background-color: #dbdddf;
   border: none;
   border-radius: 0.3rem;
   color: $color-white;
   cursor: not-allowed;
+  display: inline-flex;
   font-family: $font-family-open-sans;
   font-size: $font-size-xs;
   font-weight: bold;
   height: 4rem;
+  justify-content: center;
   letter-spacing: 0.1rem;
   outline: none;
   padding: 0 2rem;
@@ -16,5 +19,10 @@
   &--enabled {
     background-color: #36c265;
     cursor: pointer;
+  }
+
+  &:hover {
+    color: $color-white;
+    text-decoration: none;
   }
 }
