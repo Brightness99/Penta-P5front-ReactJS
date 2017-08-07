@@ -7,9 +7,9 @@
   box-sizing: border-box;
   padding: 0.1rem 0 0.1rem 0;
   background: $color-white;
-  height: 440px;
   @include lg {
     padding: 1rem 0 1rem 0;
+    height: 440px;
   }
 }
 
@@ -136,7 +136,6 @@
       width: 100%;
       overflow: hidden;
       position: relative;
-      height: 330px; 
       &__prev, &__next{
         svg{
           path{
@@ -174,6 +173,9 @@
       }
       .carouselBullet {
         z-index: 999;
+      }
+      @include lg {
+        height: 330px; 
       }
     }
     .productInformation-title {
@@ -465,12 +467,15 @@
         box-shadow: 0px 3px 5px 6px $color-lightGray2;
         z-index: 9;
         .benefitsCard-title{
-          width: 390px;
+          width: 100%;
           text-align: center;
           padding: 1.9rem 2rem;
           svg{
             width: 150px;
             height: 69px;
+          }
+          @include lg {
+            width: 390px;
           }
         }
         p{

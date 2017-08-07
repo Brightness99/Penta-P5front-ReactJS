@@ -71,7 +71,7 @@ export class InformationBlock extends React.Component {
     return (
       <section className="container-productInformation">
         <div className="box-productInformation">
-
+          <h4>Informações do produto</h4>
           <div>
             <TabNavigation>
               <span>Dicas</span>

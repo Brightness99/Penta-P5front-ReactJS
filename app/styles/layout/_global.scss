@@ -55,8 +55,7 @@ a {
 
 .app__main {
   // padding-top: 2rem;
-
   @include lg {
-    padding-top: ($header-height + $topbar-height + 2rem);
+    padding-top: 9.6rem;
   }
 }
