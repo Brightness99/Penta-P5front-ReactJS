@@ -1,3 +1,4 @@
+// truncate https://codepen.io/aj-foster/pen/emBYPW
 .app__main{
   background-color: #eeeeee;
 }
@@ -6,6 +7,7 @@
   box-sizing: border-box;
   padding: 0.1rem 0 0.1rem 0;
   background: $color-white;
+  height: 440px;
   @include lg {
     padding: 1rem 0 1rem 0;
   }
@@ -22,19 +24,17 @@
   //dentro do container pra baixo
   .product-title{
     font-weight: 400;
-    font-size: $font-size-xxl;
+    font-size: $font-size-xxx;
     text-align: center;
     @include lg{
       text-align: left;
     }
   }
   .product-subtitle{
-    font-weight: 400;
-    font-size: $font-size-sm;
+    font-size: $font-size-h5;
     text-align: center;
     @include lg{
       text-align: left;
-      font-weight: bold;
     }
   }
   .product-category{
@@ -44,26 +44,33 @@
   }  
   .box-product{
     flex: 1;
+    .list-item {
+      color: $color-lightGray;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      margin-top: 1.8rem;
+    }
     .product-price{
-      width: 220px;
-      margin: 0 auto;
       flex: 12;
+      margin: 0 auto;
       margin-top: 2.5rem;
+      width: 220px;
       .p-fnt-price{
+        color: $color-lightGray;
+        float: left;
         font-family: $font-family-open-sans;
         font-size: $font-size-xs;
-        float: left;
-        margin-top: 1.5rem;
+        margin: 1.5rem 0 0 0;
       }
       .fnt-price{
-        font-size: $font-size-xxl;
+        font-size: $font-size-il;
         font-weight: bold;
         float:left;
         color: $color-printi;
         .fnt-unit{
           font-family: $font-family-open-sans;
           font-size: $font-size-xs;
-          color: $color-black;
+          color: $color-lightGray;
           font-weight: normal;
         }
       }
@@ -76,9 +83,18 @@
         margin: inherit;
       }
     }
+    .btn-default {
+      font-size: $font-size-xxxs;
+      font-weight: 600;
+      line-height: 3;
+      letter-spacing: 1px;
+      &.btn-lg {
+        padding: 0.5rem 2.5rem;
+      }
+    }
     .spec-product{
-      font-family: $font-family-open-sans;
-      font-size: $font-size-xs;
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-xxxs;
       text-align: center;
       margin-top: 1rem;
       display: block;
@@ -104,7 +120,7 @@
       }
       .carousel__slide {
         img {
-          height: 370px;
+          height: 350px;
         }
       }
     }
@@ -113,7 +129,6 @@
 
 //Information 
 .container-productInformation {
-  margin: 4.5rem 0;
   display: flex;
   flex-direction: column;
   .box-productInformation {
@@ -121,18 +136,44 @@
       width: 100%;
       overflow: hidden;
       position: relative;
-      height: 433px; 
+      height: 330px; 
       &__prev, &__next{
         svg{
           path{
             fill: black;
+            fill-rule: evenodd;
+            opacity: .3;
           }
         }
+      }
+      &__prev {
+        left: -14px;
+        top: 45%;
+      }
+      &__next {
+        right: -14px;
+        top: 47%;
       }
       .carousel__slide{
         div{
           position: inherit;
         }
+        .card-productInformation{
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          height: 330px;
+          background-color: #fff;
+          box-sizing: border-box;
+          padding: 2rem 4rem;
+          position: relative;
+          @include lg {
+            flex-direction: row;
+          }
+        }
+      }
+      .carouselBullet {
+        z-index: 999;
       }
     }
     .productInformation-title {
@@ -147,14 +188,6 @@
       color: $color-darkGray;
       text-transform: uppercase;
       li {
-        flex: 1;
-        font-weight: bold;
-        text-align: center;
-        height: 25px;
-        margin-right: 5px;
-        font-family: $font-family-open-sans; 
-        border: 2px solid transparent;
-        cursor: pointer;
         &:last-of-type {
           margin-right: 0;
         }
@@ -174,9 +207,6 @@
           color: $color-gray;
         }
       }  
-      @include lg {
-        max-width: 53%; 
-      }
     }
     .card-productInformation {
       display: flex;
@@ -187,6 +217,8 @@
       padding: 4rem;
       .card-productInformation-image {
         flex: 1;
+        box-sizing: border-box;
+        padding-right: 2rem;
       }
       .card-productInformation-text {
         flex: 3;
@@ -194,8 +226,19 @@
         justify-content: center;
         text-align: left;
         .card-productInformation-title {
-          font-size: $font-size-h4;
+          font-family: $font-family-base;
+          font-size: $font-size-xxll;
           width: 100%;
+          font-weight: 300;
+          line-height: 0.83;
+          color: $color-almostBlack;
+        }
+        p {
+          font-family: $font-family-open-sans-light;
+          font-size: $font-size-h6;
+          font-weight: 300;
+          line-height: 1.88;
+          color: $color-lightGray;
         }
         @include lg {
           display: flex;
@@ -212,8 +255,10 @@
   margin: 4.5rem 0;
   .tutorial-title{
     text-transform: uppercase;
-    font-size: $font-size-h4;
-    font-family: $font-family-open-sans; 
+    font-size: $font-size-h6;
+    font-family: $font-family-open-sans-bold;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.8rem;
   }
   .container-boxTutorial{
     display: flex;
@@ -221,6 +266,10 @@
     .box-tutorial{
       position: relative;
       flex: 2;
+      .img-bigBox {    
+        width: 100%;
+        height: 420px;
+      }
       &:last-of-type{
         flex:1;
         overflow: auto;
@@ -228,8 +277,24 @@
           background-color: $color-white;
           height: 420px;
           box-sizing: border-box;
-          padding: 2rem;
+          padding: 1rem 2rem;
         }
+      }
+      .title-smallbox {
+        font-family: $font-family-open-sans-bold;
+        font-size: $font-size-sm;
+        line-height: 2.14;
+        letter-spacing: 1.4px;
+        color: $color-almostBlack;
+      }
+      .p-smallbox {
+        font-family: $font-family-open-sans;
+        font-size: $font-size-h5;
+        line-height: 1.33;
+        text-align: left;
+        color: $color-almostBlack;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
       }
       .tutorial-legendImg {
         position: relative;
@@ -264,29 +329,36 @@
 
 //Warranty
 .container-warranty {
-  margin: 4.5rem 0;
+  margin: 5.5rem 0 4.5rem 0;
   display: flex;
   flex-direction: column;
+  background-color: $color-lightGreenWarranty;
   .box-image-warranty {
     box-sizing: border-box;
     padding: 1rem;
     display: flex;
     justify-content: center;
-    background-color: $color-green;
+    img{
+      position: relative; 
+    }
     @include lg {
+      position: relative;
       flex: 1;
+      img{
+        position: absolute;
+        bottom: -12px;
+      }
     }
   }
   .box-text-warranty{
     box-sizing: border-box;
     padding: 1rem 2rem;
-    background-color: $color-white;
     display: flex;
     justify-content: center;
     flex-direction: column;
     .warranty-title{
-      font-size: $font-size-h4;
-      font-weight: 400;
+      font-size: $font-size-h5;
+      font-weight: bold;
     }
     .warranty-text{
       font-size: $font-size-sm;
@@ -299,12 +371,12 @@
   }
   .box-btn-warranty{
     flex: 1;
-    background-color: $color-white;
     position: relative;
     margin-top: 2rem;
     >div{
       .btn-default{
-        font-size: $font-size-xxs;
+        font-size: $font-size-xxxs;
+        font-family: $font-family-open-sans-semibold;
       }
       @include lg{
         margin: 0 -50% 0 0;
@@ -320,6 +392,7 @@
   }
   @include lg{
     flex-direction: row;
+    height: 120px;
   }
 }
 
@@ -342,24 +415,23 @@
       flex: 1;
       .benefitsCard-title{
         box-sizing: border-box;
-        padding: 3rem 2rem;
+        padding: 1.95rem 2rem;
         text-transform: uppercase;
-        font-weight: 600;
-        font-size: $font-size-sm;
       }
       p{
         background-color: $color-white; 
         margin-bottom: 0;
         text-align: center;
         box-sizing: border-box;
-        padding: 1rem 0;
+        padding: 0.8rem 0rem;
+        font-family: $font-family-open-sans;
         font-size: $font-size-xxs;
-        color: $color-darkGray;
+        color: $color-almostBlack;
         &:nth-of-type(2n-1) {
           background: #f9f9f9;
         }
         @include lg {
-          font-size: $font-size-sm;
+          font-size: $font-size-h6;
         }
         .checkIcon {
           svg {
@@ -391,19 +463,24 @@
       &:nth-of-type(2n){
         height: 496px;
         box-shadow: 0px 3px 5px 6px $color-lightGray2;
-        z-index: 999;
+        z-index: 9;
         .benefitsCard-title{
+          width: 390px;
           text-align: center;
           padding: 1.9rem 2rem;
           svg{
-            height: 9rem;
+            width: 150px;
+            height: 69px;
           }
         }
         p{
+          color: $color-lightGray;
+          font-size: $font-size-h6;
+          font-family: $font-family-open-sans-light;
           text-align: left;
-          padding: 1.1rem 2rem;
+          padding: 0.8rem 3rem;
           @include lg {
-          padding: 1.1rem 3rem;
+          padding: 0.8rem 3rem;
 
           }
         }
@@ -416,7 +493,7 @@
           }
         }
         @include lg {
-          height: 535px;
+          height: 505px;
         }
       }
       &:nth-of-type(2n-1){
@@ -429,8 +506,12 @@
       .benefitsCard-btn{
         display: flex;
         justify-content: center;
-        padding: 0.8rem 0;
+        padding: 1.6rem 0;
         background-color: $color-white;
+        .btn-default {
+          font-size: $font-size-xxxs;
+          font-family: $font-family-open-sans-semibold;
+        }
       }
     }
     @include lg{
@@ -444,8 +525,8 @@
     bottom: -1rem;
     color: $color-darkGray;
     @include lg {
-      right: 12%;
-      bottom: 8%;
+      right: 7rem;
+      bottom: 6rem;
       left: inherit;
     }
   }
@@ -456,8 +537,9 @@
   margin: 4.5rem 0;
   .graphicPlant-title{
     text-transform: uppercase;
-    font-size: $font-size-h4;
-    font-family: $font-family-open-sans; 
+    font-size: $font-size-h6;
+    font-family: $font-family-open-sans-bold; 
+    letter-spacing: 0.1rem;
   }
   .container-graphicPlant-block{
     display: flex;
@@ -470,22 +552,27 @@
         margin-right: inherit;
       }
       .graphicPlant-subtitle{
-        font-weight: 400;
-        margin-top: 1rem;
-        margin-bottom: 2.4rem;
-        font-size: $font-size-il;
+        margin: 2rem 0;
+        font-size: $font-size-h4;
+        font-family: $font-family-nunito-regular;
+        line-height: 1.48;
+        font-weight: lighter;
+        color: $color-almostBlack;
       }
       .fnt-text{
-        font-family: $font-family-open-sans; 
-        font-size: $font-size-sm;
-        font-weight: 400;
-        line-height: 2.4rem;
-        margin-bottom: 3rem;
+        font-family: $font-family-open-sans-light; 
+        font-size: $font-size-h6;
+        // margin-bottom: 3rem;
         color: $color-lightGray;
+        font-weight: 300;
+        line-height: 1.88;
       }
       .list-item{
-        font-size: $font-size-base;
         color: $color-lightGray;
+        font-weight: 300;
+        line-height: 1.88;
+        font-family: $font-family-open-sans-light; 
+        font-size: $font-size-h6;
       }
     }
     @include lg{
@@ -498,14 +585,28 @@
 .container-customersRely {
   margin: 4.5rem 0;
   .customersRely-title {   
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-base;
+    letter-spacing: 0.1rem;
     text-transform: uppercase;
-    font-size: $font-size-h4;
-    font-family: $font-family-open-sans; 
+    margin-bottom: 1.8rem;
+  }
+  .box-images-logo {
+    box-sizing: border-box;
+    padding: 3.7rem 0;
+    height: 120px;
+    border-radius: 6px;
+    background-color: $color-white;
+    img {
+      width: 100%;
+      height: 46px;
+      display: block;
+      margin: 0 auto;
+    }
   }
   .container-commentsClients{
     display: flex;
     flex-direction: column;
-    //margin-bottom: 12rem;
     .box-commentClient{
       flex: 1;
       position: relative;
@@ -515,26 +616,35 @@
         padding: 3.2rem 2rem;
         color: $color-darkGray;
         background-color: $color-white;
-        font-size: $font-size-sm;
+        font-family: $font-family-open-sans;
+        font-size: $font-size-xs;
+        line-height: 1.67;
       }
       .commentClient-img{
-        bottom: -85px;
+        bottom: -80px;
         position: absolute;
         width: 100%;
         img{
           display: block;
           margin: 0 auto;
         }
-        @include lg{
-          //flex-direction: column;
-        }
         .commentClient-name{
           font-weight: bold;
           text-align: center;
           margin-bottom: 0;
+          color: $color-almostBlack;
+          font-family: $font-family-open-sans;
+          font-size: $font-size-h6;
+          font-weight: 600;
+          line-height: 0.75;
+          margin: 1rem 0;
         }
         .commentClient-profession{
           text-align: center;
+          font-family: $font-family-open-sans;
+          font-size: $font-size-xs;
+          line-height: 1;
+          color: $color-almostBlack;
         }
       }
       @include lg{
@@ -563,9 +673,11 @@
 .container-blog {
    margin: 4.5rem 0;
    .blog-title {
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-h5;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.8rem;
     text-transform: uppercase;
-    font-size: $font-size-h4;
-    font-family: $font-family-open-sans; 
    }
   .box-blogCards {
     display: flex;
@@ -573,8 +685,8 @@
     flex-wrap: wrap;
     .blogCard {
       flex: 1;
-      height: 420px;
       position: relative;
+      color: $color-black;
       background-color: $color-white; 
       box-sizing: border-box;
       margin-right: 0; 
@@ -602,16 +714,43 @@
         padding: 2rem;
         height: auto;
         .titlePost {
-          font-size: $font-size-base;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.1rem;
+          font-family: $font-family-nunito-regular;
+          font-size: $font-size-h5;
+          font-weight: 400;
+          line-height: 2rem;
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          box-orient: vertical;
         }
         p {
-          font-size: $font-size-xs;
+          font-size: $font-size-xxs;
+          font-family: $font-family-open-sans;
+          color: $color-lightGray;
+          font-weight: 300;
+          //line-height: 2rem;
         }
+        /*.container-truncate {
+          display: flex;
+          flex-basis: 300px;
+          overflow: hidden;
+          .truncate {
+            display: block;
+            height: 300px;
+            background-color: red;
+            flex-grow: 1;
+            flex-shrink: 1;
+            .titlePost {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }*/
       }
       .hourglassText {
         position: absolute;
-        bottom: 1.5rem;
+        bottom: 1rem;
         display: table;
         span{
           display: table-cell;
@@ -636,10 +775,14 @@
 
 .opinions-percentual-stars{
   display: flex;
+  .opinions-star-number {
+    font-family: $font-family-open-sans;
+    font-size: $font-size-base;
+    color: $color-almostBlack;
+  }
 }
 
 .opinion-stars {
-  //display: flex;
   display: inline-flex;
   padding:0;
   &-item {
@@ -713,14 +856,17 @@
 .container-opinions{
   margin: 6rem 0;
   .opinions-title {   
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-base;
+    letter-spacing: 0.1rem;
+    margin-bottom: 3rem;
     text-transform: uppercase;
-    font-size: $font-size-h4;
-    font-family: $font-family-open-sans; 
-    margin-bottom: 2rem;
   }
   .opnions-subtitle{
     font-size: $font-size-xl;
     font-weight: 500;
+    color: $color-almostBlack;
+    font-family: $font-family-nunito-regular;
   }
   .container-boxOpinions{
     display: flex;
@@ -757,14 +903,17 @@
         form{
           display: flex;
           .input-text{
-            flex:5;
+            flex:7;
             border: none;
             box-sizing: border-box;
             padding: 0.6rem;
+            font-family: $font-family-open-sans-light;
+            font-size: $font-size-base;
           }
           .input-submit{
             flex: 1;
             &.btn-lg{
+              font-size: $font-size-xs;
               padding: 1.25rem 1.25rem;
             }
           }
@@ -774,22 +923,40 @@
         }
       }
       .opinion-titleNumber{
-        font-weight: 500;
+        font-family: $font-family-open-sans;
+        font-size: $font-size-base;
+        color: $color-almostBlack;
         span{
           font-weight: 600;
           font-size: $font-size-xl;
+        }
+      }
+      .opinion-textEvaluation {
+        font-family: $font-family-open-sans;
+        font-size: $font-size-xs;
+        color: $color-lightGray;
+        .opinion-stars {
+          margin-left: 0.4rem;
         }
       }
       .opinion-boxText{
         margin: 2rem 0 0rem 0;
         padding-bottom: 2rem;
         border-bottom: 1px solid $color-hrLightGray;
-        .opinion-title{
-          font-weight: bold;
+        .opinion-text {
+          font-family: $font-family-open-sans-light;
           font-size: $font-size-base;
+          color: $color-almostBlack;
+        }
+        .opinion-title{
+          font-size: $font-size-base;
+          font-family: $font-family-open-sans-bold;
         }
         sub{
+          font-family: $font-family-open-sans;
+          font-size: $font-size-xs;
           font-style: italic;
+          color: $color-lightGray;
         }
         @include lg{
           margin: 2rem 0;
@@ -827,19 +994,22 @@
 .container-detailsProduct{
   margin: 4.5rem 0;
   .detailsProduct-title{
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-base;
+    letter-spacing: 0.1rem;
     text-transform: uppercase;
-    font-size: $font-size-h4;
-    font-family: $font-family-open-sans; 
+    color: $color-almostBlack;
   }
   .detailsProduct-subtitle{
-    font-weight: 400;
-    font-size: $font-size-h4;
+    font-weight: lighter;
+    font-size: $font-size-xl;
+    font-family: $font-family-nunito-regular;
   }
   .box-detailsProduct{
-    margin: 2rem 0;
+    margin: 2.3rem 0;
     .fnt-text{
       font-family: $font-family-open-sans; 
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
       font-weight: 400;
       color: $color-lightGray;
     }
@@ -848,23 +1018,33 @@
 
 //Product Block
 .container-printiProduct{
-  //background: url('assets/media/images/bg-imrpima.png');
   box-sizing: border-box;
   padding: 4rem 2rem;
   background-color: #000;
   .printiProduct-title{
-    font-size: $font-size-xxl;
     text-align: center;
     color: $color-white;
+    font-size: $font-size-h4;
+    letter-spacing: -0.7px;
+    font-weight: 500;
+    @include lg {
+      font-size: $font-size-xxl;
+    }
   }
   .box-btn-printiProduct{
     display: flex;
     justify-content: center;
     margin: 1.5rem 0;
+    .btn-default {
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xxxs;
+    }
   }
   .fnt-text{
     text-align: center;
-    color: $color-white;
+    font-family: $font-family-open-sans;
+    font-size: $font-size-h6;
+    color: $color-hrLightGray;
   }
 }
 
@@ -895,7 +1075,8 @@
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
-  font-size: $font-size-xs;
+  font-family: $font-family-open-sans-semibold;
+  font-size: $font-size-xxxs;
   letter-spacing: 0.2rem;
   font-weight: bold;
   line-height: 1.42857143;
@@ -909,6 +1090,7 @@
   border: 1px solid transparent;
   border-radius: 3px;
   border:none;
+  letter-spacing: 1px;
   &.btn-primary {
     background-color: $color-green; 
     &:hover{
@@ -964,18 +1146,12 @@
   .slider-wrapper {
     width: 100%;
     height: 400px;
-    //margin-left: auto;
-    //margin-right: auto;
-    //margin-top: 0px;
     overflow: hidden;
     .slider-images {
       width: 2400px;
       height: 400px;
       clear: both;
       position: relative;            
-      -webkit-transition: left 2s;
-      -moz-transition: left 2s;
-      -o-transition: left 2s;
       transition: left 2s;
       li{
         float: left;
@@ -992,13 +1168,8 @@
 //carousel
 .carousel{
   width: 100%;
-  //height: 304px;
   overflow: hidden;
   position: relative;
-  @include lg{
-    //width: 530px; 
-    //height: 420px;
-  }
   button{
     fill: $color-white;
     fill-rule:evenodd;
@@ -1009,17 +1180,37 @@
     }
   }
   .carouselBullet{
+    //position: absolute;
+    //bottom: 10%;
+    //left: 7%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     position: absolute;
-    bottom: 10%;
-    left: 7%;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
     button{
-      background: #fff;
+      /*background: #fff;
       display: block;
       border-radius: 100%;
       height: 15px;
       width: 15px;
       float: left;
       margin-right: 9px;
+      opacity: .5;
+      cursor: pointer;
+      font-size: 0;
+      box-sizing: inherit;*/
+
+      //border: 1px solid;
+      display: inline-block;
+      margin: 0 5px;
+      border-radius: 100%;
+      height: 15px;
+      width: 15px;
       opacity: .5;
       cursor: pointer;
       font-size: 0;
@@ -1034,23 +1225,11 @@
     img{
       width: 100%;
     }
-    .card-productInformation{
-      display: flex;
-      flex-direction: column;
-      margin: 4.5rem 0;
-      background-color: #fff;
-      box-sizing: border-box;
-      padding: 4rem;
-      @include lg {
-        flex-direction: row;
-      }
-    }
   }
   
   &__prev, &__next{
     cursor: pointer;
     position: absolute;
-    //background: rgba(0,0,0,.6);
     background-color: transparent;
     border: none;
     font-size: 32px;
@@ -1061,17 +1240,15 @@
     line-height: 60px;
     top: 50%;
     margin-top: -30px;
-    z-index: 1000;
+    z-index: 9;
   }
   
   &__prev{
-    //left: 40px;
     left: 0;
     transform: rotate(180deg)
   }
   
   &__next{
-    //right: 40px;
     right: 0;
   }
   
@@ -1088,92 +1265,4 @@
       background-size: cover;
     }
   }
-}
-
-.translate-enter {
-  transform: translateX(100vw);
-}
-
-.translate-enter.translate-enter-active {
-  transform: translateX(0);
-  transition: all 500ms ease-in-out;
-}
-
-.translate-leave {
-  transform: translateX(0);
-}
-
-.translate-leave.translate-leave-active {
-  transform: translateX(-100vw);
-  transition: all 500ms ease-in-out;
-}
-
-.scale-appear, .blur-appear, .rotate-appear, .translate-appear{
-  filter: grayscale(100%);
-  transition: all 1000ms ease-in-out;
-}
-
-.scale-appear.scale-appear-active, .blur-appear.blur-appear-active, .rotate-appear.rotate-appear-active, .translate-appear.translate-appear-active{
-  filter: grayscale(0);
-}
-.scale-enter {
-  transform: scale(1);
-}
-
-.scale-enter.scale-enter-active {
-  transform: scale(1);
-  transition: all 500ms ease-in-out;
-}
-
-.scale-leave {
-  transform: scale(1);
-  opacity: 1;
-}
-
-.scale-leave.scale-leave-active {
-  transform: scale(1.2);
-  opacity: .01;
-  transition: all 500ms ease-in-out;
-}
-
-.blur-enter {
-  transform: scale(1);
-}
-
-.blur-enter.blur-enter-active {
-  transform: scale(1);
-  transition: all 500ms ease-in-out;
-}
-
-.blur-leave {
-  transform: scale(1);
-  opacity: 1;
-}
-
-.blur-leave.blur-leave-active {
-  filter: blur(40px);
-  opacity: .01;
-  transition: all 500ms ease-in-out;
-}
-
-.rotate-enter {
-  filter: hue-rotate(-180deg);
-  opacity: .01;
-}
-
-.rotate-enter.rotate-enter-active {
-  filter: hue-rotate(0deg);
-  opacity: 1;
-  transition: all 500ms ease-in-out;
-}
-
-.rotate-leave {
-  filter: hue-rotate(0deg);
-  opacity: 1;
-}
-
-.rotate-leave.rotate-leave-active {
-  filter: hue-rotate(180deg);
-  opacity: .01;
-  transition: all 500ms ease-in-out;
 }

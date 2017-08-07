@@ -30,8 +30,10 @@ export class BlogBlock extends React.Component {
       <div className="blogCard" key={item.id}>
         <span className="titleCategory">Biblioteca</span>
         <img src={item.image} alt="Papel" />
-        <div className="blogCard-text">
-          <h5 className="titlePost">{item.title}</h5>
+        <div className="blogCard-text" id="bla bla bla">
+          <div className="truncate">
+            <h5 className="titlePost">{item.title}</h5>
+          </div>
           <p>{item.content}</p>
           <sub className="hourglassText">
             <HourglassIcon />

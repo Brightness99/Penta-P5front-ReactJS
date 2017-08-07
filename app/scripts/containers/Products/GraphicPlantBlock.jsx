@@ -22,14 +22,13 @@ export class GraphicPlantBlock extends React.Component {
     const { graphic_plant } = this.props;
 
     return graphic_plant.LIST.map((item) => (
-      <ul className="list-item awol-pdd awol-list-style" key={`list-${item}`}>
-        <li>{item}</li>
-      </ul>
+      <li key={`list-${item}`}>{item}</li>
     ));
   }
 
   renderMobile() {
     const { graphic_plant } = this.props;
+
     return (
       <section className="container-graphicPlant">
         <h4 className="graphicPlant-title">{graphic_plant.OVER_TITLE}</h4>
@@ -39,7 +38,9 @@ export class GraphicPlantBlock extends React.Component {
         <div className="box-graphicPlant">
           <h4 className="graphicPlant-subtitle">{graphic_plant.TITLE}</h4>
           <p className="fnt-text">{graphic_plant.PARAGRAPH}</p>
-          {this.renderListGraphic()}
+          <ul className="list-item awol-pdd awol-list-style">
+            {this.renderListGraphic()}
+          </ul>
         </div>
       </section>
     );
@@ -55,7 +56,9 @@ export class GraphicPlantBlock extends React.Component {
           <div className="box-graphicPlant">
             <h4 className="graphicPlant-subtitle">{graphic_plant.TITLE}</h4>
             <p className="fnt-text">{graphic_plant.PARAGRAPH}</p>
-            {this.renderListGraphic()}
+            <ul className="list-item awol-pdd awol-list-style">
+              {this.renderListGraphic()}
+            </ul>
           </div>
           <div className="box-graphicPlant">
             <Carousel>

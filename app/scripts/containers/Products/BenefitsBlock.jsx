@@ -23,13 +23,13 @@ export default class BenefitsBlock extends React.Component {
       <p key={`advantages-${item}`}><i className="checkIcon"><CheckIcon /></i>{item}</p>
     ));
   }
+  //  <h4 className="benefits-title">{advantages.TITLE}</h4>
 
   render() {
     const { advantages } = this.props;
 
     return (
       <section className="container-benefits">
-        <h4 className="benefits-title">{advantages.TITLE}</h4>
         <div className="container-benefitsCard">
           <div className="box-benefitsCard">
             <p className="benefitsCard-title">{advantages.OTHER_ONLINE_PRINTING_COMPANIES}</p>

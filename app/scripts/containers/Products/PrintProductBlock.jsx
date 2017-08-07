@@ -13,15 +13,8 @@ type Props = {
 };
 
 export class PrintiProductBlock extends React.Component {
-  static defaultProps = {
-    screenSize: 'xs',
-  };
 
   props: Props;
-
-  renderMobile() {
-    return false;
-  }
 
   textTitle() {
     const { product, print } = this.props;
@@ -30,7 +23,7 @@ export class PrintiProductBlock extends React.Component {
     );
   }
 
-  renderDesktop() {
+  render() {
     const { print } = this.props;
 
     const styles = {
@@ -43,24 +36,11 @@ export class PrintiProductBlock extends React.Component {
         <h4 className="printiProduct-title">{this.textTitle()}</h4>
         <div className="box-btn-printiProduct">
           <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">
-          configure aqui
+          configure este produto
           </Link>
         </div>
         <p className="fnt-text">{print.QUESTIONS}</p>
       </section>
-    );
-  }
-
-  render() {
-    const { screenSize } = this.props;
-    return (
-      <div>
-        {
-          ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-            ? this.renderMobile()
-            : this.renderDesktop()
-        }
-      </div>
     );
   }
 

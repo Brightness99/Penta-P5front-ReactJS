@@ -1,11 +1,24 @@
 // @flow
 
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { Glass } from 'components/Icons';
+import LogoScroll from 'components/LogoScroll';
+import Overlay from 'components/Overlay';
+
 import Topbar from './Topbar';
 import Logo from './Logo';
 import Account from './Account';
 import Cart from './Cart';
 import Bag from './Bag';
+import ArrowMenu from './ArrowMenu';
+import Menu from './Menu';
+import Sidebar from './Sidebar';
+
+import ProductsMenu from './ProductsMenu';
+import ProfileMenu from './ProfileMenu';
+
 
 type Props = {
   screenSize: string,
@@ -13,86 +26,186 @@ type Props = {
 };
 
 type State = {
-  open: boolean,
+  showProduct: boolean,
+  showProfile: boolean,
+  isHide: boolean,
+  logo: boolean,
+  sideBar: boolean
 };
 
-//https://codepen.io/danbuda/post/a-react-navbar-component
-//https://stackoverflow.com/questions/28072196/a-hover-button-in-react-js
-//https://codepen.io/kjamshaid/pen/yJqAzw
-//https://stackoverflow.com/questions/30135351/toggle-dropdown-menu-in-reactjs
-//https://stackoverflow.com/questions/39974486/accordion-sidebar-menu-using-nav-components-with-react-bootstrap
-//https://jsfiddle.net/jL3yyk98/
-
-//hover
-//https://jsfiddle.net/qfLzkz5x/8/
-//https://stackoverflow.com/questions/29981236/how-do-you-hover-in-reactjs-onmouseleave-not-registered-during-fast-hover-ove
-//https://stackoverflow.com/questions/41937093/in-react-onmouseenter-or-hover-is-not-working-as-expected
-//https://jsfiddle.net/qfLzkz5x/8/
-
-//sidebar
-//http://plnkr.co/edit/fojeyUjllAJ5UYejYf0m?p=preview
-//http://reactjsexample.com/tag/sidebar/
-//https://codepen.io/jackrugile/pen/lCDIL
-//https://codepen.io/sirJconny/pen/BRzQEx
-
-//show and hide
-//https://stackoverflow.com/questions/24502898/show-or-hide-element
-
 export class Header extends React.Component {
+
   constructor(props) {
     super(props);
-
     this.state = {
-      open: false,
+      showProduct: false,
+      showProfile: false,
+      sideBar: false,
+      isHide: false,
+      logo: true,
     };
+    this.showToggleNav = this.showToggleNav.bind(this);
   }
 
   static defaultProps = {
     screenSize: 'xs',
   };
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
   static props: Props;
   state: State;
 
+  handleScroll = () => {
+    const windowScrollPosition = document.body.scrollTop;
+
+    if (windowScrollPosition > 40) {
+      this.setState({ logoScroll: true, logo: false });
+    } else {
+      this.setState({ logoScroll: false, logo: true });
+    }
+  };
+
+  showToggleNav = (e) => {
+    const { showProduct, showProfile, sideBar } = this.state;
+    // console.log('menu', e.currentTarget.className === 'menu title-logo-menu');
+    console.log('menu', e.currentTarget.className);
+    if (e.currentTarget.className === 'title-logo-menu products') {
+      this.setState({
+        showProduct: !showProduct,
+      });
+    } else if (e.currentTarget.className === 'accountIcon') {
+      this.setState({
+        showProfile: !showProfile,
+      });
+    } else if (e.currentTarget.className === 'title-logo-menu menu') {
+      this.setState({
+        sideBar: !sideBar,
+      });
+    }
+  }
+
   renderMobile() {
+    const { screenSize } = this.props;
+    const { showProduct, showProfile, sideBar } = this.state;
+
+    const styles = {
+      backgroundImage: `url('${require('../../../../assets/media/svg/icon-search.svg')}')`,
+      backgroundSize: '20px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+    };
+
     return (
       <header className="app__header">
-        <Logo />
+        <div>
+          <div className="app__header__container container">
+            <div>
+              <div className="menu">
+                <Link className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
+                  <Menu />
+                </Link>
+              </div>
+              <Logo />
+            </div>
+            <div>
+              <div>
+                <Link to="#" className="cartIcon">
+                  <Cart />
+                </Link>
+              </div>
+              <div>
+                <Link to="#" className="accountIcon" id="profile" onClick={this.showToggleNav}>
+                  <Account />
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="box-search-mobile">
+            <form>
+              <input type="text" placeholder="Procure por produtos ou informações" className="input-text" />
+              <input type="submit" value="" className="btn-default btn-lg" style={styles} />
+            </form>
+          </div>
+        </div>
+        <div>
+          {sideBar && (<Sidebar screenSize={screenSize} />)}
+        </div>
       </header>
     );
   }
 
   renderDesktop() {
+    const { screenSize } = this.props;
+    const { showProduct, showProfile, sideBar } = this.state;
+    const { logoScroll, logo } = this.state;
+
+    const styles = {
+      backgroundImage: `url('${require('../../../../assets/media/svg/icon-search.svg')}')`,
+      backgroundSize: '20px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+    };
 
     return (
-      <header className="app__header">
-        <Topbar />
-        <div className="app__header__container container">
-          <div>
-            <Logo />
-            <div className="menu">
-              <p className="title-logo-menu">Menu</p>
-            </div>
+      <header className={"app__header" + (logoScroll ? ' container-headerScroll' : '')} onScroll={this.handleScroll}>
+        { logo && (<Topbar />) }
+        <div>
+          <div className={"app__header__container container" + (logoScroll ? ' headerScroll' : '')}>
             <div>
-              <p className="title-logo-menu">Produtos</p>
+              { logo && (<Logo />) }
+              { logoScroll && (<div><LogoScroll /></div>) }
+              <div className="menu">
+                <Link className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
+                  <Menu /><span>Menu</span>
+                </Link>
+              </div>
+              <div className="arrowProduct">
+                <Link className="title-logo-menu products" to="#" onClick={this.showToggleNav}>
+                  <ArrowMenu />Produtos
+                </Link>
+              </div>
+            </div>
+            <div className="box-search">
+              <form>
+                <input type="text" placeholder="Procure por produtos ou informações..." className="input-text" />
+                <input type="submit" value="" className="btn-default btn-secondary btn-lg" style={styles} />
+              </form>
+            </div>
+            <div className="box-bag-account-cart">
+              <div className="box-bag-text">
+                <Link to="#" className="title-logo-menu">
+                  <Bag />
+                  <span>atendimento exclusivo</span>
+                </Link>
+              </div>
+              <div>
+                <Link to="#" className="accountIcon" id="profile" onClick={this.showToggleNav}>
+                  <Account />
+                </Link>
+              </div>
+              <div>
+                <Link to="#" className="cartIcon">
+                  <Cart />
+                </Link>
+              </div>
             </div>
           </div>
-          <div className="box-search">
-            <input type="text" placeholder="Procure por produtos ou informações" className="input-text" />
-            <input type="submit" value="lupa" className="btn-default btn-secondary btn-lg" />
+        </div>
+
+        <div className="container-allSubmenus">
+          <div className="container">
+            {showProduct && (<ProductsMenu />)}
+            {showProfile && (<ProfileMenu />)}
           </div>
-          <div className="box-bag-account-cart">
-            <div>
-              <Bag />
-              <p className="title-logo-menu">atendimento exclusivo</p>
-            </div>
-            <div>
-              <Account />
-            </div>
-            <div>
-              <Cart />
-            </div>
-          </div>
+        </div>
+        <div>
+          {sideBar && (<Sidebar screenSize={screenSize} />)}
         </div>
       </header>
     );
