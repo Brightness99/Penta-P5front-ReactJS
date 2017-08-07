@@ -1,0 +1,64 @@
+.org-products-details-modal {
+  padding: 2rem;
+
+  .mol-product-details-modal {
+    display: flex;
+
+    > .atm-cart-product-image,
+    > .mol-cart-product-details-body {
+      display: inline-flex;
+    }
+  }
+
+}
+
+.atm-product-details-modal-title {
+  font-family: $font-family-open-sans-bold;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.mol-cart-product-details-body {
+  color: #6a6f7a;
+  flex-direction: column;
+  font-size: 12px;
+  font-family: $font-family-open-sans-regular;
+  justify-content: center;
+  margin-bottom: 0;
+  padding-left: 2rem;
+
+  > li {
+    > * {
+      line-height: 1.7;
+    }
+
+    > span {
+      color: $color-almostBlack;
+      font-weight: bold;
+    }
+
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.atm-cart-product-image {
+  @include center-child-flex;
+  align-self: center;
+  border: 0.1rem solid #c7c9cb;
+  display: inline-flex;
+  height: 13rem;
+  max-height: 13rem;
+  max-width: 13rem;
+  min-height: 13rem;
+  min-width: 13rem;
+  width: 13rem;
+
+  > img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+  }
+}

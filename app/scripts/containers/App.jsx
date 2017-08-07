@@ -13,6 +13,7 @@ import Home from 'containers/Home';
 import Error404 from 'containers/Errors/404';
 import Products from 'containers/Products';
 import Authentication from 'containers/Authentication';
+import Cart from 'containers/Cart';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -30,6 +31,10 @@ export class App extends React.Component {
     window.addEventListener('resize', this.handleScreenResize);
 
     this.handleScreenResize(true);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleScreenResize);
   }
 
   static props: Props;
@@ -52,7 +57,7 @@ export class App extends React.Component {
       html = (
         <Router dispatch={dispatch} router={router}>
           <div key="app" className="app">
-            <Header screenSize={app.screenSize} />
+            <Header screenSize={app.screenSize} dispatch={dispatch} />
             <main className="app__main">
               <Switch>
                 <Route exact path="/" component={Home} />
@@ -60,6 +65,7 @@ export class App extends React.Component {
                 <Route path="/produtos-:slug" component={Products} />
                 <Route path="/login-cadastro" component={Authentication} />
                 <Route exact path="/test" component={Home} />
+                <Route path="/meu-carrinho" component={Cart} />
                 <Route exact path="/404" component={Error404} />
                 <Route component={Error404} />
               </Switch>

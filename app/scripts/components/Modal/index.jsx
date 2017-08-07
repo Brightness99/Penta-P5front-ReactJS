@@ -7,6 +7,7 @@ import Overlay from 'components/Overlay';
 import { TimesCircleIcon } from 'components/Icons';
 
 type Props = {
+  className: string,
   children?: any,
   closeOnEsc?: boolean,
   dimensions?: {},
@@ -123,6 +124,7 @@ export default class Modal extends React.Component {
     const {
       children,
       title,
+      className,
     } = this.props;
 
     return (
@@ -142,7 +144,9 @@ export default class Modal extends React.Component {
               <TimesCircleIcon />
             </a>
           </div>
-          <div className="app__modal__container__content">
+          <div
+            className="app__modal__container__content"
+          >
             {!isReady || children}
           </div>
         </div>

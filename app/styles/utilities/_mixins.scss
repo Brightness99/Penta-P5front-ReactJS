@@ -138,3 +138,7 @@ $position: left) {
     }
   }
 }
+
+@mixin border-radius() {
+  border-radius: 0.3rem;
+}
