@@ -187,7 +187,9 @@ export class Home extends React.Component {
             <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2017-03/1490382283_bannerhome.png" alt="Agora a maior gráfica online do Brasil oferece produtos gráficos para você conhecer a Qualidade Printi" />
             <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-12/banner-home-soft-touch.jpg" alt="Soft Touch - O toque que faltava no seu material agora na maior gráfica do Brasil" />
           </Carousel>
+        </div>
 
+        <div className="container"> 
           <section className="home-slider">
             <nav className="tabNavigation">
               <ul className="list-item awol-pdd awol-list-style">
@@ -286,7 +288,9 @@ export class Home extends React.Component {
               </div>
             </div>
           </section>
+        </div>
 
+        <div className="container">
           <section className="container-highlight">
             <h4 className="title-highlight">Destaques</h4>
             <div className="boxes-highlight">
@@ -316,17 +320,15 @@ export class Home extends React.Component {
               </div>
             </div>
           </section>
-
-          <CustomersRelyBlock />
-          <Blog />
         </div>
+        <CustomersRelyBlock />
+        <Blog />
       </div>
     );
   }
 
   render() {
     const { app: { screenSize } } = this.props;
-    console.log(screenSize);
 
     return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
       ? this.renderMobile()

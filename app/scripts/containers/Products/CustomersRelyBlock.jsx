@@ -41,19 +41,21 @@ export default class CustomersRelyBlock extends React.Component {
 
     return (
       <section className="container-customersRely">
-        <h4 className="customersRely-title">{clients.TITLE}</h4>
-        <div>
-          <Carousel>
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="um" />
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-06/cartao-visita-header2.jpg" alt="dois" />
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-05/cartao-visita-header1.jpg" alt="trêss" />
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="quatro" />
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-06/cartao-visita-header2.jpg" alt="cinco" />
-            <img src="https://simg.minhateca.com.br/29b7da040214fe652630df4032e1a02e90cb9479?url=http%3A%2F%2Fi62.tinypic.com%2F2mw9kr9.jpg" alt="seis" />
-          </Carousel>
-        </div>
-        <div className="container-commentsClients">
-          {this.renderTestimonials()}
+        <div className="container">
+          <h4 className="customersRely-title">{clients.TITLE}</h4>
+          <div>
+            <Carousel>
+              <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="um" />
+              <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-06/cartao-visita-header2.jpg" alt="dois" />
+              <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-05/cartao-visita-header1.jpg" alt="trêss" />
+              <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="quatro" />
+              <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-06/cartao-visita-header2.jpg" alt="cinco" />
+              <img src="https://simg.minhateca.com.br/29b7da040214fe652630df4032e1a02e90cb9479?url=http%3A%2F%2Fi62.tinypic.com%2F2mw9kr9.jpg" alt="seis" />
+            </Carousel>
+          </div>
+          <div className="container-commentsClients">
+            {this.renderTestimonials()}
+          </div>
         </div>
       </section>
     );

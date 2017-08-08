@@ -122,25 +122,27 @@ export default class OpinionsBlock extends React.Component {
 
     return (
       <section className="container-opinions">
-        <h4 className="opinions-title">Mais opiniões</h4>
-        <div className="container-boxOpinions">
-          <div className="box-opinions">
-            <h5 className="opinion-titleNumber"><span>94</span>% dos clientes recomendam este produto</h5>
-            <p className="opinion-textEvaluation">Avaliação geral: {this.starSubtitle()} de {opinions.count} avaliações.</p>
-            {this.renderListTotalOpinions()}
-          </div>
-          <div className="box-opinions">
-            <div className="box-formOpinions">
-              <h5 className="opnions-subtitle">E você, o que achou?</h5>
-              <form>
-                <input type="text" className="input-text" placeholder="Envie a sua opinião..." />
-                <input type="submit" className="btn-default btn-secondary btn-lg input-submit" name="opinions" value="Enviar" />
-              </form>
+        <div className="container">
+          <h4 className="opinions-title">Mais opiniões</h4>
+          <div className="container-boxOpinions">
+            <div className="box-opinions">
+              <h5 className="opinion-titleNumber"><span>94</span>% dos clientes recomendam este produto</h5>
+              <p className="opinion-textEvaluation">Avaliação geral: {this.starSubtitle()} de {opinions.count} avaliações.</p>
+              {this.renderListTotalOpinions()}
             </div>
-            <div className="container-boxOpinions">
-              {this.renderListOpinions()}
+            <div className="box-opinions">
+              <div className="box-formOpinions">
+                <h5 className="opnions-subtitle">E você, o que achou?</h5>
+                <form>
+                  <input type="text" className="input-text" placeholder="Envie a sua opinião..." />
+                  <input type="submit" className="btn-default btn-secondary btn-lg input-submit" name="opinions" value="Enviar" />
+                </form>
+              </div>
+              <div className="container-boxOpinions">
+                {this.renderListOpinions()}
+              </div>
+              {opinions.list.length - visible > 0 && <button className="btn-default btn-third btn-xs" onClick={this.moreComments}>carregar mais avaliações ({opinions.list.length - visible > load ? load : opinions.list.length - visible })</button>}
             </div>
-            {opinions.list.length - visible > 0 && <button className="btn-default btn-third btn-xs" onClick={this.moreComments}>carregar mais avaliações ({opinions.list.length - visible > load ? load : opinions.list.length - visible })</button>}
           </div>
         </div>
       </section>

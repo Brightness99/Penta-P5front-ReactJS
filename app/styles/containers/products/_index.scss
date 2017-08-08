@@ -1,4 +1,3 @@
-// truncate https://codepen.io/aj-foster/pen/emBYPW
 .app__main{
   background-color: #eeeeee;
 }
@@ -14,25 +13,31 @@
 }
 
 .container-product{
-  margin: 4.5rem 0;
+  margin: 1.2rem 0;
   display: flex;
   flex-direction: column;
   @include lg {
     flex-direction: row;
     justify-content: flex-start;
   }
-  //dentro do container pra baixo
   .product-title{
-    font-weight: 400;
+    font-weight: 300;
+    font-family: $font-family-nunito-light;
     font-size: $font-size-xxx;
     text-align: center;
+    color: $color-almostBlack;
+    line-height: 0.75;
+    letter-spacing: -0.8px;
     @include lg{
       text-align: left;
     }
   }
   .product-subtitle{
-    font-size: $font-size-h5;
+    font-size: $font-size-lg;
+    font-family: $font-family-nunito-regular;
     text-align: center;
+    color: $color-almostBlack;
+    padding-top: 0;
     @include lg{
       text-align: left;
     }
@@ -49,6 +54,7 @@
       font-family: $font-family-open-sans;
       font-size: $font-size-xs;
       margin-top: 1.8rem;
+      line-height: 1.67;
     }
     .product-price{
       flex: 12;
@@ -61,6 +67,7 @@
         font-family: $font-family-open-sans;
         font-size: $font-size-xs;
         margin: 1.5rem 0 0 0;
+        line-height: 1.25;
       }
       .fnt-price{
         font-size: $font-size-il;
@@ -95,6 +102,7 @@
     .spec-product{
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xxxs;
+      line-height: 1.2;
       text-align: center;
       margin-top: 1rem;
       display: block;
@@ -127,7 +135,6 @@
   }
 }
 
-//Information 
 .container-productInformation {
   display: flex;
   flex-direction: column;
@@ -161,12 +168,13 @@
           display: flex;
           flex-direction: column;
           margin: 0;
-          height: 330px;
           background-color: #fff;
           box-sizing: border-box;
-          padding: 2rem 4rem;
+          padding: 0 0 2rem 0;
           position: relative;
           @include lg {
+            height: 330px;
+            padding: 2rem 4rem;
             flex-direction: row;
           }
         }
@@ -180,8 +188,16 @@
     }
     .productInformation-title {
       text-transform: uppercase;
-      font-size: $font-size-h4;
-      font-family: $font-family-open-sans; 
+      font-size: $font-size-h5;
+      font-family: $font-family-open-sans-bold;
+      letter-spacing: 0.1rem;
+      margin-bottom: 1.8rem;
+      width: 186px;
+      line-height: 1.67;
+      margin-top: 3.8rem;
+      @include lg {
+        font-size: $font-size-base;
+      }
     }
     .list-item {
       display: flex;
@@ -220,27 +236,44 @@
       .card-productInformation-image {
         flex: 1;
         box-sizing: border-box;
-        padding-right: 2rem;
+        padding-right: 0;
+        img {
+          height: 269px;
+        }
+        @include lg {
+          padding-right: 2rem;
+        }
       }
       .card-productInformation-text {
         flex: 3;
         flex-direction: column;
         justify-content: center;
         text-align: left;
+        box-sizing: border-box;
+        padding: 0 1rem;
         .card-productInformation-title {
           font-family: $font-family-base;
-          font-size: $font-size-xxll;
+          font-size: $font-size-h4;
           width: 100%;
           font-weight: 300;
-          line-height: 0.83;
+          line-height: 1.43;
+          margin-top: 2rem;
           color: $color-almostBlack;
+          @include lg {
+            margin-top: 0;
+            //line-height: 0.83;
+            font-size: $font-size-xxll;
+          }
         }
         p {
           font-family: $font-family-open-sans-light;
-          font-size: $font-size-h6;
+          font-size: $font-size-sm;
           font-weight: 300;
           line-height: 1.88;
           color: $color-lightGray;
+          @include lg {
+            font-size: $font-size-h6;
+          }
         }
         @include lg {
           display: flex;
@@ -252,15 +285,17 @@
   } 
 }
 
-//Tutorial
 .container-tutorial{
   margin: 4.5rem 0;
   .tutorial-title{
     text-transform: uppercase;
-    font-size: $font-size-h6;
+    font-size: $font-size-h5;
     font-family: $font-family-open-sans-bold;
     letter-spacing: 0.1rem;
     margin-bottom: 1.8rem;
+    @include lg {
+      font-size: $font-size-base;
+    }
   }
   .container-boxTutorial{
     display: flex;
@@ -270,7 +305,9 @@
       flex: 2;
       .img-bigBox {    
         width: 100%;
-        height: 420px;
+        @include lg {
+          height: 420px;
+        }
       }
       &:last-of-type{
         flex:1;
@@ -301,10 +338,12 @@
       .tutorial-legendImg {
         position: relative;
         color: $color-white;
+        display: none;
         @include lg {
           position: absolute;
           bottom: 7%;
           left: 4%;
+          display: block;
         }
         .tutorial-legendImg-category{
           font-size: $font-size-xxs;
@@ -322,6 +361,24 @@
           font-size: $font-size-il;
         }
       }
+      .container-tutorialMobile {
+        flex-direction: row;
+        display: flex;
+        align-items: flex-start;
+        >div {
+          flex: 1;
+          &:first-of-type{
+            border-radius: 3px;
+          }
+          &:last-of-type {
+            box-sizing: border-box;
+            padding-left: 1rem;
+          }
+        }
+        @include lg {
+          flex-direction: column;
+        }
+      }
     }
     @include lg{
       flex-direction: row;
@@ -329,7 +386,6 @@
   }
 }
 
-//Warranty
 .container-warranty {
   margin: 5.5rem 0 4.5rem 0;
   display: flex;
@@ -398,14 +454,13 @@
   }
 }
 
-//Benefits
 .container-benefits{
   margin: 4.5rem 0;
   position: relative;
   font-family: $font-family-open-sans;
   .benefits-title{
     text-transform: uppercase;
-    font-size: $font-size-h4;
+    font-size: $font-size-h5;
     font-family: $font-family-open-sans; 
   }
   .container-benefitsCard{
@@ -413,6 +468,7 @@
     flex-direction: column;
     box-sizing: border-box;
     padding: 0 1rem;
+    margin-bottom: 4rem;
     .box-benefitsCard{
       flex: 1;
       .benefitsCard-title{
@@ -427,7 +483,7 @@
         box-sizing: border-box;
         padding: 0.8rem 0rem;
         font-family: $font-family-open-sans;
-        font-size: $font-size-xxs;
+        font-size: $font-size-xs;
         color: $color-almostBlack;
         &:nth-of-type(2n-1) {
           background: #f9f9f9;
@@ -463,9 +519,12 @@
         }
       }
       &:nth-of-type(2n){
-        height: 496px;
+        //height: 496px;
+        height: auto;
         box-shadow: 0px 3px 5px 6px $color-lightGray2;
         z-index: 9;
+        min-width: inherit;
+        max-width: 390px;
         .benefitsCard-title{
           width: 100%;
           text-align: center;
@@ -475,18 +534,25 @@
             height: 69px;
           }
           @include lg {
-            width: 390px;
+            //width: 390px;
           }
         }
         p{
-          color: $color-lightGray;
-          font-size: $font-size-h6;
-          font-family: $font-family-open-sans-light;
+          color: $color-almostBlack;
+          font-size: $font-size-xs;
           text-align: left;
-          padding: 0.8rem 3rem;
+          padding: 1.1rem 3rem;
+          &:last-of-type {
+            padding-bottom: 2.1rem;
+            @include lg {
+              padding: 1.1rem 3rem;
+            }
+          }
           @include lg {
-          padding: 0.8rem 3rem;
-
+            color: $color-lightGray;
+            font-family: $font-family-open-sans-light;
+            padding: 0.8rem 3rem;
+            font-size: $font-size-h6;
           }
         }
         .checkIcon{
@@ -498,7 +564,8 @@
           }
         }
         @include lg {
-          height: 505px;
+          //height: 505px;
+          min-width: 390px;
         }
       }
       &:nth-of-type(2n-1){
@@ -522,38 +589,46 @@
     @include lg{
       flex-direction: row;
       padding: 0 6.2rem;
+      margin-bottom: inherit;
     }
   }
   sub{
-    position: absolute;
-    left: 2rem;
-    bottom: -1rem;
     color: $color-darkGray;
+    bottom: 0.75rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
     @include lg {
-      right: 7rem;
+      position: absolute;
+      right: 8rem;
       bottom: 6rem;
       left: inherit;
+      margin-bottom: 0;
     }
   }
 }
 
-//Graphic Plant
 .container-graphicPlant{
   margin: 4.5rem 0;
   .graphicPlant-title{
     text-transform: uppercase;
-    font-size: $font-size-h6;
+    font-size: $font-size-h5;
     font-family: $font-family-open-sans-bold; 
     letter-spacing: 0.1rem;
+    @include lg {
+      font-size: $font-size-h6;
+    }
   }
   .container-graphicPlant-block{
     display: flex;
     flex-direction: column;
     .box-graphicPlant{
       flex: 1;
-      margin-right:4rem;
+      @include lg {
+        margin-right:4rem;
+      }
       &:nth-of-type(2n){
-        flex: 0 auto;
+        flex: 2;
         margin-right: inherit;
       }
       .graphicPlant-subtitle{
@@ -571,6 +646,10 @@
         color: $color-lightGray;
         font-weight: 300;
         line-height: 1.88;
+        margin-bottom: 0;
+        @include lg {
+          margin-bottom: inherit;
+        }
       }
       .list-item{
         color: $color-lightGray;
@@ -586,22 +665,29 @@
   }
 }
 
-//customers block
 .container-customersRely {
-  margin: 4.5rem 0;
+  margin: 5rem 0;
   .customersRely-title {   
     font-family: $font-family-open-sans-bold;
-    font-size: $font-size-base;
+    font-size: $font-size-h5;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
     margin-bottom: 1.8rem;
+    @include lg {
+      font-size: $font-size-base;
+    }
   }
   .box-images-logo {
     box-sizing: border-box;
-    padding: 3.7rem 0;
-    height: 120px;
     border-radius: 6px;
+    padding: 1.7rem 0;
+    margin-bottom: 2rem;
     background-color: $color-white;
+    @include lg {
+      margin-bottom: 0;
+      height: 120px;
+      padding: 3.7rem 0;
+    }
     img {
       width: 100%;
       height: 46px;
@@ -674,7 +760,6 @@
   }
 } 
 
-//Blog cards
 .container-blog {
    margin: 4.5rem 0;
    .blog-title {
@@ -683,6 +768,9 @@
     letter-spacing: 0.1rem;
     margin-bottom: 1.8rem;
     text-transform: uppercase;
+    @include lg {
+      font-size: $font-size-h5;
+    }
    }
   .box-blogCards {
     display: flex;
@@ -725,10 +813,15 @@
           font-family: $font-family-nunito-regular;
           font-size: $font-size-h5;
           font-weight: 400;
-          line-height: 2rem;
-          overflow: hidden;
-          -webkit-line-clamp: 2;
-          box-orient: vertical;
+          //line-height: 2rem;
+          //overflow: hidden;
+          //-webkit-line-clamp: 2;
+          //-webkit-box-orient: vertical;
+          //width: 200px;
+          //white-space: nowrap;
+          //overflow: hidden;
+          //display: inline-block;
+          //text-overflow: ellipsis;
         }
         p {
           font-size: $font-size-xxs;
@@ -859,21 +952,26 @@
   }
 }
 
-//Opinions
 .container-opinions{
-  margin: 6rem 0;
+  margin: 3rem 0;
   .opinions-title {   
     font-family: $font-family-open-sans-bold;
-    font-size: $font-size-base;
+    font-size: $font-size-h5;
     letter-spacing: 0.1rem;
     margin-bottom: 3rem;
     text-transform: uppercase;
+    @include lg {
+      font-size: $font-size-base;
+    }
   }
   .opnions-subtitle{
-    font-size: $font-size-xl;
     font-weight: 500;
+    font-size: $font-size-h4;
     color: $color-almostBlack;
     font-family: $font-family-nunito-regular;
+    @include lg {
+      font-size: $font-size-xl;
+    }
   }
   .container-boxOpinions{
     display: flex;
@@ -997,20 +1095,25 @@
   }
 }
 
-//details product
 .container-detailsProduct{
   margin: 4.5rem 0;
   .detailsProduct-title{
     font-family: $font-family-open-sans-bold;
-    font-size: $font-size-base;
+    font-size: $font-size-h5;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
     color: $color-almostBlack;
+    @include lg {
+      font-size: $font-size-base;
+    }
   }
   .detailsProduct-subtitle{
     font-weight: lighter;
-    font-size: $font-size-xl;
+    font-size: $font-size-h4;
     font-family: $font-family-nunito-regular;
+    @include lg {
+      font-size: $font-size-xl;
+    }
   }
   .box-detailsProduct{
     margin: 2.3rem 0;
@@ -1023,7 +1126,6 @@
   }
 }
 
-//Product Block
 .container-printiProduct{
   box-sizing: border-box;
   padding: 4rem 2rem;
@@ -1055,8 +1157,6 @@
   }
 }
 
-
-//LIST
 .list-item{
   display: flex;
   flex-direction: row;
@@ -1066,7 +1166,6 @@
   li{
     width: 100%;
   }
-  //abreviação de without
   &.awol-pdd{
     padding: 0;
   }
@@ -1076,7 +1175,6 @@
   }
 }
 
-// BUTTONS
 .btn-default {
   width: 100%;
   display: inline-block;
@@ -1147,7 +1245,6 @@
   }
 }
 
-//slider
 .slider {
   margin-bottom: 4rem;
   .slider-wrapper {
@@ -1172,7 +1269,6 @@
   }
 }
 
-//carousel
 .carousel{
   width: 100%;
   overflow: hidden;
