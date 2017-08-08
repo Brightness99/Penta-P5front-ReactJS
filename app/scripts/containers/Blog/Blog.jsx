@@ -52,9 +52,11 @@ export class BlogBlock extends React.Component {
   render() {
     return (
       <section className="container-blog">
-        <h4 className="blog-title">Últimas do blog</h4>
-        <div className="box-blogCards">
-          {this.renderPost()}
+        <div className="container">
+          <h4 className="blog-title">Últimas do blog</h4>
+          <div className="box-blogCards">
+            {this.renderPost()}
+          </div>
         </div>
       </section>
     );

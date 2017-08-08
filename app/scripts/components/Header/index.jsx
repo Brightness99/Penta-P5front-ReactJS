@@ -74,8 +74,7 @@ export class Header extends React.Component {
 
   showToggleNav = (e) => {
     const { showProduct, showProfile, sideBar } = this.state;
-    // console.log('menu', e.currentTarget.className === 'menu title-logo-menu');
-    console.log('menu', e.currentTarget.className);
+
     if (e.currentTarget.className === 'title-logo-menu products') {
       this.setState({
         showProduct: !showProduct,
@@ -108,9 +107,9 @@ export class Header extends React.Component {
           <div className="app__header__container container">
             <div>
               <div className="menu">
-                <Link className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
+                <NavLink className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
                   <Menu />
-                </Link>
+                </NavLink>
               </div>
               <Logo />
             </div>
@@ -160,14 +159,14 @@ export class Header extends React.Component {
               { logo && (<Logo />) }
               { logoScroll && (<div><LogoScroll /></div>) }
               <div className="menu">
-                <Link className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
+                <NavLink className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
                   <Menu /><span>Menu</span>
-                </Link>
+                </NavLink>
               </div>
               <div className="arrowProduct">
-                <Link className="title-logo-menu products" to="#" onClick={this.showToggleNav}>
+                <NavLink className="title-logo-menu products" to="#" onClick={this.showToggleNav}>
                   <ArrowMenu />Produtos
-                </Link>
+                </NavLink>
               </div>
             </div>
             <div className="box-search">
@@ -178,10 +177,10 @@ export class Header extends React.Component {
             </div>
             <div className="box-bag-account-cart">
               <div className="box-bag-text">
-                <Link to="#" className="title-logo-menu">
+                <NavLink to="#" className="title-logo-menu">
                   <Bag />
                   <span>atendimento exclusivo</span>
-                </Link>
+                </NavLink>
               </div>
               <div>
                 <NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>

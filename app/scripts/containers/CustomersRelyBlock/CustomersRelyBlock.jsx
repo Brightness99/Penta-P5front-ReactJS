@@ -45,12 +45,14 @@ export class CustomersRelyBlock extends React.Component {
     const { locale: { translate: { page: { home: { clients } } } } } = this.props;
     return (
       <section className="container-customersRely">
-        <h4 className="customersRely-title">{clients.TITLE}</h4>
-        <div className="box-images-logo">
-          <img src={require('assets/media/images/logos-cortados.jpg')} alt="Logos" />
-        </div>
-        <div className="container-commentsClients">
-          {this.renderTestimonials()}
+        <div className="container">
+          <h4 className="customersRely-title">{clients.TITLE}</h4>
+          <div className="box-images-logo">
+            <img src={require('assets/media/images/logos-cortados.jpg')} alt="Logos" />
+          </div>
+          <div className="container-commentsClients">
+            {this.renderTestimonials()}
+          </div>
         </div>
       </section>
     );

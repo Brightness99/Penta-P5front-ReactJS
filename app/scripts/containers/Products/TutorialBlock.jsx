@@ -44,8 +44,14 @@ export default class TutorialBlock extends React.Component {
       <div key={item.id} name={key}>
         <Link to={item.external_link} target="_blank">
           <h5 className="title-smallbox">Vídeos</h5>
-          <img src="https://www.printi.com.br//thumbs/740x421c/2016-06/banner-tutorial3.jpg" alt="imagem de teste" />
-          <p className="p-smallbox">{item.name}</p>
+          <div className="container-tutorialMobile">
+            <div>
+              <img src="https://www.printi.com.br//thumbs/740x421c/2016-06/banner-tutorial3.jpg" alt="imagem de teste" />
+            </div>
+            <div>
+              <p className="p-smallbox">{item.name}</p>
+            </div>
+          </div>
         </Link>
       </div>
     ));
@@ -54,13 +60,16 @@ export default class TutorialBlock extends React.Component {
   renderMobile() {
     return (
       <section className="container-tutorial">
-        <h4 className="tutorial-title">Tutoriais</h4>
-        <div className="container-boxTutorial">
-          <div className="box-tutorial">
-            {this.renderBigBox()}
-          </div>
-          <div className="box-tutorial">
-            {this.renderSmallBox()}
+        <div className="container">
+          <h4 className="tutorial-title">Tutoriais</h4>
+          <div className="container-boxTutorial">
+            <div className="box-tutorial">
+              {this.renderBigBox()}
+              <hr />
+            </div>
+            <div className="box-tutorial">
+              {this.renderSmallBox()}
+            </div>
           </div>
         </div>
       </section>
@@ -70,13 +79,15 @@ export default class TutorialBlock extends React.Component {
   renderDesktop() {
     return (
       <section className="container-tutorial">
-        <h4 className="tutorial-title">Tutoriais</h4>
-        <div className="container-boxTutorial">
-          <div className="box-tutorial">
-            {this.renderBigBox()}
-          </div>
-          <div className="box-tutorial">
-            {this.renderSmallBox()}
+        <div className="container">
+          <h4 className="tutorial-title">Tutoriais</h4>
+          <div className="container-boxTutorial">
+            <div className="box-tutorial">
+              {this.renderBigBox()}
+            </div>
+            <div className="box-tutorial">
+              {this.renderSmallBox()}
+            </div>
           </div>
         </div>
       </section>

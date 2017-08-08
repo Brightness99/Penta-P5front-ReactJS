@@ -32,15 +32,17 @@ export class PrintiProductBlock extends React.Component {
     };
 
     return (
-      <section className="container-printiProduct" style={styles}>
-        <h4 className="printiProduct-title">{this.textTitle()}</h4>
-        <div className="box-btn-printiProduct">
-          <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">
-          configure este produto
-          </Link>
-        </div>
-        <p className="fnt-text">{print.QUESTIONS}</p>
-      </section>
+      <div className="container">
+        <section className="container-printiProduct" style={styles}>
+          <h4 className="printiProduct-title">{this.textTitle()}</h4>
+          <div className="box-btn-printiProduct">
+            <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">
+            configure este produto
+            </Link>
+          </div>
+          <p className="fnt-text">{print.QUESTIONS}</p>
+        </section>
+      </div>  
     );
   }
 

@@ -70,22 +70,23 @@ export class InformationBlock extends React.Component {
   renderMobile() {
     return (
       <section className="container-productInformation">
-        <div className="box-productInformation">
-          <h4>Informações do produto</h4>
-          <div>
-            <TabNavigation>
-              <span>Dicas</span>
-              <span>Como Utilizar</span>
-            </TabNavigation>
-            <div className="contentNavigation">
-              <div id="tips">
-                <Carousel>
-                  {this.renderTips()}
-                </Carousel>
+        <div className="container">
+          <div className="box-productInformation">
+            <div>
+              <h4 className="productInformation-title">Informações do produto</h4>
+              <TabNavigation>
+                <span>Dicas</span>
+                <span>Como Utilizar</span>
+              </TabNavigation>
+              <div className="contentNavigation">
+                <div id="tips">
+                  <Carousel>
+                    {this.renderTips()}
+                  </Carousel>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </section>
     );
@@ -94,22 +95,22 @@ export class InformationBlock extends React.Component {
   renderDesktop() {
     return (
       <section className="container-productInformation">
-        <div className="box-productInformation">
-
-          <div>
-            <TabNavigation>
-              <span>Dicas</span>
-              <span>Como Utilizar</span>
-            </TabNavigation>
-            <div className="contentNavigation">
-              <div id="tips">
-                <Carousel>
-                  {this.renderTips()}
-                </Carousel>
+        <div className="container">
+          <div className="box-productInformation">
+            <div>
+              <TabNavigation>
+                <span>Dicas</span>
+                <span>Como Utilizar</span>
+              </TabNavigation>
+              <div className="contentNavigation">
+                <div id="tips">
+                  <Carousel>
+                    {this.renderTips()}
+                  </Carousel>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </section>
     );
