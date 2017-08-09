@@ -43,7 +43,6 @@ export class Cart extends React.Component {
     return (
       <div>
         <main className="mol-cart-content">
-          <CartHeader screenSize={screenSize} totalPrice={prices.total} totalItems={count} />
           <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
           <CartCrossSell screenSize={screenSize} />
           <CartVoucher screenSize={screenSize} />
@@ -59,7 +58,6 @@ export class Cart extends React.Component {
 
     return (
       <main>
-        <CartHeader screenSize={screenSize} totalPrice={prices.total} totalItems={count} />
         <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
         <CartVoucher screenSize={screenSize} />
         <CartSummary screenSize={screenSize} totalItems={count} totalPrice={prices.total} />

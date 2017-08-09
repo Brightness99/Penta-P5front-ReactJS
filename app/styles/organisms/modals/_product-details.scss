@@ -48,12 +48,21 @@
   align-self: center;
   border: 0.1rem solid #c7c9cb;
   display: inline-flex;
-  height: 13rem;
-  max-height: 13rem;
-  max-width: 13rem;
-  min-height: 13rem;
-  min-width: 13rem;
-  width: 13rem;
+  height: 6.5rem;
+  max-height: 6.5rem;
+  max-width: 6.5rem;
+  min-height: 6.5rem;
+  min-width: 6.5rem;
+  width: 6.5rem;
+
+  @include lg {
+    height: 13rem;
+    max-height: 13rem;
+    max-width: 13rem;
+    min-height: 13rem;
+    min-width: 13rem;
+    width: 13rem;
+  }
 
   > img {
     height: auto;

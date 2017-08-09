@@ -35,14 +35,26 @@ export default class CartSummary extends React.Component {
     return (
       <div className="org-cart-summary">
         <div className="mol-cart-summary-title">
-          Resumo do seu carrinho <span className="atm-cart-totalItems">({totalItems} itens)</span>
+          Resumo do carrinho
         </div>
-        <div className="mol-cart-summary-off">
-          <div>subtotal <IntlMoney>{150}</IntlMoney></div>
-          <div>desconto <IntlMoney>{-30}</IntlMoney></div>
+        <div className="mol-cart-summary-infos">
+          <div>
+            <span>Nº de itens:</span>
+            <span>{totalItems} itens</span>
+          </div>
+          <div>
+            <span>Subtotal:</span>
+            <span><IntlMoney>{225}</IntlMoney></span>
+          </div>
+          <div>
+            <span>Cupom:</span>
+            <button className="atm-button-cart-voucher">Adicionar código</button>
+          </div>
         </div>
+        <hr />
         <div className="mol-cart-summary-total">
-          Total <IntlMoney>{totalPrice}</IntlMoney>
+          <span>Total</span>
+          <IntlMoney className="atm-cart-price atm-cart-price--large">{225}</IntlMoney>
         </div>
       </div>
     );
