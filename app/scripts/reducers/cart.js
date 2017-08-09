@@ -69,17 +69,20 @@ export default {
       };
     },
     [CartConstants.CART_DELETE_FETCH_SUCCESS](state, action) {
+      const items = Object.keys(state.data.items)
+        .filter((item) => item !== action.payload.itemId)
+        .reduce((prevItem, currentItem) => ({
+          ...prevItem,
+          [currentItem]: state.data.items[currentItem],
+        }), {});
+
       return {
         ...state,
         data: {
           ...state.data,
-          items: Object.keys(state.data.items)
-            .filter((item) => item !== action.payload.itemId)
-            .reduce((prevItem, currentItem) => ({
-              ...prevItem,
-              [currentItem]: state.data.items[currentItem],
-            }), {}),
+          items,
         },
+        count: Object.keys(items).length,
       };
     },
   }),

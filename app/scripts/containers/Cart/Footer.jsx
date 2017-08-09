@@ -4,6 +4,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { FileTextOIcon } from 'components/Icons';
+import { IntlMoney } from 'components/Intl';
 
 type Props = {
   screenSize: string,
@@ -13,7 +14,44 @@ type Props = {
 export default class CartFooter extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
+  componentDidMount() {
+    this.handleResize();
+  }
+
+  static componentWillUnmount() {
+    document.querySelector('body').classList.remove('has-stick-footer');
+  }
+
+  componentWillUpdate(nextProps) {
+    if (isMobile(nextProps.screenSize) !== isMobile(this.props.screenSize)) {
+      this.handleResize();
+    }
+  }
+
+  componentWillUnmount() {
+    document.querySelector('body').classList.remove('has-stick-footer');
+  }
+
+  handleResize = () => {
+    const { screenSize } = this.props;
+
+    if (isMobile(screenSize)) {
+      document.querySelector('body').classList.add('has-stick-footer');
+    } else {
+      document.querySelector('body').classList.remove('has-stick-footer');
+    }
+  }
+
   static props: Props;
+
+  renderStickFooter() {
+    return (
+      <div className="org-cart-stick-footer">
+        <div><span>Total</span><IntlMoney className="atm-cart-price">{225}</IntlMoney></div>
+        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled">finalizar compra</NavLink>
+      </div>
+    );
+  }
 
   renderDesktop() {
     return (
@@ -28,14 +66,14 @@ export default class CartFooter extends React.Component {
           </NavLink>
         </div>
         <NavLink to="/" className="atm-cart-shopping">Continuar comprando</NavLink>
-        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled">CONTINUAR</NavLink>
+        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled">finalizar compra</NavLink>
       </div>
     );
   }
 
   renderMobile() {
     return (
-      <div className="org-cart-footer">
+      <div className="org-cart-footer org-cart-footer--mobile">
         <NavLink to="/" className="atm-cart-shopping">Continuar comprando</NavLink>
         <NavLink
           to="http://dev-cms.printi.com.br/v1/customers/pdf_quotation/download"
@@ -44,7 +82,7 @@ export default class CartFooter extends React.Component {
         >
           <FileTextOIcon /> Baixar Orçamento
         </NavLink>
-        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled atm-button-stick-bottom">CONTINUAR</NavLink>
+        {this.renderStickFooter()}
       </div>
     );
   }

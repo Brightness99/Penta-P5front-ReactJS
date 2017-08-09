@@ -103,6 +103,7 @@ export default class CartItens extends React.Component {
               isUpsellSelected={isUpsellSelected}
               handleUpsellChoose={this.handleUpsellChoose}
               handleModalClose={this.handleModalClose}
+              className="org-up-sell-modal"
             />
             : <ProductDetailsModal item={items[modal.itemId]} failbackImage={failbackImage} />
         }
@@ -135,24 +136,26 @@ export default class CartItens extends React.Component {
   renderActions(item, itemId) {
     if (item.type === 'cloud') {
       return (
-        <div className="mol-cart-item-actions">
-          <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-action"><PencilIcon />editar</NavLink>
-          <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-action"><PencilIcon />trocar arte</NavLink>
+        <div>
+          <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>
+          <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>
+          <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
         </div>
       );
     }
 
     return (
-      <div className="mol-cart-item-actions">
-        <button className="atm-cart-action" value={itemId} onClick={this.handleDuplicate}><FilesIcon />duplicar</button>
-        <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-action"><PencilIcon />editar</NavLink>
+      <div>
+        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}><FilesIcon />duplicar</button>
+        <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>
+        <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
       </div>
     );
   }
 
-  renderProductInfos(item, itemId) {
+  renderProductInfos(item, itemId, size: number = 3) {
     const slicedList = Object.keys(item.product_parts[Object.keys(item.product_parts)[0]].options)
-      .slice(0, 3)
+      .slice(0, size)
       .reduce((prevOption, currentOption) => (
         [
           ...prevOption,
@@ -198,16 +201,14 @@ export default class CartItens extends React.Component {
               <div className="mol-cart-item-product">
                 <div className="mol-cart-item-image">
                   <ProductImage thumbnail={items[item].thumbnail} failbackImage={failbackImage} alt={items[item].final_product.name} />
-                  <div className="atm-button-up-sell-desktop">
-                    <button
-                      onClick={this.handleModalOpen}
-                      value={item}
-                      name="upsell"
-                      className="atm-button-up-sell"
-                    >
-                      turbine seu produto <ChevronRightIcon />
-                    </button>
-                  </div>
+                  <button
+                    onClick={this.handleModalOpen}
+                    value={item}
+                    name="upsell"
+                    className="atm-button-up-sell atm-button-up-sell--desktop"
+                  >
+                    turbine seu produto <ChevronRightIcon />
+                  </button>
                 </div>
                 <div className="mol-cart-item-desktop-infos">
                   {this.renderProductInfos(items[item], item)}
@@ -241,65 +242,48 @@ export default class CartItens extends React.Component {
     );
   }
 
-  renderMobileItem(item, key) {
-    const { zipcode } = this.props;
-
-    return (
-      <li className="org-cart-section" key={key}>
-        <div className="mol-cart-item-data">
-          <img src={require('assets/media/images/cart-item.png')} alt="prod" />
-          {this.renderProductInfos(item, key)}
-        </div>
-        <div className="org-cart-item-section">
-          <div className="mol-cart-item-section-title">
-            <div className="atm-cart-title">Entrega</div>
-          </div>
-          <div className="mol-cart-item-section-data">
-            <IntlDate className="atm-cart-item-date">{item.expected_delivery_date}</IntlDate>
-            <div className="atm-cart-item-zipcode">CEP: <IntlZipcode>{zipcode}</IntlZipcode></div>
-          </div>
-        </div>
-        <div className="org-cart-item-section">
-          <div className="mol-cart-item-section-title">
-            <div className="atm-cart-title">Quantidade</div>
-            <div className="atm-cart-title">Valor</div>
-          </div>
-          <div className="mol-cart-item-section-data">
-            <div className="atm-cart-item-quantity">{item.quantity}</div>
-            <div className="atm-cart-item-price"><IntlMoney>{item.prices.total}</IntlMoney></div>
-          </div>
-        </div>
-        <div className="atm-button-up-sell-mobile">
-          <button
-            onClick={this.handleModalOpen}
-            value={item}
-            name="upsell"
-            className="atm-button-up-sell atm-button-up-sell--mobile"
-          >
-            turbine seu produto <ChevronRightIcon />
-          </button>
-        </div>
-        <div className="org-cart-mobile-actions">
-          {this.renderActions(item, key)}
-          <button
-            className="atm-cart-action atm-cart-action--red"
-            value={key}
-            onClick={this.handleDelete}
-          >
-            <TrashIcon />excluir
-          </button>
-        </div>
-      </li>
-    );
-  }
-
   renderMobile() {
-    const { items } = this.props;
+    const { items, zipcode } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
       <ul className="org-cart-item-list">
-        {Object.keys(items).map(item => this.renderMobileItem(items[item], item))}
+        {Object.keys(items).map(item => (
+          <li className="org-cart-item" key={item}>
+            <div className="mol-cart-item-header">
+              <ProductImage failbackImage={failbackImage} alt="product" />
+              {this.renderProductInfos(items[item], item, 1)}
+            </div>
+            <div className="mol-cart-item-body">
+              <div>
+                <div className="atm-cart-item-info-title">Entrega</div>
+                <div className="atm-cart-item-info-text">
+                  <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
+                  <span>(CEP: <IntlZipcode>{zipcode}</IntlZipcode>)</span>
+                </div>
+              </div>
+              <div>
+                <div className="atm-cart-item-info-title">Quantidade</div>
+                <div className="atm-cart-item-info-text">{items[item].quantity} unidades</div>
+              </div>
+              <div>
+                <div className="atm-cart-item-info-title">Valor</div>
+                <div className="atm-cart-item-info-text"><IntlMoney className="atm-cart-price">{items[item].prices.total}</IntlMoney></div>
+              </div>
+              <button
+                onClick={this.handleModalOpen}
+                value={item}
+                name="upsell"
+                className="atm-button-up-sell atm-button-up-sell--mobile"
+              >
+                turbine seu produto <ChevronRightIcon />
+              </button>
+            </div>
+            <div className="mol-cart-item-footer">
+              {this.renderActions(items[item], item)}
+            </div>
+          </li>
+        ))}
         {isOpen && this.renderModal()}
       </ul>
     );
