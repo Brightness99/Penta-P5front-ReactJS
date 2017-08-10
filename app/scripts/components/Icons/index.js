@@ -31,3 +31,5 @@ export FileTextOIcon from './FileTextO';
 export PencilIcon from './Pencil';
 export TrashIcon from './Trash';
 export ChevronRightIcon from './ChevronRight';
+export TagIcon from './Tag';
+export TicketIcon from './Ticket';

@@ -1,8 +1,6 @@
 // @flow
 
 import React from 'react';
-import SVG from 'react-inlinesvg';
-import Collapse, { Panel } from 'rc-collapse';
 import { NavLink } from 'react-router-dom';
 
 import Logo from './../Logo';
@@ -41,25 +39,13 @@ export class Sidebar extends React.Component {
 
   state: State;
 
-
   handleExpand = (key) => {
     this.setState({
       isExpanded: key.length > 0,
     });
   };
 
-  /*render() {
-    const { isExpanded } = this.state;
-
-    return (
-      <div className="container-sidebar">
-        <p onChange={this.handleExpand}>blablablabla</p>
-      </div>
-    );
-  }*/
-
   renderMobile() {
-
     return (
       <div className="container-sidebar" onChange={this.handleExpand}>
         <div className="box-logo" id="logo-sidebar">
@@ -83,88 +69,88 @@ export class Sidebar extends React.Component {
               <li>Etiqueta</li>
             </ul>
             <li className="item-sidebar-mobile">Papelaria <ArrowMenu /></li>
-              <ul className="list-item awol-list-style subItem-sidebar">
-                <li>Agenda</li>
-                <li>Apostila</li>
-                <li>Cartão de visita</li>
-                <li>Convite</li>
-                <li>Certificados</li>
-                <li>Envelope</li>
-                <li>Papel timbrado</li>
-                <li>Save the Date</li>
-                <li>Caléndario de mesa</li>
-                <li>Certificados</li>
-                <li>Calendário de parede</li>
-              </ul>
+            <ul className="list-item awol-list-style subItem-sidebar">
+              <li>Agenda</li>
+              <li>Apostila</li>
+              <li>Cartão de visita</li>
+              <li>Convite</li>
+              <li>Certificados</li>
+              <li>Envelope</li>
+              <li>Papel timbrado</li>
+              <li>Save the Date</li>
+              <li>Caléndario de mesa</li>
+              <li>Certificados</li>
+              <li>Calendário de parede</li>
+            </ul>
             <li className="item-sidebar-mobile">Promocionais <ArrowMenu /></li>
-              <ul className="list-item awol-list-style subItem-sidebar">
-                <li>Balcão PDV</li>
-                <li>Cartão fidelidade</li>
-                <li>Convie</li>
-                <li>Convite de casamento</li>
-                <li>Crachá</li>
-                <li>Tag</li>
-                <li>Cartão postal</li>
-                <li>Santinho</li>
-                <li>Filipeta</li>
-                <li>Folhetos</li>
-              </ul>
+            <ul className="list-item awol-list-style subItem-sidebar">
+              <li>Balcão PDV</li>
+              <li>Cartão fidelidade</li>
+              <li>Convie</li>
+              <li>Convite de casamento</li>
+              <li>Crachá</li>
+              <li>Tag</li>
+              <li>Cartão postal</li>
+              <li>Santinho</li>
+              <li>Filipeta</li>
+              <li>Folhetos</li>
+            </ul>
             <li className="item-sidebar-mobile">Banners e cartazes <ArrowMenu /></li>
-              <ul className="list-item awol-list-style subItem-sidebar">
-                <li>Banner</li>    
-                <li>Banner L</li>
-                <li>Banner Roll Up</li>
-                <li>Banner X</li>
-                <li>Canvas</li>
-                <li>Faixa</li>
-                <li>Cartaz</li>
-                <li>Pôster</li>
-                <li>Mobiliário Urbano</li>
-              </ul>
+            <ul className="list-item awol-list-style subItem-sidebar">
+              <li>Banner</li>
+              <li>Banner L</li>
+              <li>Banner Roll Up</li>
+              <li>Banner X</li>
+              <li>Canvas</li>
+              <li>Faixa</li>
+              <li>Cartaz</li>
+              <li>Pôster</li>
+              <li>Mobiliário Urbano</li>
+            </ul>
             <li className="item-sidebar-mobile">Sinalização <ArrowMenu /></li>
-              <ul className="list-item awol-list-style subItem-sidebar">
-                <li>Display de Balcão</li>
-                <li>Display de Retrovisor</li>
-                <li>Identificador de Porta</li>
-                <li>Móbile</li>
-                <li>Placa</li>
-                <li>Prisma de Mesa</li>
-                <li>Take One</li>
-                <li>Totem</li>
-              </ul>
+            <ul className="list-item awol-list-style subItem-sidebar">
+              <li>Display de Balcão</li>
+              <li>Display de Retrovisor</li>
+              <li>Identificador de Porta</li>
+              <li>Móbile</li>
+              <li>Placa</li>
+              <li>Prisma de Mesa</li>
+              <li>Take One</li>
+              <li>Totem</li>
+            </ul>
             <li className="item-sidebar-mobile">Ponto de venda <ArrowMenu /></li>
-              <ul className="list-item awol-list-style subItem-sidebar">
-                <li>Adesivo de Parede</li>
-                <li>Adesivo de Piso</li>
-                <li>Balcão PDV</li>
-                <li>Cardápio de Papel</li>
-                <li>Cardápio de Plástico</li>
-                <li>Display de Balcão</li>
-                <li>Display de mesa</li>
-                <li>Jogo americano</li>
-                <li>Móbile</li>
-                <li>Papel bandeja</li>
-                <li>Placa</li>
-                <li>Prisma de Mesa</li>
-              </ul>
+            <ul className="list-item awol-list-style subItem-sidebar">
+              <li>Adesivo de Parede</li>
+              <li>Adesivo de Piso</li>
+              <li>Balcão PDV</li>
+              <li>Cardápio de Papel</li>
+              <li>Cardápio de Plástico</li>
+              <li>Display de Balcão</li>
+              <li>Display de mesa</li>
+              <li>Jogo americano</li>
+              <li>Móbile</li>
+              <li>Papel bandeja</li>
+              <li>Placa</li>
+              <li>Prisma de Mesa</li>
+            </ul>
             <li className="item-sidebar-mobile">Revista e catálogos <ArrowMenu /></li>
-              <ul className="list-item awol-list-style subItem-sidebar">
-                <li>Brochura</li>
-                <li>Catálogo</li>
-                <li>Livreto</li>
-                <li>Revista</li>
-              </ul>
+            <ul className="list-item awol-list-style subItem-sidebar">
+              <li>Brochura</li>
+              <li>Catálogo</li>
+              <li>Livreto</li>
+              <li>Revista</li>
+            </ul>
             <li className="item-sidebar-mobile">Adesivos e rótulos <ArrowMenu /></li>
-              <ul className="list-item awol-list-style subItem-sidebar">
-                <li>Adesivo</li>
-                <li>Adesivo de Notebook</li>
-                <li>Adesivo de Parede</li>
-                <li>Adesivo de Piso</li>
-                <li>Etiquetas</li>
-                <li>Pôster Adesivo</li>
-                <li>Pragão</li>
-                <li>Rótulo</li>
-              </ul>
+            <ul className="list-item awol-list-style subItem-sidebar">
+              <li>Adesivo</li>
+              <li>Adesivo de Notebook</li>
+              <li>Adesivo de Parede</li>
+              <li>Adesivo de Piso</li>
+              <li>Etiquetas</li>
+              <li>Pôster Adesivo</li>
+              <li>Pragão</li>
+              <li>Rótulo</li>
+            </ul>
           </ul>
         </div>
         <div className="boxItem-sidebar">

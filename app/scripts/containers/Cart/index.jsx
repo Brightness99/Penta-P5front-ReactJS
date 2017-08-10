@@ -22,7 +22,18 @@ type Props = {
   dispatch: () => {}
 };
 
+type State = {
+  isVoucherActive: boolean,
+};
+
 export class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isVoucherActive: false,
+    };
+  }
   componentDidMount() {
     const { dispatch } = this.props;
 
@@ -30,6 +41,14 @@ export class Cart extends React.Component {
   }
 
   static props: Props;
+
+  handleVoucherToggle = () => {
+    const { isVoucherActive } = this.state;
+
+    this.setState({
+      isVoucherActive: !isVoucherActive,
+    });
+  };
 
   renderContent() {
     const { app: { screenSize } } = this.props;
@@ -39,14 +58,23 @@ export class Cart extends React.Component {
 
   renderDesktop() {
     const { app: { screenSize }, cart: { data: { prices, items, zipcode }, count }, dispatch } = this.props;
+    const { isVoucherActive } = this.state;
 
     return (
       <div>
         <main className="mol-cart-content">
           <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
           <CartCrossSell screenSize={screenSize} />
-          <CartVoucher screenSize={screenSize} />
-          <CartSummary screenSize={screenSize} totalItems={count} totalPrice={prices.total} />
+          <div className="mol-cart-desktop-summary">
+            <CartVoucher screenSize={screenSize} isActive={isVoucherActive} />
+            <CartSummary
+              screenSize={screenSize}
+              totalItems={count}
+              prices={prices}
+              isVoucherActive={isVoucherActive}
+              handleVoucherToggle={this.handleVoucherToggle}
+            />
+          </div>
           <CartFooter screenSize={screenSize} dispatch={dispatch} />
         </main>
       </div>
@@ -55,12 +83,19 @@ export class Cart extends React.Component {
 
   renderMobile() {
     const { app: { screenSize }, cart: { data: { prices, items, zipcode }, count }, dispatch } = this.props;
+    const { isVoucherActive } = this.state;
 
     return (
       <main>
         <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
-        <CartVoucher screenSize={screenSize} />
-        <CartSummary screenSize={screenSize} totalItems={count} totalPrice={prices.total} />
+        <CartVoucher screenSize={screenSize} isActive={isVoucherActive} />
+        <CartSummary
+          screenSize={screenSize}
+          totalItems={count}
+          prices={prices}
+          isVoucherActive={isVoucherActive}
+          handleVoucherToggle={this.handleVoucherToggle}
+        />
         <CartFooter screenSize={screenSize} />
       </main>
     );
