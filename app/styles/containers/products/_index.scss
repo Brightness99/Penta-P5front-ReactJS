@@ -1214,6 +1214,17 @@
     border: 1px solid $color-printi; 
     background-color: transparent; 
   }
+  &.btn-quarter {
+    color: $color-lightGray; 
+    border: 1px solid $color-lightGray; 
+    background-color: transparent; 
+  }
+  &.fnt-sbold {
+    font-family: $font-family-open-sans-semibold;
+  }
+  &.fnt-bold {
+    font-family: $font-family-open-sans-bold;
+  }
   //sizes
   //239px
   &.btn-lg {
