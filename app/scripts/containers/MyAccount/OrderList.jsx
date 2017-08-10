@@ -3,6 +3,8 @@ import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 
+import { CodeBar } from 'components/Icons';
+
 type Props = {
   screenSize: string,
 }
@@ -162,27 +164,24 @@ export class OrderList extends React.Component {
         <div className="box-detailsOrder pendingPayment">
           <div className="box-firstPart">
             <div>
-              <p>Pedido</p>
-              <p>N 483093</p>
-            </div>
-            <div>
-              <p>30/08/2016</p>
+              <p className="title-myorderMobile">Pedido</p>
+              <p className="subtitle-myorderMobile">Nº 210.016</p>
             </div>
           </div>
           <span className="blabla" />
           <div className="box-secondPart">
             <div>
               <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">3 produtos</p>
+              <p className="txt-secondPart">4 produtos</p>
+            </div>
+            <div className="box-statusMobile">
+              <p className="title-statusMobile">status</p>
+              <p className="subtitle-statusMobile">aguardando pagamento</p>
             </div>
             <div>
-              <p>status</p>
-              <p>aguardando pagamento</p>
-            </div>
-            <div>
-              <p>imprimir boleto</p>
-              <p>enviar comprovante</p>
-              <p>ver detalhes</p>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">enviar comprovante</Link>
+              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
             </div>
           </div>
         </div>
@@ -211,7 +210,7 @@ export class OrderList extends React.Component {
         <h3 className="subtitle-myorder">Meus pedidos</h3>
         <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
         <ul className="box-tableOrder">
-          <li>N do pedido</li>
+          <li>Nº do pedido</li>
           <li>Realizado em</li>
           <li>Status</li>
           <li>Ações</li>

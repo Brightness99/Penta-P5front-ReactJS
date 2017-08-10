@@ -33,11 +33,9 @@
         line-height: 4.7rem;
         font-family: $font-family-open-sans;
         font-size: $font-size-base;
-        //line-height: 1.88;
         text-align: left;
         color: $color-lightGray;
         i {
-          //vertical-align: text-top;
           svg {
             width: 29px;
             height: 24px;
@@ -103,16 +101,14 @@
       }
     }
     .box-detailsOrder {
-      //display: flex;
-      //flex-direction: row;
       transition: box-shadow .3s;
-      border: 1px solid $color-hrLightGray;
       box-sizing: border-box;
       border-radius: 3px;
       margin-bottom: 1rem;
       background-color: $color-white; 
       @include lg {
         padding: 2rem 1.4rem;
+        border: 1px solid $color-hrLightGray;
       }
       &.delivered, &.pendingPayment, &.inTransport {
         .flagOrder p{
@@ -129,7 +125,8 @@
       &.delivered {
         border-top: 10px solid $color-Lightgreen;
         @include lg {
-          border-left: 10px solid $color-Lightgreen;
+          border-top: 1px solid $color-hrLightGray;
+          border-left: 5px solid $color-Lightgreen;
         }
         .flagOrder p{
           &:before {
@@ -140,6 +137,7 @@
       &.pendingPayment {
         border-top: 10px solid $color-red;
         @include lg {
+          border-top: 1px solid $color-hrLightGray;
           border-left: 5px solid $color-red;
         }
         .flagOrder p{
@@ -151,6 +149,7 @@
       &.inTransport {
         border-top: 10px solid $color-yellow;
         @include lg {
+          border-top: 1px solid $color-hrLightGray;
           border-left: 5px solid $color-yellow;
         }
         .flagOrder p{
@@ -162,6 +161,7 @@
       .box-firstPart {
         display: flex;
         flex-direction: column;
+        padding: 2rem 1.4rem;
         @include lg {
           flex-direction: row;
         }
@@ -181,6 +181,19 @@
           &:last-of-type {
             flex: 2;
           }
+          .title-myorderMobile {
+            font-size: 12px;
+            line-height: 1.67;
+          }
+          .subtitle-myorderMobile {
+            font-family: $font-family-open-sans-bold;
+            font-size: $font-size-h5;
+            font-weight: bold;
+            line-height: 1.11;
+            letter-spacing: 1.8px;
+            text-align: left;
+            color: $color-almostBlack;
+          }
         }
         .box-icons {
           display: flex;
@@ -194,16 +207,33 @@
       }
       .blabla {
         height: 1px;
-        background: red;
+        border-bottom: .1rem dashed #eee;
         width: 100%;
         display: block;
         position: relative;
+        &:before, &:after {
+          content: "";
+          position: absolute;
+          display: block;
+          width: .9em;
+          height: .9em;
+          background: #eee;
+          border-radius: 50%;
+          top: -0.7rem;
+        }
+        &:before {
+          left: -4px;
+        }
+        &:after {
+          right: -4px;
+        }
       }
       .box-secondPart {
         display: flex;
         flex-direction: column;
-        margin-top: 3rem;
+        padding: 2rem 1.4rem;
         @include lg {
+          margin-top: 3rem;
           flex-direction: row;
         }
         >div {
@@ -221,21 +251,51 @@
           }
           .title-secondPart {
             font-family: $font-family-open-sans;
-            font-size: $font-size-xs;
+            font-size: 12px;
             line-height: 1.67;
             text-align: left;
-            color: $color-lightGray;
+            color: $color-almostBlack;
+            font-size: $font-size-xs;
             margin-bottom: 0;
+            @include lg {
+              color: $color-lightGray;
+            }
           }
           .txt-secondPart {
-            font-size: $font-size-base;
-            line-height: 1.25;
+            font-size: $font-size-h5;
+            line-height: 1.11;
             color: $color-almostBlack;
+            @include lg {
+              font-size: $font-size-base;
+              line-height: 1.25;
+            }
+          }
+        }
+        .box-statusMobile {
+          font-family: $font-family-open-sans;
+          .title-statusMobile {
+            font-size: $font-size-xs;
+            line-height: 1.67;
+            color: $color-almostBlack;
+            margin-bottom: 0;
+          }
+          .subtitle-statusMobile {
+            font-size: $font-size-h5;
+            line-height: 1.11;
+            color: $color-red;
+          }
+        }
+        .btn-default {
+          margin-bottom: 1rem;
+          &:last-of-type {
+            margin-top: 1.1rem;
           }
         }
       }
       &:hover {
-        box-shadow: 0px 3px 5px 6px $color-lightGray2;
+        @include lg {
+          box-shadow: 0px 3px 5px 6px $color-lightGray2;
+        }
       }
     }
   }
