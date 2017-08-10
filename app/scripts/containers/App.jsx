@@ -14,6 +14,7 @@ import Error404 from 'containers/Errors/404';
 import Products from 'containers/Products';
 import Authentication from 'containers/Authentication';
 import Cart from 'containers/Cart';
+import MyAccount from 'containers/MyAccount';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -64,6 +65,7 @@ export class App extends React.Component {
                 <Route path="/configuracao-:slug" component={Config} />
                 <Route path="/produtos-:slug" component={Products} />
                 <Route path="/login-cadastro" component={Authentication} />
+                <Route path="/minha-conta" component={MyAccount} />
                 <Route exact path="/test" component={Home} />
                 <Route path="/meu-carrinho" component={Cart} />
                 <Route exact path="/404" component={Error404} />
