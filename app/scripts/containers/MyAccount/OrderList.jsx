@@ -1,0 +1,337 @@
+// @flow
+import React from 'react';
+import Breadcrumbs from 'components/Breadcrumbs';
+import { Link } from 'react-router-dom';
+
+type Props = {
+  screenSize: string,
+}
+
+export class OrderList extends React.Component {
+  static defaultProps = {
+    screenSize: 'xs',
+  };
+
+  props: Props;
+
+  /*render() {
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Minha conta',
+        url: '/minha-conta',
+      },
+      {
+        title: 'Meus pedidos',
+      },
+    ];
+    return (
+      <div className="container-myorder">
+        <Breadcrumbs links={breadcrumb} />
+        <h2>Minha conta</h2>
+        <h3 className="subtitle-myorder">Meus pedidos</h3>
+        <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
+        <ul className="box-tableOrder">
+          <li>N do pedido</li>
+          <li>Realizado em</li>
+          <li>Status</li>
+          <li>Ações</li>
+        </ul>
+
+        <div className="box-detailsOrder delivered">
+          <div className="box-firstPart">
+            <div>
+              <p>483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+            <div className="flagOrder">
+              <p>Pedido entregue</p>
+            </div>
+            <div className="box-icons">
+              <div className="icons">
+                <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+              </div>
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+            <div className="box-images">
+              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
+            </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p className="title-secondPart">Valor total</p>
+              <p className="txt-secondPart">R$ 2.050,30</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="box-detailsOrder pendingPayment">
+          <div className="box-firstPart">
+            <div>
+              <p>483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+            <div className="flagOrder">
+              <p>Aguardando pagamento</p>
+            </div>
+            <div className="box-icons">
+              <div className="icons">
+                <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+              </div>
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+            <div className="box-images">
+              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
+            </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p className="title-secondPart">Valor total</p>
+              <p className="txt-secondPart">R$ 2.050,30</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="box-detailsOrder inTransport">
+          <div className="box-firstPart">
+            <div>
+              <p>483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+            <div className="flagOrder">
+              <p>Em transporte</p>
+            </div>
+            <div className="box-icons">
+              <div className="icons">
+                <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+              </div>
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+            <div className="box-images">
+              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
+            </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p className="title-secondPart">Valor total</p>
+              <p className="txt-secondPart">R$ 2.050,30</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    );
+  }*/
+
+  renderMobile() {
+    return (
+      <div className="container-myorder">
+        <h2>Minha conta</h2>
+        <h3 className="subtitle-myorder">Meus pedidos</h3>
+        <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
+        <div className="box-detailsOrder pendingPayment">
+          <div className="box-firstPart">
+            <div>
+              <p>Pedido</p>
+              <p>N 483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+          </div>
+          <span className="blabla" />
+          <div className="box-secondPart">
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p>status</p>
+              <p>aguardando pagamento</p>
+            </div>
+            <div>
+              <p>imprimir boleto</p>
+              <p>enviar comprovante</p>
+              <p>ver detalhes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderDesktop() {
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Minha conta',
+        url: '/minha-conta',
+      },
+      {
+        title: 'Meus pedidos',
+      },
+    ];
+    return (
+      <div className="container-myorder">
+        <Breadcrumbs links={breadcrumb} />
+        <h2>Minha conta</h2>
+        <h3 className="subtitle-myorder">Meus pedidos</h3>
+        <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
+        <ul className="box-tableOrder">
+          <li>N do pedido</li>
+          <li>Realizado em</li>
+          <li>Status</li>
+          <li>Ações</li>
+        </ul>
+        <div className="box-detailsOrder delivered">
+          <div className="box-firstPart">
+            <div>
+              <p>483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+            <div className="flagOrder">
+              <p>Pedido entregue</p>
+            </div>
+            <div className="box-icons">
+              <div className="icons">
+                <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+              </div>
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+            <div className="box-images">
+              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
+            </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p className="title-secondPart">Valor total</p>
+              <p className="txt-secondPart">R$ 2.050,30</p>
+            </div>
+          </div>
+        </div>
+        <div className="box-detailsOrder pendingPayment">
+          <div className="box-firstPart">
+            <div>
+              <p>483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+            <div className="flagOrder">
+              <p>Aguardando pagamento</p>
+            </div>
+            <div className="box-icons">
+              <div className="icons">
+                <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+              </div>
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+            <div className="box-images">
+              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
+            </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p className="title-secondPart">Valor total</p>
+              <p className="txt-secondPart">R$ 2.050,30</p>
+            </div>
+          </div>
+        </div>
+        <div className="box-detailsOrder inTransport">
+          <div className="box-firstPart">
+            <div>
+              <p>483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+            <div className="flagOrder">
+              <p>Em transporte</p>
+            </div>
+            <div className="box-icons">
+              <div className="icons">
+                <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+              </div>
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+            <div className="box-images">
+              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
+              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
+            </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p className="title-secondPart">Valor total</p>
+              <p className="txt-secondPart">R$ 2.050,30</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const { screenSize } = this.props;
+
+    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
+      ? this.renderMobile()
+      : this.renderDesktop();
+  }
+}
+
+export default OrderList;
