@@ -62,7 +62,7 @@ export default class CartVoucher extends React.Component {
 
   renderInactiveVoucher() {
     return (
-      <div className="org-cart-voucher org-cart-voucher--inactive">
+      <div className="org-cart-voucher-inactive">
         <TagIcon />
         <div className="mol-cart-voucher-text">
           <PageTitle>Tem um cupom de desconto?</PageTitle>
@@ -95,14 +95,18 @@ export default class CartVoucher extends React.Component {
   renderDesktop() {
     const { isActive } = this.props;
 
-    return isActive ? this.renderActiveVoucher() : this.renderInactiveVoucher();
+    return (
+      <div className="org-cart-voucher">
+        {isActive ? this.renderActiveVoucher() : this.renderInactiveVoucher()}
+      </div>
+    );
   }
 
   renderMobile() {
     const { isActive } = this.props;
 
     return (
-      <div className="org-cart-voucher org-cart-voucher--mobile">
+      <div className="org-cart-voucher">
         <div className="mol-cart-voucher-title">
           <div className="atm-cart-title">cupom de desconto</div>
           <TextButton>Ver cupons</TextButton>
