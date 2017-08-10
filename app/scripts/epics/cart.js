@@ -6,7 +6,7 @@ import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, CartConstants } from 'constants/index';
 import cartAddPayloadMock from 'assets/json/mockCartAddPayload.json';
 import { push } from 'modules/ReduxRouter';
-
+import { cartFetch as cartFetchAction } from 'actions';
 
 export function cartBasicFetch(action$) {
   return action$.ofType(CartConstants.CART_BASIC_FETCH_REQUEST)
@@ -43,7 +43,8 @@ export function cartBasicFetch(action$) {
 }
 
 export function cartFetch(action$) {
-  return action$.ofType(CartConstants.CART_FETCH_REQUEST)
+  console.log(action$);
+  return action$.ofType(CartConstants.CART_FETCH_REQUEST || CartConstants.CART_VOUCHER_ADD_FETCH_SUCCESS)
     .switchMap(() => {
       const endpoint = '/v2/cart';
 
@@ -186,6 +187,94 @@ export function cartDeleteFetch(action$) {
         .defaultIfEmpty({ type: CartConstants.CART_DELETE_FETCH_CANCEL })
         .catch(error => ([{
           type: CartConstants.CART_DELETE_FETCH_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]));
+    });
+}
+
+export function cartVoucherAddFetch(action$, store) {
+  console.log(action$);
+  return action$.ofType(CartConstants.CART_VOUCHER_ADD_FETCH_REQUEST)
+    .switchMap(action => {
+      const voucher = action.payload.voucher;
+
+      const endpoint = `/v2/cart/voucher/${voucher}`;
+
+      return rxAjax({
+        endpoint,
+        payload: {},
+        method: 'POST',
+      })
+        .map(data => {
+          if (data.status === 204) {
+            if (cartFetchAction) {
+              store.dispatch(cartFetchAction());
+            }
+
+            return {
+              type: CartConstants.CART_VOUCHER_ADD_FETCH_SUCCESS,
+              payload: {
+                voucher,
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE,
+            payload: { message: data.response, status: data.status },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: CartConstants.CART_VOUCHER_ADD_FETCH_CANCEL })
+        .catch(error => ([{
+          type: CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]));
+    });
+}
+
+export function cartVoucherRemoveFetch(action$, store) {
+  console.log(action$);
+  return action$.ofType(CartConstants.CART_VOUCHER_REMOVE_FETCH_REQUEST)
+    .switchMap(action => {
+      const voucher = action.payload.voucher;
+
+      const endpoint = `/v2/cart/voucher/${voucher}`;
+
+      return rxAjax({
+        endpoint,
+        payload: {},
+        method: 'DELETE',
+      })
+        .map(data => {
+          if (data.status === 204) {
+            if (cartFetchAction) {
+              store.dispatch(cartFetchAction());
+            }
+
+            return {
+              type: CartConstants.CART_VOUCHER_REMOVE_FETCH_SUCCESS,
+              payload: {
+                voucher,
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE,
+            payload: { message: data.response, status: data.status },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: CartConstants.CART_VOUCHER_ADD_FETCH_CANCEL })
+        .catch(error => ([{
+          type: CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE,
           payload: { message: error.message, status: error.status },
           meta: { updatedAt: getUnixtime() },
         }]));

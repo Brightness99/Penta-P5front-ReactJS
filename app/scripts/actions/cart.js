@@ -71,3 +71,34 @@ export function cartDeleteFetch(itemId: string): Object {
     },
   };
 }
+
+/**
+ * Cart Voucher Add Fetch
+ * @param {string} voucher
+ *
+ * @returns {Object}
+ */
+export function cartVoucherAddFetch(voucher: string): Object {
+  return {
+    type: CartConstants.CART_VOUCHER_ADD_FETCH_REQUEST,
+    payload: {
+      voucher,
+    },
+  };
+}
+
+
+/**
+ * Cart Voucher Remove Fetch
+ * @param {string} voucher
+ *
+ * @returns {Object}
+ */
+export function cartVoucherRemoveFetch(voucher: string): Object {
+  return {
+    type: CartConstants.CART_VOUCHER_REMOVE_FETCH_REQUEST,
+    payload: {
+      voucher,
+    },
+  };
+}

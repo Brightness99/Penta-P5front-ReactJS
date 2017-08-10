@@ -2,27 +2,63 @@
 
 import React from 'react';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { InputAction } from 'molecules/Inputs';
+import { TextButton } from 'atoms/Buttons';
+import { InputAction } from 'atoms/Inputs';
 import { PageTitle } from 'atoms/Titles';
-import { TagIcon, TicketIcon } from 'components/Icons';
+import { TagIcon, TicketIcon, TimesCircleIcon } from 'components/Icons';
+import { cartVoucherAddFetch, cartVoucherRemoveFetch } from 'actions';
+import cx from 'classnames';
 
 type Props = {
   screenSize: string,
   isActive: string,
   voucher: {},
+  dispatch: () => {},
 };
 
 export default class CartVoucher extends React.Component {
-  shouldComponentUpdate = shouldComponentUpdate;
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showInput: true,
+    };
+  }
 
   static defaultProps = {
     isActive: false,
     voucher: {},
   };
 
+  shouldComponentUpdate = shouldComponentUpdate;
+
   static props: Props;
 
   static state: State;
+
+  handleVoucherRemoval = () => {
+    const { voucher: { voucher_name }, dispatch } = this.props;
+
+    dispatch(cartVoucherRemoveFetch(voucher_name));
+  };
+
+  handleState() {
+    const { voucher: { voucher_name } } = this.props;
+    return !voucher_name
+      ? <InputAction name="voucher" onSubmit={this.handleVoucherSubmit} placeholder="Código..." />
+      : (<div className="mol-voucher-input-simulate">
+        <span className="atm-voucher-input-text">VAAPHYNNVV4GY519</span>
+        <button onClick={this.handleVoucherRemoval}><TimesCircleIcon /></button>
+      </div>);
+  }
+
+  handleVoucherSubmit = (ev) => {
+    ev.preventDefault();
+
+    const { dispatch } = this.props;
+
+    dispatch(cartVoucherAddFetch(ev.currentTarget.voucher.value));
+  };
 
   renderInactiveVoucher() {
     return (
@@ -37,15 +73,20 @@ export default class CartVoucher extends React.Component {
   }
 
   renderActiveVoucher() {
+    const { voucher } = this.props;
     return (
-      <div className="org-cart-ticket">
+      <div className={cx(
+        'org-cart-ticket',
+        voucher.voucher_name && 'org-cart-ticket--valid',
+        voucher.error.status && 'org-cart-ticket--invalid'
+      )}>
         <TicketIcon />
         <div className="mol-cart-voucher-ticket-body">
-          <div className="atm-cart-voucher-ticket-text">
+          <div className="mol-cart-voucher-ticket-text">
             <span>Tem um cupom de desconto?</span>
-            <span>Adicione o código e garanta seu desconto</span>
+            <p>Adicione o código e garanta seu desconto</p>
           </div>
-          <InputAction placeholder="Código..." />
+          {this.handleState()}
         </div>
       </div>
     );
@@ -64,6 +105,7 @@ export default class CartVoucher extends React.Component {
       <div className="org-cart-voucher org-cart-voucher--mobile">
         <div className="mol-cart-voucher-title">
           <div className="atm-cart-title">cupom de desconto</div>
+          <TextButton>Ver cupons</TextButton>
         </div>
         {isActive ? this.renderActiveVoucher() : this.renderInactiveVoucher()}
       </div>
