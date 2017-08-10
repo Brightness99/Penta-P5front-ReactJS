@@ -36,6 +36,9 @@
         text-align: left;
         color: $color-lightGray;
         i {
+        //line-height: 1.88;
+        text-align: left;
+        color: $color-lightGray;
           svg {
             width: 29px;
             height: 24px;
@@ -47,6 +50,7 @@
       }
     }
   }
+
   .container-myorder {
     @include lg {
       background-color: $color-white;
@@ -69,6 +73,7 @@
       @include lg {
         margin-top: 2.4rem;
       }
+
     }
     .legend-myorder {
       font-family: $font-family-open-sans-light;
@@ -105,6 +110,7 @@
     }
     .box-detailsOrder {
       transition: box-shadow .3s;
+      border: 1px solid $color-hrLightGray;
       box-sizing: border-box;
       border-radius: 3px;
       margin-bottom: 1rem;
@@ -305,6 +311,16 @@
           }
           &:last-of-type {
             margin-top: 1.1rem;
+            font-size: $font-size-xs;
+            line-height: 1.67;
+            text-align: left;
+            color: $color-lightGray;
+            margin-bottom: 0;
+          }
+          .txt-secondPart {
+            font-size: $font-size-base;
+            line-height: 1.25;
+            color: $color-almostBlack;
           }
         }
       }
