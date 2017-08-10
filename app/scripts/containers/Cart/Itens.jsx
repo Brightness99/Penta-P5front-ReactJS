@@ -27,11 +27,6 @@ type State = {
     itemId: string,
   },
   isUpsellSelected: boolean,
-  upsell: {
-    isOpen: boolean,
-    product: string,
-    isSelected: boolean,
-  }
 };
 
 export default class CartItens extends React.Component {
@@ -39,11 +34,6 @@ export default class CartItens extends React.Component {
     super(props);
 
     this.state = {
-      upsell: {
-        isOpen: false,
-        product: '',
-        isSelected: false,
-      },
       modal: {
         type: '',
         isOpen: false,
@@ -121,12 +111,12 @@ export default class CartItens extends React.Component {
     const { dispatch } = this.props;
     const targetValue = ev.currentTarget.value;
     swal({
-      title: "Você tem certeza?",
-      text: "Ao remover este produto ele não estará mais disponível no carrinho!",
-      type: "warning",
-      confirmButtonColor: "#2cac57",
-      confirmButtonText: "Sim",
-      cancelButtonText: "Não",
+      title: 'Você tem certeza?',
+      text: 'Ao remover este produto ele não estará mais disponível no carrinho!',
+      type: 'warning',
+      confirmButtonColor: '#2cac57',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
       showCancelButton: true,
       reverseButtons: true,
     })
@@ -159,7 +149,7 @@ export default class CartItens extends React.Component {
       .reduce((prevOption, currentOption) => (
         [
           ...prevOption,
-          <li key={currentOption}>{item.product_parts[Object.keys(item.product_parts)[0]].options[currentOption].name}</li>
+          <li key={currentOption}>{item.product_parts[Object.keys(item.product_parts)[0]].options[currentOption].name}</li>,
         ]
       ), []);
     return (
@@ -185,7 +175,7 @@ export default class CartItens extends React.Component {
 
   renderDesktop() {
     const { items, zipcode } = this.props;
-    const { upsell, modal: { isOpen } } = this.state;
+    const { modal: { isOpen } } = this.state;
 
     return (
       <div className="org-cart-items-desktop">

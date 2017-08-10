@@ -7,7 +7,9 @@ import { IntlMoney } from 'components/Intl';
 type Props = {
   screenSize: string,
   totalItems: number,
-  totalPrice: number,
+  prices: {},
+  isVoucherActive: boolean,
+  handleVoucherToggle: () => {},
 };
 
 type State = {
@@ -25,12 +27,45 @@ export default class CartSummary extends React.Component {
 
   static state: State;
 
+  handleVoucher = () => {
+    const { handleVoucherToggle } = this.props;
+
+    if (typeof handleVoucherToggle === 'function') {
+      handleVoucherToggle();
+    }
+  };
+
+  renderVoucher() {
+    const { isVoucherActive } = this.props;
+
+    return isVoucherActive
+      ? <span>---</span>
+      : <button onClick={this.handleVoucher} className="atm-button-cart-voucher">Adicionar código</button>;
+  }
+
   renderDesktop() {
-    return null;
+    const { prices } = this.props;
+
+    return (
+      <div className="mol-cart-summary-infos">
+        <div>
+          <span>Subtotal:</span>
+          <span><IntlMoney>{prices.total_no_discount || prices.total}</IntlMoney></span>
+        </div>
+        <div>
+          <span>Cupom:</span>
+          {this.renderVoucher()}
+        </div>
+        <div className="mol-cart-summary-total">
+          <span>Total</span>
+          <IntlMoney className="atm-cart-price atm-cart-price--large">{prices.total}</IntlMoney>
+        </div>
+      </div>
+    );
   }
 
   renderMobile() {
-    const { totalItems, totalPrice } = this.props;
+    const { totalItems, prices } = this.props;
 
     return (
       <div className="org-cart-summary">
@@ -44,17 +79,17 @@ export default class CartSummary extends React.Component {
           </div>
           <div>
             <span>Subtotal:</span>
-            <span><IntlMoney>{225}</IntlMoney></span>
+            <span><IntlMoney>{prices.total_no_discount || prices.total}</IntlMoney></span>
           </div>
           <div>
             <span>Cupom:</span>
-            <button className="atm-button-cart-voucher">Adicionar código</button>
+            {this.renderVoucher()}
           </div>
         </div>
         <hr />
         <div className="mol-cart-summary-total">
           <span>Total</span>
-          <IntlMoney className="atm-cart-price atm-cart-price--large">{225}</IntlMoney>
+          <IntlMoney className="atm-cart-price atm-cart-price--large">{prices.total}</IntlMoney>
         </div>
       </div>
     );

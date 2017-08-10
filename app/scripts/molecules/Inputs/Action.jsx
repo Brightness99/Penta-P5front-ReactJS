@@ -11,12 +11,15 @@ type Props = {
 };
 
 type State = {
+  inputValue: string,
 };
 
 export default class InputAction extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      inputValue: props.value || '',
+    };
   }
 
   shouldComponentUpdate = shouldComponentUpdate;
@@ -24,6 +27,12 @@ export default class InputAction extends React.Component {
   static props: Props;
 
   static state: State;
+
+  handleChange = (ev) => {
+    this.setState({
+      inputValue: ev.currentTarget.value,
+    });
+  };
 
   render() {
     const { placeholder, value } = this.props;
@@ -33,7 +42,9 @@ export default class InputAction extends React.Component {
         <InputText
           placeholder={placeholder}
           value={value}
+          onChange={this.handleChange}
         />
+        <button>123</button>
       </div>
     );
   }
