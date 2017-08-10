@@ -36,10 +36,10 @@ export default class CartSummary extends React.Component {
   };
 
   renderVoucher() {
-    const { isVoucherActive } = this.props;
+    const { isVoucherActive, prices: { discount } } = this.props;
 
     return isVoucherActive
-      ? <span>---</span>
+      ? <span>-{discount ? <IntlMoney>{discount.total}</IntlMoney> : '--'}</span>
       : <button onClick={this.handleVoucher} className="atm-button-cart-voucher">Adicionar código</button>;
   }
 

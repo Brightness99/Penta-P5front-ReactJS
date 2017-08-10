@@ -40,6 +40,17 @@ export class Cart extends React.Component {
     dispatch(cartFetch());
   }
 
+  componentWillUpdate(nextProps) {
+    const { cart: { voucher } } = this.props;
+    const nextVoucher = nextProps.cart.voucher;
+
+    if (nextVoucher.voucher_name && voucher.voucher_name !== nextVoucher.voucher_name ) {
+      this.setState({
+        isVoucherActive: true,
+      });
+    }
+  }
+
   static props: Props;
 
   handleVoucherToggle = () => {
@@ -57,7 +68,7 @@ export class Cart extends React.Component {
   }
 
   renderDesktop() {
-    const { app: { screenSize }, cart: { data: { prices, items, zipcode }, count }, dispatch } = this.props;
+    const { app: { screenSize }, cart: { data: { prices, items, zipcode }, voucher, count }, dispatch } = this.props;
     const { isVoucherActive } = this.state;
 
     return (
@@ -66,7 +77,12 @@ export class Cart extends React.Component {
           <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
           <CartCrossSell screenSize={screenSize} />
           <div className="mol-cart-desktop-summary">
-            <CartVoucher screenSize={screenSize} isActive={isVoucherActive} />
+            <CartVoucher
+              screenSize={screenSize}
+              isActive={isVoucherActive}
+              dispatch={dispatch}
+              voucher={voucher}
+            />
             <CartSummary
               screenSize={screenSize}
               totalItems={count}
@@ -82,13 +98,12 @@ export class Cart extends React.Component {
   }
 
   renderMobile() {
-    const { app: { screenSize }, cart: { data: { prices, items, zipcode }, count }, dispatch } = this.props;
+    const { app: { screenSize }, cart: { data: { prices, items, zipcode }, voucher, count }, dispatch } = this.props;
     const { isVoucherActive } = this.state;
 
     return (
       <main>
         <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
-        <CartVoucher screenSize={screenSize} isActive={isVoucherActive} />
         <CartSummary
           screenSize={screenSize}
           totalItems={count}
@@ -96,13 +111,19 @@ export class Cart extends React.Component {
           isVoucherActive={isVoucherActive}
           handleVoucherToggle={this.handleVoucherToggle}
         />
+        <CartVoucher
+          screenSize={screenSize}
+          isActive={isVoucherActive}
+          dispatch={dispatch}
+          voucher={voucher}
+        />
         <CartFooter screenSize={screenSize} />
       </main>
     );
   }
 
   render() {
-    const { cart: { count, isRunning, isLoaded } } = this.props;
+    const { cart: { count, isRunning, isLoaded, data } } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -113,7 +134,7 @@ export class Cart extends React.Component {
       },
     ];
 
-    if (isRunning || !isLoaded) {
+    if ((isRunning || !isLoaded) && !data.items) {
       return (<Loading />);
     }
 

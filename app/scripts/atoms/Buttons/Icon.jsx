@@ -1,19 +1,21 @@
 // @flow
 
 import React from 'react';
-import { shouldComponentUpdate } from 'utils/helpers';
 
 type Props = {
+  icon: any,
 };
 
-export default class IconButton extends React.Component {
-  shouldComponentUpdate = shouldComponentUpdate;
+const IconButton = (props: Props) => {
+  const { icon } = props;
 
-  static props: Props;
+  return (
+    <button
+      className="atm-icon-button"
+    >
+      {icon}
+    </button>
+  );
+};
 
-  render() {
-    return (
-      <div>=></div>
-    );
-  }
-}
+export default IconButton;

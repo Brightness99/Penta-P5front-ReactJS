@@ -14,6 +14,14 @@ const cartState = {
   isRunning: false,
   count: 0,
   error: {},
+  voucher: {
+    isRunning: false,
+    isLoaded: false,
+    error: {},
+    voucher_name: '',
+    total: 0,
+    voucher_id: '',
+  },
 };
 
 export default {
@@ -33,9 +41,9 @@ export default {
         count: action.payload.count,
       };
     },
-    [CartConstants.CART_FETCH_REQUEST]() {
+    [CartConstants.CART_FETCH_REQUEST](state) {
       return {
-        ...cartState,
+        ...state,
         isRunning: true,
       };
     },
@@ -46,6 +54,11 @@ export default {
         isRunning: false,
         count: Object.keys(action.payload.items).length,
         isLoaded: true,
+        voucher: {
+          ...state.voucher,
+          ...action.payload.prices.discount,
+        }
+
       };
     },
     [CartConstants.CART_FETCH_FAILURE](state, action) {
@@ -83,6 +96,51 @@ export default {
           items,
         },
         count: Object.keys(items).length,
+      };
+    },
+    [CartConstants.CART_VOUCHER_ADD_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        voucher: {
+          ...cartState.voucher,
+          isRunning: true,
+        }
+      };
+    },
+    [CartConstants.CART_VOUCHER_ADD_FETCH_SUCCESS](state) {
+      return {
+        ...state,
+        voucher: {
+          ...state.voucher,
+          isRunning: false,
+          isLoaded: true,
+        }
+      };
+    },
+    [CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        voucher: {
+          ...state.voucher,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        }
+      };
+    },
+    [CartConstants.CART_VOUCHER_REMOVE_FETCH_SUCCESS](state) {
+      return {
+        ...state,
+        voucher: cartState.voucher,
+      };
+    },
+    [CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        voucher: {
+          ...state.voucher,
+          error: action.payload,
+        }
       };
     },
   }),
