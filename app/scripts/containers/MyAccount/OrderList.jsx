@@ -3,6 +3,7 @@ import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
 import { CodeBar, Receipt } from 'components/Icons';
 
 type Props = {
@@ -21,10 +22,18 @@ export class OrderList extends React.Component {
     };
   }
 
+=======
+type Props = {
+  screenSize: string,
+}
+
+export class OrderList extends React.Component {
+>>>>>>> MyAccountOrder
   static defaultProps = {
     screenSize: 'xs',
   };
 
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
   static props: Props;
   state: State;
 
@@ -34,6 +43,9 @@ export class OrderList extends React.Component {
       secondStep: !secondStep,
     });
   }
+=======
+  props: Props;
+>>>>>>> MyAccountOrder
 
   /*render() {
     const breadcrumb = [
@@ -183,6 +195,7 @@ export class OrderList extends React.Component {
         <div className="box-detailsOrder pendingPayment">
           <div className="box-firstPart">
             <div>
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
               <p className="title-myorderMobile">Pedido</p>
               <p className="subtitle-myorderMobile">Nº 210.016</p>
             </div>
@@ -255,12 +268,41 @@ export class OrderList extends React.Component {
           </div>
         </div>
 
+=======
+              <p>Pedido</p>
+              <p>N 483093</p>
+            </div>
+            <div>
+              <p>30/08/2016</p>
+            </div>
+          </div>
+          <span className="blabla" />
+          <div className="box-secondPart">
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">3 produtos</p>
+            </div>
+            <div>
+              <p>status</p>
+              <p>aguardando pagamento</p>
+            </div>
+            <div>
+              <p>imprimir boleto</p>
+              <p>enviar comprovante</p>
+              <p>ver detalhes</p>
+            </div>
+          </div>
+        </div>
+>>>>>>> MyAccountOrder
       </div>
     );
   }
 
   renderDesktop() {
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
     const { secondStep } = this.state;
+=======
+>>>>>>> MyAccountOrder
     const breadcrumb = [
       {
         title: 'Home',
@@ -281,7 +323,11 @@ export class OrderList extends React.Component {
         <h3 className="subtitle-myorder">Meus pedidos</h3>
         <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
         <ul className="box-tableOrder">
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
           <li>Nº do pedido</li>
+=======
+          <li>N do pedido</li>
+>>>>>>> MyAccountOrder
           <li>Realizado em</li>
           <li>Status</li>
           <li>Ações</li>
@@ -302,10 +348,17 @@ export class OrderList extends React.Component {
                 <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
                 <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
               </div>
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
             </div>
           </div>
           {secondStep && (<div className="box-secondPart">
+=======
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+>>>>>>> MyAccountOrder
             <div className="box-images">
               <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
               <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
@@ -319,7 +372,11 @@ export class OrderList extends React.Component {
               <p className="title-secondPart">Valor total</p>
               <p className="txt-secondPart">R$ 2.050,30</p>
             </div>
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
           </div>)}
+=======
+          </div>
+>>>>>>> MyAccountOrder
         </div>
         <div className="box-detailsOrder pendingPayment">
           <div className="box-firstPart">
@@ -337,10 +394,17 @@ export class OrderList extends React.Component {
                 <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
                 <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
               </div>
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
             </div>
           </div>
           {secondStep && (<div className="box-secondPart">
+=======
+              <Link to="#" className="icons align-text">ver detalhes</Link>
+            </div>
+          </div>
+          <div className="box-secondPart">
+>>>>>>> MyAccountOrder
             <div className="box-images">
               <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
               <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
@@ -354,7 +418,11 @@ export class OrderList extends React.Component {
               <p className="title-secondPart">Valor total</p>
               <p className="txt-secondPart">R$ 2.050,30</p>
             </div>
+<<<<<<< 7123d2ca04dbdcea71dd8dc16143d973119ef5c0
           </div>)}
+=======
+          </div>
+>>>>>>> MyAccountOrder
         </div>
         <div className="box-detailsOrder inTransport">
           <div className="box-firstPart">
