@@ -41,3 +41,4 @@ export Cards from './Cards';
 export Models from './Models';
 export Out from './Out';
 export CodeBar from './CodeBar';
+export Receipt from './Receipt';
