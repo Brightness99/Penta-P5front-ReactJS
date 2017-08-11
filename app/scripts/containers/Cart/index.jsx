@@ -6,12 +6,13 @@ import { isMobile } from 'utils/helpers';
 import { cartFetch } from 'actions';
 
 import Breadcrumbs from 'components/Breadcrumbs';
+import StickBar from 'components/StickBar';
+
 import { PageTitle } from 'atoms/Titles';
 import Loading from 'components/Loading';
 import CartEmpty from './Empty';
 import CartCrossSell from './CrossSell';
 import CartFooter from './Footer';
-import CartHeader from './Header';
 import CartItens from './Itens';
 import CartSummary from './Summary';
 import CartVoucher from './Voucher';
@@ -72,7 +73,7 @@ export class Cart extends React.Component {
     const { isVoucherActive } = this.state;
 
     return (
-      <div>
+      <div className="page-cart-content">
         <main className="mol-cart-content">
           <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
           <CartCrossSell screenSize={screenSize} />
@@ -93,6 +94,47 @@ export class Cart extends React.Component {
           </div>
           <CartFooter screenSize={screenSize} dispatch={dispatch} />
         </main>
+        <StickBar>
+          <div className="org-cart-stickbar">
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+            <br />
+            123
+          </div>
+        </StickBar>
       </div>
     );
   }
