@@ -250,7 +250,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 3rem 0;
+  margin: 3rem 0 0;
 
   > .atm-cart-shopping {
     color: #6a6f7a;
@@ -336,6 +336,8 @@
 }
 
 .mol-cart-content {
+  display: inline-flex;
+  flex-direction: column;
   width: 74.5%;
 }
 
@@ -794,107 +796,18 @@
   }
 }
 
-//.org-cart-voucher {
-//  align-items: center;
-//  background-color: $color-white;
-//  border-radius: 0.3rem;
-//  display: flex;
-//  flex-direction: column;
-//  margin-bottom: 3rem;
-//  padding: 2rem;
-//  width: 100%;
-//
-//  @include lg {
-//    margin-bottom: 0;
-//    max-width: calc(100% - 25rem);
-//    padding: inherit;
-//  }
-//
-//  .mol-cart-voucher-title {
-//    align-self: flex-start;
-//    width: 100%;
-//  }
-//  .org-cart-ticket {
-//    @include center-child-flex;
-//    color: #eee;
-//    display: flex;
-//    height: 13rem;
-//    margin-top: 2rem;
-//    max-height: 13rem;
-//    max-width: 26rem;
-//    min-height: 13rem;
-//    min-width: 26rem;
-//    position: relative;
-//    width: 26rem;
-//
-//    > svg {
-//      fill: currentColor;
-//      left: 0;
-//      height: 100%;
-//      position: absolute;
-//      top: 0;
-//      width: 100%;
-//      z-index: 0;
-//    }
-//    .mol-cart-voucher-ticket-body {
-//      display: flex;
-//      flex-direction: column;
-//      z-index: 1;
-//    }
-//
-//    .atm-cart-voucher-ticket-text {
-//      @include center-child-flex;
-//      border-radius: 0.3rem;
-//      border: 0.1rem solid $color-white;
-//      color: #151617;
-//      display: flex;
-//      flex-direction: column;
-//      font-family: $font-family-open-sans;
-//      font-size: $font-size-xs;
-//      height: 6rem;
-//      margin-bottom: 1rem;
-//      width: 22rem;
-//
-//      span:last-child {
-//        font-size: $font-size-xxs;
-//        color: #878b94;
-//      }
-//    }
-//
-//    .mol-input-action input {
-//      background-color: $color-white;
-//    }
-//  }
-//
-//  &--inactive {
-//    align-items: center;
-//    display: flex;
-//    flex-direction: row;
-//
-//    svg {
-//      height: 2.4rem;
-//      width: 2.4rem;
-//    }
-//
-//    .mol-cart-voucher-text {
-//      padding-left: 1.5rem;
-//
-//      h2 {
-//        margin: 0;
-//        padding: 0;
-//      }
-//
-//      span,
-//      a {
-//        font-family: $font-family-open-sans;
-//        font-size: $font-size-xs;
-//        color: #878b94;
-//      }
-//
-//      a {
-//        color: $color-printi;
-//        cursor: pointer;
-//      }
-//    }
-//  }
-//}
+.page-cart-content {
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+
+  .org-stick-bar {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 24.5%;
+  }
+}
