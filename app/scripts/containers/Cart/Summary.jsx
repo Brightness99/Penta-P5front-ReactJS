@@ -50,7 +50,7 @@ export default class CartSummary extends React.Component {
       <div className="mol-cart-summary-infos">
         <div>
           <span>Subtotal:</span>
-          <span><IntlMoney>{prices.total_no_discount || prices.total}</IntlMoney></span>
+          <IntlMoney>{prices.total_no_discount || prices.total}</IntlMoney>
         </div>
         <div>
           <span>Cupom:</span>

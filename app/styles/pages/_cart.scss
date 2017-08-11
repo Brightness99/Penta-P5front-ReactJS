@@ -26,8 +26,11 @@
 .mol-cart-sidebar-summary {
   margin-top: 2rem;
 
-  > div span{
-    padding: 0 1rem;
+  > div {
+    span,
+    button {
+      padding: 0 1rem;
+    }
   }
 
   .mol-cart-summary-total {
