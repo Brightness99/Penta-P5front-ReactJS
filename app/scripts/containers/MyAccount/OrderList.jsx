@@ -3,18 +3,37 @@ import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 
-import { CodeBar } from 'components/Icons';
+import { CodeBar, Receipt } from 'components/Icons';
 
 type Props = {
   screenSize: string,
-}
+};
+
+type State = {
+  secondStep: boolean,
+};
 
 export class OrderList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      secondStep: false,
+    };
+  }
+
   static defaultProps = {
     screenSize: 'xs',
   };
 
-  props: Props;
+  static props: Props;
+  state: State;
+
+  showDetails = () => {
+    const { secondStep } = this.state;
+    this.setState({
+      secondStep: !secondStep,
+    });
+  }
 
   /*render() {
     const breadcrumb = [
@@ -168,7 +187,7 @@ export class OrderList extends React.Component {
               <p className="subtitle-myorderMobile">Nº 210.016</p>
             </div>
           </div>
-          <span className="blabla" />
+          <span className="detach" />
           <div className="box-secondPart">
             <div>
               <p className="title-secondPart">Itens do pedido</p>
@@ -176,20 +195,72 @@ export class OrderList extends React.Component {
             </div>
             <div className="box-statusMobile">
               <p className="title-statusMobile">status</p>
-              <p className="subtitle-statusMobile">aguardando pagamento</p>
+              <p className="subtitle-statusMobile">Aguardando pagamento</p>
             </div>
             <div>
               <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">enviar comprovante</Link>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
               <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
             </div>
           </div>
         </div>
+
+        <div className="box-detailsOrder inTransport">
+          <div className="box-firstPart">
+            <div>
+              <p className="title-myorderMobile">Pedido</p>
+              <p className="subtitle-myorderMobile">Nº 210.016</p>
+            </div>
+          </div>
+          <span className="detach" />
+          <div className="box-secondPart">
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">4 produtos</p>
+            </div>
+            <div className="box-statusMobile">
+              <p className="title-statusMobile">status</p>
+              <p className="subtitle-statusMobile">Em transporte</p>
+            </div>
+            <div>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
+              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="box-detailsOrder delivered">
+          <div className="box-firstPart">
+            <div>
+              <p className="title-myorderMobile">Pedido</p>
+              <p className="subtitle-myorderMobile">Nº 210.016</p>
+            </div>
+          </div>
+          <span className="detach" />
+          <div className="box-secondPart">
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">4 produtos</p>
+            </div>
+            <div className="box-statusMobile">
+              <p className="title-statusMobile">status</p>
+              <p className="subtitle-statusMobile">Entregue</p>
+            </div>
+            <div>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
+              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }
 
   renderDesktop() {
+    const { secondStep } = this.state;
     const breadcrumb = [
       {
         title: 'Home',
@@ -231,10 +302,10 @@ export class OrderList extends React.Component {
                 <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
                 <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
               </div>
-              <Link to="#" className="icons align-text">ver detalhes</Link>
+              <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
             </div>
           </div>
-          <div className="box-secondPart">
+          {secondStep && (<div className="box-secondPart">
             <div className="box-images">
               <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
               <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
@@ -248,7 +319,7 @@ export class OrderList extends React.Component {
               <p className="title-secondPart">Valor total</p>
               <p className="txt-secondPart">R$ 2.050,30</p>
             </div>
-          </div>
+          </div>)}
         </div>
         <div className="box-detailsOrder pendingPayment">
           <div className="box-firstPart">
@@ -266,10 +337,10 @@ export class OrderList extends React.Component {
                 <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
                 <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
               </div>
-              <Link to="#" className="icons align-text">ver detalhes</Link>
+              <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
             </div>
           </div>
-          <div className="box-secondPart">
+          {secondStep && (<div className="box-secondPart">
             <div className="box-images">
               <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
               <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
@@ -283,7 +354,7 @@ export class OrderList extends React.Component {
               <p className="title-secondPart">Valor total</p>
               <p className="txt-secondPart">R$ 2.050,30</p>
             </div>
-          </div>
+          </div>)}
         </div>
         <div className="box-detailsOrder inTransport">
           <div className="box-firstPart">
