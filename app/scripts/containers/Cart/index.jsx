@@ -36,7 +36,13 @@ export class Cart extends React.Component {
     };
   }
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { cart: { voucher }, dispatch } = this.props;
+
+    if (voucher.voucher_name) {
+      this.setState({
+        isVoucherActive: true,
+      });
+    }
 
     dispatch(cartFetch());
   }
