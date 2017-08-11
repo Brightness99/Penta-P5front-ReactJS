@@ -65,7 +65,10 @@
       text-align: left;
       color: $color-almostBlack;
       text-transform: none;
-      margin-top: 2.4rem;
+      margin-top: 1.4rem;
+      @include lg {
+        margin-top: 2.4rem;
+      }
     }
     .legend-myorder {
       font-family: $font-family-open-sans-light;
@@ -133,6 +136,9 @@
             background-color: $color-Lightgreen;
           }
         }
+        .subtitle-statusMobile {
+          color: $color-Lightgreen;
+        }
       }
       &.pendingPayment {
         border-top: 10px solid $color-red;
@@ -145,6 +151,9 @@
             background-color: $color-red;
           }
         }
+        .subtitle-statusMobile {
+          color: $color-red;
+        }
       }
       &.inTransport {
         border-top: 10px solid $color-yellow;
@@ -156,6 +165,9 @@
           &:before {
             background-color: $color-yellow;
           }
+        }
+        .subtitle-statusMobile {
+          color: $color-yellow;
         }
       }
       .box-firstPart {
@@ -205,7 +217,7 @@
           }
         }
       }
-      .blabla {
+      .detach {
         height: 1px;
         border-bottom: .1rem dashed #eee;
         width: 100%;
@@ -235,6 +247,7 @@
         @include lg {
           margin-top: 3rem;
           flex-direction: row;
+          border-top: 1px solid $color-hrLightGray;
         }
         >div {
           flex: 1;
@@ -282,11 +295,14 @@
           .subtitle-statusMobile {
             font-size: $font-size-h5;
             line-height: 1.11;
-            color: $color-red;
           }
         }
         .btn-default {
           margin-bottom: 1rem;
+          svg {
+            width: 22px;
+            height: 17px;
+          }
           &:last-of-type {
             margin-top: 1.1rem;
           }
