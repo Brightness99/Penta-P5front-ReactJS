@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
 import { cartFetch } from 'actions';
-
+import { NavLink } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
 import StickBar from 'components/StickBar';
 
@@ -96,44 +96,18 @@ export class Cart extends React.Component {
         </main>
         <StickBar>
           <div className="org-cart-stickbar">
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
-            <br />
-            123
+            <div className="atm-cart-sidebar-title">Resumo do carrinho</div>
+            <div className="mol-cart-sidebar-summary">
+              <CartSummary
+                screenSize={screenSize}
+                totalItems={count}
+                prices={prices}
+                isVoucherActive={isVoucherActive}
+                handleVoucherToggle={this.handleVoucherToggle}
+              />
+            </div>
           </div>
+          <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled">finalizar compra</NavLink>
         </StickBar>
       </div>
     );
