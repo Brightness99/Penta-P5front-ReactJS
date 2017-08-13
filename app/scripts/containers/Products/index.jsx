@@ -40,7 +40,7 @@ export class Products extends React.Component {
 
   renderMobile = () => {
     const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
-    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } } } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
@@ -71,7 +71,7 @@ export class Products extends React.Component {
 
   renderDesktop = () => {
     const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
-    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print }, home: { clients, testimonials } } } } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } } } = this.props;
     const breadcrumb = [
       {
         title: 'Home',

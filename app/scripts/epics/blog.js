@@ -8,7 +8,7 @@ import { push } from 'modules/ReduxRouter';
 
 export function blogFetch(action$) {
   return action$.ofType(BlogConstants.BLOG_FETCH_REQUEST)
-    .switchMap(action => {
+    .switchMap(() => {
       const endpoint = '/v2/blog/recent-posts';
 
       return rxAjax({

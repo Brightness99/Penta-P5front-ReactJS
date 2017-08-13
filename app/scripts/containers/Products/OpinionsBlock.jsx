@@ -52,13 +52,11 @@ export default class OpinionsBlock extends React.Component {
   }
 
   renderStars = (stars: number) => (
-    Array.from({ length: 5 }, (v, k) => {
-      return (
-        <li className={cx('opinion-stars-item', k + 1 <= stars && 'opinion-stars-item-filled')}>
-          <StarIcon />
-        </li>
-      );
-    })
+    Array.from({ length: 5 }, (v, k) => (
+      <li className={cx('opinion-stars-item', k + 1 <= stars && 'opinion-stars-item-filled')}>
+        <StarIcon />
+      </li>
+    ))
   )
 
   starSubtitle() {
