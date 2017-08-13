@@ -691,9 +691,10 @@
   font-family: $font-family-open-sans;
   font-size: 12px;
   width: calc(100% - 8rem);
+  flex-wrap: wrap;
 
-  > span:last-child {
-    padding: 0 1rem;
+  > span {
+    padding-right: 1rem;
   }
 
   > span.atm-cart-price {

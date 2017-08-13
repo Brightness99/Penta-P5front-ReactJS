@@ -18,6 +18,9 @@ type Props = {
   screenSize: string,
   items: {},
   zipcode: number,
+  usePickupPlaces: boolean,
+  pickupPlaces: {},
+  pickupPlaceId: number,
   dispatch: () => {},
 };
 
@@ -43,6 +46,7 @@ export default class CartItens extends React.Component {
       isUpsellSelected: false,
     };
   }
+
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
@@ -173,6 +177,28 @@ export default class CartItens extends React.Component {
     ];
   }
 
+  renderZipcode() {
+    const { usePickupPlaces, zipcode, pickupPlaces } = this.props;
+
+    if (usePickupPlaces) {
+      if (!pickupPlaces[zipcode]) {
+        return null;
+      }
+
+      return (
+        <div className="atm-cart-item-zipcode">
+          {pickupPlaces[zipcode].receiver_name}
+        </div>
+      );
+    }
+
+    return (
+      <div className="atm-cart-item-zipcode">
+        CEP: <IntlZipcode>{zipcode}</IntlZipcode>
+      </div>
+    );
+  }
+
   renderProductInfos(item, itemId, size: number = 3) {
     const slicedList = Object.keys(item.product_parts[Object.keys(item.product_parts)[0]].options)
       .slice(0, size)
@@ -204,7 +230,7 @@ export default class CartItens extends React.Component {
   }
 
   renderDesktop() {
-    const { items, zipcode } = this.props;
+    const { items } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
@@ -236,7 +262,7 @@ export default class CartItens extends React.Component {
               </div>
               <div className="mol-cart-item-delivery">
                 <IntlDate className="atm-cart-item-date">{items[item].expected_delivery_date}</IntlDate>
-                <div className="atm-cart-item-zipcode">CEP: <IntlZipcode>{zipcode}</IntlZipcode></div>
+                {this.renderZipcode()}
               </div>
               <div className="mol-cart-item-quantity">
                 <div className="atm-cart-item-quantity">{items[item].quantity}</div>
@@ -256,7 +282,7 @@ export default class CartItens extends React.Component {
   }
 
   renderMobile() {
-    const { items, zipcode } = this.props;
+    const { items } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
@@ -272,7 +298,7 @@ export default class CartItens extends React.Component {
                 <div className="atm-cart-item-info-title">Entrega</div>
                 <div className="atm-cart-item-info-text">
                   <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
-                  <span>(CEP: <IntlZipcode>{zipcode}</IntlZipcode>)</span>
+                  {this.renderZipcode()}
                 </div>
               </div>
               <div>

@@ -6,7 +6,7 @@ import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, CartConstants } from 'constants/index';
 import cartAddPayloadMock from 'assets/json/mockCartAddPayload.json';
 import { push } from 'modules/ReduxRouter';
-import { cartFetch as cartFetchAction } from 'actions';
+import { cartFetch as cartFetchAction, cartPickupFetch as cartPickupAction } from 'actions';
 
 export function cartBasicFetch(action$) {
   return action$.ofType(CartConstants.CART_BASIC_FETCH_REQUEST)
@@ -42,8 +42,7 @@ export function cartBasicFetch(action$) {
     });
 }
 
-export function cartFetch(action$) {
-  console.log(action$);
+export function cartFetch(action$, store) {
   return action$.ofType(CartConstants.CART_FETCH_REQUEST || CartConstants.CART_VOUCHER_ADD_FETCH_SUCCESS)
     .switchMap(() => {
       const endpoint = '/v2/cart';
@@ -54,6 +53,9 @@ export function cartFetch(action$) {
       })
         .map(data => {
           if (data.status === 200 && data.response) {
+            if (data.response.use_pickup_places) {
+              store.dispatch(cartPickupAction(data.response.zipcode));
+            }
             return {
               type: CartConstants.CART_FETCH_SUCCESS,
               payload: data.response,
@@ -194,7 +196,6 @@ export function cartDeleteFetch(action$) {
 }
 
 export function cartVoucherAddFetch(action$, store) {
-  console.log(action$);
   return action$.ofType(CartConstants.CART_VOUCHER_ADD_FETCH_REQUEST)
     .switchMap(action => {
       const voucher = action.payload.voucher;
@@ -238,7 +239,6 @@ export function cartVoucherAddFetch(action$, store) {
 }
 
 export function cartVoucherRemoveFetch(action$, store) {
-  console.log(action$);
   return action$.ofType(CartConstants.CART_VOUCHER_REMOVE_FETCH_REQUEST)
     .switchMap(action => {
       const voucher = action.payload.voucher;
@@ -275,6 +275,43 @@ export function cartVoucherRemoveFetch(action$, store) {
         .defaultIfEmpty({ type: CartConstants.CART_VOUCHER_ADD_FETCH_CANCEL })
         .catch(error => ([{
           type: CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]));
+    });
+}
+
+export function cartPickupFetch(action$) {
+  return action$.ofType(CartConstants.CART_PICKUP_FETCH_REQUEST)
+    .switchMap((action) => {
+      const endpoint = `/v1/pickup_places/addresses/${action.payload.zipcode}/zipcode`;
+
+      return rxAjax({
+        endpoint,
+        method: 'GET',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+            return {
+              type: CartConstants.CART_PICKUP_FETCH_SUCCESS,
+              payload: {
+                ...data.response,
+                unmaskedZipcode: action.payload.unmaskedZipcode
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: CartConstants.CART_PICKUP_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: CartConstants.CART_PICKUP_FETCH_CANCEL })
+        .catch(error => ([{
+          type: CartConstants.CART_PICKUP_FETCH_FAILURE,
           payload: { message: error.message, status: error.status },
           meta: { updatedAt: getUnixtime() },
         }]));

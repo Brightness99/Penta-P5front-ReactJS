@@ -75,13 +75,21 @@ export class Cart extends React.Component {
   }
 
   renderDesktop() {
-    const { app: { screenSize }, cart: { data: { prices, items, zipcode }, voucher, count }, dispatch } = this.props;
+    const { app: { screenSize }, cart: { data: { prices, items, zipcode, use_pickup_places, pickup_place_id }, voucher, count, pickupPlaces }, dispatch } = this.props;
     const { isVoucherActive } = this.state;
 
     return (
       <div className="page-cart-content">
         <main className="mol-cart-content">
-          <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
+          <CartItens
+            screenSize={screenSize}
+            items={items}
+            zipcode={zipcode}
+            dispatch={dispatch}
+            usePickupPlaces={use_pickup_places}
+            pickupPlaces={pickupPlaces}
+            pickupPlaceId={pickup_place_id}
+          />
           <CartCrossSell screenSize={screenSize} />
           <div className="mol-cart-desktop-summary">
             <CartVoucher
@@ -120,12 +128,19 @@ export class Cart extends React.Component {
   }
 
   renderMobile() {
-    const { app: { screenSize }, cart: { data: { prices, items, zipcode }, voucher, count }, dispatch } = this.props;
+    const { app: { screenSize }, cart: { data: { prices, items, zipcode, use_pickup_places, pickup_place_id }, voucher, count, pickupPlaces }, dispatch } = this.props;
     const { isVoucherActive } = this.state;
 
     return (
       <main>
-        <CartItens screenSize={screenSize} items={items} zipcode={zipcode} dispatch={dispatch} />
+        <CartItens
+          screenSize={screenSize}
+          items={items}
+          zipcode={zipcode}
+          dispatch={dispatch}
+          usePickupPlaces={use_pickup_places}
+          pickupPlaces={pickupPlaces}
+        />
         <CartSummary
           screenSize={screenSize}
           totalItems={count}
