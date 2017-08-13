@@ -15,9 +15,16 @@ type Props = {
 export const IntlDate = (props: Props) => {
   const { className, children, locale } = props;
 
+  const standardDate = new Date(children);
+
+  const userOffset = standardDate.getTimezoneOffset() * 60 * 1000;
+
   return (
     <span className={className}>
-      {new Intl.DateTimeFormat(locale.LANGUAGE.replace('_', '-')).format(new Date(children))}
+      {new Intl
+        .DateTimeFormat(locale.LANGUAGE.replace('_', '-'))
+        .format(new Date(standardDate.getTime() + userOffset))
+      }
     </span>
   );
 };
