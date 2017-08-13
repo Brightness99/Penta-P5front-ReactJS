@@ -52,11 +52,11 @@ export default {
         ...state,
         data: action.payload,
         isRunning: false,
-        count: Object.keys(action.payload.items).length,
+        count: action.payload.items ? Object.keys(action.payload.items).length : 0,
         isLoaded: true,
         voucher: {
           ...state.voucher,
-          ...action.payload.prices.discount,
+          ...action.payload.prices ? action.payload.prices.discount : {},
         }
 
       };
