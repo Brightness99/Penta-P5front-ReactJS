@@ -47,7 +47,7 @@ export default class CartVoucher extends React.Component {
     return !voucher_name
       ? <InputAction name="voucher" onSubmit={this.handleVoucherSubmit} placeholder="Código..." />
       : (<div className="mol-voucher-input-simulate">
-        <span className="atm-voucher-input-text">VAAPHYNNVV4GY519</span>
+        <span className="atm-voucher-input-text">{voucher_name}</span>
         <button onClick={this.handleVoucherRemoval}><TimesCircleIcon /></button>
       </div>);
   }

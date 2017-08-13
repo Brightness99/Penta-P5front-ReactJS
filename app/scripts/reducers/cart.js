@@ -7,6 +7,7 @@
 import { REHYDRATE } from 'redux-persist/constants';
 import { createReducer } from 'utils/helpers';
 import { CartConstants } from 'constants/index';
+import StringMask from 'string-mask';
 
 const cartState = {
   data: {},
@@ -14,6 +15,7 @@ const cartState = {
   isRunning: false,
   count: 0,
   error: {},
+  pickupPlaces: {},
   voucher: {
     isRunning: false,
     isLoaded: false,
@@ -139,6 +141,15 @@ export default {
         voucher: {
           ...state.voucher,
           error: action.payload,
+        },
+      };
+    },
+    [CartConstants.CART_PICKUP_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        pickupPlaces: {
+          ...state.pickupPlaces,
+          [action.payload.unmaskedZipcode]: action.payload,
         },
       };
     },

@@ -48,4 +48,8 @@ export const CartConstants = keyMirror({
   CART_CLEAR_FETCH_SUCCESS: undefined,
   CART_CLEAR_FETCH_FAILURE: undefined,
   CART_CLEAR_FETCH_CANCEL: undefined,
+  CART_PICKUP_FETCH_REQUEST: undefined,
+  CART_PICKUP_FETCH_SUCCESS: undefined,
+  CART_PICKUP_FETCH_FAILURE: undefined,
+  CART_PICKUP_FETCH_CANCEL: undefined,
 });
