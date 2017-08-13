@@ -716,35 +716,46 @@
 .mol-cart-item-footer {
   display: flex;
   height: 5rem;
+  width: 100%;
+}
 
-  > div {
-    display: flex;
-    width: 100%;
-  }
+.mol-cart-item-desktop-actions {
+  display: flex;
 
-  .atm-cart-item-action {
-    @include center-child-flex;
-    background: transparent;
-    border: transparent;
-    border-right: 0.1rem solid #dbdddf;
-    color: #6a6f7a;
-    display: inline-flex;
-    flex: 1;
-    flex-direction: column;
-    height: 100%;
-    text-transform: capitalize;
-    font-size: 10px;
-    font-family: $font-family-open-sans;
+  .mol-tooltip {
+    margin-right: 2rem;
 
-    > svg {
-      fill: currentColor;
-      height: 1.6rem;
-      margin-bottom: 0.5rem;
-      width: 1.6rem;
-    }
     &:last-child {
-      border-right: transparent;
+      margin-right: 0;
     }
+  }
+}
+
+.atm-cart-item-action {
+  @include center-child-flex;
+  background: transparent;
+  border: transparent;
+  border-right: 0.1rem solid #dbdddf;
+  color: #6a6f7a;
+  display: inline-flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  text-transform: capitalize;
+  font-size: 10px;
+  font-family: $font-family-open-sans;
+
+  > svg {
+    fill: currentColor;
+    height: 1.6rem;
+    margin-bottom: 0.5rem;
+    width: 1.6rem;
+  }
+  &:last-child {
+    border-right: transparent;
+  }
+  @include lg {
+    border: transparent;
   }
 }
 

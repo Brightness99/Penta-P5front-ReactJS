@@ -1,0 +1,43 @@
+.mol-tooltip {
+  display: flex;
+  position: relative;
+
+  &:hover {
+    .atm-tooltip {
+      display: flex;
+    }
+  }
+}
+
+.atm-tooltip {
+  align-items: center;
+  background-color: #6a6f7a;
+  border-radius: 0.3rem;
+  bottom: -3.5rem;
+  color: #dbdddf;
+  display: none;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  left: 50%;
+  height: 3rem;
+  position: absolute;
+  transform: translateX(-50%);
+
+
+  > span {
+    padding: 0 2rem;
+  }
+
+  &::before {
+    border-bottom: 0.5rem solid #6a6f7a;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    content: "";
+    left: 50%;
+    height: 0;
+    position: absolute;
+    top: -0.5rem;
+    transform: translateX(-50%);
+    width: 0;
+  }
+}
