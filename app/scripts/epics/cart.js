@@ -296,7 +296,7 @@ export function cartPickupFetch(action$) {
               type: CartConstants.CART_PICKUP_FETCH_SUCCESS,
               payload: {
                 ...data.response,
-                unmaskedZipcode: action.payload.unmaskedZipcode
+                unmaskedZipcode: action.payload.unmaskedZipcode,
               },
               meta: { updatedAt: getUnixtime() },
             };

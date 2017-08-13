@@ -24,7 +24,7 @@ export default {
         rehydrated: true,
       };
     },
-    [BlogConstants.BLOG_FETCH_REQUEST](state, action) {
+    [BlogConstants.BLOG_FETCH_REQUEST](state) {
       return {
         ...state,
         isRunning: true,
