@@ -57,8 +57,7 @@ export default {
         voucher: {
           ...state.voucher,
           ...action.payload.prices ? action.payload.prices.discount : {},
-        }
-
+        },
       };
     },
     [CartConstants.CART_FETCH_FAILURE](state, action) {
@@ -104,7 +103,7 @@ export default {
         voucher: {
           ...cartState.voucher,
           isRunning: true,
-        }
+        },
       };
     },
     [CartConstants.CART_VOUCHER_ADD_FETCH_SUCCESS](state) {
@@ -114,7 +113,7 @@ export default {
           ...state.voucher,
           isRunning: false,
           isLoaded: true,
-        }
+        },
       };
     },
     [CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE](state, action) {
@@ -125,7 +124,7 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
-        }
+        },
       };
     },
     [CartConstants.CART_VOUCHER_REMOVE_FETCH_SUCCESS](state) {
@@ -140,7 +139,7 @@ export default {
         voucher: {
           ...state.voucher,
           error: action.payload,
-        }
+        },
       };
     },
   }),

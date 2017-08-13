@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { cartDuplicateFetch, cartDeleteFetch } from 'actions';
 import { FilesIcon, PencilIcon, TrashIcon, ChevronRightIcon } from 'components/Icons';
 import { IntlDate, IntlMoney, IntlZipcode } from 'components/Intl';
+import Tooltip from 'components/Tooltipster';
 import Modal from 'components/Modal';
 import ProductImage from './ProductImage';
 import { ProductDetailsModal, UpsellingModal } from './Modals';
@@ -124,23 +125,52 @@ export default class CartItens extends React.Component {
   };
 
   renderActions(item, itemId) {
+    const { screenSize } = this.props;
     if (item.type === 'cloud') {
-      return (
-        <div>
-          <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>
-          <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>
-          <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
-        </div>
-      );
+      if (isMobile(screenSize)) {
+        return [
+          <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
+          <NavLink key="trocar arte" to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>,
+          <button key="excluir" className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+        ];
+      }
+
+      return [
+        <Tooltip key="editar" text="editar">
+          <NavLink to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
+        </Tooltip>,
+        <Tooltip key="trocar arte" text="trocar arte">
+          <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
+        </Tooltip>,
+        <Tooltip key="excluir" text="excluir">
+          <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon /></button>
+        </Tooltip>
+      ];
     }
 
-    return (
-      <div>
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}><FilesIcon />duplicar</button>
-        <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>
-        <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
-      </div>
-    );
+    if (isMobile(screenSize)) {
+      return [
+        <button key="duplicar" className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
+          <FilesIcon />duplicar
+        </button>,
+        <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
+        <button key="excluir" className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+      ];
+    }
+
+    return [
+      <Tooltip key="duplicar" text="Duplicar">
+        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
+          <FilesIcon />
+        </button>
+      </Tooltip>,
+      <Tooltip key="editar" text="Editar">
+        <NavLink to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
+      </Tooltip>,
+      <Tooltip key="excluir" text="Excluir">
+        <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon /></button>
+      </Tooltip>
+    ];
   }
 
   renderProductInfos(item, itemId, size: number = 3) {
@@ -202,7 +232,6 @@ export default class CartItens extends React.Component {
                 </div>
                 <div className="mol-cart-item-desktop-infos">
                   {this.renderProductInfos(items[item], item)}
-                  {this.renderActions(items[item], item)}
                 </div>
               </div>
               <div className="mol-cart-item-delivery">
@@ -214,14 +243,8 @@ export default class CartItens extends React.Component {
               </div>
               <div className="mol-cart-item-price">
                 <div className="atm-cart-item-price"><IntlMoney>{items[item].prices.total}</IntlMoney></div>
-                <div className="mol-cart-item-actions">
-                  <button
-                    className="atm-cart-action atm-cart-action--red"
-                    value={item}
-                    onClick={this.handleDelete}
-                  >
-                    <TrashIcon />excluir
-                  </button>
+                <div className="mol-cart-item-desktop-actions">
+                  {this.renderActions(items[item], item)}
                 </div>
               </div>
             </li>
