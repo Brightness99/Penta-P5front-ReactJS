@@ -63,6 +63,7 @@
   }
 
   .container-myorder {
+    margin-bottom: 4rem;
     @include lg {
       background-color: $color-white;
       flex: 5;
@@ -157,8 +158,15 @@
             background-color: $color-Lightgreen;
           }
         }
-        .subtitle-statusMobile {
-          color: $color-Lightgreen;
+        .box-statusMobile {
+          i {
+            svg {
+              fill: $color-Lightgreen;
+            }
+          }
+          .subtitle-statusMobile {
+            color: $color-Lightgreen;
+          }
         }
       }
       &.pendingPayment {
@@ -172,8 +180,15 @@
             background-color: $color-red;
           }
         }
-        .subtitle-statusMobile {
-          color: $color-red;
+        .box-statusMobile {
+          i {
+            svg {
+              fill: $color-melon;
+            }
+          }
+          .subtitle-statusMobile {
+            color: $color-red;
+          }
         }
       }
       &.inTransport {
@@ -187,8 +202,15 @@
             background-color: $color-yellow;
           }
         }
-        .subtitle-statusMobile {
-          color: $color-yellow;
+        .box-statusMobile {
+          i {
+            svg {
+              fill: $color-yellow;
+            }
+          }
+          .subtitle-statusMobile {
+            color: $color-yellow;
+          }
         }
       }
       .box-firstPart {
@@ -343,8 +365,8 @@
             margin-top: 1.1rem;
             font-size: $font-size-xs;
             line-height: 1.67;
-            text-align: left;
-            color: $color-lightGray;
+            text-align: center;
+            color: $color-white;
             margin-bottom: 0;
           }
           .txt-secondPart {
@@ -373,6 +395,12 @@
           box-shadow: 0px 3px 5px 6px $color-lightGray2;
         }
       }
+    }
+    .btn-third {
+      color: $color-lightGray;
+      border-color: $color-lightGray;
+      margin-top: 4.6rem;
+      margin-bottom: 4.6rem;
     }
   }
 }
