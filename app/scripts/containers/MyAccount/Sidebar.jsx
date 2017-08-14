@@ -1,5 +1,6 @@
 // flow
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Orders, Address, MyData, Cards, Models, Out } from 'components/Icons';
 
 export class Sidebar extends React.Component {
@@ -13,22 +14,34 @@ export class Sidebar extends React.Component {
         <hr />
         <ul className="menuAccount">
           <li>
-            <i><Orders /></i>Meus pedidos
+            <Link to="#">
+              <i><Orders /></i>Meus pedidos
+            </Link>
           </li>
           <li>
-            <i><Address /></i>Meus endereços
+            <Link to="#">
+              <i><Address /></i>Meus endereços
+            </Link>
           </li>
           <li>
-            <i><MyData /></i>Meu dados
+            <Link to="#">
+              <i><MyData /></i>Meus dados
+            </Link>
           </li>
           <li>
-            <i><Cards /></i>Cartões salvos
+            <Link to="#">
+              <i><Cards /></i>Cartões salvos
+            </Link>
           </li>
           <li>
-            <i><Models /></i>Modelos salvos
+            <Link to="#">
+              <i><Models /></i>Modelos salvos
+            </Link>
           </li>
           <li>
-            <i><Out /></i>Sair
+            <Link to="#">
+              <i><Out /></i>Sair
+            </Link>
           </li>
         </ul>
       </div>
