@@ -48,3 +48,4 @@ export Clipboard from './Clipboard';
 export CheckCircleOIcon from './CheckCircleO';
 export CircleIcon from './Circle';
 export PrintiLogoIcon from './PrintiLogo';
+export Warning from './Warning';

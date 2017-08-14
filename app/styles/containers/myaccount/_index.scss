@@ -421,3 +421,67 @@
     }
   }
 }
+
+
+.container-myaccountdetails {
+  margin-bottom: 4rem;
+  @include lg {
+    background-color: $color-white;
+    flex: 5;
+    box-sizing: border-box;
+    padding: 2rem 6rem 0 6rem;
+  }
+  .box-headerDetails {
+    display: flex;
+    flex-direction: row;
+    >div {
+      flex: 1;
+      .subtitle-details {
+        font-family: $font-family-nunito-light;
+        font-size: $font-size-xl;
+        text-transform: inherit;
+        font-weight: 300;
+        line-height: 1.11;
+        color: $color-almostBlack;
+      }
+      .total-value {
+        font-family: $font-family-open-sans-light;
+        font-size: $font-size-base;
+        font-weight: 300;
+        line-height: 1.25;
+        color: $color-lightGray;
+        span {
+          font-family: $font-family-open-sans-bold;
+          font-weight: bold;
+        }
+      }
+      &.btns-details {
+        display: flex;
+        .btn-default {
+          flex: 1;
+          font-size: $font-size-xxxs;
+          border: solid 1px $color-printi-blue;
+          color: $color-printi-blue;
+          svg {
+            width: inherit;
+            height: inherit;
+            fill: $color-printi-blue;
+          }
+        }
+      }
+    }
+  }
+  .box-warningDetails {
+    display: flex;
+    background-color: $color-yellow;
+    >div {
+      flex: 1;
+      &:first-of-type {
+        background-color: $color-darkYellow;
+      }
+      &:last-of-type {
+        flex: 12;
+      }
+    }
+  }
+}
