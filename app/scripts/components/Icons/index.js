@@ -42,4 +42,6 @@ export Models from './Models';
 export Out from './Out';
 export CodeBar from './CodeBar';
 export Receipt from './Receipt';
-
+export ExclamationMark from './ExclamationMark';
+export DocumentDownload from './DocumentDownload';
+export Clipboard from './Clipboard';

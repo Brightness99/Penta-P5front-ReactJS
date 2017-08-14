@@ -1203,15 +1203,15 @@
     }
   }
   &.btn-secondary {
-    background-color: $color-printi; 
+    background-color: $color-printi-blue; 
     color: $color-white;
     &:hover {
       background-color: $color-darkBlue; 
     }
   }
   &.btn-third {
-    color: $color-printi; 
-    border: 1px solid $color-printi; 
+    color: $color-printi-blue; 
+    border: 1px solid $color-printi-blue; 
     background-color: transparent; 
   }
   &.btn-quarter {
@@ -1294,9 +1294,6 @@
     }
   }
   .carouselBullet{
-    //position: absolute;
-    //bottom: 10%;
-    //left: 7%;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1307,19 +1304,6 @@
     text-align: center;
     z-index: 10;
     button{
-      /*background: #fff;
-      display: block;
-      border-radius: 100%;
-      height: 15px;
-      width: 15px;
-      float: left;
-      margin-right: 9px;
-      opacity: .5;
-      cursor: pointer;
-      font-size: 0;
-      box-sizing: inherit;*/
-
-      //border: 1px solid;
       display: inline-block;
       margin: 0 5px;
       border-radius: 100%;
