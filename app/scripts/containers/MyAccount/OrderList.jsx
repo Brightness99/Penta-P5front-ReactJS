@@ -4,6 +4,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, Cards } from 'components/Icons';
 
+
 type Props = {
   screenSize: string,
 };

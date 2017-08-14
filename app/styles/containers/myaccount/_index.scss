@@ -148,16 +148,17 @@
         }
       } 
       &.delivered {
-        border-top: 10px solid $color-Lightgreen;
+        border-top: 10px solid $color-green;
         @include lg {
           border-top: 1px solid $color-hrLightGray;
-          border-left: 5px solid $color-Lightgreen;
+          border-left: 5px solid $color-green;
         }
         .flagOrder p{
           &:before {
-            background-color: $color-Lightgreen;
+            background-color: $color-green
           }
         }
+<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
         .box-statusMobile {
           i {
             svg {
@@ -167,19 +168,24 @@
           .subtitle-statusMobile {
             color: $color-Lightgreen;
           }
+=======
+        .subtitle-statusMobile {
+          color: $color-green;
+>>>>>>> Sprint040/MyAccountOrderList
         }
       }
       &.pendingPayment {
-        border-top: 10px solid $color-red;
+        border-top: 10px solid $color-melon;
         @include lg {
           border-top: 1px solid $color-hrLightGray;
-          border-left: 5px solid $color-red;
+          border-left: 5px solid $color-melon;
         }
         .flagOrder p{
           &:before {
-            background-color: $color-red;
+            background-color: $color-melon
           }
         }
+<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
         .box-statusMobile {
           i {
             svg {
@@ -189,19 +195,24 @@
           .subtitle-statusMobile {
             color: $color-red;
           }
+=======
+        .subtitle-statusMobile {
+          color: $color-melon;
+>>>>>>> Sprint040/MyAccountOrderList
         }
       }
       &.inTransport {
-        border-top: 10px solid $color-yellow;
+        border-top: 10px solid $color-maize;
         @include lg {
           border-top: 1px solid $color-hrLightGray;
-          border-left: 5px solid $color-yellow;
+          border-left: 5px solid $color-maize;
         }
         .flagOrder p{
           &:before {
-            background-color: $color-yellow;
+            background-color: $color-maize;
           }
         }
+<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
         .box-statusMobile {
           i {
             svg {
@@ -211,6 +222,10 @@
           .subtitle-statusMobile {
             color: $color-yellow;
           }
+=======
+        .subtitle-statusMobile {
+          color: $color-maize;
+>>>>>>> Sprint040/MyAccountOrderList
         }
       }
       .box-firstPart {
@@ -406,6 +421,23 @@
             }
           }
         }
+<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
+=======
+        .box-secondPart-mobile {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1.2rem;
+          >div {
+            &:first-of-type{
+              margin-right: 2rem;
+            }
+            svg {
+              height: inherit;
+              width: inherit;
+            }
+          }
+        }
+>>>>>>> Sprint040/MyAccountOrderList
       }
       &:hover {
         @include lg {
