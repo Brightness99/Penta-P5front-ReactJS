@@ -2,7 +2,7 @@
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
-import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard } from 'components/Icons';
+import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, Cards } from 'components/Icons';
 
 type Props = {
   screenSize: string,
@@ -197,17 +197,17 @@ export class OrderList extends React.Component {
             </div>
             <div className="box-icons">
               <div className="icons">
-                <Link to="#">
-                  <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <Link to="#" className="btn-icons">
+                  <Receipt />
                 </Link>
-                <Link to="#">
-                  <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+                <Link to="#" className="btn-icons">
+                  <Cards />
                 </Link>
               </div>
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
             </div>
           </div>
-          {secondStep && (<div className="box-secondPart">>
+          {secondStep && (<div className="box-secondPart">
             <div className="box-images">
               <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
               <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
@@ -236,11 +236,11 @@ export class OrderList extends React.Component {
             </div>
             <div className="box-icons">
               <div className="icons">
-                <Link to="#">
-                  <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <Link to="#" className="btn-icons">
+                  <Receipt />
                 </Link>
-                <Link to="#">
-                  <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+                <Link to="#" className="btn-icons">
+                  <Cards />
                 </Link>
               </div>
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
@@ -275,11 +275,11 @@ export class OrderList extends React.Component {
             </div>
             <div className="box-icons">
               <div className="icons">
-                <Link to="#">
-                  <img src={require('assets/media/images/card-download.jpg')} alt="Download" />
+                <Link to="#" className="btn-icons">
+                  <Receipt />
                 </Link>
-                <Link to="#">
-                  <img src={require('assets/media/images/card-myaccount.jpg')} alt="Card" />
+                <Link to="#" className="btn-icons">
+                  <Cards />
                 </Link>
               </div>
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
