@@ -1,0 +1,80 @@
+.mol-editable-text {
+  cursor: pointer;
+  display: inline-flex;
+  position: relative;
+  height: 3rem;
+
+  &--inactive {
+    color: $color-almostBlack;
+    font-size: $font-size-lg;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    width: 100%;
+  }
+
+  &--active {
+    @include center-child-flex;
+    width: calc(100% - 2.3rem);
+
+    > .app__qrk__input-container {
+      width: 100%;
+    }
+
+    > .atm-icon-button {
+      @include center-child-flex;
+      background-color: $color-printi;
+      border: transparent;
+      border-radius: 1.5rem;
+      color: $color-white;
+      display: flex;
+      height: 2.4rem;
+      position: absolute;
+      right: 0.3rem;
+      top: 0.3rem;
+      width: 2.4rem;
+
+      > svg {
+        fill: currentColor;
+        max-height: 60%;
+        max-width: 60%;
+      }
+    }
+  }
+
+  > svg {
+    display: none;
+    height: 1.6rem;
+    position: absolute;
+    right: 0;
+    top: 0.7rem;
+    width: 1.6rem;
+  }
+
+  &:hover > svg {
+    display: block;
+  }
+
+}
+
+.org-editable-text {
+  position: relative;
+  width: 100%;
+
+  .mol-editable-text {
+    height: 3rem;
+  }
+
+  .app__qrk__input-container > input {
+    margin-bottom: 0;
+    height: 3rem;
+  }
+
+  > .atm-icon-button {
+    height: 2rem;
+    position: absolute;
+    right: 0;
+    top: 0.3rem;
+    width: 2rem;
+  }
+}

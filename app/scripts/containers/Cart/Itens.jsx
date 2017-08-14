@@ -4,11 +4,12 @@ import React from 'react';
 import swal from 'sweetalert2';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { NavLink } from 'react-router-dom';
-import { cartDuplicateFetch, cartDeleteFetch } from 'actions';
+import { cartDuplicateFetch, cartDeleteFetch, cartUpdateFetch } from 'actions';
 import { FilesIcon, PencilIcon, TrashIcon, ChevronRightIcon } from 'components/Icons';
 import { IntlDate, IntlMoney, IntlZipcode } from 'components/Intl';
 import Tooltip from 'components/Tooltipster';
 import Modal from 'components/Modal';
+import { EditableText } from 'molecules/Inputs';
 import ProductImage from './ProductImage';
 import { ProductDetailsModal, UpsellingModal } from './Modals';
 
@@ -199,6 +200,18 @@ export default class CartItens extends React.Component {
     );
   }
 
+  handleProjectNameSubmit = (ev, itemId) => {
+    ev.preventDefault();
+
+    const { dispatch } = this.props;
+
+    dispatch(cartUpdateFetch(itemId, {
+      item: {
+        project_name: ev.currentTarget.editableInput.value,
+      },
+    }));
+  }
+
   renderProductInfos(item, itemId, size: number = 3) {
     const slicedList = Object.keys(item.product_parts[Object.keys(item.product_parts)[0]].options)
       .slice(0, size)
@@ -210,7 +223,12 @@ export default class CartItens extends React.Component {
       ), []);
     return (
       <div className="mol-cart-item-infos">
-        <div className="atm-cart-item-name">{item.project_name}</div>
+        <EditableText
+          value={item.project_name}
+          placeholder="Nome do projeto..."
+          aditionalReturn={itemId}
+          onSubmit={this.handleProjectNameSubmit}
+        />
         <div className="atm-cart-item-product">{item.final_product.name}</div>
         <ul>
           {slicedList}

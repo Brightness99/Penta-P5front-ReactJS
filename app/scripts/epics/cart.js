@@ -53,7 +53,7 @@ export function cartFetch(action$, store) {
       })
         .map(data => {
           if (data.status === 200 && data.response) {
-            if (data.response.use_pickup_places) {
+            if (data.response.use_pickup_places && !store.getState().cart.pickupPlaces[data.response.zipcode]) {
               store.dispatch(cartPickupAction(data.response.zipcode));
             }
             return {
@@ -312,6 +312,43 @@ export function cartPickupFetch(action$) {
         .defaultIfEmpty({ type: CartConstants.CART_PICKUP_FETCH_CANCEL })
         .catch(error => ([{
           type: CartConstants.CART_PICKUP_FETCH_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]));
+    });
+}
+
+export function cartUpdateFetch(action$, store) {
+  return action$.ofType(CartConstants.CART_UPDATE_FETCH_REQUEST)
+    .switchMap((action) => {
+      const endpoint = `/v2/cart/${action.payload.itemId}`;
+
+      return rxAjax({
+        endpoint,
+        payload: action.payload.updatedInfo,
+        method: 'PUT',
+      })
+        .map(data => {
+          if (data.status === 201 && data.response) {
+            store.dispatch(cartFetchAction());
+
+            return {
+              type: CartConstants.CART_UPDATE_FETCH_SUCCESS,
+              payload: action.payload,
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: CartConstants.CART_UPDATE_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: CartConstants.CART_UPDATE_FETCH_CANCEL })
+        .catch(error => ([{
+          type: CartConstants.CART_UPDATE_FETCH_FAILURE,
           payload: { message: error.message, status: error.status },
           meta: { updatedAt: getUnixtime() },
         }]));

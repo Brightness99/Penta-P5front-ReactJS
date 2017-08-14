@@ -621,7 +621,8 @@
   justify-content: space-between;
   display: inline-flex;
   flex-direction: column;
-  padding: 0 0 0 ($grid-gutter-width / 3) * 2;
+  padding: 0 ($grid-gutter-width / 3) * 2;
+  width: 100%;
 
   > .mol-cart-item-actions {
     padding-top: 2rem;
@@ -757,6 +758,12 @@
   }
   @include lg {
     border: transparent;
+  }
+
+  &:hover,
+  &:active {
+    color: $color-printi;
+    text-decoration: none;
   }
 }
 

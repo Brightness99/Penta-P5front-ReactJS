@@ -123,3 +123,21 @@ export function cartPickupFetch(zipcode: number): Object {
     },
   };
 }
+
+
+/**
+ * Cart Pickup Places Fetch
+ * @param {number} itemId
+ * @param {Object} updatedInfo
+ *
+ * @returns {Object}
+ */
+export function cartUpdateFetch(itemId: number, updatedInfo: Object): Object {
+  return {
+    type: CartConstants.CART_UPDATE_FETCH_REQUEST,
+    payload: {
+      itemId,
+      updatedInfo,
+    },
+  };
+}

@@ -20,7 +20,9 @@ type Props = {
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      value: props.value,
+    };
   }
 
   static props: Props;
@@ -36,6 +38,10 @@ export default class Input extends React.Component {
 
   handleChange = (ev) => {
     const { onChange } = this.props;
+
+    this.setState({
+      value: ev.currentTarget.value,
+    });
 
     if (typeof onChange === 'function') {
       onChange(ev);
@@ -59,7 +65,8 @@ export default class Input extends React.Component {
   };
 
   render() {
-    const { id, type, name, value, showLabel, placeholder, className } = this.props;
+    const { id, type, name, showLabel, placeholder, className } = this.props;
+    const { value } = this.state;
     let inputLabel;
 
     if (showLabel === true) {
