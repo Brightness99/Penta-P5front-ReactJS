@@ -14,6 +14,7 @@ const cartState = {
   isRunning: false,
   count: 0,
   error: {},
+  pickupPlaces: {},
   voucher: {
     isRunning: false,
     isLoaded: false,
@@ -52,13 +53,12 @@ export default {
         ...state,
         data: action.payload,
         isRunning: false,
-        count: Object.keys(action.payload.items).length,
+        count: action.payload.items ? Object.keys(action.payload.items).length : 0,
         isLoaded: true,
         voucher: {
           ...state.voucher,
-          ...action.payload.prices.discount,
-        }
-
+          ...action.payload.prices ? action.payload.prices.discount : {},
+        },
       };
     },
     [CartConstants.CART_FETCH_FAILURE](state, action) {
@@ -104,7 +104,7 @@ export default {
         voucher: {
           ...cartState.voucher,
           isRunning: true,
-        }
+        },
       };
     },
     [CartConstants.CART_VOUCHER_ADD_FETCH_SUCCESS](state) {
@@ -114,7 +114,7 @@ export default {
           ...state.voucher,
           isRunning: false,
           isLoaded: true,
-        }
+        },
       };
     },
     [CartConstants.CART_VOUCHER_ADD_FETCH_FAILURE](state, action) {
@@ -125,7 +125,7 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
-        }
+        },
       };
     },
     [CartConstants.CART_VOUCHER_REMOVE_FETCH_SUCCESS](state) {
@@ -140,7 +140,31 @@ export default {
         voucher: {
           ...state.voucher,
           error: action.payload,
-        }
+        },
+      };
+    },
+    [CartConstants.CART_PICKUP_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        pickupPlaces: {
+          ...state.pickupPlaces,
+          [action.payload.unmaskedZipcode]: action.payload,
+        },
+      };
+    },
+    [CartConstants.CART_UPDATE_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          items: {
+            ...state.data.items,
+            [action.payload.itemId]: {
+              ...state.data.items[action.payload.itemId],
+              ...action.payload.updatedInfo,
+            },
+          }
+        },
       };
     },
   }),

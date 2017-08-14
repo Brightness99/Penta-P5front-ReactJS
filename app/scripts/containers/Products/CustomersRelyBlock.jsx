@@ -28,7 +28,7 @@ export default class CustomersRelyBlock extends React.Component {
       <div className="box-commentClient" key={`commentClient-${item.NAME}`}>
         <p className="commentClient-text">"{item.TEXT}"</p>
         <div className="commentClient-img">
-          <img src={'https://d2ofpir5gh0cbr.cloudfront.net/assets' + item.IMAGE} alt={item.name} />
+          <img src={`https://d2ofpir5gh0cbr.cloudfront.net/assets${item.IMAGE}`} alt={item.name} />
           <p className="commentClient-name">{item.NAME}</p>
           <p className="commentClient-profession">{item.WORK_TITLE}</p>
         </div>

@@ -24,7 +24,7 @@ export default {
         rehydrated: true,
       };
     },
-    [ProductConstants.PRODUCT_FETCH_REQUEST](state, action) {
+    [ProductConstants.PRODUCT_FETCH_REQUEST](state) {
       return {
         ...state,
         isRunning: true,

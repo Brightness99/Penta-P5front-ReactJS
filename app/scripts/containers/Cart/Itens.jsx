@@ -4,10 +4,12 @@ import React from 'react';
 import swal from 'sweetalert2';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { NavLink } from 'react-router-dom';
-import { cartDuplicateFetch, cartDeleteFetch } from 'actions';
+import { cartDuplicateFetch, cartDeleteFetch, cartUpdateFetch } from 'actions';
 import { FilesIcon, PencilIcon, TrashIcon, ChevronRightIcon } from 'components/Icons';
 import { IntlDate, IntlMoney, IntlZipcode } from 'components/Intl';
+import Tooltip from 'components/Tooltipster';
 import Modal from 'components/Modal';
+import { EditableText } from 'molecules/Inputs';
 import ProductImage from './ProductImage';
 import { ProductDetailsModal, UpsellingModal } from './Modals';
 
@@ -17,6 +19,9 @@ type Props = {
   screenSize: string,
   items: {},
   zipcode: number,
+  usePickupPlaces: boolean,
+  pickupPlaces: {},
+  pickupPlaceId: number,
   dispatch: () => {},
 };
 
@@ -42,6 +47,7 @@ export default class CartItens extends React.Component {
       isUpsellSelected: false,
     };
   }
+
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
@@ -124,23 +130,86 @@ export default class CartItens extends React.Component {
   };
 
   renderActions(item, itemId) {
+    const { screenSize } = this.props;
     if (item.type === 'cloud') {
+      if (isMobile(screenSize)) {
+        return [
+          <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
+          <NavLink key="trocar arte" to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>,
+          <button key="excluir" className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+        ];
+      }
+
+      return [
+        <Tooltip key="editar" text="editar">
+          <NavLink to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
+        </Tooltip>,
+        <Tooltip key="trocar arte" text="trocar arte">
+          <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
+        </Tooltip>,
+        <Tooltip key="excluir" text="excluir">
+          <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon /></button>
+        </Tooltip>
+      ];
+    }
+
+    if (isMobile(screenSize)) {
+      return [
+        <button key="duplicar" className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
+          <FilesIcon />duplicar
+        </button>,
+        <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
+        <button key="excluir" className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+      ];
+    }
+
+    return [
+      <Tooltip key="duplicar" text="Duplicar">
+        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
+          <FilesIcon />
+        </button>
+      </Tooltip>,
+      <Tooltip key="editar" text="Editar">
+        <NavLink to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
+      </Tooltip>,
+      <Tooltip key="excluir" text="Excluir">
+        <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon /></button>
+      </Tooltip>
+    ];
+  }
+
+  renderZipcode() {
+    const { usePickupPlaces, zipcode, pickupPlaces } = this.props;
+
+    if (usePickupPlaces) {
+      if (!pickupPlaces[zipcode]) {
+        return null;
+      }
+
       return (
-        <div>
-          <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>
-          <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>
-          <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+        <div className="atm-cart-item-zipcode">
+          {pickupPlaces[zipcode].receiver_name}
         </div>
       );
     }
 
     return (
-      <div>
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}><FilesIcon />duplicar</button>
-        <NavLink to={`/configuracao-${item.product_slug.slug}/editar/${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>
-        <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+      <div className="atm-cart-item-zipcode">
+        CEP: <IntlZipcode>{zipcode}</IntlZipcode>
       </div>
     );
+  }
+
+  handleProjectNameSubmit = (ev, itemId) => {
+    ev.preventDefault();
+
+    const { dispatch } = this.props;
+
+    dispatch(cartUpdateFetch(itemId, {
+      item: {
+        project_name: ev.currentTarget.editableInput.value,
+      },
+    }));
   }
 
   renderProductInfos(item, itemId, size: number = 3) {
@@ -154,7 +223,12 @@ export default class CartItens extends React.Component {
       ), []);
     return (
       <div className="mol-cart-item-infos">
-        <div className="atm-cart-item-name">{item.project_name}</div>
+        <EditableText
+          value={item.project_name}
+          placeholder="Nome do projeto..."
+          aditionalReturn={itemId}
+          onSubmit={this.handleProjectNameSubmit}
+        />
         <div className="atm-cart-item-product">{item.final_product.name}</div>
         <ul>
           {slicedList}
@@ -174,7 +248,7 @@ export default class CartItens extends React.Component {
   }
 
   renderDesktop() {
-    const { items, zipcode } = this.props;
+    const { items } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
@@ -202,26 +276,19 @@ export default class CartItens extends React.Component {
                 </div>
                 <div className="mol-cart-item-desktop-infos">
                   {this.renderProductInfos(items[item], item)}
-                  {this.renderActions(items[item], item)}
                 </div>
               </div>
               <div className="mol-cart-item-delivery">
                 <IntlDate className="atm-cart-item-date">{items[item].expected_delivery_date}</IntlDate>
-                <div className="atm-cart-item-zipcode">CEP: <IntlZipcode>{zipcode}</IntlZipcode></div>
+                {this.renderZipcode()}
               </div>
               <div className="mol-cart-item-quantity">
                 <div className="atm-cart-item-quantity">{items[item].quantity}</div>
               </div>
               <div className="mol-cart-item-price">
                 <div className="atm-cart-item-price"><IntlMoney>{items[item].prices.total}</IntlMoney></div>
-                <div className="mol-cart-item-actions">
-                  <button
-                    className="atm-cart-action atm-cart-action--red"
-                    value={item}
-                    onClick={this.handleDelete}
-                  >
-                    <TrashIcon />excluir
-                  </button>
+                <div className="mol-cart-item-desktop-actions">
+                  {this.renderActions(items[item], item)}
                 </div>
               </div>
             </li>
@@ -233,7 +300,7 @@ export default class CartItens extends React.Component {
   }
 
   renderMobile() {
-    const { items, zipcode } = this.props;
+    const { items } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
@@ -249,7 +316,7 @@ export default class CartItens extends React.Component {
                 <div className="atm-cart-item-info-title">Entrega</div>
                 <div className="atm-cart-item-info-text">
                   <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
-                  <span>(CEP: <IntlZipcode>{zipcode}</IntlZipcode>)</span>
+                  {this.renderZipcode()}
                 </div>
               </div>
               <div>

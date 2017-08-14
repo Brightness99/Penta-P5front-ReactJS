@@ -50,17 +50,7 @@ export default class SideBar extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    const { screenSize } = this.props;
-
-    if (!isMobile(screenSize)) {
-      window.removeEventListener('scroll', this.handlePosition);
-      window.removeEventListener('resize', this.handlePosition);
-    }
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log('componentWillUpdate', nextState);
+  componentWillUpdate(nextProps) {
     const { screenSize } = this.props;
     const nextScreenSize = nextProps.screenSize;
 
@@ -76,6 +66,16 @@ export default class SideBar extends React.Component {
       }
     }
   }
+
+  componentWillUnmount() {
+    const { screenSize } = this.props;
+
+    if (!isMobile(screenSize)) {
+      window.removeEventListener('scroll', this.handlePosition);
+      window.removeEventListener('resize', this.handlePosition);
+    }
+  }
+
 
   static props: Props;
 
@@ -115,7 +115,7 @@ export default class SideBar extends React.Component {
           right: 0,
           top: containerHeight - componentHeight,
           width: contentWidth,
-        }
+        },
       });
     } else if (style.position !== 'fixed') {
       this.setState({
@@ -125,7 +125,7 @@ export default class SideBar extends React.Component {
           right: (bodyWidth - containerWidth) / 2,
           top: componentOffset,
           width: contentWidth,
-        }
+        },
       });
     }
   };

@@ -42,7 +42,7 @@ export class PrintiProductBlock extends React.Component {
           </div>
           <p className="fnt-text">{print.QUESTIONS}</p>
         </section>
-      </div>  
+      </div>
     );
   }
 

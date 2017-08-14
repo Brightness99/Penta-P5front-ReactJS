@@ -3,7 +3,7 @@
 import React from 'react';
 import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Blog from 'containers/Blog/Blog';
 import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
@@ -16,12 +16,6 @@ type Props = {
 
 export class Home extends React.Component {
   props: Props;
-
-  /*<div>
-    <NavLink to="/configuracao-catalogo">Home Page</NavLink>
-      <br />
-    <NavLink to="/produtos-banner">Produto Banner</NavLink>
-  </div>*/
 
   renderMobile() {
     const styles = {
@@ -53,7 +47,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -63,7 +57,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -73,7 +67,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -83,7 +77,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -93,7 +87,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -103,7 +97,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -113,7 +107,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -123,7 +117,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div style={styles}>
@@ -188,8 +182,7 @@ export class Home extends React.Component {
             <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-12/banner-home-soft-touch.jpg" alt="Soft Touch - O toque que faltava no seu material agora na maior gráfica do Brasil" />
           </Carousel>
         </div>
-
-        <div className="container"> 
+        <div className="container">
           <section className="home-slider">
             <nav className="tabNavigation">
               <ul className="list-item awol-pdd awol-list-style">
@@ -206,7 +199,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de R$ 29,00</p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -216,7 +209,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -226,7 +219,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -236,7 +229,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -246,7 +239,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -256,7 +249,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -266,7 +259,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div>
@@ -276,7 +269,7 @@ export class Home extends React.Component {
                   <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
-                  <Link to="#" className="btn-default btn-primary btn-lg">Veja mais </Link>
+                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
                 </div>
               </div>
               <div style={styles}>
