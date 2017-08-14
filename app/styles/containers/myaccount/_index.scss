@@ -422,9 +422,9 @@
   }
 }
 
-
+// details about the order
 .container-myaccountdetails {
-  margin-bottom: 4rem;
+  //margin-bottom: 4rem;
   @include lg {
     background-color: $color-white;
     flex: 5;
@@ -473,14 +473,72 @@
   }
   .box-warningDetails {
     display: flex;
+    align-items: center;
+    flex-direction: row;   
+    border-radius: 3px; 
     background-color: $color-yellow;
+    font-family: $font-family-open-sans;
+    font-size: $font-size-xs;
+    line-height: 1.25;
+    color: $color-lightGray;
     >div {
       flex: 1;
       &:first-of-type {
         background-color: $color-darkYellow;
       }
-      &:last-of-type {
+      &:nth-of-type(2n) {
         flex: 12;
+        box-sizing: border-box;
+        padding: .5rem;
+      }
+    }
+  }
+
+  .box-paymentDetails-dataDelivery {
+    display: flex;
+    margin: 2rem 0;
+    .box-headerDetails {
+      display: flex;
+      margin-bottom: 0.9rem;
+      .title-details {
+        flex: 7;
+      }
+      .link-alterDetails {
+        flex: 1;
+      }
+    }
+    .box-paymentDetails, .box-dataDelivery {
+      border: 1px solid #dbdddf;
+      flex: 1;
+      box-sizing: border-box;
+      padding: 1.9rem 1.2rem;
+    }
+    .box-paymentDetails {
+      margin-right: 2.5rem;
+    }
+    .paymentDetails-dataDelivery {
+      .details {
+        display: flex;
+        font-family: $font-family-open-sans;
+        font-size: $font-size-sm;
+        // line-height: 2.14;
+        .firstDetail {
+          flex: 3;
+          color: $color-almostBlack;
+        }
+        .secondDetail {
+          flex: 9;
+          color: #6a6f7a;
+        }
+      }
+      .paymentMethod-details {
+        margin-top: 2rem;
+        margin-bottom: 0;
+        font-family: $font-family-open-sans;
+        color: $color-almostBlack;
+        .typeMethod {
+          color: #6a6f7a;
+        }
       }
     }
   }
