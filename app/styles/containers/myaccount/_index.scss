@@ -29,16 +29,20 @@
     }
     .menuAccount {
       margin-top: 2.6rem;
+<<<<<<< HEAD
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
+=======
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
       li {
         line-height: 4.7rem;
         font-family: $font-family-open-sans;
         font-size: $font-size-base;
         text-align: left;
         color: $color-lightGray;
+<<<<<<< HEAD
         a {
           color: $color-lightGray;
           i {
@@ -62,6 +66,20 @@
     }
   }
 
+=======
+        i {
+          svg {
+            width: 29px;
+            height: 24px;
+            float: left;
+            margin-right: 0px;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
   .container-myorder {
     @include lg {
       background-color: $color-white;
@@ -72,9 +90,12 @@
     .app__breadcrumb {
       margin-bottom: 2.4rem;
     }
+<<<<<<< HEAD
     .title-myorder {
       padding: 2rem 0 0.5rem 0;      
     }
+=======
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
     .subtitle-myorder {
       font-family: $font-family-nunito-light;
       font-size: $font-size-xl;
@@ -84,11 +105,17 @@
       color: $color-almostBlack;
       text-transform: none;
       margin-top: 1.4rem;
+<<<<<<< HEAD
       padding-bottom: 0;
       @include lg {
         margin-top: 2.4rem;
       }
 
+=======
+      @include lg {
+        margin-top: 2.4rem;
+      }
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
     }
     .legend-myorder {
       font-family: $font-family-open-sans-light;
@@ -125,7 +152,10 @@
     }
     .box-detailsOrder {
       transition: box-shadow .3s;
+<<<<<<< HEAD
       border: 1px solid $color-hrLightGray;
+=======
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
       box-sizing: border-box;
       border-radius: 3px;
       margin-bottom: 1rem;
@@ -147,6 +177,7 @@
         }
       } 
       &.delivered {
+<<<<<<< HEAD
         border-top: 10px solid $color-green;
         @include lg {
           border-top: 1px solid $color-hrLightGray;
@@ -189,15 +220,64 @@
         }
         .subtitle-statusMobile {
           color: $color-maize;
+=======
+        border-top: 10px solid $color-Lightgreen;
+        @include lg {
+          border-top: 1px solid $color-hrLightGray;
+          border-left: 5px solid $color-Lightgreen;
+        }
+        .flagOrder p{
+          &:before {
+            background-color: $color-Lightgreen;
+          }
+        }
+        .subtitle-statusMobile {
+          color: $color-Lightgreen;
+        }
+      }
+      &.pendingPayment {
+        border-top: 10px solid $color-red;
+        @include lg {
+          border-top: 1px solid $color-hrLightGray;
+          border-left: 5px solid $color-red;
+        }
+        .flagOrder p{
+          &:before {
+            background-color: $color-red;
+          }
+        }
+        .subtitle-statusMobile {
+          color: $color-red;
+        }
+      }
+      &.inTransport {
+        border-top: 10px solid $color-yellow;
+        @include lg {
+          border-top: 1px solid $color-hrLightGray;
+          border-left: 5px solid $color-yellow;
+        }
+        .flagOrder p{
+          &:before {
+            background-color: $color-yellow;
+          }
+        }
+        .subtitle-statusMobile {
+          color: $color-yellow;
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
         }
       }
       .box-firstPart {
         display: flex;
         flex-direction: column;
+<<<<<<< HEAD
         padding: 1rem 1.4rem 2rem 1.4rem;
         @include lg {
           padding: 2rem 1.4rem;
           align-items: center;
+=======
+        padding: 2rem 1.4rem;
+        @include lg {
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
           flex-direction: row;
         }
         >div {
@@ -215,7 +295,10 @@
           }
           &:last-of-type {
             flex: 2;
+<<<<<<< HEAD
             align-items: center;
+=======
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
           }
           .title-myorderMobile {
             font-size: 12px;
@@ -302,7 +385,10 @@
             font-size: $font-size-h5;
             line-height: 1.11;
             color: $color-almostBlack;
+<<<<<<< HEAD
             text-decoration: underline;
+=======
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
             @include lg {
               font-size: $font-size-base;
               line-height: 1.25;
@@ -323,6 +409,7 @@
           }
         }
         .btn-default {
+<<<<<<< HEAD
           text-align: left;
           margin-bottom: 1rem;
           @include lg {
@@ -379,6 +466,15 @@
               height: inherit;
               width: inherit;
             }
+=======
+          margin-bottom: 1rem;
+          svg {
+            width: 22px;
+            height: 17px;
+          }
+          &:last-of-type {
+            margin-top: 1.1rem;
+>>>>>>> 6084da268a49868797931d3e6fa13d3f69b6a547
           }
         }
       }
