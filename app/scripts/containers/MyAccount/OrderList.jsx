@@ -38,7 +38,7 @@ export class OrderList extends React.Component {
   renderMobile() {
     return (
       <div className="container-myorder">
-        <h2 className="title-myorder">Minha conta</h2>
+        <h2>Minha conta</h2>
         <h3 className="subtitle-myorder">Meus pedidos</h3>
         <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
         <div className="box-detailsOrder pendingPayment">
@@ -123,25 +123,13 @@ export class OrderList extends React.Component {
           </div>
           <span className="detach" />
           <div className="box-secondPart">
-            <div className="box-secondPart-mobile">
-              <div>
-                <i><Clipboard /></i>
-              </div>
-              <div>
-                <p className="title-secondPart">Itens do pedido</p>
-                <p className="txt-secondPart">4 produtos</p>
-              </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">4 produtos</p>
             </div>
             <div className="box-statusMobile">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><CodeBar /></i>
-                </div>
-                <div>
-                  <p className="title-statusMobile">status</p>
-                  <p className="subtitle-statusMobile">Entregue</p>
-                </div>
-              </div>
+              <p className="title-statusMobile">status</p>
+              <p className="subtitle-statusMobile">Entregue</p>
             </div>
             <div>
               <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
@@ -156,7 +144,6 @@ export class OrderList extends React.Component {
 
   renderDesktop() {
     const { secondStep } = this.state;
-
     const breadcrumb = [
       {
         title: 'Home',
@@ -205,7 +192,7 @@ export class OrderList extends React.Component {
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
             </div>
           </div>
-          {secondStep && (<div className="box-secondPart">>
+          {secondStep && (<div className="box-secondPart">
             <div className="box-images">
               <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
               <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
