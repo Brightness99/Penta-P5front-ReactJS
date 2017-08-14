@@ -2,7 +2,6 @@
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
-
 import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard } from 'components/Icons';
 
 type Props = {
@@ -35,10 +34,12 @@ export class OrderList extends React.Component {
     });
   }
 
+  props: Props;
+
   renderMobile() {
     return (
       <div className="container-myorder">
-        <h2>Minha conta</h2>
+        <h2 className="title-myorder">Minha conta</h2>
         <h3 className="subtitle-myorder">Meus pedidos</h3>
         <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
         <div className="box-detailsOrder pendingPayment">
@@ -123,13 +124,25 @@ export class OrderList extends React.Component {
           </div>
           <span className="detach" />
           <div className="box-secondPart">
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">4 produtos</p>
+            <div className="box-secondPart-mobile">
+              <div>
+                <i><Clipboard /></i>
+              </div>
+              <div>
+                <p className="title-secondPart">Itens do pedido</p>
+                <p className="txt-secondPart">4 produtos</p>
+              </div>
             </div>
             <div className="box-statusMobile">
-              <p className="title-statusMobile">status</p>
-              <p className="subtitle-statusMobile">Entregue</p>
+              <div className="box-secondPart-mobile">
+                <div>
+                  <i><CodeBar /></i>
+                </div>
+                <div>
+                  <p className="title-statusMobile">status</p>
+                  <p className="subtitle-statusMobile">Entregue</p>
+                </div>
+              </div>
             </div>
             <div>
               <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
@@ -138,12 +151,14 @@ export class OrderList extends React.Component {
             </div>
           </div>
         </div>
+        <button className="btn-default btn-third btn-xs">carregar mais pedidos (4)</button>
       </div>
     );
   }
 
   renderDesktop() {
     const { secondStep } = this.state;
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -164,7 +179,7 @@ export class OrderList extends React.Component {
         <h3 className="subtitle-myorder">Meus pedidos</h3>
         <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
         <ul className="box-tableOrder">
-          <li>N do pedido</li>
+          <li>Nº do pedido</li>
           <li>Realizado em</li>
           <li>Status</li>
           <li>Ações</li>
@@ -192,7 +207,7 @@ export class OrderList extends React.Component {
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
             </div>
           </div>
-          {secondStep && (<div className="box-secondPart">
+          {secondStep && (<div className="box-secondPart">>
             <div className="box-images">
               <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
               <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
