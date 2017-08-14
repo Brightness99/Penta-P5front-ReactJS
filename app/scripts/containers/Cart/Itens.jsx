@@ -136,7 +136,7 @@ export default class CartItens extends React.Component {
         return [
           <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
           <NavLink key="trocar arte" to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>,
-          <button key="excluir" className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+          <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
         ];
       }
 
@@ -148,7 +148,7 @@ export default class CartItens extends React.Component {
           <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
         </Tooltip>,
         <Tooltip key="excluir" text="excluir">
-          <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon /></button>
+          <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
         </Tooltip>
       ];
     }
@@ -159,7 +159,7 @@ export default class CartItens extends React.Component {
           <FilesIcon />duplicar
         </button>,
         <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
-        <button key="excluir" className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon />excluir</button>
+        <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
       ];
     }
 
@@ -173,7 +173,7 @@ export default class CartItens extends React.Component {
         <NavLink to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
       </Tooltip>,
       <Tooltip key="excluir" text="Excluir">
-        <button className="atm-cart-item-action" value={item} onClick={this.handleDelete}><TrashIcon /></button>
+        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
       </Tooltip>
     ];
   }
