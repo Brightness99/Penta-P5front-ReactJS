@@ -151,7 +151,7 @@ export default class MatrixShippingTable extends React.Component {
               <th
                 className="app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-yellow app__config__shipping-table--th app__config__shipping-table--th-round"
               >
-                SuperExpres
+                SuperExpress
               </th>
               <th colSpan={Object.keys(dates).length - 2} />
               <th
