@@ -260,6 +260,23 @@
             &.align-text {
               text-align: right;
             }
+            .btn-icons {
+              border: 1px solid $color-printi-blue;
+              box-sizing: border-box;
+              padding: 0.6rem 2rem 0.6rem 2rem;
+              border-radius: 2px;
+              margin-right: 2px;
+              float: left;
+              width: 61px;
+              height: 34px;
+              svg {
+                width: 25px;
+                height: 20px;
+                path {
+                  fill: $color-printi-blue;
+                }
+              }
+            }
           }
         }
       }
