@@ -38,14 +38,19 @@
     text-align: center;
     color: $color-almostBlack;
     padding-top: 0;
+    line-height: 1.11;
+    text-transform: inherit;
     @include lg{
       text-align: left;
     }
   }
   .product-category{
-    color: $color-printi;
-    font-size: $font-size-sm;
     text-transform: uppercase;
+    font-family: $font-family-open-sans-bold;
+    color: $color-printi-blue;
+    font-size: $font-size-xs;
+    font-weight: bold;
+    text-align: left;
   }  
   .box-product{
     flex: 1;
@@ -74,6 +79,7 @@
         font-weight: bold;
         float:left;
         color: $color-printi;
+        font-family: $font-family-nunito-regular;
         .fnt-unit{
           font-family: $font-family-open-sans;
           font-size: $font-size-xs;
@@ -143,7 +149,7 @@
       width: 100%;
       overflow: hidden;
       position: relative;
-      &__prev, &__next{
+     /* &__prev, &__next{
         svg{
           path{
             fill: black;
@@ -151,13 +157,13 @@
             opacity: .3;
           }
         }
-      }
+      }*/
       &__prev {
-        left: -14px;
+        left: 4px;
         top: 45%;
       }
       &__next {
-        right: -14px;
+        right: 4px;
         top: 47%;
       }
       .carousel__slide{
@@ -174,7 +180,7 @@
           position: relative;
           @include lg {
             height: 330px;
-            padding: 2rem 4rem;
+            padding: 2rem 7.5rem;
             flex-direction: row;
           }
         }
@@ -1008,7 +1014,7 @@
         form{
           display: flex;
           .input-text{
-            flex:7;
+            flex:12;
             border: none;
             box-sizing: border-box;
             padding: 0.6rem;
@@ -1130,6 +1136,7 @@
   box-sizing: border-box;
   padding: 4rem 2rem;
   background-color: #000;
+  margin-bottom: 6rem;
   .printiProduct-title{
     text-align: center;
     color: $color-white;
@@ -1285,10 +1292,10 @@
   overflow: hidden;
   position: relative;
   button{
-    fill: $color-white;
-    fill-rule:evenodd;
-    opacity:.3;
+    fill: #6a6f7a;
+    opacity:.2;
     &:hover{
+      fill: $color-printi-blue;
       opacity: 1;
       transition: all 0.3s ease;
     }
@@ -1303,18 +1310,22 @@
     right: 0;
     text-align: center;
     z-index: 10;
+    opacity: 1;
     button{
       display: inline-block;
       margin: 0 5px;
       border-radius: 100%;
-      height: 15px;
-      width: 15px;
-      opacity: .5;
+      height: 10px;
+      width: 10px;
       cursor: pointer;
       font-size: 0;
       box-sizing: inherit;
+      opacity: .2;
+      border: 0;
+      background-color: #6a6f7a;
       &:hover{
         opacity: 1;
+        background-color: $color-printi-blue;
         transition: all 0.3s ease;
       }
     }
@@ -1331,7 +1342,7 @@
     background-color: transparent;
     border: none;
     font-size: 32px;
-    color: white;
+    color: #eee;
     width: 64px;
     height: 83px;
     text-align: center;

@@ -644,6 +644,7 @@
         font-family: $font-family-open-sans;
         font-size: $font-size-sm;
         margin-bottom: 0.8rem;
+        
         &:last-of-type {
           margin-bottom: 0;
         }
@@ -751,10 +752,11 @@
       cursor: pointer;
       flex: 1;
       font-weight: bold;
-      // height: 25px;
       height: auto;
       margin-right: 5px;
       text-align: center;
+      box-sizing: border-box;
+      padding: 0.5rem 0;
       &:hover {
         border: 2px solid;
         color: $color-printi;
@@ -763,7 +765,6 @@
     }
     @include lg {
       max-width: calc(100% / 3);
-      //max-width: 53%;
     }
   }
 }

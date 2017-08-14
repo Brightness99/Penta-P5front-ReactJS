@@ -52,7 +52,7 @@ export default class TabNavigation extends React.Component {
   }
 
   renderContent() {
-    console.log(document.getElementsByClassName('tab-content'));
+    //console.log(document.getElementsByClassName('tab-content'));
   }
 
   render() {
