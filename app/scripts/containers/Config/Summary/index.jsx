@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import { RoundedConfirmationButton } from 'atoms/Buttons';
-
 type Props = {
   selection: [],
   screenSize: 'string',
@@ -74,7 +72,6 @@ export default class SummaryBlock extends React.Component {
         top: containerHeight - componentHeight,
       });
     } else if (position !== 'fixed') {
-      console.log('changed');
       this.setState({
         position: 'fixed',
         right: (bodyWidth - containerWidth) / 2,
@@ -92,8 +89,6 @@ export default class SummaryBlock extends React.Component {
   }
 
   renderSummary() {
-    const { selection, optionSectionInfo, calculator } = this.props;
-
     return (
       <div className="app__sidebar" style={this.state}>
         123

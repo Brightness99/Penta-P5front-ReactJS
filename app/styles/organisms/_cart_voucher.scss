@@ -17,9 +17,11 @@
     align-items: center;
     display: flex;
     flex-direction: row;
+    height: 13rem;
     padding: 0 2.5rem;
 
     @include lg {
+      height: auto;
       padding: 0;
     }
 

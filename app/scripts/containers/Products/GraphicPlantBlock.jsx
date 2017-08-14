@@ -71,7 +71,7 @@ export class GraphicPlantBlock extends React.Component {
                 <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico2" />
               </Carousel>
             </div>
-        </div>
+          </div>
         </div>
       </section>
     );

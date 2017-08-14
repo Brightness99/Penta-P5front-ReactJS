@@ -52,11 +52,6 @@ export function userSignIn(action$) {
     .switchMap(action => {
       const endpoint = '/v1/customers/login';
 
-      console.log('endpoint');
-      console.log(endpoint);
-      console.log('action');
-      console.log(action);
-
       return rxAjax({
         endpoint,
         payload: {
@@ -65,13 +60,11 @@ export function userSignIn(action$) {
         },
         method: 'POST',
       })
-      .map(data => {
-        return {
-          type: UserConstants.USER_AUTH_SIGN_IN_SUCCESS,
-          payload: data.response,
-          meta: { updatedAt: getUnixtime() },
-        };
-      })
+      .map(data => ({
+        type: UserConstants.USER_AUTH_SIGN_IN_SUCCESS,
+        payload: data.response,
+        meta: { updatedAt: getUnixtime() },
+      }))
       .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
       .defaultIfEmpty({ type: UserConstants.USER_AUTH_SIGN_IN_CANCEL })
       .catch(error => [

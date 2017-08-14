@@ -108,10 +108,6 @@ export default class OptionsBlock extends React.Component {
   }
 
   renderCustomQuantity(option) {
-    const { finalProduct } = this.props;
-
-    console.log(option);
-
     switch (option) {
       case 'format':
         return this.renderCustomFormat();
@@ -183,7 +179,6 @@ export default class OptionsBlock extends React.Component {
 
   renderOptionList() {
     const { options: { parts, list } } = this.props;
-    console.log(list);
     if (parts.total === 1) {
       return (
         <div className="app__config__options-listing">

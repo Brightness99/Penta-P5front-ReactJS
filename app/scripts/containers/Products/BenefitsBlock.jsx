@@ -64,7 +64,7 @@ export default class BenefitsBlock extends React.Component {
           </div>
           <sub>{advantages.CHECK_AVAILABLE_PRODUCTS}</sub>
           <div className="benefitsCard-btn">
-            <Link to={{ pathname: `/configuracao-banner` }} className="btn-default btn-primary btn-lg">Configure este produto</Link>
+            <Link to={{ pathname: '/configuracao-banner' }} className="btn-default btn-primary btn-lg">Configure este produto</Link>
           </div>
         </div>
       </section>
@@ -94,7 +94,7 @@ export default class BenefitsBlock extends React.Component {
               </p>
               {this.renderListAdvantages()}
               <div className="benefitsCard-btn">
-                <Link to={{ pathname: `/configuracao-banner` }} className="btn-default btn-primary btn-lg">Configure este produto</Link>
+                <Link to={{ pathname: '/configuracao-banner' }} className="btn-default btn-primary btn-lg">Configure este produto</Link>
               </div>
             </div>
             <div className="box-benefitsCard">

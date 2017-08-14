@@ -1,4 +1,7 @@
 // @flow
+
+import StringMask from 'string-mask';
+
 /**
  * @module Actions/Cart
  * @desc Actions for Cart
@@ -99,6 +102,42 @@ export function cartVoucherRemoveFetch(voucher: string): Object {
     type: CartConstants.CART_VOUCHER_REMOVE_FETCH_REQUEST,
     payload: {
       voucher,
+    },
+  };
+}
+
+
+/**
+ * Cart Pickup Places Fetch
+ * @param {number} zipcode
+ *
+ * @returns {Object}
+ */
+export function cartPickupFetch(zipcode: number): Object {
+  const mask = new StringMask('99999-999');
+  return {
+    type: CartConstants.CART_PICKUP_FETCH_REQUEST,
+    payload: {
+      zipcode: mask.apply(zipcode),
+      unmaskedZipcode: zipcode,
+    },
+  };
+}
+
+
+/**
+ * Cart Pickup Places Fetch
+ * @param {number} itemId
+ * @param {Object} updatedInfo
+ *
+ * @returns {Object}
+ */
+export function cartUpdateFetch(itemId: number, updatedInfo: Object): Object {
+  return {
+    type: CartConstants.CART_UPDATE_FETCH_REQUEST,
+    payload: {
+      itemId,
+      updatedInfo,
     },
   };
 }

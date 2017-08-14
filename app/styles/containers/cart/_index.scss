@@ -621,7 +621,8 @@
   justify-content: space-between;
   display: inline-flex;
   flex-direction: column;
-  padding: 0 0 0 ($grid-gutter-width / 3) * 2;
+  padding: 0 ($grid-gutter-width / 3) * 2;
+  width: 100%;
 
   > .mol-cart-item-actions {
     padding-top: 2rem;
@@ -691,9 +692,10 @@
   font-family: $font-family-open-sans;
   font-size: 12px;
   width: calc(100% - 8rem);
+  flex-wrap: wrap;
 
-  > span:last-child {
-    padding: 0 1rem;
+  > span {
+    padding-right: 1rem;
   }
 
   > span.atm-cart-price {
@@ -716,35 +718,52 @@
 .mol-cart-item-footer {
   display: flex;
   height: 5rem;
+  width: 100%;
+}
 
-  > div {
-    display: flex;
-    width: 100%;
+.mol-cart-item-desktop-actions {
+  display: flex;
+
+  .mol-tooltip {
+    margin-right: 2rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.atm-cart-item-action {
+  @include center-child-flex;
+  background: transparent;
+  border: transparent;
+  border-right: 0.1rem solid #dbdddf;
+  color: #6a6f7a;
+  display: inline-flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  text-transform: capitalize;
+  font-size: 10px;
+  font-family: $font-family-open-sans;
+
+  > svg {
+    fill: currentColor;
+    height: 1.6rem;
+    margin-bottom: 0.5rem;
+    width: 1.6rem;
+  }
+  &:last-child {
+    border-right: transparent;
+  }
+  @include lg {
+    border: transparent;
   }
 
-  .atm-cart-item-action {
-    @include center-child-flex;
-    background: transparent;
-    border: transparent;
-    border-right: 0.1rem solid #dbdddf;
-    color: #6a6f7a;
-    display: inline-flex;
-    flex: 1;
-    flex-direction: column;
-    height: 100%;
-    text-transform: capitalize;
-    font-size: 10px;
-    font-family: $font-family-open-sans;
-
-    > svg {
-      fill: currentColor;
-      height: 1.6rem;
-      margin-bottom: 0.5rem;
-      width: 1.6rem;
-    }
-    &:last-child {
-      border-right: transparent;
-    }
+  &:hover,
+  &:active {
+    color: $color-printi;
+    text-decoration: none;
   }
 }
 
