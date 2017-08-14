@@ -152,5 +152,20 @@ export default {
         },
       };
     },
+    [CartConstants.CART_UPDATE_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          items: {
+            ...state.data.items,
+            [action.payload.itemId]: {
+              ...state.data.items[action.payload.itemId],
+              ...action.payload.updatedInfo,
+            },
+          }
+        },
+      };
+    },
   }),
 };

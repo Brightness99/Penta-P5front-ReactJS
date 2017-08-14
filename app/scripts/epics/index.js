@@ -24,7 +24,8 @@ import {
   cartDuplicateFetch,
   cartVoucherAddFetch,
   cartVoucherRemoveFetch,
-  cartPickupFetch
+  cartPickupFetch,
+  cartUpdateFetch
 } from './cart';
 
 export default combineEpics(
@@ -46,4 +47,5 @@ export default combineEpics(
   cartVoucherAddFetch,
   cartVoucherRemoveFetch,
   cartPickupFetch,
+  cartUpdateFetch,
 );
