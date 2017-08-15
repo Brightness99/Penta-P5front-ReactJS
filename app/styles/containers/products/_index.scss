@@ -299,9 +299,6 @@
     font-family: $font-family-open-sans-bold;
     letter-spacing: 0.1rem;
     margin-bottom: 1.8rem;
-    @include lg {
-      font-size: $font-size-base;
-    }
   }
   .container-boxTutorial{
     display: flex;
@@ -621,9 +618,6 @@
     font-size: $font-size-h5;
     font-family: $font-family-open-sans-bold; 
     letter-spacing: 0.1rem;
-    @include lg {
-      font-size: $font-size-h6;
-    }
   }
   .container-graphicPlant-block{
     display: flex;
@@ -639,7 +633,7 @@
       }
       .graphicPlant-subtitle{
         margin: 2rem 0;
-        font-size: $font-size-h4;
+        font-size: $font-size-il;
         font-family: $font-family-nunito-regular;
         line-height: 1.48;
         font-weight: lighter;
@@ -679,9 +673,6 @@
     letter-spacing: 0.1rem;
     text-transform: uppercase;
     margin-bottom: 1.8rem;
-    @include lg {
-      font-size: $font-size-base;
-    }
   }
   .box-images-logo {
     box-sizing: border-box;
@@ -767,17 +758,14 @@
 } 
 
 .container-blog {
-   margin: 4.5rem 0;
-   .blog-title {
+  margin: 4.5rem 0;
+  .blog-title {
     font-family: $font-family-open-sans-bold;
     font-size: $font-size-h5;
     letter-spacing: 0.1rem;
     margin-bottom: 1.8rem;
     text-transform: uppercase;
-    @include lg {
-      font-size: $font-size-h5;
-    }
-   }
+  }
   .box-blogCards {
     display: flex;
     flex-direction: column;
