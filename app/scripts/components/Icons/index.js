@@ -46,3 +46,5 @@ export ExclamationMark from './ExclamationMark';
 export DocumentDownload from './DocumentDownload';
 export Clipboard from './Clipboard';
 export Warning from './Warning';
+export Change from './Change';
+export Archive from './Archive';
