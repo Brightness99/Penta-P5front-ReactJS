@@ -49,3 +49,5 @@ export CheckCircleOIcon from './CheckCircleO';
 export CircleIcon from './Circle';
 export PrintiLogoIcon from './PrintiLogo';
 export Warning from './Warning';
+export Change from './Change';
+export Archive from './Archive';
