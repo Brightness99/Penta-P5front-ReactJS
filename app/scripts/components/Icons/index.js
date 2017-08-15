@@ -45,3 +45,5 @@ export Receipt from './Receipt';
 export ExclamationMark from './ExclamationMark';
 export DocumentDownload from './DocumentDownload';
 export Clipboard from './Clipboard';
+export CheckCircleOIcon from './CheckCircleO';
+export CircleIcon from './Circle';
