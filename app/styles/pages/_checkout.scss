@@ -1,12 +1,14 @@
 .page-checkout {
+  background-color: $color-pale-grey;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .org-checkout-header {
   @include center-child-flex;
-  background-color: $atm-color-white;
-  border-bottom: $atm-color-silver;
+  background-color: $color-white;
+  border-bottom: 0.1rem solid $color-silver;
   height: 6.5rem;
   width: 100%;
 }
@@ -56,6 +58,256 @@
     background: linear-gradient(180deg, #2deca0 0, #2fd463 100%);
     box-shadow: 0 8px 8px 0 rgba(47, 212, 99, 0.2);
     border-radius: 1.2rem;
-    color: $atm-color-white;
+    color: $color-white;
+  }
+}
+
+.org-checkout-body {
+  height: calc(100vh - 6.5rem);
+  padding: 4rem 0;
+  position: relative;
+
+  &-background {
+    background-color: $color-white;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(50% + 10rem);
+  }
+}
+
+// --------------------- body
+.org-checkout-main {
+  display: flex;
+  height: 100%;
+}
+
+.org-checkout-content {
+  height: 100%;
+  width: calc(50% + 10rem);
+}
+
+// ------------------------------- summary
+.org-checkout-summary {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-left: 3rem;
+  width: calc(50% - 10rem);
+
+  @include xl {
+    padding-left: 4rem;
+  }
+}
+
+.atm-checkout-summary-title {
+  color: $color-dark;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-base;
+  font-weight: bold;
+  line-height: 1.5;
+  padding-top: 0.8rem;
+  flex: 0 0 auto;
+}
+
+.org-checkout-summary-items {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem 0;
+  overflow-y: auto;
+  flex: 0 1 auto;
+}
+
+.mol-checkout-summary-item {
+  display: flex;
+  min-height: 8rem;
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin: 0;
+  }
+}
+
+.mol-checkout-summary-prices {
+  flex: 0 0 auto;
+}
+
+.mol-checkout-summary-total {
+  flex: 0 0 auto;
+}
+
+.mol-checkout-summary-item-resume {
+  display: inline-flex;
+  flex-grow: 2;
+
+  .mol-checkout-summary-item-image {
+    @include center-child-flex;
+    background-color: $color-white;
+    border: solid 0.1rem $color-silver;
+    border-radius: 0.4rem;
+    height: 8rem;
+    max-height: 8rem;
+    max-width: 8rem;
+    min-height: 8rem;
+    min-width: 8rem;
+    width: 8rem;
+
+    > img {
+      height: auto;
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+    }
+  }
+
+  .mol-checkout-summary-item-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0.8rem 1.6rem;
+    width: calc(100% - 8rem);
+
+    > * {
+      display: inline-flex;
+    }
+  }
+}
+
+.atm-checkout-summary-item-price {
+  display: inline-flex;
+}
+
+.atm-checkout-summary-item-data-name {
+  color: $color-dark;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-base;
+  line-height: 1.5;
+}
+
+.atm-checkout-summary-item-data-infos {
+  color: $color-dark;
+  display: flex;
+  flex-direction: column;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xxs;
+  line-height: 1.6;
+  opacity: 0.5;
+}
+
+.atm-checkout-summary-item-price {
+  color: $color-dark;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  padding-top: 0.8rem;
+}
+
+.mol-checkout-summary-prices {
+  border-bottom: 0.1rem solid $color-silver;
+  border-top: 0.1rem solid $color-silver;
+  padding: 1.6rem 0;
+}
+
+.atm-checkout-total-price {
+  color: $color-printi-blue;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-il;
+  line-height: 1.33;
+}
+
+.mol-checkout-summary-prices {
+  color: $color-dark;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  line-height: 2;
+  text-align: left;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+    > span {
+      opacity: 0.5;
+      display: inline-flex;
+    }
+  }
+}
+
+.mol-checkout-summary-total {
+  align-items: center;
+  display: flex;
+  color: $color-dark;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  justify-content: space-between;
+  line-height: 2;
+  padding-top: 2.4rem;
+  text-align: left;
+
+  > span {
+    display: inline-flex;
+    opacity: 0.5;
+
+    &.atm-checkout-total-price {
+      opacity: 1;
+    }
+  }
+}
+
+// ---------------------------------------- content
+
+.atm-logo {
+  flex: 0 0 auto;
+  justify-content: flex-start;
+  height: 4.8rem;
+
+  > svg {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+  }
+}
+
+// ----------------- container
+.org-checkout-content-container {
+  margin: 4.8rem 0;
+}
+// ----------------- footer
+.mol-checkout-content-footer {
+  @include center-child-flex
+  display: flex;
+  flex: 0 0 auto;
+
+  .atm-checkout-certificate {
+    background: url('../../assets/media/images/sprites.png');
+    display: inline-flex;
+    filter: grayscale(100%);
+    margin: 0 1.6rem;
+
+    &:hover {
+      filter: none;
+    }
+
+    &--certisign {
+      background-position: -244px 0;
+      height: 40px;
+      margin-left: 0;
+      width: 95px;
+    }
+
+    &--norton {
+      background-position: -362px 0;
+      height: 41px;
+      width: 77px;
+    }
+
+    &--google {
+      background-position: -459px 0;
+      height: 40px;
+      margin-right: 0;
+      width: 84px;
+    }
   }
 }
