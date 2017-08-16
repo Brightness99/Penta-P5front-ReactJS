@@ -269,11 +269,6 @@
     width: auto;
   }
 }
-
-// ----------------- container
-.org-checkout-content-container {
-  margin: 4.8rem 0;
-}
 // ----------------- footer
 .mol-checkout-content-footer {
   @include center-child-flex
@@ -310,4 +305,37 @@
       width: 84px;
     }
   }
+}
+
+// ----------------------------- content
+
+.org-checkout-content-container {
+  margin: 4.8rem 0;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+}
+
+.org-checkout-content {
+  padding-right: 3rem;
+
+  @include xl {
+    padding-right: 4rem;
+  }
+}
+
+.atm-checkout-content-title {
+  color: $color-dark;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-il;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.atm-checkout-content-text {
+  color: $color-dark;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  margin: 1.2rem 0;
 }

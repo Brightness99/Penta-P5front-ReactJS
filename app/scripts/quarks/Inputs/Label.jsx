@@ -6,13 +6,14 @@ type Props = {
   showLabel: boolean,
   forId: string,
   children: string,
+  className: string,
 };
 
 const Label = (props: Props) => {
-  const { forId, children } = props;
+  const { forId, children, className } = props;
 
   return (
-    <label htmlFor={forId}>
+    <label className={className} htmlFor={forId}>
       {children}
     </label>
   );
