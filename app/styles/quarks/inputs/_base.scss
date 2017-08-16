@@ -1,31 +1,4 @@
 .app__qrk {
-  &__input-container {
-    > input {
-      @include transition(all 0.2s ease);
-      border-radius: 0.3rem;
-      border: 0.1rem solid $color-hrLightGray;
-      color: $color-black;
-      font-family: $font-family-open-sans-light;
-      font-size: $font-size-sm;
-      height: 4rem;
-      margin-bottom: 1rem;
-      outline-color: transparent;
-      text-indent: 1.2rem;
-      width: 100%;
-      &:focus {
-        @include box-shadows(0px, 0px, 3px, lighten($color-printi, 20%));
-        border-color: lighten($color-printi, 20%);
-      }
-      &.dirty.invalid {
-        @include box-shadows(0px, 0px, 3px, lighten($color-red, 10%));
-        border-color: $color-red;
-      }
-      &.dirty.valid {
-        @include box-shadows(0px, 0px, 3px, lighten($color-green, 15%));
-        border-color: $color-green;
-      }
-    }
-  }
   &__button {
     @include transition(all 0.2s ease);
     border-radius: 0.3rem;
