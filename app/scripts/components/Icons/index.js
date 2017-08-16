@@ -47,3 +47,4 @@ export DocumentDownload from './DocumentDownload';
 export Clipboard from './Clipboard';
 export CheckCircleOIcon from './CheckCircleO';
 export CircleIcon from './Circle';
+export PrintiLogoIcon from './PrintiLogo';
