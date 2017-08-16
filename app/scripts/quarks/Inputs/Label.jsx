@@ -5,21 +5,17 @@ import React from 'react';
 type Props = {
   showLabel: boolean,
   forId: string,
-  placeholder: string,
+  children: string,
 };
 
 const Label = (props: Props) => {
-  const { showLabel, forId, placeholder } = props;
+  const { forId, children } = props;
 
-  if (showLabel === true) {
-    return (
-      <label htmlFor={forId}>
-        {placeholder}
-      </label>
-    );
-  }
-
-  return null;
+  return (
+    <label htmlFor={forId}>
+      {children}
+    </label>
+  );
 };
 
 export default Label;
