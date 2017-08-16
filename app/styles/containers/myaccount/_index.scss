@@ -431,6 +431,45 @@
     box-sizing: border-box;
     padding: 2rem 6rem 0 6rem;
   }
+  .btns-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include lg {
+      justify-content: flex-end;
+      flex-direction: row;
+    }
+    .btn-default {
+      flex: 1;
+      font-size: $font-size-xxxs;
+      display: flex;
+      align-items: center;
+      height: 30px;
+      max-width: 200px;
+      border: 1px solid $color-lightGray;
+      color: $color-lightGray;
+      i {
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+        svg {
+          width: inherit;
+          height: inherit;
+          fill: $color-lightGray;
+          @include lg {
+            fill: $color-printi-blue;
+          }
+        }
+      }
+      @include lg {
+        border: 1px solid $color-printi-blue;
+        color: $color-printi-blue;
+        &:first-of-type {
+          margin-right: 2rem;
+        }
+      }
+    }
+  }
   .box-headerDetails {
     display: flex;
     flex-direction: row;
@@ -456,35 +495,6 @@
           font-weight: bold;
         }
       }
-      &.btns-details {
-        display: flex;
-        @include lg {
-          justify-content: flex-end;
-        }
-        .btn-default {
-          flex: 1;
-          font-size: $font-size-xxxs;
-          border: solid 1px $color-printi-blue;
-          color: $color-printi-blue;
-          display: flex;
-          align-items: center;
-          height: 30px;
-          max-width: 200px;
-          i {
-            margin-right: 1rem;
-            display: flex;
-            align-items: center;
-            svg {
-              width: inherit;
-              height: inherit;
-              fill: $color-printi-blue;
-            }
-          }
-          &:first-of-type {
-            margin-right: 2rem;
-          }
-        }
-      }
     }
   }
   .box-warningDetails {
@@ -500,6 +510,8 @@
     height: 62px;
     >div {
       flex: 1;
+      justify-content: center;
+      display: flex;
       span {
         font-weight: bold;
       }
@@ -525,17 +537,46 @@
         box-sizing: border-box;
         padding: .5rem;
       }
+      &:last-of-type {
+        i {
+          svg {
+            width: 12px;
+            height: 12px;
+            path {
+              fill: $color-lightGray;
+            }
+          }
+        }
+      }
     }
   }
 
   .box-paymentDetails-dataDelivery {
     display: flex;
     margin: 2rem 0;
+    overflow-x: auto;
+    @include lg {
+      overflow-x: hidden;
+    }
     .box-headerDetails {
       display: flex;
       margin-bottom: 0.9rem;
       .title-details {
         flex: 6;
+        font-family: $font-family-open-sans-bold;
+        font-size: $font-size-lg;
+        line-height: 1.67;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: $color-almostBlack;
+        @include lg {
+          line-height: 1;
+          letter-spacing: -0.5px;
+          color: $color-black;
+          font-size: $font-size-il;
+          font-family: $font-family-nunito-regular;
+          text-transform: initial;
+        }
       }
       .link-alterDetails {
         flex: 1;
@@ -559,9 +600,16 @@
       box-sizing: border-box;
       padding: 1.9rem 1.2rem;
       border-radius: 2px;
+      min-width: 270px;
+      @include lg {
+        min-width: inherit;
+      }
     }
     .box-paymentDetails {
-      margin-right: 2.5rem;
+      margin-right: 1.5rem;
+      @include lg {
+        margin-right: 2.5rem;
+      }
     }
     .paymentDetails-dataDelivery {
       .details {
@@ -570,12 +618,15 @@
         font-size: $font-size-sm;
         // line-height: 2.14;
         .firstDetail {
-          flex: 3;
+          flex: 5;
           color: $color-almostBlack;
+          @include lg  {
+            flex: 3;
+          }
         }
         .secondDetail {
           flex: 9;
-          color: #6a6f7a;
+          color: $color-lightGray;
         }
       }
       .paymentMethod-details {
@@ -584,7 +635,21 @@
         font-family: $font-family-open-sans;
         color: $color-almostBlack;
         .typeMethod {
-          color: #6a6f7a;
+          color: $color-lightGray;
+        }
+      }
+      .link-alterDetails--mobile {
+        font-family: $font-family-open-sans;
+        font-size: $font-size-xs;
+        line-height: 1.67;
+        text-align: left;
+        color: $color-printi-blue;
+        display: flex;
+        align-items: center;
+        svg {
+          width: 15px;
+          margin-right: 5px;
+          fill: $color-printi-blue;
         }
       }
     }
@@ -594,7 +659,11 @@
     margin: 4.2rem 0;
     .header-detailsAboutProduct {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+        align-items: center;
+      }
       .title-detailsAboutProduct  {
         font-family: $font-family-nunito-regular;
         font-size: $font-size-il;
@@ -621,6 +690,17 @@
     &.allright {
       .title-status {
         color: $color-green;
+        i {
+          border-radius: 100%;
+          padding: 0 0.7rem;
+          background-color: $color-green;
+          margin-right: 0.5rem;
+          svg {
+            width: 10px;
+            height: 10px;
+            fill: $color-white;
+          }
+        }
       }
       .box-aboutProduct {
         .status-aboutProduct {
@@ -637,6 +717,10 @@
       .title-status {
         color: $color-melon;
         i {
+          border-radius: 0;
+          padding: 0;
+          background-color: none;
+          margin-right: 0.5rem;
           svg {
             width: 20px;
             height: 20px;
@@ -650,9 +734,16 @@
       border: solid 1px $color-hrLightGray;
       .status-aboutProduct {
         display: flex;
-        background-color: #eeeeee;
         box-sizing: border-box;
-        padding: 1rem 4rem;
+        padding: 1rem 2rem;
+        background-color: $color-white;
+        overflow-x: scroll;
+        margin-bottom: 0;
+        @include lg {
+          padding: 1rem 4rem; 
+          background-color: #eeeeee;
+          margin-bottom: inherit;
+        }
         li {
           flex: 1;
           text-align: center;
@@ -673,6 +764,7 @@
       .box-detailsTransport {
         box-sizing: border-box;
         padding: 1rem 3rem;
+        background-color: $color-white; 
         .titlesDetails-product{
           display:flex;
           font-family: $font-family-open-sans-bold;
@@ -692,22 +784,48 @@
         }
         .details-product {
           display: flex;
-          padding: 1rem 3rem;
+          flex-direction: column;
+          @include lg {
+            padding: 1rem 3rem;
+            flex-direction: row;
+          }
           .detail {
             flex: 1;
             font-family: $font-family-open-sans;
             font-size: 12px;
             line-height: 1.25;
             color: $color-almostBlack;
+            margin-bottom: 4.8rem;
+            @include lg {
+              margin-bottom: 2rem;
+              margin-bottom: inherit;
+            }
             .title-data {
               margin-bottom: 0;
               font-size: $font-size-lg;
+            }
+            .title-imageProduct--mobile{
+              border-bottom: 1px solid #dbdddf;
+              margin-bottom: 2rem;
+              .title--mobile {
+                font-family: $font-family-open-sans-bold;
+                font-size: $font-size-xs;
+                font-weight: bold;
+                text-transform: uppercase;
+                line-height: 1;
+                letter-spacing: 1.2px;
+                color: $color-almostBlack;
+              }
             }
             &:first-of-type {
               flex: 2;
             }
             &.imageProduct {
               display: flex;
+              flex-direction: column;
+              @include lg {
+                flex-direction: row;
+              }
               >div {
                 flex: 1;
                 &:last-of-type {
@@ -716,19 +834,26 @@
                     padding: 0 5rem 0 3rem;
                   }
                 }
+                .box-imageProduct--mobile {
+                  display: flex;
+                  flex-direction: row;
+                  >div {
+                    flex: 1;
+                  }
+                }
               }
               .title-status {
                 font-size: 18px;
                 line-height: 1.11;
                 i {
-                  border-radius: 100%;
-                  padding: 0 0.7rem;
-                  background-color: $color-green;
-                  margin-right: 0.5rem;
+                  //border-radius: 100%;
+                  //padding: 0 0.7rem;
+                  //background-color: $color-green;
+                  //margin-right: 0.5rem;
                   svg {
-                    width: 10px;
-                    height: 10px;
-                    fill: $color-white;
+                    //width: 10px;
+                    //height: 10px;
+                    //fill: $color-white;
                   }
                 }
               }
