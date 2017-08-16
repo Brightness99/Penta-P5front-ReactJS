@@ -196,7 +196,7 @@ export class Home extends React.Component {
                 <img src={require('assets/media/images/image-product-pasta.png')} alt="Grafica Online para cartões de visita" />
                 <div className="desc-slider">
                   <h4 className="title-product-slider">Pasta</h4>
-                  <p className="price-product-slider">A partir de R$ 29,00</p>
+                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
                 </div>
                 <div className="btn-slider">
                   <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
@@ -299,7 +299,7 @@ export class Home extends React.Component {
                 <div className="bg-highlight-hover" />
                 <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/destaque-pagina-gabaritos.jpg" alt="Baixe Gabaritos da grafica online Printi" />
                 <div className="desc-highlight">
-                  <h4 className="box-highlight-title">VEJA COMO EDITAR SUA ARTE</h4>
+                  <h4 className="box-highlight-title">Veja como editar sua arte</h4>
                   <p>Baixe o gabarito e edite seu arquivo nos padrões recomendados para impressão.</p>
                 </div>
               </div>

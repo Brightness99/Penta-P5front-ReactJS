@@ -372,6 +372,7 @@
 
 .container-homePage {
   .carousel { 
+    margin-top: 3rem;
     .carousel__slide {
       img{
         height: 180px;
@@ -379,6 +380,15 @@
           height: 380px;
         }
       }    
+    }
+    button {
+      fill: $color-white;
+    }
+    .carouselBullet {
+      button {
+        fill: $color-white;
+        background-color: $color-white; 
+      }
     }
   }
 }
@@ -413,18 +423,24 @@
           top: 0;
           width: 60%;
           .title-product-slider {
-            font-size: $font-size-h5;
+            font-size: $font-size-il;
             text-align: left;
+            color: $color-white;
           }
           .price-product-slider {
             text-align: left;
+            color: $color-white;
+            line-height: 1.67;
+            font-weight: 300;
             &:last-of-type {
-              padding-top: 23%;
+              padding-top: 15%;
               text-align: left;
               span {
                 float: left;
                 font-size: $font-size-xxl;
+                font-family: $font-family-open-sans;
                 width: 100%;
+                margin-top: 0.5rem;                
                 em {
                   font-style: inherit;
                 }
@@ -453,43 +469,53 @@
         .title-product-slider {
           font-size: $font-size-base;
           text-align: center;
+          font-family: $font-family-nunito-regular;
+          letter-spacing: -0.3px;
+          color: $color-almostBlack;
         }
         .price-product-slider {
-          font-size: $font-size-xs;
           text-align: center;
+          font-family: $font-family-open-sans-light;
+          font-size: $font-size-xs;
+          font-weight: 300;
+          line-height: 1;
+          color: $color-lightGray;
+          margin-bottom: 2rem;
           span {
             color: $color-printi;
-            font-size: $font-size-sm;
+            font-family: $font-family-open-sans;
+            font-size: $font-size-base;
             font-weight: bold;
+            line-height: 0.75;
           }
         }
       }
       .btn-slider {
-        display: none;
-        z-index: 2;
+        opacity: 0;
       }
       &:hover {
         box-shadow: 0px 3px 5px 6px $color-lightGray2;
-        transition: box-shadow 0.4s;
-        transition-timing-function: ease-in-out;
+        transition: all 0.4s;
+        transition-timing-function: linear;
         .btn-slider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           bottom: 11%;
-          display: block;
-          float: none;
-          margin: 0 auto;
           position: relative;
           text-align: center;
+          opacity: 1;
+          transition: all 0.2s;
+          transition-timing-function: linear;
           .btn-default {
-            background-color: $color-fluorescentGreen;
+            background-color: $color-green;
             font-family: $font-family-open-sans;
             font-size: $font-size-xxxs;
+            box-shadow: 0px 4px 18px 2px rgba(83, 117, 153, 0.5);
             &.btn-lg{
-              padding: 1.4rem 3.5rem;
+              padding: 1.3rem 4.2rem;
             }
           }
-        }
-        .desc-slider{
-          //position: static;
         }
       }
     }
@@ -503,8 +529,8 @@
   margin-bottom: 5.8rem;
   .title-highlight {
     font-family: $font-family-open-sans-bold;
-    font-size: $font-size-base;
-    letter-spacing: 0.1rem;
+    font-size: $font-size-lg;
+    letter-spacing: 1.8px;
     margin-bottom: 1.8rem;
     text-transform: uppercase;
   }
@@ -518,21 +544,24 @@
       left: 0;
       margin: 0 1rem;
       position: relative;
-      &:nth-of-type(2n) {
+      img {
+        border-radius: 3px;
+      }
+      /*&:nth-of-type(2n) {
         &:hover {
           .bg-highlight-hover {
             //width: 95.7%;
             width: 100%;
           }
         }
-      }
+      }*/
       &:hover {
         .bg-highlight-hover {
           background-color: rgba(0, 110, 227, 0.5);
           height: 100%;
           position: absolute;
           transition: background-color 0.2s;
-          transition-timing-function: ease-in;
+          transition-timing-function: linear;
           width: 100%;
           z-index: 1;
         }
@@ -548,7 +577,7 @@
         box-sizing: border-box;
         padding: 0 1rem;
         position: absolute;
-        width: 97.8%;
+        width: 100%;
         .box-highlight-title {
           color: $color-white;
           font-family: $font-family-nunito-regular;
@@ -560,9 +589,10 @@
         }
         p { 
           color: $color-white;
-          font-family: $font-family-open-sans;
+          font-family: $font-family-open-sans-light;
           font-size: $font-size-xs;
           line-height: 2rem;
+          font-weight: bold;
         }
       }
       @include lg {
