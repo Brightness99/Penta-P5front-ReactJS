@@ -67,15 +67,10 @@ export default class Input extends React.Component {
   render() {
     const { id, type, name, showLabel, placeholder, className } = this.props;
     const { value } = this.state;
-    let inputLabel;
-
-    if (showLabel === true) {
-      inputLabel = <Label forId={id} placeholder={placeholder} />;
-    }
 
     return (
       <div className="app__qrk__input-container">
-        {inputLabel}
+        {showLabel && <Label forId={id}>{placeholder}</Label>}
         <input
           className={className}
           type={type}
