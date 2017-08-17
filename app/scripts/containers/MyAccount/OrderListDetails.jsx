@@ -2,7 +2,7 @@
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
-import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive } from 'components/Icons';
+import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon } from 'components/Icons';
 
 type Props = {
   screenSize: string,
@@ -19,10 +19,13 @@ export class OrderListDetails extends React.Component {
     return (
       <section className="container-myaccountdetails">
         <h2>Minha conta</h2>
-        <div className="box-headerDetails">
+        <div className="box-headerDetails headerDetails--mobile">
           <div>
             <h3 className="subtitle-details">Pedido nº483.093</h3>
             <p className="total-value">Valor total: <span>R$ 350,00</span></p>
+          </div>
+          <div>
+            <Link to="#">Voltar</Link>
           </div>
         </div>
         <div className="box-warningDetails">
@@ -92,28 +95,36 @@ export class OrderListDetails extends React.Component {
           </div>
         </div>
         <div className="box-detailsAboutProduct allright">
-          <div className="header-detailsAboutProduct">
+          <div className="header-detailsAboutProduct header-detailsAboutProduct--mobile">
             <h4 className="title-detailsAboutProduct">Cartão de visita</h4>
-            <p className="title-numberOrder">[item nº 593328]</p>
-            <Link to="#">
-              + Mais detalhes
-            </Link>
+            <div className="alignTitles--mobile">
+              <p className="title-numberOrder">[item nº 593328]</p>
+              <Link to="#">
+                + Toque para mais detalhes
+              </Link>
+            </div>
           </div>
           <div className="box-aboutProduct">
-            <ul className="status-aboutProduct">
-              <li className="allright">
-                <span>1</span>
-              </li>
-              <li>
-                <span>2</span>
-              </li>
-              <li>
-                <span>3</span>
-              </li>
-              <li>
-                <span>4</span>
-              </li>
-            </ul>
+            <div className="box-statusAboutProduct-mobile">
+              <ul className="status-aboutProduct scroll-statusMobile">
+                <li className="allright">
+                  <span />
+                  <p className="legend-statusProduct">Arquivo recebido</p>
+                </li>
+                <li>
+                  <span />
+                  <p className="legend-statusProduct">Produto em produção</p>
+                </li>
+                <li>
+                  <span />
+                  <p className="legend-statusProduct">Produto em transporte</p>
+                </li>
+                <li>
+                  <span />
+                  <p className="legend-statusProduct">Produto entregue</p>
+                </li>
+              </ul>
+            </div>
             <div className="box-detailsTransport">
               <div className="details-product">
                 <div className="detail imageProduct">
@@ -137,8 +148,15 @@ export class OrderListDetails extends React.Component {
                     <p className="title--mobile">Datas</p>
                   </div>
                   <div>
-                    <p className="title-data">20/04/2015</p>
-                    <p>Previsão de entrega</p>
+                    <div className="box-calendarProduct--mobile">
+                      <div className="icon-calendarProduct">
+                        <CalendarIcon />
+                      </div>
+                      <div className="text-calendarProduct">
+                        <p>Previsão de entrega</p>
+                        <p className="title-data">20/04/2015</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="detail">
@@ -146,13 +164,101 @@ export class OrderListDetails extends React.Component {
                     <p className="title--mobile">Ações</p>
                   </div>
                   <div>
-                    <Link className="btn-default btn-quarter fnt-sbold btn-lg" to="#"><i><Archive /></i>Acompanhar o pedido</Link>
+                    <Link className="btn-default btn-quarter fnt-sbold btn-lg w-mxw" to="#"><i><Archive /></i>Acompanhar o pedido</Link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div className="box-detailsAboutProduct attention">
+          <div className="header-detailsAboutProduct header-detailsAboutProduct--mobile">
+            <h4 className="title-detailsAboutProduct">Cartão de visita</h4>
+            <div className="alignTitles--mobile">
+              <p className="title-numberOrder">[item nº 593328]</p>
+              <Link to="#">
+                + Toque para mais detalhes
+              </Link>
+            </div>
+          </div>
+          <div className="box-aboutProduct">
+            <div className="box-statusAboutProduct-mobile">
+              <ul className="status-aboutProduct scroll-statusMobile">
+                <li>
+                  <span />
+                  <p className="legend-statusProduct">Arquivo recebido</p>
+                </li>
+                <li>
+                  <span />
+                  <p className="legend-statusProduct">Produto em produção</p>
+                </li>
+                <li>
+                  <span />
+                  <p className="legend-statusProduct">Produto em transporte</p>
+                </li>
+                <li>
+                  <span />
+                  <p className="legend-statusProduct">Produto entregue</p>
+                </li>
+              </ul>
+            </div>
+            <div className="box-detailsTransport">
+              <div className="details-product">
+                <div className="detail imageProduct">
+                  <div className="title-imageProduct--mobile">
+                    <p className="title--mobile">Arquivo</p>
+                  </div>
+                  <div>
+                    <div className="box-imageProduct--mobile">
+                      <div>
+                        <img src={require('assets/media/images/captura-de-tela.png')} alt="imagem" />
+                      </div>
+                      <div>
+                        <h5 className="title-status"><i><ExclamationMark /></i>Atenção</h5>
+                        <p>A imagem ao lado é meramente ilustrativa.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="detail">
+                  <div className="title-imageProduct--mobile">
+                    <p className="title--mobile">Datas</p>
+                  </div>
+                  <div>
+                    <div className="box-calendarProduct--mobile">
+                      <div className="icon-calendarProduct">
+                        <CalendarIcon />
+                      </div>
+                      <div className="text-calendarProduct">
+                        <p>Previsão de entrega</p>
+                        <p className="title-data">20/04/2015</p>
+                      </div>
+                    </div>
+                    <div className="box-calendarProduct--mobile text-uploadArt">
+                      <div className="icon-calendarProduct">
+                        <CalendarIcon />
+                      </div>
+                      <div className="text-calendarProduct">
+                        <p>Prazo de upload da arte</p>
+                        <p className="title-data">20/04/2015</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="detail">
+                  <div className="title-imageProduct--mobile">
+                    <p className="title--mobile">Ações</p>
+                  </div>
+                  <div>
+                    <p>Para enviar sua arte, você precisa acessar sua conta através de um computador desktop.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
     );
   }
@@ -324,13 +430,7 @@ export class OrderListDetails extends React.Component {
                     <p>O arquivo deste produto ainda não foi enviado.</p>
                   </div>
                 </div>
-                <div className="detail">
-                  <p className="title-data">20/04/2015</p>
-                  <p>Previsão de entrega</p>
-
-                  <p className="title-data">20/04/2015</p>
-                  <p>Previsão de entrega</p>
-
+                <div className="detail attention">
                   <p className="title-data">20/04/2015</p>
                   <p>Previsão de entrega</p>
                 </div>
