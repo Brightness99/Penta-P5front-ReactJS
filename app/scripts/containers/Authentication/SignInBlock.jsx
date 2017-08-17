@@ -90,6 +90,7 @@ export class SignInBlock extends React.Component {
           <InputEmail
             name="email"
             placeholder="E-mail"
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputPassword

@@ -6,6 +6,28 @@
     height: 7.5rem;
   }
 
+  &.dirty.invalid {
+    > input {
+      @include box-shadows(0px, 0px, 3px, lighten($color-red, 10%));
+      border-color: $color-red;
+    }
+
+    > .app__qrk__input-label {
+      color: $color-red;
+    }
+  }
+
+  &.dirty.valid {
+    > input {
+      @include box-shadows(0px, 0px, 3px, lighten($color-green, 15%));
+      border-color: $color-green;
+    }
+
+    > .app__qrk__input-label {
+      color: $color-green;
+    }
+  }
+
   > input {
     @include transition(all 0.2s ease);
     border-radius: 0.3rem;
@@ -18,17 +40,10 @@
     outline-color: transparent;
     text-indent: 1.2rem;
     width: 100%;
+
     &:focus {
       @include box-shadows(0px, 0px, 3px, lighten($color-printi, 20%));
       border-color: lighten($color-printi, 20%);
-    }
-    &.dirty.invalid {
-      @include box-shadows(0px, 0px, 3px, lighten($color-red, 10%));
-      border-color: $color-red;
-    }
-    &.dirty.valid {
-      @include box-shadows(0px, 0px, 3px, lighten($color-green, 15%));
-      border-color: $color-green;
     }
 
     &::placeholder {
@@ -45,16 +60,16 @@
     pointer-events: none;
     opacity: 0.5;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(1);
+    transform-origin: 0;
     transition: all 0.1s ease;
-    will-change: transform, font-size;
 
     &.app__qrk__input-label--active {
-      font-size: $font-size-xs;
       color: $color-printi-blue;
       opacity: 1;
       top: 0;
-      transform: translateY(0.5rem);
+      transform: translateY(0.5rem) scale(0.7);
+      transform-origin: 0;
     }
   }
 }
