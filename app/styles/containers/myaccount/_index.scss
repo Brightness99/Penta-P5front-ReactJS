@@ -78,7 +78,7 @@
     }
     .subtitle-myorder {
       font-family: $font-family-nunito-light;
-      font-size: $font-size-xl;
+      font-size: $font-size-h4;
       font-weight: 300;
       line-height: 1.11;
       text-align: left;
@@ -87,6 +87,7 @@
       margin-top: 1.4rem;
       padding-bottom: 0;
       @include lg {
+        font-size: $font-size-xl;
         margin-top: 2.4rem;
       }
     }
@@ -454,11 +455,15 @@
           }
         }
       }
+      &:first-of-type {
+        margin-bottom: 1rem;
+      }
       @include lg {
         border: 1px solid $color-printi-blue;
         color: $color-printi-blue;
         &:first-of-type {
           margin-right: 2rem;
+          margin-bottom: 0;
         }
       }
     }
@@ -471,11 +476,15 @@
       flex: 1;
       .subtitle-details {
         font-family: $font-family-nunito-light;
-        font-size: $font-size-xl;
+        font-size: $font-size-h4;
+        padding-bottom: 0; 
         text-transform: inherit;
         font-weight: 300;
         line-height: 1.11;
         color: $color-almostBlack;
+        @include lg {
+          font-size: $font-size-xl;
+        }
       }
       .total-value {
         font-family: $font-family-open-sans-light;
@@ -486,6 +495,13 @@
         span {
           font-family: $font-family-open-sans-bold;
           font-weight: bold;
+        }
+      }
+    }
+    &.headerDetails--mobile {
+      >div {
+        &:first-of-type {
+          flex: 4;
         }
       }
     }
@@ -500,7 +516,11 @@
     font-size: $font-size-xs;
     line-height: 1.25;
     color: $color-lightGray;
-    height: 62px;
+    height: auto;
+    margin-bottom: 1.9rem;
+    @include lg {
+      height: 62px;
+    }
     >div {
       flex: 1;
       justify-content: center;
@@ -511,8 +531,12 @@
       &:first-of-type {
         display: flex;
         justify-content: center;
-        padding: 1.8rem 0rem;
+        padding: 2.8rem 0.6rem;
         background-color: $color-darkYellow;
+        border-radius: 3px;
+        @include lg {
+          padding: 1.8rem 0rem;
+        }
         i {
           //display: block;
           //margin: 0 auto;
@@ -526,9 +550,20 @@
         }
       }
       &:nth-of-type(2n) {
-        flex: 18;
         box-sizing: border-box;
+        flex: 6;
         padding: .5rem;
+        line-height: 1.5;
+        p {
+          margin-bottom: 0;
+          font-size: $font-size-xxxs;
+          @include lg {
+            font-size: $font-size-xs;
+          }
+        }
+        @include lg {
+          flex: 18;
+        }
       }
       &:last-of-type {
         i {
@@ -656,14 +691,20 @@
       @include lg {
         flex-direction: row;
         align-items: center;
+        margin-bottom: 2rem;
       }
       .title-detailsAboutProduct  {
-        font-family: $font-family-nunito-regular;
-        font-size: $font-size-il;
+        font-size: $font-size-h5;
+        font-family: $font-family-open-sans-bold;
         letter-spacing: -0.5px;
         text-align: left;
         color: $color-black;
         margin-right: 0.8rem;
+        margin-bottom: 0;
+        @include lg {
+          font-family: $font-family-nunito-regular;
+          font-size: $font-size-il;
+        }
       }
       .title-numberOrder {
         font-family: $font-family-nunito-regular;
@@ -678,6 +719,23 @@
         line-height: 1.67;
         text-align: left;
         color: $color-printi-blue;
+      }
+      &.header-detailsAboutProduct--mobile {
+        .alignTitles--mobile{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          p { 
+            flex: 2;
+            font-size: $font-size-h5;
+            font-family: $font-family-open-sans-bold;
+            margin-right: 0;
+          }
+          a { 
+            flex: 2;
+            font-size: 11px;
+          }
+        }
       }
     }
     &.allright {
@@ -720,11 +778,24 @@
           }
         }
       }
+      .details-product {
+        .detail {
+          &.attention {
+            .title-data, p {
+              color: $color-melon;
+            }
+          }
+        } 
+      }
     }
     .box-aboutProduct {
       border-radius: 3px;
       // background-color: #dbdddf;
       border: solid 1px $color-hrLightGray;
+      .box-statusAboutProduct-mobile {
+        padding: 1rem;
+        background-color: $color-white;
+      }
       .status-aboutProduct {
         display: flex;
         box-sizing: border-box;
@@ -736,6 +807,7 @@
           padding: 1rem 4rem; 
           background-color: #eeeeee;
           margin-bottom: inherit;
+          overflow: hidden;
         }
         li {
           flex: 1;
@@ -753,11 +825,69 @@
             color: $color-white;
           }
         }
+        &.scroll-statusMobile {
+          display: flex;
+          overflow-x: auto;
+          border: 1px solid $color-lightGray3;
+          padding: 1rem 0.5rem;
+          li {
+            position: relative;
+            span {
+              padding: 0.01rem 0.8rem;
+              &:after {
+                content: '';
+                width: 80%;
+                height: 1px;
+                background-color: $color-lightGray3;
+                // background-color: #36c265;
+                position: absolute;
+                top: 20%;
+                left: -53%;
+                margin: 0 12px;
+              }
+            }
+            &:first-of-type{
+              span {
+                &:after {
+                  width: 0;
+                  top: 0;
+                  height: 0;
+                }
+              }
+            }
+            &.allright {
+              span {
+                &:after {
+                  background-color: #36c265;
+                }
+              }
+            }
+          }
+          li {
+            flex: 1;
+            box-sizing: border-box;
+            padding: 0;
+            border-radius: 2px;
+            min-width: 120px;
+            .legend-statusProduct {
+              font-family: $font-family-open-sans-bold;
+              font-size: $font-size-xxs;
+              text-transform: uppercase;
+              line-height: 1.36;
+              letter-spacing: 1.1px;
+              text-align: center;
+              color: $color-lightGray;
+            }
+          }
+        }
       }
       .box-detailsTransport {
         box-sizing: border-box;
-        padding: 1rem 3rem;
+        padding: 1rem 2rem;
         background-color: $color-white; 
+        @include lg {
+          padding: 1rem 3rem;
+        }
         .titlesDetails-product{
           display:flex;
           font-family: $font-family-open-sans-bold;
@@ -793,6 +923,9 @@
               margin-bottom: 2rem;
               margin-bottom: inherit;
             }
+            &:last-of-type {
+              margin-bottom: 0;
+            }
             .title-data {
               margin-bottom: 0;
               font-size: $font-size-lg;
@@ -810,6 +943,30 @@
                 color: $color-almostBlack;
               }
             }
+            .box-calendarProduct--mobile {
+              display: flex;
+              align-items: center;
+              margin-bottom: 2.9rem;
+              .icon-calendarProduct {
+                flex: 1;
+                svg {
+                  width: 19px;
+                  height: 17px;
+                }
+              }
+              .text-calendarProduct {
+                flex: 5;
+                p {
+                  margin-bottom: 0;
+                }
+              }
+              &.text-uploadArt {
+                color: $color-melon;
+                svg {
+                  fill: $color-melon;
+                }
+              }
+            }
             &:first-of-type {
               flex: 2;
             }
@@ -824,7 +981,10 @@
                 &:last-of-type {
                   flex: 2;
                   p {
-                    padding: 0 5rem 0 3rem;
+                    padding: 0 0 0 3rem;
+                    @include lg {
+                      padding: 0 5rem 0 3rem;
+                    }
                   }
                 }
                 .box-imageProduct--mobile {
@@ -832,6 +992,14 @@
                   flex-direction: row;
                   >div {
                     flex: 1;
+                    &:last-of-type {
+                      flex: 2;
+                      margin-left: 1rem;
+                      @include lg {
+                        margin-left: inherit;
+                        flex: 1;
+                      }
+                    }
                   }
                 }
               }
@@ -876,6 +1044,14 @@
                   position: relative;
                   fill: $color-printi-blue;
                 }
+              }
+              &:first-of-type {
+                margin-bottom: 1rem;
+              }
+              // btn without height and max width
+              &.w-mxw {
+                max-width: inherit;
+                height: auto;
               }
             }
           }
