@@ -158,7 +158,6 @@
             background-color: $color-green
           }
         }
-<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
         .box-statusMobile {
           i {
             svg {
@@ -168,10 +167,6 @@
           .subtitle-statusMobile {
             color: $color-Lightgreen;
           }
-=======
-        .subtitle-statusMobile {
-          color: $color-green;
->>>>>>> Sprint040/MyAccountOrderList
         }
       }
       &.pendingPayment {
@@ -185,7 +180,6 @@
             background-color: $color-melon
           }
         }
-<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
         .box-statusMobile {
           i {
             svg {
@@ -193,12 +187,8 @@
             }
           }
           .subtitle-statusMobile {
-            color: $color-red;
+            color: $color-melon;
           }
-=======
-        .subtitle-statusMobile {
-          color: $color-melon;
->>>>>>> Sprint040/MyAccountOrderList
         }
       }
       &.inTransport {
@@ -212,20 +202,8 @@
             background-color: $color-maize;
           }
         }
-<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
-        .box-statusMobile {
-          i {
-            svg {
-              fill: $color-yellow;
-            }
-          }
-          .subtitle-statusMobile {
-            color: $color-yellow;
-          }
-=======
         .subtitle-statusMobile {
           color: $color-maize;
->>>>>>> Sprint040/MyAccountOrderList
         }
       }
       .box-firstPart {
@@ -421,23 +399,6 @@
             }
           }
         }
-<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
-=======
-        .box-secondPart-mobile {
-          display: flex;
-          align-items: center;
-          margin-bottom: 1.2rem;
-          >div {
-            &:first-of-type{
-              margin-right: 2rem;
-            }
-            svg {
-              height: inherit;
-              width: inherit;
-            }
-          }
-        }
->>>>>>> Sprint040/MyAccountOrderList
       }
       &:hover {
         @include lg {
