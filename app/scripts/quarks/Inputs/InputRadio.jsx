@@ -9,17 +9,17 @@ type Props = {
   name: string,
   value: any,
   checked: boolean,
-  onClick?: () => {},
+  onChange?: () => {},
 };
 
 const InputRadio = (props: Props) => {
   const { id, name, value, checked } = props;
 
-  const onChange = (ev) => {
-    const { onClick } = props;
+  const handleChange = (ev) => {
+    const { onChange } = props;
 
-    if (typeof onClick === 'function') {
-      onClick(ev);
+    if (typeof onChange === 'function') {
+      onChange(ev);
     }
   };
 
@@ -30,7 +30,7 @@ const InputRadio = (props: Props) => {
         name={name}
         id={id}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         checked={checked}
       />
       <SVG src={require('assets/media/svg/icon_check.svg')} />
