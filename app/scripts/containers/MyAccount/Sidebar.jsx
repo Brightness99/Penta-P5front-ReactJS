@@ -1,9 +1,5 @@
 // flow
 import React from 'react';
-<<<<<<< e5ab5c9b97f91099b5821d7901e23b05d853a049
-
-=======
->>>>>>> Sprint040/MyAccountOrderList
 import { Link } from 'react-router-dom';
 import { Orders, Address, MyData, Cards, Models, Out } from 'components/Icons';
 
