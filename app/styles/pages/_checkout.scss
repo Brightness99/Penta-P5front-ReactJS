@@ -2,7 +2,8 @@
   background-color: $color-pale-grey;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 }
 
 .org-checkout-header {
@@ -63,7 +64,8 @@
 }
 
 .org-checkout-body {
-  height: calc(100vh - 6.5rem);
+  height: 100%;
+  min-height: calc(100vh - 6.5rem);
   padding: 4rem 0;
   position: relative;
 
@@ -338,4 +340,24 @@
   font-size: $font-size-base;
   line-height: 1.5;
   margin: 1.2rem 0;
+}
+
+.org-checkout-content-data {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 1rem;
+
+  > .atm-checkout-input {
+    display: inline-flex;
+    margin-top: 1rem;
+
+    &-one {
+      width: calc(33% - 0.5rem);
+    }
+
+    &-two {
+      width: calc(66%);
+    }
+  }
 }

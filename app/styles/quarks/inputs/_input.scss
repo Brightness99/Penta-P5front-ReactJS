@@ -3,7 +3,7 @@
   position: relative;
 
   &--labeled {
-    height: 7.5rem;
+    height: 5rem;
   }
 
   &.dirty.invalid {
@@ -34,7 +34,9 @@
     border: 0.1rem solid $color-hrLightGray;
     color: $color-dark;
     font-family: $font-family-open-sans-light;
-    font-size: $font-size-sm;
+    font-size: $font-size-xs;
+    line-height: 1.67;
+    padding-top: 1.6rem;
     height: 100%;
     margin-bottom: 1rem;
     outline-color: transparent;
@@ -68,7 +70,7 @@
       color: $color-printi-blue;
       opacity: 1;
       top: 0;
-      transform: translateY(0.5rem) scale(0.7);
+      transform: translateY(0.5rem) scale(0.85);
       transform-origin: 0;
     }
   }
