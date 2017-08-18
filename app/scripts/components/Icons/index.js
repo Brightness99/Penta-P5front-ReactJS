@@ -52,3 +52,4 @@ export Warning from './Warning';
 export Change from './Change';
 export Archive from './Archive';
 export ChevronDownIcon from './ChevronDown';
+export Plus from './Plus';
