@@ -29,20 +29,34 @@ export default class DataPane extends React.Component {
   renderPersonalData() {
     return (
       <form className="org-checkout-content-data">
-        <Input className="atm-checkout-input-two" placeholder="Nome Completo" />
-        <Input className="atm-checkout-input-one" placeholder="CPF" />
-        <Input className="atm-checkout-input-one" placeholder="Telefone" />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-two"
+          placeholder="Nome Completo"
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="CPF"
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="Telefone"
+        />
         <Select
-          className="atm-checkout-input-one"
+          className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-gender"
           showLabel={true}
           id="data-pane-gender"
           placeholder="Sexo"
+          required={true}
         >
           <option value={'male'}>Masculino</option>
           <option value={'female'}>Feminino</option>
         </Select>
         <Select
+          className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-area"
           showLabel={true}
           id="data-pane-area"
@@ -57,7 +71,63 @@ export default class DataPane extends React.Component {
   }
 
   renderEnterpriseData() {
-
+    return (
+      <form className="org-checkout-content-data">
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-two"
+          placeholder="Nome Completo"
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="CNPJ"
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-two"
+          placeholder="Razão Social"
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="Telefone/Celular"
+        />
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-area"
+          showLabel={true}
+          id="data-pane-area"
+          placeholder="Área de Atuação"
+          required={true}
+        >
+          <option value={1}>Gráfica</option>
+          <option value={2}>Agência</option>
+        </Select>
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-collaborators"
+          showLabel={true}
+          id="data-pane-collaborators"
+          placeholder="Número de funcionários"
+          required={true}
+        >
+          <option value={'1'}>1</option>
+          <option value={'2'}>2</option>
+        </Select>
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-state"
+          showLabel={true}
+          id="data-pane-state"
+          placeholder="Inscrição Estadual"
+          required={true}
+        >
+          <option value={'sp'}>SP</option>
+          <option value={'rj'}>RJ</option>
+        </Select>
+      </form>
+    );
   }
 
   handleSelection = (ev) => {
@@ -95,7 +165,7 @@ export default class DataPane extends React.Component {
             Pessoa Jurídica
           </BoxRadio>
         </div>
-        {this.renderPersonalData()}
+        {activeForm === 'person' ? this.renderPersonalData() : this.renderEnterpriseData()}
       </div>
     );
   }
