@@ -2,7 +2,7 @@
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
-import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon } from 'components/Icons';
+import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel } from 'components/Icons';
 
 type Props = {
   screenSize: string,
@@ -25,7 +25,7 @@ export class OrderListDetails extends React.Component {
             <p className="total-value">Valor total: <span>R$ 350,00</span></p>
           </div>
           <div>
-            <Link to="#">Voltar</Link>
+            <Link to="#"><i><ArrowCarousel /></i>Voltar</Link>
           </div>
         </div>
         <div className="box-warningDetails">
@@ -258,7 +258,7 @@ export class OrderListDetails extends React.Component {
             </div>
           </div>
         </div>
-
+        <Link to="#" className="btn-default btn-quarter btn-xs fnt-bold">Carregar todos produtos (2)</Link>
       </section>
     );
   }
