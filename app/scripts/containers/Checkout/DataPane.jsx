@@ -4,8 +4,11 @@ import React from 'react';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { Input } from 'quarks/Inputs';
 import { BoxRadio, Select } from 'atoms/Inputs';
+import { ChevronLeftIcon } from 'components/Icons';
+import { NavLink } from 'react-router-dom';
 
 type Props = {
+  handleNavigation?: () => {},
 };
 
 type State = {
@@ -25,6 +28,14 @@ export default class DataPane extends React.Component {
   static props: Props;
 
   static state: State;
+
+  handleClick = (ev) => {
+    const { handleNavigation } = this.props;
+
+    if (typeof handleNavigation === 'function') {
+      handleNavigation(ev);
+    }
+  };
 
   renderPersonalData() {
     return (
@@ -166,6 +177,11 @@ export default class DataPane extends React.Component {
           </BoxRadio>
         </div>
         {activeForm === 'person' ? this.renderPersonalData() : this.renderEnterpriseData()}
+
+        <div className="mol-checkout-pane-footer">
+          <NavLink className="atm-go-back-link" to="/meu-carrinho"><ChevronLeftIcon /> Voltar para o carrinho</NavLink>
+          <button value={2} onClick={this.handleClick} className="atm-send-button">Continuar</button>
+        </div>
       </div>
     );
   }
