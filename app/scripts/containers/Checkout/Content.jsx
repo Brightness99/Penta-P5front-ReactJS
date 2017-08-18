@@ -3,9 +3,12 @@
 import React from 'react';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { PrintiLogoIcon } from 'components/Icons';
-import DataPane from "./DataPane";
+import DataPane from './DataPane';
+import AddressPane from './AddressPane';
 
 type Props = {
+  handleNavigation?: () => {},
+  activePanel: number,
 };
 
 type State = {
@@ -25,7 +28,23 @@ export default class Content extends React.Component {
 
 
   handlePanes() {
-    return <DataPane />;
+    const { handleNavigation, activePanel } = this.props;
+
+    switch (activePanel) {
+      case 1:
+        return (
+          <DataPane
+            handleNavigation={handleNavigation}
+          />
+        );
+      case 2:
+        return (
+          <AddressPane
+            handleNavigation={handleNavigation}
+          />
+        );
+      default: return null;
+    }
   }
 
   render() {

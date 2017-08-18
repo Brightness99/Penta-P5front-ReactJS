@@ -361,3 +361,51 @@
     }
   }
 }
+
+.mol-data-pane-choser {
+  > .atm-box-radio {
+    margin-right: 2rem;
+    padding-right: 2rem;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.mol-checkout-pane-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+
+  > .atm-go-back-link {
+    color: $color-printi-blue;
+    display: inline-flex;
+    font-family: $font-family-open-sans;
+    font-size: $font-size-xs;
+
+    > svg {
+      fill: currentColor;
+      height: 1.6rem;
+      padding-right: 1rem;
+      width: auto;
+    }
+  }
+
+  > .atm-send-button{
+    background-color: #2ed463;
+    border: transparent;
+    border-radius: 0.4rem;
+    color: $color-white;
+    display: inline-flex;
+    font-family: $font-family-open-sans;
+    font-size: $font-size-xs;
+    font-weight: bold;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    height: 4rem;
+    text-transform: uppercase;
+    width: 20rem;
+  }
+}
