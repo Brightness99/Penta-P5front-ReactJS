@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
 import OrderList from './OrderList';
 import OrderListDetails from './OrderListDetails';
+import MyAddresses from './MyAddresses';
 
 type Props = {
   app: AppStore,
@@ -19,10 +20,12 @@ export class MyAccount extends React.Component {
   renderMobile() {
     const { app: { screenSize } } = this.props;
     // <OrderList screenSize={screenSize} />
+    // <OrderListDetails screenSize={screenSize} />
+    // <MyAddresses screenSize={screenSize} />
     return (
       <div className="container-myaccount">
         <div className="container">
-          <OrderListDetails screenSize={screenSize} />
+          <MyAddresses screenSize={screenSize} />
         </div>
       </div>
     );
@@ -30,11 +33,13 @@ export class MyAccount extends React.Component {
 
   renderDesktop() {
     // <OrderList screenSize={screenSize} />
+    // <OrderListDetails screenSize={screenSize} />
+    // <MyAddresses screenSize={screenSize} />
     const { app: { screenSize } } = this.props;
     return (
       <div className="container-myaccount">
         <Sidebar screenSize={screenSize} />
-        <OrderListDetails screenSize={screenSize} />
+        <MyAddresses screenSize={screenSize} />
       </div>
     );
   }
