@@ -35,8 +35,6 @@ export class OrderList extends React.Component {
     });
   }
 
-  props: Props;
-
   renderMobile() {
     return (
       <div className="container-myorder">
