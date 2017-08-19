@@ -7,6 +7,7 @@ import Sidebar from './Sidebar';
 import OrderList from './OrderList';
 import OrderListDetails from './OrderListDetails';
 import MyAddresses from './MyAddresses';
+import TemplateModels from './TemplateModels';
 
 type Props = {
   app: AppStore,
@@ -25,7 +26,7 @@ export class MyAccount extends React.Component {
     return (
       <div className="container-myaccount">
         <div className="container">
-          <MyAddresses screenSize={screenSize} />
+          <TemplateModels screenSize={screenSize} />
         </div>
       </div>
     );
@@ -39,7 +40,7 @@ export class MyAccount extends React.Component {
     return (
       <div className="container-myaccount">
         <Sidebar screenSize={screenSize} />
-        <MyAddresses screenSize={screenSize} />
+        <TemplateModels screenSize={screenSize} />
       </div>
     );
   }

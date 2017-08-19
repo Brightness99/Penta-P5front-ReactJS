@@ -1264,3 +1264,92 @@
     }
   }
 }
+
+.container-templateModels {
+  margin-bottom: 3rem;
+  @include lg {
+    background-color: $color-white;
+    flex: 5;
+    box-sizing: border-box;
+    padding: 2rem 6rem 0 6rem;
+    margin-bottom: 0;
+  }
+  .subtitle-templateModels{
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-h4;
+    font-weight: 300;
+    line-height: 1.11;
+    text-align: left;
+    color: $color-almostBlack;
+    text-transform: none;
+    margin-top: 1.4rem;
+    padding-bottom: 0;
+    @include lg {
+      font-size: $font-size-xl;
+      margin-top: 2.4rem;
+    }
+  }
+  .box-templateModels {
+    .box-itensModel {
+      position: relative;
+      display: flex;
+      flex-flow: row wrap;
+      .itemModel {
+        border-radius: 2px;
+        border: solid 1px #dbdddf;
+        box-sizing: border-box;
+        padding: 2rem;
+        flex: 1;
+        flex-basis: calc((100% / 2) - 10px);
+        margin: 0.5rem 0.5rem;
+        .title-item {
+          font-family: $font-family-nunito-light;
+          font-size: $font-size-il;
+          letter-spacing: -0.5px;
+          color: $color-black;
+        }
+        .img-itemModel {
+          margin: 3rem 0;
+          display: flex;
+          justify-content: center;
+        }
+        .btn-itemModel {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .btn-item {
+            flex: 1;
+            &:first-of-type {
+              flex:2;
+            }
+            i {
+              svg {
+                width: 15px;
+                height: 15px;
+              }
+            }
+            &.fnt-edit-delete {
+              font-family: $font-family-open-sans;
+              font-size: $font-size-sm;
+              line-height: 2.14;
+              color: $color-printi-blue;
+              .icon-edit {
+                color: $color-printi-blue;
+                margin-right: 1.2rem;
+                svg {
+                  fill: $color-printi-blue;
+                }
+              }
+              .icon-delete {
+                color: $color-melon;
+                svg {
+                  fill: $color-melon;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
