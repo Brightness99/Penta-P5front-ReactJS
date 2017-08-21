@@ -14,6 +14,7 @@ type Props = {
   isActive: string,
   voucher: {},
   dispatch: () => {},
+  handleVoucherToggle: () => {},
 };
 
 export default class CartVoucher extends React.Component {
@@ -60,13 +61,21 @@ export default class CartVoucher extends React.Component {
     dispatch(cartVoucherAddFetch(ev.currentTarget.voucher.value));
   };
 
+  handleVoucher = () => {
+    const { handleVoucherToggle } = this.props;
+
+    if (typeof handleVoucherToggle === 'function') {
+      handleVoucherToggle();
+    }
+  };
+
   renderInactiveVoucher() {
     return (
       <div className="org-cart-voucher-inactive">
         <TagIcon />
         <div className="mol-cart-voucher-text">
           <PageTitle>Tem um cupom de desconto?</PageTitle>
-          <span>Adicione o código e garanta seu desconto. <a href="#test" title="123">Confira cupons disponíveis</a></span>
+          <span>Adicione o código e garanta seu desconto. <button onClick={this.handleVoucher} className="atm-button-cart-voucher">Clique aqui</button></span>
         </div>
       </div>
     );

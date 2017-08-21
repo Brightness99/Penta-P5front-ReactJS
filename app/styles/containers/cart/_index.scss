@@ -123,6 +123,7 @@
   align-items: flex-end;
   color: $color-almostBlack;
   display: inline-flex;
+  font-family: $font-family-open-sans;
   font-size: $font-size-lg;
   font-weight: bold;
   justify-content: space-between;
@@ -139,13 +140,15 @@
 
   @include lg {
     align-items: flex-start;
-    flex: 2;
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 0;
+    width: 25%;
 
     .atm-cart-item-zipcode {
-      padding-top: $grid-gutter-width / 6;
+      color: #6a6f7a;
+      font-weight: normal;
+      padding-top: 0.8rem;
     }
   }
 }
@@ -207,6 +210,7 @@
   font-size: $font-size-xs;
 
   > div {
+    align-items: center;
     display: inline-flex;
     justify-content: space-between;
     padding: 0.5rem 0;
@@ -214,6 +218,10 @@
     > span {
       display: inline-flex;
     }
+  }
+
+  > div:not(:last-child) span:last-child{
+    font-size: 1.8rem;
   }
 }
 
@@ -232,7 +240,7 @@
 .atm-button-cart-voucher {
   background-color: transparent;
   border: transparent;
-  color: #151617;
+  color: $color-printi-blue;
   display: flex;
   flex-direction: column;
   font-family: $font-family-open-sans;
@@ -294,7 +302,6 @@
     border: solid 1px #dbdddf;
     display: flex;
     height: 3rem;
-    justify-content: space-between;
     padding: 0 3rem;
     text-transform: uppercase;
     width: 100%;
@@ -302,19 +309,26 @@
     > span {
       color: #151617;
       display: inline-flex;
-      flex: 2;
       font-family: $font-family-open-sans;
       font-size: $font-size-xs;
       font-weight: bold;
       letter-spacing: 0.12rem;
 
       &:first-child {
-        flex: 5 ;
+        width: 40%;
+      }
+
+      &:nth-child(2) {
+        width: 25%;
+      }
+
+      &:nth-child(3) {
+        width: 20%;
       }
 
       &:last-child {
         justify-content: flex-end;
-        flex: 1;
+        width: 15%;
       }
     }
   }
@@ -327,7 +341,7 @@
 
     > .mol-cart-item-desktop {
       border-bottom: 0.1rem solid #dbdddf;
-      padding: 3rem 1rem;
+      padding: 4rem 1rem;
 
       &:last-child {
         border-bottom: transparent;
@@ -348,10 +362,10 @@
   flex-direction: column;
   font-family: $font-family-open-sans;
   font-size: $font-size-xs;
-  line-height: 1.67;
+  line-height: 1;
 
-  .atm-cart-item-product {
-    color: $color-almostBlack;
+  > ul {
+    padding-top: 0.8rem;
   }
 }
 
@@ -360,38 +374,75 @@
   display: flex;
 
   @include lg {
-    flex: 5;
+    width: 40%;
   }
 }
 
 .mol-cart-item-desktop {
   display: flex;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  line-height: 1.67;
 }
 
 .mol-cart-item-quantity {
   align-items: flex-start;
   color: $color-almostBlack;
   display: inline-flex;
-  flex: 2;
   flex-direction: column;
+  font-family: $font-family-open-sans;
   font-size: $font-size-lg;
-  font-weight: bold;
   justify-content: flex-start;
+
+  @include lg {
+    flex-direction: column;
+    width: 20%;
+
+    .atm-cart-item-quantity {
+      line-height: 1;
+    }
+
+    .atm-cart-item-quantity-unit {
+      color: #6a6f7a;
+      font-size: $font-size-xs;
+      font-weight: normal;
+      text-transform: capitalize;
+      line-height: 1;
+      padding-top: 0.8rem;
+    }
+  }
 }
 
 .mol-cart-item-price {
   align-items: flex-end;
   color: $color-almostBlack;
   display: inline-flex;
-  flex: 1;
   flex-direction: column;
   font-size: $font-size-lg;
   font-weight: bold;
   justify-content: space-between;
+  width: 15%;
+
+  > .atm-cart-item-price {
+    color: $color-printi-blue;
+    flex-direction: column;
+    line-height: 1;
+
+    span {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    > span:last-child {
+      color: #6a6f7a;
+      font-size: $font-size-xs;
+      padding-top: 0.8rem;
+    }
+  }
 }
 
 .org-cross-sell {
-  margin-top: 2rem;
+  margin-bottom: 1rem;
   .org-cart-cross-sell {
     display: flex;
     justify-content: space-between;
@@ -406,7 +457,7 @@
     padding: $grid-gutter-width / 3;
     position: relative;
     text-align: center;
-    width: 18%;
+    width: 24%;
 
     &:hover {
       box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
@@ -466,9 +517,9 @@
 .mol-cart-item-image {
   display: inline-flex;
   flex-direction: column;
-  height: 13rem;
+  height: 11rem;
   position: relative;
-  width: 13rem;
+  width: 11rem;
 }
 
 .mol-cart-content {
@@ -612,9 +663,11 @@
 .atm-cart-see-more {
   background: transparent;
   border: transparent;
-  color: #6a6f7a;
+  color: $color-printi-blue;
   font-family: $font-family-open-sans;
   font-weight: bold;
+  margin-top: 1.6rem;
+  text-decoration: underline;
 }
 
 .mol-cart-item-desktop-infos {
@@ -710,7 +763,7 @@
   line-height: 1.11;
 
   &--large {
-    font-size: $font-family-nunito-regular;
+    font-family: $font-family-nunito-regular;
     font-size: 2.4rem;
   }
 }
@@ -812,7 +865,13 @@
 
   .mol-cart-summary-infos {
     display: inline-flex;
+    height: 100%;
+    justify-content: space-between;
     width: 20rem;
+
+    > div:not(:last-child) span:last-child{
+      font-size: 1.8rem;
+    }
   }
 }
 
@@ -828,6 +887,6 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 24.5%;
+    width: 23.8%;
   }
 }

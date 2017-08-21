@@ -14,13 +14,13 @@
   &--desktop {
     border-top-right-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
-    left: -1rem;
+    left: -4rem;
     position: absolute;
-    top: 11.5rem;
-    width: 15rem;
+    top: 10rem;
+    width: 17rem;
 
     &:before {
-      border-top: 2rem solid transparent;
+      border-top: 1rem solid transparent;
       border-bottom: 0 solid transparent;
       border-right: 1rem solid #005ab9;
       content: "";
@@ -28,7 +28,7 @@
       left: 0;
       position: absolute;
       width: 0;
-      top: -2rem;
+      top: -1rem;
     }
   }
 

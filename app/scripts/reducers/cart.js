@@ -51,13 +51,14 @@ export default {
     [CartConstants.CART_FETCH_SUCCESS](state, action) {
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.cart,
         isRunning: false,
-        count: action.payload.items ? Object.keys(action.payload.items).length : 0,
+        count: action.payload.cart.items ? Object.keys(action.payload.cart.items).length : 0,
+        crossSelling: action.payload.crossSelling,
         isLoaded: true,
         voucher: {
           ...state.voucher,
-          ...action.payload.prices ? action.payload.prices.discount : {},
+          ...action.payload.cart.prices ? action.payload.cart.prices.discount : {},
         },
       };
     },
