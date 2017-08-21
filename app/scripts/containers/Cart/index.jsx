@@ -75,7 +75,7 @@ export class Cart extends React.Component {
   }
 
   renderDesktop() {
-    const { app: { screenSize }, cart: { data: { prices, items, zipcode, use_pickup_places, pickup_place_id }, voucher, count, pickupPlaces }, dispatch } = this.props;
+    const { app: { screenSize }, cart: { data: { prices, items, zipcode, use_pickup_places, pickup_place_id }, voucher, count, pickupPlaces, crossSelling }, dispatch } = this.props;
     const { isVoucherActive } = this.state;
 
     return (
@@ -90,20 +90,19 @@ export class Cart extends React.Component {
             pickupPlaces={pickupPlaces}
             pickupPlaceId={pickup_place_id}
           />
-          <CartCrossSell screenSize={screenSize} />
+          <CartCrossSell screenSize={screenSize} crossSelling={crossSelling} />
           <div className="mol-cart-desktop-summary">
             <CartVoucher
               screenSize={screenSize}
               isActive={isVoucherActive}
               dispatch={dispatch}
               voucher={voucher}
+              handleVoucherToggle={this.handleVoucherToggle}
             />
             <CartSummary
               screenSize={screenSize}
               totalItems={count}
               prices={prices}
-              isVoucherActive={isVoucherActive}
-              handleVoucherToggle={this.handleVoucherToggle}
             />
           </div>
           <CartFooter screenSize={screenSize} dispatch={dispatch} />
@@ -116,8 +115,6 @@ export class Cart extends React.Component {
                 screenSize={screenSize}
                 totalItems={count}
                 prices={prices}
-                isVoucherActive={isVoucherActive}
-                handleVoucherToggle={this.handleVoucherToggle}
               />
             </div>
           </div>
@@ -128,7 +125,7 @@ export class Cart extends React.Component {
   }
 
   renderMobile() {
-    const { app: { screenSize }, cart: { data: { prices, items, zipcode, use_pickup_places, pickup_place_id }, voucher, count, pickupPlaces }, dispatch } = this.props;
+    const { app: { screenSize }, cart: { data: { prices, items, zipcode, use_pickup_places }, voucher, count, pickupPlaces, crossSelling }, dispatch } = this.props;
     const { isVoucherActive } = this.state;
 
     return (
@@ -145,14 +142,13 @@ export class Cart extends React.Component {
           screenSize={screenSize}
           totalItems={count}
           prices={prices}
-          isVoucherActive={isVoucherActive}
-          handleVoucherToggle={this.handleVoucherToggle}
         />
         <CartVoucher
           screenSize={screenSize}
           isActive={isVoucherActive}
           dispatch={dispatch}
           voucher={voucher}
+          handleVoucherToggle={this.handleVoucherToggle}
         />
         <CartFooter screenSize={screenSize} />
       </main>

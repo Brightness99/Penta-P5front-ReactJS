@@ -12,36 +12,10 @@ type Props = {
   handleVoucherToggle: () => {},
 };
 
-type State = {
-};
-
 export default class CartSummary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
-
-  static state: State;
-
-  handleVoucher = () => {
-    const { handleVoucherToggle } = this.props;
-
-    if (typeof handleVoucherToggle === 'function') {
-      handleVoucherToggle();
-    }
-  };
-
-  renderVoucher() {
-    const { isVoucherActive, prices: { discount } } = this.props;
-
-    return isVoucherActive
-      ? <span>-{discount ? <IntlMoney>{discount.total}</IntlMoney> : '--'}</span>
-      : <button onClick={this.handleVoucher} className="atm-button-cart-voucher">Adicionar código</button>;
-  }
 
   renderDesktop() {
     const { prices } = this.props;
@@ -54,7 +28,7 @@ export default class CartSummary extends React.Component {
         </div>
         <div>
           <span>Cupom:</span>
-          {this.renderVoucher()}
+          <span>-{prices.discount ? <IntlMoney>{prices.discount.total}</IntlMoney> : '--'}</span>
         </div>
         <div className="mol-cart-summary-total">
           <span>Total</span>
@@ -83,7 +57,7 @@ export default class CartSummary extends React.Component {
           </div>
           <div>
             <span>Cupom:</span>
-            {this.renderVoucher()}
+            <span>-{prices.discount ? <IntlMoney>{prices.discount.total}</IntlMoney> : '--'}</span>
           </div>
         </div>
         <hr />
