@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import Cards from 'react-credit-cards';
+import { Input } from 'quarks/Inputs';
+import { BoxRadio, Select } from 'atoms/Inputs';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel, PencilIcon, TrashIcon } from 'components/Icons';
@@ -63,6 +65,16 @@ export class CardsAccount extends React.Component {
     );
   }*/
 
+/*  <Input
+      showLabel={true}
+      className="atm-checkout-input atm-checkout-input-two"
+      type="text"
+      name="name"
+      placeholder="Name"
+      onKeyUp={this.handleInputChange}
+      onFocus={this.handleInputFocus}
+    /> 
+*/
   render() {
     const { name, number, expiry, cvc, focused } = this.state;
     return (
@@ -77,12 +89,12 @@ export class CardsAccount extends React.Component {
             focused={focused}
             callback={this.handleCallback}
           />
-          <form>
+          <form className="org-checkout-content-data">
             <div>
               <input
                 type="tel"
                 name="number"
-                placeholder="Card Number"
+                placeholder="Número do Cartão"
                 onKeyUp={this.handleInputChange}
                 onFocus={this.handleInputFocus}
               />
