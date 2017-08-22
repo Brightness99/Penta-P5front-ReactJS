@@ -40,6 +40,11 @@ export class Sidebar extends React.Component {
           </li>
           <li>
             <Link to="#">
+              Cloud
+            </Link>
+          </li>
+          <li>
+            <Link to="#">
               <i><Out /></i>Sair
             </Link>
           </li>
