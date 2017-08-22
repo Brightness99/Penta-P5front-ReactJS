@@ -1,0 +1,13 @@
+.container-creditCard {
+  @include lg {
+    background-color: $color-white;
+    flex: 5;
+    box-sizing: border-box;
+    padding: 2rem 6rem 3rem 6rem;
+  }
+  .container-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
