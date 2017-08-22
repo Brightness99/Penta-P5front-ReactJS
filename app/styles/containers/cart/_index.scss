@@ -125,14 +125,9 @@
   display: inline-flex;
   font-family: $font-family-open-sans;
   font-size: $font-size-lg;
-  font-weight: bold;
   justify-content: space-between;
   padding-top: $grid-gutter-width / 2;
   width: 100%;
-
-  > * {
-    line-height: 1;
-  }
 
   .atm-cart-item-zipcode {
     font-size: $font-size-xs;
@@ -148,7 +143,6 @@
     .atm-cart-item-zipcode {
       color: #6a6f7a;
       font-weight: normal;
-      padding-top: 0.8rem;
     }
   }
 }
@@ -220,8 +214,10 @@
     }
   }
 
-  > div:not(:last-child) span:last-child{
-    font-size: 1.8rem;
+  @include lg {
+    > div:not(:last-child) span:last-child{
+      font-size: 1.8rem;
+    }
   }
 }
 
@@ -293,6 +289,7 @@
 }
 
 .org-cart-items-desktop {
+  margin-bottom: 2rem;
   width: 100%;
 
   > .mol-cart-items-header {
@@ -367,6 +364,27 @@
   > ul {
     padding-top: 0.8rem;
   }
+
+  .mol-editable-text {
+    align-items: center;
+    width: 100%;
+
+    @include lg {
+      width: 10rem;
+    }
+
+    @include xl {
+      width: 16rem;
+    }
+
+    @include xxl {
+      width: 20rem;
+    }
+
+    @include xxxl {
+      width: 24rem;
+    }
+  }
 }
 
 .mol-cart-item-product {
@@ -398,17 +416,11 @@
     flex-direction: column;
     width: 20%;
 
-    .atm-cart-item-quantity {
-      line-height: 1;
-    }
-
     .atm-cart-item-quantity-unit {
       color: #6a6f7a;
       font-size: $font-size-xs;
       font-weight: normal;
       text-transform: capitalize;
-      line-height: 1;
-      padding-top: 0.8rem;
     }
   }
 }
@@ -426,7 +438,6 @@
   > .atm-cart-item-price {
     color: $color-printi-blue;
     flex-direction: column;
-    line-height: 1;
 
     span {
       display: flex;
@@ -436,13 +447,18 @@
     > span:last-child {
       color: #6a6f7a;
       font-size: $font-size-xs;
-      padding-top: 0.8rem;
+      font-weight: normal;
     }
   }
 }
 
 .org-cross-sell {
   margin-bottom: 1rem;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
   .org-cart-cross-sell {
     display: flex;
     justify-content: space-between;
@@ -889,4 +905,8 @@
     top: 0;
     width: 23.8%;
   }
+}
+
+.atm-cart-item-product {
+  padding-top: 0.8rem;
 }

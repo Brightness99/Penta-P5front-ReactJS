@@ -113,20 +113,18 @@ export function cartVoucherRemoveFetch(voucher: string): Object {
  *
  * @returns {Object}
  */
-export function cartPickupFetch(zipcode: number): Object {
-  const mask = new StringMask('99999-999');
+export function cartPickupFetch(pickupPlaceId: number): Object {
   return {
     type: CartConstants.CART_PICKUP_FETCH_REQUEST,
     payload: {
-      zipcode: mask.apply(zipcode),
-      unmaskedZipcode: zipcode,
+      pickupPlaceId,
     },
   };
 }
 
 
 /**
- * Cart Pickup Places Fetch
+ * Cart Update Fetch
  * @param {number} itemId
  * @param {Object} updatedInfo
  *

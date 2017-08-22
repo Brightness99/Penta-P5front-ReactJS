@@ -22,6 +22,7 @@ import Footer from 'components/Footer';
 
 type Props = {
   app: AppStore,
+  cart: {},
   dispatch: () => {},
   router: RouterStore,
   locale: {},
@@ -50,7 +51,7 @@ export class App extends React.Component {
   };
 
   render() {
-    const { app, dispatch, router } = this.props;
+    const { app, dispatch, router, cart } = this.props;
 
     let html = (<div className="loader">Loading</div>);
 
@@ -61,7 +62,7 @@ export class App extends React.Component {
             <Route exact path="/pagamento" component={Checkout} />
             <Route path="/" render={() => (
               <div key="app" className="app">
-                <Header screenSize={app.screenSize} dispatch={dispatch} />
+                <Header screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count} />
                 <main className="app__main">
                   <Switch>
                     <Route exact path="/" component={Home} />
@@ -91,6 +92,7 @@ export class App extends React.Component {
 function mapStateToProps(state) {
   return {
     app: state.app,
+    cart: state.cart,
     router: state.router,
     locale: state.locale,
   };

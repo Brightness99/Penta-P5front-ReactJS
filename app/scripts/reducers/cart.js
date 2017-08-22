@@ -149,7 +149,7 @@ export default {
         ...state,
         pickupPlaces: {
           ...state.pickupPlaces,
-          [action.payload.unmaskedZipcode]: action.payload,
+          [action.payload.id]: action.payload,
         },
       };
     },

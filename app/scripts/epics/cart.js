@@ -53,7 +53,7 @@ export function cartFetch(action$, store) {
       })
         .map(data => {
           if (data.status === 200 && data.response) {
-            if (data.response.use_pickup_places && !store.getState().cart.pickupPlaces[data.response.zipcode]) {
+            if (data.response.use_pickup_places && !store.getState().cart.pickupPlaces[data.response.pickup_place_id]) {
               store.dispatch(cartPickupAction(data.response.zipcode));
             }
             return {
@@ -284,7 +284,7 @@ export function cartVoucherRemoveFetch(action$, store) {
 export function cartPickupFetch(action$) {
   return action$.ofType(CartConstants.CART_PICKUP_FETCH_REQUEST)
     .switchMap((action) => {
-      const endpoint = `/v1/pickup_places/addresses/${action.payload.zipcode}/zipcode`;
+      const endpoint = `/v1/pickup_places/${action.payload.pickupPlaceId}/address`;
 
       return rxAjax({
         endpoint,
@@ -296,7 +296,6 @@ export function cartPickupFetch(action$) {
               type: CartConstants.CART_PICKUP_FETCH_SUCCESS,
               payload: {
                 ...data.response,
-                unmaskedZipcode: action.payload.unmaskedZipcode,
               },
               meta: { updatedAt: getUnixtime() },
             };
