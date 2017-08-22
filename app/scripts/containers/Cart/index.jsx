@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
-import { cartFetch } from 'actions';
+import { cartFetch, cartPickupFetch } from 'actions';
 import { NavLink } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
 import StickBar from 'components/StickBar';
@@ -36,7 +36,7 @@ export class Cart extends React.Component {
     };
   }
   componentDidMount() {
-    const { cart: { voucher }, dispatch } = this.props;
+    const { cart: { voucher, use_pickup_places, pickup_place_id }, dispatch } = this.props;
 
     if (voucher.voucher_name) {
       this.setState({
@@ -45,16 +45,25 @@ export class Cart extends React.Component {
     }
 
     dispatch(cartFetch());
+
+    if (use_pickup_places) {
+      dispatch(cartPickupFetch(pickup_place_id));
+    }
+
   }
 
   componentWillUpdate(nextProps) {
-    const { cart: { voucher } } = this.props;
-    const nextVoucher = nextProps.cart.voucher;
+    const { cart: { voucher, data: { use_pickup_places } }, dispatch } = this.props;
+    const nextCart = nextProps.cart;
 
-    if (nextVoucher.voucher_name && voucher.voucher_name !== nextVoucher.voucher_name ) {
+    if (nextCart.voucher.voucher_name && voucher.voucher_name !== nextCart.voucher.voucher_name ) {
       this.setState({
         isVoucherActive: true,
       });
+    }
+
+    if (nextCart.data.use_pickup_places && nextCart.data.use_pickup_places !== use_pickup_places) {
+      dispatch(cartPickupFetch(nextCart.data.pickup_place_id));
     }
   }
 

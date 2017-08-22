@@ -3,15 +3,14 @@
 import React from 'react';
 import swal from 'sweetalert2';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { NavLink } from 'react-router-dom';
 import { cartDuplicateFetch, cartDeleteFetch, cartUpdateFetch } from 'actions';
 import { FilesIcon, PencilIcon, TrashIcon, ChevronRightIcon } from 'components/Icons';
 import { IntlDate, IntlMoney, IntlZipcode } from 'components/Intl';
-import Tooltip from 'components/Tooltipster';
 import Modal from 'components/Modal';
 import { EditableText } from 'molecules/Inputs';
 import ProductImage from './ProductImage';
 import { ProductDetailsModal, UpsellingModal } from './Modals';
+import Actions from './Actions';
 
 const failbackImage = require('assets/media/images/blue-logo.png');
 
@@ -107,95 +106,26 @@ export default class CartItens extends React.Component {
     );
   }
 
-  handleDuplicate = (ev) => {
-    const { dispatch } = this.props;
-
-    dispatch(cartDuplicateFetch(ev.currentTarget.value));
-  };
-
-  handleDelete = (ev) => {
-    const { dispatch } = this.props;
-    const targetValue = ev.currentTarget.value;
-    swal({
-      title: 'Você tem certeza?',
-      text: 'Ao remover este produto ele não estará mais disponível no carrinho!',
-      type: 'warning',
-      confirmButtonColor: '#2cac57',
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não',
-      showCancelButton: true,
-      reverseButtons: true,
-    })
-      .then(() => dispatch(cartDeleteFetch(targetValue)));
-  };
-
-  renderActions(item, itemId) {
-    const { screenSize } = this.props;
-    if (item.type === 'cloud') {
-      if (isMobile(screenSize)) {
-        return [
-          <NavLink key="editar" to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
-          <NavLink key="trocar arte" to={`/${item.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>,
-          <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
-        ];
-      }
-
-      return [
-        <Tooltip key="editar" text="editar">
-          <NavLink to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-        </Tooltip>,
-        <Tooltip key="trocar arte" text="trocar arte">
-          <NavLink to={`/${item.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-        </Tooltip>,
-        <Tooltip key="excluir" text="excluir">
-          <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
-        </Tooltip>
-      ];
-    }
-
-    if (isMobile(screenSize)) {
-      return [
-        <button key="duplicar" className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
-          <FilesIcon />duplicar
-        </button>,
-        <NavLink key="editar" to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
-        <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
-      ];
-    }
-
-    return [
-      <Tooltip key="duplicar" text="Duplicar">
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
-          <FilesIcon />
-        </button>
-      </Tooltip>,
-      <Tooltip key="editar" text="Editar">
-        <NavLink to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-      </Tooltip>,
-      <Tooltip key="excluir" text="Excluir">
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
-      </Tooltip>
-    ];
-  }
-
   renderZipcode() {
-    const { usePickupPlaces, zipcode, pickupPlaces } = this.props;
+    const { usePickupPlaces, pickupPlaceId, pickupPlaces } = this.props;
+
+    console.log(usePickupPlaces, pickupPlaceId, pickupPlaces);
 
     if (usePickupPlaces) {
-      if (!pickupPlaces[zipcode]) {
+      if (!pickupPlaces[pickupPlaceId]) {
         return null;
       }
 
       return (
         <div className="atm-cart-item-zipcode">
-          {pickupPlaces[zipcode].receiver_name}
+          {pickupPlaces[pickupPlaceId].receiver_name}
         </div>
       );
     }
 
     return (
       <div className="atm-cart-item-zipcode">
-        CEP: <IntlZipcode>{zipcode}</IntlZipcode>
+        CEP: <IntlZipcode>{pickupPlaceId}</IntlZipcode>
       </div>
     );
   }
@@ -210,7 +140,7 @@ export default class CartItens extends React.Component {
         project_name: ev.currentTarget.editableInput.value,
       },
     }));
-  }
+  };
 
   renderProductInfos(item, itemId) {
     const slicedList = Object.keys(item.product_parts[Object.keys(item.product_parts)[0]].options)
@@ -248,7 +178,7 @@ export default class CartItens extends React.Component {
   }
 
   renderDesktop() {
-    const { items } = this.props;
+    const { items, screenSize } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
@@ -292,7 +222,7 @@ export default class CartItens extends React.Component {
                   <span><IntlMoney>{items[item].prices.total / items[item].quantity}</IntlMoney>/un</span>
                 </div>
                 <div className="mol-cart-item-desktop-actions">
-                  {this.renderActions(items[item], item)}
+                  <Actions screenSize={screenSize} actions={items[item].actions} itemId={item} />
                 </div>
               </div>
             </li>

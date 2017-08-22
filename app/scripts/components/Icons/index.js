@@ -51,4 +51,5 @@ export PrintiLogoIcon from './PrintiLogo';
 export Warning from './Warning';
 export Change from './Change';
 export Archive from './Archive';
+export CartIcon from './Cart';
 
