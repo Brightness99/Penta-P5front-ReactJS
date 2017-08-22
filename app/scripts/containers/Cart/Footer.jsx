@@ -8,6 +8,8 @@ import { IntlMoney } from 'components/Intl';
 
 type Props = {
   screenSize: string,
+  locale: {},
+  totalPrice: number,
   dispatch: () => {},
 };
 
@@ -45,15 +47,27 @@ export default class CartFooter extends React.Component {
   static props: Props;
 
   renderStickFooter() {
+    const { locale, totalPrice } = this.props;
+
     return (
       <div className="org-cart-stick-footer">
-        <div><span>Total</span><IntlMoney className="atm-cart-price">{225}</IntlMoney></div>
-        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled">finalizar compra</NavLink>
+        <div>
+          <span>{locale.sidebar.TOTAL}</span>
+          <IntlMoney className="atm-cart-price">{totalPrice}</IntlMoney>
+        </div>
+        <NavLink
+          to="/pagamento"
+          className="atm-button-rounded atm-button-rounded--enabled"
+        >
+          {locale.seo.PROCEED_TO_CHECKOUT}
+        </NavLink>
       </div>
     );
   }
 
   renderDesktop() {
+    const { locale } = this.props;
+
     return (
       <div className="org-cart-footer org-cart-footer--desktop">
         <div>
@@ -62,25 +76,32 @@ export default class CartFooter extends React.Component {
             target="new"
             className="atm-button-transparent"
           >
-            <FileTextOIcon /> Baixar Orçamento
+            <FileTextOIcon /> {locale.seo.DOWNLOAD_QUOTATION}
           </NavLink>
         </div>
-        <NavLink to="/" className="atm-cart-shopping">Continuar comprando</NavLink>
-        <NavLink to="/pagamento" className="atm-button-rounded atm-button-rounded--enabled">finalizar compra</NavLink>
+        <NavLink to="/" className="atm-cart-shopping">{locale.seo.KEEP_BUYING}</NavLink>
+        <NavLink
+          to="/pagamento"
+          className="atm-button-rounded atm-button-rounded--enabled"
+        >
+          {locale.seo.PROCEED_TO_CHECKOUT}
+        </NavLink>
       </div>
     );
   }
 
   renderMobile() {
+    const { locale } = this.props;
+
     return (
       <div className="org-cart-footer org-cart-footer--mobile">
-        <NavLink to="/" className="atm-cart-shopping">Continuar comprando</NavLink>
+        <NavLink to="/" className="atm-cart-shopping">{locale.seo.KEEP_BUYING}</NavLink>
         <NavLink
           to="http://dev-cms.printi.com.br/v1/customers/pdf_quotation/download"
           target="new"
           className="atm-button-transparent"
         >
-          <FileTextOIcon /> Baixar Orçamento
+          <FileTextOIcon /> {locale.seo.DOWNLOAD_QUOTATION}
         </NavLink>
         {this.renderStickFooter()}
       </div>

@@ -54,3 +54,4 @@ export Archive from './Archive';
 export ChevronDownIcon from './ChevronDown';
 export Plus from './Plus';
 export PrintiClub from './PrintiClub';
+export CartIcon from './Cart';

@@ -1,0 +1,36 @@
+.mol-cart-icon {
+  display: inline-flex;
+  height: auto;
+  margin-right: 1rem;
+  position: relative;
+  width: auto;
+
+  svg {
+    fill: #151617;
+    height: 2.3rem;
+    width: 2.6rem;
+  }
+
+  &:hover {
+    svg {
+      fill: #006ee3;
+      transition: 0.3s ease-in-out;
+    }
+  }
+}
+
+.atm-cart-icon-total {
+  align-self: center;
+  background: linear-gradient(to bottom,#f83b07 0,#fd0c62 58%,#fd0c62 100%);
+  border-radius: 0.8rem;
+  color: $color-white;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xxs;
+  font-weight: bold;
+  height: 1.6rem;
+  position: absolute;
+  right: -0.8rem;
+  text-align: center;
+  top: -0.8rem;
+  width: 1.6rem;
+}

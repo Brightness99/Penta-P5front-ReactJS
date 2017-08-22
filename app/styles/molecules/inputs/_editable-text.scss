@@ -18,6 +18,7 @@
     width: calc(100% - 2.3rem);
 
     > .app__qrk__input-container {
+      height: 3rem;
       width: 100%;
     }
 
@@ -47,7 +48,7 @@
     height: 1.6rem;
     position: absolute;
     right: 0;
-    top: 0.7rem;
+    top: 0.8rem;
     width: 1.6rem;
   }
 
@@ -73,7 +74,7 @@
   > .atm-icon-button {
     height: 2rem;
     position: absolute;
-    right: 0;
+    right: -1.6rem;
     top: 0.3rem;
     width: 2rem;
   }
