@@ -116,7 +116,7 @@ export function cartAddFetch(action$) {
     });
 }
 
-export function cartDuplicateFetch(action$) {
+export function cartDuplicateFetch(action$, store) {
   return action$.ofType(CartConstants.CART_DUPLICATE_FETCH_REQUEST)
     .switchMap(action => {
       const itemId = action.payload.itemId;
@@ -130,6 +130,10 @@ export function cartDuplicateFetch(action$) {
       })
         .map(data => {
           if (data.status === 201) {
+            if (cartFetchAction) {
+              store.dispatch(cartFetchAction());
+            }
+
             return {
               type: CartConstants.CART_DUPLICATE_FETCH_SUCCESS,
               payload: {

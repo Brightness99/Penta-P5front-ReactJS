@@ -808,6 +808,7 @@
   border: transparent;
   border-right: 0.1rem solid #dbdddf;
   color: #6a6f7a;
+  cursor: pointer;
   display: inline-flex;
   flex: 1;
   flex-direction: column;
@@ -815,6 +816,7 @@
   text-transform: capitalize;
   font-size: 10px;
   font-family: $font-family-open-sans;
+  transition: 0.3s ease-in-out;
 
   > svg {
     fill: currentColor;

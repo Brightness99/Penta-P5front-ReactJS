@@ -70,18 +70,6 @@ export default {
         error: action.payload,
       };
     },
-    [CartConstants.CART_DUPLICATE_FETCH_SUCCESS](state, action) {
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          items: {
-            ...state.data.items,
-            [action.payload.itemId]: state.data.items[action.payload.originalItemId],
-          },
-        },
-      };
-    },
     [CartConstants.CART_DELETE_FETCH_SUCCESS](state, action) {
       const items = Object.keys(state.data.items)
         .filter((item) => item !== action.payload.itemId)

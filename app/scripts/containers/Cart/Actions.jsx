@@ -2,18 +2,21 @@
 
 import React from 'react';
 import swal from 'sweetalert2';
+import { NavLink } from 'react-router-dom';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { cartDuplicateFetch, cartDeleteFetch, cartUpdateFetch } from 'actions';
-import { FilesIcon, PencilIcon, TrashIcon, ChevronRightIcon } from 'components/Icons';
+import { cartDuplicateFetch, cartDeleteFetch } from 'actions';
+import { FilesIcon, PencilIcon, TrashIcon } from 'components/Icons';
 import Tooltip from 'components/Tooltipster';
 
 type Props = {
   screenSize: string,
+  itemId: string,
   actions: {},
+  locale: {},
   dispatch: () => {},
 };
 
-export default class  extends React.Component {
+export default class Actions extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
@@ -24,7 +27,7 @@ export default class  extends React.Component {
     dispatch(cartDuplicateFetch(ev.currentTarget.value));
   };
 
-  handleDelete = (ev) => {
+  handleRemove = (ev) => {
     const { dispatch } = this.props;
     const targetValue = ev.currentTarget.value;
     swal({
@@ -40,75 +43,133 @@ export default class  extends React.Component {
       .then(() => dispatch(cartDeleteFetch(targetValue)));
   };
 
-  renderAction(item) {
-    const { screenSize } = this.props;
-    if (isMobile(screenSize)) {
-      console.log('cool');
+  renderIcon(action) {
+    switch (action) {
+      case 'EDIT':
+        return <PencilIcon />;
+      case 'DUPLICATE':
+        return <FilesIcon />;
+      case 'REMOVE':
+        return <TrashIcon />;
+      default:
+        return <PencilIcon />;
     }
   }
 
-  renderMobile() {
-    const { actions } = this.props;
+  renderRemove(action) {
+    const { screenSize, itemId, locale } = this.props;
+
+    if (isMobile(screenSize)) {
+      return (
+        <button
+          key={action.label}
+          className="atm-cart-item-action"
+          value={itemId}
+          onClick={this.handleRemove}
+        >
+          {this.renderIcon(action.label)}
+          {locale[action.label]}
+        </button>
+      );
+    }
 
     return (
-      <div className="mol-cart-item-desktop-actions">
-        {Object.keys(actions)}
-      </div>
+      <Tooltip
+        key={action.label}
+        text={locale[action.label]}
+      >
+        <button
+          className="atm-cart-item-action"
+          value={itemId}
+          onClick={this.handleRemove}
+        >
+          {this.renderIcon(action.label)}
+        </button>
+      </Tooltip>
     );
   }
 
-  render() {
-    return <div />;
-  }
-}
-
-/*
-renderActions(item, itemId) {
-    const { screenSize } = this.props;
-    if (item.type === 'cloud') {
-      if (isMobile(screenSize)) {
-        return [
-          <NavLink key="editar" to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
-          <NavLink key="trocar arte" to={`/${item.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>,
-          <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
-        ];
-      }
-
-      return [
-        <Tooltip key="editar" text="editar">
-          <NavLink to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-        </Tooltip>,
-        <Tooltip key="trocar arte" text="trocar arte">
-          <NavLink to={`/${item.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-        </Tooltip>,
-        <Tooltip key="excluir" text="excluir">
-          <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
-        </Tooltip>
-      ];
-    }
+  renderDuplicate(action) {
+    const { screenSize, itemId, locale } = this.props;
 
     if (isMobile(screenSize)) {
-      return [
-        <button key="duplicar" className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
-          <FilesIcon />duplicar
-        </button>,
-        <NavLink key="editar" to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
-        <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
-      ];
+      return (
+        <button
+          key={action.label}
+          className="atm-cart-item-action"
+          value={itemId}
+          onClick={this.handleDuplicate}
+        >
+          {this.renderIcon(action.label)}
+          {locale[action.label]}
+        </button>
+      );
     }
 
-    return [
-      <Tooltip key="duplicar" text="Duplicar">
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
-          <FilesIcon />
+    return (
+      <Tooltip
+        key={action.label}
+        text={locale[action.label]}
+      >
+        <button
+          className="atm-cart-item-action"
+          value={itemId}
+          onClick={this.handleDuplicate}
+        >
+          {this.renderIcon(action.label)}
         </button>
-      </Tooltip>,
-      <Tooltip key="editar" text="Editar">
-        <NavLink to={`/configuracao-${item.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-      </Tooltip>,
-      <Tooltip key="excluir" text="Excluir">
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
       </Tooltip>
-    ];
+    );
   }
-*/
+
+  renderLink(action) {
+    const { screenSize, locale } = this.props;
+
+    if (isMobile(screenSize)) {
+      return (
+        <NavLink
+          key={action.label}
+          to={action.target}
+          className="atm-cart-item-action"
+        >
+          {this.renderIcon(action.label)}
+          {locale[action.label]}
+        </NavLink>
+      );
+    }
+
+    return (
+      <Tooltip
+        key={action.label}
+        text={locale[action.label]}
+      >
+        <NavLink to={action.target} className="atm-cart-item-action">
+          {this.renderIcon(action.label)}
+        </NavLink>
+      </Tooltip>
+    );
+  }
+
+  renderAction(action) {
+    if (action.target) {
+      return this.renderLink(action);
+    }
+    switch (action.label) {
+      case 'REMOVE':
+        return this.renderRemove(action);
+      case 'DUPLICATE':
+        return this.renderDuplicate(action);
+      default:
+        return null;
+    }
+  }
+
+  render() {
+    const { screenSize, actions } = this.props;
+    return (
+      <div className={isMobile(screenSize) ? 'mol-cart-item-footer' : 'mol-cart-item-desktop-actions'}>
+        {Object.keys(actions).map((action) => this.renderAction(actions[action]))}
+      </div>
+    );
+  }
+}

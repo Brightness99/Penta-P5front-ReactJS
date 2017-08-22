@@ -134,6 +134,77 @@
       "FAILURE": "Houve um problema ao cadastrar seu e-mail"
     },
     "page": {
+      "cart": {
+        "seo": {
+          "PAGE_TITLE": "Meu Carrinho | Printi",
+          "META_DESCRIPTION": "Meu Carrinho - Printi",
+          "TITLE": "Seu carrinho",
+          "GO_TO_HOMEPAGE": "Voltar para a home",
+          "EMPTY_CART": "Seu carrinho está vazio!",
+          "PROCEED_TO_CHECKOUT": "Finalizar Compra",
+          "KEEP_BUYING": "Continuar comprando",
+          "DOWNLOAD_QUOTATION": "Baixar orçamento"
+        },
+        "item_details_modal": {
+          "TITLE": "Detalhes do produto",
+          "ADDITIONAL_OPTIONS": "Opções adicionais"
+        },
+        "product_list": {
+          "PRODUCT": "Produto",
+          "DELIVERY": "Entrega",
+          "ESTIMATED_DELIVERY": "Previsão de entrega",
+          "AFTER_ART_APPROVAL": "Após aprovação da arte final",
+          "QUANTITY": "Quantidade",
+          "PRICE": "Valor",
+          "ZIPCODE_TYPE": "CEP",
+          "SEE_MORE": "Ver mais"
+        },
+        "actions": {
+          "DUPLICATE": "Duplicar",
+          "EDIT": "Editar",
+          "EDIT_TEMPLATE": "Editar modelo",
+          "CHOOSE_TEMPLATE": "Escolher modelo",
+          "CHANGE_TEMPLATE": "Trocar modelo",
+          "CHOOSE_CHILI_TEMPLATE": "Escolher arte",
+          "CHANGE_CHILI_TEMPLATE": "Trocar arte",
+          "REMOVE": "Excluir"
+        },
+        "voucher": {
+          "TITLE": "Compom de desconto",
+          "TEXT_TITLE": "Tem um cupom de desconto?",
+          "LINK_TEXT": "Clique aqui",
+          "TEXT": "Adicione o código e garanta seu desconto",
+          "PLACEHOLDER": "Código...",
+          "VALIDATE": "Validar",
+          "REMOVE": "Remover",
+          "SEE_COUPONS": "ver cupons"
+        },
+        "values": {
+          "TOTAL": "Total",
+          "DISCOUNT": "Desconto",
+          "SUBTOTAL": "Subtotal"
+        },
+        "sidebar": {
+          "NUMBER_TEXT": "Nº de itens",
+          "ITEM": "item",
+          "ITEMS": "itens",
+          "TITLE": "Resumo do carrinho",
+          "TOTAL": "Total"
+        },
+        "units": {
+          "UNIT": "unidade",
+          "UNITS": "unidades",
+          "UNIT_SHORT": "un"
+        },
+        "upselling": {
+          "LABEL": "turbine seu produto"
+        },
+        "cross_selling": {
+          "TITLE": "Quem comprou também viu",
+          "LABEL": "ver mais",
+          "FROM_PRICE": "A partir de"
+        }
+      },
       "home": {
         "highlights": {
           "TITLE": "Destaques",

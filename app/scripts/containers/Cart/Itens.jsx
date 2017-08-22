@@ -21,6 +21,7 @@ type Props = {
   usePickupPlaces: boolean,
   pickupPlaces: {},
   pickupPlaceId: number,
+  locale: {},
   dispatch: () => {},
 };
 
@@ -107,9 +108,7 @@ export default class CartItens extends React.Component {
   }
 
   renderZipcode() {
-    const { usePickupPlaces, pickupPlaceId, pickupPlaces } = this.props;
-
-    console.log(usePickupPlaces, pickupPlaceId, pickupPlaces);
+    const { usePickupPlaces, pickupPlaceId, pickupPlaces, locale } = this.props;
 
     if (usePickupPlaces) {
       if (!pickupPlaces[pickupPlaceId]) {
@@ -125,7 +124,7 @@ export default class CartItens extends React.Component {
 
     return (
       <div className="atm-cart-item-zipcode">
-        CEP: <IntlZipcode>{pickupPlaceId}</IntlZipcode>
+        {locale.product_list.SEE_MORE}: <IntlZipcode>{pickupPlaceId}</IntlZipcode>
       </div>
     );
   }
@@ -143,6 +142,8 @@ export default class CartItens extends React.Component {
   };
 
   renderProductInfos(item, itemId) {
+    const { locale } = this.props;
+
     const slicedList = Object.keys(item.product_parts[Object.keys(item.product_parts)[0]].options)
       .slice(0, 1)
       .reduce((prevOption, currentOption) => (
@@ -155,7 +156,6 @@ export default class CartItens extends React.Component {
       <div className="mol-cart-item-infos">
         <EditableText
           value={item.project_name}
-          placeholder="Nome do projeto..."
           aditionalReturn={itemId}
           onSubmit={this.handleProjectNameSubmit}
         />
@@ -169,7 +169,7 @@ export default class CartItens extends React.Component {
               value={itemId}
               onClick={this.handleModalOpen}
             >
-              Ver mais
+              {locale.product_list.SEE_MORE}
             </button>
           </li>
         </ul>
@@ -178,16 +178,16 @@ export default class CartItens extends React.Component {
   }
 
   renderDesktop() {
-    const { items, screenSize } = this.props;
+    const { items, screenSize, dispatch, locale } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
       <div className="org-cart-items-desktop">
         <div className="mol-cart-items-header">
-          <span>produto</span>
-          <span>entrega</span>
-          <span>quantidade</span>
-          <span>valor</span>
+          <span>{locale.product_list.PRODUCT}</span>
+          <span>{locale.product_list.DELIVERY}</span>
+          <span>{locale.product_list.QUANTITY}</span>
+          <span>{locale.product_list.PRICE}</span>
         </div>
         <ul className="mol-cart-items-list">
           {Object.keys(items).map((item) => (
@@ -201,7 +201,7 @@ export default class CartItens extends React.Component {
                     name="upsell"
                     className="atm-button-up-sell atm-button-up-sell--desktop"
                   >
-                    turbine seu produto <ChevronRightIcon />
+                    {locale.upselling.LABEL} <ChevronRightIcon />
                   </button>}
                 </div>
                 <div className="mol-cart-item-desktop-infos">
@@ -214,16 +214,22 @@ export default class CartItens extends React.Component {
               </div>
               <div className="mol-cart-item-quantity">
                 <div className="atm-cart-item-quantity">{items[item].quantity}</div>
-                <div className="atm-cart-item-quantity-unit">unidades</div>
+                <div className="atm-cart-item-quantity-unit">
+                  {items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}
+                </div>
               </div>
               <div className="mol-cart-item-price">
                 <div className="atm-cart-item-price">
                   <IntlMoney>{items[item].prices.total}</IntlMoney>
-                  <span><IntlMoney>{items[item].prices.total / items[item].quantity}</IntlMoney>/un</span>
+                  <span><IntlMoney>{items[item].prices.total / items[item].quantity}</IntlMoney>/{locale.units.UNIT_SHORT}</span>
                 </div>
-                <div className="mol-cart-item-desktop-actions">
-                  <Actions screenSize={screenSize} actions={items[item].actions} itemId={item} />
-                </div>
+                <Actions
+                  screenSize={screenSize}
+                  actions={items[item].actions}
+                  itemId={item}
+                  dispatch={dispatch}
+                  locale={locale.actions}
+                />
               </div>
             </li>
           ))}
@@ -234,7 +240,7 @@ export default class CartItens extends React.Component {
   }
 
   renderMobile() {
-    const { items } = this.props;
+    const { items, screenSize, dispatch, locale } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
@@ -247,18 +253,18 @@ export default class CartItens extends React.Component {
             </div>
             <div className="mol-cart-item-body">
               <div>
-                <div className="atm-cart-item-info-title">Entrega</div>
+                <div className="atm-cart-item-info-title">{locale.product_list.DELIVERY}</div>
                 <div className="atm-cart-item-info-text">
                   <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
                   {this.renderZipcode()}
                 </div>
               </div>
               <div>
-                <div className="atm-cart-item-info-title">Quantidade</div>
-                <div className="atm-cart-item-info-text">{items[item].quantity} unidades</div>
+                <div className="atm-cart-item-info-title">{locale.product_list.QUANTITY}</div>
+                <div className="atm-cart-item-info-text">{`${items[item].quantity} ${items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}`}</div>
               </div>
               <div>
-                <div className="atm-cart-item-info-title">Valor</div>
+                <div className="atm-cart-item-info-title">{locale.product_list.PRICE}</div>
                 <div className="atm-cart-item-info-text"><IntlMoney className="atm-cart-price">{items[item].prices.total}</IntlMoney></div>
               </div>
               {item.upselling && item.upselling.isUpsellingDate && <button
@@ -267,12 +273,16 @@ export default class CartItens extends React.Component {
                 name="upsell"
                 className="atm-button-up-sell atm-button-up-sell--mobile"
               >
-                turbine seu produto <ChevronRightIcon />
+                {locale.upselling.LABEL} <ChevronRightIcon />
               </button>}
             </div>
-            <div className="mol-cart-item-footer">
-              {this.renderActions(items[item], item)}
-            </div>
+            <Actions
+              screenSize={screenSize}
+              actions={items[item].actions}
+              itemId={item}
+              dispatch={dispatch}
+              locale={locale.actions}
+            />
           </li>
         ))}
         {isOpen && this.renderModal()}
