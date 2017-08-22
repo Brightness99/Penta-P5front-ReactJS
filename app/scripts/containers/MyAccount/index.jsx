@@ -30,7 +30,7 @@ export class MyAccount extends React.Component {
     // <Loyalty screenSize={screenSize} />
     return (
       <div className="container-myaccount">
-        <OrderList screenSize={screenSize} />
+        <CardsAccount screenSize={screenSize} />
       </div>
     );
   }
@@ -47,7 +47,7 @@ export class MyAccount extends React.Component {
     return (
       <div className="container-myaccount">
         <Sidebar screenSize={screenSize} />
-        <OrderList screenSize={screenSize} />
+        <CardsAccount screenSize={screenSize} />
       </div>
     );
   }
