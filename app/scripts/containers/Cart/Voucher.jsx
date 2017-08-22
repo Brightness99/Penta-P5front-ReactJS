@@ -12,6 +12,7 @@ import cx from 'classnames';
 type Props = {
   screenSize: string,
   isActive: string,
+  locale: {},
   voucher: {},
   dispatch: () => {},
   handleVoucherToggle: () => {},
@@ -44,9 +45,9 @@ export default class CartVoucher extends React.Component {
   };
 
   handleState() {
-    const { voucher: { voucher_name } } = this.props;
+    const { locale, voucher: { voucher_name } } = this.props;
     return !voucher_name
-      ? <InputAction name="voucher" onSubmit={this.handleVoucherSubmit} placeholder="Código..." />
+      ? <InputAction name="voucher" onSubmit={this.handleVoucherSubmit} placeholder={locale.PLACEHOLDER} />
       : (<div className="mol-voucher-input-simulate">
         <span className="atm-voucher-input-text">{voucher_name}</span>
         <button onClick={this.handleVoucherRemoval}><TimesCircleIcon /></button>
@@ -70,19 +71,28 @@ export default class CartVoucher extends React.Component {
   };
 
   renderInactiveVoucher() {
+    const { locale } = this.props;
     return (
       <div className="org-cart-voucher-inactive">
         <TagIcon />
         <div className="mol-cart-voucher-text">
-          <PageTitle>Tem um cupom de desconto?</PageTitle>
-          <span>Adicione o código e garanta seu desconto. <button onClick={this.handleVoucher} className="atm-button-cart-voucher">Clique aqui</button></span>
+          <PageTitle>{locale.TEXT_TITLE}</PageTitle>
+          <span>
+            {locale.TEXT}
+            <button
+              onClick={this.handleVoucher}
+              className="atm-button-cart-voucher"
+            >
+              {locale.LINK_TEXT}
+            </button>
+          </span>
         </div>
       </div>
     );
   }
 
   renderActiveVoucher() {
-    const { voucher } = this.props;
+    const { locale, voucher } = this.props;
     return (
       <div className={cx(
         'org-cart-ticket',
@@ -92,8 +102,8 @@ export default class CartVoucher extends React.Component {
         <TicketIcon />
         <div className="mol-cart-voucher-ticket-body">
           <div className="mol-cart-voucher-ticket-text">
-            <span>Tem um cupom de desconto?</span>
-            <p>Adicione o código e garanta seu desconto</p>
+            <span>{locale.TEXT_TITLE}</span>
+            <p>{locale.TEXT}</p>
           </div>
           {this.handleState()}
         </div>
@@ -112,13 +122,12 @@ export default class CartVoucher extends React.Component {
   }
 
   renderMobile() {
-    const { isActive } = this.props;
+    const { isActive, locale } = this.props;
 
     return (
       <div className="org-cart-voucher">
         <div className="mol-cart-voucher-title">
-          <div className="atm-cart-title">cupom de desconto</div>
-          <TextButton>Ver cupons</TextButton>
+          <div className="atm-cart-title">{locale.TITLE}</div>
         </div>
         {isActive ? this.renderActiveVoucher() : this.renderInactiveVoucher()}
       </div>
