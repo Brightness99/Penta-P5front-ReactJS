@@ -72,24 +72,26 @@ $position: left) {
 
 @mixin box-shadows($top, $left, $blur, $color, $inset: false) {
   @if $inset {
-    -webkit-box-shadow:inset $top $left $blur $color;
-    -moz-box-shadow:inset $top $left $blur $color;
-    box-shadow:inset $top $left $blur $color;
-  } @else {
-    -webkit-box-shadow: $top $left $blur $color;
-    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: inset $top $left $blur $color;
+  }
+
+  @else {
     box-shadow: $top $left $blur $color;
   }
 }
 
 @mixin button-background-color($color, $hover-darken: 5%) {
   background-color: $color;
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     background-color: darken($color, $hover-darken);
   }
+
   &:disabled {
-    cursor: not-allowed;
     background-color: lighten($color, 20%);
+    cursor: not-allowed;
+
     &:hover {
       background-color: lighten($color, 20%);
     }
@@ -97,10 +99,6 @@ $position: left) {
 }
 
 @mixin transition($args) {
-  -webkit-transition: $args;
-  -moz-transition: $args;
-  -ms-transition: $args;
-  -o-transition: $args;
   transition: $args;
 }
 
