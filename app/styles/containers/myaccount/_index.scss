@@ -66,12 +66,11 @@
   }
 
   .container-myorder {
-    margin-bottom: 4rem;
     @include lg {
       background-color: $color-white;
       flex: 5;
       box-sizing: border-box;
-      padding: 2rem 6rem 0 6rem;
+      padding: 2rem 6rem 3rem 6rem;
     }
     .app__breadcrumb {
       margin-bottom: 2.4rem;
