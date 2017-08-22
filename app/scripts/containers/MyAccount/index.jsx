@@ -7,7 +7,10 @@ import Sidebar from './Sidebar';
 import OrderList from './OrderList';
 import OrderListDetails from './OrderListDetails';
 import MyAddresses from './MyAddresses';
+import CardsAccount from './CardsAccount';
 import TemplateModels from './TemplateModels';
+import Cloud from './Cloud';
+import Loyalty from './Loyalty';
 
 type Props = {
   app: AppStore,
@@ -23,11 +26,11 @@ export class MyAccount extends React.Component {
     // <OrderList screenSize={screenSize} />
     // <OrderListDetails screenSize={screenSize} />
     // <MyAddresses screenSize={screenSize} />
+    // <TemplateModels screenSize={screenSize} />
+    // <Loyalty screenSize={screenSize} />
     return (
       <div className="container-myaccount">
-        <div className="container">
-          <TemplateModels screenSize={screenSize} />
-        </div>
+        <OrderList screenSize={screenSize} />
       </div>
     );
   }
@@ -36,11 +39,15 @@ export class MyAccount extends React.Component {
     // <OrderList screenSize={screenSize} />
     // <OrderListDetails screenSize={screenSize} />
     // <MyAddresses screenSize={screenSize} />
+    // <TemplateModels screenSize={screenSize} />
+    // <Cloud screenSize={screenSize} />
+    // <Loyalty screenSize={screenSize} />
+    // <CardsAccount screenSize={screenSize} />
     const { app: { screenSize } } = this.props;
     return (
       <div className="container-myaccount">
         <Sidebar screenSize={screenSize} />
-        <TemplateModels screenSize={screenSize} />
+        <OrderList screenSize={screenSize} />
       </div>
     );
   }

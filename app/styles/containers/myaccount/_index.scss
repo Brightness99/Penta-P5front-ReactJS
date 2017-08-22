@@ -1,3 +1,6 @@
+@import "cloud";
+@import "loyalty";
+
 .container-myaccount {
   @include lg {
     display: flex;
@@ -516,7 +519,7 @@
             svg {
               width: 5px;
               float: left;
-              height: 20px;
+              height: 10px;
               fill: $color-printi-blue;
             }
           } 
@@ -1266,13 +1269,13 @@
 }
 
 .container-templateModels {
-  margin-bottom: 3rem;
+  margin: 4rem 0 3rem 0;
   @include lg {
     background-color: $color-white;
     flex: 5;
     box-sizing: border-box;
-    padding: 2rem 6rem 0 6rem;
-    margin-bottom: 0;
+    padding: 2rem 6rem 3rem 6rem;
+    margin: 0;
   }
   .subtitle-templateModels{
     font-family: $font-family-nunito-light;
@@ -1290,10 +1293,40 @@
     }
   }
   .box-templateModels {
+    .org-input-research {
+      display: flex;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      margin: 3.9rem 0 2.1rem 0;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      .mol-input-text, .mol-select-research {
+        color: $color-almostBlack;
+        margin-bottom: 0.5rem;
+        @include lg {
+          margin-bottom: initial;
+        }
+      }
+      .mol-input-text {
+        flex: 2;
+        &::-webkit-input-placeholder {
+          color: $color-almostBlack;
+        }
+      }
+      .mol-select-research {
+        flex:1;
+      }
+    }
     .box-itensModel {
       position: relative;
       display: flex;
       flex-flow: row wrap;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
       .itemModel {
         border-radius: 2px;
         border: solid 1px #dbdddf;
@@ -1302,11 +1335,21 @@
         flex: 1;
         flex-basis: calc((100% / 2) - 10px);
         margin: 0.5rem 0.5rem;
+        background-color: $color-white;
+        &:nth-of-type(2n-1){
+          margin-left: 0;
+        }
+        &:nth-of-type(2n) {
+          margin-right: 0;
+        }
         .title-item {
+          font-size: $font-size-h4;
           font-family: $font-family-nunito-light;
-          font-size: $font-size-il;
           letter-spacing: -0.5px;
           color: $color-black;
+          @include lg {
+            font-size: $font-size-il;
+          }
         }
         .img-itemModel {
           margin: 3rem 0;
@@ -1347,9 +1390,31 @@
                 }
               }
             }
+            &.btn-item--mobile {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
           }
         }
       }
     }
+  }
+}
+
+
+.org-input-research {
+  .mol-input-text, .mol-select-research {
+    height: 5rem;
+    background-color: $color-white;
+    border: 1px solid #dbdddf;
+    box-sizing: border-box;
+    padding: 0.9rem 1.0rem;
+    cursor: pointer;
+  }
+  .mol-select-research {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 }
