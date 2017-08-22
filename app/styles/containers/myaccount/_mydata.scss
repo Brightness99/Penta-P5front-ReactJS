@@ -1,0 +1,81 @@
+.bg-mobile-myData {
+  background-color: $color-white;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+.container-myData {
+  padding: 4rem 0 3rem 0;
+  font-family: $font-family-open-sans;
+  @include lg {
+    flex: 5;
+    background-color: $color-white;
+    box-sizing: border-box;
+    padding: 2rem 6rem 0 6rem;
+    margin-bottom: 0;
+  }
+  h2 {
+    @include lg {
+      margin-top: 2.4rem;
+    }
+  }
+  .title-myData {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-xl;
+    font-weight: 300;
+    line-height: 1.11;
+    color: $color-almostBlack;
+    margin: 2rem 0 1rem 0;    
+    text-transform: none;
+  }
+  .title-changePass {
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-il;
+    color: $color-black;
+    margin-top: 3.8rem;
+    text-transform: uppercase;
+    @include lg {
+      text-transform: none;
+    }
+  }
+  .mol-checkout-pane-footer {
+    justify-content: flex-end;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .atm-go-back-link {
+      margin-right: 2rem;
+    }
+  }
+  .atm-up-sell-checkbox {
+    font-family: $font-family-open-sans;
+    font-size: $font-size-xs;
+    line-height: 2.5;
+    color: $color-lightGray;
+    margin-top: 1.1rem;
+    span {
+      margin-right: 1rem;
+    }
+  }
+  .container-changeDatas {
+    box-sizing: border-box;
+    padding: 1rem 0;
+    margin: 2rem 1rem;
+    @include lg {
+      background-color: #eee;
+      margin: 10rem 0 10rem 0;
+    }
+    .text-changeDatas {
+      font-family: $font-family-open-sans-light;
+      font-size: $font-size-sm;
+      font-weight: 300;
+      line-height: 1.88;
+      color: $color-lightGray;
+      margin-bottom: 0;
+      text-align: center;
+      @include lg {
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
