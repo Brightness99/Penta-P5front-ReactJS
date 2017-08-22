@@ -29,6 +29,28 @@ export class CardsAccount extends React.Component {
     });
   };
 
+  handleInputChange = (e) => {
+    const target = e.target;
+
+    if (target.name === 'number') {
+      this.setState({
+        [target.name]: target.value.replace(/ /g, ''),
+      });
+    } else if (target.name === 'expiry') {
+      this.setState({
+        [target.name]: target.value.replace(/ |\//g, ''),
+      });
+    } else {
+      this.setState({
+        [target.name]: target.value,
+      });
+    }
+  };
+
+  handleCallback(type, isValid) {
+    console.log(type, isValid); //eslint-disable-line no-console
+  }
+
   static defaultProps = {
     screenSize: 'xs',
   };
@@ -44,16 +66,55 @@ export class CardsAccount extends React.Component {
   render() {
     const { name, number, expiry, cvc, focused } = this.state;
     return (
-      <div className="container-loyalty">
+      <div className="container-creditCard">
         <h2>Minha conta</h2>
-        <Cards
-          number={number}
-          name={name}
-          expiry={expiry}
-          cvc={cvc}
-          focused={focused}
-          callback={this.handleCallback}
-        />
+        <div className="container-card">
+          <Cards
+            number={number}
+            name={name}
+            expiry={expiry}
+            cvc={cvc}
+            focused={focused}
+            callback={this.handleCallback}
+          />
+          <form>
+            <div>
+              <input
+                type="tel"
+                name="number"
+                placeholder="Card Number"
+                onKeyUp={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+              <div>E.g.: 49..., 51..., 36..., 37...</div>
+            </div>
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                onKeyUp={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+            </div>
+            <div>
+              <input
+                type="tel"
+                name="expiry"
+                placeholder="Valid Thru"
+                onKeyUp={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+              <input
+                type="tel"
+                name="cvc"
+                placeholder="CVC"
+                onKeyUp={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
