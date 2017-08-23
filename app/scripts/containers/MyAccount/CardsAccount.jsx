@@ -65,15 +65,40 @@ export class CardsAccount extends React.Component {
     );
   }*/
 
-/*  <Input
-      showLabel={true}
-      className="atm-checkout-input atm-checkout-input-two"
-      type="text"
-      name="name"
-      placeholder="Name"
+
+/* 
+  <div>
+    <input
+      type="tel"
+      name="number"
+      placeholder="Número do Cartão"
       onKeyUp={this.handleInputChange}
       onFocus={this.handleInputFocus}
-    /> 
+    />
+    <div>E.g.: 49..., 51..., 36..., 37...</div>
+  </div>
+  <input
+    type="text"
+    name="name"
+    placeholder="Name"
+    onKeyUp={this.handleInputChange}
+    onFocus={this.handleInputFocus}
+  />
+  <input
+    type="tel"
+    name="expiry"
+    placeholder="Valid Thru"
+    onKeyUp={this.handleInputChange}
+    onFocus={this.handleInputFocus}
+  />
+  <input
+    type="tel"
+    name="cvc"
+    placeholder="CVC"
+    onKeyUp={this.handleInputChange}
+    onFocus={this.handleInputFocus}
+  />
+
 */
   render() {
     const { name, number, expiry, cvc, focused } = this.state;
@@ -90,41 +115,42 @@ export class CardsAccount extends React.Component {
             callback={this.handleCallback}
           />
           <form className="org-checkout-content-data">
-            <div>
-              <input
-                type="tel"
-                name="number"
-                placeholder="Número do Cartão"
-                onKeyUp={this.handleInputChange}
-                onFocus={this.handleInputFocus}
-              />
-              <div>E.g.: 49..., 51..., 36..., 37...</div>
-            </div>
-            <div>
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                onKeyUp={this.handleInputChange}
-                onFocus={this.handleInputFocus}
-              />
-            </div>
-            <div>
-              <input
-                type="tel"
-                name="expiry"
-                placeholder="Valid Thru"
-                onKeyUp={this.handleInputChange}
-                onFocus={this.handleInputFocus}
-              />
-              <input
-                type="tel"
-                name="cvc"
-                placeholder="CVC"
-                onKeyUp={this.handleInputChange}
-                onFocus={this.handleInputFocus}
-              />
-            </div>
+            <Input
+              showLabel={true}
+              className="atm-checkout-input atm-checkout-input-full"
+              type="tel"
+              name="number"
+              placeholder="Número do Cartão"
+              onKeyUp={this.handleInputChange}
+              onFocus={this.handleInputFocus}
+            />
+            <Input
+              showLabel={true}
+              type="text"
+              name="name"
+              placeholder="Name"
+              className="atm-checkout-input atm-checkout-input-full"
+              onKeyUp={this.handleInputChange}
+              onFocus={this.handleInputFocus}
+            />
+            <Input
+              showLabel={true}
+              type="tel"
+              name="expiry"
+              placeholder="Valid Thru"
+              className="atm-checkout-input atm-checkout-input-one"
+              onKeyUp={this.handleInputChange}
+              onFocus={this.handleInputFocus}
+            />
+            <Input
+              showLabel={true}
+              type="tel"
+              name="cvc"
+              placeholder="CVC"
+              className="atm-checkout-input atm-checkout-input-one"
+              onKeyUp={this.handleInputChange}
+              onFocus={this.handleInputFocus}
+            />
           </form>
         </div>
       </div>
