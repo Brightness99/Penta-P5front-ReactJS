@@ -16,8 +16,35 @@ export class Cloud extends React.Component {
   static props: Props;
 
   render() {
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Minha conta',
+        url: '/minha-conta',
+      },
+      {
+        title: 'Cloud',
+      },
+    ];
     return (
-      <p className="testando">cloud</p>
+      <div className="container-cloud">
+        <Breadcrumbs links={breadcrumb} />
+        <h2>Minha conta</h2>
+        <h3 className="subtitle-cloud">cloud</h3>
+        <div>
+          <div>
+            <label>Data inicial:</label>
+            <input type="date" />
+          </div>
+          <div>  
+            <label>Data final:</label>
+            <input type="date" />
+          </div>
+        </div>
+      </div>
     );
   }
 }
