@@ -13,6 +13,14 @@
     padding: 2rem 6rem 0 6rem;
     margin-bottom: 0;
   }
+  .app__qrk__input-container--labeled {
+    display: inline-block;
+    width: 100%;
+    margin-top: 1rem;
+    @include lg {
+      width: calc(33% - 0.5rem);
+    }
+  }
   h2 {
     @include lg {
       margin-top: 2.4rem;
