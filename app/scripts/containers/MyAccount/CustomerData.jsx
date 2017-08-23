@@ -3,12 +3,10 @@ import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Input } from 'quarks/Inputs';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
-import { BoxRadio, Select } from 'atoms/Inputs';
+import { Select } from 'atoms/Inputs';
 import { CheckBox } from 'components/Input';
 import { NavLink, Link } from 'react-router-dom';
-import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel, PencilIcon, TrashIcon } from 'components/Icons';
 
-//https://app.zeplin.io/project/595a8dc1d6dafa4574894a0f/screen/598a100d97dbb83115f41c4d
 type Props = {
   screenSize: string,
 };
@@ -60,11 +58,12 @@ export class CustomerData extends React.Component {
                 className="atm-checkout-input atm-checkout-input-full"
                 placeholder="Telefone"
               />
-              <Input
+              <InputEmail
                 className="atm-checkout-input atm-checkout-input-full"
                 name="email"
                 placeholder="E-mail"
                 showLabel={true}
+                onValidate={this.handleValidatedInput}
               />
               <label className="atm-up-sell-checkbox atm-up-sell-checkbox--checked">
                 <CheckBox value="123" />Isento de inscrição estadual
@@ -73,23 +72,26 @@ export class CustomerData extends React.Component {
 
             <h4 className="title-changePass">Mudar senha</h4>
             <form className="org-checkout-content-data">
-              <Input
+              <InputPassword
                 showLabel={true}
                 className="atm-checkout-input atm-checkout-input-full"
                 name="password"
                 placeholder="Senha atual"
+                onValidate={this.handleValidatedInput}
               />
-              <Input
+              <InputPassword
                 showLabel={true}
                 className="atm-checkout-input atm-checkout-input-full"
                 name="password"
                 placeholder="Nova senha"
+                onValidate={this.handleValidatedInput}
               />
-              <Input
+              <InputPassword
                 showLabel={true}
                 className="atm-checkout-input atm-checkout-input-full"
                 name="password"
                 placeholder="Confirme sua nova senha"
+                onValidate={this.handleValidatedInput}
               />
             </form>
             <div className="mol-checkout-pane-footer">
@@ -157,11 +159,12 @@ export class CustomerData extends React.Component {
               className="atm-checkout-input atm-checkout-input-one"
               placeholder="Telefone"
             />
-            <Input
+            <InputEmail
               className="atm-checkout-input atm-checkout-input-one"
               name="email"
               placeholder="E-mail"
               showLabel={true}
+              onValidate={this.handleValidatedInput}
             />
             <label className="atm-up-sell-checkbox atm-up-sell-checkbox--checked">
               <CheckBox value="123" />Isento de inscrição estadual
@@ -170,23 +173,26 @@ export class CustomerData extends React.Component {
 
           <h4 className="title-changePass">Mudar senha</h4>
           <form className="org-checkout-content-data">
-            <Input
+            <InputPassword
               showLabel={true}
               className="atm-checkout-input atm-checkout-input-one"
               name="password"
               placeholder="Senha atual"
+              onValidate={this.handleValidatedInput}
             />
-            <Input
+            <InputPassword
               showLabel={true}
               className="atm-checkout-input atm-checkout-input-one"
               name="password"
               placeholder="Nova senha"
+              onValidate={this.handleValidatedInput}
             />
-            <Input
+            <InputPassword
               showLabel={true}
               className="atm-checkout-input atm-checkout-input-one"
               name="password"
               placeholder="Confirme sua nova senha"
+              onValidate={this.handleValidatedInput}
             />
           </form>
           <div className="mol-checkout-pane-footer">
