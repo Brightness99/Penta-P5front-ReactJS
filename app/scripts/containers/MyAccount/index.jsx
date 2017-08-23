@@ -31,7 +31,7 @@ export class MyAccount extends React.Component {
     // <Loyalty screenSize={screenSize} />
     return (
       <div className="container-myaccount">
-        <CustomerData screenSize={screenSize} />
+        <MyAddresses screenSize={screenSize} />
       </div>
     );
   }
@@ -49,7 +49,7 @@ export class MyAccount extends React.Component {
     return (
       <div className="container-myaccount">
         <Sidebar screenSize={screenSize} />
-        <CustomerData screenSize={screenSize} />
+        <MyAddresses screenSize={screenSize} />
       </div>
     );
   }
