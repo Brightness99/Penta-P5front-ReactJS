@@ -100,6 +100,13 @@ export class CardsAccount extends React.Component {
   />
 
 */
+
+  handleChange = (ev) => {
+      this.setState({
+        [ev.currentTarget.name]: ev.currentTarget.value,
+      });
+  };
+
   render() {
     const { name, number, expiry, cvc, focused } = this.state;
     return (
@@ -121,8 +128,8 @@ export class CardsAccount extends React.Component {
               type="tel"
               name="number"
               placeholder="Número do Cartão"
-              onKeyUp={this.handleInputChange}
               onFocus={this.handleInputFocus}
+              onChange={this.handleChange}
             />
             <Input
               showLabel={true}
@@ -130,7 +137,7 @@ export class CardsAccount extends React.Component {
               name="name"
               placeholder="Name"
               className="atm-checkout-input atm-checkout-input-full"
-              onKeyUp={this.handleInputChange}
+              onChange={this.handleChange}
               onFocus={this.handleInputFocus}
             />
             <Input
@@ -139,7 +146,7 @@ export class CardsAccount extends React.Component {
               name="expiry"
               placeholder="Valid Thru"
               className="atm-checkout-input atm-checkout-input-one"
-              onKeyUp={this.handleInputChange}
+              onChange={this.handleChange}
               onFocus={this.handleInputFocus}
             />
             <Input
@@ -148,7 +155,7 @@ export class CardsAccount extends React.Component {
               name="cvc"
               placeholder="CVC"
               className="atm-checkout-input atm-checkout-input-one"
-              onKeyUp={this.handleInputChange}
+              onChange={this.handleChange}
               onFocus={this.handleInputFocus}
             />
           </form>
