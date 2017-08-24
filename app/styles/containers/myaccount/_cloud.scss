@@ -24,4 +24,72 @@
       margin-top: 2.4rem;
     }
   }
+  .box-cloudDate {
+    margin: 2rem 0;
+    @include lg {
+      margin: 1rem 0;
+    }
+    .label-dateInitialFinal {
+      margin: 2rem;
+      &:first-of-type {
+        margin-left: 0;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+    .DateRangePicker {
+      border-color: transparent;
+      border-radius: 0;
+      .DateRangePickerInput {
+        border-color: transparent;
+        &__arrow {
+          margin: 0 1rem;
+        }
+        .DateInput {
+          font-size: $font-size-base;
+          padding: inherit;
+          width: auto;
+          &__input {
+            cursor: pointer;
+          }
+          &__display-text--focused {
+            background-color: $color-white;
+            border-bottom: 0.1rem solid $color-printi-blue;
+            color: $color-lightGray;
+          }
+        }
+      }
+      .DayPickerKeyboardShortcuts {
+        &__show--bottom-right {
+          border-right: 33.3rem solid $color-printi-blue;
+          &:hover {
+            border-right: 3.3rem solid $color-printi-blue;
+          }
+        }
+      }
+    }
+  }
+  .btn-downloadCloud {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    .btn-default {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      @include lg {
+        justify-content: flex-end;
+      }
+      i {
+        height: 1.5rem;
+        margin-right: .5rem;
+        svg {
+          fill: $color-white;
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
+    }
+  }
 }
