@@ -23,6 +23,11 @@ const cartState = {
     total: 0,
     voucher_id: '',
   },
+  upselling: {
+    items: {},
+    isRunning: false,
+    isLoaded: false,
+  },
 };
 
 export default {
@@ -152,7 +157,25 @@ export default {
               ...state.data.items[action.payload.itemId],
               ...action.payload.updatedInfo,
             },
-          }
+          },
+        },
+      };
+    },
+    [CartConstants.CART_UPSELLING_DATE_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          items: {
+            ...state.data.items,
+            [action.payload.itemId]: {
+              ...state.data.items[action.payload.itemId],
+              upselling: {
+                ...state.data.items[action.payload.itemId].upselling,
+                date: action.payload.upsellingForDate,
+              },
+            },
+          },
         },
       };
     },
