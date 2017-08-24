@@ -101,6 +101,7 @@ export class Cart extends React.Component {
         count,
         pickupPlaces,
         crossSelling,
+        upselling,
       },
       locale,
       dispatch,
@@ -119,11 +120,7 @@ export class Cart extends React.Component {
             pickupPlaces={pickupPlaces}
             pickupPlaceId={pickup_place_id}
             locale={locale}
-          />
-          <CartCrossSell
-            screenSize={screenSize}
-            crossSelling={crossSelling}
-            locale={locale.cross_selling}
+            upselling={upselling}
           />
           <div className="mol-cart-desktop-summary">
             <CartVoucher
@@ -145,6 +142,11 @@ export class Cart extends React.Component {
             screenSize={screenSize}
             dispatch={dispatch}
             locale={locale}
+          />
+          <CartCrossSell
+            screenSize={screenSize}
+            crossSelling={crossSelling}
+            locale={locale.cross_selling}
           />
         </main>
         <StickBar>
@@ -187,6 +189,7 @@ export class Cart extends React.Component {
         count,
         pickupPlaces,
         crossSelling,
+        upselling,
       },
       locale,
       dispatch,
@@ -204,6 +207,7 @@ export class Cart extends React.Component {
           pickupPlaces={pickupPlaces}
           pickupPlaceId={pickup_place_id}
           locale={locale}
+          upselling={upselling}
         />
         <CartSummary
           screenSize={screenSize}

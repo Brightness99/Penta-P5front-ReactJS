@@ -278,6 +278,10 @@
 
     > div {
       flex-grow: 2;
+
+      > .atm-button-transparent {
+        margin: 0;
+      }
     }
   }
 
@@ -289,7 +293,6 @@
 }
 
 .org-cart-items-desktop {
-  margin-bottom: 2rem;
   width: 100%;
 
   > .mol-cart-items-header {
@@ -453,7 +456,7 @@
 }
 
 .org-cross-sell {
-  margin-bottom: 1rem;
+  margin-top: 3rem;
 
   h2 {
     margin-bottom: 1rem;
@@ -462,6 +465,7 @@
   .org-cart-cross-sell {
     display: flex;
     justify-content: space-between;
+    margin: 0;
   }
   .mol-product-card {
     @include border-radius;
@@ -549,6 +553,10 @@
   padding: 14rem 2rem 2rem;
   max-width: 42rem;
   width: 100%;
+
+  @include lg {
+    width: 42rem;
+  }
 
   .mol-up-sell-header {
     color: #151617;
@@ -663,13 +671,39 @@
       span {
         display: flex;
         color: #151617;
-        font-size: 14px;
+        font-size: $font-size-xxs;
         text-decoration: line-through;
+
+        @include lg {
+          font-size: $font-size-sm;
+        }
 
         &.atm-up-sell-prices-after {
           color: #006ee3;
-          font-size: 18px;
+          font-size: $font-size-sm;
           text-decoration: none;
+
+          @include lg {
+            font-size: $font-size-lg;
+          }
+        }
+      }
+    }
+
+    .atm-up-sell-add {
+      .atm-button-text {
+        margin-right: 0.5rem;
+
+        @include lg {
+          margin-right: 1.5rem;
+        }
+      }
+
+      .atm-button-rounded {
+        font-size: $font-size-xxxs;
+
+        @include lg {
+          font-size: $font-size-xs;
         }
       }
     }

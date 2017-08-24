@@ -9,7 +9,7 @@ type Props = {
 };
 
 const EmptyCart = (props: Props) => {
-  const { locale } = this.props;
+  const { locale } = props;
 
   return (
     <div className="mol-cart-empty">
