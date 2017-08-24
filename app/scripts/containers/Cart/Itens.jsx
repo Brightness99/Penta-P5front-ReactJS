@@ -9,7 +9,7 @@ import { IntlDate, IntlMoney, IntlZipcode } from 'components/Intl';
 import Modal from 'components/Modal';
 import { EditableText } from 'molecules/Inputs';
 import ProductImage from './ProductImage';
-import { ProductDetailsModal, UpsellingModal } from './Modals';
+import { ProductDetailsModal, UpsellingDateModal } from './Modals';
 import Actions from './Actions';
 
 const failbackImage = require('assets/media/images/blue-logo.png');
@@ -22,6 +22,7 @@ type Props = {
   pickupPlaces: {},
   pickupPlaceId: number,
   locale: {},
+  upselling: {},
   dispatch: () => {},
 };
 
@@ -44,7 +45,7 @@ export default class CartItens extends React.Component {
         isOpen: false,
         itemId: '',
       },
-      isUpsellSelected: false,
+      isUpsellSelected: true,
     };
   }
 
@@ -69,7 +70,7 @@ export default class CartItens extends React.Component {
         itemId: '',
         type: '',
       },
-      isUpsellSelected: false,
+      isUpsellSelected: true,
     });
   };
 
@@ -84,31 +85,39 @@ export default class CartItens extends React.Component {
   };
 
   renderModal() {
-    const { items } = this.props;
+    const { items, locale, dispatch, upselling } = this.props;
     const { modal, isUpsellSelected } = this.state;
 
-    if (!modal.type || !modal.itemId || !(modal.type === 'details' || modal.type === 'upsell')) {
+    if (!modal.type || !modal.itemId || !['details', 'upsellDate'].includes(modal.type)) {
       return null;
     }
 
     return (
       <Modal handleCloseModal={this.handleModalClose}>
         {
-          modal.type === 'upsell'
-            ? <UpsellingModal
+          modal.type === 'upsellDate'
+            ? <UpsellingDateModal
               isUpsellSelected={isUpsellSelected}
+              itemId={modal.itemId}
               handleUpsellChoose={this.handleUpsellChoose}
               handleModalClose={this.handleModalClose}
               className="org-up-sell-modal"
+              locale={locale.upselling}
+              dispatch={dispatch}
+              upselling={items[modal.itemId].upselling.date}
             />
-            : <ProductDetailsModal item={items[modal.itemId]} failbackImage={failbackImage} />
+            : <ProductDetailsModal
+              item={items[modal.itemId]}
+              failbackImage={failbackImage}
+              locale={locale.item_details_modal}
+            />
         }
       </Modal>
     );
   }
 
   renderZipcode() {
-    const { usePickupPlaces, pickupPlaceId, pickupPlaces, locale } = this.props;
+    const { usePickupPlaces, pickupPlaceId, pickupPlaces, locale, zipcode } = this.props;
 
     if (usePickupPlaces) {
       if (!pickupPlaces[pickupPlaceId]) {
@@ -124,7 +133,7 @@ export default class CartItens extends React.Component {
 
     return (
       <div className="atm-cart-item-zipcode">
-        {locale.product_list.SEE_MORE}: <IntlZipcode>{pickupPlaceId}</IntlZipcode>
+        {locale.product_list.ZIPCODE_TYPE}: <IntlZipcode>{zipcode}</IntlZipcode>
       </div>
     );
   }
@@ -198,7 +207,7 @@ export default class CartItens extends React.Component {
                   {items[item].upselling.isUpsellingDate && <button
                     onClick={this.handleModalOpen}
                     value={item}
-                    name="upsell"
+                    name="upsellDate"
                     className="atm-button-up-sell atm-button-up-sell--desktop"
                   >
                     {locale.upselling.LABEL} <ChevronRightIcon />
@@ -248,7 +257,7 @@ export default class CartItens extends React.Component {
         {Object.keys(items).map(item => (
           <li className="org-cart-item" key={item}>
             <div className="mol-cart-item-header">
-              <ProductImage failbackImage={failbackImage} alt="product" />
+              <ProductImage thumbnail={items[item].thumbnail} failbackImage={failbackImage} alt={items[item].final_product.name} />
               {this.renderProductInfos(items[item], item, 1)}
             </div>
             <div className="mol-cart-item-body">
@@ -267,10 +276,10 @@ export default class CartItens extends React.Component {
                 <div className="atm-cart-item-info-title">{locale.product_list.PRICE}</div>
                 <div className="atm-cart-item-info-text"><IntlMoney className="atm-cart-price">{items[item].prices.total}</IntlMoney></div>
               </div>
-              {item.upselling && item.upselling.isUpsellingDate && <button
+              {items[item].upselling.isUpsellingDate && <button
                 onClick={this.handleModalOpen}
                 value={item}
-                name="upsell"
+                name="upsellDate"
                 className="atm-button-up-sell atm-button-up-sell--mobile"
               >
                 {locale.upselling.LABEL} <ChevronRightIcon />

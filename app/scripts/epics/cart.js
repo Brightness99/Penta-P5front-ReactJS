@@ -357,3 +357,77 @@ export function cartUpdateFetch(action$, store) {
         }]));
     });
 }
+
+export function cartUpsellingDateFetch(action$) {
+  return action$.ofType(CartConstants.CART_UPSELLING_DATE_FETCH_REQUEST)
+    .switchMap((action) => {
+      const endpoint = `/v2/cart/${action.payload.itemId}/upselling_date`;
+
+      return rxAjax({
+        endpoint,
+        method: 'GET',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+            return {
+              type: CartConstants.CART_UPSELLING_DATE_FETCH_SUCCESS,
+              payload: {
+                itemId: action.payload.itemId,
+                ...data.response,
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: CartConstants.CART_UPSELLING_DATE_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: CartConstants.CART_UPSELLING_DATE_FETCH_CANCEL })
+        .catch(error => ([{
+          type: CartConstants.CART_UPSELLING_DATE_FETCH_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]));
+    });
+}
+
+export function cartUpsellingAddFetch(action$, store) {
+  return action$.ofType(CartConstants.CART_UPSELLING_ADD_FETCH_REQUEST)
+    .switchMap((action) => {
+      const endpoint = `/v2/cart/${action.payload.itemId}/upselling`;
+
+      return rxAjax({
+        endpoint,
+        payload: {},
+        method: 'PUT',
+      })
+        .map(data => {
+          if (data.status === 201) {
+            store.dispatch(cartFetchAction());
+
+            return {
+              type: CartConstants.CART_UPSELLING_ADD_FETCH_SUCCESS,
+              payload: action.payload,
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: CartConstants.CART_UPSELLING_ADD_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: CartConstants.CART_UPSELLING_ADD_FETCH_CANCEL })
+        .catch(error => ([{
+          type: CartConstants.CART_UPSELLING_ADD_FETCH_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]));
+    });
+}

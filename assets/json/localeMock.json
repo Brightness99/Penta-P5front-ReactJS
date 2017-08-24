@@ -197,7 +197,14 @@
           "UNIT_SHORT": "un"
         },
         "upselling": {
-          "LABEL": "turbine seu produto"
+          "LABEL": "Turbine seu produto",
+          "TITLE": "Turbine seu produto",
+          "SUB_TITLE": "Antecipe sua entrega agora mesmo! :)",
+          "ESTIMATED_DELIVERY": "Previsão de entrega",
+          "DAYS": "dias",
+          "NEW_ESTIMATED_DELIVERY": "Nova previsão de entrega",
+          "CANCEL": "Cancelar",
+          "ADD": "Adicionar"
         },
         "cross_selling": {
           "TITLE": "Quem comprou também viu",
