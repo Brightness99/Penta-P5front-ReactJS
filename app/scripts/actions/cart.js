@@ -90,7 +90,6 @@ export function cartVoucherAddFetch(voucher: string): Object {
   };
 }
 
-
 /**
  * Cart Voucher Remove Fetch
  * @param {string} voucher
@@ -105,7 +104,6 @@ export function cartVoucherRemoveFetch(voucher: string): Object {
     },
   };
 }
-
 
 /**
  * Cart Pickup Places Fetch
@@ -122,20 +120,50 @@ export function cartPickupFetch(pickupPlaceId: number): Object {
   };
 }
 
-
 /**
  * Cart Update Fetch
- * @param {number} itemId
+ * @param {string} itemId
  * @param {Object} updatedInfo
  *
  * @returns {Object}
  */
-export function cartUpdateFetch(itemId: number, updatedInfo: Object): Object {
+export function cartUpdateFetch(itemId: string, updatedInfo: Object): Object {
   return {
     type: CartConstants.CART_UPDATE_FETCH_REQUEST,
     payload: {
       itemId,
       updatedInfo,
+    },
+  };
+}
+
+/**
+ * Cart Upselling Date Fetch
+ * @param {string} itemId
+ *
+ * @returns {Object}
+ */
+export function cartUpsellingDateFetch(itemId: string): Object {
+  return {
+    type: CartConstants.CART_UPSELLING_DATE_FETCH_REQUEST,
+    payload: {
+      itemId,
+    },
+  };
+}
+
+
+/**
+ * Cart Upselling Fetch
+ * @param {string} itemId
+ *
+ * @returns {Object}
+ */
+export function cartUpsellingAddFetch(itemId: string): Object {
+  return {
+    type: CartConstants.CART_UPSELLING_ADD_FETCH_REQUEST,
+    payload: {
+      itemId,
     },
   };
 }

@@ -7,10 +7,14 @@ import ProductImage from '../ProductImage';
 type Props = {
   item: {},
   failbackImage: string,
+  locale: {
+    TITLE: string,
+    ADDITIONAL_OPTIONS: string,
+  },
 };
 
 const ProductDetailsModal = (props: Props) => {
-  const { item, failbackImage } = props;
+  const { item, failbackImage, locale } = props;
 
   const partsKeys = Object.keys(item.product_parts);
 
@@ -32,7 +36,7 @@ const ProductDetailsModal = (props: Props) => {
 
   return (
     <div className="org-products-details-modal">
-      <div className="atm-product-details-modal-title">Detalhes do produto</div>
+      <div className="atm-product-details-modal-title">{locale.TITLE}</div>
       <div className="mol-product-details-modal">
         <ProductImage thumbnail={item.thumbnail} failbackImage={failbackImage} alt={item.final_product.name} />
         <ul className="mol-cart-product-details-body">
@@ -44,7 +48,7 @@ const ProductDetailsModal = (props: Props) => {
             }
           </li>
           <li>
-            <span>Opções adicionais</span>
+            <span>{locale.ADDITIONAL_OPTIONS}</span>
             {renderProductDetails('', {
               proof: item.additional_options.proof,
               file_format: item.additional_options.file_format,

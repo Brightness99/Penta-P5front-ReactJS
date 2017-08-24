@@ -65,7 +65,10 @@ export default class CartCrossSell extends React.Component {
   }
 
   render() {
-    const { screenSize } = this.props;
+    const { screenSize, crossSelling } = this.props;
+    if (crossSelling.length <= 0) {
+      return null;
+    }
 
     return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
