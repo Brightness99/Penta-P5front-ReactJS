@@ -209,12 +209,6 @@ export class Cart extends React.Component {
           locale={locale}
           upselling={upselling}
         />
-        <CartSummary
-          screenSize={screenSize}
-          totalItems={count}
-          prices={prices}
-          locale={locale}
-        />
         <CartVoucher
           screenSize={screenSize}
           isActive={isVoucherActive}
@@ -223,11 +217,22 @@ export class Cart extends React.Component {
           locale={locale.voucher}
           handleVoucherToggle={this.handleVoucherToggle}
         />
+        <CartSummary
+          screenSize={screenSize}
+          totalItems={count}
+          prices={prices}
+          locale={locale}
+        />
         <CartFooter
           screenSize={screenSize}
           dispatch={dispatch}
           locale={locale}
           totalPrice={prices.total}
+        />
+        <CartCrossSell
+          screenSize={screenSize}
+          crossSelling={crossSelling}
+          locale={locale.cross_selling}
         />
       </main>
     );
