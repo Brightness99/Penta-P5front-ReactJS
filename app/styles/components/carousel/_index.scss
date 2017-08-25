@@ -1,0 +1,26 @@
+.cmp-carousel {
+  height: auto;
+  position: relative;
+  padding: 0 2.5rem;
+  width: auto;
+
+  &__slide {
+    display: block;
+    overflow: visible;
+    width: 100%;
+
+    > * {
+      display: inline-block;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

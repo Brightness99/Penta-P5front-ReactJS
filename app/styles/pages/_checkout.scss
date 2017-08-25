@@ -2,7 +2,8 @@
   background-color: $color-pale-grey;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 }
 
 .org-checkout-header {
@@ -22,8 +23,8 @@
   display: flex;
   font-family: $font-family-open-sans;
   font-size: $font-size-base;
-  opacity: 0.5;
   margin-left: 4rem;
+  opacity: 0.5;
 
   &--active {
     opacity: 1;
@@ -49,29 +50,30 @@
   width: 2.4rem;
 
   > svg {
-    fill: #2FD463;
-    width: 100%;
+    fill: #2fd463;
     height: 100%;
+    width: 100%;
   }
 
   &--unchecked {
     background: linear-gradient(180deg, #2deca0 0, #2fd463 100%);
-    box-shadow: 0 8px 8px 0 rgba(47, 212, 99, 0.2);
     border-radius: 1.2rem;
+    box-shadow: 0 0.8rem 0.8rem 0 rgba(47, 212, 99, 0.2);
     color: $color-white;
   }
 }
 
 .org-checkout-body {
-  height: calc(100vh - 6.5rem);
+  height: 100%;
+  min-height: calc(100vh - 6.5rem);
   padding: 4rem 0;
   position: relative;
 
   &-background {
     background-color: $color-white;
     bottom: 0;
-    position: absolute;
     left: 0;
+    position: absolute;
     top: 0;
     width: calc(50% + 10rem);
   }
@@ -85,7 +87,12 @@
 
 .org-checkout-content {
   height: 100%;
+  padding-right: 3rem;
   width: calc(50% + 10rem);
+
+  @include xl {
+    padding-right: 4rem;
+  }
 }
 
 // ------------------------------- summary
@@ -103,38 +110,30 @@
 
 .atm-checkout-summary-title {
   color: $color-dark;
+  flex: 0 0 auto;
   font-family: $font-family-open-sans;
   font-size: $font-size-base;
   font-weight: bold;
   line-height: 1.5;
   padding-top: 0.8rem;
-  flex: 0 0 auto;
 }
 
 .org-checkout-summary-items {
   display: flex;
+  flex: 0 1 auto;
   flex-direction: column;
   margin: 2.5rem 0;
   overflow-y: auto;
-  flex: 0 1 auto;
 }
 
 .mol-checkout-summary-item {
   display: flex;
-  min-height: 8rem;
   margin-bottom: 1.5rem;
+  min-height: 8rem;
 
   &:last-child {
     margin: 0;
   }
-}
-
-.mol-checkout-summary-prices {
-  flex: 0 0 auto;
-}
-
-.mol-checkout-summary-total {
-  flex: 0 0 auto;
 }
 
 .mol-checkout-summary-item-resume {
@@ -164,8 +163,8 @@
   .mol-checkout-summary-item-data {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 100%;
+    justify-content: space-between;
     padding: 0.8rem 1.6rem;
     width: calc(100% - 8rem);
 
@@ -173,10 +172,6 @@
       display: inline-flex;
     }
   }
-}
-
-.atm-checkout-summary-item-price {
-  display: inline-flex;
 }
 
 .atm-checkout-summary-item-data-name {
@@ -198,16 +193,11 @@
 
 .atm-checkout-summary-item-price {
   color: $color-dark;
+  display: inline-flex;
   font-family: $font-family-open-sans;
   font-size: $font-size-base;
   line-height: 1.5;
   padding-top: 0.8rem;
-}
-
-.mol-checkout-summary-prices {
-  border-bottom: 0.1rem solid $color-silver;
-  border-top: 0.1rem solid $color-silver;
-  padding: 1.6rem 0;
 }
 
 .atm-checkout-total-price {
@@ -218,10 +208,14 @@
 }
 
 .mol-checkout-summary-prices {
+  border-bottom: 0.1rem solid $color-silver;
+  border-top: 0.1rem solid $color-silver;
   color: $color-dark;
+  flex: 0 0 auto;
   font-family: $font-family-open-sans;
   font-size: $font-size-xs;
   line-height: 2;
+  padding: 1.6rem 0;
   text-align: left;
 
   > div {
@@ -229,16 +223,17 @@
     justify-content: space-between;
 
     > span {
-      opacity: 0.5;
       display: inline-flex;
+      opacity: 0.5;
     }
   }
 }
 
 .mol-checkout-summary-total {
   align-items: center;
-  display: flex;
   color: $color-dark;
+  display: flex;
+  flex: 0 0 auto;
   font-family: $font-family-open-sans;
   font-size: $font-size-xs;
   justify-content: space-between;
@@ -260,8 +255,8 @@
 
 .atm-logo {
   flex: 0 0 auto;
-  justify-content: flex-start;
   height: 4.8rem;
+  justify-content: flex-start;
 
   > svg {
     max-height: 100%;
@@ -271,7 +266,7 @@
 }
 // ----------------- footer
 .mol-checkout-content-footer {
-  @include center-child-flex
+  @include center-child-flex;
   display: flex;
   flex: 0 0 auto;
 
@@ -286,23 +281,23 @@
     }
 
     &--certisign {
-      background-position: -244px 0;
-      height: 40px;
+      background-position: -24.4rem 0;
+      height: 4rem;
       margin-left: 0;
-      width: 95px;
+      width: 9.5rem;
     }
 
     &--norton {
-      background-position: -362px 0;
-      height: 41px;
-      width: 77px;
+      background-position: -36.2rem 0;
+      height: 4.1rem;
+      width: 7.7rem;
     }
 
     &--google {
-      background-position: -459px 0;
-      height: 40px;
+      background-position: -45.9rem 0;
+      height: 4rem;
       margin-right: 0;
-      width: 84px;
+      width: 8.4rem;
     }
   }
 }
@@ -310,18 +305,10 @@
 // ----------------------------- content
 
 .org-checkout-content-container {
-  margin: 4.8rem 0;
   display: flex;
   flex: 0 1 auto;
   flex-direction: column;
-}
-
-.org-checkout-content {
-  padding-right: 3rem;
-
-  @include xl {
-    padding-right: 4rem;
-  }
+  margin: 4.8rem 0;
 }
 
 .atm-checkout-content-title {
@@ -338,4 +325,72 @@
   font-size: $font-size-base;
   line-height: 1.5;
   margin: 1.2rem 0;
+}
+
+.org-checkout-content-data {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 1rem;
+
+  > .atm-checkout-input {
+    display: inline-flex;
+    margin-top: 1rem;
+
+    &-one {
+      width: calc(33% - 0.5rem);
+    }
+
+    &-two {
+      width: calc(66%);
+    }
+  }
+}
+
+.mol-data-pane-choser {
+  > .atm-box-radio {
+    margin-right: 2rem;
+    padding-right: 2rem;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.mol-checkout-pane-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+
+  > .atm-go-back-link {
+    color: $color-printi-blue;
+    display: inline-flex;
+    font-family: $font-family-open-sans;
+    font-size: $font-size-xs;
+
+    > svg {
+      fill: currentColor;
+      height: 1.6rem;
+      padding-right: 1rem;
+      width: auto;
+    }
+  }
+
+  > .atm-send-button{
+    background-color: #2ed463;
+    border: transparent;
+    border-radius: 0.4rem;
+    color: $color-white;
+    display: inline-flex;
+    font-family: $font-family-open-sans;
+    font-size: $font-size-xs;
+    font-weight: bold;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    height: 4rem;
+    text-transform: uppercase;
+    width: 20rem;
+  }
 }

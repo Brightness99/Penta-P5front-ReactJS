@@ -10,12 +10,20 @@ type Props = {
   name: string,
   value: any,
   checked?: boolean,
-  onClick?: () => {},
+  onChange?: () => {},
   children?: any,
 };
 
 const BoxRadio = (props: Props) => {
-  const { id, name, value, checked, onClick, children } = props;
+  const { id, name, value, checked, children } = props;
+
+  const handleChange = (ev) => {
+    const { onChange } = props;
+
+    if (typeof onChange === 'function') {
+      onChange(ev);
+    }
+  };
 
   return (
     <label className={cx('atm-box-radio', props.checked && 'atm-box-radio--selected')}>
@@ -23,7 +31,7 @@ const BoxRadio = (props: Props) => {
         name={name}
         id={id}
         value={value}
-        onCLick={onClick}
+        onChange={handleChange}
         checked={checked}
       />
       {children}

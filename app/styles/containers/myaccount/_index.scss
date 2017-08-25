@@ -1,3 +1,6 @@
+@import "cloud";
+@import "loyalty";
+
 .container-myaccount {
   @include lg {
     display: flex;
@@ -63,12 +66,11 @@
   }
 
   .container-myorder {
-    margin-bottom: 4rem;
     @include lg {
       background-color: $color-white;
       flex: 5;
       box-sizing: border-box;
-      padding: 2rem 6rem 0 6rem;
+      padding: 2rem 6rem 3rem 6rem;
     }
     .app__breadcrumb {
       margin-bottom: 2.4rem;
@@ -516,7 +518,7 @@
             svg {
               width: 5px;
               float: left;
-              height: 20px;
+              height: 10px;
               fill: $color-printi-blue;
             }
           } 
@@ -1262,5 +1264,156 @@
         }
       }
     }
+  }
+}
+
+.container-templateModels {
+  margin: 4rem 0 3rem 0;
+  @include lg {
+    background-color: $color-white;
+    flex: 5;
+    box-sizing: border-box;
+    padding: 2rem 6rem 3rem 6rem;
+    margin: 0;
+  }
+  .subtitle-templateModels{
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-h4;
+    font-weight: 300;
+    line-height: 1.11;
+    text-align: left;
+    color: $color-almostBlack;
+    text-transform: none;
+    margin-top: 1.4rem;
+    padding-bottom: 0;
+    @include lg {
+      font-size: $font-size-xl;
+      margin-top: 2.4rem;
+    }
+  }
+  .box-templateModels {
+    .org-input-research {
+      display: flex;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      margin: 3.9rem 0 2.1rem 0;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      .mol-input-text, .mol-select-research {
+        color: $color-almostBlack;
+        margin-bottom: 0.5rem;
+        @include lg {
+          margin-bottom: initial;
+        }
+      }
+      .mol-input-text {
+        flex: 2;
+        &::-webkit-input-placeholder {
+          color: $color-almostBlack;
+        }
+      }
+      .mol-select-research {
+        flex:1;
+      }
+    }
+    .box-itensModel {
+      position: relative;
+      display: flex;
+      flex-flow: row wrap;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      .itemModel {
+        border-radius: 2px;
+        border: solid 1px #dbdddf;
+        box-sizing: border-box;
+        padding: 2rem;
+        flex: 1;
+        flex-basis: calc((100% / 2) - 10px);
+        margin: 0.5rem 0.5rem;
+        background-color: $color-white;
+        &:nth-of-type(2n-1){
+          margin-left: 0;
+        }
+        &:nth-of-type(2n) {
+          margin-right: 0;
+        }
+        .title-item {
+          font-size: $font-size-h4;
+          font-family: $font-family-nunito-light;
+          letter-spacing: -0.5px;
+          color: $color-black;
+          @include lg {
+            font-size: $font-size-il;
+          }
+        }
+        .img-itemModel {
+          margin: 3rem 0;
+          display: flex;
+          justify-content: center;
+        }
+        .btn-itemModel {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .btn-item {
+            flex: 1;
+            &:first-of-type {
+              flex:2;
+            }
+            i {
+              svg {
+                width: 15px;
+                height: 15px;
+              }
+            }
+            &.fnt-edit-delete {
+              font-family: $font-family-open-sans;
+              font-size: $font-size-sm;
+              line-height: 2.14;
+              color: $color-printi-blue;
+              .icon-edit {
+                color: $color-printi-blue;
+                margin-right: 1.2rem;
+                svg {
+                  fill: $color-printi-blue;
+                }
+              }
+              .icon-delete {
+                color: $color-melon;
+                svg {
+                  fill: $color-melon;
+                }
+              }
+            }
+            &.btn-item--mobile {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.org-input-research {
+  .mol-input-text, .mol-select-research {
+    height: 5rem;
+    background-color: $color-white;
+    border: 1px solid #dbdddf;
+    box-sizing: border-box;
+    padding: 0.9rem 1.0rem;
+    cursor: pointer;
+  }
+  .mol-select-research {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 }

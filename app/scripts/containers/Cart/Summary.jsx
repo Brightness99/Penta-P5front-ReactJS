@@ -9,55 +9,30 @@ type Props = {
   totalItems: number,
   prices: {},
   isVoucherActive: boolean,
+  locale: {},
   handleVoucherToggle: () => {},
 };
 
-type State = {
-};
-
 export default class CartSummary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
-  static state: State;
-
-  handleVoucher = () => {
-    const { handleVoucherToggle } = this.props;
-
-    if (typeof handleVoucherToggle === 'function') {
-      handleVoucherToggle();
-    }
-  };
-
-  renderVoucher() {
-    const { isVoucherActive, prices: { discount } } = this.props;
-
-    return isVoucherActive
-      ? <span>-{discount ? <IntlMoney>{discount.total}</IntlMoney> : '--'}</span>
-      : <button onClick={this.handleVoucher} className="atm-button-cart-voucher">Adicionar código</button>;
-  }
-
   renderDesktop() {
-    const { prices } = this.props;
+    const { prices, locale } = this.props;
 
     return (
       <div className="mol-cart-summary-infos">
         <div>
-          <span>Subtotal:</span>
+          <span>{locale.values.SUBTOTAL}:</span>
           <IntlMoney>{prices.total_no_discount || prices.total}</IntlMoney>
         </div>
         <div>
-          <span>Cupom:</span>
-          {this.renderVoucher()}
+          <span>{locale.values.DISCOUNT}:</span>
+          <span>-{prices.discount ? <IntlMoney>{prices.discount.total}</IntlMoney> : '--'}</span>
         </div>
         <div className="mol-cart-summary-total">
-          <span>Total</span>
+          <span>{locale.values.TOTAL}</span>
           <IntlMoney className="atm-cart-price atm-cart-price--large">{prices.total}</IntlMoney>
         </div>
       </div>
@@ -65,30 +40,30 @@ export default class CartSummary extends React.Component {
   }
 
   renderMobile() {
-    const { totalItems, prices } = this.props;
+    const { totalItems, prices, locale } = this.props;
 
     return (
       <div className="org-cart-summary">
         <div className="mol-cart-summary-title">
-          Resumo do carrinho
+          {locale.sidebar.TITLE}
         </div>
         <div className="mol-cart-summary-infos">
           <div>
-            <span>Nº de itens:</span>
-            <span>{totalItems} itens</span>
+            <span>{locale.sidebar.NUMBER_TEXT}:</span>
+            <span>{`${totalItems} ${totalItems > 1 ? locale.sidebar.ITEMS : locale.sidebar.ITEM}`}</span>
           </div>
           <div>
-            <span>Subtotal:</span>
+            <span>{locale.values.SUBTOTAL}:</span>
             <span><IntlMoney>{prices.total_no_discount || prices.total}</IntlMoney></span>
           </div>
           <div>
-            <span>Cupom:</span>
-            {this.renderVoucher()}
+            <span>{locale.values.DISCOUNT}:</span>
+            <span>-{prices.discount ? <IntlMoney>{prices.discount.total}</IntlMoney> : '--'}</span>
           </div>
         </div>
         <hr />
         <div className="mol-cart-summary-total">
-          <span>Total</span>
+          <span>{locale.values.TOTAL}</span>
           <IntlMoney className="atm-cart-price atm-cart-price--large">{prices.total}</IntlMoney>
         </div>
       </div>

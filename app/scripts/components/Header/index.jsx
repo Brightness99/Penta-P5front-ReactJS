@@ -24,6 +24,7 @@ type Props = {
   screenSize: string,
   links: {},
   dispatch: () => {},
+  totalCartItems: number,
 };
 
 type State = {
@@ -91,7 +92,7 @@ export class Header extends React.Component {
   }
 
   renderMobile() {
-    const { screenSize, dispatch } = this.props;
+    const { screenSize, dispatch, totalCartItems } = this.props;
     const { showProduct, showProfile, sideBar } = this.state;
 
     const styles = {
@@ -111,11 +112,11 @@ export class Header extends React.Component {
                   <Menu />
                 </NavLink>
               </div>
-              <Logo />
+              <Logo enableLink={true} />
             </div>
             <div>
               <div>
-                <Cart dispatch={dispatch} />
+                <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
               </div>
               <div>
                 <NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>
@@ -139,9 +140,8 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize, dispatch } = this.props;
-    const { showProduct, showProfile, sideBar } = this.state;
-    const { logoScroll, logo } = this.state;
+    const { screenSize, dispatch, totalCartItems } = this.props;
+    const { showProduct, showProfile, sideBar, logoScroll, logo } = this.state;
 
     const styles = {
       backgroundImage: `url('${require('../../../../assets/media/svg/icon-search.svg')}')`,
@@ -156,7 +156,7 @@ export class Header extends React.Component {
         <div>
           <div className={"app__header__container container" + (logoScroll ? ' headerScroll' : '')}>
             <div>
-              { logo && (<Logo />) }
+              { logo && (<Logo enableLink={true} />) }
               { logoScroll && (<div><LogoScroll /></div>) }
               <div className="menu">
                 <NavLink className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
@@ -188,7 +188,7 @@ export class Header extends React.Component {
                 </NavLink>
               </div>
               <div>
-                <Cart dispatch={dispatch} />
+                <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
               </div>
             </div>
           </div>

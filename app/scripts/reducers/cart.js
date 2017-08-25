@@ -23,6 +23,11 @@ const cartState = {
     total: 0,
     voucher_id: '',
   },
+  upselling: {
+    items: {},
+    isRunning: false,
+    isLoaded: false,
+  },
 };
 
 export default {
@@ -51,13 +56,14 @@ export default {
     [CartConstants.CART_FETCH_SUCCESS](state, action) {
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.cart,
         isRunning: false,
-        count: action.payload.items ? Object.keys(action.payload.items).length : 0,
+        count: action.payload.cart.items ? Object.keys(action.payload.cart.items).length : 0,
+        crossSelling: action.payload.crossSelling,
         isLoaded: true,
         voucher: {
           ...state.voucher,
-          ...action.payload.prices ? action.payload.prices.discount : {},
+          ...action.payload.cart.prices ? action.payload.cart.prices.discount : {},
         },
       };
     },
@@ -67,18 +73,6 @@ export default {
         isRunning: false,
         isLoaded: true,
         error: action.payload,
-      };
-    },
-    [CartConstants.CART_DUPLICATE_FETCH_SUCCESS](state, action) {
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          items: {
-            ...state.data.items,
-            [action.payload.itemId]: state.data.items[action.payload.originalItemId],
-          },
-        },
       };
     },
     [CartConstants.CART_DELETE_FETCH_SUCCESS](state, action) {
@@ -148,7 +142,7 @@ export default {
         ...state,
         pickupPlaces: {
           ...state.pickupPlaces,
-          [action.payload.unmaskedZipcode]: action.payload,
+          [action.payload.id]: action.payload,
         },
       };
     },
@@ -163,7 +157,25 @@ export default {
               ...state.data.items[action.payload.itemId],
               ...action.payload.updatedInfo,
             },
-          }
+          },
+        },
+      };
+    },
+    [CartConstants.CART_UPSELLING_DATE_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          items: {
+            ...state.data.items,
+            [action.payload.itemId]: {
+              ...state.data.items[action.payload.itemId],
+              upselling: {
+                ...state.data.items[action.payload.itemId].upselling,
+                date: action.payload.upsellingForDate,
+              },
+            },
+          },
         },
       };
     },

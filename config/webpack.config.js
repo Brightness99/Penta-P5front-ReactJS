@@ -60,7 +60,7 @@ var config = {
             },
           },
         ],
-        include: /media/,
+        include: [/media/, /node_modules/],
       },
       {
         test: /\.json$/,

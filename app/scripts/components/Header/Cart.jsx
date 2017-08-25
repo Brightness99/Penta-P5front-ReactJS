@@ -2,12 +2,13 @@
 
 import React from 'react';
 import { shouldComponentUpdate } from 'utils/helpers';
-import SVG from 'react-inlinesvg';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { CartIcon } from 'components/Icons';
 
 import { cartBasicFetch } from 'actions';
 
 type Props = {
+  totalCartItems: number,
   dispatch: () => {},
 };
 
@@ -22,13 +23,15 @@ export default class Cart extends React.Component {
 
   static props: Props;
 
-  static state: State;
-
   render() {
+    const { totalCartItems } = this.props;
     return (
-      <Link to={{ pathname: '/meu-carrinho' }}>
-        <SVG src={require('assets/media/svg/icon-cart.svg')} />
-      </Link>
+      <div className="mol-cart-icon">
+        <NavLink to="/meu-carrinho">
+          <CartIcon />
+        </NavLink>
+        {totalCartItems > 0 && <div className="atm-cart-icon-total">{totalCartItems}</div>}
+      </div>
     );
   }
 }

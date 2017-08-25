@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Breadcrumbs from 'components/Breadcrumbs';
 import { PageTitle } from 'atoms/Titles';
-import Alert from 'components/Alert/warningFull';
+import Alert from 'components/Alert';
 
 type Props = {
   app: AppStore,
@@ -35,16 +35,32 @@ export class Upload extends React.Component {
       },
     ];
 
-    const alert = [
+    const alerts = [
       {
-        title: 'Atenção!',
-        message: 'A arte deve ser enviada até 22/08/17 às 20:00 . Após esse período a previsão de entrega será alterada.'
+        type: 'error',
+        title: 'Desculpe!',
+        content: 'Ocorreu um erro interno impossibilitando seu upload.'
       },
       {
+        type: 'warning',
         title: 'Atenção!',
-        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada.'
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada.'
+      },
+      {
+        type: 'warning',
+        title: 'Atenção!',
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após dsadsse período a previsão de entrega será alterada.'
+      },
+      {
+        type: 'error',
+        title: 'Atenção!',
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse perfgdgfíodo a previsão de entrega será alterada.'
       }
     ];
+
+    const renderAlerts = () => {
+      return alerts.map((alert) => (<Alert key={`${new Date()}-${alert.content}`} type={alert.type} title={alert.title} content={alert.content} />));
+    };
 
     return (
       <div>
@@ -52,9 +68,7 @@ export class Upload extends React.Component {
           <div className="container">
             <Breadcrumbs links={breadcrumb} />
             <PageTitle>envie sua arte final</PageTitle>
-            <div className="alert-container">
-              <Alert alert={alert} />
-            </div>
+            <div className="alert-container">{renderAlerts()}</div>
           </div>
         </div>
       </div>

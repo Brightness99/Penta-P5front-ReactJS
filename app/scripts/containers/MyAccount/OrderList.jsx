@@ -38,119 +38,121 @@ export class OrderList extends React.Component {
   renderMobile() {
     return (
       <div className="container-myorder">
-        <h2 className="title-myorder">Minha conta</h2>
-        <h3 className="subtitle-myorder">Meus pedidos</h3>
-        <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
-        <div className="box-detailsOrder pendingPayment">
-          <div className="box-firstPart">
-            <div>
-              <p className="title-myorderMobile">Pedido</p>
-              <p className="subtitle-myorderMobile">Nº 210.016</p>
-            </div>
-          </div>
-          <span className="detach" />
-          <div className="box-secondPart">
-            <div className="box-secondPart-mobile">
+        <div className="container">
+          <h2 className="title-myorder">Minha conta</h2>
+          <h3 className="subtitle-myorder">Meus pedidos</h3>
+          <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
+          <div className="box-detailsOrder pendingPayment">
+            <div className="box-firstPart">
               <div>
-                <i><Clipboard /></i>
-              </div>
-              <div>
-                <p className="title-secondPart">Itens do pedido</p>
-                <p className="txt-secondPart">4 produtos</p>
+                <p className="title-myorderMobile">Pedido</p>
+                <p className="subtitle-myorderMobile">Nº 210.016</p>
               </div>
             </div>
-            <div className="box-statusMobile">
+            <span className="detach" />
+            <div className="box-secondPart">
               <div className="box-secondPart-mobile">
                 <div>
-                  <i><ExclamationMark /></i>
+                  <i><Clipboard /></i>
                 </div>
                 <div>
-                  <p className="title-statusMobile">status</p>
-                  <p className="subtitle-statusMobile">Aguardando pagamento</p>
+                  <p className="title-secondPart">Itens do pedido</p>
+                  <p className="txt-secondPart">4 produtos</p>
                 </div>
               </div>
-            </div>
-            <div>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
-              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+              <div className="box-statusMobile">
+                <div className="box-secondPart-mobile">
+                  <div>
+                    <i><ExclamationMark /></i>
+                  </div>
+                  <div>
+                    <p className="title-statusMobile">status</p>
+                    <p className="subtitle-statusMobile">Aguardando pagamento</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
+                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="box-detailsOrder inTransport">
-          <div className="box-firstPart">
-            <div>
-              <p className="title-myorderMobile">Pedido</p>
-              <p className="subtitle-myorderMobile">Nº 210.016</p>
-            </div>
-          </div>
-          <span className="detach" />
-          <div className="box-secondPart">
-            <div className="box-secondPart-mobile">
+          <div className="box-detailsOrder inTransport">
+            <div className="box-firstPart">
               <div>
-                <i><Clipboard /></i>
-              </div>
-              <div>
-                <p className="title-secondPart">Itens do pedido</p>
-                <p className="txt-secondPart">4 produtos</p>
+                <p className="title-myorderMobile">Pedido</p>
+                <p className="subtitle-myorderMobile">Nº 210.016</p>
               </div>
             </div>
-            <div className="box-statusMobile">
+            <span className="detach" />
+            <div className="box-secondPart">
               <div className="box-secondPart-mobile">
                 <div>
-                  <i><CodeBar /></i>
+                  <i><Clipboard /></i>
                 </div>
                 <div>
-                  <p className="title-statusMobile">status</p>
-                  <p className="subtitle-statusMobile">Em transporte</p>
+                  <p className="title-secondPart">Itens do pedido</p>
+                  <p className="txt-secondPart">4 produtos</p>
                 </div>
               </div>
-            </div>
-            <div>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>acompanhar pedido</Link>
-              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+              <div className="box-statusMobile">
+                <div className="box-secondPart-mobile">
+                  <div>
+                    <i><CodeBar /></i>
+                  </div>
+                  <div>
+                    <p className="title-statusMobile">status</p>
+                    <p className="subtitle-statusMobile">Em transporte</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>acompanhar pedido</Link>
+                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="box-detailsOrder delivered">
-          <div className="box-firstPart">
-            <div>
-              <p className="title-myorderMobile">Pedido</p>
-              <p className="subtitle-myorderMobile">Nº 210.016</p>
-            </div>
-          </div>
-          <span className="detach" />
-          <div className="box-secondPart">
-            <div className="box-secondPart-mobile">
+          <div className="box-detailsOrder delivered">
+            <div className="box-firstPart">
               <div>
-                <i><Clipboard /></i>
-              </div>
-              <div>
-                <p className="title-secondPart">Itens do pedido</p>
-                <p className="txt-secondPart">4 produtos</p>
+                <p className="title-myorderMobile">Pedido</p>
+                <p className="subtitle-myorderMobile">Nº 210.016</p>
               </div>
             </div>
-            <div className="box-statusMobile">
+            <span className="detach" />
+            <div className="box-secondPart">
               <div className="box-secondPart-mobile">
                 <div>
-                  <i><CodeBar /></i>
+                  <i><Clipboard /></i>
                 </div>
                 <div>
-                  <p className="title-statusMobile">status</p>
-                  <p className="subtitle-statusMobile">Entregue</p>
+                  <p className="title-secondPart">Itens do pedido</p>
+                  <p className="txt-secondPart">4 produtos</p>
                 </div>
               </div>
-            </div>
-            <div>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
-              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+              <div className="box-statusMobile">
+                <div className="box-secondPart-mobile">
+                  <div>
+                    <i><CodeBar /></i>
+                  </div>
+                  <div>
+                    <p className="title-statusMobile">status</p>
+                    <p className="subtitle-statusMobile">Entregue</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
+                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+              </div>
             </div>
           </div>
+          <button className="btn-default btn-third btn-xs">carregar mais pedidos (4)</button>
         </div>
-        <button className="btn-default btn-third btn-xs">carregar mais pedidos (4)</button>
       </div>
     );
   }
