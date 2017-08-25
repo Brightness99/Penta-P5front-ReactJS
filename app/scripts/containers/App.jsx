@@ -18,7 +18,7 @@ import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-
+import Upload from 'containers/Upload';
 
 type Props = {
   app: AppStore,
@@ -71,6 +71,7 @@ export class App extends React.Component {
                     <Route path="/minha-conta" component={MyAccount} />
                     <Route exact path="/test" component={Home} />
                     <Route path="/meu-carrinho" component={Cart} />
+                    <Route path="/:slug/upload/:itemId" component={Upload} />
                     <Route exact path="/404" component={Error404} />
                     <Route component={Error404} />
                   </Switch>
