@@ -2,8 +2,10 @@
 
 import React from 'react';
 
-const Loading = () => (
-  <div className="app__loading">Loading...</div>
-);
+const Loading = () => {
+  console.log('Loading');
+
+  return <div className="app__loading">Loading...</div>;
+};
 
 export default Loading;

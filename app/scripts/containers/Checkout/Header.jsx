@@ -14,10 +14,6 @@ type State = {
 };
 
 export default class Header extends React.Component {
-  static defaultProps = {
-    activeStep: 2,
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
@@ -50,8 +46,6 @@ export default class Header extends React.Component {
 
   render() {
     const { activeStep } = this.props;
-
-    console.log(typeof activeStep);
 
     return (
       <div className="org-checkout-header">

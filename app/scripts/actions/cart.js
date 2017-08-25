@@ -90,7 +90,6 @@ export function cartVoucherAddFetch(voucher: string): Object {
   };
 }
 
-
 /**
  * Cart Voucher Remove Fetch
  * @param {string} voucher
@@ -106,38 +105,65 @@ export function cartVoucherRemoveFetch(voucher: string): Object {
   };
 }
 
-
 /**
  * Cart Pickup Places Fetch
  * @param {number} zipcode
  *
  * @returns {Object}
  */
-export function cartPickupFetch(zipcode: number): Object {
-  const mask = new StringMask('99999-999');
+export function cartPickupFetch(pickupPlaceId: number): Object {
   return {
     type: CartConstants.CART_PICKUP_FETCH_REQUEST,
     payload: {
-      zipcode: mask.apply(zipcode),
-      unmaskedZipcode: zipcode,
+      pickupPlaceId,
+    },
+  };
+}
+
+/**
+ * Cart Update Fetch
+ * @param {string} itemId
+ * @param {Object} updatedInfo
+ *
+ * @returns {Object}
+ */
+export function cartUpdateFetch(itemId: string, updatedInfo: Object): Object {
+  return {
+    type: CartConstants.CART_UPDATE_FETCH_REQUEST,
+    payload: {
+      itemId,
+      updatedInfo,
+    },
+  };
+}
+
+/**
+ * Cart Upselling Date Fetch
+ * @param {string} itemId
+ *
+ * @returns {Object}
+ */
+export function cartUpsellingDateFetch(itemId: string): Object {
+  return {
+    type: CartConstants.CART_UPSELLING_DATE_FETCH_REQUEST,
+    payload: {
+      itemId,
     },
   };
 }
 
 
 /**
- * Cart Pickup Places Fetch
- * @param {number} itemId
- * @param {Object} updatedInfo
+ * Cart Upselling Fetch
+ * @param {string} itemId
  *
  * @returns {Object}
  */
-export function cartUpdateFetch(itemId: number, updatedInfo: Object): Object {
+export function cartUpsellingAddFetch(itemId: string): Object {
   return {
-    type: CartConstants.CART_UPDATE_FETCH_REQUEST,
+    type: CartConstants.CART_UPSELLING_ADD_FETCH_REQUEST,
     payload: {
       itemId,
-      updatedInfo,
     },
   };
 }

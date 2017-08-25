@@ -32,7 +32,7 @@ export class Checkout extends React.Component {
 
   static state: State;
 
-  handleHeaderNavigation = (ev) => {
+  handleNavigation = (ev) => {
     this.setState({
       activeStep: parseInt(ev.currentTarget.value, 10),
     });
@@ -43,13 +43,16 @@ export class Checkout extends React.Component {
     return (
       <div className="page-checkout">
         <Header
-          onClick={this.handleHeaderNavigation}
+          onClick={this.handleNavigation}
           activeStep={activeStep}
         />
         <div className="org-checkout-body">
           <div className="org-checkout-body-background" />
           <div className="org-checkout-main container">
-            <Content />
+            <Content
+              handleNavigation={this.handleNavigation}
+              activePanel={activeStep}
+            />
             <Summary />
           </div>
         </div>

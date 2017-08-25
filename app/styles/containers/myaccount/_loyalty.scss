@@ -1,0 +1,350 @@
+.container-loyalty {
+  padding: 4rem 0 3rem 0;
+  font-family: $font-family-open-sans;
+  background-color: $color-white;
+  @include lg {
+    background-color: $color-white;
+    flex: 5;
+    box-sizing: border-box;
+    padding: 2rem 6rem 0 6rem;
+    margin-bottom: 0;
+  }
+  .title-loyalty {
+    margin-bottom: 3.2rem;
+  }
+  .logo-printiClub {
+    svg {
+      width: 167px;
+      height: 32px;
+    }
+  }
+  .subtitle-loyalty {
+    font-size: $font-size-xs;
+    line-height: 2;
+    color: $color-dark;
+    margin-top: 1rem;
+    opacity: 0.5;
+  }
+  .app__breadcrumb {
+    margin-bottom: 2.4rem;
+  }
+  .tab-loyalty {
+    margin: 4rem 0 2rem 0;
+    font-family: $font-family-open-sans-semibold;
+    font-size: $font-size-xxxs;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid $color-pale-grey;
+    li {
+      display: inline-flex;
+      margin-right: 3.2rem;
+      a {
+        color: $color-gray;
+      }
+      &.active-underline, &:hover {
+        color: $color-printi-blue;
+        border-bottom: 1px solid $color-printi-blue;
+        z-index: 999;
+        a {
+          text-decoration: none;
+          color: $color-printi-blue;
+        }
+      }
+    }
+  }
+  .box-clubGold {
+    margin-bottom: 5.5rem;
+    .title-clubGold {
+      font-size: $font-size-base;
+      line-height: 1.5;
+      color: $color-dark;
+      text-transform: inherit;
+      padding-bottom: 0; 
+    }
+    .subtitle-clubGold {
+      opacity: 0.5;
+      font-size: $font-size-xs;
+      line-height: 2;
+      color: $color-black;
+    }
+  }
+  .boxes-gold {
+    display: flex;
+    margin-top: 2.4rem;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .box-gold {
+      flex: 1;
+      box-sizing: border-box;
+      padding: 2.4rem 0 1.2rem 0;
+      border: 1px solid $color-pale-grey;
+      background-color: $color-white;
+      &.first-box-gold {
+        background-color: #faf2dc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-color: transparent;
+        .first-title-gold {
+          font-family: $font-family-open-sans-bold;
+          font-size: $font-size-h2;
+          text-transform: uppercase;
+          background-color: #f0c454;
+          color: $color-white;
+          box-sizing: border-box;
+          padding: 0.15rem;
+          border-radius: 30px;
+          text-align: center;
+          width: 126px;
+        }
+      }
+      &:nth-of-type(2n) {
+        margin: 0;
+        @include lg {
+          margin: 0 2rem;
+        }
+      }
+      .title-gold {
+        font-size: $font-size-xxl;
+        line-height: 1.25;
+        color: $color-black;
+        text-align: center;
+        margin-bottom: 0;
+      }
+      .subtitle-gold {
+        opacity: 0.5;
+        font-size: $font-size-xs;
+        line-height: 2;
+        text-align: center;
+        color: $color-dark;
+        margin-top: 0;
+      }
+    }
+    .box-gold--mobile {
+      display: flex;
+      margin-top: 2rem;
+      .title-gold {
+        font-size: 2.2rem;
+      }
+      .subtitle-gold {
+        font-size: 1rem;
+        margin-bottom: 0;
+      }
+      .box-gold {
+        &:first-of-type {
+          box-sizing: border-box;
+          padding: 2rem;
+          margin-right: 1.6rem;
+          flex: 2;
+          // max-width: 178px;
+        }
+        &:last-of-type {
+          // max-width: 152px;          
+          flex: 1;
+        }
+      }
+    }
+  }
+  .advantages-clubGold {
+    margin-bottom: 5.5rem;
+    .title-advantages {
+      font-size: $font-size-base;
+      line-height: 1.5;
+      color: $color-dark;
+    }
+    .boxes-advantagesClubGold {
+      position: relative;
+      display: flex;
+      flex-flow: row wrap;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      .box-advantagesClubGold {
+        border-radius: 2px;
+        box-sizing: border-box;
+        padding: 2rem;
+        flex: 1;
+        flex-basis: calc((100% / 3) - 10px);
+        margin: 0.2rem 0;
+        background-color: $color-white;
+        color: $color-gunmetal;
+        font-size: $font-size-xs;
+        i {
+          float: right;
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+        p { 
+          margin-bottom: 0;
+        }
+        @include lg {
+          margin: 1rem 1.5rem;
+        }
+        &:nth-of-type(1n){
+          margin-left: 0;
+        }
+        &:nth-of-type(3n) {
+          margin-right: 0;
+        }
+        &.bg-maizeLight {
+          background-color: #faf2dc;
+          i {
+            svg {
+              fill: $color-maize;
+            }
+          }
+        }
+        &.bg-grayLight {
+          background-color: $color-light-grey;
+          color: #e6e9ed;
+          i {
+            svg {
+              fill: #e6e9ed;
+            }
+          }
+        }
+      }
+    }
+  }
+  .become-clubBlack {
+    @include lg {
+      margin-bottom: 5.5rem;
+    }
+    .title-clubBlack {
+      font-size: $font-size-base;
+      line-height: 1.5;
+      color: $color-dark;
+    }
+    .boxes-become {
+      margin-top: 2.7rem; 
+      display: flex;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      .box-become {
+        flex: 1;
+        margin: 0;
+        @include lg {
+          margin: 0rem 1.5rem;
+        }
+        &:first-of-type {
+          flex: 1 1 10rem;
+          @include lg {
+            margin-left: 0;
+          }
+        }
+        &:last-of-type {
+          @include lg {
+            margin-right: 0;
+          }
+        }
+        .become-goldOrBlack {
+          display: flex;
+          .become-gold, .become-black {
+            display: flex;
+            flex: 1;
+            .fnt-number {
+              font-family: $font-family-open-sans;
+              font-size: $font-size-xs;
+              line-height: 2;
+              text-align: left;
+              color: $color-gunmetal;
+            }
+            .bg-gold, .bg-black {
+              font-family: $font-family-open-sans-bold;
+              font-size: $font-size-sm;
+              text-align: center;
+              color: $color-white;
+              border-radius: 30px;
+              width: 5.2rem;
+            }
+            .bg-gold {
+              background-color: $color-maize;
+            }
+            .bg-black {
+              background-image: linear-gradient( to right, #576678 50%, #102338);
+            }
+          }
+          .become-gold {
+            .bg-gold {
+              margin-right: 1.2rem;
+            }
+          }
+          .become-black {
+            justify-content: flex-end;
+            .fnt-number{
+              margin-right: 1.2rem;
+            }
+          }
+        }
+        .line-score {
+          height: 16px;
+          background-color: $color-pale-grey;
+          border-radius: 20px;
+          width: 100%;
+          display: flex;
+          &.line-become-value {
+            position: relative;
+            &:before {
+              content: "";
+              position: absolute;
+              width: 50%;
+              height: 16px;
+              border-radius: 20px;
+              background-color: $color-maize;
+            }
+            &:after {
+              content: "";
+              position: absolute;
+              right: 51%;
+              top: 10%;
+              width: 10px;
+              height: 10px;
+              border-radius: 20px;
+              background-color: $color-white;
+            }
+          }
+          &.line-become-total {
+            position: relative;
+            &:before {
+              content: "";
+              position: absolute;
+              width: 50%;
+              height: 16px;
+              border-radius: 20px;
+              background-color: $color-maize;
+            }
+            &:after {
+              content: "";
+              position: absolute;
+              right: 51.4%;
+              top: 10%;
+              width: 10px;
+              height: 10px;
+              border-radius: 20px;
+              background-color: $color-white;
+              @include xxl {
+                right: 51%;
+              }
+            }
+          }
+        }
+        .total-club {
+          font-family: $font-family-open-sans-bold;
+          font-size: $font-size-xs; 
+          line-height: 2;
+          text-align: center;
+          color: $color-printi-blue;
+        }
+      }
+    }
+  }
+}

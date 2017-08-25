@@ -1,17 +1,16 @@
 // @flow
 
 import React from 'react';
-import swal from 'sweetalert2';
+import Slider from 'react-slick';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { NavLink } from 'react-router-dom';
-import { cartDuplicateFetch, cartDeleteFetch, cartUpdateFetch } from 'actions';
-import { FilesIcon, PencilIcon, TrashIcon, ChevronRightIcon } from 'components/Icons';
+import { cartUpdateFetch } from 'actions';
+import { ChevronRightIcon } from 'components/Icons';
 import { IntlDate, IntlMoney, IntlZipcode } from 'components/Intl';
-import Tooltip from 'components/Tooltipster';
 import Modal from 'components/Modal';
 import { EditableText } from 'molecules/Inputs';
 import ProductImage from './ProductImage';
-import { ProductDetailsModal, UpsellingModal } from './Modals';
+import { ProductDetailsModal, UpsellingDateModal } from './Modals';
+import Actions from './Actions';
 
 const failbackImage = require('assets/media/images/blue-logo.png');
 
@@ -22,6 +21,8 @@ type Props = {
   usePickupPlaces: boolean,
   pickupPlaces: {},
   pickupPlaceId: number,
+  locale: {},
+  upselling: {},
   dispatch: () => {},
 };
 
@@ -44,7 +45,7 @@ export default class CartItens extends React.Component {
         isOpen: false,
         itemId: '',
       },
-      isUpsellSelected: false,
+      isUpsellSelected: true,
     };
   }
 
@@ -69,7 +70,7 @@ export default class CartItens extends React.Component {
         itemId: '',
         type: '',
       },
-      isUpsellSelected: false,
+      isUpsellSelected: true,
     });
   };
 
@@ -84,118 +85,55 @@ export default class CartItens extends React.Component {
   };
 
   renderModal() {
-    const { items } = this.props;
+    const { items, locale, dispatch, upselling } = this.props;
     const { modal, isUpsellSelected } = this.state;
 
-    if (!modal.type || !modal.itemId || !(modal.type === 'details' || modal.type === 'upsell')) {
+    if (!modal.type || !modal.itemId || !['details', 'upsellDate'].includes(modal.type)) {
       return null;
     }
 
     return (
       <Modal handleCloseModal={this.handleModalClose}>
         {
-          modal.type === 'upsell'
-            ? <UpsellingModal
+          modal.type === 'upsellDate'
+            ? <UpsellingDateModal
               isUpsellSelected={isUpsellSelected}
+              itemId={modal.itemId}
               handleUpsellChoose={this.handleUpsellChoose}
               handleModalClose={this.handleModalClose}
               className="org-up-sell-modal"
+              locale={locale.upselling}
+              dispatch={dispatch}
+              upselling={items[modal.itemId].upselling.date}
             />
-            : <ProductDetailsModal item={items[modal.itemId]} failbackImage={failbackImage} />
+            : <ProductDetailsModal
+              item={items[modal.itemId]}
+              failbackImage={failbackImage}
+              locale={locale.item_details_modal}
+            />
         }
       </Modal>
     );
   }
 
-  handleDuplicate = (ev) => {
-    const { dispatch } = this.props;
-
-    dispatch(cartDuplicateFetch(ev.currentTarget.value));
-  };
-
-  handleDelete = (ev) => {
-    const { dispatch } = this.props;
-    const targetValue = ev.currentTarget.value;
-    swal({
-      title: 'Você tem certeza?',
-      text: 'Ao remover este produto ele não estará mais disponível no carrinho!',
-      type: 'warning',
-      confirmButtonColor: '#2cac57',
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não',
-      showCancelButton: true,
-      reverseButtons: true,
-    })
-      .then(() => dispatch(cartDeleteFetch(targetValue)));
-  };
-
-  renderActions(item, itemId) {
-    const { screenSize } = this.props;
-    if (item.type === 'cloud') {
-      if (isMobile(screenSize)) {
-        return [
-          <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
-          <NavLink key="trocar arte" to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon />trocar arte</NavLink>,
-          <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
-        ];
-      }
-
-      return [
-        <Tooltip key="editar" text="editar">
-          <NavLink to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-        </Tooltip>,
-        <Tooltip key="trocar arte" text="trocar arte">
-          <NavLink to={`/${item.product_slug.slug}/editar-produto/${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-        </Tooltip>,
-        <Tooltip key="excluir" text="excluir">
-          <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
-        </Tooltip>
-      ];
-    }
-
-    if (isMobile(screenSize)) {
-      return [
-        <button key="duplicar" className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
-          <FilesIcon />duplicar
-        </button>,
-        <NavLink key="editar" to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon />editar</NavLink>,
-        <button key="excluir" className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon />excluir</button>
-      ];
-    }
-
-    return [
-      <Tooltip key="duplicar" text="Duplicar">
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDuplicate}>
-          <FilesIcon />
-        </button>
-      </Tooltip>,
-      <Tooltip key="editar" text="Editar">
-        <NavLink to={`/configuracao-${item.product_slug.slug}?edit=1&cart_index=${itemId}`} className="atm-cart-item-action"><PencilIcon /></NavLink>
-      </Tooltip>,
-      <Tooltip key="excluir" text="Excluir">
-        <button className="atm-cart-item-action" value={itemId} onClick={this.handleDelete}><TrashIcon /></button>
-      </Tooltip>
-    ];
-  }
-
   renderZipcode() {
-    const { usePickupPlaces, zipcode, pickupPlaces } = this.props;
+    const { usePickupPlaces, pickupPlaceId, pickupPlaces, locale, zipcode } = this.props;
 
     if (usePickupPlaces) {
-      if (!pickupPlaces[zipcode]) {
+      if (!pickupPlaces[pickupPlaceId]) {
         return null;
       }
 
       return (
         <div className="atm-cart-item-zipcode">
-          {pickupPlaces[zipcode].receiver_name}
+          {pickupPlaces[pickupPlaceId].receiver_name}
         </div>
       );
     }
 
     return (
       <div className="atm-cart-item-zipcode">
-        CEP: <IntlZipcode>{zipcode}</IntlZipcode>
+        {locale.product_list.ZIPCODE_TYPE}: <IntlZipcode>{zipcode}</IntlZipcode>
       </div>
     );
   }
@@ -210,11 +148,13 @@ export default class CartItens extends React.Component {
         project_name: ev.currentTarget.editableInput.value,
       },
     }));
-  }
+  };
 
-  renderProductInfos(item, itemId, size: number = 3) {
+  renderProductInfos(item, itemId) {
+    const { locale } = this.props;
+
     const slicedList = Object.keys(item.product_parts[Object.keys(item.product_parts)[0]].options)
-      .slice(0, size)
+      .slice(0, 1)
       .reduce((prevOption, currentOption) => (
         [
           ...prevOption,
@@ -225,7 +165,6 @@ export default class CartItens extends React.Component {
       <div className="mol-cart-item-infos">
         <EditableText
           value={item.project_name}
-          placeholder="Nome do projeto..."
           aditionalReturn={itemId}
           onSubmit={this.handleProjectNameSubmit}
         />
@@ -239,7 +178,7 @@ export default class CartItens extends React.Component {
               value={itemId}
               onClick={this.handleModalOpen}
             >
-              Ver mais...
+              {locale.product_list.SEE_MORE}
             </button>
           </li>
         </ul>
@@ -248,16 +187,16 @@ export default class CartItens extends React.Component {
   }
 
   renderDesktop() {
-    const { items } = this.props;
+    const { items, screenSize, dispatch, locale } = this.props;
     const { modal: { isOpen } } = this.state;
 
     return (
       <div className="org-cart-items-desktop">
         <div className="mol-cart-items-header">
-          <span>produto</span>
-          <span>entrega</span>
-          <span>quantidade</span>
-          <span>valor</span>
+          <span>{locale.product_list.PRODUCT}</span>
+          <span>{locale.product_list.DELIVERY}</span>
+          <span>{locale.product_list.QUANTITY}</span>
+          <span>{locale.product_list.PRICE}</span>
         </div>
         <ul className="mol-cart-items-list">
           {Object.keys(items).map((item) => (
@@ -265,14 +204,14 @@ export default class CartItens extends React.Component {
               <div className="mol-cart-item-product">
                 <div className="mol-cart-item-image">
                   <ProductImage thumbnail={items[item].thumbnail} failbackImage={failbackImage} alt={items[item].final_product.name} />
-                  <button
+                  {items[item].upselling.isUpsellingDate && <button
                     onClick={this.handleModalOpen}
                     value={item}
-                    name="upsell"
+                    name="upsellDate"
                     className="atm-button-up-sell atm-button-up-sell--desktop"
                   >
-                    turbine seu produto <ChevronRightIcon />
-                  </button>
+                    {locale.upselling.LABEL} <ChevronRightIcon />
+                  </button>}
                 </div>
                 <div className="mol-cart-item-desktop-infos">
                   {this.renderProductInfos(items[item], item)}
@@ -284,12 +223,22 @@ export default class CartItens extends React.Component {
               </div>
               <div className="mol-cart-item-quantity">
                 <div className="atm-cart-item-quantity">{items[item].quantity}</div>
+                <div className="atm-cart-item-quantity-unit">
+                  {items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}
+                </div>
               </div>
               <div className="mol-cart-item-price">
-                <div className="atm-cart-item-price"><IntlMoney>{items[item].prices.total}</IntlMoney></div>
-                <div className="mol-cart-item-desktop-actions">
-                  {this.renderActions(items[item], item)}
+                <div className="atm-cart-item-price">
+                  <IntlMoney>{items[item].prices.total}</IntlMoney>
+                  <span><IntlMoney>{items[item].prices.total / items[item].quantity}</IntlMoney>/{locale.units.UNIT_SHORT}</span>
                 </div>
+                <Actions
+                  screenSize={screenSize}
+                  actions={items[item].actions}
+                  itemId={item}
+                  dispatch={dispatch}
+                  locale={locale.actions}
+                />
               </div>
             </li>
           ))}
@@ -300,49 +249,66 @@ export default class CartItens extends React.Component {
   }
 
   renderMobile() {
-    const { items } = this.props;
+    const { items, screenSize, dispatch, locale } = this.props;
     const { modal: { isOpen } } = this.state;
-
+    const sliderSettings = {
+      arrows: false,
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '25px',
+    };
     return (
-      <ul className="org-cart-item-list">
-        {Object.keys(items).map(item => (
-          <li className="org-cart-item" key={item}>
-            <div className="mol-cart-item-header">
-              <ProductImage failbackImage={failbackImage} alt="product" />
-              {this.renderProductInfos(items[item], item, 1)}
-            </div>
-            <div className="mol-cart-item-body">
-              <div>
-                <div className="atm-cart-item-info-title">Entrega</div>
-                <div className="atm-cart-item-info-text">
-                  <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
-                  {this.renderZipcode()}
+      <div className="org-cart-item-list">
+        <Slider {...sliderSettings}>
+          {Object.keys(items).map(item => (
+            <div>
+              <div className="org-cart-item" key={item}>
+                <div className="mol-cart-item-header">
+                  <ProductImage thumbnail={items[item].thumbnail} failbackImage={failbackImage} alt={items[item].final_product.name} />
+                  {this.renderProductInfos(items[item], item, 1)}
                 </div>
+                <div className="mol-cart-item-body">
+                  <div>
+                    <div className="atm-cart-item-info-title">{locale.product_list.DELIVERY}</div>
+                    <div className="atm-cart-item-info-text">
+                      <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
+                      {this.renderZipcode()}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="atm-cart-item-info-title">{locale.product_list.QUANTITY}</div>
+                    <div className="atm-cart-item-info-text">{`${items[item].quantity} ${items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}`}</div>
+                  </div>
+                  <div>
+                    <div className="atm-cart-item-info-title">{locale.product_list.PRICE}</div>
+                    <div className="atm-cart-item-info-text"><IntlMoney className="atm-cart-price">{items[item].prices.total}</IntlMoney></div>
+                  </div>
+                  {items[item].upselling.isUpsellingDate && <button
+                    onClick={this.handleModalOpen}
+                    value={item}
+                    name="upsellDate"
+                    className="atm-button-up-sell atm-button-up-sell--mobile"
+                  >
+                    {locale.upselling.LABEL} <ChevronRightIcon />
+                  </button>}
+                </div>
+                <Actions
+                  screenSize={screenSize}
+                  actions={items[item].actions}
+                  itemId={item}
+                  dispatch={dispatch}
+                  locale={locale.actions}
+                />
               </div>
-              <div>
-                <div className="atm-cart-item-info-title">Quantidade</div>
-                <div className="atm-cart-item-info-text">{items[item].quantity} unidades</div>
-              </div>
-              <div>
-                <div className="atm-cart-item-info-title">Valor</div>
-                <div className="atm-cart-item-info-text"><IntlMoney className="atm-cart-price">{items[item].prices.total}</IntlMoney></div>
-              </div>
-              <button
-                onClick={this.handleModalOpen}
-                value={item}
-                name="upsell"
-                className="atm-button-up-sell atm-button-up-sell--mobile"
-              >
-                turbine seu produto <ChevronRightIcon />
-              </button>
             </div>
-            <div className="mol-cart-item-footer">
-              {this.renderActions(items[item], item)}
-            </div>
-          </li>
-        ))}
+          ))}
+        </Slider>
         {isOpen && this.renderModal()}
-      </ul>
+      </div>
     );
   }
 

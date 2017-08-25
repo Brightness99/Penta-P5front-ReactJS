@@ -1,8 +1,10 @@
 .app__breadcrumb {
+  color: $color-printi;
   font-family: $font-family-open-sans;
   font-size: $font-size-xs;
   letter-spacing: -0.2px;
-  color: $color-printi;
+  line-height: 1;
+  padding: 2rem 0;
 
   span.separator {
     color: #878b94;
