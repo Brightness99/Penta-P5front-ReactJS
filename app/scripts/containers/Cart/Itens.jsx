@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react';
-import swal from 'sweetalert2';
+import Slider from 'react-slick';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { cartDuplicateFetch, cartDeleteFetch, cartUpdateFetch } from 'actions';
-import { FilesIcon, PencilIcon, TrashIcon, ChevronRightIcon } from 'components/Icons';
+import { cartUpdateFetch } from 'actions';
+import { ChevronRightIcon } from 'components/Icons';
 import { IntlDate, IntlMoney, IntlZipcode } from 'components/Intl';
 import Modal from 'components/Modal';
 import { EditableText } from 'molecules/Inputs';
@@ -251,51 +251,64 @@ export default class CartItens extends React.Component {
   renderMobile() {
     const { items, screenSize, dispatch, locale } = this.props;
     const { modal: { isOpen } } = this.state;
-
+    const sliderSettings = {
+      arrows: false,
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '25px',
+    };
     return (
-      <ul className="org-cart-item-list">
-        {Object.keys(items).map(item => (
-          <li className="org-cart-item" key={item}>
-            <div className="mol-cart-item-header">
-              <ProductImage thumbnail={items[item].thumbnail} failbackImage={failbackImage} alt={items[item].final_product.name} />
-              {this.renderProductInfos(items[item], item, 1)}
-            </div>
-            <div className="mol-cart-item-body">
-              <div>
-                <div className="atm-cart-item-info-title">{locale.product_list.DELIVERY}</div>
-                <div className="atm-cart-item-info-text">
-                  <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
-                  {this.renderZipcode()}
+      <div className="org-cart-item-list">
+        <Slider {...sliderSettings}>
+          {Object.keys(items).map(item => (
+            <div>
+              <div className="org-cart-item" key={item}>
+                <div className="mol-cart-item-header">
+                  <ProductImage thumbnail={items[item].thumbnail} failbackImage={failbackImage} alt={items[item].final_product.name} />
+                  {this.renderProductInfos(items[item], item, 1)}
                 </div>
+                <div className="mol-cart-item-body">
+                  <div>
+                    <div className="atm-cart-item-info-title">{locale.product_list.DELIVERY}</div>
+                    <div className="atm-cart-item-info-text">
+                      <span><IntlDate>{items[item].expected_delivery_date}</IntlDate></span>
+                      {this.renderZipcode()}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="atm-cart-item-info-title">{locale.product_list.QUANTITY}</div>
+                    <div className="atm-cart-item-info-text">{`${items[item].quantity} ${items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}`}</div>
+                  </div>
+                  <div>
+                    <div className="atm-cart-item-info-title">{locale.product_list.PRICE}</div>
+                    <div className="atm-cart-item-info-text"><IntlMoney className="atm-cart-price">{items[item].prices.total}</IntlMoney></div>
+                  </div>
+                  {items[item].upselling.isUpsellingDate && <button
+                    onClick={this.handleModalOpen}
+                    value={item}
+                    name="upsellDate"
+                    className="atm-button-up-sell atm-button-up-sell--mobile"
+                  >
+                    {locale.upselling.LABEL} <ChevronRightIcon />
+                  </button>}
+                </div>
+                <Actions
+                  screenSize={screenSize}
+                  actions={items[item].actions}
+                  itemId={item}
+                  dispatch={dispatch}
+                  locale={locale.actions}
+                />
               </div>
-              <div>
-                <div className="atm-cart-item-info-title">{locale.product_list.QUANTITY}</div>
-                <div className="atm-cart-item-info-text">{`${items[item].quantity} ${items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}`}</div>
-              </div>
-              <div>
-                <div className="atm-cart-item-info-title">{locale.product_list.PRICE}</div>
-                <div className="atm-cart-item-info-text"><IntlMoney className="atm-cart-price">{items[item].prices.total}</IntlMoney></div>
-              </div>
-              {items[item].upselling.isUpsellingDate && <button
-                onClick={this.handleModalOpen}
-                value={item}
-                name="upsellDate"
-                className="atm-button-up-sell atm-button-up-sell--mobile"
-              >
-                {locale.upselling.LABEL} <ChevronRightIcon />
-              </button>}
             </div>
-            <Actions
-              screenSize={screenSize}
-              actions={items[item].actions}
-              itemId={item}
-              dispatch={dispatch}
-              locale={locale.actions}
-            />
-          </li>
-        ))}
+          ))}
+        </Slider>
         {isOpen && this.renderModal()}
-      </ul>
+      </div>
     );
   }
 

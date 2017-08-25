@@ -458,6 +458,50 @@
 .org-cross-sell {
   margin-top: 3rem;
 
+  .atm__page-title {
+    font-size: $font-size-sm;
+
+    @include lg {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .org-cross-sell-list {
+    margin: 0 -2.5rem 0;
+    width: calc(100% + 5rem);
+
+    .slick-slider {
+      img {
+        display: inline-flex;
+      }
+    }
+
+    .slick-list {
+      overflow: visible;
+    }
+
+    .slick-slide {
+      .mol-product-card {
+        margin: 0 0.5rem;
+        width: calc(100% - 1rem);
+      }
+
+      &:first-child {
+        .mol-product-card {
+          margin-left: 0;
+          width: calc(100% - 0.5rem);
+        }
+      }
+
+      &:last-child {
+        .mol-product-card {
+          margin-right: 0;
+          width: calc(100% - 0.5rem);
+        }
+      }
+    }
+  }
+
   h2 {
     margin-bottom: 1rem;
   }
@@ -472,12 +516,24 @@
     background-color: $color-white;
     border: 0.1rem solid #dbdddf;
     cursor: pointer;
-    display: inline-flex;
-    flex-direction: column;
+    display: inline-block;
     padding: $grid-gutter-width / 3;
     position: relative;
     text-align: center;
-    width: 24%;
+
+    .atm-card-button {
+      display: flex;
+    }
+
+    @include lg {
+      display: inline-flex;
+      flex-direction: column;
+      width: 24%;
+
+      .atm-card-button {
+        display: none;
+      }
+    }
 
     &:hover {
       box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
@@ -733,8 +789,33 @@
 }
 
 .org-cart-item-list {
+  margin: auto -2.5rem 3rem;
+  width: calc(100% + 5rem);
+
   .app__modal__container {
     padding: 0;
+  }
+
+  .slick-list {
+    overflow: visible;
+  }
+
+  .slick-slide {
+    .org-cart-item {
+      margin: 0 0.5rem;
+    }
+
+    &:first-child {
+      .org-cart-item {
+        margin-left: 0;
+      }
+    }
+
+    &:last-child {
+      .org-cart-item {
+        margin-right: 0;
+      }
+    }
   }
 }
 

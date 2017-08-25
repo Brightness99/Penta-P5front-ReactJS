@@ -4,6 +4,7 @@ import React from 'react';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { PageTitle } from 'atoms/Titles';
 import { IntlMoney } from 'components/Intl';
+import Slider from 'react-slick';
 import { NavLink } from 'react-router-dom';
 
 type Props = {
@@ -27,39 +28,67 @@ export default class CartCrossSell extends React.Component {
 
   static state: State;
 
-  renderCrossSell() {
-    const { crossSelling, locale } = this.props;
-
-    return (
-      <ul className="org-cart-cross-sell">
-        {crossSelling.map((product) => (
-          <li key={product.slug} className="mol-product-card">
-            <NavLink to={`/produto-${product.slug}`}>
-              <img src={`http://dev-cms.printi.com.br/${product.image_small.file}`} alt={product.image_small.alt} />
-              <div>
-                <div className="atm-card-title">{product.title}</div>
-                <div className="atm-card-text">{locale.FROM_PRICE} <IntlMoney>{parseFloat(product.minimum_price)}</IntlMoney>
-                </div>
-              </div>
-              <div className="atm-card-button">{locale.LABEL}</div>
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
   renderMobile() {
-    return null;
-  }
+    const { locale, crossSelling } = this.props;
 
-  renderDesktop() {
-    const { locale } = this.props;
+    const sliderSettings = {
+      arrows: false,
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '25px',
+    };
 
     return (
       <div className="org-cross-sell">
         <PageTitle>{locale.TITLE}</PageTitle>
-        {this.renderCrossSell()}
+        <div className="org-cross-sell-list">
+          <Slider {...sliderSettings}>
+            {crossSelling.map((product) => (
+              <div>
+                <div key={product.slug} className="mol-product-card">
+                  <NavLink to={`/produto-${product.slug}`}>
+                    <img src={`http://dev-cms.printi.com.br/${product.image_small.file}`} alt={product.image_small.alt} />
+                    <div>
+                      <div className="atm-card-title">{product.title}</div>
+                      <div className="atm-card-text">{locale.FROM_PRICE} <IntlMoney>{parseFloat(product.minimum_price)}</IntlMoney>
+                      </div>
+                    </div>
+                    <div className="atm-card-button">{locale.LABEL}</div>
+                  </NavLink>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+    );
+  }
+
+  renderDesktop() {
+    const { locale, crossSelling } = this.props;
+
+    return (
+      <div className="org-cross-sell">
+        <PageTitle>{locale.TITLE}</PageTitle>
+        <ul className="org-cart-cross-sell">
+          {crossSelling.map((product) => (
+            <li key={product.slug} className="mol-product-card">
+              <NavLink to={`/produto-${product.slug}`}>
+                <img src={`http://dev-cms.printi.com.br/${product.image_small.file}`} alt={product.image_small.alt} />
+                <div>
+                  <div className="atm-card-title">{product.title}</div>
+                  <div className="atm-card-text">{locale.FROM_PRICE} <IntlMoney>{parseFloat(product.minimum_price)}</IntlMoney>
+                  </div>
+                </div>
+                <div className="atm-card-button">{locale.LABEL}</div>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

@@ -1,5 +1,7 @@
 // *** Vendor
 @import '~sass-mediaqueries/media-queries';
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 // *** Vendor customization
 @import 'vendor/rc-collapse';
@@ -45,6 +47,7 @@
 @import 'components/modal/index';
 @import 'components/breadcrumbs/index';
 @import 'components/tooltipster/index';
+@import 'components/carousel/index';
 
 // *** Bosons
 @import 'bosons/index';
