@@ -2,15 +2,20 @@
 
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import cx from 'classnames';
 
-import { Glass } from 'components/Icons';
+import { HeartIcon, HelpCircleIcon, ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon, Glass } from 'components/Icons';
 import LogoScroll from 'components/LogoScroll';
 import Overlay from 'components/Overlay';
+import Logo from 'components/Logo';
 
-import Topbar from './_Topbar';
-import Logo from './Logo';
-import Account from './Account';
+
 import Cart from './_Cart';
+import ExclusiveService from './_ExclusiveService';
+import SearchBar from './_SearchBar';
+import Topbar from './_Topbar';
+
+import Account from './Account';
 import Bag from './Bag';
 import ArrowMenu from './ArrowMenu';
 import Menu from './Menu';
@@ -32,7 +37,8 @@ type State = {
   showProfile: boolean,
   isHide: boolean,
   logo: boolean,
-  sideBar: boolean
+  sideBar: boolean,
+  showTopbar: boolean,
 };
 
 export class Header extends React.Component {
@@ -45,6 +51,7 @@ export class Header extends React.Component {
       sideBar: false,
       isHide: false,
       logo: true,
+      showTopbar: true,
     };
     this.showToggleNav = this.showToggleNav.bind(this);
   }
@@ -66,10 +73,14 @@ export class Header extends React.Component {
   handleScroll = () => {
     const windowScrollPosition = document.body.scrollTop;
 
-    if (windowScrollPosition > 40) {
-      this.setState({ logoScroll: true, logo: false });
+    if (windowScrollPosition > 60) {
+      this.setState({
+        showTopbar: false,
+      });
     } else {
-      this.setState({ logoScroll: false, logo: true });
+      this.setState({
+        showTopbar: true,
+      });
     }
   };
 
@@ -141,7 +152,7 @@ export class Header extends React.Component {
 
   renderDesktop() {
     const { screenSize, dispatch, totalCartItems } = this.props;
-    const { showProduct, showProfile, sideBar, logoScroll, logo } = this.state;
+    const { showProduct, showProfile, sideBar, logoScroll, logo, showTopbar } = this.state;
 
     const styles = {
       backgroundImage: `url('${require('../../../../assets/media/svg/icon-search.svg')}')`,
@@ -151,58 +162,89 @@ export class Header extends React.Component {
     };
 
     return (
-      <header className={"app__header" + (logoScroll ? ' container-headerScroll' : '')} onScroll={this.handleScroll}>
-        { logo && (<Topbar />) }
-        <div>
-          <div className={"app__header__container container" + (logoScroll ? ' headerScroll' : '')}>
-            <div>
-              { logo && (<Logo enableLink={true} />) }
-              { logoScroll && (<div><LogoScroll /></div>) }
-              <div className="menu">
-                <NavLink className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
-                  <Menu /><span>Menu</span>
-                </NavLink>
-              </div>
-              <div className="arrowProduct">
-                <NavLink className="title-logo-menu products" to="#" onClick={this.showToggleNav}>
-                  <ArrowMenu />Produtos
-                </NavLink>
-              </div>
-            </div>
-            <div className="box-search">
-              <form>
-                <input type="text" placeholder="Procure por produtos ou informações..." className="input-text" />
-                <input type="submit" value="" className="btn-default btn-secondary btn-lg" style={styles} />
-              </form>
-            </div>
-            <div className="box-bag-account-cart">
-              <div className="box-bag-text">
-                <NavLink to="#" className="title-logo-menu">
-                  <Bag />
-                  <span>atendimento exclusivo</span>
-                </NavLink>
-              </div>
-              <div>
-                <NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>
-                  <Account />
-                </NavLink>
-              </div>
-              <div>
-                <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="container-allSubmenus">
+      <header
+        className={cx(
+          'org-header',
+          !showTopbar && 'org-header--scrolled'
+        )}
+      >
+        <Topbar />
+        <div className="org-header-content">
           <div className="container">
-            {showProduct && (<ProductsMenu />)}
-            {showProfile && (<ProfileMenu />)}
+            <Logo small={!showTopbar} enableLink={true} />
+            <div className="mol-header-button">
+              <button className="atm-header-button">
+                <MenuIcon />Menu
+              </button>
+            </div>
+            <div className="mol-header-button">
+              <button className="atm-header-button">
+                <AngleDownIcon />Produtos
+              </button>
+            </div>
+            <SearchBar dispatch={dispatch} />
+            <div className="mol-header-button">
+              <div className="atm-header-button">
+                <ExclusiveServiceIcon />Venda Corporativa
+              </div>
+              <ExclusiveService />
+            </div>
+            <button className="atm-header-icon-button">
+              <MyAccountIcon />
+            </button>
+            <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           </div>
         </div>
-        <div>
-          {sideBar && (<Sidebar screenSize={screenSize} />)}
-        </div>
+        {/*<div>*/}
+          {/*<div className={"app__header__container container" + (logoScroll ? ' headerScroll' : '')}>*/}
+            {/*<div>*/}
+              {/*{ logo && (<Logo enableLink={true} />) }*/}
+              {/*{ logoScroll && (<div><LogoScroll /></div>) }*/}
+              {/*<div className="menu">*/}
+                {/*<NavLink className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>*/}
+                  {/*<Menu /><span>Menu</span>*/}
+                {/*</NavLink>*/}
+              {/*</div>*/}
+              {/*<div className="arrowProduct">*/}
+                {/*<NavLink className="title-logo-menu products" to="#" onClick={this.showToggleNav}>*/}
+                  {/*<ArrowMenu />Produtos*/}
+                {/*</NavLink>*/}
+              {/*</div>*/}
+            {/*</div>*/}
+            {/*<div className="box-search">*/}
+              {/*<form>*/}
+                {/*<input type="text" placeholder="Procure por produtos ou informações..." className="input-text" />*/}
+                {/*<input type="submit" value="" className="btn-default btn-secondary btn-lg" style={styles} />*/}
+              {/*</form>*/}
+            {/*</div>*/}
+            {/*<div className="box-bag-account-cart">*/}
+              {/*<div className="box-bag-text">*/}
+                {/*<NavLink to="#" className="title-logo-menu">*/}
+                  {/*<Bag />*/}
+                  {/*<span>atendimento exclusivo</span>*/}
+                {/*</NavLink>*/}
+              {/*</div>*/}
+              {/*<div>*/}
+                {/*<NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>*/}
+                  {/*<Account />*/}
+                {/*</NavLink>*/}
+              {/*</div>*/}
+              {/*<div>*/}
+                {/**/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+        {/*</div>*/}
+
+        {/*<div className="container-allSubmenus">*/}
+          {/*<div className="container">*/}
+            {/*{showProduct && (<ProductsMenu />)}*/}
+            {/*{showProfile && (<ProfileMenu />)}*/}
+          {/*</div>*/}
+        {/*</div>*/}
+        {/*<div>*/}
+          {/*{sideBar && (<Sidebar screenSize={screenSize} />)}*/}
+        {/*</div>*/}
       </header>
     );
   }
