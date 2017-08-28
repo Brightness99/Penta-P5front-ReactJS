@@ -48,7 +48,7 @@ export default class CartCrossSell extends React.Component {
         <div className="org-cross-sell-list">
           <Slider {...sliderSettings}>
             {crossSelling.map((product) => (
-              <div>
+              <div key={product.slug}>
                 <div key={product.slug} className="mol-product-card">
                   <NavLink to={`/produto-${product.slug}`}>
                     <img src={`http://dev-cms.printi.com.br/${product.image_small.file}`} alt={product.image_small.alt} />

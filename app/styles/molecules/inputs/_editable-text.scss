@@ -1,6 +1,6 @@
 .mol-editable-text {
   cursor: pointer;
-  display: inline-flex;
+  display: block;
   position: relative;
   height: 3rem;
 
@@ -8,6 +8,7 @@
     display: block;
     color: $color-almostBlack;
     font-size: $font-size-lg;
+    line-height: 3rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
