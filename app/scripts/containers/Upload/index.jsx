@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { PageTitle } from 'atoms/Titles';
 import Alert from 'components/Alert';
+import AdditionalOption from 'components/AdditionalOption';
 
 type Props = {
   app: AppStore,
@@ -58,8 +59,65 @@ export class Upload extends React.Component {
       }
     ];
 
+    const additionalOptions = [
+      {
+        title: 'Formato do arquivo',
+        video: 'http://www.youtube.com',
+        options: [
+          {
+            label: 'Arquivo PDF (fechado para impressão)',
+            value: true,
+            price: 0,
+          },
+          {
+            label: 'Arquivo AI, INDD, PSD, JPG (aberto)',
+            value: false,
+            price: 30,
+          },
+        ]
+      },
+      {
+        title: 'Checagem do arquivo',
+        video: 'http://www.youtube.com',
+        options: [
+          {
+            label: 'Checagem padrão',
+            value: true,
+            price: 0,
+          },
+          {
+            label: 'Checagem profissional',
+            value: false,
+            price: 25,
+          },
+        ]
+      },
+    ];
+
     const renderAlerts = () => {
-      return alerts.map((alert) => (<Alert key={`${new Date()}-${alert.content}`} type={alert.type} title={alert.title} content={alert.content} />));
+      return alerts.map(
+        (alert) => (
+          <Alert
+            key={`${new Date()}-${alert.content}`}
+            type={alert.type}
+            title={alert.title}
+            content={alert.content}
+          />
+        )
+      );
+    };
+
+    const renderAdditionalOptions = () => {
+      return additionalOptions.map(
+        (additionalOption) => (
+          <AdditionalOption
+            key={`${new Date()}-${additionalOption.title}`}
+            title={additionalOption.title}
+            video={additionalOption.video}
+            options={additionalOption.options}
+          />
+        )
+      );
     };
 
     return (
@@ -69,6 +127,14 @@ export class Upload extends React.Component {
             <Breadcrumbs links={breadcrumb} />
             <PageTitle>envie sua arte final</PageTitle>
             <div className="alert-container">{renderAlerts()}</div>
+            <div className="upload-container">
+              <div className="upload-container-centralized">
+                {renderAdditionalOptions()}
+              </div>
+            </div>
+            <div className="upload-container">
+              <div className="upload-container-centralized" />
+            </div>
           </div>
         </div>
       </div>

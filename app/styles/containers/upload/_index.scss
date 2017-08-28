@@ -1,0 +1,25 @@
+@import "additionalOptions/index";
+
+.page-upload {
+	.container {
+		.upload-container {
+			display: flex;
+			align-items: center;
+    	justify-content: center;
+    	background-color: $color-white;
+    	margin-bottom: 2rem;
+			.upload-container-centralized {
+				width: 87%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				margin: 2rem 0;
+				.container-midSide {
+					width: 49%;
+					display: flex;
+					flex-direction: row;
+				}
+			}
+		}
+	}
+}
