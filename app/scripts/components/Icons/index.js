@@ -55,3 +55,4 @@ export ChevronDownIcon from './ChevronDown';
 export Plus from './Plus';
 export PrintiClub from './PrintiClub';
 export CartIcon from './Cart';
+export PlayCircleIcon from './_PlayCircle';

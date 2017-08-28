@@ -1,0 +1,44 @@
+.additionalOptions-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .additionalOptions-box-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    span.title {
+      font-weight: 400;
+      font-size: 1.8rem;
+      font-family: $font-family-nunito-regular;
+      letter-spacing: -0.036rem;
+    }
+    span.midia {
+      display: flex;
+      flex-direction: row;
+      .midiaIcon {
+        width: 1.6rem;
+        height: 1.6rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        margin-top: .6rem;
+        cursor: pointer;
+        svg {
+          fill: $color-printi;
+        }
+      }
+      button {
+        cursor: pointer;
+        border: 0;
+        background: transparent;
+        font-weight: 400;
+        font-size: 1.3rem;
+        font-family: $font-family-open-sans-regular;
+        color: $color-printi;
+      }
+    }
+  }
+}
