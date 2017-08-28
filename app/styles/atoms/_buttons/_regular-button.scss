@@ -1,0 +1,31 @@
+// TODO: Label Icon Atom
+
+.atm-regular-button {
+  @include center-child-flex;
+  background-color: $color-printi-blue;
+  border: none;
+  border-radius: $bsn-border-radius;
+  color: $color-white;
+  display: flex;
+  font-size: $font-size-xs;
+  height: 3rem;
+  outline: none;
+  text-decoration: none;
+  transition: 0.3s linear;
+
+  &:hover {
+    background-color: lighten($color-printi-blue, 10%);
+    color: $color-white;
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: darken($color-printi-blue, 10%);
+    color: darken($color-white, 10%);
+    text-decoration: none;
+  }
+
+  @include lg {
+    height: 4rem;
+  }
+}

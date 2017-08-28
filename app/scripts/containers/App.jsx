@@ -16,7 +16,7 @@ import Authentication from 'containers/Authentication';
 import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
-import Header from 'components/Header';
+import Header from 'components/Header/nIndex';
 import Footer from 'components/Footer';
 
 
