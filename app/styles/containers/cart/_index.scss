@@ -370,6 +370,7 @@
 
   .mol-editable-text {
     align-items: center;
+    display: inline-flex;
     width: 100%;
 
     @include lg {
@@ -770,21 +771,29 @@
   background: transparent;
   border: transparent;
   color: $color-printi-blue;
+  display: inline-flex;
   font-family: $font-family-open-sans;
   font-weight: bold;
-  margin-top: 1.6rem;
   text-decoration: underline;
+  text-align: left;
 }
 
 .mol-cart-item-desktop-infos {
   justify-content: space-between;
   display: inline-flex;
   flex-direction: column;
+  height: 11rem;
   padding: 0 ($grid-gutter-width / 3) * 2;
   width: 100%;
 
   > .mol-cart-item-actions {
     padding-top: 2rem;
+  }
+
+  > .mol-cart-item-infos {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -829,7 +838,7 @@
     align-items: center;
     display: flex;
     height: 12rem;
-    padding: 0 1.5rem;
+    padding: 1.5rem;
     border-bottom: 0.1rem solid #dbdddf;
   }
 
@@ -849,6 +858,9 @@
   }
 
   .mol-cart-item-infos {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
     padding-left: 1.5rem;
     width: calc(100% - 6.5rem);
   }
@@ -1025,5 +1037,5 @@
 }
 
 .atm-cart-item-product {
-  padding-top: 0.8rem;
+  display: inline-flex;
 }
