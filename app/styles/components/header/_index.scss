@@ -861,21 +861,57 @@
     }
 
     .mol-topbar-models {
-      display: inline-flex;
       position: relative;
+
+      .atm-topbar-link {
+        height: 2.5rem;
+      }
 
       .mol-topbar-modelList {
         background-color: $color-white;
+        border-radius: 0 0 $bsn-border-radius $bsn-border-radius;
+        box-shadow: 0.8rem 0.8rem 1rem 0 rgba(83, 117, 153, 0.5);
         display: none;
+        flex-direction: column;
+        height: 30rem;
+        left: 50%;
         position: absolute;
         top: 2.5rem;
-        left: 50%;
         transform: translateX(-50%);
+        overflow: hidden;
+        overflow-y: auto;
+        width: 30rem;
+        z-index: 1;
+
+        li {
+          align-items: center;
+          display: inline-flex;
+          height: 3rem;
+          max-height: 3rem;
+          min-height: 3rem;
+          padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+          width: 100%;
+
+          a {
+            color: $color-almostBlack;
+            text-decoration: none;
+            transition: 0.3s ease;
+
+            &:hover {
+              color: $color-printi-blue;
+              text-decoration: none;
+            }
+          }
+        }
       }
 
       &:hover {
+        .atm-topbar-link {
+          color: $color-printi-blue;
+        }
+
         .mol-topbar-modelList {
-          display: inline-flex;
+          display: block;
         }
       }
     }
@@ -955,9 +991,20 @@
       }
     }
 
+    .mol-header-button-hidden {
+      display: none;
+      opacity: 0;
+      transition: 0.3s ease;
+    }
+
     &:hover {
       .atm-header-button {
         color: $color-printi-blue;
+      }
+
+      .mol-header-button-hidden {
+        display: flex;
+        opacity: 1;
       }
     }
   }
