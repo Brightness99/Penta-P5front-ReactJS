@@ -1,0 +1,28 @@
+.container-changePayment {
+  background-color: $color-white;
+}
+
+.box-order {
+  background-color: $color-white; 
+  .titles-descOrder {
+    display: flex;
+    >li {
+      flex: 1;
+      &:first-of-type {
+        flex: 2;
+      }
+    }
+  }
+  .details-descOrder {
+    display: flex;
+    >div {
+      flex: 1;
+      &:first-of-type {
+        flex: 2;
+      }
+    }
+  }
+  .total-value-descOrder {
+    
+  }
+}
