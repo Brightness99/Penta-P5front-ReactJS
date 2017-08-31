@@ -8,6 +8,7 @@ import { PrintiIcon, PrintiSymbolIcon } from 'components/Icons';
 type Props = {
   enableLink: boolean,
   small: boolean,
+  fill: string,
 };
 
 const Logo = (props: Props) => {
@@ -17,7 +18,7 @@ const Logo = (props: Props) => {
     return (
       <div className="atm-printi-logo">
         <NavLink to="/">
-          {small ? <PrintiSymbolIcon /> : <PrintiIcon />}
+          {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
         </NavLink>
       </div>
     );
@@ -25,7 +26,7 @@ const Logo = (props: Props) => {
 
   return (
     <div className="atm-printi-logo">
-      {small ? <PrintiSymbolIcon /> : <PrintiIcon />}
+      {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
     </div>
   );
 };
