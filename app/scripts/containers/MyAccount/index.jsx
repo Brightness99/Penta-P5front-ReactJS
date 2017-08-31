@@ -25,11 +25,11 @@ type Props = {
 export class MyAccount extends React.Component {
   static props: Props;
 
+  // <OrderList screenSize={screenSize} />
   renderMobile() {
     return (
       <div className="container-myaccount">
         {this.renderContainer()}
-        <ChangePaymentMethod screenSize={screenSize} />
       </div>
     );
   }

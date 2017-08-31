@@ -2,7 +2,7 @@
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
-import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, Cards } from 'components/Icons';
+import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, CardsIcon } from 'components/Icons';
 
 
 type Props = {
@@ -202,7 +202,7 @@ export class OrderList extends React.Component {
                   <Receipt />
                 </Link>
                 <Link to="#" className="btn-icons">
-                  <Cards />
+                  <CardsIcon />
                 </Link>
               </div>
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
@@ -241,7 +241,7 @@ export class OrderList extends React.Component {
                   <Receipt />
                 </Link>
                 <Link to="#" className="btn-icons">
-                  <Cards />
+                  <CardsIcon />
                 </Link>
               </div>
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
@@ -280,7 +280,7 @@ export class OrderList extends React.Component {
                   <Receipt />
                 </Link>
                 <Link to="#" className="btn-icons">
-                  <Cards />
+                  <CardsIcon />
                 </Link>
               </div>
               <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>

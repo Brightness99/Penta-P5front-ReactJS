@@ -1,7 +1,7 @@
 // flow
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Orders, Address, MyData, Cards, Models, Out } from 'components/Icons';
+import { Orders, Address, MyData, CardsIcon, Models, Out } from 'components/Icons';
 
 export class Sidebar extends React.Component {
   render() {
@@ -30,7 +30,7 @@ export class Sidebar extends React.Component {
           </li>
           <li>
             <Link to="#">
-              <i><Cards /></i>Cartões salvos
+              <i><CardsIcon /></i>Cartões salvos
             </Link>
           </li>
           <li>

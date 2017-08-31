@@ -1,28 +1,244 @@
 .container-changePayment {
-  background-color: $color-white;
+  // background-color: $color-white;
 }
 
+.fnt-w600 {
+  font-weight: 600;
+}
+.mrg-half {
+  margin: 0.5rem 0;
+}
+.title-changePayment {
+  font-family: $font-family-open-sans-bold;
+  font-size: $font-size-lg;
+  margin-top: 2rem;
+  text-transform: uppercase;
+}
 .box-order {
   background-color: $color-white; 
+  display: flex;
+  margin-top: 3.2rem;
+  flex-direction: row;
+  @include lg {
+    flex-direction: column;
+  }
   .titles-descOrder {
-    display: flex;
-    >li {
+    background-color: $color-light-grey;
+    box-sizing: border-box;
+    display: none;
+    flex-direction: column;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-xxs;
+    margin: 0;
+    padding: 0.4rem 2rem;
+    text-transform: uppercase;
+    @include lg {
+      display: flex;
+      flex-direction: row;
+    }
+    li {
       flex: 1;
       &:first-of-type {
         flex: 2;
       }
     }
   }
-  .details-descOrder {
-    display: flex;
-    >div {
-      flex: 1;
-      &:first-of-type {
-        flex: 2;
+
+  .container-detailsOrder {
+    box-sizing: border-box;
+    padding: 0.4rem 2rem;
+    width: 100%;
+    .details-descOrder {
+      display: flex;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      p {
+        font-size: $font-size-xs;
+        margin-bottom: 0;
+      }
+      .title-descOrder {
+        font-family: $font-family-open-sans-regular;
+        font-size: $font-size-base;
+        font-weight: 600;
+      }
+      div {
+        flex: 1;
+        &:first-of-type {
+          flex: 2;
+        }
+        &.image-text-descOrder {
+          display: flex;
+          flex-direction: column;
+          @include lg {
+            flex-direction: row;
+          }
+          div {
+            flex: 1;
+            .image-descOrder {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              @include lg {
+                align-items: flex-start;
+              }
+            }
+          }
+          a {
+            color: $color-gunmetal;
+            font-family: $font-family-open-sans-regular;
+            font-size: $font-size-sm;
+            margin-top: 1rem;
+          }
+        }
+        .title-blockMobile {
+          font-weight: 600;
+          @include lg {
+            display: none;
+          }
+          &.align-center {
+            text-align: center;
+          }
+        }
+        &.flex-blockMobile {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          @include lg {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+          div {
+            &:first-of-type {
+              display: flex;
+              flex: 1;
+              @include lg {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+    .total-value-descOrder {
+      align-items: flex-end;
+      border-top: 0.1rem solid $color-silver;
+      justify-content: flex-end;
+      margin-bottom: 4rem;
+      display: none;
+      @include lg {
+        display: flex;
+      }
+      .box-total-value {
+        display: inline-flex;
+        margin-top: 2rem;
+        width: 100%;
+        @include lg {
+          width: 36%;
+        }
+        div {
+          flex: 1;
+          p {
+            margin-bottom: 0;
+          }
+          .text-total {
+            font-family: $font-family-open-sans-bold;
+            font-size: $font-size-xs;
+            text-transform: uppercase;
+          }
+          .text-value {
+            font-family: $font-family-open-sans-bold;
+            font-size: $font-size-lg;
+          }
+        }
       }
     }
   }
-  .total-value-descOrder {
-    
+}
+
+.container-cards {
+  background-color: $color-white;
+  margin: 2rem 0;
+  padding: 2rem;
+  .btn-default {
+    &.btn-credit-card {
+      display: inline-flex;
+      height: auto;
+      padding: 2rem;
+      width: auto;
+      svg {
+        fill: $color-white;
+        margin-right: 1rem;
+      }
+    }
+  }
+  .box-savecards {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 2rem 0;
+    @include lg {
+      flex-direction: row;
+    }
+    .btn-default {
+      margin-bottom: 1rem;
+      padding: 1.1rem 2.922rem;
+    }
+    .atm-box-radio {
+      padding: 0.2rem 1rem;
+    }
+  }
+  .box-cards {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .rccs, .org-checkout-content-data {
+      flex: 1;
+    }
+    .rccs {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+    .org-checkout-content-data {
+      .atm-checkout-input {
+        &-full {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .box-footer-card {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    div {
+      flex: 1;
+      margin-top: 1rem;
+      @include lg {
+        margin-top: 0;
+      }
+      &:last-of-type {
+        align-items: flex-end;
+        display: flex;
+        justify-content: flex-end;
+      }
+      span {
+        margin-right: 1rem;
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
   }
 }
