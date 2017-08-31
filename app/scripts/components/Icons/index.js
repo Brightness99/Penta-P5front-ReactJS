@@ -37,7 +37,7 @@ export ArrowRightIcon from './ArrowRight';
 export Orders from './Orders';
 export Address from './Address';
 export MyData from './MyData';
-export Cards from './Cards';
+export CardsIcon from './CardsIcon';
 export Models from './Models';
 export Out from './Out';
 export CodeBar from './CodeBar';
