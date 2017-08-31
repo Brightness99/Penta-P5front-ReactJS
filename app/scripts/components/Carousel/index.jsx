@@ -15,7 +15,7 @@ type State = {
   counter: number,
 }
 
-export default class Carousel extends React.Component {
+export default class oCarousel extends React.Component {
   constructor(props) {
     super(props);
 
@@ -78,30 +78,6 @@ export default class Carousel extends React.Component {
     const { children } = this.props;
     const { counter } = this.state;
 
-    return (
-
-      <div className="carousel">
-        <div className="carouselBullet">
-          {this.pager()}
-        </div>
-        <button className="carousel__prev" onClick={this.prevSlide}>
-          <ArrowCarousel />
-        </button>
-        <button className="carousel__next" onClick={this.nextSlide}>
-           <ArrowCarousel />
-        </button>
-        <CSSTransitionGroup
-          transitionName="animate"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-          component="div"
-          className="carousel__slide"
-          transitionAppear={true}
-          transitionAppearTimeout={1000}
-        >
-          {children[counter]}
-        </CSSTransitionGroup>
-      </div>
-    );
+    return <span>{children}</span>;
   }
 }

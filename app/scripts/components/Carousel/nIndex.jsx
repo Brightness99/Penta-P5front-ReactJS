@@ -22,7 +22,7 @@ type State = {
   screenSize: number,
 }
 
-export default class Carousel extends React.Component {
+export default class nCarousel extends React.Component {
   constructor(props) {
     super(props);
 

@@ -3,22 +3,24 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import cx from 'classnames';
-
+import { TransitionGroup } from 'react-transition-group';
 import { HeartIcon, HelpCircleIcon, ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon, Glass } from 'components/Icons';
 import LogoScroll from 'components/LogoScroll';
 import Overlay from 'components/Overlay';
 import Logo from 'components/Logo';
 
+import { FadeToggle, SlideToggle } from 'animations';
 
 import Cart from './_Cart';
 import ExclusiveService from './_ExclusiveService';
+import Menu from './_Menu';
 import SearchBar from './_SearchBar';
 import Topbar from './_Topbar';
+import Products from './_Products';
 
 import Account from './Account';
 import Bag from './Bag';
 import ArrowMenu from './ArrowMenu';
-import Menu from './Menu';
 import Sidebar from './Sidebar';
 
 import ProductsMenu from './ProductsMenu';
@@ -39,6 +41,9 @@ type State = {
   logo: boolean,
   sideBar: boolean,
   showTopbar: boolean,
+  showMenu: boolean,
+  showProducts: boolean,
+  activePane: string,
 };
 
 export class Header extends React.Component {
@@ -52,6 +57,9 @@ export class Header extends React.Component {
       isHide: false,
       logo: true,
       showTopbar: true,
+      showMenu: false,
+      showProducts: false,
+      activePane: '',
     };
     this.showToggleNav = this.showToggleNav.bind(this);
   }
@@ -68,7 +76,8 @@ export class Header extends React.Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
   static props: Props;
-  state: State;
+
+  static state: State;
 
   handleScroll = () => {
     const windowScrollPosition = document.body.scrollTop;
@@ -100,7 +109,25 @@ export class Header extends React.Component {
         sideBar: !sideBar,
       });
     }
-  }
+  };
+
+  handlePaneHide = () => {
+    this.setState({
+      activePane: '',
+    });
+  };
+
+  handleShowMenu = () => {
+    this.setState({
+      activePane: 'menu',
+    });
+  };
+
+  handleShowProducts = () => {
+    this.setState({
+      activePane: 'products',
+    });
+  };
 
   renderMobile() {
     const { screenSize, dispatch, totalCartItems } = this.props;
@@ -152,14 +179,7 @@ export class Header extends React.Component {
 
   renderDesktop() {
     const { screenSize, dispatch, totalCartItems } = this.props;
-    const { showProduct, showProfile, sideBar, logoScroll, logo, showTopbar } = this.state;
-
-    const styles = {
-      backgroundImage: `url('${require('../../../../assets/media/svg/icon-search.svg')}')`,
-      backgroundSize: '20px',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-    };
+    const { showTopbar, activePane, showProducts } = this.state;
 
     return (
       <header
@@ -168,23 +188,29 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
-        <Topbar />
+        <Topbar handleClose={this.handlePaneHide} />
         <div className="org-header-content">
           <div className="container">
             <Logo small={!showTopbar} enableLink={true} />
             <div className="mol-header-button">
-              <button className="atm-header-button">
+              <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu
               </button>
             </div>
-            <div className="mol-header-button">
-              <button className="atm-header-button">
+            <div className="mol-header-button mol-header-button--no-position">
+              <button
+                onClick={activePane === 'products' ? this.handlePaneHide : this.handleShowProducts}
+                className={cx(
+                  'atm-header-button',
+                  activePane === 'products' && 'atm-header-button-products--active',
+                )}
+              >
                 <AngleDownIcon />Produtos
               </button>
             </div>
             <SearchBar dispatch={dispatch} />
             <div className="mol-header-button">
-              <div className="atm-header-button">
+              <div onMouseOver={this.handlePaneHide} className="atm-header-button">
                 <ExclusiveServiceIcon />Venda Corporativa
               </div>
               <ExclusiveService />
@@ -195,56 +221,16 @@ export class Header extends React.Component {
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           </div>
         </div>
-        {/*<div>*/}
-          {/*<div className={"app__header__container container" + (logoScroll ? ' headerScroll' : '')}>*/}
-            {/*<div>*/}
-              {/*{ logo && (<Logo enableLink={true} />) }*/}
-              {/*{ logoScroll && (<div><LogoScroll /></div>) }*/}
-              {/*<div className="menu">*/}
-                {/*<NavLink className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>*/}
-                  {/*<Menu /><span>Menu</span>*/}
-                {/*</NavLink>*/}
-              {/*</div>*/}
-              {/*<div className="arrowProduct">*/}
-                {/*<NavLink className="title-logo-menu products" to="#" onClick={this.showToggleNav}>*/}
-                  {/*<ArrowMenu />Produtos*/}
-                {/*</NavLink>*/}
-              {/*</div>*/}
-            {/*</div>*/}
-            {/*<div className="box-search">*/}
-              {/*<form>*/}
-                {/*<input type="text" placeholder="Procure por produtos ou informações..." className="input-text" />*/}
-                {/*<input type="submit" value="" className="btn-default btn-secondary btn-lg" style={styles} />*/}
-              {/*</form>*/}
-            {/*</div>*/}
-            {/*<div className="box-bag-account-cart">*/}
-              {/*<div className="box-bag-text">*/}
-                {/*<NavLink to="#" className="title-logo-menu">*/}
-                  {/*<Bag />*/}
-                  {/*<span>atendimento exclusivo</span>*/}
-                {/*</NavLink>*/}
-              {/*</div>*/}
-              {/*<div>*/}
-                {/*<NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>*/}
-                  {/*<Account />*/}
-                {/*</NavLink>*/}
-              {/*</div>*/}
-              {/*<div>*/}
-                {/**/}
-              {/*</div>*/}
-            {/*</div>*/}
-          {/*</div>*/}
-        {/*</div>*/}
-
-        {/*<div className="container-allSubmenus">*/}
-          {/*<div className="container">*/}
-            {/*{showProduct && (<ProductsMenu />)}*/}
-            {/*{showProfile && (<ProfileMenu />)}*/}
-          {/*</div>*/}
-        {/*</div>*/}
-        {/*<div>*/}
-          {/*{sideBar && (<Sidebar screenSize={screenSize} />)}*/}
-        {/*</div>*/}
+        <Menu
+          screenSize={screenSize}
+          isHidden={activePane !== 'menu'}
+          handleClose={this.handlePaneHide}
+        />
+        <Products
+          screenSize={screenSize}
+          isHidden={activePane !== 'products'}
+          handleClose={this.handlePaneHide}
+        />
       </header>
     );
   }
