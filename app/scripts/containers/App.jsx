@@ -19,7 +19,6 @@ import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-
 type Props = {
   app: AppStore,
   cart: {},
@@ -60,25 +59,28 @@ export class App extends React.Component {
         <Router dispatch={dispatch} router={router}>
           <Switch>
             <Route exact path="/pagamento" component={Checkout} />
-            <Route path="/" render={() => (
-              <div key="app" className="app">
-                <Header screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count} />
-                <main className="app__main">
-                  <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/configuracao-:slug" component={Config} />
-                    <Route path="/produtos-:slug" component={Products} />
-                    <Route path="/login-cadastro" component={Authentication} />
-                    <Route path="/minha-conta" component={MyAccount} />
-                    <Route exact path="/test" component={Home} />
-                    <Route path="/meu-carrinho" component={Cart} />
-                    <Route exact path="/404" component={Error404} />
-                    <Route component={Error404} />
-                  </Switch>
-                </main>
-                <Footer screenSize={app.screenSize} />
-              </div>
-            )} />
+            <Route
+              path="/"
+              render={() => (
+                <div key="app" className="app">
+                  <Header screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count} />
+                  <main className="app__main">
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route path="/configuracao-:slug" component={Config} />
+                      <Route path="/produtos-:slug" component={Products} />
+                      <Route path="/login-cadastro" component={Authentication} />
+                      <Route path="/minha-conta" component={MyAccount} />
+                      <Route exact path="/test" component={Home} />
+                      <Route path="/meu-carrinho" component={Cart} />
+                      <Route exact path="/404" component={Error404} />
+                      <Route component={Error404} />
+                    </Switch>
+                  </main>
+                  <Footer screenSize={app.screenSize} />
+                </div>
+              )}
+            />
           </Switch>
         </Router>
       );
