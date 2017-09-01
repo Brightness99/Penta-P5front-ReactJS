@@ -11,7 +11,7 @@
     flex: 1;
     //height: 100%;
     box-sizing: border-box;
-    padding: 3rem 7rem 3rem 7rem;
+    padding: 3rem 1.8rem 3rem 9rem;
     border-right: 1px solid $color-lightGray2;
     .box-client {
       display: flex;
@@ -43,19 +43,22 @@
         font-size: $font-size-base;
         text-align: left;
         color: $color-lightGray;
+        margin-bottom: 1.2rem;
+        display: inline-flex;
         a {
           color: $color-lightGray;
-          i {
-            float: left;
-            margin-right: 20px;
-            height: 25px;
-            margin-top: 1rem;
+          display: inline-flex;
+          span {
+            flex: 2;
+            margin-left: 1.0rem;
+          }
+          svg {
+            //width: 14%;
+          }
+          &.is-active {
+            color: $color-printi-blue;
             svg {
-              //width: 29px;
-              //height: 24px;
-              //float: left;
-              //margin-right: 0px;
-              //margin-top: 10px;
+              fill: $color-printi-blue;
             }
           }
         }
@@ -129,14 +132,13 @@
     }
     .box-detailsOrder {
       transition: box-shadow .3s;
-
       border: 1px solid $color-hrLightGray;
       box-sizing: border-box;
       border-radius: 3px;
       margin-bottom: 1rem;
       background-color: $color-white; 
       @include lg {
-        padding: 2rem 1.4rem;
+        padding: 1rem 1.4rem;
         border: 1px solid $color-hrLightGray;
       }
       &.delivered, &.pendingPayment, &.inTransport {
@@ -215,7 +217,7 @@
         flex-direction: column;
         padding: 1rem 1.4rem 2rem 1.4rem;
         @include lg {
-          padding: 2rem 1.4rem;
+          padding: 1.2rem 1.4rem;          
           align-items: center;
           flex-direction: row;
         }
@@ -338,7 +340,6 @@
             font-size: $font-size-h5;
             line-height: 1.11;
             color: $color-almostBlack;
-            text-decoration: underline;
             @include lg {
               font-size: $font-size-base;
               line-height: 1.25;
