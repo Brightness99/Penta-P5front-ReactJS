@@ -17,6 +17,7 @@ import Menu from './_Menu';
 import SearchBar from './_SearchBar';
 import Topbar from './_Topbar';
 import Products from './_Products';
+import MyAccount from "./_MyAccount";
 
 import Account from './Account';
 import Bag from './Bag';
@@ -215,9 +216,12 @@ export class Header extends React.Component {
               </div>
               <ExclusiveService />
             </div>
-            <button className="atm-header-icon-button">
-              <MyAccountIcon />
-            </button>
+            <div className="mol-header-button">
+              <button className="atm-header-icon-button">
+                <MyAccountIcon />
+              </button>
+              <MyAccount screenSize={screenSize} />
+            </div>
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           </div>
         </div>
