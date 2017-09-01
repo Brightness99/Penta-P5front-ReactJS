@@ -1,15 +1,10 @@
 // @flow
 
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
-import { TransitionGroup } from 'react-transition-group';
-import { HeartIcon, HelpCircleIcon, ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon, Glass } from 'components/Icons';
-import LogoScroll from 'components/LogoScroll';
-import Overlay from 'components/Overlay';
+import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
-
-import { FadeToggle, SlideToggle } from 'animations';
 
 import Cart from './_Cart';
 import ExclusiveService from './_ExclusiveService';
@@ -17,16 +12,7 @@ import Menu from './_Menu';
 import SearchBar from './_SearchBar';
 import Topbar from './_Topbar';
 import Products from './_Products';
-import MyAccount from "./_MyAccount";
-
-import Account from './Account';
-import Bag from './Bag';
-import ArrowMenu from './ArrowMenu';
-import Sidebar from './Sidebar';
-
-import ProductsMenu from './ProductsMenu';
-import ProfileMenu from './ProfileMenu';
-
+import MyAccount from './_MyAccount';
 
 type Props = {
   screenSize: string,
@@ -36,38 +22,20 @@ type Props = {
 };
 
 type State = {
-  showProduct: boolean,
-  showProfile: boolean,
-  isHide: boolean,
-  logo: boolean,
-  sideBar: boolean,
   showTopbar: boolean,
-  showMenu: boolean,
-  showProducts: boolean,
   activePane: string,
 };
 
 export class Header extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      showProduct: false,
-      showProfile: false,
-      sideBar: false,
-      isHide: false,
-      logo: true,
       showTopbar: true,
-      showMenu: false,
-      showProducts: false,
       activePane: '',
     };
-    this.showToggleNav = this.showToggleNav.bind(this);
   }
 
-  static defaultProps = {
-    screenSize: 'xs',
-  };
+  shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
@@ -94,24 +62,6 @@ export class Header extends React.Component {
     }
   };
 
-  showToggleNav = (e) => {
-    const { showProduct, showProfile, sideBar } = this.state;
-
-    if (e.currentTarget.className === 'title-logo-menu products') {
-      this.setState({
-        showProduct: !showProduct,
-      });
-    } else if (e.currentTarget.className === 'accountIcon') {
-      this.setState({
-        showProfile: !showProfile,
-      });
-    } else if (e.currentTarget.className === 'title-logo-menu menu') {
-      this.setState({
-        sideBar: !sideBar,
-      });
-    }
-  };
-
   handlePaneHide = () => {
     this.setState({
       activePane: '',
@@ -130,57 +80,50 @@ export class Header extends React.Component {
     });
   };
 
+  handleShowMyAccount = () => {
+    this.setState({
+      activePane: 'account',
+    });
+  };
+
   renderMobile() {
     const { screenSize, dispatch, totalCartItems } = this.props;
-    const { showProduct, showProfile, sideBar } = this.state;
-
-    const styles = {
-      backgroundImage: `url('${require('../../../../assets/media/svg/icon-search.svg')}')`,
-      backgroundSize: '20px',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-    };
+    const { activePane } = this.state;
 
     return (
-      <header className="app__header">
-        <div>
-          <div className="app__header__container container">
-            <div>
-              <div className="menu">
-                <NavLink className="title-logo-menu menu" to="#" onClick={this.showToggleNav}>
-                  <Menu />
-                </NavLink>
-              </div>
-              <Logo enableLink={true} />
-            </div>
-            <div>
-              <div>
-                <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
-              </div>
-              <div>
-                <NavLink to="/login-cadastro" className="accountIcon" id="profile" onClick={this.showToggleNav}>
-                  <Account />
-                </NavLink>
-              </div>
-            </div>
+      <header className="org-header">
+        <div className="mol-mobile-header">
+          <div className="mol-header-button mol-header-button--menu">
+            <button onClick={this.handleShowMenu} className="atm-header-icon-button">
+              <MenuIcon />
+            </button>
           </div>
-          <div className="box-search-mobile">
-            <form>
-              <input type="text" placeholder="Procure por produtos ou informações" className="input-text" />
-              <input type="submit" value="" className="btn-default btn-lg" style={styles} />
-            </form>
+          <Logo enableLink={true} />
+          <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
+          <div className="mol-header-button">
+            <button onClick={this.handleShowMyAccount}  className="atm-header-icon-button">
+              <MyAccountIcon />
+            </button>
           </div>
         </div>
-        <div>
-          {sideBar && (<Sidebar screenSize={screenSize} />)}
-        </div>
+        <SearchBar dispatch={dispatch} />
+        <Menu
+          screenSize={screenSize}
+          isHidden={activePane !== 'menu'}
+          handleClose={this.handlePaneHide}
+        />
+        <MyAccount
+          isHidden={activePane !== 'account'}
+          handleClose={this.handlePaneHide}
+          screenSize={screenSize}
+        />
       </header>
     );
   }
 
   renderDesktop() {
     const { screenSize, dispatch, totalCartItems } = this.props;
-    const { showTopbar, activePane, showProducts } = this.state;
+    const { showTopbar, activePane } = this.state;
 
     return (
       <header
@@ -242,9 +185,7 @@ export class Header extends React.Component {
   render() {
     const { screenSize } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 

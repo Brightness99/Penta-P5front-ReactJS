@@ -2,37 +2,40 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { TransitionGroup } from 'react-transition-group';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
-import { AngleDownIcon, OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon } from 'components/Icons';
+import { AngleDownIcon, OrdersIcon, AddressIcon, CardsIcon, ModelsIcon, OutIcon, MyAccountIcon, TimesIcon } from 'components/Icons';
+import { FadeToggle, SlideToggle } from 'animations';
+import Overlay from 'components/Overlay';
 
 type Props = {
   screenSize: string,
-};
-
-type State = {
+  isHidden: string,
+  handleClose: () => {},
 };
 
 export default class MyAccount extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
-  static state: State;
+  handleClick = (ev) => {
+    const { handleClose } = this.props;
+
+    if (typeof handleClose === 'function') {
+      handleClose(ev);
+    }
+  };
 
   renderLoggedOut() {
     return [
       <li key="login">
-        <NavLink to="/login">
+        <NavLink onClick={this.handleClick} to="/login">
           <AngleDownIcon style={{ transform: 'rotate(270deg)' }} /> Entrar
         </NavLink>
       </li>,
       <li key="register">
-        <NavLink to="/cadastro">
+        <NavLink onClick={this.handleClick} to="/cadastro">
           <AngleDownIcon /> Cadastrar
         </NavLink>
       </li>,
@@ -42,40 +45,73 @@ export default class MyAccount extends React.Component {
   renderLoggedIn() {
     return [
       <li key="pedidos">
-        <NavLink to="/minha-conta/pedidos">
+        <NavLink onClick={this.handleClick} to="/minha-conta/pedidos">
           <OrdersIcon /> Meus Pedidos
         </NavLink>
       </li>,
       <li key="enderecos">
-        <NavLink to="/minha-conta/enderecos">
+        <NavLink onClick={this.handleClick} to="/minha-conta/enderecos">
           <AddressIcon /> Meus endereços
         </NavLink>
       </li>,
       <li key="cartoes-salvos">
-        <NavLink to="/minha-conta/cartoes-salvos">
+        <NavLink onClick={this.handleClick} to="/minha-conta/cartoes-salvos">
           <CardsIcon /> Cartões salvos
         </NavLink>
       </li>,
       <li key="modelos-salvos">
-        <NavLink to="/minha-conta/modelos-salvos">
+        <NavLink onClick={this.handleClick} to="/minha-conta/modelos-salvos">
           <ModelsIcon /> Modelos salvos
         </NavLink>
       </li>,
       <li key="cloud">
-        <NavLink to="/minha-conta/cloud">
+        <NavLink onClick={this.handleClick} to="/minha-conta/cloud">
           <ModelsIcon /> Cloud
         </NavLink>
       </li>,
       <li key="logout">
-        <NavLink to="#">
+        <NavLink onClick={this.handleClick} to="#">
           <OutIcon /> Sair
         </NavLink>
-      </li>
+      </li>,
     ];
   }
 
+  renderMobileHeader() {
+    return (
+      <div>
+        <span key="hello">Olá!</span>
+        <span key="register">Entrar ou Cadastrar</span>
+      </div>
+    );
+  }
+
   renderMobile() {
-    return null;
+    const { isHidden } = this.props;
+
+    return (
+      <TransitionGroup className="org-myAccount-menu-expand">
+        {!isHidden && [
+          <FadeToggle key="fade-toggle-header">
+            <Overlay onClick={this.handleClick} />
+          </FadeToggle>,
+          <SlideToggle key="slide-toggle-header" direction="rtl">
+            <div className="mol-header-account-expand">
+              <div className="mol-header-account-expand-header">
+                <MyAccountIcon />
+                {this.renderMobileHeader()}
+                <button className="atm-header-menu-close" onClick={this.handleCloseMenu}>
+                  <TimesIcon />
+                </button>
+              </div>
+              <ul className="mol-header-account-list">
+                {this.renderLoggedIn()}
+              </ul>
+            </div>
+          </SlideToggle>,
+        ]}
+      </TransitionGroup>
+    );
   }
 
   renderDesktop() {
