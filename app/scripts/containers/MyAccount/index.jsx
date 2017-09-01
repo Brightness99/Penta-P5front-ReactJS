@@ -13,6 +13,8 @@ import TemplateModels from './TemplateModels';
 import Cloud from './Cloud';
 import Loyalty from './Loyalty';
 
+import Briefing from './Briefing';
+
 type Props = {
   app: AppStore,
   router: RouterStore,
@@ -32,6 +34,18 @@ export class MyAccount extends React.Component {
   }
 
   renderDesktop() {
+
+    // <OrderList screenSize={screenSize} />
+    // <OrderListDetails screenSize={screenSize} />
+    // <MyAddresses screenSize={screenSize} />
+    // <TemplateModels screenSize={screenSize} />
+    // <Cloud screenSize={screenSize} />
+    // <Loyalty screenSize={screenSize} />
+    // <CardsAccount screenSize={screenSize} />
+    /*<div className="container-myaccount">
+    <Sidebar screenSize={screenSize} />
+    <OrderList screenSize={screenSize} />
+  </div>*/
     const { app: { screenSize } } = this.props;
     return (
       <div className="container-myaccount">
