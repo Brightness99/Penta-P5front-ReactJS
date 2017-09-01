@@ -20,4 +20,3 @@ const PrintiClub = () => (
 );
 
 export default PrintiClub;
-
