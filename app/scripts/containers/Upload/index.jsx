@@ -5,7 +5,11 @@ import { connect } from 'react-redux';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { PageTitle } from 'atoms/Titles';
 import Alert from 'components/Alert';
-import AdditionalOption from 'components/AdditionalOption';
+import AdditionalOption from './AdditionalOption';
+import AvailableStrategy from './AvailableStrategy';
+import NormalSchema from './UploadTypeSchemas/Normal';
+import CanvasSchema from './UploadTypeSchemas/Canvas';
+import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
 
 type Props = {
   app: AppStore,
@@ -20,6 +24,11 @@ export class Upload extends React.Component {
   static props: Props;
 
   render() {
+
+    const globalFlags = {
+      upload_type: 'canvas',
+      from_my_account: false,
+    };
 
     const breadcrumb = [
       {
@@ -94,6 +103,8 @@ export class Upload extends React.Component {
       },
     ];
 
+    const availableStrategies = [1, 4];
+
     const renderAlerts = () => {
       return alerts.map(
         (alert) => (
@@ -120,20 +131,50 @@ export class Upload extends React.Component {
       );
     };
 
+    const renderAvailableStrategies = () => {
+      return availableStrategies.map(
+        (strategy) => (
+          <AvailableStrategy
+            key={`${new Date()}-${strategy}`}
+            totalStrategies={availableStrategies.length}
+            strategy={strategy}
+          />
+        )
+      );
+    };
+
+    const renderUploadTypeSchema = () => {
+      switch (globalFlags.upload_type) {
+        case 'normal':
+          return <NormalSchema />;
+        case 'canvas':
+          return <CanvasSchema />;
+        case 'sku_scene':
+          return <SkuSceneSchema />;
+        default:
+          return <NormalSchema />;
+      }
+    };
+
     return (
-      <div>
-        <div className="page-upload">
-          <div className="container">
-            <Breadcrumbs links={breadcrumb} />
-            <PageTitle>envie sua arte final</PageTitle>
-            <div className="alert-container">{renderAlerts()}</div>
-            <div className="upload-container">
-              <div className="upload-container-centralized">
-                {renderAdditionalOptions()}
-              </div>
+      <div className="page-upload">
+        <div className="container">
+          <Breadcrumbs links={breadcrumb} />
+          <PageTitle>envie sua arte final</PageTitle>
+          <div className="alert-container">{renderAlerts()}</div>
+          <div className="upload-container">
+            <div className="upload-container-centralized">
+              {renderAdditionalOptions()}
             </div>
-            <div className="upload-container">
-              <div className="upload-container-centralized" />
+          </div>
+          <div className="upload-container">
+            <div className="upload-container-centralized">
+              {renderAvailableStrategies()}
+            </div>
+          </div>
+          <div className="upload-container">
+            <div className="upload-container-canvasCentralized">
+              {renderUploadTypeSchema()}
             </div>
           </div>
         </div>

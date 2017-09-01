@@ -12,23 +12,25 @@ type Props = {
 };
 
 const Alert = (props: Props) => {
-  const properties = {
-    class: '',
-    icon: <WarningFilled />,
-  };
-
-  switch (props.type) {
-    case 'warning':
-      properties.class = 'app__alert--warning';
-      properties.icon = <WarningFilled />;
-      break;
-    case 'error':
-      properties.class = 'app__alert--error';
-      properties.icon = <WarningFilled />;
-      break;
-    default:
-      break;
-  }
+  const properties = (() => {
+    switch (props.type) {
+      case 'warning':
+        return {
+          class: 'app__alert--warning',
+          icon: <WarningFilled />,
+        };
+      case 'error':
+        return {
+          class: 'app__alert--error',
+          icon: <WarningFilled />,
+        };
+      default:
+        return {
+          class: '',
+          icon: <WarningFilled />,
+        };
+    }
+  })();
 
   return (
     <div className={cx('app__alert', properties.class)}>

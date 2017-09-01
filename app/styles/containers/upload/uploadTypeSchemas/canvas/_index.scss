@@ -1,0 +1,36 @@
+@import "../cimpressComponents/topMenuBar/index";
+@import "../cimpressComponents/sideTextBar/index";
+@import "../cimpressComponents/sideImageBar/index";
+@import "../cimpressComponents/canvasToolBar/index";
+@import "../cimpressComponents/canvasArea/index";
+
+.upload__canvasSchema {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .upload__canvasSchema_mainAreaContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    .upload__canvasSchema_sidebarContainer {
+      display: flex;
+      width: 27.5%;
+      flex-direction: column;
+      margin-top: 1.5rem;
+      height: 500px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #dbdddf;
+      border-radius: 3px;
+    }
+    .upload__canvasSchema_canvasContainer {
+      display: flex;
+      flex-direction: column;
+      width: 68%;
+      margin: 1.5rem 2.25% 0 2.25%;
+      height: 500px;
+
+    }
+  }
+}

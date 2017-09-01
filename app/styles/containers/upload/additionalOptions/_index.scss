@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin: 2rem 0 0 0;
   .additionalOptions-box-title {
     display: flex;
     flex-direction: row;
@@ -23,14 +24,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 1.5rem;
         margin-top: .6rem;
         cursor: pointer;
+        @include md {
+          margin-right: 1.5rem;
+        }
         svg {
           fill: $color-printi;
         }
       }
       button {
+        display: none;
         cursor: pointer;
         border: 0;
         background: transparent;
@@ -38,6 +42,9 @@
         font-size: 1.3rem;
         font-family: $font-family-open-sans-regular;
         color: $color-printi;
+        @include md {
+          display: block;
+        }
       }
     }
   }

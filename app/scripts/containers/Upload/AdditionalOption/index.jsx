@@ -6,7 +6,6 @@ import { RadioButton } from 'components/Input';
 
 type Props = {
   title: string,
-  title: string,
   options: [],
 };
 
