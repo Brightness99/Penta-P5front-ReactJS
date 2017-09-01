@@ -56,3 +56,8 @@ export Plus from './Plus';
 export PrintiClub from './PrintiClub';
 export CartIcon from './Cart';
 export PlayCircleIcon from './_PlayCircle';
+export UploadSendLaterIcon from './UploadSendLater';
+export UploadUniqueFileIcon from './UploadUniqueFile';
+export UploadMultipleFilesIcon from './UploadMultipleFiles';
+export AddFileIcon from './AddFile';
+export AddTextIcon from './AddText';
