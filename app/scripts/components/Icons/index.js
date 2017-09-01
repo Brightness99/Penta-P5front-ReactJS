@@ -56,3 +56,4 @@ export Plus from './Plus';
 export PrintiClub from './PrintiClub';
 export CartIcon from './Cart';
 export CloudIcon from './CloudIcon';
+export RepurchaseIcon from './RepurchaseIcon';

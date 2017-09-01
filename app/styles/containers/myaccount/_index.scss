@@ -305,7 +305,7 @@
       .box-secondPart {
         display: flex;
         flex-direction: column;
-        padding: 2rem 1.4rem;
+        padding: 1rem 1.4rem 0;
         @include lg {
           margin-top: 3rem;
           flex-direction: row;
