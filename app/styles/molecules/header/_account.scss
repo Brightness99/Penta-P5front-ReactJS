@@ -1,0 +1,48 @@
+.mol-header-account {
+  background-color: #eee;
+  box-shadow: 0.8rem 0.8rem 1rem 0 rgba(83, 117, 153, 0.5);
+  display: none;
+  flex-direction: column;
+  left: 0;
+  margin-left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  top: 100%;
+  width: 20rem;
+
+  li {
+    border-bottom: 0.1rem solid $color-silver;
+    display: flex;
+    height: 5rem;
+    padding: 0 2rem;
+    width: 100%;
+
+    a {
+      align-items: center;
+      color: $color-almostBlack;
+      display: inline-flex;
+      font-size: $font-size-sm;
+      transition: 0.3s ease;
+
+      &:hover {
+        color: $color-printi-blue;
+        text-decoration: none;
+      }
+
+      svg {
+        fill: currentColor;
+        height: 1.4rem;
+        margin-right: 0.8rem;
+        width: 1.4rem;
+      }
+    }
+  }
+}
+
+.mol-header-button {
+  &:hover {
+    .mol-header-account {
+      display: flex;
+    }
+  }
+}

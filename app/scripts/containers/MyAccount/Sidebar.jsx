@@ -1,7 +1,7 @@
 // flow
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Orders, Address, MyData, Cards, Models, Out } from 'components/Icons';
+import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon } from 'components/Icons';
 
 export class Sidebar extends React.Component {
   render() {
@@ -15,27 +15,27 @@ export class Sidebar extends React.Component {
         <ul className="menuAccount">
           <li>
             <Link to="#">
-              <i><Orders /></i>Meus pedidos
+              <i><OrdersIcon /></i>Meus pedidos
             </Link>
           </li>
           <li>
             <Link to="#">
-              <i><Address /></i>Meus endereços
+              <i><AddressIcon /></i>Meus endereços
             </Link>
           </li>
           <li>
             <Link to="#">
-              <i><MyData /></i>Meus dados
+              <i><MyDataIcon /></i>Meus dados
             </Link>
           </li>
           <li>
             <Link to="#">
-              <i><Cards /></i>Cartões salvos
+              <i><CardsIcon /></i>Cartões salvos
             </Link>
           </li>
           <li>
             <Link to="#">
-              <i><Models /></i>Modelos salvos
+              <i><ModelsIcon /></i>Modelos salvos
             </Link>
           </li>
           <li>
@@ -45,7 +45,7 @@ export class Sidebar extends React.Component {
           </li>
           <li>
             <Link to="#">
-              <i><Out /></i>Sair
+              <i><OutIcon /></i>Sair
             </Link>
           </li>
         </ul>

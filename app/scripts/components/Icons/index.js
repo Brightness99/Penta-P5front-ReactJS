@@ -56,6 +56,14 @@ export Plus from './Plus';
 export PrintiClub from './PrintiClub';
 export CartIcon from './Cart';
 
+// Temporary
+export OrdersIcon from './Orders';
+export AddressIcon from './Address';
+export MyDataIcon from './MyData';
+export CardsIcon from './Cards';
+export ModelsIcon from './Models';
+export OutIcon from './Out';
+
 // new definitive icons
 export AngleDownIcon from './_AngleDown';
 export ExclusiveServiceIcon from './_ExclusiveService';
