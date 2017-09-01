@@ -158,7 +158,7 @@ export default class CartItens extends React.Component {
       .reduce((prevOption, currentOption) => (
         [
           ...prevOption,
-          <li key={currentOption}>{item.product_parts[Object.keys(item.product_parts)[0]].options[currentOption].name}</li>,
+          <div className="atm-cart-item-product" key={currentOption}>{item.product_parts[Object.keys(item.product_parts)[0]].options[currentOption].name}</div>,
         ]
       ), []);
     return (
@@ -169,19 +169,15 @@ export default class CartItens extends React.Component {
           onSubmit={this.handleProjectNameSubmit}
         />
         <div className="atm-cart-item-product">{item.final_product.name}</div>
-        <ul>
-          {slicedList}
-          <li>
-            <button
-              className="atm-cart-see-more"
-              name="details"
-              value={itemId}
-              onClick={this.handleModalOpen}
-            >
-              {locale.product_list.SEE_MORE}
-            </button>
-          </li>
-        </ul>
+        {slicedList}
+        <button
+          className="atm-cart-see-more"
+          name="details"
+          value={itemId}
+          onClick={this.handleModalOpen}
+        >
+          {locale.product_list.SEE_MORE}
+        </button>
       </div>
     );
   }

@@ -4,7 +4,11 @@
   font-size: $font-size-lg;
   letter-spacing: 0.2rem;
   line-height: 1;
-  padding: 0;
+  padding: 2rem 0 0;
   margin-bottom: 2rem;
   text-transform: uppercase;
+}
+
+.app__breadcrumb ~ .atm__page-title {
+  padding: 0;
 }
