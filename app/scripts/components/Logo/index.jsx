@@ -9,15 +9,24 @@ type Props = {
   enableLink: boolean,
   small: boolean,
   fill: string,
+  onClick: () => {},
 };
 
 const Logo = (props: Props) => {
   const { enableLink, small } = props;
 
+  const handleClick = (ev) => {
+    const { onClick } = props;
+
+    if (typeof onClick === 'function') {
+      onClick(ev);
+    }
+  };
+
   if (enableLink) {
     return (
       <div className="atm-printi-logo">
-        <NavLink to="/">
+        <NavLink to="/" onClick={handleClick}>
           {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
         </NavLink>
       </div>

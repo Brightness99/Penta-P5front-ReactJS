@@ -1030,12 +1030,6 @@
     }
   }
 
-  .mol-header-search {
-    display: inline-flex;
-    flex-grow: 2;
-    margin: 0 1.2rem;
-  }
-
   .atm-header-icon-button {
     background-color: transparent;
     border: transparent;
@@ -1060,38 +1054,86 @@
   }
 
   .mol-header-search {
-    border: 1px solid $color-silver;
-    border-radius: 0.4rem;
+    display: inline-flex;
     height: 4rem;
-    margin: 0 0.8rem;
     transition: 0.3s ease-in-out;
+    width: 100%;
+
+    @include lg {
+      border: 0.1rem solid $color-silver;
+      border-radius: $bsn-border-radius;
+      flex-grow: 2;
+      margin: 0 0.8rem;
+      width: auto;
+    }
 
     input {
       background: transparent;
-      border: transparent;
+      border: 0.1rem solid $color-silver;
+      border-left: transparent;
+      border-right: transparent;
       font-family: $font-family-open-sans;
       font-size: $font-size-xs;
       outline: none;
       padding: 0.8rem 1.6rem;
       width: calc(100% - 8rem);
+
+      @include lg {
+        border: transparent;
+      }
     }
 
     button {
       align-items: center;
       background: $color-printi-blue;
       border: transparent;
-      border-radius: 0.4rem;
       color: $color-white;
       display: inline-flex;
       justify-content: center;
       height: 100%;
       width: 8rem;
 
+      @include lg {
+        border-radius: $bsn-border-radius;
+      }
+
       svg {
         fill: currentColor;
         height: 1.6rem;
         width: 1.6rem;
       }
+    }
+  }
+}
+
+.mol-mobile-header {
+  align-items: center;
+  display: flex;
+  height: 6rem;
+  width: 100%;
+
+  > * {
+    @include center-child-flex;
+    height: 4rem;
+  }
+
+  .mol-header-button--menu {
+    width: 5rem;
+
+    .atm-header-icon-button {
+      width: 100%;
+
+      svg {
+        height: 2rem;
+      }
+    }
+  }
+
+  .atm-printi-logo {
+    flex-grow: 2;
+
+    svg {
+      height: 4rem;
     }
   }
 }

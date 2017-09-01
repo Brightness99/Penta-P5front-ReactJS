@@ -37,19 +37,9 @@
     }
 
     .atm-header-menu-close {
-      background: transparent;
-      border: transparent;
       color: $color-white;
       height: 6rem;
-      position: absolute;
-      right: 0;
-      top: 0;
-      transition: 0.3s ease;
       width: 6rem;
-
-      > svg {
-        fill: currentColor;
-      }
 
       &:hover {
         color: darken($color-white, 10%);
@@ -90,5 +80,19 @@
         text-decoration: underline;
       }
     }
+  }
+}
+
+.atm-header-menu-close {
+  background: transparent;
+  border: transparent;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.3s ease;
+
+  > svg {
+    fill: currentColor;
   }
 }

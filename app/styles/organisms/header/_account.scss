@@ -1,0 +1,95 @@
+.org-myAccount-menu-expand {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 7;
+
+  .app__overlay {
+    height: 100vh;
+    left: 0;
+    top: 0;
+    width: 100vw;
+  }
+
+  .mol-header-account-expand {
+    display: inline-flex;
+    background-color: #eee;
+    flex-direction: column;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30rem;
+    z-index: 2;
+
+    &-header {
+      border-bottom: 0.1rem solid $color-silver;
+      align-items: center;
+      display: inline-flex;
+      padding: 2rem;
+      position: relative;
+
+      > svg {
+        display: flex;
+        height: 3rem;
+        margin-right: 2rem;
+        width: 3rem;
+      }
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        font-size: $font-size-sm;
+        font-weight: bold;
+
+
+        span {
+          display: inline-flex;
+        }
+      }
+
+      .atm-header-menu-close {
+        height: 100%;
+        width: 6rem;
+
+        > svg {
+          height: 3rem;
+        }
+      }
+    }
+  }
+
+  .mol-header-account-list {
+    li {
+      border-bottom: 0.1rem solid $color-silver;
+      display: flex;
+      height: 5rem;
+      padding: 0 2rem;
+      width: 100%;
+
+      a {
+        align-items: center;
+        color: $color-almostBlack;
+        display: inline-flex;
+        font-size: $font-size-sm;
+        transition: 0.3s ease;
+
+        &:hover {
+          color: $color-printi-blue;
+          text-decoration: none;
+        }
+
+        svg {
+          fill: currentColor;
+          height: 1.4rem;
+          margin-right: 0.8rem;
+          width: 1.4rem;
+        }
+      }
+    }
+  }
+}

@@ -52,8 +52,10 @@ a {
 }
 
 .app__main {
+  padding-top: $header-height-mobile;
+
   @include lg {
-    padding-top: 9.6rem;
+    padding-top: $desktop-height-mobile;
   }
 }
 
