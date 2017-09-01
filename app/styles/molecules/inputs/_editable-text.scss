@@ -1,6 +1,6 @@
 .mol-editable-text {
   cursor: pointer;
-  display: inline-flex;
+  display: block;
   position: relative;
   height: 3rem;
 
@@ -8,6 +8,7 @@
     display: block;
     color: $color-almostBlack;
     font-size: $font-size-lg;
+    line-height: 3rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
@@ -16,11 +17,15 @@
 
   &--active {
     @include center-child-flex;
-    width: calc(100% - 2.3rem);
+    width: calc(100% - 2.4rem);
 
     > .app__qrk__input-container {
       height: 3rem;
       width: 100%;
+
+      > input {
+        padding: 0;
+      }
     }
 
     > .atm-icon-button {
@@ -60,6 +65,7 @@
 }
 
 .org-editable-text {
+  padding-right: 0.5rem;
   position: relative;
   width: 100%;
 
@@ -75,7 +81,7 @@
   > .atm-icon-button {
     height: 2rem;
     position: absolute;
-    right: -1.6rem;
+    right: -1.4rem;
     top: 0.3rem;
     width: 2rem;
   }

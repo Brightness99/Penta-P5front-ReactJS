@@ -239,7 +239,7 @@ export class Cart extends React.Component {
   }
 
   render() {
-    const { cart: { count, isRunning, isLoaded, data }, locale } = this.props;
+    const { app: { screenSize }, cart: { count, isRunning, isLoaded, data }, locale } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -256,7 +256,7 @@ export class Cart extends React.Component {
 
     return (
       <div className="page-cart container">
-        <Breadcrumbs links={breadcrumb} />
+        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <PageTitle>{locale.seo.TITLE}</PageTitle>
         {count > 0 ? this.renderContent() : <CartEmpty locale={locale.seo} />}
       </div>
