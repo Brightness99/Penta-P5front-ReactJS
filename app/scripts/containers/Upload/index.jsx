@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Breadcrumbs from 'components/Breadcrumbs';
+import Warning from 'containers/Config/Warning';
 import { PageTitle } from 'atoms/Titles';
 import Alert from 'components/Alert';
 import AdditionalOption from './AdditionalOption';
@@ -20,31 +21,9 @@ type Props = {
 };
 
 export class Upload extends React.Component {
-
   static props: Props;
 
-  render() {
-
-    const globalFlags = {
-      upload_type: 'canvas',
-      from_my_account: false,
-    };
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Marca página',
-        url: '/configuracao-marca-pagina',
-      },
-      {
-        title: 'Enviar arte',
-        url: '',
-      },
-    ];
-
+  renderAlerts = () => {
     const alerts = [
       {
         type: 'error',
@@ -68,6 +47,19 @@ export class Upload extends React.Component {
       }
     ];
 
+    return alerts.map(
+      (alert) => (
+        <Alert
+          key={`${new Date()}-${alert.content}`}
+          type={alert.type}
+          title={alert.title}
+          content={alert.content}
+        />
+      )
+    );
+  };
+
+  renderAdditionalOptions = () => {
     const additionalOptions = [
       {
         title: 'Formato do arquivo',
@@ -103,57 +95,88 @@ export class Upload extends React.Component {
       },
     ];
 
+    return additionalOptions.map(
+      (additionalOption) => (
+        <AdditionalOption
+          key={`${new Date()}-${additionalOption.title}`}
+          title={additionalOption.title}
+          video={additionalOption.video}
+          options={additionalOption.options}
+        />
+      )
+    );
+  };
+
+  renderAvailableStrategies = () => {
     const availableStrategies = [1, 4];
 
-    const renderAlerts = () => {
-      return alerts.map(
-        (alert) => (
-          <Alert
-            key={`${new Date()}-${alert.content}`}
-            type={alert.type}
-            title={alert.title}
-            content={alert.content}
-          />
-        )
-      );
+    return availableStrategies.map(
+      (strategy) => (
+        <AvailableStrategy
+          key={`${new Date()}-${strategy}`}
+          totalStrategies={availableStrategies.length}
+          strategy={strategy}
+        />
+      )
+    );
+  };
+
+  renderUploadTypeSchema = () => {
+    const globalFlags = {
+      upload_type: 'normal',
+      from_my_account: false,
     };
 
-    const renderAdditionalOptions = () => {
-      return additionalOptions.map(
-        (additionalOption) => (
-          <AdditionalOption
-            key={`${new Date()}-${additionalOption.title}`}
-            title={additionalOption.title}
-            video={additionalOption.video}
-            options={additionalOption.options}
-          />
-        )
-      );
+    switch (globalFlags.upload_type) {
+      case 'normal':
+        return <NormalSchema />;
+      case 'canvas':
+        return <CanvasSchema />;
+      case 'sku_scene':
+        return <SkuSceneSchema />;
+      default:
+        return <NormalSchema />;
+    }
+  };
+
+  render() {
+    const { dispatch } = this.props;
+
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Marca página',
+        url: '/configuracao-marca-pagina',
+      },
+      {
+        title: 'Enviar arte',
+        url: '',
+      },
+    ];
+
+    const templates = {
+      options: {
+        vertical: ['illustrator', 'photoshop', 'photoshop'],
+        horizontal: ['illustrator', 'photoshop', 'photoshop'],
+      },
+      downloadUrls: {
+        vertical: {},
+        horizontal: {},
+      },
+      parts: {
+        pbcard: {
+          guideCombinationId: 25,
+          fileCombinationId: 27,
+        },
+      },
+      selectedOrientation: 'vertical',
     };
 
-    const renderAvailableStrategies = () => {
-      return availableStrategies.map(
-        (strategy) => (
-          <AvailableStrategy
-            key={`${new Date()}-${strategy}`}
-            totalStrategies={availableStrategies.length}
-            strategy={strategy}
-          />
-        )
-      );
-    };
-
-    const renderUploadTypeSchema = () => {
-      switch (globalFlags.upload_type) {
-        case 'normal':
-          return <NormalSchema />;
-        case 'canvas':
-          return <CanvasSchema />;
-        case 'sku_scene':
-          return <SkuSceneSchema />;
-        default:
-          return <NormalSchema />;
-      }
+    const product = {
+      title: 'Cartão de Visita',
     };
 
     return (
@@ -161,20 +184,21 @@ export class Upload extends React.Component {
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
-          <div className="alert-container">{renderAlerts()}</div>
+          <div className="alert-container">{this.renderAlerts()}</div>
           <div className="upload-container">
             <div className="upload-container-centralized">
-              {renderAdditionalOptions()}
+              {this.renderAdditionalOptions()}
             </div>
           </div>
           <div className="upload-container">
             <div className="upload-container-centralized">
-              {renderAvailableStrategies()}
+              {this.renderAvailableStrategies()}
             </div>
           </div>
           <div className="upload-container">
-            <div className="upload-container-canvasCentralized">
-              {renderUploadTypeSchema()}
+              {this.renderUploadTypeSchema()}
+            <div className="upload-container-centralized">
+              <Warning templates={templates} dispatch={dispatch} product={product} />
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ type Props = {
 const CanvasArea = (props: Props) => {
   return (
     <div className="upload__canvasSchema__canvasArea">
-      <p>teste area</p>
+      <div id="canvases" />
     </div>
   );
 };

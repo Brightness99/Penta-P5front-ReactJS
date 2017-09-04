@@ -1,12 +1,14 @@
 @import "additionalOptions/index";
 @import "availableStrategy/index";
 @import "uploadTypeSchemas/canvas/index";
+@import "uploadTypeSchemas/normal/index";
 
 .page-upload {
 	.container {
 		.upload-container {
       align-items: center;
       display: flex;
+      flex-direction: column;
       background-color: $color-white;
       justify-content: center;
       margin-bottom: 2rem;

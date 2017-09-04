@@ -32,13 +32,6 @@ const AdditionalOption = (props: Props) => {
           </span>
         </div>
         {renderOptions()}
-        {/*<RadioButton
-          name={'teste'}
-          value={'teste'}
-          checked={true}
-          onChange={console.log('mudou')}
-        />*/}
-
       </div>
     </div>
   );

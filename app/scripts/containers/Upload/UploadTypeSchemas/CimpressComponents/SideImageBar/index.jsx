@@ -17,7 +17,7 @@ const SideImageBar = (props: Props) => {
         </button>
       </div>
       <div className="sideImageBar__thumbnailContainer">
-        <p>thumbnail</p>
+        <div className="dcl-widget-upload-list" />
       </div>
     </div>
   );
