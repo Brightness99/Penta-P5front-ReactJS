@@ -11,6 +11,8 @@ import Logo from 'components/Logo';
 import { FadeToggle, SlideToggle } from 'animations';
 import { TimesIcon } from 'components/Icons';
 
+import Products from './_Products';
+
 type Props = {
   screenSize: string,
   isHidden: boolean,
@@ -23,7 +25,28 @@ export default class Menu extends React.Component {
   static props: Props;
 
   renderMobile() {
-    return null;
+    const { screenSize } = this.props;
+    return (
+      <div className="mol-header-menu-content">
+        <NavLink
+          className="atm-header-menu-title"
+          to="/venda-corporativa"
+          activeClassName="selected"
+          onClick={this.handleCloseMenu}
+        >
+          Venda Corporativa
+        </NavLink>
+        <NavLink
+          className="atm-header-menu-title"
+          to="/central-de-ajuda?action=search&value=meu-pedido"
+          activeClassName="selected"
+          onClick={this.handleCloseMenu}
+        >
+          Central de Ajuda
+        </NavLink>
+        <Products screenSize={screenSize} />
+      </div>
+    );
   }
 
   handleCloseMenu = (ev) => {
