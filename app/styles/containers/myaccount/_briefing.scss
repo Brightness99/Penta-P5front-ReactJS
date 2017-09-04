@@ -1,0 +1,59 @@
+
+.bg-briefing {
+  background-color: $color-white;
+  padding-bottom: 1rem;
+}
+
+.text-bold-briefing {
+  font-family: $font-family-open-sans-regular;
+  font-size: $font-size-sm;
+  font-weight: bold;
+}
+
+.text-italic-briefing {
+  font-family: $font-family-open-sans-regular;
+  font-size: $font-size-sm;
+  font-style: italic;
+}
+
+.container-briefing {
+  .atm-box-radio {
+    padding: 1rem;
+    width: calc(50% - 0.5rem);
+    &:first-of-type {
+      margin-right: 0.5rem;
+    }
+    &:last-of-type {
+      margin-left: 0.5rem;
+    }
+  }
+  .org-checkout-content-data {
+    .atm-checkout-input-one, .app__qrk__input-container {
+      width: 100%;
+      @include lg {
+        width: calc(50% - 0.5rem);
+      }
+    }
+    .atm-checkout-input-full {
+      width: 100%;
+      &.textArea-height {
+        height: 15rem;
+        .app__qrk__input-label {
+          top: 32%;
+          @include lg {
+            top: 20%;
+          }
+          &--active {
+            top: 5%;
+          }
+        }
+      }
+    }
+  }
+  .app__qrk__input-container {
+    margin-top: 1rem;
+  }
+  .box-textsBriefing {
+    margin: 2.5rem 0 0;
+  }
+}

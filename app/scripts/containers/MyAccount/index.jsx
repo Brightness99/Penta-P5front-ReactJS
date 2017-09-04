@@ -13,8 +13,6 @@ import TemplateModels from './TemplateModels';
 import Cloud from './Cloud';
 import Loyalty from './Loyalty';
 
-import ChangePaymentMethod from './ChangePaymentMethod';
-
 type Props = {
   app: AppStore,
   router: RouterStore,
@@ -25,7 +23,6 @@ type Props = {
 export class MyAccount extends React.Component {
   static props: Props;
 
-  // <OrderList screenSize={screenSize} />
   renderMobile() {
     return (
       <div className="container-myaccount">
@@ -35,15 +32,6 @@ export class MyAccount extends React.Component {
   }
 
   renderDesktop() {
-    // <OrderList screenSize={screenSize} />
-    // <OrderListDetails screenSize={screenSize} />
-    // <MyAddresses screenSize={screenSize} />
-    // <TemplateModels screenSize={screenSize} />
-    // <Cloud screenSize={screenSize} />
-    // <Loyalty screenSize={screenSize} />
-    // <CardsAccount screenSize={screenSize} />
-    // <Sidebar screenSize={screenSize} />
-    // <ChangePaymentMethod screenSize={screenSize} />
     const { app: { screenSize } } = this.props;
     return (
       <div className="container-myaccount">
