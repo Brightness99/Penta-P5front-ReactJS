@@ -45,13 +45,13 @@ export class Sidebar extends React.Component {
           </li>
           <li>
             <NavLink exact={true} activeClassName="is-active" to="/minha-conta/cloud">
-              <i><OutIcon /></i>
+              <i className="cloudIcon"><CloudIcon /></i>
               <span>Cloud</span>
             </NavLink>
           </li>
           <li>
             <NavLink exact={true} activeClassName="is-active" to="#">
-              <i><PrintiClub /></i>
+              <i className="printClubIcon"><PrintiClub /></i>
             </NavLink>
           </li>
           <li>

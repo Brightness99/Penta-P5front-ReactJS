@@ -2,7 +2,7 @@
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
-import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, CardsIcon, RepurchaseIcon } from 'components/Icons';
+import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, CardsIcon, RepurchaseIcon, WatchIcon } from 'components/Icons';
 
 
 type Props = {
@@ -72,8 +72,14 @@ export class OrderList extends React.Component {
                 </div>
               </div>
               <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+                  <i><CodeBar /></i>
+                  <span>imprimir boleto</span>
+                </Link>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+                  <i><Receipt /></i>
+                  <span>enviar comprovante</span>
+                </Link>
                 <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
               </div>
             </div>
@@ -100,7 +106,7 @@ export class OrderList extends React.Component {
               <div className="box-statusMobile">
                 <div className="box-secondPart-mobile">
                   <div>
-                    <i><CodeBar /></i>
+                    <i><WatchIcon /></i>
                   </div>
                   <div>
                     <p className="title-statusMobile">status</p>
@@ -109,7 +115,10 @@ export class OrderList extends React.Component {
                 </div>
               </div>
               <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>acompanhar pedido</Link>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+                  <i><CodeBar /></i>
+                  <span>acompanhar pedido</span>
+                </Link>
                 <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
               </div>
             </div>
@@ -145,8 +154,14 @@ export class OrderList extends React.Component {
                 </div>
               </div>
               <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><CodeBar /></i>imprimir boleto</Link>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#"><i><Receipt /></i>enviar comprovante</Link>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+                  <i><CodeBar /></i>
+                  <span>imprimir boleto</span>
+                </Link>
+                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+                  <i><Receipt /></i>
+                  <span>enviar comprovante</span>
+                </Link>
                 <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
               </div>
             </div>
@@ -205,7 +220,7 @@ export class OrderList extends React.Component {
                   <RepurchaseIcon />
                 </Link>
               </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
+              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
             </div>
           </div>
           {secondStep && (<div className="box-secondPart">
@@ -244,7 +259,7 @@ export class OrderList extends React.Component {
                   <Receipt />
                 </Link>
               </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
+              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
             </div>
           </div>
           {secondStep && (<div className="box-secondPart">
@@ -280,10 +295,10 @@ export class OrderList extends React.Component {
                   <Receipt />
                 </Link>
                 <Link to="#" className="btn-icons">
-                  <CardsIcon />
+                  <RepurchaseIcon />
                 </Link>
               </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>ver detalhes</Link>
+              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
             </div>
           </div>
           {secondStep && (<div className="box-secondPart">
