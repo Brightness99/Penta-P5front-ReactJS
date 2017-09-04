@@ -8,6 +8,7 @@ import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
 import { AngleDownIcon, StarIcon } from 'components/Icons';
+import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 'components/Accordion/nAccordion';
 
 import categoriesMock from 'assets/json/categoriesMock.json';
 
@@ -123,9 +124,20 @@ export default class Products extends React.Component {
     );
   }
 
+  renderMobile() {
+    return (
+      <Accordion>
+        <AccordionItem key={1}>
+          <AccordionItemTitle>Title coroi</AccordionItemTitle>
+          <AccordionItemBody>456</AccordionItemBody>
+        </AccordionItem>
+      </Accordion>
+    );
+  }
+
   render() {
     const { screenSize } = this.props;
 
-    return isMobile(screenSize) ? null : this.renderDesktop();
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }

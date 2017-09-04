@@ -52,23 +52,40 @@
   }
 
   .mol-header-menu-content {
+    display: flex;
+    flex-direction: column;
     padding-top: 2rem;
 
     ul {
       margin: 0;
       padding-bottom: 1.6rem;
+
+      .atm-header-menu-title {
+        padding-bottom: 1.2rem;
+      }
+
+      a {
+        color: #878b94;
+        font-size: $font-size-sm;
+
+        &:hover {
+          color: $color-white;
+          text-decoration: none;
+        }
+
+        &.selected {
+          color: $color-white;
+          text-decoration: underline;
+        }
+      }
     }
 
-    span {
+    .atm-header-menu-title {
       color: $color-white;
       font-size: $font-size-base;
       font-weight: bold;
-      padding-bottom: 1.2rem;
-    }
-
-    a {
-      color: #878b94;
-      font-size: $font-size-sm;
+      padding-bottom: 1.6rem;
+      text-decoration: none;
 
       &:hover {
         color: $color-white;
