@@ -58,3 +58,17 @@ export CartIcon from './Cart';
 export CloudIcon from './CloudIcon';
 export RepurchaseIcon from './RepurchaseIcon';
 export WatchIcon from './WatchIcon';
+
+// Temporary
+export AngleRightIcon from './AngleRight';
+
+// new definitive icons
+export AngleDownIcon from './_AngleDown';
+export ExclusiveServiceIcon from './_ExclusiveService';
+export HeartIcon from './_Heart';
+export HelpCircleIcon from './_HelpCircle';
+export MenuIcon from './_Menu';
+export MyAccountIcon from './_MyAccount';
+export PrintiIcon from './_Printi';
+export PrintiSymbolIcon from './_PrintiSymbol';
+export SearchIcon from './_Search';

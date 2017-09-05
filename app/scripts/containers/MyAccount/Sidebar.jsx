@@ -1,6 +1,6 @@
 // flow
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub } from 'components/Icons';
 
 export class Sidebar extends React.Component {

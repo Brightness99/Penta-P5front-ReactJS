@@ -1,0 +1,17 @@
+.org-accordion {
+  height: auto;
+  overflow: hidden;
+}
+
+.atm-accordion-title {
+  background-color: transparent;
+  border: 0 transparent;
+  display: flex;
+  font: inherit;
+}
+
+.atm-accordion-item-body {
+  height: 0;
+  overflow: hidden;
+  transition: 0.3s ease;
+}

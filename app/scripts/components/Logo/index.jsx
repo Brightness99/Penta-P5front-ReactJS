@@ -1,23 +1,43 @@
 // @flow
 
 import React from 'react';
-import SVG from 'react-inlinesvg';
 import { NavLink } from 'react-router-dom';
+
+import { PrintiIcon, PrintiSymbolIcon } from 'components/Icons';
 
 type Props = {
   enableLink: boolean,
-}
+  small: boolean,
+  fill: string,
+  onClick: () => {},
+};
 
 const Logo = (props: Props) => {
-  if (props.enableLink) {
+  const { enableLink, small } = props;
+
+  const handleClick = (ev) => {
+    const { onClick } = props;
+
+    if (typeof onClick === 'function') {
+      onClick(ev);
+    }
+  };
+
+  if (enableLink) {
     return (
-      <NavLink to="/">
-        <SVG src={require('assets/media/svg/logo.svg')} />
-      </NavLink>
+      <div className="atm-printi-logo">
+        <NavLink to="/" onClick={handleClick}>
+          {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
+        </NavLink>
+      </div>
     );
   }
 
-  return <SVG src={require('assets/media/svg/logo.svg')} />;
+  return (
+    <div className="atm-printi-logo">
+      {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
+    </div>
+  );
 };
 
 export default Logo;

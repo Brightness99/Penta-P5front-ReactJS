@@ -134,7 +134,7 @@
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "react-slick": "^0.14.11",
-    "react-transition-group": "^1.2.0",
+    "react-transition-group": "^2.2.0",
     "redux": "^3.7.1",
     "redux-observable": "^0.14.1",
     "redux-persist": "^4.8.1",
@@ -147,7 +147,8 @@
     "slick-carousel": "^1.7.1",
     "sprintf-js": "^1.1.1",
     "string-mask": "^0.3.0",
-    "sweetalert2": "^6.6.6"
+    "sweetalert2": "^6.6.6",
+    "throttle-debounce": "^1.0.1"
   },
   "engines": {
     "node": ">=6.0.0",

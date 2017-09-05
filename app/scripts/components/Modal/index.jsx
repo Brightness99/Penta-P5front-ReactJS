@@ -121,18 +121,14 @@ export default class Modal extends React.Component {
 
   render() {
     const { isReady, isMounted } = this.state;
-    const {
-      children,
-      title,
-      className,
-    } = this.props;
+    const { children, title } = this.props;
 
     return (
       <div className="app__modal">
         <Overlay onClick={this.handleOverlayClick} />
         <div
           key="Modal"
-          ref={c => (this.modal = c)}
+          ref={c => (this.modal = c)} // eslint-disable-line no-return-assign
           className={cx('app__modal__container', {
             'app__modal__container--is-mounted': isMounted,
             'app__modal__container--is-ready': isReady,

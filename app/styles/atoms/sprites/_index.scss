@@ -1,0 +1,21 @@
+.atm-sprite-icon {
+  background-image: url('../../assets/media/images/sprites.png');
+
+  &--money {
+    background-position: 10.2rem 45.4rem;
+    height: 2.2rem;
+    width: 2.6rem;
+  }
+
+  &--house {
+    background-position: 4.2rem 45.4rem;
+    height: 2.2rem;
+    width: 2.6rem;
+  }
+
+  &--people {
+    background-position: 7.2rem 45.4rem;
+    height: 2.2rem;
+    width: 2.6rem;
+  }
+}
