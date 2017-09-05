@@ -38,12 +38,29 @@ export class Header extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    const { screenSize } = this.props;
+
+    if (!isMobile(screenSize)) {
+      window.addEventListener('scroll', this.handleScroll);
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    const { screenSize } = this.props;
+
+    if (!isMobile(screenSize)) {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
   }
+
+  componentDidUpdate() {
+    const { screenSize } = this.props;
+
+    if (!isMobile(screenSize)) {
+      window.addEventListener('scroll', this.handleScroll);
+    }
+  }
+
   static props: Props;
 
   static state: State;

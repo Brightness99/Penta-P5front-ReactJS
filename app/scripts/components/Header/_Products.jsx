@@ -52,8 +52,7 @@ export default class Products extends React.Component {
   };
 
   renderProductList(category) {
-    return [
-      <h3 key={`${category.title}-title`}>{category.title}</h3>,
+    return (
       <ul key={`${category.title}-content`}>
         {category.products.map((product) => (
           <li key={product.slug}>
@@ -66,8 +65,8 @@ export default class Products extends React.Component {
             </NavLink>
           </li>
         ))}
-      </ul>,
-    ];
+      </ul>
+    );
   }
 
   renderDesktop() {
@@ -105,6 +104,7 @@ export default class Products extends React.Component {
               </ul>
               <div className="mol-products-menu-content">
                 <div className="mol-products-menu-links">
+                  <h3>{selectedCategory.title}</h3>
                   {this.renderProductList(selectedCategory)}
                 </div>
                 <div className="atm-products-menu-image">
@@ -126,11 +126,15 @@ export default class Products extends React.Component {
 
   renderMobile() {
     return (
-      <Accordion>
-        <AccordionItem key={1}>
-          <AccordionItemTitle>Title coroi</AccordionItemTitle>
-          <AccordionItemBody>456</AccordionItemBody>
-        </AccordionItem>
+      <Accordion className="org-accordion-product">
+        {
+          categoriesMock.map((category) => (
+            <AccordionItem key={category.id}>
+              <AccordionItemTitle>{category.title}</AccordionItemTitle>
+              <AccordionItemBody>{this.renderProductList(category)}</AccordionItemBody>
+            </AccordionItem>
+          ))
+        }
       </Accordion>
     );
   }

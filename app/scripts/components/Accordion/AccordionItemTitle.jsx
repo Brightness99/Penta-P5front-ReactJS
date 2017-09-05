@@ -2,42 +2,51 @@
 
 import React from 'react';
 import cx from 'classnames';
+import { AngleDownIcon, AngleRightIcon, MinusSquareOIcon, PlusSquareOIcon } from 'components/Icons';
 
 type Props = {
-  handleClick: () => {},
+  active: boolean,
   className: string,
-  component: string,
   value: number,
   children: any,
+  icon: string,
+  handleClick: () => {},
 };
 
 const AccordionItemTitle = (props: Props) => {
-  const { component, value, className, children } = props;
+  const { active, icon, children, value, className } = props;
 
   const onClick = (ev) => {
     const { handleClick } = props;
 
     if (typeof handleClick === 'function') {
-      handleClick(ev);
+      handleClick(parseInt(ev.currentTarget.value, 10));
     }
   };
 
-  console.log(component);
+  if (icon === 'square') {
+    return (
+      <button
+        className={cx('atm-accordion-title', className)}
+        onClick={onClick}
+        value={value}
+        key={value}
+      >
+        {active ? <MinusSquareOIcon /> : <PlusSquareOIcon />}{children}
+      </button>
+    );
+  }
 
-  return React.createElement(
-    component,
-    {
-      className: cx('atm-accordion-title', className),
-      role: 'button',
-      onClick: onClick,
-      value: value,
-    },
-    children
+  return (
+    <button
+      className={cx('atm-accordion-title', className)}
+      onClick={onClick}
+      value={value}
+      key={value}
+    >
+      {children}{active ? <AngleDownIcon /> : <AngleRightIcon />}
+    </button>
   );
-};
-
-AccordionItemTitle.defaultProps = {
-  component: 'button',
 };
 
 export default AccordionItemTitle;
