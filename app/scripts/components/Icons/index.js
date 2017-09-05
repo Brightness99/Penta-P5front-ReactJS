@@ -55,6 +55,7 @@ export ChevronDownIcon from './ChevronDown';
 export Plus from './Plus';
 export PrintiClub from './PrintiClub';
 export CartIcon from './Cart';
+
 export CloudIcon from './CloudIcon';
 export RepurchaseIcon from './RepurchaseIcon';
 export WatchIcon from './WatchIcon';
@@ -72,3 +73,8 @@ export MyAccountIcon from './_MyAccount';
 export PrintiIcon from './_Printi';
 export PrintiSymbolIcon from './_PrintiSymbol';
 export SearchIcon from './_Search';
+
+export InvoiceIcon from './InvoiceIcon';
+export SpecialProjectsIcon from './SpecialProjectsIcon';
+export AccountManagerIcon from './AccountManagerIcon';
+
