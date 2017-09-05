@@ -1,0 +1,87 @@
+.mol-exclusive-service {
+  background-color: #eee;
+  border: 1px solid $color-silver;
+  border-radius: 0 0 $bsn-border-radius $bsn-border-radius;
+  box-shadow: 0.8rem 0.8rem 1rem 0 rgba(83, 117, 153, 0.5);
+  display: flex;
+  flex-direction: column;
+  padding: 2.4rem;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 57rem;
+  z-index: 1;
+
+  .atm-excusive-service-title {
+    @include center-child-flex;
+    background-color: $color-printi-blue;
+    color: $color-white;
+    margin: -2.4rem -2.4rem 0 -2.4rem;
+    height: 5rem;
+  }
+
+  .mol-exclusive-service-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 0;
+
+    > li {
+      display: inline-flex;
+    }
+  }
+
+  .atm-regular-button {
+    align-self: center;
+    width: 22rem;
+  }
+}
+
+.mol-exlusive-service-item {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15rem;
+
+  .atm-exlusive-service-item-title {
+    @include center-child-flex;
+    color: $color-printi-blue;
+    display: inline-flex;
+    flex-direction: row;
+    font-family: $font-family-nunito-regular;
+    font-size: 2.1rem;
+
+    > div {
+      margin-left: 0.8rem;
+    }
+  }
+
+  p {
+    color: $color-almostBlack;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    padding-top: 2rem;
+    text-align: center;
+  }
+}
+
+.mol-exclusive-service-separator {
+  @include center-child-flex;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    color: #6a6f7a;
+    display: inline-flex;
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-sm;
+    height: auto;
+    padding-bottom: 1.6rem;
+  }
+
+  .mol-exlusive-service-item-line {
+    display: inline-flex;
+    flex: 2;
+    height: auto;
+    border-left: 0.1rem solid $color-silver;
+  }
+}

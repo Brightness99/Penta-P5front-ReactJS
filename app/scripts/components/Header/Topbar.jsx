@@ -1,27 +1,41 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { HelpCenterIcon } from 'components/Icons';
+import { NavLink } from 'react-router-dom';
+import { HeartIcon, HelpCircleIcon, AngleDownIcon } from 'components/Icons';
+import Models from './Models';
 
+type Props = {
+  handleClose: () => {},
+};
 
-const Topbar = () => (
-  <div className="app__header__topbar">
-    <div className="container">
-      <ul>
-        <li>
-          <Link to="#" className="helpCenterIcon">
-            Central de ajuda <HelpCenterIcon />
-          </Link>
-        </li>
-        <li>
-          <Link to="#">
-            Modelos
-          </Link>
-        </li>
-      </ul>
+const Topbar = (props: Props) => {
+  const handleAction = (ev) => {
+    const { handleClose } = props;
+
+    if (typeof handleClose === 'function') {
+      handleClose(ev);
+    }
+  };
+
+  return (
+    <div className="org-topbar">
+      <div className="container">
+        <NavLink className="atm-topbar-link atm-topbar-referral" to="/indique-a-printi">
+          Indique a Printi <HeartIcon />
+        </NavLink>
+        <div className="mol-topbar-models">
+          <button onMouseOver={handleAction} className="atm-topbar-link">
+            Modelos <AngleDownIcon />
+          </button>
+          <Models />
+        </div>
+        <NavLink to="central-de-ajuda?action=search&value=meu-pedido" className="atm-topbar-link ">
+          Central de ajuda <HelpCircleIcon />
+        </NavLink>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Topbar;
