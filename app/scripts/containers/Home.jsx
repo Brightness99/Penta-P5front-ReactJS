@@ -5,6 +5,8 @@ import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
+import Banners from 'components/Banners';
+
 import Blog from 'containers/Blog/Blog';
 import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
 
@@ -14,10 +16,55 @@ type Props = {
   app: {},
 };
 
+const bannerImages = [
+  {
+    link: {
+      url: '/',
+      target: 'self',
+    },
+    file: {
+      desktop: 'https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730548_banner-home-site-1920x420px.jpg',
+      mobile: 'https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730557_banner-home-mobile-1578x932px.jpg',
+    },
+    alt: 'promo carnaval',
+  },
+  {
+    link: {
+      url: '/',
+      target: 'self',
+    },
+    file: {
+      desktop: 'http://dev-cms.printi.com.br/files/2017-02/lan-amentos-printi.png',
+      mobile: 'http://dev-cms.printi.com.br/files/2017-02/1486471907_lan-amentos-printi.png',
+    },
+    alt: 'promo carnaval',
+  },
+  {
+    link: {
+      url: '/',
+      target: 'self',
+    },
+    file: {
+      desktop: '',
+      mobile: 'http://dev-cms.printi.com.br/files/2016-12/1482158857_matix.png',
+    },
+    alt: 'mobile only',
+  },
+  {
+    file: {
+      desktop: 'http://dev-cms.printi.com.br/files/2016-12/banner-desktop.png',
+      mobile: '',
+    },
+    alt: 'teste somente desktop',
+  },
+];
+
 export class Home extends React.Component {
   props: Props;
 
   renderMobile() {
+    const { app: { screenSize } } = this.props;
+
     const styles = {
       backgroundImage: `url('${require('../../../assets/media/images/home-card.png')}')`,
       backgroundSize: 'cover',
@@ -25,11 +72,7 @@ export class Home extends React.Component {
 
     return (
       <div className="container-homePage">
-        <Carousel>
-          <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730548_banner-home-site-1920x420px.jpg" alt="Printi. A Gráfica do futuro é online" />
-          <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2017-03/1490382283_bannerhome.png" alt="Agora a maior gráfica online do Brasil oferece produtos gráficos para você conhecer a Qualidade Printi" />
-          <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-12/banner-home-soft-touch.jpg" alt="Soft Touch - O toque que faltava no seu material agora na maior gráfica do Brasil" />
-        </Carousel>
+        <Banners images={bannerImages} screenSize={screenSize} />
         <div className="container">
           <section className="home-slider">
             <nav className="tabNavigation">
@@ -168,6 +211,8 @@ export class Home extends React.Component {
   }
 
   renderDesktop() {
+    const { app: { screenSize } } = this.props;
+
     const styles = {
       backgroundImage: `url('${require('../../../assets/media/images/home-card.png')}')`,
       backgroundSize: 'cover',
@@ -176,11 +221,7 @@ export class Home extends React.Component {
     return (
       <div className="container-homePage">
         <div className="container">
-          <Carousel>
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730548_banner-home-site-1920x420px.jpg" alt="Printi. A Gráfica do futuro é online" />
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2017-03/1490382283_bannerhome.png" alt="Agora a maior gráfica online do Brasil oferece produtos gráficos para você conhecer a Qualidade Printi" />
-            <img src="https://d2ofpir5gh0cbr.cloudfront.net/files/2016-12/banner-home-soft-touch.jpg" alt="Soft Touch - O toque que faltava no seu material agora na maior gráfica do Brasil" />
-          </Carousel>
+          <Banners images={bannerImages} screenSize={screenSize} />
         </div>
         <div className="container">
           <section className="home-slider">

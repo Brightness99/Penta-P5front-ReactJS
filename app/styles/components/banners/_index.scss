@@ -1,0 +1,38 @@
+.org-component-banners {
+  position: relative;
+
+  .atm-banners-arrow {
+    @include center-child-flex;
+    background-color: transparent;
+    border: 0 transparent;
+    color: rgba(#6a6f7a, 0.3);
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    position: absolute;
+    transition: 0.3s ease;
+    top: 0;
+    width: 6rem;
+
+    > svg {
+      fill: currentColor;
+      height: auto;
+      width: 2rem;
+    }
+
+    &:hover {
+      color: rgba($color-white, 1);
+    }
+
+    &--prev {
+      left: -6rem;
+      > svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    &--next {
+      right: -6rem;
+    }
+  }
+}

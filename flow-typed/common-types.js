@@ -98,3 +98,15 @@ declare type SettingsStore = {
     },
   },
 };
+
+decare type BannerImageType = {
+  link: {
+    url?: string,
+    target: string,
+  },
+  file: {
+    desktop?: string,
+    mobile?: string,
+  },
+  alt: string,
+};
