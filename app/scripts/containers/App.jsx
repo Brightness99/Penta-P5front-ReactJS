@@ -16,9 +16,8 @@ import Authentication from 'containers/Authentication';
 import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
-import Header from 'components/Header/nIndex';
+import Header from 'components/Header';
 import Footer from 'components/Footer';
-
 
 type Props = {
   app: AppStore,

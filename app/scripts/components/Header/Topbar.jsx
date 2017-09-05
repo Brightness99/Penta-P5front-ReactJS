@@ -3,7 +3,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { HeartIcon, HelpCircleIcon, AngleDownIcon } from 'components/Icons';
-import Models from './_Models';
+import Models from './Models';
 
 type Props = {
   handleClose: () => {},

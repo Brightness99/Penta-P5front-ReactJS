@@ -4,8 +4,6 @@ import React from 'react';
 import cx from 'classnames';
 import { shouldComponentUpdate } from 'utils/helpers';
 
-import AccordionItem from './AccordionItem';
-
 type Props = {
   children: any,
   className: string,
@@ -46,9 +44,9 @@ export class Accordion extends React.Component {
 
     if (Array.isArray(children)) {
       children.forEach((child, index) => {
-       if (child.props.active) {
+        if (child.props.active) {
          activeItem = index;
-       }
+        }
       });
     } else if (children.props.active) {
       activeItem = 0;
