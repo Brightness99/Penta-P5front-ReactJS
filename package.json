@@ -147,8 +147,7 @@
     "slick-carousel": "^1.7.1",
     "sprintf-js": "^1.1.1",
     "string-mask": "^0.3.0",
-    "sweetalert2": "^6.6.6",
-    "throttle-debounce": "^1.0.1"
+    "sweetalert2": "^6.6.6"
   },
   "engines": {
     "node": ">=6.0.0",
