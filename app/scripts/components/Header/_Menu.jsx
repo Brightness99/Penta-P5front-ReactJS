@@ -7,11 +7,12 @@ import { NavLink } from 'react-router-dom';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import Overlay from 'components/Overlay';
 import Logo from 'components/Logo';
-
+import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 'components/Accordion/nAccordion';
 import { FadeToggle, SlideToggle } from 'animations';
 import { TimesIcon } from 'components/Icons';
 
 import Products from './_Products';
+import Models from './_Models';
 
 type Props = {
   screenSize: string,
@@ -44,7 +45,14 @@ export default class Menu extends React.Component {
         >
           Central de Ajuda
         </NavLink>
+        <span className="atm-header-menu-title">Produtos</span>
         <Products screenSize={screenSize} />
+        <Accordion>
+          <AccordionItem>
+            <AccordionItemTitle className="atm-header-menu-title">Modelos</AccordionItemTitle>
+            <AccordionItemBody><Models screenSize={screenSize} /></AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
       </div>
     );
   }

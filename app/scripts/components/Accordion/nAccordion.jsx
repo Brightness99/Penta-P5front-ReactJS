@@ -8,72 +8,114 @@ import AccordionItem from './AccordionItem';
 
 type Props = {
   children: any,
-  component: string,
   className: string,
-  defaultItem: number,
+  onChange: () => {},
+  id: any,
+  icon: string,
 };
 
 type State = {
-  selectedItem: number,
+  activeItem: number,
 };
 
 export class Accordion extends React.Component {
   constructor(props: Props) {
     super(props);
     this.state = {
-      selectedItem: props.defaultItem,
+      activeItem: -1,
     };
   }
 
-  static defaultProps = {
-    component: 'div',
-    defaultItem: 0,
-  };
-
   shouldComponentUpdate = shouldComponentUpdate;
 
-  componentWillReceiveProps(nextProps) {
-    const { defaultItem } = this.props;
+  componentDidMount() {
+    this.handleDefaultItem();
+  }
 
-    if (nextProps.defaultItem !== defaultItem) {
-      this.setState({
-        defaultItem: nextProps.defaultItem,
-      });
-    }
+  componentWillReceiveProps() {
+    this.handleDefaultItem();
   }
 
   static props: Props;
 
   static state: State;
 
-  handleNavigation = (ev) => {
-    console.log('accordion biiiiiiiiiiiiirl');
+  handleDefaultItem = () => {
+    const { children } = this.props;
+    let { activeItem } = this.state;
+
+    if (Array.isArray(children)) {
+      children.forEach((child, index) => {
+       if (child.props.active) {
+         activeItem = index;
+       }
+      });
+    } else if (children.props.active) {
+      activeItem = 0;
+    }
+
+    this.setState({
+      activeItem,
+    });
+  };
+
+  handleNavigation = (nextActiveItem) => {
+    const { activeItem } = this.state;
+    let finalActiveItem = nextActiveItem;
+
+    if (nextActiveItem === activeItem) {
+      finalActiveItem = -1;
+    }
+
+    this.setState({
+      activeItem: finalActiveItem,
+    });
   };
 
   render() {
-    const { className, component, children } = this.props;
+    const { id, className, children, icon, onChange } = this.props;
+    const { activeItem } = this.state;
 
-    if (!Array.isArray(children)) {
-      return children;
-    }
-
-    console.log(typeof this.props.children, this.props.children, this.props.children.length, Array.isArray(children));
     return (
-      <component className={cx('org-accordion', className)}>
+      <div
+        id={id}
+        className={cx('org-accordion', className)}
+        ref={(accordion) => this.accordion = accordion}  // eslint-disable-line no-return-assign
+      >
         {
-          children
+          !Array.isArray(children) ?
+            React.cloneElement(
+              children,
+              {
+                ...children.props,
+                key: 'Accordion-0',
+                handleClick: this.handleNavigation,
+                active: activeItem === 0,
+                icon,
+                itemId: 0,
+                onChange,
+                onUpdate: this.handleUpdate,
+              },
+              children.props.children
+            )
+            : children
             .filter((child) => child.type.displayName === 'AccordionItem')
-            .map((child) => React.cloneElement(
+            .map((child, index) => React.cloneElement(
               child,
               {
                 ...child.props,
                 key: child.key,
                 handleClick: this.handleNavigation,
+                active: index === activeItem,
+                icon,
+                itemId: index,
+                onChange,
+                onUpdate: this.handleUpdate,
               },
               child.props.children
             ))
         }
-      </component>
+      </div>
     );
   }
 }

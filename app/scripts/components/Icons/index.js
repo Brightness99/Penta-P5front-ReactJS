@@ -63,6 +63,7 @@ export MyDataIcon from './MyData';
 export CardsIcon from './Cards';
 export ModelsIcon from './Models';
 export OutIcon from './Out';
+export AngleRightIcon from './AngleRight';
 
 // new definitive icons
 export AngleDownIcon from './_AngleDown';
