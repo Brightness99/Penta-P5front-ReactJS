@@ -44,6 +44,9 @@ const Banners = (props: Props) => {
       className="org-component-banners"
       nextArrow={<NextArrow />}
       prevArrow={<PrevArrow />}
+      dots={true}
+      dotsClass="atm-banners-dots"
+      autoplay={true}
     >
       {images
         .filter((image) => {
