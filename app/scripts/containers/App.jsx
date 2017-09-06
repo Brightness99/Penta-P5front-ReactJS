@@ -32,6 +32,8 @@ import TermsOfUse from 'containers/TermsOfUse';
 import PrivacyPolicy from 'containers/PrivacyPolicy';
 import Sitemap from 'containers/Sitemap';
 import Search from 'components/Search';
+import Footer from 'components/Footer';
+import Gabaritos from 'containers/Gabaritos';
 
 type Props = {
   app: AppStoreType,
@@ -106,6 +108,7 @@ export class App extends React.Component {
                       <Route path="/:slug/upload/:itemId" component={Upload} />
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
+                      <Route exact path="/gabaritos" component={Gabaritos} />
                       <Route component={Error404} />
                     </Switch>
                   </main>
