@@ -38,15 +38,24 @@
 }
 
 .atm-banners-dots {
-  @include center-child-flex;
-  bottom: 2rem;
+  display: flex!important;
   line-height: 0;
   height: auto;
-  margin: 0;
+  justify-content: center;
+  margin: 1.6rem 0 0;
   padding: 0;
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
+  position: relative;
+  width: 100%;
+
+  @include lg {
+    bottom: 2rem;
+    margin-top: 0;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    width: auto;
+  }
+
 
   > li {
     display: inline-flex;
@@ -54,7 +63,7 @@
     margin: 0 0.6rem;
 
     > button {
-      background-color: rgba($color-white, 0.4);
+      background-color: rgba(#6a6f7a, 0.3);
       border: 0 transparent;
       border-radius: 0.4rem;
       color: transparent;
@@ -63,11 +72,19 @@
       opacity: 1;
       transition: 0.3s ease;
       width: 0.8rem;
+
+      @include lg {
+        background-color: rgba($color-white, 0.3);
+      }
     }
 
     &.slick-active {
       > button {
-        background-color: rgba($color-white, 1);
+        background-color: $color-printi;
+
+        @include lg {
+          background-color: $color-white;
+        }
       }
     }
   }
