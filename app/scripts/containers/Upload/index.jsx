@@ -123,7 +123,7 @@ export class Upload extends React.Component {
 
   renderUploadTypeSchema = () => {
     const globalFlags = {
-      upload_type: 'normal',
+      upload_type: 'canvas',
       from_my_account: false,
     };
 
@@ -196,10 +196,10 @@ export class Upload extends React.Component {
             </div>
           </div>
           <div className="upload-container">
-              {this.renderUploadTypeSchema()}
-            <div className="upload-container-centralized">
+            {this.renderUploadTypeSchema()}
+            {/*<div className="upload-container-centralized">
               <Warning templates={templates} dispatch={dispatch} product={product} />
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
