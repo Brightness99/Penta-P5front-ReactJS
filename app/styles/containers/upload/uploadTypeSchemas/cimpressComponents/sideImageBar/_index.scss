@@ -8,47 +8,70 @@
     align-items: center;
     justify-content: center;
     background-color: $color-sky-blue-light;
-    button {
+    .dcl-upload-button {
       display: flex;
-      flex-direction: row;
+      width: 100%;
+      height: 8rem;
       align-items: center;
       justify-content: center;
-      width: 87%;
-      height: 4rem;
-      background-color: $color-printi;
-      border: none;
-      border-radius: 3px;
-      transition: 0.3s;
-      .filesIcon {
+      button {
         display: flex;
-        width: 1.5rem;
-        height: 1.5rem;
-        margin-right: 0.5rem;
-        color: $color-white;
-        line-height: 0.9;
-        svg {
-          fill: $color-white;
-          .addFileIconFill {
-            fill: $color-printi !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 87%;
+        height: 4rem;
+        background-color: $color-printi;
+        border: none;
+        border-radius: 3px;
+        transition: 0.3s;
+        .filesIcon {
+          display: flex;
+          width: 1.5rem;
+          height: 1.5rem;
+          margin-right: 0.5rem;
+          color: $color-white;
+          line-height: 0.9;
+          svg {
+            fill: $color-white;
+            .addFileIconFill {
+              fill: $color-printi !important;
+            }
           }
         }
-      }
-      &:hover {
-        background-color: $color-darkBlue;
-      }
-      span {
-        display: flex;
-        color: $color-white;
-        font-family: $font-family-open-sans-bold;
-        font-weight: 700;
-        font-size: 1rem;
-        text-transform: uppercase;
+        &:hover {
+          background-color: $color-darkBlue;
+        }
+        span {
+          display: flex;
+          color: $color-white;
+          font-family: $font-family-open-sans-bold;
+          font-weight: 700;
+          font-size: 1rem;
+          text-transform: uppercase;
+        }
       }
     }
   }
   .sideImageBar__thumbnailContainer {
     display: flex;
     width: 100%;
-    height: 42rem;
+    min-height: 42rem;
+    max-height: 62rem;
+    .dcl-widget-upload-list {
+      display: flex;
+      width: 100%;
+      margin-top: 3rem;
+      .dcl-thumb__actions__link--delete {
+        width: 30px;
+        height: 30px;
+      }
+      .dcl-pdf-thumb__image {
+        .dcl-thumb__actions__link--delete {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
   }
 }

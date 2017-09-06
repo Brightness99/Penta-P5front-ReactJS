@@ -1,12 +1,14 @@
 // @flow
 
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import Loading from 'components/Loading';
 import TopMenuBar from '../CimpressComponents/TopMenuBar';
 import SideImageBar from '../CimpressComponents/SideImageBar';
 import SideTextBar from '../CimpressComponents/SideTextBar';
 import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
 import CanvasArea from '../CimpressComponents/CanvasArea';
+import Indicator from '../CimpressComponents/Indicator';
 
 type Props = {
 };
@@ -47,7 +49,7 @@ export default class Canvas extends React.Component {
         services: {
           clients: {
             tokenRetrieval: {
-              apiKey: '',
+              apiKey: '580de974cffe5feedb620793053d32354ff56e68b650c8400314c273f3d46172',
             },
             font: {
               defaultFont: "Alegreya Sans",
@@ -220,7 +222,7 @@ export default class Canvas extends React.Component {
               },
               widgets: {
                 addButtonTextField: 'Adicionar texto',
-                uploadFileButton: 'Adicionar arquivo',
+                uploadFileButton: '+ Adicionar novo arquivo',
                 imageUploading: 'Adicionando...',
                 imageProcessing: 'Processando...',
                 cropModalTitle: 'Defina como a imagem será recortada:',
@@ -273,10 +275,36 @@ export default class Canvas extends React.Component {
           canvas: {
             enabledCanvas: 1,
             visibleCanvas: 1,
+            showMargins: true,
             chromes: {
+              canvasTools: {
+                enabled: true,
+                left: 0,
+                top: -25,
+              },
               dimensions: {
                 enabled: false,
                 measurement: 'mm',
+              },
+              infoIndicators: {
+                enabled: true,
+                margins: {
+                  safety: {
+                    safeOffset: 0.60,
+                    enabled: true,
+                    template: () => (ReactDOMServer.renderToString(<Indicator type="safety" title="Margem" content="conteudo" />)),
+                  },
+                  bleed: {
+                    bleedOffset: 0.75,
+                    enabled: true,
+                    template: () => (ReactDOMServer.renderToString(<Indicator type="bleed" title="Sangria" content="conteudo" />)),
+                  },
+                  trim: {
+                    trimOffset: 0.90,
+                    enabled: true,
+                    template: () => (ReactDOMServer.renderToString(<Indicator type="trim" title="Linha do produto" content="conteudo" />)),
+                  },
+                },
               },
             },
           },
@@ -291,16 +319,36 @@ export default class Canvas extends React.Component {
             },
             zoom: {
               enabled: true,
-              containerElement: ".dcl-zoom-container",
+              containerElement: '.dcl-zoom-container',
             },
             addText: {
               enabled: true,
-              containerElement: ".add-text-container",
+              containerElement: '.add-text-container',
             },
             editText: {
               enabled: true,
-              containerElement: ".edit-text-container",
+              containerElement: '.edit-text-container',
             },
+            uploadButton: {
+              enabled: true,
+              containerElement: '.sideImageBar__buttonContainer',
+              template: () => {
+                const button = document.createElement('button'),
+                  icon = document.createElement('i'),
+                  span = document.createElement('span');
+
+                button.setAttribute('class', 'sideImageBar__buttonContainer_button');
+
+                icon.setAttribute('class', 'filesIcon');
+                icon.innerHTML = '+';
+                button.appendChild(icon);
+
+                span.innerHTML = 'Adicionar novo arquivo';
+                button.appendChild(span);
+
+                return button;
+              },
+            }
           },
           zoomStrategy: {
             resizeEnabled: false,
@@ -335,15 +383,15 @@ export default class Canvas extends React.Component {
         surfaces: [
           {
             name: "UNIQUE1",
-            widthInMm: 56,
-            heightInMm: 186,
+            widthInMm: 186,
+            heightInMm: 56,
             processType: "Print",
             trim: 3,
           },
           {
             name: "UNIQUE2",
-            widthInMm: 56,
-            heightInMm: 186,
+            widthInMm: 186,
+            heightInMm: 56,
             processType: "Print",
             trim: 3,
           },

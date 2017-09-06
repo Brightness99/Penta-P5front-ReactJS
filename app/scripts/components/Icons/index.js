@@ -61,3 +61,4 @@ export UploadUniqueFileIcon from './UploadUniqueFile';
 export UploadMultipleFilesIcon from './UploadMultipleFiles';
 export AddFileIcon from './AddFile';
 export AddTextIcon from './AddText';
+export EyeIcon from './Eye';
