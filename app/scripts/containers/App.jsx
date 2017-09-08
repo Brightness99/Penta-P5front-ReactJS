@@ -18,6 +18,7 @@ import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
+<<<<<<< 87816e77dac4a3a8d75e67ea9eb74f6f6aebdd70
 import Upload from 'containers/Upload';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
@@ -33,6 +34,10 @@ import PrivacyPolicy from 'containers/PrivacyPolicy';
 import Sitemap from 'containers/Sitemap';
 import Search from 'components/Search';
 import Gabaritos from 'containers/Gabaritos';
+=======
+import Footer from 'components/Footer';
+import Templateslp from 'containers/Templateslp';
+>>>>>>> Sprint042 | Template Lp layout
 
 type Props = {
   app: AppStoreType,
@@ -108,6 +113,7 @@ export class App extends React.Component {
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/gabaritos" component={Gabaritos} />
+                      <Route exact path="/modelos" component={Templateslp} />
                       <Route component={Error404} />
                     </Switch>
                   </main>
