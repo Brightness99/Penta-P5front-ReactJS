@@ -1,0 +1,22 @@
+.tpl-templateslp {
+  display: flex;
+  .org-list-category {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .org-list-models {
+    flex: 3;
+    .mol-list-models {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      margin: 0 0 3.7rem 0;
+      .atm-model {
+        background-color: red;
+        flex-basis: calc((100% / 3) - 14px);
+        margin: 0 0.7rem 2rem 0.7rem;
+      }
+    }
+  }
+}
