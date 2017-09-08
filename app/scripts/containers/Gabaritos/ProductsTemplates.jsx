@@ -11,7 +11,7 @@ export class ProductsTemplates extends React.Component {
     return (
       <section>
         <div className="container">
-          <ul className="container-productsTemplates">
+          <ul className="org-productsTemplates">
             <li><p>Cartão de visita</p></li>
             <li><p>Cartão de visita (verniz local)</p></li>
             <li><p>Cartaz/Pôster</p></li>

@@ -2,8 +2,19 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Input, Button } from 'quarks/Inputs';
+import ChooseSettings from './ChooseSettings';
+
+type Props = {
+  screenSize: string;
+}
 
 class DownloadTemplate extends React.Component {
+  static defaultProps = {
+    screenSize: 'xs',
+  };
+
+  props: Props;
 
   sidebar() {
     return (
@@ -22,19 +33,19 @@ class DownloadTemplate extends React.Component {
           <ul className="qrk-list-download">
             <li>
               <img src={require('assets/media/images/ilustrator-icon.png')} alt="Ilustrator" />
-              <Link to="#" className="btn-default btn-primary btn-sm fnt-sbold">Ilustrator</Link>
+              <Link to="#" className="btn-default btn-sm fnt-sbold">Ilustrator</Link>
             </li>
             <li>
               <img src={require('assets/media/images/photoshop-icon.png')} alt="Photoshop" />
-              <Link to="#" className="btn-default btn-primary btn-sm fnt-sbold">Photoshop</Link>
+              <Link to="#" className="btn-default btn-sm fnt-sbold">Photoshop</Link>
               </li>
             <li>
               <img src={require('assets/media/images/indesign-icon.png')} alt="Indesign" />
-              <Link to="#" className="btn-default btn-primary btn-sm fnt-sbold">Indesign</Link>
+              <Link to="#" className="btn-default btn-sm fnt-sbold">Indesign</Link>
             </li>
             <li>
               <img src={require('assets/media/images/coreldraw-icon.png')} alt="Coreldraw" />
-              <Link to="#" className="btn-default btn-primary btn-sm fnt-sbold">Coreldraw</Link>
+              <Link to="#" className="btn-default btn-sm fnt-sbold">Coreldraw</Link>
             </li>
           </ul>
         </div>
@@ -46,8 +57,13 @@ class DownloadTemplate extends React.Component {
     return (
       <div className="mol-sidebar-preview">
         <h4 className="title-atm-preview">Preview</h4>
-        <div>
-          images preview
+        <div className="atm-image-preview">
+          <div className="qrk-image-preview">
+            <img src={require('assets/media/images/gabarito-frente.png')} alt="Frente" />
+          </div>
+          <div className="qrk-image-preview">
+            <img src={require('assets/media/images/gabarito-verso.png')} alt="Verso" />
+          </div>
         </div>
         <ul className="atm-list-sidebar-preview">
           <li className="final-format">Formato final/faca</li>
@@ -55,12 +71,53 @@ class DownloadTemplate extends React.Component {
           <li className="bleed">Sangria</li>
           <li className="creases">Dobras</li>
         </ul>
-        <p>Nãto esqueça de remover o gabarito antes de fechar o PDF para impressão</p>
+        <p className="atm-legend-preview">Não esqueça de remover o gabarito antes de fechar o PDF para impressão</p>
       </div>
     );
   }
 
-  render() {
+  footerPreviewMobile() {
+    return (
+      <div className="mol-footer-preview">
+        <div className="container">
+          <p className="text-footer-preview">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor sapien nibh, nec varius sem finibus sit amet. Nulla ornare ligula nec ex sodales rutrum. Maecenas ac consectetur mi, vel malesuada libero.</p>
+          <form>
+            <Input
+              name="email"
+              placeholder="E-mail"
+              showLabel={true}
+            />
+            <Button
+            type="submit"
+            kind="success"
+            className="btn-default"
+            >
+            Enviar
+          </Button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  renderMobile() {
+    const { screenSize } = this.props;
+    return (
+      <section>
+        <div className="container">
+          <ChooseSettings />
+          <div className="org-download-template">
+            { this.previewTemplate() }
+          </div>
+        </div>
+        <div className="org-download-template">
+          { this.footerPreviewMobile() }
+        </div>
+      </section>
+    );
+  }
+
+  renderDesktop() {
     return (
       <section>
         <div className="container">
@@ -70,6 +127,19 @@ class DownloadTemplate extends React.Component {
           </div>
         </div>
       </section>
+    );
+  }
+
+  render() {
+    const { screenSize } = this.props;
+    return (
+      <div>
+        {
+          ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
+            ? this.renderMobile()
+            : this.renderDesktop()
+        }
+      </div>
     );
   }
 }

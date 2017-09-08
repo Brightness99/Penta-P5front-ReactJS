@@ -1,21 +1,31 @@
+@import "choose-settings";
+@import "download-template";
+@import "products-template";
 
 .title-timeline {
   font-family: $font-family-open-sans-bold;
-  font-size: $font-size-lg;
+  font-size: $font-size-sm;
+  @include lg {
+    font-size: $font-size-lg;
+  }
 }
 .subtitle-timeline {
   color: $color-lightGray;
   font-family: $font-family-open-sans-light;
-  font-size: $font-size-base;
+  font-size: $font-size-xs;
+  @include lg {
+    font-size: $font-size-base;
+  }
 }
 
 .container-timeline {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 3rem 0;
+  margin: 2rem 0;
   @include lg {
     flex-direction: row;
+    margin: 3rem 0;
   }
   .list-timeline {
     align-items: center;
@@ -39,8 +49,12 @@
       flex-direction: column;
       justify-content: center;
       margin-right: 1rem;
+      text-transform: uppercase;
+      width: 110px;
+      text-align: center;
       @include lg {
         flex-direction: row;
+        width: auto;
       }
       &:last-of-type {
         margin-right: 0;
@@ -50,23 +64,67 @@
         border-radius: 1.5rem;
         color: $color-white;
         height: 2rem;
-        margin-right: 0.5rem;
+        margin-right: 0;
         padding: 0.1rem 0.6rem;
+        text-align: center;
         width: 2rem;
         position: relative;
         @include lg {
           padding: 0.1rem 0.7rem;
+          margin-right: 0.5rem;
         }
-        &:after {
-          background-color: $color-hrLightGray;
-          content: '';
-          height: 0.1rem;
-          left: 100%;
-          position: absolute;
-          top: 50%;
-          width: 600px;
-          @include lg  {
-            background-color: transparent;
+        &.after {
+          &:after {
+            background-color: $color-hrLightGray;
+            content: '';
+            height: 0.1rem;
+            left: 100%;
+            position: absolute;
+            top: 50%;
+            width: 600px;
+            @include lg  {
+              background-color: transparent;
+            }
+          }
+        }
+        &.after-before {
+          &:after {
+            background-color: $color-hrLightGray;
+            content: '';
+            height: 0.1rem;
+            left: 100%;
+            position: absolute;
+            top: 50%;
+            width: 600px;
+            @include lg {
+              background-color: transparent;
+            }
+          }          
+          &:before {
+            background-color: $color-hrLightGray;
+            content: '';
+            height: 0.1rem;
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            width: 600px;
+            @include lg {
+              background-color: transparent;
+            }
+          }
+        }
+        &.before {
+          &:before {
+            background-color: $color-hrLightGray;
+            content: '';
+            height: 0.1rem;
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            width: 600px;
+            @include lg {
+              background-color: transparent;
+            }
           }
         }
       }
@@ -82,7 +140,9 @@
     border: 0.1rem solid $color-hrLightGray;
     border-radius: 0.3rem;
     display: flex;
-    margin-top: 2rem;
+    @include lg {
+      margin-top: 2rem;
+    }
     .app__qrk__input-container--labeled {
       flex:6;
       input {
@@ -93,232 +153,11 @@
     .btn-default {
       flex: 1;
       background-color: #eee;
-    }
-  }
-}
-
-.container-productsTemplates {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  font-family: $font-family-open-sans-bold;
-  font-size: $font-size-xs;
-  margin: 0 0 3.7rem 0;
-  flex-direction: column;
-  @include lg {
-    flex-direction: row;
-  }
-  li {
-    align-items: flex-start;
-    background: $color-white;
-    border-radius: 0.3rem;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: flex;
-    flex: 1;
-    flex-basis: calc((100% / 3) - 1.4rem);
-    flex-direction: column;
-    height: 6rem;
-    justify-content: center;
-    margin: 0 0 2rem 0;
-    padding: 2rem 1rem;
-    position: relative;
-    text-transform: uppercase;
-    transition-delay: 0.04s;
-    transition-timing-function: ease-in-out;
-    @include lg {
-      margin: 0 0.7rem 2rem 0.7rem;
-    }
-    p { margin-bottom: 0; }
-    &:hover {
-      background-color: $color-printi-blue;
-      color: $color-white;
-    }
-    &:nth-of-type(3n-2) {
-      margin-left: 0;
-    }
-    &:nth-of-type(3n) {
-      margin-right: 0;
-    }
-  }
-}
-
-
-.container-chooseSettings {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  font-family: $font-family-open-sans-bold;
-  font-size: $font-size-xs;
-  margin: 0 0 3.7rem 0;
-  flex-direction: column;
-  @include lg {
-    flex-direction: row;
-  }
-  .item-chooseSettings{
-    align-items: flex-start;
-    background: $color-white;
-    border-radius: 0.3rem;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: flex;
-    flex: 1;
-    flex-basis: calc((100% / 3) - 1.4rem);
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 0 2rem 0;
-    padding: 2rem 1rem;
-    position: relative;
-    text-transform: uppercase;
-    transition-delay: 0.04s;
-    transition-timing-function: ease-in-out;
-    @include lg {
-      margin: 0 0.7rem 2rem 0.7rem;
-    }
-    &:nth-of-type(3n-2) {
-      margin-left: 0;
-    }
-    &:nth-of-type(3n) {
-      margin-right: 0;
-    }
-    span {
-      align-items: center;
-      border: 0.1rem solid $color-lightGray3;
-      border-radius: 1.5rem;
-      color: $color-lightGray3;
-      display: flex;
-      font-family: $font-family-nunito-regular;
-      font-size: $font-size-lg;
-      height: 3rem;
-      justify-content: center;
-      position: relative;
-      width: 3rem;
-    }
-    .title-chooseSettings {
-      font-family: $font-family-open-sans-light;
-      font-size: $font-size-base;
-      margin-bottom: 0;
-      text-transform: none;
-    }
-    .org-checkout-content-data {
-      width: 100%;
-      margin-top: 0;
-      .atm-checkout-input-one {
-        width: 100%;
-      }
-    }
-    .box-numberSetting {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      margin: 1rem 0 2.6rem;
-      width: 100%;
-    }
-  }
-}
-
-
-.org-links-chooseSettings {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 4rem;
-  .atm-link {
-    align-items: center;
-    color: $color-lightGray;
-    display: inline-flex;
-    font-family: $font-family-open-sans-regular;
-    font-size: $font-size-xs;
-    svg {
-      fill: $color-lightGray;
-      margin-right: 0.5rem;
-      width: 0.9rem;
-    }
-  }
-  .btn-default {
-    font-size: $font-size-xxxs;
-    padding: 1.1rem 7.7rem;
-  }
-}
-
-
-.org-download-template {
-  display: flex;
-  margin-bottom: 4rem;
-  .title-atm-preview {
-    font-family: $font-family-nunito-light;
-    font-size: $font-size-xxx;
-  }
-  .title-atm-sidebar {
-    font-family: $font-family-nunito-regular;
-    font-size: $font-size-il;
-  }
-  .mol-sidebar-download-template {
-    background-color: $color-white;
-    border-radius: 0.3rem;
-    flex: 1;
-    margin-right: 2rem;
-    padding: 3rem 1.8rem;
-    .atm-sidebar-download-template {
-      .qrk-list-sidebar {
-        color: $color-lightGray;
-        font-family: $font-family-open-sans-light;
-        font-size: $font-size-base;
-        margin: 1.5rem 0;
-      }
-    }
-    .atm-sidebar-choose-download {
-      .qrk-list-download {
-        li {
-          display: flex;
-          margin: 1.5rem 0;
-        }
-      }
-    }
-  }
-  .mol-sidebar-preview {
-    background-color: $color-white;
-    border-radius: 0.3rem;
-    flex: 3;
-    padding: 3rem 3rem 1.7rem;
-    .atm-list-sidebar-preview {
-      border-top: 0.1rem solid #eee;
-      li {
-        display: inline-flex;
-        &:before { 
-          background-color: red;
-          border-radius: 1.5rem;
-          content: '';
-          height: 2rem;
-          width: 2rem;
-        }
-        &.final-format {
-          &:before {
-            background-color: $color-sky-blue;
-          }
-        }
-        &.safety-margin {
-          &:before {
-            background-color: $color-yellow;
-          }
-        }
-        &.bleed {
-          &:before {
-            background-color: $color-barbie-pink;
-          }
-        }
-        &.creases {
-          &:before {
-            background: repeating-linear-gradient(
-              88deg,
-              $color-white,
-              #eee 10px,
-              #465298 10px,
-              #eee 20px
-            );
-          }
-        }
+      svg {
+        fill: $color-silver;
+        height: 2rem;
+        width: 2rem;
       }
     }
   }
 }
-
