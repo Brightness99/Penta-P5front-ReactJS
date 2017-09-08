@@ -2,18 +2,22 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Select } from 'atoms/Inputs/Select';
+import { isMobile } from 'utils/helpers';
 
+import { Select } from 'atoms/Inputs/Select';
 import { Arrow } from 'components/Icons';
 
 export class ChooseSettings extends React.Component {
+  static props: Props;
+
   render() {
     return (
       <section>
         <div className="container">
-          <div className="container-chooseSettings">
-            <div className="item-chooseSettings">
-              <div className="box-numberSetting">
+          <div className="org-chooseSettings">
+
+            <div className="mol-chooseSettings">
+              <div className="atm-numberSetting">
                 <span>1</span>
               </div>
               <p className="title-chooseSettings">Orientação</p>
@@ -31,8 +35,9 @@ export class ChooseSettings extends React.Component {
                 </Select>
               </form>
             </div>
-            <div className="item-chooseSettings">
-              <div className="box-numberSetting">
+
+            <div className="mol-chooseSettings">
+              <div className="atm-numberSetting">
                 <span>2</span>
               </div>
               <p className="title-chooseSettings">Número de páginas</p>
@@ -50,8 +55,9 @@ export class ChooseSettings extends React.Component {
                 </Select>
               </form>
             </div>
-            <div className="item-chooseSettings">
-              <div className="box-numberSetting">
+
+            <div className="mol-chooseSettings">
+              <div className="atm-numberSetting">
                 <span>3</span>
               </div>
               <p className="title-chooseSettings">Formato</p>
@@ -69,8 +75,10 @@ export class ChooseSettings extends React.Component {
                 </Select>
               </form>
             </div>
+
           </div>
-          <div className="org-links-chooseSettings">
+
+          <div className="org-links-chooseSettings footer-page">
             <Link to="#" className="atm-link"><Arrow />Voltar para escolher outro produto</Link>
             <Link to="#" className="btn-default btn-primary btn-sm fnt-sbold">Continuar</Link>
           </div>
