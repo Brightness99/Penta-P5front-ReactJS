@@ -1,21 +1,154 @@
 .tpl-templateslp {
   display: flex;
+  flex-direction: column;
+  @include lg {
+    flex-direction: row;
+  }
   .org-list-category {
-    display: flex;
     flex: 1;
-    flex-direction: column;
+    @include lg {
+      margin-right: 2rem;
+    }
+    .qrk-title-category {
+      border: 1px solid #c7c9cb;
+      line-height: 3;
+      padding-left: 1.2rem;
+    }
+    .mol-list-category {
+      background-color: $color-white;
+      display: flex;
+      flex-direction: column;
+      font-family: $font-family-open-sans-light;
+      font-size: $font-size-sm;
+      left: 0;
+      padding: 0 1.6rem;
+      position: absolute;
+      top: -95px;
+      width: 30rem;
+      z-index: 7;
+      @include lg {
+        background-color: transparent;
+        border: 1px solid #c7c9cb;
+        font-size: $font-size-base;
+        padding: 2rem;
+        position: relative;
+        top: auto;
+        z-index: inherit;
+      }
+      li {
+        margin-bottom: 1rem;
+        a {
+          color: $color-black;
+        }
+        @include lg {
+          margin-bottom: 2rem;
+        }
+      }
+      .qrk-title-mobile {
+        font-size: $font-size-h4;
+        padding: 1rem 0;
+      }
+      .atm-header-menu-close {
+        height: 3rem;
+        width: 3rem;
+        top: 0.7rem;
+      }
+    }
   }
   .org-list-models {
     flex: 3;
+    margin-top: 2rem;
+    @include lg {
+      margin-top: 0; 
+    }
+    .mol-search-models-page {
+      .atm-search-page {
+        display: flex;
+        margin-bottom: 2rem;
+        .qrk-input, .atm-simple-select > select {
+          background-color: #eee;
+          border: transparent;
+        }
+        .qrk-input {
+          border: transparent;
+          border: 1px solid #c7c9cb;
+          flex: 3;
+          padding-left: 1.2rem;
+        }
+        .qrk-select {
+          border: 1px solid #c7c9cb;
+          border-left: 0;
+          flex: 1;
+        }
+      }
+    }
     .mol-list-models {
       display: flex;
+      flex-direction: column;
       flex-wrap: wrap;
-      flex-direction: row;
       margin: 0 0 3.7rem 0;
+      @include lg {
+        flex-direction: row;
+      }
       .atm-model {
-        background-color: red;
-        flex-basis: calc((100% / 3) - 14px);
-        margin: 0 0.7rem 2rem 0.7rem;
+        align-items: center;
+        background-color: $color-white;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        display: flex;
+        flex-basis: calc((100% / 3) - 1rem);
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem;
+        position: relative;
+        @include lg {
+          margin: 0 1.5rem 2rem 1.5rem;
+        }
+        &:hover {
+          box-shadow: 0px 3px 5px 6px #ccc;
+          transition: all 0.4s;
+          transition-timing-function: linear;
+          .qrk-btns-model { 
+            opacity: 1; 
+            transition: all 0.2s;
+            transition-timing-function: linear;
+          }
+        }
+        .qrk-btns-model {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          opacity: 0;
+          .btn-details {
+            align-items: center;
+            background-color: $color-white;
+            border: 1px solid $color-lightGray;
+            color: $color-lightGray;
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            svg {
+              margin-right: 1rem;
+              width: 16px;
+            }
+          }
+        }
+        &:nth-of-type(n) {
+          margin-left: 0;
+        }
+        &:nth-of-type(3n) {
+          margin-right: 0;
+        }
+        &:first-of-type {
+          background-color: #eef3f9;
+          border: 2px dashed $color-printi-blue;
+        }
+        .qrk-fnt-send-art {
+          color: $color-bluishPurple;
+          font-family: $font-family-open-sans-regular;
+          font-size: $font-size-base;
+          margin-top: 1rem;
+        }
       }
     }
   }
