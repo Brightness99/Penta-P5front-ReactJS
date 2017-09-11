@@ -72,3 +72,5 @@ export MyAccountIcon from './_MyAccount';
 export PrintiIcon from './_Printi';
 export PrintiSymbolIcon from './_PrintiSymbol';
 export SearchIcon from './_Search';
+
+export GlassZoomIcon from './GlassZoomIcon';
