@@ -5,12 +5,9 @@ import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import Banners from 'components/Banners';
-
-import Blog from 'containers/Blog/Blog';
 import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
 
-import Carousel from 'components/Carousel';
+import { Banners, Highlights, Blog } from 'components/LandingPage';
 
 type Props = {
   app: {},
@@ -19,45 +16,111 @@ type Props = {
 const bannerImages = [
   {
     link: {
-      url: '/',
-      target: 'self',
+      URL: '/',
+      TARGET: 'self',
     },
     file: {
-      desktop: 'https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730548_banner-home-site-1920x420px.jpg',
-      mobile: 'https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730557_banner-home-mobile-1578x932px.jpg',
+      DESKTOP: 'https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730548_banner-home-site-1920x420px.jpg',
+      MOBILE: 'https://d2ofpir5gh0cbr.cloudfront.net/files/2017-05/1493730557_banner-home-mobile-1578x932px.jpg',
     },
-    alt: 'promo carnaval',
+    ALT: 'promo carnaval',
   },
   {
     link: {
-      url: '/',
-      target: 'self',
+      URL: '/',
+      TARGET: 'self',
     },
     file: {
-      desktop: 'http://dev-cms.printi.com.br/files/2017-02/lan-amentos-printi.png',
-      mobile: 'http://dev-cms.printi.com.br/files/2017-02/1486471907_lan-amentos-printi.png',
+      DESKTOP: 'http://dev-cms.printi.com.br/files/2017-02/lan-amentos-printi.png',
+      MOBILE: 'http://dev-cms.printi.com.br/files/2017-02/1486471907_lan-amentos-printi.png',
     },
-    alt: 'promo carnaval',
+    ALT: 'promo carnaval',
   },
   {
     link: {
-      url: '/',
-      target: 'self',
+      URL: '/',
+      TARGET: 'self',
     },
     file: {
-      desktop: '',
-      mobile: 'http://dev-cms.printi.com.br/files/2016-12/1482158857_matix.png',
+      DESKTOP: '',
+      MOBILE: 'http://dev-cms.printi.com.br/files/2016-12/1482158857_matix.png',
     },
-    alt: 'mobile only',
+    ALT: 'mobile only',
   },
   {
     file: {
-      desktop: 'http://dev-cms.printi.com.br/files/2016-12/banner-desktop.png',
-      mobile: '',
+      DESKTOP: 'http://dev-cms.printi.com.br/files/2016-12/banner-desktop.png',
+      MOBILE: '',
     },
-    alt: 'teste somente desktop',
+    ALT: 'teste somente desktop',
   },
 ];
+
+const highlightsJson = {
+  TITLE: 'Destaques',
+  list: [
+    {
+      TITLE: 'SAIBA COMO PAGAR FATURADO',
+      TEXT: 'Conte com os benefícios e facilidades do pagamento faturado. Veja como solicitar o seu.',
+      link: {
+        URL: '/solicitacao-faturamento',
+        TITLE: 'Pague faturado na gráfica Printi',
+      },
+      image: {
+        URL: '/assets/final/img/destaque-pagar-faturado.jpg',
+        ALT: 'Pague faturado na gráfica Printi',
+      },
+    },
+    {
+      TITLE: 'VEJA COMO EDITAR SUA ARTE',
+      TEXT: 'Baixe o gabarito e edite seu arquivo nos padrões recomendados para impressão.',
+      link: {
+        URL: '/download-de-gabaritos',
+        TITLE: 'Baixe Gabaritos da grafica online Printi',
+      },
+      image: {
+        URL: '/assets/final/img/destaque-pagina-gabaritos.jpg',
+        ALT: 'Baixe Gabaritos da grafica online Printi',
+      },
+    },
+    {
+      TITLE: 'Evite erros na impressão',
+      TEXT: 'Consulte nosso guia de impressão e solucione todas as dúvidas antes de imprimir.',
+      link: {
+        URL: '/guia-de-impressao',
+        TITLE: 'Guia de impressão da grafica online melhor do Brasil',
+      },
+      image: {
+        URL: '/assets/final/img/destaque-guia-impressao.jpg',
+        ALT: 'Guia de impressão da grafica online melhor do Brasil',
+      },
+    },
+    {
+      TITLE: 'Aprenda a montar sua arte',
+      TEXT: 'Encontre todas as informações que você precisa para montar seu arquivo corretamente.',
+      link: {
+        URL: '/montagem-do-arquivo',
+        TITLE: 'Montagem do arquivo da Printi melhor gráfica do Brasil',
+      },
+      image: {
+        URL: '/assets/final/img/destaque-montagem-arquivo.jpg',
+        ALT: 'Montagem do arquivo da Printi melhor gráfica do Brasil',
+      },
+    },
+    {
+      TITLE: 'TUTORIAL DE CARTÃO DE VISITA',
+      TEXT: 'Aprenda sobre as especificações, características e formas de uso dos cartões de visita.',
+      link: {
+        URL: '/tutoriais/cartao-de-visita',
+        TITLE: 'Tutorial de cartões de visita da grafica online Printi',
+      },
+      image: {
+        URL: '/assets/final/img/destaque-tutorial-cartao-visita.jpg',
+        ALT: 'Tutorial de cartões de visita da grafica online Printi',
+      },
+    },
+  ],
+};
 
 export class Home extends React.Component {
   props: Props;
@@ -172,40 +235,10 @@ export class Home extends React.Component {
               </div>
             </div>
           </section>
-
-          <section className="container-highlight">
-            <h4 className="title-highlight">Destaques</h4>
-            <div className="boxes-highlight">
-              <div className="box-highlight">
-                <div className="bg-highlight-hover" />
-                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/destaque-pagar-faturado.jpg" alt="Pague faturado na gráfica Printi" />
-                <div className="desc-highlight">
-                  <h4 className="box-highlight-title">Saiba como pagar faturado</h4>
-                  <p>Precisa de um cartão mas não ter arte? monte o seu modelo agora mesmo.</p>
-                </div>
-              </div>
-              <div className="box-highlight">
-                <div className="bg-highlight-hover" />
-                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/destaque-pagina-gabaritos.jpg" alt="Baixe Gabaritos da grafica online Printi" />
-                <div className="desc-highlight">
-                  <h4 className="box-highlight-title">Monte seu cartão de visita</h4>
-                  <p>Precisa de um cartão mas não ter arte? monte o seu modelo agora mesmo.</p>
-                </div>
-              </div>
-              <div className="box-highlight">
-                <div className="bg-highlight-hover" />
-                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/destaque-guia-impressao.jpg" alt="Guia de impressão da grafica online melhor do Brasil" />
-                <div className="desc-highlight">
-                  <h4 className="box-highlight-title">Conheça o nosso portfolio</h4>
-                  <p>Tem dúvida sobre algum produto? confira a nossa seleção de impressos promocionais.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <CustomersRelyBlock />
-          <Blog />
         </div>
+        <Highlights highlights={highlightsJson} screenSize={screenSize} />
+        <CustomersRelyBlock screenSize={screenSize}  />
+        <Blog screenSize={screenSize} />
       </div>
     );
   }
@@ -324,39 +357,9 @@ export class Home extends React.Component {
           </section>
         </div>
 
-        <div className="container">
-          <section className="container-highlight">
-            <h4 className="title-highlight">Destaques</h4>
-            <div className="boxes-highlight">
-              <div className="box-highlight">
-                <div className="bg-highlight-hover" />
-                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/destaque-pagar-faturado.jpg" alt="Pague faturado na gráfica Printi" />
-                <div className="desc-highlight">
-                  <h4 className="box-highlight-title">Saiba como pagar faturado</h4>
-                  <p>Conte com os benefícios e facilidades do pagamento faturado. Veja como solicitar o seu.</p>
-                </div>
-              </div>
-              <div className="box-highlight">
-                <div className="bg-highlight-hover" />
-                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/destaque-pagina-gabaritos.jpg" alt="Baixe Gabaritos da grafica online Printi" />
-                <div className="desc-highlight">
-                  <h4 className="box-highlight-title">Veja como editar sua arte</h4>
-                  <p>Baixe o gabarito e edite seu arquivo nos padrões recomendados para impressão.</p>
-                </div>
-              </div>
-              <div className="box-highlight">
-                <div className="bg-highlight-hover" />
-                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/destaque-guia-impressao.jpg" alt="Guia de impressão da grafica online melhor do Brasil" />
-                <div className="desc-highlight">
-                  <h4 className="box-highlight-title">Evite erros na impressão</h4>
-                  <p>Consulte nosso guia de impressão e solucione todas as dúvidas antes de imprimir.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <CustomersRelyBlock />
-        <Blog />
+        <Highlights highlights={highlightsJson} screenSize={screenSize} />
+        <CustomersRelyBlock screenSize={screenSize} />
+        <Blog screenSize={screenSize} />
       </div>
     );
   }
