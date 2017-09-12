@@ -54,7 +54,7 @@
 @import 'components/tooltipster/index';
 @import 'components/carousel/index';
 @import 'components/accordion/index';
-@import 'components/banners/index';
+@import 'components/landing-page/index';
 
 // *** Bosons
 @import 'bosons/index';
@@ -73,3 +73,7 @@
 
 // *** Pages
 @import 'pages/index';
+
+.container {
+  background-color: red;
+}

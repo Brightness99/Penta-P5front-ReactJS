@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
-import Blog from 'containers/Blog/Blog';
+import { Blog } from 'components/LandingPage';
 import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
 import Loading from 'components/Loading';
 import Breadcrumbs from 'components/Breadcrumbs';
