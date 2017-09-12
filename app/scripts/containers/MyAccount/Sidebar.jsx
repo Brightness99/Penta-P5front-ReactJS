@@ -1,7 +1,7 @@
 // flow
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub } from 'components/Icons';
+import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub, ReferralIcon } from 'components/Icons';
 
 export class Sidebar extends React.Component {
   render() {
@@ -47,6 +47,12 @@ export class Sidebar extends React.Component {
             <NavLink exact={true} activeClassName="is-active" to="/minha-conta/cloud">
               <i className="cloudIcon"><CloudIcon /></i>
               <span>Cloud</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/indicacoes">
+              <i className="referralIcon"><ReferralIcon /></i>
+              <span>Indicações</span>
             </NavLink>
           </li>
           <li>

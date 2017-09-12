@@ -12,6 +12,7 @@ import CardsAccount from './CardsAccount';
 import TemplateModels from './TemplateModels';
 import Cloud from './Cloud';
 import Loyalty from './Loyalty';
+import Referral from './Referral';
 
 type Props = {
   app: AppStore,
@@ -79,6 +80,10 @@ export class MyAccount extends React.Component {
         <Route
           path="/minha-conta/programa-de-fidelidade"
           render={(props) => <Loyalty {...props} screenSize={screenSize} />}
+        />
+        <Route
+          path="/minha-conta/indicacoes"
+          render={(props) => <Referral {...props} screenSize={screenSize} />}
         />
         <Route
           render={(props) => <OrderList {...props} screenSize={screenSize} />}

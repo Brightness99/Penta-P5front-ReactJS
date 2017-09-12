@@ -3,6 +3,16 @@
 @import "creditCard";
 @import "changepayment";
 @import "briefing";
+@import "referral";
+
+.title-myaccount {
+  font-family: $font-family-open-sans-bold;
+  font-size: $font-size-lg;
+  font-weight: 700;
+  letter-spacing: 0.18rem;
+  margin-bottom: 3.2rem;
+  text-transform: uppercase;
+}
 
 .container-myaccount {
   @include lg {
@@ -54,14 +64,14 @@
             flex: 2;
             margin-left: 1.0rem;
           }
-          svg {
-            //width: 14%;
-          }
           .cloudIcon {
             width: 17%;
           }
           .printClubIcon {
             width: 82%;
+          }
+          .referralIcon {
+            width: 14%;
           }
           &.is-active {
             color: $color-printi-blue;
@@ -394,7 +404,6 @@
             text-align: center;
             color: $color-white;
             margin-bottom: 0;
-          }
           .txt-secondPart {
             font-size: $font-size-base;
             line-height: 1.25;
@@ -1419,18 +1428,19 @@
 }
 
 
-.org-input-research {
-  .mol-input-text, .mol-select-research {
-    height: 5rem;
-    background-color: $color-white;
-    border: 1px solid #dbdddf;
-    box-sizing: border-box;
-    padding: 0.9rem 1.0rem;
-    cursor: pointer;
-  }
-  .mol-select-research {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  .org-input-research {
+    .mol-input-text, .mol-select-research {
+      height: 5rem;
+      background-color: $color-white;
+      border: 1px solid #dbdddf;
+      box-sizing: border-box;
+      padding: 0.9rem 1.0rem;
+      cursor: pointer;
+    }
+    .mol-select-research {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
   }
 }
