@@ -46,8 +46,8 @@ export class BlogBlock extends React.Component {
     const { blog: { blog } } = this.props;
 
     return blog.map((item) => (
-      <div className="blogCard">
-        <NavLink to={item.url} key={`blogCard-${item.title}`} target="_blank">
+      <div className="blogCard" key={`blogCard-${item.title}`}>
+        <NavLink to={item.url} target="_blank">
           <span className="titleCategory">{missingBlogAttributes.post_category}</span>
           <img src={item.image} alt={item.title} />
           <div className="blogCard-text">
