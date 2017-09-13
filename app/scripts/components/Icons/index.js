@@ -74,3 +74,6 @@ export PrintiSymbolIcon from './_PrintiSymbol';
 export SearchIcon from './_Search';
 
 export ReferralIcon from './ReferralIcon';
+export LinkIcon from './LinkIcon';
+export GmailIcon from './GmailIcon';
+export FacebookIcon from './FacebookIcon';
