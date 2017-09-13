@@ -1,24 +1,18 @@
 // @flow
 
 import React from 'react';
-import cx from 'classnames';
 import { ArrowCarousel } from 'components/Icons';
 
 type Props = {
-  className: string,
   onClick: () => {},
 };
 
 export const PrevArrow = (props: Props) => {
-  const { onClick, className } = props;
+  const { onClick } = props;
 
   return (
     <button
-      className={cx(
-        'atm-carousel-arrow',
-        'atm-carousel-arrow--prev',
-        className,
-      )}
+      className="atm-carousel-arrow atm-carousel-arrow--prev"
       onClick={onClick}
     >
       <ArrowCarousel />
@@ -27,15 +21,11 @@ export const PrevArrow = (props: Props) => {
 };
 
 export const NextArrow = (props: Props) => {
-  const { onClick, className } = props;
+  const { onClick } = props;
 
   return (
     <button
-      className={cx(
-        'atm-carousel-arrow',
-        'atm-carousel-arrow--next',
-        className,
-      )}
+      className="atm-carousel-arrow atm-carousel-arrow--next"
       onClick={onClick}
     >
       <ArrowCarousel />
