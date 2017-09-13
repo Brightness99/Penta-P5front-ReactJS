@@ -378,7 +378,7 @@
     }
   }
 
-  > .atm-send-button{
+  > .atm-send-button {
     background-color: #2ed463;
     border: transparent;
     border-radius: 0.4rem;
@@ -387,9 +387,9 @@
     font-family: $font-family-open-sans;
     font-size: $font-size-xs;
     font-weight: bold;
-    justify-content: center;
-    letter-spacing: 0.5px;
     height: 4rem;
+    justify-content: center;
+    letter-spacing: 0.05rem;
     text-transform: uppercase;
     width: 20rem;
   }

@@ -10,10 +10,15 @@ type Props = {
 };
 
 export const PrevArrow = (props: Props) => {
-  const { onClick } = props;
+  const { onClick, className } = props;
+
   return (
     <button
-      className="atm-carousel-arrow atm-carousel-arrow--prev"
+      className={cx(
+        'atm-carousel-arrow',
+        'atm-carousel-arrow--prev',
+        className,
+      )}
       onClick={onClick}
     >
       <ArrowCarousel />
@@ -22,10 +27,15 @@ export const PrevArrow = (props: Props) => {
 };
 
 export const NextArrow = (props: Props) => {
-  const { onClick } = props;
+  const { onClick, className } = props;
+
   return (
     <button
-      className="atm-carousel-arrow atm-carousel-arrow--next"
+      className={cx(
+        'atm-carousel-arrow',
+        'atm-carousel-arrow--next',
+        className,
+      )}
       onClick={onClick}
     >
       <ArrowCarousel />

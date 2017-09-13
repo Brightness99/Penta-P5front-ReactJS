@@ -15,17 +15,17 @@ type Props = {
 const Highlights = (props: Props) => {
   const { highlights, screenSize } = props;
 
-  const renderHighlights = () => {
-    return highlights.list.map((highlight) => (
-      <NavLink to={highlight.link.URL} title={highlight.link.TITLE} className="box-highlight">
+  const renderHighlights = () => (
+    highlights.list.map((highlight) => (
+      <NavLink to={highlight.link.URL} title={highlight.link.TITLE} key={highlight.link.URL} className="box-highlight">
         <img src={`http://dev-cms.printi.com.br${highlight.image.URL}`} alt={highlight.image.ALT} />
         <div className="desc-highlight">
           <h4 className="box-highlight-title">{highlight.TITLE}</h4>
           <p>{highlight.TEXT}</p>
         </div>
       </NavLink>
-    ));
-  };
+    ))
+  );
 
   const renderMobile = () => (
     <div className="container">
