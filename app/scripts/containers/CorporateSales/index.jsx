@@ -21,14 +21,23 @@ type Props = {
 }
 
 export class CorporateSales extends React.Component {
+  renderBanner() {
+    return (
+      <div className="container">
+        <img src={require('assets/media/images/corporate-sales.png')} alt="Atendimento exclusivo" />
+      </div>
+    );
+  }
+
   render() {
     return (
-      <div>
+      <section>
+        {this.renderBanner()}
         <MainBenefits />
         <CloudTools />
         <CustomersRelyBlock />
         <RequestSample />
-      </div>
+      </section>
     );
   }
 }
