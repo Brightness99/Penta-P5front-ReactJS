@@ -45,7 +45,7 @@ export class Accordion extends React.Component {
     if (Array.isArray(children)) {
       children.forEach((child, index) => {
         if (child.props.active) {
-         activeItem = index;
+          activeItem = index;
         }
       });
     } else if (children.props.active) {
