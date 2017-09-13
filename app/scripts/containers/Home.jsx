@@ -5,9 +5,7 @@ import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
-
-import { Banners, Highlights, Blog } from 'components/LandingPage';
+import { Banners, Highlights, Blog, CustomersRely } from 'components/LandingPage';
 
 type Props = {
   app: {},
@@ -237,7 +235,7 @@ export class Home extends React.Component {
           </section>
         </div>
         <Highlights highlights={highlightsJson} screenSize={screenSize} />
-        <CustomersRelyBlock screenSize={screenSize}  />
+        <CustomersRely screenSize={screenSize}  />
         <Blog screenSize={screenSize} />
       </div>
     );
@@ -358,7 +356,7 @@ export class Home extends React.Component {
         </div>
 
         <Highlights highlights={highlightsJson} screenSize={screenSize} />
-        <CustomersRelyBlock screenSize={screenSize} />
+        <CustomersRely screenSize={screenSize} />
         <Blog screenSize={screenSize} />
       </div>
     );
