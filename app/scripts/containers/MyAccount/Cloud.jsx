@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { DateRangePicker, DateRangePickerPhrases } from 'react-dates';
-import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION, ANCHOR_LEFT, ANCHOR_RIGHT, DAY_SIZE, ICON_BEFORE_POSITION } from 'react-dates/constants';
+import { isMobile } from 'utils/helpers';
+import { DateRangePicker } from 'react-dates';
+import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION } from 'react-dates/constants';
 import moment from 'moment';
 import cx from 'classnames';
-import { Button } from 'quarks/Inputs';
 import { Link } from 'react-router-dom';
 import { FileIcon } from 'components/Icons';
 
@@ -15,8 +15,8 @@ type Props = {
   autoFocusEndDate: boolean,
   initialStartDate: momentObj,
   initialEndDate: momentObj,
+  withPortal: boolean,
 };
-
 
 export class Cloud extends React.Component {
   constructor(props) {
@@ -54,32 +54,8 @@ export class Cloud extends React.Component {
     this.setState({ focusedInput });
   }
 
-  renderMobile() {
-    const { focusedInput, startDate, endDate } = this.state;
-
-    return (
-      <div className="container-cloud">
-        <div className="container">
-          <h2>Minha conta</h2>
-          <h3 className="subtitle-cloud">Cloud</h3>
-          <div className="box-cloudDate">
-            <DateRangePicker
-              onDatesChange={this.onDatesChange}
-              onFocusChange={this.onFocusChange}
-              focusedInput={focusedInput}
-              startDate={startDate}
-              endDate={endDate}
-            />
-          </div>
-          <div className="btn-downloadCloud">
-            <Link to="#" className="btn-default btn-primary fnt-sbold btn-sm"><i><FileIcon /></i>Download</Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  renderDesktop() {
+  render() {
+    const { screenSize } = this.props;
     const { focusedInput, startDate, endDate } = this.state;
     const breadcrumb = [
       {
@@ -94,34 +70,31 @@ export class Cloud extends React.Component {
         title: 'Cloud',
       },
     ];
-    // <label className="label-dateInitialFinal">Data Inicial</label>
-    // <label className="label-dateInitialFinal">Data final</label>
     return (
       <div className="container-cloud">
-        <Breadcrumbs links={breadcrumb} />
-        <h2>Minha conta</h2>
-        <h3 className="subtitle-cloud">Cloud</h3>
-        <div className="box-cloudDate">
-          <DateRangePicker
-            onDatesChange={this.onDatesChange}
-            onFocusChange={this.onFocusChange}
-            focusedInput={focusedInput}
-            startDate={startDate}
-            endDate={endDate}
-          />
-        </div>
-        <div className="btn-downloadCloud">
-          <Link to="#" className="btn-default btn-primary fnt-sbold btn-sm"><i><FileIcon /></i>Download</Link>
+        <div className={cx(isMobile(screenSize) && ('container'))}>
+          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
+          <h2>Minha conta</h2>
+          <h3 className="subtitle-cloud">Cloud</h3>
+          <div className="box-cloudDate">
+            <DateRangePicker
+              onDatesChange={this.onDatesChange}
+              onFocusChange={this.onFocusChange}
+              focusedInput={focusedInput}
+              startDate={startDate}
+              endDate={endDate}
+              orientation={isMobile(screenSize) ? VERTICAL_ORIENTATION : HORIZONTAL_ORIENTATION}
+              withFullScreenPortal={isMobile(screenSize)}
+              startDatePlaceholderText="Data Inicial"
+              endDatePlaceholderText="Data Final"
+            />
+          </div>
+          <div className="btn-downloadCloud">
+            <Link to="#" className="btn-default btn-primary fnt-sbold btn-sm"><i><FileIcon /></i>Download</Link>
+          </div>
         </div>
       </div>
     );
-  }
-  render() {
-    const { screenSize } = this.props;
-
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
   }
 }
 
