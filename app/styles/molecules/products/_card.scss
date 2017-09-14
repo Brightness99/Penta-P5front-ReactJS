@@ -1,9 +1,8 @@
 .mol-product-card {
   display: inline-flex;
-  padding: 0 0.8rem;
+  padding: 0.8rem;
   position: relative;
   text-align: center;
-  transition: 0.3s linear;
   width: 20%;
 
   > a {
@@ -14,20 +13,21 @@
     display: flex;
     flex-direction: column;
     padding: $grid-gutter-width / 3;
+    transition: 0.3s linear;
     width: 100%;
-  }
 
-  &:hover {
-    box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
-    transform: scale(1.05);
+    &:hover {
+      box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+      transform: scale(1.05);
 
-    .atm-card-button {
-      display: flex;
+      .atm-card-button {
+        display: flex;
+      }
     }
   }
 
-  .atm-cart-product-image {
-    height: auto;
+  .atm-card-image {
+    display: flex;
     width: 100%;
   }
 }
@@ -35,7 +35,6 @@
 .atm-card-title {
   color: #151617;
   font-family: $font-family-nunito-regular;
-  font-size: 16px;
   letter-spacing: -0.3px;
   padding-top: $grid-gutter-width / 3;
 }

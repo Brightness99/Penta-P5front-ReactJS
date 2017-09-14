@@ -24,7 +24,7 @@ const ProductCard = (props: Props) => {
   return (
     <div className="mol-product-card">
       <NavLink to={`/produto-${slug}`}>
-        <img src={productImage} alt={image.alt} />
+        <img className="atm-card-image" src={productImage} alt={image.alt} />
         <div>
           <div className="atm-card-title">{title}</div>
           <div className="atm-card-text">{locale.STARTING_FROM} <IntlMoney>{price ? parseFloat(price) : 0}</IntlMoney>
