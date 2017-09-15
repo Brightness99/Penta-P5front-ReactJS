@@ -24,7 +24,6 @@ type Props = {
 export class CloudCompany extends React.Component {
   static props: Props;
 
-  
   render() {
     const { app: { screenSize } } = this.props;
     return (

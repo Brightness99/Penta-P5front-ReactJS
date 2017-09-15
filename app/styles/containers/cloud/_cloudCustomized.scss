@@ -1,6 +1,9 @@
 .org-cloud-customized {
   background-color: $color-white;
-  padding: 4rem 0;
+  padding: 2rem 0;
+  @include lg {
+    padding: 4rem 0;
+  }
   .mol-cloud-customized {
     &:last-of-type {
       margin-top: 4rem;
