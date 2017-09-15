@@ -24,8 +24,7 @@ type Props = {
 export class CloudCompany extends React.Component {
   static props: Props;
 
-  // <GraphicPlantBlock />
-
+  
   render() {
     const { app: { screenSize } } = this.props;
     return (
@@ -40,6 +39,7 @@ export class CloudCompany extends React.Component {
         <div className="org-customers-rely">
           <CustomersRelyBlock screenSize={screenSize} />
         </div>
+        <GraphicPlantBlock />
       </section>
     );
   }
