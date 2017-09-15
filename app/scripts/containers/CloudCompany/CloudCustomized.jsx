@@ -1,9 +1,72 @@
 // @flow
 
 import React from 'react';
+import Slider from 'react-slick';
+
+type Props = {
+  screenSize: string,
+};
 
 class CloudCustomized extends React.Component {
-  render() {
+  static props: Props;
+
+  renderMobile() {
+    return (
+      <div className="slider-cloud-customized">
+        <div className="org-cloud-customized">
+          <div className="container">
+            <div className="mol-cloud-customized">
+              <p className="qrk-title-desc-customized">Simples, rápido e personalizado</p>
+            </div>
+            <Slider
+              className="container-commentsClients"
+              arrows={false}
+              dots={true}
+              dotsClass="atm-carousel-dots"
+              autoplay={false}
+            >
+              <div className="mol-cloud-customized">
+                <div className="atm-desc-customized">
+                  <div className="qrk-desc-text-customized">
+                    <img src={require('assets/media/images/img-brand.png')} alt="Nosso site, sua marca" />
+                    <div className="qrk-texts-details-customized">
+                      <p className="title-details-customized">Nosso site, sua marca.</p>
+                      <p className="subtitle-details-customized">Produtos exclusivos e padronizados, garantindo a identidade da sua marca.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mol-cloud-customized">
+                <div className="atm-desc-customized">
+                  <div className="qrk-desc-text-customized">
+                    <img src={require('assets/media/images/img-budget.png')} alt="Orçamento na hora" />
+                    <div className="qrk-texts-details-customized">
+                      <p className="title-details-customized">Orçamento na hora</p>
+                      <p className="subtitle-details-customized">Cotações instantâneas de acordo com as especificações de seus materiais.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mol-cloud-customized">
+                <div className="atm-desc-customized">
+                  <div className="qrk-desc-text-customized">
+                    <img src={require('assets/media/images/img-datas-customized.png')} alt="Dados Personalizados" />
+                    <div className="qrk-texts-details-customized">
+                      <p className="title-details-customized">Dados personalizados</p>
+                      <p className="subtitle-details-customized">Personalização de texto e imagem com visualização imediata na tela.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </Slider>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderDesktop() {
     return (
       <div className="org-cloud-customized">
         <div className="container">
@@ -65,6 +128,13 @@ class CloudCustomized extends React.Component {
         </div>
       </div>
     );
+  }
+  render() {
+    const { screenSize } = this.props;
+
+    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
+    ? this.renderMobile()
+    : this.renderDesktop();
   }
 }
 

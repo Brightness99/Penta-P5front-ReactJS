@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
+import { CustomersRely } from 'components/LandingPage';
 import GraphicPlantBlock from 'containers/GraphicPlantBlock/GraphicPlantBlock';
 import BannerCloud from './BannerCloud';
 import AboutCloud from './AboutCloud';
@@ -37,9 +37,9 @@ export class CloudCompany extends React.Component {
         <OrderPlataform screenSize={screenSize} />
         <GuiteCloud screenSize={screenSize} />
         <div className="org-customers-rely">
-          <CustomersRelyBlock screenSize={screenSize} />
+          <CustomersRely screenSize={screenSize} />
         </div>
-        <GraphicPlantBlock />
+        <GraphicPlantBlock screenSize={screenSize} />
       </section>
     );
   }
