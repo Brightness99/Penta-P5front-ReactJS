@@ -4,6 +4,10 @@
   .mol-texts-guite-cloud {
     align-items: center;
     display: flex;
+    flex-direction: column-reverse;
+    @include lg {
+      flex-direction: row;
+    }
     .atm-text-guite-cloud {
       flex: 1;
       &:last-of-type {

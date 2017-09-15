@@ -3,8 +3,79 @@
 import React from 'react';
 import { CloseIcon, CheckIcon, FilialIcon, GraficProduction, MaterialProduction, ControlProduction, ArrowsCloud } from 'components/Icons';
 
+type Props = {
+  screenSize: string,
+};
+
 export class BenefitsCloud extends React.Component {
-  render() {
+  static defaultProps = {
+    screenSize: 'xs',
+  };
+
+  props: Props;
+
+  renderMobile() {
+    return (
+      <div className="org-benefits-cloud-mobile">
+        <div className="container">
+          <h4 className="qrk-title-benefits-cloud">A Cloud traz diversos benefícios para o marketing da sua empresa. Confira:</h4>
+          <ul>
+            <li>cloud</li>
+            <li>processo tradicional</li>
+          </ul>
+          <div className="mol-cloud-mobile">
+            <img src={require('assets/media/images/cloud-printi.png')} alt="Cloud Printi" />
+
+            <div className="atm-cloud-mobile">
+              <div className="qrk-cloud-mobile">
+                <div className="qrk-atm-icon-text">
+                  <FilialIcon />
+                  <span>Filiais</span>
+                </div>
+                <div className="qrk-atm-text check">
+                  <CheckIcon />
+                  <p>Aviso de novos materiais, coleta de pedidos e personalização manual dos dados das filiais.</p>
+                </div>
+              </div>
+              <div className="qrk-cloud-mobile">
+                <div className="qrk-atm-icon-text">
+                  <GraficProduction />
+                  <span>Produção gráfica</span>
+                </div>
+                <div className="qrk-atm-text check">
+                  <CheckIcon />
+                  <p>Cotação dos materiais, fechamento do pedido, envio.</p>
+                </div>
+              </div>
+              <div className="qrk-cloud-mobile">
+                <div className="qrk-atm-icon-text">
+                  <ControlProduction />
+                  <span>Controle</span>
+                </div>
+                <div className="qrk-atm-text check">
+                  <CheckIcon />
+                  <p>Cotação dos materiais, fechamento do pedido, envio.</p>
+                </div>
+              </div>
+              <div className="qrk-cloud-mobile">
+                <div className="qrk-atm-icon-text">
+                  <MaterialProduction />
+                  <span>Resposição de materiais</span>
+                </div>
+                <div className="qrk-atm-text check">
+                  <CheckIcon />
+                  <p>Cotação dos materiais, fechamento do pedido, envio.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderDesktop() {
     return (
       <div className="org-benefits-cloud">
         <div className="container">
@@ -81,6 +152,13 @@ export class BenefitsCloud extends React.Component {
         </div>
       </div>
     );
+  }
+  render() {
+    const { screenSize } = this.props;
+
+    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
+      ? this.renderMobile()
+      : this.renderDesktop();
   }
 }
 
