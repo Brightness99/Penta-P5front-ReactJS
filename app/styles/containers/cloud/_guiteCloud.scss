@@ -1,6 +1,9 @@
 .org-guite-cloud {
-  padding: 4rem 0;
   background-color: $color-white;
+  padding: 2rem 0;
+  @include lg {
+    padding: 4rem 0;
+  }
   .mol-texts-guite-cloud {
     align-items: center;
     display: flex;

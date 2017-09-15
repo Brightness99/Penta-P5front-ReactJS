@@ -6,7 +6,10 @@
 }
 .org-benefits-cloud {
   background-color: $color-white;
-  padding: 4rem 0;
+  padding: 2rem 0;
+  @include lg {
+    padding: 4rem 0;
+  }
   .mol-tables-benefits-cloud{
     display: flex;
     margin-top: 4rem;
