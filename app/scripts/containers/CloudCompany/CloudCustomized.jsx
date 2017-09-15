@@ -10,7 +10,7 @@ type Props = {
 class CloudCustomized extends React.Component {
   static props: Props;
 
-  renderMobile() {
+  renderSliderSimplePlataform() {
     return (
       <div className="slider-cloud-customized">
         <div className="org-cloud-customized">
@@ -62,6 +62,71 @@ class CloudCustomized extends React.Component {
             </Slider>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  renderSliderProcessCloud() {
+    return (
+      <div className="slider-cloud-customized">
+        <div className="org-cloud-customized">
+          <div className="container">
+            <div className="mol-cloud-customized">
+              <p className="qrk-title-desc-customized">Processos simplificados</p>
+            </div>
+            <Slider
+              className="container-commentsClients"
+              arrows={false}
+              dots={true}
+              dotsClass="atm-carousel-dots"
+              autoplay={false}
+            >
+              <div className="mol-cloud-customized">
+                <div className="atm-desc-customized">
+                  <div className="qrk-desc-text-customized">
+                    <img src={require('assets/media/images/cloud-billing.png')} alt="Nosso site, sua marca" />
+                    <div className="qrk-texts-details-customized">
+                      <p className="title-details-customized">Faturamento individualizado.</p>
+                      <p className="subtitle-details-customized">Gerenciamento automático e escalável dos dados de cobrança da granquia, sem o envolvimento operacional do franqueador.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mol-cloud-customized">
+                <div className="atm-desc-customized">
+                  <div className="qrk-desc-text-customized">
+                    <img src={require('assets/media/images/cloud-extensive.png')} alt="Orçamento na hora" />
+                    <div className="qrk-texts-details-customized">
+                      <p className="title-details-customized">Abrangência nacional</p>
+                      <p className="subtitle-details-customized">Garanta entrega de seus impressos promocionais em todos território nacional através da nossa plataforma Cloud.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mol-cloud-customized">
+                <div className="atm-desc-customized">
+                  <div className="qrk-desc-text-customized">
+                    <img src={require('assets/media/images/cloud-production.png')} alt="Dados Personalizados" />
+                    <div className="qrk-texts-details-customized">
+                      <p className="title-details-customized">Centralização da produção</p>
+                      <p className="subtitle-details-customized">A centralização garante um padrão de qualidade constante para todos os impressos da rede, sem variação na impressão.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </Slider>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderMobile() {
+    return (
+      <div>
+        {this.renderSliderSimplePlataform()}
+        {this.renderSliderProcessCloud()}
       </div>
     );
   }
