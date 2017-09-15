@@ -3,3 +3,48 @@
 @import "cloudCustomized";
 @import "orderPlataform";
 @import "guiteCloud";
+
+
+.org-banner-cloud {
+  @include lg {
+    margin-top: 2rem;
+  }
+  .mol-banner-cloud {
+    position: relative;
+    .atm-banner-cloud {
+      background-color: rgba(0, 0, 0, 0.84);
+      @include lg {
+        background-color: transparent;
+        left: 6rem;
+        position: absolute;
+        top: 7rem;
+        width: 48%;
+      }
+      .qrk-title-banner-cloud {
+        color: $color-printi-blue;
+        font-family: $font-family-open-sans-bold;
+        font-size: $font-size-lg;
+        letter-spacing: 0.18rem;
+        text-transform: uppercase;
+      }
+      .qrk-subtitle-banner-cloud {
+        color: $color-white;
+        font-family: $font-family-nunito-light;
+        font-size: $font-size-xxx;
+        font-weight: 300;
+        margin: 2.6rem 0;
+        text-transform: none;
+        padding-bottom: 0;
+      }
+      .qrk-text-banner-cloud {
+        color: $color-white;
+        font-family: $font-family-open-sans-light;
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
+
+.org-customers-rely {
+  margin-top: 4rem;
+}

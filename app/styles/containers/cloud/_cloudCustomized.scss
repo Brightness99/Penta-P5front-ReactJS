@@ -16,6 +16,9 @@
       .qrk-desc-text-customized {
         border: 0.1rem solid $color-hrLightGray;
         flex: 1;
+        img {
+          width: 100%;
+        }
         .qrk-texts-details-customized {
           text-align: center;
           padding: 1rem;
