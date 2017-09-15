@@ -52,7 +52,7 @@ export class GraphicPlantBlock extends React.Component {
   }
 
   renderDesktop() {
-    const { locale: { graphic_plant } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { graphic_plant } } } } } = this.props;
 
     return (
       <section className="container-graphicPlant">
@@ -79,11 +79,7 @@ export class GraphicPlantBlock extends React.Component {
   }
 
   render() {
-    const { locale: { isRunning, isLoaded }, app: { screenSize } } = this.props;
-
-    if (isRunning || !isLoaded) {
-      return <Loading />;
-    }
+    const { app: { screenSize } } = this.props;
 
     return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
     ? this.renderMobile()
