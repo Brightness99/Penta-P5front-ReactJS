@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { shouldComponentUpdate } from 'utils/helpers';
+import cx from 'classnames';
 
 type Props = {
   children: any,
   defaultTab: number,
+  className: string,
 };
 
 type State = {
@@ -51,11 +53,14 @@ export class Tabs extends React.Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, className } = this.props;
     const { activeIndex } = this.state;
 
     return (
-      <div className="org-tabs">
+      <div className={cx(
+        'org-tabs',
+        className
+      )}>
         {children.map((child) => (
           React.cloneElement(
             child,

@@ -1,0 +1,32 @@
+.org-categories-carousel {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  margin-bottom: 3rem;
+
+  .atm-tab-active {
+    display: block;
+    flex-wrap: wrap;
+    margin: 0 -2rem;
+    position: relative;
+    width: calc(100% + 4rem);
+
+    .mol-product-card {
+      display: inline-flex;
+      width: 20%;
+    }
+  }
+
+  .slick-slide {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .atm-carousel-arrow--prev {
+    left: -4rem;
+  }
+
+  .atm-carousel-arrow--next {
+    right: -4rem;
+  }
+}
