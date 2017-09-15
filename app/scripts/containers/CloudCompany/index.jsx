@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
 import GraphicPlantBlock from 'containers/GraphicPlantBlock/GraphicPlantBlock';
+import BannerCloud from './BannerCloud';
 import AboutCloud from './AboutCloud';
 import BenefitsCloud from './BenefitsCloud';
 import BrandIntegrity from './BrandIntegrity';
@@ -25,16 +27,19 @@ export class CloudCompany extends React.Component {
   // <GraphicPlantBlock />
 
   render() {
+    const { app: { screenSize } } = this.props;
     return (
       <section>
-        <p>carousel</p>
-        <AboutCloud />
-        <BenefitsCloud />
-        <BrandIntegrity />
-        <CloudCustomized />
-        <OrderPlataform />
-        <GuiteCloud />
-        <CustomersRelyBlock />
+        <BannerCloud screenSize={screenSize} />
+        <AboutCloud screenSize={screenSize} />
+        <BenefitsCloud screenSize={screenSize} />
+        <BrandIntegrity screenSize={screenSize} />
+        <CloudCustomized screenSize={screenSize} />
+        <OrderPlataform screenSize={screenSize} />
+        <GuiteCloud screenSize={screenSize} />
+        <div className="org-customers-rely">
+          <CustomersRelyBlock screenSize={screenSize} />
+        </div>
       </section>
     );
   }
