@@ -15,6 +15,9 @@
       flex: 1;
       &:last-of-type {
         flex: 2;
+        @include lg {
+          margin-left: 3rem;
+        }
       }
       .qrk-title-guite-cloud {
         font-family: $font-family-nunito-light;
