@@ -126,7 +126,9 @@ export class Products extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return productsSelector(state);
+  return {
+    app: state.app,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

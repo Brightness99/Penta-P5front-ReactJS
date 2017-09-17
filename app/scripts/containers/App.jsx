@@ -19,6 +19,8 @@ import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
+import Glossary from 'containers/Glossary';
+
 type Props = {
   app: AppStore,
   cart: {},
@@ -71,6 +73,7 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
+                      <Route path="/glossario" component={Glossary} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route exact path="/404" component={Error404} />
