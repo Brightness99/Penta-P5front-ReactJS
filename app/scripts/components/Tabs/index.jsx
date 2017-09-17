@@ -67,6 +67,7 @@ export class Tabs extends React.Component {
               ...child.props,
               activeIndex,
               onClick: this.handleClick,
+              key: child.type.displayName,
             }
           )
         ))}
