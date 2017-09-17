@@ -1,5 +1,9 @@
 .org-component-banners {
-  margin: 0 0 3rem;
+  margin: 0 0 6.5rem;
+
+  @include lg {
+    margin: 0 0 4rem;
+  }
 }
 
 .atm-banners-dots {

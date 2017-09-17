@@ -20,7 +20,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   cart: {},
   dispatch: () => {},
   router: RouterStore,

@@ -6,7 +6,7 @@ import cx from 'classnames';
 import { Input } from 'quarks/Inputs';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   pattern: any,
   locale: {},

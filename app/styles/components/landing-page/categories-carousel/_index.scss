@@ -2,24 +2,61 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+  position: relative;
+
+  &.container {
+    padding: 0 2rem;
+
+    @include lg {
+      padding: 0 1.5rem;
+    }
+  }
 
   .atm-tab-active {
     display: block;
     flex-wrap: wrap;
-    margin: 0 -2rem;
     position: relative;
-    width: calc(100% + 4rem);
+    margin-top: 2rem;
+
+    @include lg {
+      margin: 0 -2rem;
+      width: calc(100% + 4rem);
+    }
+
+    .anm-fade-toggle-exit,
+    .anm-fade-toggle-enter {
+      transition-delay: 0.3s;
+    }
+
+    .anm-fade-toggle-exit-active {
+      position: absolute;
+    }
 
     .mol-product-card {
       display: inline-flex;
-      width: 20%;
+      width: 100%;
+
+      @include lg {
+        width: 20%;
+      }
     }
   }
 
-  .slick-slide {
-    max-width: 100%;
-    padding: 1rem;
+  .slick-list {
+    overflow: visible;
+
+    @include lg {
+      overflow: hidden;
+    }
+  }
+
+
+  @include lg {
+    .slick-slide {
+      padding: 1rem;
+      transform: scale(1);
+    }
   }
 
   .atm-carousel-arrow--prev {
@@ -28,5 +65,11 @@
 
   .atm-carousel-arrow--next {
     right: -4rem;
+  }
+
+  @include im-only {
+    .mol-tabs-header {
+      margin: 0 -2.8rem;
+    }
   }
 }

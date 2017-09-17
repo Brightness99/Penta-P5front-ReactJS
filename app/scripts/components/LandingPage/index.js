@@ -1,7 +1,7 @@
 // @flow
 
 export Banners from './Banners';
-export Blog from './Blog';
+export BlogBlock from './Blog';
 export CategoriesCarousel from './CategoriesCarousel';
-export CustomersRely from './CustomersRely';
+export CustomersRelyBlock from './CustomersRely';
 export Highlights from './Highlights';

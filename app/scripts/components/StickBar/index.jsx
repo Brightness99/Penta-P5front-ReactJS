@@ -10,7 +10,7 @@ type Props = {
 type State = {
 };
 
-export default class  extends React.Component {
+export default class StickBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,14 +23,14 @@ export default class  extends React.Component {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
-  componentDidMount () {
+  componentDidMount() {
     this.handleContent();
 
     window.addEventListener('resize', this.handleContent);
     window.addEventListener('scroll', this.handleContent);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.handleContent);
     window.removeEventListener('scroll', this.handleContent);
   }

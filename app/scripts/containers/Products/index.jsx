@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
-import { Blog } from 'components/LandingPage';
-import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
+import { BlogBlock, CustomersRelyBlock } from 'components/LandingPage';
 import Loading from 'components/Loading';
 import Breadcrumbs from 'components/Breadcrumbs';
 
@@ -21,7 +20,7 @@ import DetailsProductBlock from './DetailsProductBlock';
 import PrintProductBlock from './PrintProductBlock';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   locale: {},
   match: {},
@@ -60,7 +59,7 @@ export class Products extends React.Component {
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
           <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
           <CustomersRelyBlock />
-          <Blog />
+          <BlogBlock />
           <OpinionsBlock screenSize={screenSize} opinions={opinions} />
           <DetailsProductBlock product={product} screenSize={screenSize} />
           <PrintProductBlock product={product} print={print} screenSize={screenSize} />
@@ -102,7 +101,7 @@ export class Products extends React.Component {
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
           <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
           <CustomersRelyBlock />
-          <Blog />
+          <BlogBlock />
           <OpinionsBlock screenSize={screenSize} opinions={opinions} />
           <DetailsProductBlock product={product} screenSize={screenSize} />
           <PrintProductBlock product={product} print={print} screenSize={screenSize} />
