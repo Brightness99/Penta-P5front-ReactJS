@@ -19,6 +19,8 @@ import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
+import CloudEditor from 'containers/CloudEditor';
+
 type Props = {
   app: AppStore,
   cart: {},
@@ -75,6 +77,7 @@ export class App extends React.Component {
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route exact path="/404" component={Error404} />
                       <Route component={Error404} />
+                      <Route path="/editor-cloud" component={CloudEditor} />
                     </Switch>
                   </main>
                   <Footer screenSize={app.screenSize} />
