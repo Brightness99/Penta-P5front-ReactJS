@@ -73,11 +73,11 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
+                      <Route path="/editor-cloud" component={CloudEditor} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route exact path="/404" component={Error404} />
                       <Route component={Error404} />
-                      <Route path="/editor-cloud" component={CloudEditor} />
                     </Switch>
                   </main>
                   <Footer screenSize={app.screenSize} />
