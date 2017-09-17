@@ -194,6 +194,7 @@ class CloudCustomized extends React.Component {
       </div>
     );
   }
+
   render() {
     const { screenSize } = this.props;
 
