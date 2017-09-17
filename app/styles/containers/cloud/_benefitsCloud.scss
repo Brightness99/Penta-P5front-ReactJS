@@ -110,6 +110,15 @@
 .org-benefits-cloud-mobile {
   background-color: $color-white;
   padding: 2rem 0;
+  .mol-list-tab {
+    align-items: center;
+    color: $color-lightGray;
+    display: inline-flex;
+    font-size: $font-size-xs;
+    justify-content: space-around;
+    margin-top: 2rem;
+    width: 100%;
+  }
   .mol-cloud-mobile {
     .atm-cloud-mobile {
       .qrk-cloud-mobile {
