@@ -2,12 +2,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import Slider from 'react-slick';
-import { shouldComponentUpdate } from 'utils/helpers';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { Tabs, TabHeader, TabNav, TabBody } from 'components/Tabs';
 import { ProductCard } from 'molecules/Products';
-import { PrevArrow, NextArrow } from "components/Carousel/Arrows";
+import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
 
 type Props = {
   screenSize: string,
@@ -751,160 +750,70 @@ export class CategoriesCarousel extends React.Component {
 
   static state: State;
 
-  renderMobile() {
-    const { screenSize } = this.props;
-
-    const styles = {
-      backgroundImage: `url('${require('assets/media/images/home-card.png')}')`,
-      backgroundSize: 'cover',
-    };
-
+  renderMobile(category) {
     return (
-      <div className="container">
-        <section className="home-slider">
-          <nav className="tabNavigation">
-            <ul className="list-item awol-pdd awol-list-style">
-              <li>Lançamentos</li>
-              <li>Mais vendidos</li>
-              <li>Super ofertas</li>
-            </ul>
-          </nav>
-          <div className="slider-images">
-            <div>
-              <img src={require('assets/media/images/image-product-pasta.png')} alt="Grafica Online para cartões de visita" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Pasta</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
+      <Slider
+        arrows={false}
+        dots={false}
+        autoplay={false}
+        key={category.id}
+        infinite={false}
+      >
+        {category.pages.map((products) => (
+          products.products.map((product) => (
+            <div key={product.slug}>
+              <ProductCard
+                slug={product.slug}
+                image={product.image_small}
+                title={product.title}
+                price={product.minimum_price}
+              />
             </div>
-            <div>
-              <img src={require('assets/media/images/image-product-folder.png')} alt="Gráfica para imprimir flyer" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Folder</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
-            </div>
-            <div>
-              <img src={require('assets/media/images/image-product-tag.png')} alt="Gráfica Online para imprimir adesivos" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Tag</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
-            </div>
-            <div>
-              <img src={require('assets/media/images/image-product-revista.png')} alt="Canetas Personalizadas com entrega rápida" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Revista</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
-            </div>
-            <div>
-              <img src={require('assets/media/images/image-product-envelope.png')} alt="Gráfica Online para Chaveiro" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Envelope</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
-            </div>
-            <div>
-              <img src={require('assets/media/images/image-product-cartaz.png')} alt="Gráfica para impressão de panfleto" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Cartaz</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
-            </div>
-            <div>
-              <img src={require('assets/media/images/image-product-revista.png')} alt="Gráfica para impressão de banner" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Revista</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
-            </div>
-            <div>
-              <img src={require('assets/media/images/image-product-envelope.png')} alt="Gráfica online para folder" />
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Envelope</h4>
-                <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-              </div>
-              <div className="btn-slider">
-                <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-              </div>
-            </div>
-            <div style={styles}>
-              <div className="desc-slider">
-                <h4 className="title-product-slider">Cartão de visita</h4>
-                <p className="price-product-slider">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                <p className="price-product-slider">A partir de <span><sup>R$</sup><em>19,</em><sup>90</sup></span></p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+          ))
+        ))}
+      </Slider>
     );
   }
 
-  renderDesktop() {
-
+  renderDesktop(category) {
     return (
-      <div className="container">
-        <Tabs className="org-categories-carousel">
-          <TabHeader>
-            {categoryCarousel.map((category) => <TabNav key={category.id}>{category.title}</TabNav>)}
-          </TabHeader>
-          <TabBody>
-            {categoryCarousel.map((category) => (
-              <Slider
-                nextArrow={<NextArrow />}
-                prevArrow={<PrevArrow />}
-                dots={false}
-                autoplay={false}
-              >
-                {category.pages.map((products) => (
-                  <div>
-                    {products.products.map((product) => (
-                      <ProductCard
-                        slug={product.slug}
-                        image={product.image_small}
-                        title={product.title}
-                        price={product.minimum_price}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </Slider>
+      <Slider
+        nextArrow={<NextArrow />}
+        prevArrow={<PrevArrow />}
+        dots={false}
+        autoplay={false}
+        key={category.id}
+      >
+        {category.pages.map((products) => (
+          <div key={`products-${products.products[0].slug}`}>
+            {products.products.map((product) => (
+              <ProductCard
+                slug={product.slug}
+                image={product.image_small}
+                title={product.title}
+                price={product.minimum_price}
+                key={product.slug}
+              />
             ))}
-          </TabBody>
-        </Tabs>
-      </div>
+          </div>
+        ))}
+      </Slider>
     );
   }
 
   render() {
     const { screenSize } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return (
+      <Tabs className="org-categories-carousel container">
+        <TabHeader>
+          {categoryCarousel.map((category) => <TabNav key={category.id}>{category.title}</TabNav>)}
+        </TabHeader>
+        <TabBody>
+          {categoryCarousel.map((category) => (isMobile(screenSize) ? this.renderMobile(category) : this.renderDesktop(category)))}
+        </TabBody>
+      </Tabs>
+    );
   }
 }
 

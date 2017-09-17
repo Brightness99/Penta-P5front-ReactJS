@@ -3,12 +3,12 @@
 import React from 'react';
 import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 
-import { Banners, Highlights, Blog, CustomersRely, CategoriesCarousel } from 'components/LandingPage';
+import { Banners, Highlights, BlogBlock, CustomersRelyBlock, CategoriesCarousel } from 'components/LandingPage';
 
 type Props = {
-  app: {},
+  screenSize: AppStoreType.screenSize,
 };
 
 const bannerImages = [
@@ -121,133 +121,26 @@ const highlightsJson = {
 };
 
 export class Home extends React.Component {
-  props: Props;
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  static props: Props;
 
   renderMobile() {
-    const { app: { screenSize } } = this.props;
-
-    const styles = {
-      backgroundImage: `url('${require('../../../assets/media/images/home-card.png')}')`,
-      backgroundSize: 'cover',
-    };
+    const { screenSize } = this.props;
 
     return (
       <div className="container-homePage">
         <Banners images={bannerImages} screenSize={screenSize} />
-        <div className="container">
-          <section className="home-slider">
-            <nav className="tabNavigation">
-              <ul className="list-item awol-pdd awol-list-style">
-                <li>Lançamentos</li>
-                <li>Mais vendidos</li>
-                <li>Super ofertas</li>
-              </ul>
-            </nav>
-            <div className="slider-images">
-              <div>
-                <img src={require('assets/media/images/image-product-pasta.png')} alt="Grafica Online para cartões de visita" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Pasta</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div>
-                <img src={require('assets/media/images/image-product-folder.png')} alt="Gráfica para imprimir flyer" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Folder</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div>
-                <img src={require('assets/media/images/image-product-tag.png')} alt="Gráfica Online para imprimir adesivos" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Tag</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div>
-                <img src={require('assets/media/images/image-product-revista.png')} alt="Canetas Personalizadas com entrega rápida" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Revista</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div>
-                <img src={require('assets/media/images/image-product-envelope.png')} alt="Gráfica Online para Chaveiro" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Envelope</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div>
-                <img src={require('assets/media/images/image-product-cartaz.png')} alt="Gráfica para impressão de panfleto" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Cartaz</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div>
-                <img src={require('assets/media/images/image-product-revista.png')} alt="Gráfica para impressão de banner" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Revista</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div>
-                <img src={require('assets/media/images/image-product-envelope.png')} alt="Gráfica online para folder" />
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Envelope</h4>
-                  <p className="price-product-slider">A partir de <span>R$ 29,00</span></p>
-                </div>
-                <div className="btn-slider">
-                  <NavLink to="#" className="btn-default btn-primary btn-lg">Veja mais </NavLink>
-                </div>
-              </div>
-              <div style={styles}>
-                <div className="desc-slider">
-                  <h4 className="title-product-slider">Cartão de visita</h4>
-                  <p className="price-product-slider">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                  <p className="price-product-slider">A partir de <span><sup>R$</sup><em>19,</em><sup>90</sup></span></p>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+        <CategoriesCarousel />
         <Highlights highlights={highlightsJson} screenSize={screenSize} />
-        <CustomersRely screenSize={screenSize}  />
-        <Blog screenSize={screenSize} />
+        <CustomersRelyBlock />
+        <BlogBlock />
       </div>
     );
   }
 
   renderDesktop() {
-    const { app: { screenSize } } = this.props;
-
-    const styles = {
-      backgroundImage: `url('${require('../../../assets/media/images/home-card.png')}')`,
-      backgroundSize: 'cover',
-    };
+    const { screenSize } = this.props;
 
     return (
       <div className="container-homePage">
@@ -256,24 +149,22 @@ export class Home extends React.Component {
         </div>
         <CategoriesCarousel />
         <Highlights highlights={highlightsJson} screenSize={screenSize} />
-        <CustomersRely screenSize={screenSize} />
-        <Blog screenSize={screenSize} />
+        <CustomersRelyBlock />
+        <BlogBlock />
       </div>
     );
   }
 
   render() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 
 function mapStateToProps(state) {
   return {
-    app: state.app,
+    screenSize: state.app.screenSize,
   };
 }
 
