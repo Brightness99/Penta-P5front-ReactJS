@@ -19,9 +19,9 @@ export class BenefitsCloud extends React.Component {
       <div className="org-benefits-cloud-mobile">
         <div className="container">
           <h4 className="qrk-title-benefits-cloud">A Cloud traz diversos benefícios para o marketing da sua empresa. Confira:</h4>
-          <ul>
-            <li>cloud</li>
-            <li>processo tradicional</li>
+          <ul className="mol-list-tab">
+            <li>Cloud</li>
+            <li>Processo tradicional</li>
           </ul>
           <div className="mol-cloud-mobile">
             <img src={require('assets/media/images/cloud-printi.png')} alt="Cloud Printi" />

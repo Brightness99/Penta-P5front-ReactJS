@@ -6,7 +6,7 @@
 
 
 .org-banner-cloud {
-  .bg-mobile {
+  &.bg-mobile {
     background: url('../../assets/media/images/cloud-mobile.png');
     background-position: center;
     background-repeat: no-repeat;
