@@ -29,7 +29,7 @@ const ProductCard = (props: Props) => {
         className,
       )}
     >
-      <NavLink to={`/produto-${slug}`}>
+      <NavLink to={`/produtos-${slug}`}>
         <img className="atm-card-image" src={productImage} alt={image.alt} />
         <div>
           <div className="atm-card-title">{title}</div>
