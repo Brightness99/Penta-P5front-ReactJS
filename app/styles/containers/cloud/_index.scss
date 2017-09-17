@@ -6,14 +6,23 @@
 
 
 .org-banner-cloud {
+  .bg-mobile {
+    background: url('../../assets/media/images/cloud-mobile.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 570px;
+    margin-top: 2rem;
+  }
   @include lg {
     margin-top: 2rem;
   }
   .mol-banner-cloud {
     position: relative;
     .atm-banner-cloud {
-      background-color: rgba(0, 0, 0, 0.84);
+      padding-top: 2rem;
       @include lg {
+        background-color: rgba(0, 0, 0, 0.84);
         background-color: transparent;
         left: 6rem;
         position: absolute;
