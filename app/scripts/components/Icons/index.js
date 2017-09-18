@@ -74,16 +74,11 @@ export MyAccountIcon from './_MyAccount';
 export PrintiIcon from './_Printi';
 export PrintiSymbolIcon from './_PrintiSymbol';
 export SearchIcon from './_Search';
-<<<<<<< 391a22029b7333c3de2c87ae37c0072c09a3906c
 export FilialIcon from './FilialIcon';
 export GraficProduction from './GraficProduction';
 export ControlProduction from './ControlProduction';
 export MaterialProduction from './MaterialProduction';
 export ArrowsCloud from './ArrowsCloud';
-=======
-
 export InvoiceIcon from './InvoiceIcon';
 export SpecialProjectsIcon from './SpecialProjectsIcon';
 export AccountManagerIcon from './AccountManagerIcon';
-
->>>>>>> Sprint041 | Corporate sales layout
