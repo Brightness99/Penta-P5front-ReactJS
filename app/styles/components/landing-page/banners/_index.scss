@@ -5,26 +5,3 @@
     margin: 0 0 4rem;
   }
 }
-
-.atm-banners-dots {
-  @include lg {
-    bottom: 2rem;
-    margin-top: 0;
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
-    width: auto;
-
-    > li {
-      > button {
-        background-color: rgba($color-white, 0.3);
-      }
-
-      &.slick-active {
-        > button {
-          background-color: $color-white;
-        }
-      }
-    }
-  }
-}
