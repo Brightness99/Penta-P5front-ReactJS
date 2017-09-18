@@ -17,7 +17,6 @@ export class GraphicPlantBlock extends React.Component {
 
   props: Props;
 
-
   renderListGraphic() {
     const { graphic_plant } = this.props;
 

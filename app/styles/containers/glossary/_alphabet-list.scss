@@ -1,3 +1,7 @@
+.scroll-list-mobile {
+  overflow-x: scroll;
+  width: 100%;
+}
 .org-alphabet-list {
   background-color: $color-printi-blue;
   border-radius: 0.3rem;
@@ -7,7 +11,16 @@
   font-size: $font-size-sm;
   justify-content: space-around;
   padding: 1.4rem 0;
-  width: 100%;
+  max-width: 99999px;
+  width: 361%;
+  @include lg {
+    width: 100%;
+  }
+  li {
+    a {
+      color: $color-white;
+    }
+  }
 }
 
 .org-content-alphabet-list {
