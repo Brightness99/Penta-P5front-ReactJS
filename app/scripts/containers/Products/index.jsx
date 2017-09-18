@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
-import { BlogBlock, CustomersRelyBlock } from 'components/LandingPage';
+import { BlogBlock, CustomersRelyBlock, ProductHighlightsBlock } from 'components/LandingPage';
 import Loading from 'components/Loading';
 import Breadcrumbs from 'components/Breadcrumbs';
 
@@ -47,11 +47,7 @@ export class Products extends React.Component {
 
     return (
       <div>
-        <div className="bgProduct">
-          <div className="container">
-            <ProductBlock product={product} screenSize={screenSize} />
-          </div>
-        </div>
+        <ProductHighlightsBlock product={product} screenSize={screenSize} />
         <div>
           <InformationBlock screenSize={screenSize} informations={informations} />
           <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
@@ -69,7 +65,7 @@ export class Products extends React.Component {
   };
 
   renderDesktop = () => {
-    const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { products: { product, categories, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
     const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } } } = this.props;
     const breadcrumb = [
       {
@@ -78,7 +74,6 @@ export class Products extends React.Component {
       },
       {
         title: product.title,
-        url: `/produto-${product.slug}`,
       },
     ];
 
@@ -88,12 +83,8 @@ export class Products extends React.Component {
 
     return (
       <div>
-        <div className="bgProduct">
-          <div className="container">
-            <Breadcrumbs links={breadcrumb} />
-            <ProductBlock product={product} screenSize={screenSize} />
-          </div>
-        </div>
+        <Breadcrumbs links={breadcrumb} />
+        <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
         <div>
           <InformationBlock screenSize={screenSize} informations={informations} />
           <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
@@ -108,10 +99,9 @@ export class Products extends React.Component {
         </div>
       </div>
     );
-  }
+  };
 
   render() {
-    // const { app: { screenSize } } = this.props;
     const { products: { isRunning, isLoaded }, app: { screenSize } } = this.props;
 
     if (isRunning || !isLoaded) {

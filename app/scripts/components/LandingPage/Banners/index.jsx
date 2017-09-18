@@ -21,7 +21,7 @@ const Banners = (props: Props) => {
       nextArrow={<NextArrow />}
       prevArrow={<PrevArrow />}
       dots={true}
-      dotsClass="atm-carousel-dots atm-banners-dots"
+      dotsClass="atm-carousel-dots atm-carousel-dots--inline"
       autoplay={true}
     >
       {images
