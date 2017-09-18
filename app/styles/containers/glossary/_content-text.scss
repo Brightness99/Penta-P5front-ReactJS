@@ -4,13 +4,19 @@
   }
   .title-texts {
     font-family: $font-family-nunito-light;
-    font-size: $font-size-xxx;
+    font-size: $font-size-h2;
     font-weight: 300;
     text-transform: none;
+    @include lg {
+      font-size: $font-size-xxx;
+    }
   }
   .p-text {
     color: $color-lightGray;
     font-family: $font-family-open-sans-light;
-    font-size: $font-size-lg;
+    font-size: $font-size-sm;
+    @include lg {
+      font-size: $font-size-lg;
+    }
   }
 }
