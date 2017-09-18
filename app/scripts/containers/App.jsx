@@ -18,6 +18,7 @@ import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import CloudCompany from 'containers/CloudCompany';
 
 import Glossary from 'containers/Glossary';
 
@@ -77,6 +78,7 @@ export class App extends React.Component {
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route exact path="/404" component={Error404} />
+                      <Route path="/cloud" component={CloudCompany} />
                       <Route component={Error404} />
                     </Switch>
                   </main>
