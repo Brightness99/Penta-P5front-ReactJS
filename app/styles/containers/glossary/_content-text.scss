@@ -1,4 +1,8 @@
 .org-content-text {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   @include lg {
     padding: 0 14rem;
   }
