@@ -51,7 +51,7 @@ export class Glossary extends React.Component {
             <h2 className="title-glossary">Glossário</h2>
             <p className="subtitle-glossary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum</p>
             <ContentTextGlossary />
-            <AlphabetList />
+            <AlphabetList screenSize={screenSize} />
             <ContentAlphabetList />
           </div>
         </div>
