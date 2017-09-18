@@ -19,8 +19,8 @@ import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import CloudCompany from 'containers/CloudCompany';
-
 import Glossary from 'containers/Glossary';
+
 
 type Props = {
   app: AppStore,
