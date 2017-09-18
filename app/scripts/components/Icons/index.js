@@ -73,3 +73,8 @@ export MyAccountIcon from './_MyAccount';
 export PrintiIcon from './_Printi';
 export PrintiSymbolIcon from './_PrintiSymbol';
 export SearchIcon from './_Search';
+export FilialIcon from './FilialIcon';
+export GraficProduction from './GraficProduction';
+export ControlProduction from './ControlProduction';
+export MaterialProduction from './MaterialProduction';
+export ArrowsCloud from './ArrowsCloud';

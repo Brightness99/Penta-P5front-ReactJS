@@ -1,0 +1,25 @@
+.org-guite-cloud {
+  padding: 4rem 0;
+  background-color: $color-white;
+  .mol-texts-guite-cloud {
+    align-items: center;
+    display: flex;
+    .atm-text-guite-cloud {
+      flex: 1;
+      &:last-of-type {
+        flex: 2;
+      }
+      .qrk-title-guite-cloud {
+        font-family: $font-family-nunito-light;
+        font-size: $font-size-xxx;
+        font-weight: lighter;
+      }
+      .qrk-p-guite-cloud {
+        color: $color-lightGray;
+        font-family: $font-family-open-sans-light;
+        font-size: $font-size-base;
+        margin: 2rem 0;
+      }
+    }
+  }
+}
