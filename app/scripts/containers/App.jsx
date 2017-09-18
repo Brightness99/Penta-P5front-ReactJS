@@ -18,13 +18,10 @@ import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-<<<<<<< 391a22029b7333c3de2c87ae37c0072c09a3906c
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
-
-=======
 import CorporateSales from 'containers/CorporateSales';
->>>>>>> Sprint041 | Corporate sales layout
+
 
 type Props = {
   app: AppStore,
