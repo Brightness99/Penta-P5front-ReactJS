@@ -1,0 +1,42 @@
+.tpl-printi-press {
+  .title-printi-press {
+    color: $color-almostBlack;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-lg;
+  }
+  .org-printi-press {
+    max-width: 100%;
+    .mol-printi-press {
+      display: inline-flex;
+      width: 25%;
+      padding: 1rem;
+      &:nth-of-type(4n-3) {
+        padding-left: 0; 
+      }
+      &:nth-of-type(4n) {
+        padding-right: 0; 
+      }
+      .atm-content-printi-press {
+        border: 0.1rem solid $color-hrLightGray;
+        border-radius: 0.3rem;
+        background-color: $color-white;
+        img {
+          width: 100%;
+        }
+        .qrk-text-printi-press {
+          padding: 2rem 1rem;
+          .title-content {
+            font-size: $font-size-base;
+            font-weight: bold;
+          }
+          .text-content {
+            color: $color-lightGray;
+            font-family: $font-family-open-sans-regular;
+            font-size: $font-size-xs;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
