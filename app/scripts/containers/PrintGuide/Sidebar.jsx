@@ -17,27 +17,32 @@ export class Sidebar extends React.Component {
     return (
       <Accordion className="qrk-accordion-sidebar">
         <AccordionItem>
-          <AccordionItemTitle><span className="circle-number">1</span>Criar arquivo</AccordionItemTitle>
+          <AccordionItemTitle><span className="circle-number">1</span>Formatos e sangria</AccordionItemTitle>
           <AccordionItemBody>
             <ul>
               <li>
                 <NavLink to="#">
-                  <img src={require('assets/media/images/illustrator.png')} alt="Illustrator" className="img-mrg-r" />Illustrator
+                  Formatos de papel
                 </NavLink>
               </li>
               <li>
                 <NavLink to="#">
-                  <img src={require('assets/media/images/photoshop.png')} alt="Photoshop" className="img-mrg-r" />Photoshop
+                  Formato aberto ou fechado
                 </NavLink>
               </li>
               <li>
                 <NavLink to="#">
-                  <img src={require('assets/media/images/indesign.png')} alt="InDesign" className="img-mrg-r" />InDesign
+                  Folhas e páginas
                 </NavLink>
               </li>
               <li>
                 <NavLink to="#">
-                  <img src={require('assets/media/images/coreldraw.png')} alt="CorelDraw" className="img-mrg-r" />CorelDraw
+                  Lâminas
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="#">
+                  Sangria e margens
                 </NavLink>
               </li>
             </ul>
@@ -51,7 +56,7 @@ export class Sidebar extends React.Component {
     return (
       <Accordion className="qrk-accordion-sidebar accordion-mobile">
         <AccordionItem>
-          <AccordionItemTitle>Illustrator</AccordionItemTitle>
+          <AccordionItemTitle>Formatos de papel</AccordionItemTitle>
           <AccordionItemBody>
             <ContentText />
           </AccordionItemBody>
@@ -65,7 +70,7 @@ export class Sidebar extends React.Component {
       <div className="atm-sidebar-file">
         <Accordion className="qrk-accordion-sidebar">
           <AccordionItem>
-            <AccordionItemTitle>Criar Arquivo</AccordionItemTitle>
+            <AccordionItemTitle>Formatos e sangria</AccordionItemTitle>
             <AccordionItemBody>
               {this.renderListMobile()}
             </AccordionItemBody>
