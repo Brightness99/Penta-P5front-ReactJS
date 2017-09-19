@@ -4,36 +4,48 @@
 @import "../cimpressComponents/canvasToolBar/index";
 @import "../cimpressComponents/canvasArea/index";
 
-.upload__canvasSchema {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  .upload__canvasSchema_mainAreaContainer {
+.upload-container {
+  .upload__canvasSchema {
+    margin-top: 2rem;
     display: flex;
+    flex-direction: column;
     width: 100%;
-    flex-direction: row;
-    .upload__canvasSchema_mainAreaContainer_canvases {
+    .upload__canvasSchema_mainAreaContainer {
       display: flex;
       width: 100%;
+      flex-direction: row;
+      .upload__canvasSchema_mainAreaContainer_canvases {
+        display: flex;
+        width: 100%;
+      }
+      .upload__canvasSchema_sidebarContainer {
+        display: flex;
+        width: 27.5%;
+        flex-direction: column;
+        margin-top: 1.5rem;
+        min-height: 50rem;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #dbdddf;
+        border-radius: 3px;
+      }
+      .upload__canvasSchema_canvasContainer {
+        display: flex;
+        flex-direction: column;
+        width: 68%;
+        margin: 1.5rem 2.25% 0 2.25%;
+        min-height: 50rem;
+      }
     }
-    .upload__canvasSchema_sidebarContainer {
-      display: flex;
-      width: 27.5%;
-      flex-direction: column;
-      margin-top: 1.5rem;
-      min-height: 50rem;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #dbdddf;
-      border-radius: 3px;
-    }
-    .upload__canvasSchema_canvasContainer {
-      display: flex;
-      flex-direction: column;
-      width: 68%;
-      margin: 1.5rem 2.25% 0 2.25%;
-      min-height: 50rem;
-    }
+  }
+  &.toogleOn {
+    display: flex !important;
+  }
+  &.toogleOff {
+    // display: none !important;
+  }
+  &.invisible {
+    visibility: hidden;
+    position: absolute !important;
   }
 }
