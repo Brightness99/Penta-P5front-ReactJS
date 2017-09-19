@@ -3,8 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import cx from 'classnames';
 import { IntlMoney } from 'components/Intl/';
-import { ProductImage } from 'atoms/Product';
 
 type Props = {
   locale: CommonLocaleType,
@@ -12,18 +12,24 @@ type Props = {
   image?: ImageType,
   title: string,
   price: number,
+  className: string,
 };
 
 const failbackImage = 'http://dev-cms.printi.com.br/assets/final/img/blue-logo.png';
 
 const ProductCard = (props: Props) => {
-  const { locale, slug, image, title, price } = props;
+  const { locale, slug, image, title, price, className } = props;
 
   const productImage = image.file ? `http://dev-cms.printi.com.br/files/${image.file}` : failbackImage;
 
   return (
-    <div className="mol-product-card">
-      <NavLink to={`/produto-${slug}`}>
+    <div
+      className={cx(
+        'mol-product-card',
+        className,
+      )}
+    >
+      <NavLink to={`/produtos-${slug}`}>
         <img className="atm-card-image" src={productImage} alt={image.alt} />
         <div>
           <div className="atm-card-title">{title}</div>

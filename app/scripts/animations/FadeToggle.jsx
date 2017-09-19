@@ -15,7 +15,7 @@ const FadeToggle = (props: Props) => (
   <CSSTransition
     {...props}
     classNames="anm-fade-toggle"
-    timeout={props.timeout || { enter: 500, exit: 300 }}
+    timeout={props.timeout || { enter: 300, exit: 300 }}
   >
     {props.children}
   </CSSTransition>

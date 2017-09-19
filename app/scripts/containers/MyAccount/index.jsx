@@ -14,7 +14,7 @@ import Cloud from './Cloud';
 import Loyalty from './Loyalty';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   dispatch: () => {},
   children: any,

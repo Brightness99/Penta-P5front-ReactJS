@@ -4,7 +4,7 @@ import SVG from 'react-inlinesvg';
 import { Button } from 'quarks/Inputs';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   locale: {},
   dispatch: () => {},
