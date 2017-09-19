@@ -1,5 +1,7 @@
 // @flow
 
+// TODO: Accept text as children
+
 import React from 'react';
 import cx from 'classnames';
 import { shouldComponentUpdate } from 'utils/helpers';

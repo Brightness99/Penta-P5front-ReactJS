@@ -1,9 +1,10 @@
 // @flow
 // TODO: Carousel this
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Slider from 'react-slick';
-import { IntlMoney } from 'components/Intl';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { IntlMoney } from 'components/Intl/index';
 import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
 
 type Props = {
@@ -16,14 +17,9 @@ type Props = {
 };
 
 export class ProductBlock extends React.Component {
-
-  static defaultProps = {
-    screenSize: 'xs',
-  };
+  shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
-
-  static state: State;
 
   renderMobile() {
     const { product } = this.props;
@@ -116,15 +112,8 @@ export class ProductBlock extends React.Component {
 
   render() {
     const { screenSize } = this.props;
-    return (
-      <div>
-        {
-          ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-            ? this.renderMobile()
-            : this.renderDesktop()
-        }
-      </div>
-    );
+
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 
