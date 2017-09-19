@@ -4,7 +4,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import SVG from 'react-inlinesvg';
 import Collapse, { Panel } from 'rc-collapse';
 import { Link } from 'react-router-dom';
-import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, Plus, PencilIcon, TrashIcon, Address } from 'components/Icons';
+import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
 
 type Props = {
   screenSize: string,
@@ -112,7 +112,7 @@ export class MyAddresses extends React.Component {
               </div>
             </div>
             <div className="btn-addresses--mobile">
-              <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><Address /></i>Novo endereço</Link>
+              <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
             </div>
           </div>
 
@@ -188,7 +188,7 @@ export class MyAddresses extends React.Component {
               </div>
             </div>
             <div className="btn-addresses--mobile">
-              <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><Address /></i>Novo endereço</Link>
+              <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
             </div>
           </div>
         </div>

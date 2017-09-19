@@ -19,6 +19,8 @@ import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Upload from 'containers/Upload';
+import CloudCompany from 'containers/CloudCompany';
+import Glossary from 'containers/Glossary';
 
 type Props = {
   app: AppStore,
@@ -72,10 +74,12 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
+                      <Route path="/glossario" component={Glossary} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route path="/:slug/upload/:itemId" component={Upload} />
                       <Route exact path="/404" component={Error404} />
+                      <Route path="/cloud" component={CloudCompany} />
                       <Route component={Error404} />
                     </Switch>
                   </main>

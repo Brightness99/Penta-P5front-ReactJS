@@ -1,0 +1,149 @@
+.org-header-menu {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: auto;
+  z-index: 7;
+
+  .app__overlay {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .org-header-menu-container {
+    background-color: $color-black;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 0 1.6rem;
+    position: relative;
+    width: 30rem;
+    z-index: 2;
+  }
+
+  .mol-header-menu-head {
+    display: inline-flex;
+  }
+
+  .mol-header-menu-header {
+    align-items: center;
+    display: flex;
+    height: 6rem;
+    width: 100%;
+
+    .atm-printi-logo {
+      display: inline-flex;
+      height: 4rem;
+    }
+
+    .atm-header-menu-close {
+      color: $color-white;
+      height: 6rem;
+      width: 6rem;
+
+      &:hover {
+        color: darken($color-white, 10%);
+      }
+
+      &:active {
+        color: darken($color-white, 20%);
+      }
+    }
+  }
+
+  .mol-header-menu-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    width: 100%;
+
+    ul {
+      margin: 0;
+      padding-bottom: 1.6rem;
+
+      .atm-header-menu-title {
+        padding-bottom: 0.8rem;
+      }
+
+      a {
+        color: #878b94;
+        font-size: $font-size-sm;
+
+        &:hover {
+          color: $color-white;
+          text-decoration: none;
+        }
+
+        &.selected {
+          color: $color-white;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .atm-header-menu-title {
+      color: $color-white;
+      display: flex;
+      font-size: $font-size-base;
+      font-weight: bold;
+      padding-bottom: 1.6rem;
+      text-decoration: none;
+
+      &:hover {
+        color: $color-white;
+        text-decoration: none;
+      }
+
+      &.selected {
+        color: $color-white;
+        text-decoration: underline;
+      }
+    }
+
+    span.atm-header-menu-title {
+      padding-bottom: 0.8rem;
+    }
+
+    .org-accordion {
+      width: 100%;
+      &-product {
+        padding-bottom: 1.6rem;
+        .atm-accordion-title {
+          color: $color-white;
+          font-size: $font-size-sm;
+          padding: 0.4rem 0;
+        }
+      }
+
+      .atm-header-menu-title {
+        padding-bottom: 0.8rem;
+      }
+
+      .atm-accordion-title {
+        justify-content: space-between;
+        width: 100%;
+
+        > svg {
+          fill: currentColor;
+        }
+      }
+    }
+  }
+}
+
+.atm-header-menu-close {
+  background: transparent;
+  border: transparent;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.3s ease;
+
+  > svg {
+    fill: currentColor;
+  }
+}

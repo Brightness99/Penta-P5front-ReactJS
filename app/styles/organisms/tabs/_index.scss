@@ -1,0 +1,56 @@
+.mol-tabs-header {
+  display: flex;
+  justify-content: center;
+  margin: 0 -0.8rem;
+  position: relative;
+  width: auto;
+}
+.atm-tab-nav {
+  background-color: transparent;
+  border: 0.2rem solid transparent;
+  color: #6a6f7a;
+  font-size: $font-size-sm;
+  letter-spacing: 0.12rem;
+  margin: 0 0.8rem;
+  padding: 1rem 2rem;
+  transition: 0.3s linear;
+
+  &:hover {
+    color: $color-printi-blue;
+  }
+
+  &--active {
+    border-color: $color-printi-blue;
+    color: $color-printi-blue;
+  }
+}
+
+//  .list-item {
+//    color: $color-darkGray;
+//    display: flex;
+//    flex-direction: row;
+//    font-family: $font-family-open-sans;
+//    font-size: $font-size-xs;
+//    margin: 0 auto;
+//    text-transform: uppercase;
+//    li {
+//      border: 2px solid transparent;
+//      cursor: pointer;
+//      flex: 1;
+//      font-weight: bold;
+//      height: auto;
+//      margin-right: 5px;
+//      text-align: center;
+//      box-sizing: border-box;
+//      padding: 0.3rem 0;
+//      &:hover {
+//        border: 2px solid;
+//        color: $color-printi;
+//        transition: border 0.4s;
+//      }
+//    }
+//    @include lg {
+//      max-width: calc(100% / 3);
+//    }
+//  }
+//}

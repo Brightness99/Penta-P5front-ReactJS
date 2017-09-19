@@ -1,0 +1,50 @@
+.org-cloud-customized {
+  background-color: $color-white;
+  padding: 2rem 0;
+  @include lg {
+    padding: 4rem 0;
+  }
+  .mol-cloud-customized {
+    &:last-of-type {
+      margin-top: 4rem;
+    }
+    .qrk-title-desc-customized {
+      font-family: $font-family-open-sans-bold;
+      font-size: $font-size-lg;
+      letter-spacing: 0.18rem;
+      text-transform: uppercase;
+    }
+    .atm-desc-customized {
+      display: flex;
+      .qrk-desc-text-customized {
+        border: 0.1rem solid $color-hrLightGray;
+        flex: 1;
+        img {
+          width: 100%;
+        }
+        .qrk-texts-details-customized {
+          text-align: center;
+          padding: 1rem;
+          .title-details-customized {
+            font-family: $font-family-nunito-regular;
+            font-size: $font-size-il;
+          }
+          .subtitle-details-customized {
+            color: $color-lightGray;
+            font-family: $font-family-open-sans-light;
+            font-size: $font-size-base;
+          }
+        }
+        &:nth-of-type(2n) {
+          margin: 0 2rem;
+        }
+      }
+    }
+  }
+}
+
+.slider-cloud-customized {
+  .atm-carousel-dots {
+    margin: -2.2rem 0 0;
+  }
+}

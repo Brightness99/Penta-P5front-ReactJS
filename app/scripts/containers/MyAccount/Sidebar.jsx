@@ -1,7 +1,7 @@
 // flow
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Orders, Address, MyData, Cards, Models, Out } from 'components/Icons';
+import { NavLink } from 'react-router-dom';
+import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub } from 'components/Icons';
 
 export class Sidebar extends React.Component {
   render() {
@@ -14,39 +14,51 @@ export class Sidebar extends React.Component {
         <hr />
         <ul className="menuAccount">
           <li>
-            <Link to="#">
-              <i><Orders /></i>Meus pedidos
-            </Link>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/meus-pedidos">
+              <i><OrdersIcon /></i>
+              <span>Meus pedidos</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="#">
-              <i><Address /></i>Meus endereços
-            </Link>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/enderecos">
+              <i><AddressIcon /></i>
+              <span>Meus endereços</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="#">
-              <i><MyData /></i>Meus dados
-            </Link>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/meus-dados">
+              <i><MyDataIcon /></i>
+              <span>Meus dados</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="#">
-              <i><Cards /></i>Cartões salvos
-            </Link>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/cartoes-salvos">
+              <i><CardsIcon /></i>
+              <span>Cartões salvos</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="#">
-              <i><Models /></i>Modelos salvos
-            </Link>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/modelos-salvos">
+              <i><ModelsIcon /></i>
+              <span>Modelos salvos</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="#">
-              Cloud
-            </Link>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/cloud">
+              <i className="cloudIcon"><CloudIcon /></i>
+              <span>Cloud</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="#">
-              <i><Out /></i>Sair
-            </Link>
+            <NavLink exact={true} activeClassName="is-active" to="#">
+              <i className="printClubIcon"><PrintiClub /></i>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact={true} activeClassName="is-active" to="#">
+              <i><OutIcon /></i>
+              <span>Sair</span>
+            </NavLink>
           </li>
         </ul>
       </div>

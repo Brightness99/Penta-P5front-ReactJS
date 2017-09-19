@@ -1,0 +1,46 @@
+.container-creditCard {
+  padding: 4rem 0 3rem 0;
+  @include lg {
+    background-color: $color-white;
+    box-sizing: border-box;
+    flex: 5;
+    padding: 2rem 6rem;
+  }
+  .title-creditCard {
+    color: $color-almostBlack;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-lg;
+  }
+  .subtitle-creditCard {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-h4;
+    font-weight: 300;
+    line-height: 1.11;
+    text-align: left;
+    color: $color-almostBlack;
+    text-transform: none;
+    margin: 1.4rem 0 2rem 0;
+    padding-bottom: 0;
+    @include lg {
+      font-size: $font-size-xl;
+      margin-top: 2.4rem;
+    }
+  }
+  .container-card {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .rccs {
+      @include lg {
+        margin-left: 0; 
+      }
+    }
+    .atm-checkout-input-full {
+      width: 100%;
+    }
+  }
+}
