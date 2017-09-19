@@ -23,7 +23,7 @@ import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   cart: {},
   dispatch: () => {},
   router: RouterStore,
