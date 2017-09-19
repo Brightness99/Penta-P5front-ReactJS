@@ -15,14 +15,17 @@ type Props = {
 
 type State = {
   isReady: boolean,
+  isInvisible: boolean,
+  isToogleOn: boolean,
 };
 
 export default class Canvas extends React.Component {
   constructor(props: Props) {
     super(props);
-
     this.state = {
       isReady: false,
+      isInvisible: true,
+      isToogleOn: true,
     };
   }
 
@@ -400,9 +403,16 @@ export default class Canvas extends React.Component {
     };
 
     if (isReady && isReady !== prevState.isReady) {
-      console.log('Initiate Cimpress global.designer');
-      global.designer.start(cimpressDesignerSettings);
+      global.designer.start(cimpressDesignerSettings)
+      .then(
+        response => {
+          this.setState({
+            isToogleOn: false,
+          });
+        }
+      );
     }
+
   }
 
   static props: Props;
@@ -418,28 +428,30 @@ export default class Canvas extends React.Component {
   }
 
   render() {
-    const { isReady } = this.state;
+    const { isReady, isToogleOn, isInvisible } = this.state;
 
     return (
-      <div className="upload-container-canvasCentralized">
-        <div className="upload__canvasSchema">
-        {
-          !isReady ?
-          <Loading /> :
-          [
-            <TopMenuBar />,
-            <div className="upload__canvasSchema_mainAreaContainer">
-              <div className="upload__canvasSchema_sidebarContainer">
-                <SideImageBar />
-                <SideTextBar />
-              </div>
-              <div className="upload__canvasSchema_canvasContainer">
-                <CanvasToolBar />
-                <CanvasArea />
-              </div>
-            </div>,
-          ]
-        }
+      <div className={`upload-container ${(isToogleOn) ? 'toogleOn' : 'toogleOff'} ${(isInvisible) ? 'invisible' : ''}`}>
+        <div className="upload-container-canvasCentralized">
+          <div className="upload__canvasSchema">
+          {
+            !isReady ?
+            <Loading /> :
+            [
+              <TopMenuBar />,
+              <div className="upload__canvasSchema_mainAreaContainer">
+                <div className="upload__canvasSchema_sidebarContainer">
+                  <SideImageBar />
+                  <SideTextBar />
+                </div>
+                <div className="upload__canvasSchema_canvasContainer">
+                  <CanvasToolBar />
+                  <CanvasArea />
+                </div>
+              </div>,
+            ]
+          }
+          </div>
         </div>
       </div>
     );

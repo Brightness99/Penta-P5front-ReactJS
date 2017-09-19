@@ -139,24 +139,7 @@ export class Upload extends React.Component {
     }
   };
 
-  render() {
-    const { dispatch } = this.props;
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Marca página',
-        url: '/configuracao-marca-pagina',
-      },
-      {
-        title: 'Enviar arte',
-        url: '',
-      },
-    ];
-
+  renderWarningExtraInfo = () => {
     const templates = {
       options: {
         vertical: ['illustrator', 'photoshop', 'photoshop'],
@@ -175,9 +158,30 @@ export class Upload extends React.Component {
       selectedOrientation: 'vertical',
     };
 
+    const { dispatch } = this.props;
+
     const product = {
       title: 'Cartão de Visita',
     };
+
+    return <Warning templates={templates} dispatch={dispatch} product={product} />;
+  };
+
+  render() {
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Marca página',
+        url: '/configuracao-marca-pagina',
+      },
+      {
+        title: 'Enviar arte',
+        url: '',
+      },
+    ];
 
     return (
       <div className="page-upload">
@@ -195,12 +199,10 @@ export class Upload extends React.Component {
               {this.renderAvailableStrategies()}
             </div>
           </div>
-          <div className="upload-container">
-            {this.renderUploadTypeSchema()}
-            {/*<div className="upload-container-centralized">
-              <Warning templates={templates} dispatch={dispatch} product={product} />
-            </div>*/}
-          </div>
+          {this.renderUploadTypeSchema()}
+          {/*<div className="upload-container-centralized">
+            {this.renderWarningExtraInfo()}
+          </div>*/}
         </div>
       </div>
     );
