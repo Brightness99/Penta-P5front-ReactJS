@@ -1,10 +1,12 @@
 .mol-tabs-header {
   display: flex;
+  margin-bottom: 2rem;
   position: relative;
   width: auto;
 
   @include lg {
-    margin: 0 -0.8rem;
+    margin-left: -0.8rem;
+    margin-right: -0.8rem;
   }
 }
 .atm-tab-nav {

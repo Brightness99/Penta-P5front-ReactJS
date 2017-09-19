@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
-import { BlogBlock, CustomersRelyBlock, ProductHighlightsBlock } from 'components/LandingPage';
+import { BlogBlock, CustomersRelyBlock } from 'components/LandingPage';
 import Loading from 'components/Loading';
 import Breadcrumbs from 'components/Breadcrumbs';
 
-import ProductBlock from './ProductBlock';
+import ProductHighlightsBlock from './ProductHighlights';
+import ProductInformationBlock from './ProductInformation';
+
 import InformationBlock from './InformationBlock';
 import TutorialBlock from './TutorialBlock';
 import WarrantyBlock from './WarrantyBlock';
@@ -22,7 +24,7 @@ import PrintProductBlock from './PrintProductBlock';
 type Props = {
   app: AppStoreType,
   router: RouterStore,
-  locale: {},
+  locale: LocaleType.translate.page.product_landing_page.informations,
   match: {},
   products: {},
   dispatch: () => {},
@@ -39,7 +41,7 @@ export class Products extends React.Component {
 
   renderMobile = () => {
     const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
-    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } }, locale } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
@@ -47,9 +49,13 @@ export class Products extends React.Component {
 
     return (
       <div>
-        <ProductHighlightsBlock product={product} screenSize={screenSize} />
+        <ProductHighlightsBlock screenSize={screenSize} product={product} />
+        <ProductInformationBlock
+          screenSize={screenSize}
+          informations={informations}
+          locale={locale.translate.page.product_landing_page.informations}
+        />
         <div>
-          <InformationBlock screenSize={screenSize} informations={informations} />
           <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
           <WarrantyBlock screenSize={screenSize} />
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
@@ -66,7 +72,7 @@ export class Products extends React.Component {
 
   renderDesktop = () => {
     const { products: { product, categories, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
-    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } }, locale } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -85,8 +91,12 @@ export class Products extends React.Component {
       <div>
         <Breadcrumbs links={breadcrumb} />
         <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
+        <ProductInformationBlock
+          screenSize={screenSize}
+          informations={informations}
+          locale={locale.translate.page.product_landing_page.informations}
+        />
         <div>
-          <InformationBlock screenSize={screenSize} informations={informations} />
           <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
           <WarrantyBlock screenSize={screenSize} />
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
@@ -115,7 +125,12 @@ export class Products extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return productsSelector(state);
+  return {
+    app: state.app,
+    locale: state.locale,
+    router: state.router,
+    products: state.products,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

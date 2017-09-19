@@ -23,11 +23,9 @@ const TabBody = (props: Props) => {
   }
 
   return (
-    <TransitionGroup className="atm-tab-active">
-      <FadeToggle key={children[activeIndex].key}>
-        {children[activeIndex]}
-      </FadeToggle>
-    </TransitionGroup>
+    <div className="atm-tab-active">
+      {children[activeIndex]}
+    </div>
   );
 };
 

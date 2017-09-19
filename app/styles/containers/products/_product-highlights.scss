@@ -102,12 +102,14 @@
       font-size: $font-size-xxx;
       letter-spacing: -0.08rem;
       line-height: 0.75;
+      margin-left: -0.1rem;
     }
   }
 
   &-description {
     font-size: $font-size-sm;
     line-height: 1.43;
+    margin: 0;
     padding: 2rem 0;
 
     @include lg {
@@ -169,7 +171,7 @@
   &-list {
     color: #6a6f7a;
     font-size: $font-size-xs;
-    padding: 2rem 0;
+    padding-bottom: 4rem;
     text-align: left;
 
     > * {
