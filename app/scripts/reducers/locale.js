@@ -6,7 +6,10 @@
 
 import { REHYDRATE } from 'redux-persist/constants';
 import { createReducer, mergeDeep } from 'utils/helpers';
+import { LocaleConstants } from 'constants/index';
 import locale from 'assets/json/localeMock.json';
+
+console.log('tomar no cy', LocaleConstants);
 
 const missingLocale = {
   translate: {
@@ -16,22 +19,29 @@ const missingLocale = {
   },
 };
 
-export const appState = mergeDeep(
-  {
-    ...locale,
-    rehydrated: false,
-  },
-  missingLocale
-);
+export const appState = {
+  rehydrated: false,
+};
 
 export default {
   locale: createReducer(appState, {
-    [REHYDRATE](state, action) {
+    [REHYDRATE](state) {
       return {
         ...state,
-        ...action.payload.locale,
         rehydrated: true,
       };
+    },
+    [LocaleConstants.LOCALE_FETCH_REQUEST]() {
+      return appState;
+    },
+    [LocaleConstants.LOCALE_FETCH_SUCCESS](state, action) {
+      return mergeDeep(
+        {
+          ...state,
+          ...action.payload,
+        },
+        missingLocale
+      );
     },
   }),
 };
