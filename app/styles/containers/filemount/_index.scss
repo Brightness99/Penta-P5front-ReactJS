@@ -1,0 +1,20 @@
+@import "sidebar";
+@import "content-text";
+
+.template-file-mount {
+  .title-file-mount {
+    color: $color-almostBlack;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-lg;
+    text-transform: uppercase;
+  }
+  .subtitle-file-mount {
+    color: $color-lightGray;
+    font-family: $font-family-open-sans-light;
+    font-size: $font-size-base;
+  }
+}
+
+.org-content-file-mount {
+  display: flex;
+}

@@ -1,0 +1,38 @@
+.atm-sidebar-file {
+  flex: 1;
+  background-color: $color-white;
+  margin-right: 2rem;
+  .qrk-accordion-sidebar {
+    .mol-accordion-item {
+      .atm-accordion-title {
+        font-family: $font-family-open-sans-bold;
+        font-size: $font-size-xs;
+        padding: 2rem;
+        text-transform: uppercase;
+        width: 100%;
+        position: relative;
+        .circle-number {
+          border: 0.1rem solid $color-almostBlack;
+          border-radius: 3rem;
+          font-family: $font-family-nunito-regular;
+          font-size: $font-size-lg;
+          padding: 0.05rem 0.887rem;          
+          margin-right: 1rem;
+        }
+      }
+      svg {
+        fill: $color-almostBlack;
+        position: absolute;
+        right: 1rem;
+      }
+    }
+    .atm-accordion-item-body {
+      background-color: $color-light-grey;
+      ul {
+        padding: 2rem;
+        font-family: $font-family-open-sans;
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
