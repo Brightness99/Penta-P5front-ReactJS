@@ -1,11 +1,12 @@
 // @flow
 
 import React from 'react';
+import Slider from 'react-slick';
+import { NavLink } from 'react-router-dom';
+import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { PageTitle } from 'atoms/Titles';
 import { IntlMoney } from 'components/Intl';
-import Slider from 'react-slick';
-import { NavLink } from 'react-router-dom';
 
 type Props = {
   screenSize: string,
@@ -51,7 +52,7 @@ export default class CartCrossSell extends React.Component {
               <div key={product.slug}>
                 <div key={product.slug} className="mol-product-card">
                   <NavLink to={`/produto-${product.slug}`}>
-                    <img src={`http://dev-cms.printi.com.br/${product.image_small.file}`} alt={product.image_small.alt} />
+                    <img src={`${config.basePath}${product.image_small.file}`} alt={product.image_small.alt} />
                     <div>
                       <div className="atm-card-title">{product.title}</div>
                       <div className="atm-card-text">{locale.FROM_PRICE} <IntlMoney>{parseFloat(product.minimum_price)}</IntlMoney>
@@ -78,7 +79,7 @@ export default class CartCrossSell extends React.Component {
           {crossSelling.map((product) => (
             <li key={product.slug} className="mol-product-card">
               <NavLink to={`/produto-${product.slug}`}>
-                <img src={`http://dev-cms.printi.com.br/${product.image_small.file}`} alt={product.image_small.alt} />
+                <img src={`${config.basePath}${product.image_small.file}`} alt={product.image_small.alt} />
                 <div>
                   <div className="atm-card-title">{product.title}</div>
                   <div className="atm-card-text">{locale.FROM_PRICE} <IntlMoney>{parseFloat(product.minimum_price)}</IntlMoney>

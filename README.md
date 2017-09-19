@@ -6,6 +6,7 @@ Requirements
 ===
 - node ^6.x
 - npm ^3.x
+- Access to Printi QA Environment (check with @lucca_mendonca)
 
 ###NVM
 Changin node.js version can be hard sometimes and it's harder to navigate between old and new versions.

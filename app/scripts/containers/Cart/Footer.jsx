@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { FileTextOIcon } from 'components/Icons';
 import { IntlMoney } from 'components/Intl';
@@ -72,7 +73,7 @@ export default class CartFooter extends React.Component {
       <div className="org-cart-footer org-cart-footer--desktop">
         <div>
           <NavLink
-            to="http://dev-cms.printi.com.br/v1/customers/pdf_quotation/download"
+            to={`${config.basePath}v1/customers/pdf_quotation/download`}
             target="new"
             className="atm-button-transparent"
           >
@@ -97,7 +98,7 @@ export default class CartFooter extends React.Component {
       <div className="org-cart-footer org-cart-footer--mobile">
         <NavLink to="/" className="atm-cart-shopping">{locale.seo.KEEP_BUYING}</NavLink>
         <NavLink
-          to="http://dev-cms.printi.com.br/v1/customers/pdf_quotation/download"
+          to={`${config.basePath}v1/customers/pdf_quotation/download`}
           target="new"
           className="atm-button-transparent"
         >
