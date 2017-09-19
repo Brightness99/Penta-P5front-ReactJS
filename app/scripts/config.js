@@ -7,8 +7,8 @@
 
 import NPMPackage from '../../package.json';
 
-const apiUrl = 'http://qa-cms.printi.com.br';
-const basePath = 'http://qa-cms.printi.com.br/';
+const apiUrl = 'http://dev-cms.printi.com.br';
+const basePath = 'http://dev-cms.printi.com.br/';
 
 const config = {
   name: NPMPackage.name,
