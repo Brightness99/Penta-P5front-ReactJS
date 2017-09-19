@@ -1,0 +1,27 @@
+.atm-content-file {
+  align-items: center;
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  background-color: $color-white;
+  padding: 2rem;
+  .title-content-file {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-il;
+    font-weight: lighter;
+    text-transform: none;
+    text-align: left;
+    width: 100%;
+    @include lg {
+      font-size: $font-size-xxx;
+    }
+  }
+  .p-text-content-file {
+    color: $color-lightGray;
+    font-family: $font-family-open-sans-light;
+    font-size: $font-size-xs;
+    @include lg {
+      font-size: $font-size-base;
+    }
+  }
+}

@@ -22,6 +22,8 @@ import Upload from 'containers/Upload';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
 import CorporateSales from 'containers/CorporateSales';
+import FileMount from 'containers/FileMount';
+import PrintGuide from 'containers/PrintGuide';
 
 type Props = {
   app: AppStoreType,
@@ -75,6 +77,8 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
+                      <Route path="/montagem-de-arquivos" component={FileMount} />
+                      <Route path="/guia-de-impressao" component={PrintGuide} />
                       <Route path="/glossario" component={Glossary} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
