@@ -21,6 +21,7 @@ import Footer from 'components/Footer';
 import Upload from 'containers/Upload';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
+import CorporateSales from 'containers/CorporateSales';
 
 type Props = {
   app: AppStoreType,
@@ -80,6 +81,7 @@ export class App extends React.Component {
                       <Route path="/:slug/upload/:itemId" component={Upload} />
                       <Route exact path="/404" component={Error404} />
                       <Route path="/cloud" component={CloudCompany} />
+                      <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route component={Error404} />
                     </Switch>
                   </main>

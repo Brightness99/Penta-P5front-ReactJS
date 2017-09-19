@@ -85,3 +85,6 @@ export GraficProduction from './GraficProduction';
 export ControlProduction from './ControlProduction';
 export MaterialProduction from './MaterialProduction';
 export ArrowsCloud from './ArrowsCloud';
+export InvoiceIcon from './InvoiceIcon';
+export SpecialProjectsIcon from './SpecialProjectsIcon';
+export AccountManagerIcon from './AccountManagerIcon';
