@@ -1,0 +1,14 @@
+.org-order-plataform {
+  padding: 2rem 0;
+  @include lg {
+    padding: 4rem 0;
+  }
+  .qrk-title-order {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-h4;
+    text-align: center;
+    @include lg {
+      font-size: $font-size-xl;
+    }
+  }
+}

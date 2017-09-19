@@ -1,22 +1,41 @@
 {
   "COUNTRY_CODE": "BR",
   "COUNTRY": "Brasil",
+  "LANGUAGE": "pt_BR",
   "CURRENCY": "BRL",
   "CURRENCY_FORMAT": "R$",
-  "LANGUAGE": "pt_BR",
-  "TIME_FORMAT": "d/m/Y H:i:s",
-  "UPDATED_AT": "2017-05-04 14:10:13",
+  "FE_DATE_FORMAT": "dd/MM/yyyy",
+  "TIME_FORMAT": "H:i",
+  "DATE_FORMAT": "d/m/Y",
+  "DEFAULT_PSP": "pagarme",
+  "WEIGHT": "kg",
+  "WEIGHT_SYM": "kg",
+  "LENGTH": "cm",
+  "LENGTH_SYM": "cm",
+  "DOMAIN": "printi.com.br",
+  "UPDATED_AT": "2017-09-13 15:28:01",
   "translate": {
     "common": {
       "WARNING": "Atenção",
       "OOPS": "Ops!",
       "PROMPT_YES": "Sim",
       "PROMPT_NO": "Não",
-      "MORE_INFOS": "Mais informações"
+      "MORE_INFO": "Mais informações",
+      "EDIT": "Editar",
+      "OR": "Ou",
+      "VIEW_MORE": "Ver mais...",
+      "VIEW_MORE_DRY": "Ver mais"
     },
     "header": {
+      "MENU": "Menu",
       "PRODUCTS": "Produtos",
-      "SEARCH_PLACEHOLDER": "Procure por produtos ou informações"
+      "SEARCH_PLACEHOLDER": "Procure por produtos ou informações",
+      "GREETING": "Olá",
+      "HELP_CENTER": "Central de ajuda",
+      "MY_ACCOUNT": "Minha conta",
+      "LOGOUT": "Sair",
+      "SIGN_IN": "Entrar",
+      "SIGN_UP": "Cadastrar"
     },
     "footer": {
       "certificates": {

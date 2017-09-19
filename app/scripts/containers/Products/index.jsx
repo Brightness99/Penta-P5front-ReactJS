@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
-import Blog from 'containers/Blog/Blog';
+import { Blog } from 'components/LandingPage';
 import CustomersRelyBlock from 'containers/CustomersRelyBlock/CustomersRelyBlock';
 import Loading from 'components/Loading';
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -126,7 +126,9 @@ export class Products extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return productsSelector(state);
+  return {
+    app: state.app,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

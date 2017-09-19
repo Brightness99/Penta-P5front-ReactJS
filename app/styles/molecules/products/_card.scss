@@ -1,0 +1,75 @@
+.mol-product-card {
+  display: inline-flex;
+  padding: 0.8rem;
+  position: relative;
+  text-align: center;
+
+  > a {
+    background-color: $color-white;
+    border: 0.1rem solid #dbdddf;
+    border-radius: $bsn-border-radius;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: $grid-gutter-width / 3;
+    transition: 0.3s linear;
+    width: 100%;
+
+    &:hover {
+      box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+      transform: scale(1.05);
+
+      .atm-card-button {
+        display: flex;
+      }
+    }
+  }
+
+  .atm-card-image {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.atm-card-title {
+  color: #151617;
+  font-family: $font-family-nunito-regular;
+  letter-spacing: -0.3px;
+  padding-top: $grid-gutter-width / 3;
+}
+
+.atm-card-text {
+  color: #6a6f7a;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xs;
+  line-height: 1;
+
+  > span {
+    font-size: 16px;
+    color: #006ee3;
+  }
+}
+
+.atm-card-button {
+  @include border-radius;
+  align-items: center;
+  background-color: #36c265;
+  box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+  color: #ffffff;
+  display: none;
+  font-size: 10px;
+  font-weight: bold;
+  height: 4rem;
+  justify-content: center;
+  left: 50%;
+  letter-spacing: 1px;
+  position: absolute;
+  text-transform: uppercase;
+  top: 50%;
+  transform: translate(-50%);
+  width: 70%;
+}
+
+a:hover {
+  text-decoration: none;
+}

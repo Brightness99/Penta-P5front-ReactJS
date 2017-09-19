@@ -2,6 +2,7 @@
 @import '~sass-mediaqueries/media-queries';
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+@import '~react-credit-cards/lib/styles.scss';
 
 // *** Vendor customization
 @import 'vendor/rc-collapse';
@@ -25,6 +26,9 @@
 @import 'vendor/bootstrap';
 @import 'vendor/bootstrap-theme';
 
+// *** Animations
+@import "animations/index";
+
 // *** Layout
 @import 'layout/global';
 
@@ -36,6 +40,9 @@
 @import 'containers/authentication/index';
 @import 'containers/myaccount/index';
 @import 'containers/upload/index';
+@import 'containers/home/index';
+@import 'containers/glossary/index';
+@import 'containers/cloud/index';
 
 // *** Components
 @import 'components/back-to-top/index';
@@ -50,6 +57,8 @@
 @import 'components/tooltipster/index';
 @import 'components/carousel/index';
 @import 'components/alert/index';
+@import 'components/accordion/index';
+@import 'components/landing-page/index';
 
 // *** Bosons
 @import 'bosons/index';

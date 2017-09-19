@@ -34,12 +34,12 @@ export ChevronRightIcon from './ChevronRight';
 export TagIcon from './Tag';
 export TicketIcon from './Ticket';
 export ArrowRightIcon from './ArrowRight';
-export Orders from './Orders';
-export Address from './Address';
-export MyData from './MyData';
-export Cards from './Cards';
-export Models from './Models';
-export Out from './Out';
+export OrdersIcon from './OrdersIcon';
+export AddressIcon from './AddressIcon';
+export MyDataIcon from './MyDataIcon';
+export CardsIcon from './CardsIcon';
+export ModelsIcon from './ModelsIcon';
+export OutIcon from './OutIcon';
 export CodeBar from './CodeBar';
 export Receipt from './Receipt';
 export ExclamationMark from './ExclamationMark';
@@ -62,3 +62,26 @@ export UploadMultipleFilesIcon from './UploadMultipleFiles';
 export AddFileIcon from './AddFile';
 export AddTextIcon from './AddText';
 export EyeIcon from './Eye';
+export CloudIcon from './CloudIcon';
+export RepurchaseIcon from './RepurchaseIcon';
+export WatchIcon from './WatchIcon';
+
+// Temporary
+export AngleRightIcon from './AngleRight';
+export AngleLeftIcon from './AngleLeft';
+
+// new definitive icons
+export AngleDownIcon from './_AngleDown';
+export ExclusiveServiceIcon from './_ExclusiveService';
+export HeartIcon from './_Heart';
+export HelpCircleIcon from './_HelpCircle';
+export MenuIcon from './_Menu';
+export MyAccountIcon from './_MyAccount';
+export PrintiIcon from './_Printi';
+export PrintiSymbolIcon from './_PrintiSymbol';
+export SearchIcon from './_Search';
+export FilialIcon from './FilialIcon';
+export GraficProduction from './GraficProduction';
+export ControlProduction from './ControlProduction';
+export MaterialProduction from './MaterialProduction';
+export ArrowsCloud from './ArrowsCloud';

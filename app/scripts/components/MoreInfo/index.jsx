@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 type Props = {
   locale: {
-    MORE_INFOS: string,
+    MORE_INFO: string,
   },
   text: string,
   className?: string,
@@ -18,7 +18,7 @@ export class Newsletter extends React.Component {
   static props: Props;
 
   render() {
-    const { locale: { MORE_INFOS }, className, text } = this.props;
+    const { locale: { MORE_INFO }, className, text } = this.props;
 
     return (
       <div
@@ -27,7 +27,7 @@ export class Newsletter extends React.Component {
           className
         )}
       >
-        <SVG src={require('assets/media/svg/icon_info.svg')} /> {MORE_INFOS}
+        <SVG src={require('assets/media/svg/icon_info.svg')} /> {MORE_INFO}
         <div className="atm-more-info-content">
           {text}
         </div>
@@ -39,7 +39,9 @@ export class Newsletter extends React.Component {
 /* istanbul ignore next */
 function mapStateToProps(state) {
   return {
-    locale: state.locale.translate.common,
+    locale: {
+      MORE_INFO: state.locale.translate.common.MORE_INFO,
+    },
   };
 }
 

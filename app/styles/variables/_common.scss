@@ -4,11 +4,13 @@ $font-path: '../../assets/fonts/';
 $header-height: 8rem;
 // $header-height: 3rem;
 $topbar-height: 2.8rem;
+$n-topbar-height: 2.5rem;
 $footer-height: 5.1rem;
 
-$brand-secondary: #cd0423;
+$header-height-mobile: 10rem;
+$desktop-height-mobile: 9.7rem;
 
-$font-family-base: 'R Light', 'Open Sans Light', Helvetica, Arial, sans-serif;
+$brand-secondary: #cd0423;
 
 $font-family-nunito-regular: 'Nunito Regular', Helvetica, Arial, sans-serif;
 $font-family-nunito-light: 'Nunito Light', Helvetica, Arial, sans-serif;
@@ -18,6 +20,8 @@ $font-family-open-sans-regular: 'Open Sans Regular', Helvetica, Arial, sans-seri
 $font-family-open-sans-light: 'Open Sans Light', Helvetica, Arial, sans-serif;
 $font-family-open-sans-bold: 'Open Sans Bold', Helvetica, Arial, sans-serif;
 $font-family-open-sans-semibold: 'Open Sans SemiBold', Helvetica, Arial, sans-serif;
+
+$font-family-base: $font-family-open-sans;
 
 $color-black: #000;
 $color-white: #ffffff;
@@ -73,3 +77,6 @@ $color-opacity-maize: #eee5ce;
 $color-tomato-error-dark: #EA4335;
 $color-tomato-error-light: #EFD2D0;
 $color-pastel-red-light: #fee0e1;
+
+// Bosons // TODO: Move that later
+$bsn-border-radius: 0.4rem;

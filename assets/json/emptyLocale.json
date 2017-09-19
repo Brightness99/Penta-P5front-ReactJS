@@ -1,0 +1,42 @@
+{
+  "COUNTRY_CODE": "",
+  "COUNTRY": "",
+  "LANGUAGE": "",
+  "CURRENCY": "",
+  "CURRENCY_FORMAT": "",
+  "FE_DATE_FORMAT": "",
+  "TIME_FORMAT": "",
+  "DATE_FORMAT": "",
+  "DEFAULT_PSP": "",
+  "WEIGHT": "",
+  "WEIGHT_SYM": "",
+  "LENGTH": "",
+  "LENGTH_SYM": "",
+  "DOMAIN": "",
+  "UPDATED_AT": "",
+  "translate": {
+    "common": {
+      "WARNING": "",
+      "OOPS": "",
+      "PROMPT_YES": "",
+      "PROMPT_NO": "",
+      "MORE_INFO": "",
+      "EDIT": "",
+      "OR": "",
+      "VIEW_MORE": "",
+      "VIEW_MORE_DRY": "",
+      "STARTING_FROM": ""
+    },
+    "header": {
+      "MENU": "",
+      "PRODUCTS": "",
+      "SEARCH_PLACEHOLDER": "",
+      "GREETING": "",
+      "HELP_CENTER": "",
+      "MY_ACCOUNT": "",
+      "LOGOUT": "",
+      "SIGN_IN": "",
+      "SIGN_UP": ""
+    }
+  }
+}

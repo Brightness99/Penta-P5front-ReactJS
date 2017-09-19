@@ -1,0 +1,140 @@
+.container-blog {
+  margin: 0 0 7.5rem;
+
+  @include lg {
+    margin-bottom: 5rem;
+  }
+
+  .slick-list {
+    overflow: visible!important;
+
+    .slick-track {
+      display: flex!important;
+      height: 100%;
+    }
+  }
+
+  .atm__block-title {
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
+
+    @include lg {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .box-blogCards {
+    display: flex;
+    margin: 0 2.5rem;
+
+    @include lg {
+      margin: 0 -1rem;
+    }
+
+    .blogCard {
+      display: inline-flex;
+      flex-grow: 1;
+      flex-basis: 1px;
+      padding: 0 0.5rem;
+
+      @include lg {
+        padding: 0 1rem;
+        width: 25%;
+      }
+
+      a {
+        box-shadow: 0 0.4rem 0.8rem 0 rgba(21, 22, 23, 0.2);
+        background-color: $color-white;
+        border-radius: 0.4rem;
+        color: #6a6f7a;
+        cursor: pointer;
+        display: inline-flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        transition: 0.3s ease;
+
+        @include lg {
+          box-shadow: none;
+        }
+
+        &:hover {
+          box-shadow: 0 0.4rem 0.8rem 0 rgba(21, 22, 23, 0.2);
+          transform: scale(1.1);
+          text-decoration: none;
+        }
+      }
+
+      .titleCategory {
+        background-color: rgba(#000, 0.3);
+        color: $color-white;
+        border-radius: 1rem;
+        border: 0.1rem solid currentColor;
+        font-size: $font-size-xxs;
+        left: 2rem;
+        line-height: 1;
+        padding: 0.5rem 1.5rem;
+        position: absolute;
+        text-transform: uppercase;
+        top: 2rem;
+      }
+
+      img {
+        display: inline-flex;
+        flex: 0 0 auto;
+        height: 21rem;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      &-text {
+        display: flex;
+        flex: 0 1 auto;
+        flex-direction: column;
+        height: 100%;
+        padding: 2.5rem 2rem;
+
+        h4 {
+          color: #151617;
+          margin-bottom: 1.1rem;
+          font-family: $font-family-nunito-regular;
+          font-size: $font-size-lg;
+          font-weight: 400;
+          line-height: 1.11;
+          padding-bottom: 1.6rem;
+        }
+
+        p {
+          font-size: $font-size-xxs;
+          font-family: $font-family-open-sans;
+          color: $color-lightGray;
+          font-weight: 300;
+        }
+      }
+
+      &-footer {
+        display: flex;
+        flex: 0 0 auto;
+        justify-content: space-between;
+        padding: 0 2rem 2rem;
+        position: relative;
+
+        > div {
+          align-items: center;
+          display: flex;
+
+          span{
+            display: inline-flex;
+            font-size: $font-size-xs;
+          }
+          svg {
+            display: inline-flex;
+            width: 1.2rem;
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

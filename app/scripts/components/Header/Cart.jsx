@@ -28,9 +28,11 @@ export default class Cart extends React.Component {
     return (
       <div className="mol-cart-icon">
         <NavLink to="/meu-carrinho">
-          <CartIcon />
+          <div>
+            <CartIcon />
+            {totalCartItems > 0 && <div className="atm-cart-icon-total">{totalCartItems}</div>}
+          </div>
         </NavLink>
-        {totalCartItems > 0 && <div className="atm-cart-icon-total">{totalCartItems}</div>}
       </div>
     );
   }

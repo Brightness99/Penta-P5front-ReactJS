@@ -1,0 +1,681 @@
+// 20170908113307
+// http://dev-cms.printi.com/v2/locale
+
+{
+  "COUNTRY_CODE": "US",
+  "COUNTRY": "United States",
+  "LANGUAGE": "en_US",
+  "CURRENCY": "USD",
+  "CURRENCY_FORMAT": "$",
+  "FE_DATE_FORMAT": "MM/dd/yyyy",
+  "TIME_FORMAT": "H:i",
+  "DATE_FORMAT": "m/d/Y",
+  "DEFAULT_PSP": "adyen",
+  "WEIGHT": "pounds",
+  "WEIGHT_SYM": "lb",
+  "LENGTH": "inch",
+  "LENGTH_SYM": "in",
+  "DOMAIN": "printi.com",
+  "UPDATED_AT": "2017-09-08 14:23:49",
+  "translate": {
+    "common": {
+      "WARNING": "Attention",
+      "OOPS": "Oops!",
+      "PROMPT_YES": "Yes",
+      "PROMPT_NO": "No",
+      "MORE_INFO": "More info",
+      "EDIT": "Edit",
+      "OR": "Or",
+      "VIEW_MORE": "More...",
+      "VIEW_MORE_DRY": "More"
+    },
+    "locale_select_modal": {
+      "TITLE": "Please confirm your country",
+      "DESCRIPTION": "You accessed <strong>%s</strong>, but we noticed that you're actually coming from <strong>%s</strong>. Let us know wether you want to stay on <strong>%s</strong> or go to <strong>%s</strong>"
+    },
+    "header": {
+      "MENU": "Menu",
+      "PRODUCTS": "Products",
+      "SEARCH_PLACEHOLDER": "Search for products or information",
+      "GREETING": "Hello",
+      "HELP_CENTER": "Help",
+      "MY_ACCOUNT": "My account",
+      "LOGOUT": "Log out",
+      "SIGN_IN": "Sign in",
+      "SIGN_UP": "Sign up"
+    },
+    "footer": {
+      "RIGHTS_RESERVED": "All rights reserved",
+      "SOCIAL": "Social media",
+      "VIEW_ALL_LINKS": "View all links",
+      "SUPPORT": "Support",
+      "PAYMENT_METHODS": "Payment methods",
+      "COMPANY_INFO": "FM Printing USA, Inc.",
+      "SELOS_RECLAME": "Quality Certifications",
+      "security": {
+        "SAFE_SITE": "Safe site",
+        "CERTISIGN_MSG": "Validation of this site by Certisign indicates that our company has satisfactorily completed all procedures to determine that the validated domain domain is owned or registered by a company or organization authorized to trade for or to engage in any lawful activity on its behalf."
+      }
+    },
+    "form": {
+      "common": {
+        "CANCEL": "Cancel",
+        "EDIT": "Edit",
+        "REMOVE": "Remove",
+        "CONFIRM": "Confirm",
+        "SEND": "Send"
+      },
+      "address": {
+        "ADDRESS": "Address",
+        "RECEIVER_NAME": "Name",
+        "ZIPCODE": "ZIP code",
+        "ZIPCODE_HELPER": "",
+        "STREET_ADDRESS": "Street address",
+        "NUMBER": "",
+        "ADDITIONAL_ADDRESS": "Additional address",
+        "NEIGHBORHOOD": "",
+        "CITY": "City",
+        "STATE": "State",
+        "CITY_STATE": "City/State",
+        "SAVE": "Save address"
+      },
+      "customer": {
+        "EMAIL": "E-mail",
+        "EMAIL_CONFIRM": "Confirm e-mail",
+        "PASSWORD": "Password",
+        "FIRST_NAME": "First name",
+        "LAST_NAME": "Last name",
+        "FULL_NAME": "Full name",
+        "GENDER": "Gender",
+        "MALE": "Male",
+        "FEMALE": "Female",
+        "PHONE": "Phone",
+        "SAVE": "Save customer"
+      },
+      "payment": {
+        "CREDIT_CARD": "Credit card",
+        "BOLETO": "Boleto bancário",
+        "FATURA": "Invoice",
+        "PAY_ON_DELIVERY": "Pay on delivery",
+        "PAY_WITH_SAVED_CARD": "Use saved card",
+        "USE_SAVED_CARD": "Use saved card",
+        "USE_ANOTHER_CARD": "Use another card",
+        "SAVE_CARD": "Save card",
+        "SAVED_CARD_MSG": "On your next purchase at Printi, you can use this  credit card without having to enter the information again. Printi guarantees security: your card will be saved encrypted and only you can make purchases with it.",
+        "CARD_NUMBER": "Card number",
+        "HOLDER_NAME": "Cardholder name",
+        "EXP_MONTH": "Month",
+        "EXP_YEAR": "Year",
+        "CVC": "CVC",
+        "SECURE_PURCHASE": "100% secure purchase",
+        "INVALID_VOUCHER_MSG": "Your voucher code is not valid. Please return to the cart and try again."
+      }
+    },
+    "page": {
+      "home": {
+        "seo": {
+          "PAGE_TITLE": "Printing made easier | Online Printing Services | Printi",
+          "META_DESCRIPTION": "Printi offers the easiest and most affordable solutions for printing all your marketing and business materials. Fast. Anywhere. Anytime."
+        },
+        "carousel": {
+          "STARTING_FROM": "Starting from"
+        },
+        "highlights": {
+          "TITLE": "Highlights",
+          "list": [
+            {
+              "TITLE": "Find out how to pay by invoice",
+              "TEXT": "Count on the simplicity and convenience of paying by invoice. Find out how to get approved here."
+            }
+          ]
+        },
+        "clients": {
+          "TITLE": "MORE THAN 50,000 HAPPY CUSTOMERS"
+        },
+        "testimonials": [
+          {
+            "TEXT": "The personal service and special attention that online printing offers make Printi not just one of our suppliers, but a great partner for our business.",
+            "NAME": "Adriano Alcalde",
+            "WORK_TITLE": "CFO - Netshoes",
+            "IMAGE": "/final/img/cliente-2.jpg"
+          },
+          {
+            "TEXT": "The partnership with Printi is important for us because we need advanced offset solutions. This is only made possible due to the high level of responsibility and competence Printi offers.",
+            "NAME": "Marcelo Froes",
+            "WORK_TITLE": "Purchasing - Certisign",
+            "IMAGE": "/final/img/cliente-1.jpg"
+          },
+          {
+            "TEXT": "Printi has allowed us to save between 15% and 20% of our offset printing costs, in addition to saving time. From a financial standpoint alone, it is worth being a Printi customer.",
+            "NAME": "Florian Otto",
+            "WORK_TITLE": "Founder and CEO - Groupon Brazil",
+            "IMAGE": "/final/img/cliente-3.jpg"
+          }
+        ]
+      },
+      "search": {
+        "seo": {
+          "PAGE_TITLE": "Buscar | Printi",
+          "META_DESCRIPTION": "Buscar - Printi."
+        }
+      },
+      "faq": {
+        "seo": {
+          "PAGE_TITLE": "Contact Us | Printi",
+          "META_DESCRIPTION": "Contact Us - Printi."
+        }
+      },
+      "legal_content": {
+        "privacy_policy": {
+          "seo": {
+            "PAGE_TITLE": "Privacy Policy | Printi",
+            "META_DESCRIPTION": "Printi's privacy policy."
+          }
+        },
+        "use_terms": {
+          "seo": {
+            "PAGE_TITLE": "Terms of use | Printi",
+            "META_DESCRIPTION": "Printi's terms of use."
+          }
+        }
+      },
+      "login": {
+        "seo": {
+          "PAGE_TITLE": "Sign In - Sign Up | Printi",
+          "META_DESCRIPTION": "Sign In - Sign Up - Printi"
+        },
+        "TITLE": "Login",
+        "SIGN_IN_WITH": "Sign in using: ",
+        "SIGN_IN_WITH_FACEBOOK": "Enter with Facebook",
+        "SIGN_IN_WITH_GOOGLE": "Enter with Google",
+        "HAVE_AN_ACCOUNT": "I have an account",
+        "NEW_CUSTOMER": "I'm new here",
+        "SIGN_IN": "Sign in",
+        "SIGN_UP": "Sign up",
+        "STAY_CONNECTED": "Stay connected",
+        "FORGOT_PASSWORD": "Forgot password",
+        "VIEW_PASSWORD": "View password",
+        "HIDE_PASSWORD": "Hide password",
+        "NEWSLETTER_REGISTER": "Contact me by e-mail with exclusive offers and news",
+        "AGREE_WITH_TERMS": "By registering, you agree to our &nbsp;<a href=\"%s\" target=\"_blank\">Website Terms of Use</a>&nbsp;and our&nbsp;<a href=\"%s\" target=\"_blank\">Privacy Policy</a>."
+      },
+      "forgot_password": {
+        "TITLE": "Forgot password",
+        "DESCRIPTION": "Enter your e-mail in the field below to reset your password",
+        "GO_BACK_AND": "Go back",
+        "SIGN_IN": "Login"
+      },
+      "product_landing_page": {
+        "common": {
+          "GET_STARTED": "Get started",
+          "CONFIGURE_PRODUCT": "Shop now",
+          "UNAVAILABLE_PRODUCT": "Product unavailable",
+          "UNAVAILABLE_TITLE": "Let me know when this product is available",
+          "EMAIl": "Enter your e-mail",
+          "SEND": "Send"
+        },
+        "description": {
+          "STARTING_FROM": "From",
+          "NEXT_PAGE": "You'll be able to customize your product and see the price on the next screen"
+        },
+        "informations": {
+          "TITLE": "Product information",
+          "HINTS": "Hints",
+          "HOW_TO_USE": "How it works"
+        },
+        "advantages": {
+          "TITLE": "ADVANTAGES",
+          "OTHER_ONLINE_PRINTING_COMPANIES": "OTHER ONLINE PRINTERS",
+          "TRADITIONAL_PRINTING_COMPANIES": "TRADITIONAL PRINTERS",
+          "LIST": [
+            "Transparent pricing",
+            "1-day turnaround*",
+            "Free templates",
+            "Printing of short and long runs",
+            "Choice of delivery date",
+            "Personalized service",
+            "Offset quality at low prices",
+            "Partnerships with premier printers"
+          ],
+          "CHECK_AVAILABLE_PRODUCTS": "* For select products"
+        },
+        "graphic_plant": {
+          "OVER_TITLE": "Printing plants",
+          "TITLE": "Our partners' plants produce offset prints of the highest quality!",
+          "PARAGRAPH": "We offer long runs and large formats at rock-bottom prices.",
+          "LIST": [
+            "• Modern machinery;",
+            "• Offset and digital printing;",
+            "• Large formats;",
+            "• Long runs;",
+            "• Large variety of finishings and refinements."
+          ]
+        },
+        "print": {
+          "TITLE": "Get the best price for your %s now!",
+          "QUESTIONS": "Still have questions? Call us toll-free at (888) 886-2575"
+        },
+        "reviews": {
+          "TITLE": "PRODUCT REVIEWS",
+          "SUB_TITLE": "Average of <span itemprop=\"ratingValue\">%s</span> stars on <span itemprop=\"reviewCount\">%s</span> reviews",
+          "SUBMIT_REVIEW": "Submit review"
+        }
+      },
+      "product_settings": {
+        "seo": {
+          "PAGE_TITLE": "Customize your %s | Printi",
+          "META_DESCRIPTION": "Setup your %s. Select your options, quantity and the date when you want to receive the product."
+        },
+        "BREADCRUMB_TITLE": "Customize",
+        "TITLE": "Customize your product",
+        "ADD_TO_CART": "Add to cart",
+        "options": {
+          "TITLE": "Select your options",
+          "COMBINATIONS": "Help me choose",
+          "MORE_INFO_TEXT": "Create your perfect configuration for the production and printing of your materials by following these steps: First, select the format you want your product to have and the type of material or type of printing you are looking for. Then choose any extra options such as finishing, cutting, folding, lamination, and more. These options change depending on the product you choose.",
+          "TWO_PART_PRODUCT": "This product has two parts",
+          "VIEW_MODE": "View as",
+          "LIST": "List",
+          "PHOTOS": "Thumbs",
+          "CUSTOM_OPTION": "Personalize"
+        },
+        "matrix": {
+          "TITLE": "Calculate postage and delivery forecast",
+          "MORE_INFO_TEXT": "Please select the quantity and your preferred delivery date.",
+          "QTY_DATE_PRICE": "Quantity, delivery estimate and prices",
+          "FREE": "Free",
+          "SHIPPING": "Shipping",
+          "QUANTITY": "Quantity",
+          "BUSINESS_DAYS": "business days",
+          "CUSTOM_QUANTITY": "Add custom quantity",
+          "ZIP_CODE_DELIVERY": "Delivery",
+          "PICKUP_PLACE": "Pick-up"
+        },
+        "additional_options": {
+          "TITLE": "Additional Options",
+          "MORE_INFO_TEXT": "Choose whether your file is in an open (.ai, .eps, etc.) or closed (.pdf) format. Then select which type of check you want your file to pass: standard or professional. Note that the check is to make sure your materials are in perfect condition for printing, and doesn't include text or content changes. Tip: PDF or closed-to-print files go into production faster than open ones.",
+          "FREE": "FREE"
+        },
+        "sidebar": {
+          "TITLE": "Summary",
+          "ESTIMATED_DELIVERY": "Estimated delivery",
+          "QUANTITY": "Quantity"
+        },
+        "prepress_template": {
+          "TITLE": "Find out how to set up your file",
+          "SUB_TITLE": "Download the template and instructions",
+          "ORIENTATION_CHOICE": "Choose your file's orientation",
+          "orientation": {
+            "UNIQUE": "Unique",
+            "LANDSCAPE": "Landscape",
+            "PORTRAIT": "Portrait"
+          },
+          "SOFTWARE_CHOICE": "Choose your software"
+        }
+      },
+      "cart": {
+        "seo": {
+          "PAGE_TITLE": "My cart | Printi",
+          "META_DESCRIPTION": "My cart - Printi"
+        },
+        "TITLE": "Your cart",
+        "GO_TO_HOMEPAGE": "Back to the homepage",
+        "EMPTY_CART": "Your cart is empty!",
+        "PROCEED_TO_CHECKOUT": "Checkout",
+        "KEEP_BUYING": "Keep shopping",
+        "item_details_modal": {
+          "TITLE": "Product details",
+          "ADDITIONAL_OPTIONS": "Additional options"
+        },
+        "product_list": {
+          "PRODUCT": "Product",
+          "ESTIMATED_DELIVERY": "Delivery estimate",
+          "AFTER_ART_APPROVAL": "After design approval",
+          "QUANTITY": "Quantity",
+          "PRICE": "Price",
+          "actions": {
+            "DUPLICATE": "Duplicate",
+            "EDIT": "Edit",
+            "EDIT_TEMPLATE": "Edit template",
+            "CHOOSE_TEMPLATE": "Choose template",
+            "CHANGE_TEMPLATE": "Change template",
+            "CHOOSE_CHILI_TEMPLATE": "Choose design",
+            "CHANGE_CHILI_TEMPLATE": "Switch design",
+            "REMOVE": "Remove"
+          }
+        },
+        "voucher": {
+          "TITLE": "Use a voucher",
+          "PLACEHOLDER": "Add voucher",
+          "VALIDATE": "Validate",
+          "REMOVE": "Remove"
+        },
+        "values": {
+          "TOTAL": "Total",
+          "DISCOUNT": "Discount",
+          "SUBTOTAL": "Subtotal"
+        },
+        "sidebar": {
+          "ITEM": "item",
+          "ITEMS": "items",
+          "TITLE": "Cart summary",
+          "TOTAL": "Total"
+        },
+        "upselling": {
+          "TITLE": "Boost your product",
+          "modal": {
+            "TITLE": "Boost your product",
+            "GET_PRODUCT_EARLIER": "Get your product faster! :)",
+            "ORIGINAL_ESTIMATED_DELIVERY": "Original delivery date",
+            "NEW_ESTIMATED_DELIVERY": "New delivery date",
+            "DAYS": "days",
+            "CANCEL": "Cancel",
+            "ADD_UPSELLING": "Confirm"
+          }
+        }
+      },
+      "upload": {
+        "seo": {
+          "PAGE_TITLE": "Upload your files | Printi",
+          "META_DESCRIPTION": "Upload your files in open or closed format and print at America's best online printer."
+        },
+        "TITLE": "Upload your files",
+        "BREADCRUMB_TITLE": "Upload",
+        "sidebar": {
+          "TITLE": "Product summary",
+          "ESTIMATED_DELIVERY": "Delivery estimate"
+        },
+        "box_strategy": {
+          "TITLE": "How do you want to upload?",
+          "MORE_INFO_TEXT": "This option lets you change how you want to create your design. Select which one you prefer to proceed to the next steps.",
+          "CHANGE_STRATEGY": "Change upload method",
+          "send_later": {
+            "TITLE": "Send later",
+            "DESCRIPTION": "You can finish your order first and send us your design later."
+          },
+          "send_one_file": {
+            "TITLE": "Send your design now in one file",
+            "DESCRIPTION": "Send your design in one file"
+          },
+          "send_two_files": {
+            "TITLE": "Send your design now in two files",
+            "DESCRIPTION": "Send your design  in two files"
+          },
+          "send_multiple_files": {
+            "TITLE": "Send your design now in multiple files",
+            "DESCRIPTION": "Send your design in multiple files"
+          }
+        },
+        "box_upload": {
+          "TITLE": "Choose your file",
+          "MORE_INFO_TEXT": "This option lets you change how you want to create your design. Select which one you prefer to proceed to the next steps.",
+          "CHOOSE_FILE": "Choose your file",
+          "PREVIEW_UPLOAD": "Preview",
+          "ADD_ANOTHER_FILE": "Click to add another file",
+          "ADD_ANOTHER_FILE_MSG": [
+            "(Only if you need to send us a design for the back or a UV channel.",
+            "Do not use if the design for the back and/or UV channel are already included in the previous file.)"
+          ],
+          "SEND_FILES": "Send files",
+          "SEND_LATER": "Send later",
+          "UPLOAD_MISSING": "You have to upload a file to send us your design.",
+          "TERMS_MISSING": "You must accept above terms to continue.",
+          "UPLOAD_TERMS": "I agree that the design sent is my responsibility. There will be no spell checking or any other adjustments.",
+          "SEND_TO_PRODUCTION_WARNING": "To send the file to production, accept the terms and press the button \"Send final design\"."
+        },
+        "cimpress_designer": {
+          "DRAG_FILES": "Drag the files to the edit area.",
+          "LANDSCAPE": "Landscape",
+          "PORTRAIT": "Portrait",
+          "SEND_LATER": "Send later",
+          "WORKSPACE": "Edit are",
+          "MUST_AGREE_WITH_TERMS": "You must accept above terms to continue.",
+          "AGREE_WITH_TERMS": "I agree that the design sent is my responsibility. There will be no spell checking or any other adjustments.",
+          "PREVIEW": "Preview after cutting",
+          "ZOOM": "Zoom"
+        }
+      },
+      "checkout": {
+        "TITLE": "Checkout",
+        "sidebar": {
+          "TITLE": "Summary",
+          "SUBTOTAL": "Subtotal",
+          "TOTAL": "Total",
+          "PRODUCTS": "Products",
+          "DISCOUNT": "Discount",
+          "VIEW_ALL_PRODUCTS": "View all products",
+          "ITEMS": "Items"
+        },
+        "all_items_modal": {
+          "TITLE": "All items",
+          "QUANTITY": "Quantity",
+          "ESTIMATED_DELIVERY": "Delivery estimate",
+          "BUSINESS_DAYS": "Business days",
+          "AFTER_ART_APPROVAL": "After final design approval",
+          "TOTAL": "Total",
+          "ADDITIONAL_OPTIONS": "Additional options",
+          "NEW_PRICE_TEXT": "Some products might have a new price.",
+          "VALID_ITEM_TITLE": "All items",
+          "INVALID_ITEM_TITLE": "Pending Products",
+          "BUTTON_CONTINUE": "Continue"
+        },
+        "customer_data": {
+          "TITLE": "Customer Info",
+          "DESCRIPTION": "Complete your information to proceed. We only ask for this information once – your next purchases will be even faster and easier!",
+          "SUBMIT": "Submit",
+          "VALIDATION_MSG": "Oops... it seems that some fields are not valid!"
+        },
+        "address_data": {
+          "TITLE": "Choose your addresses",
+          "SHIPPING": "Shipping",
+          "BILLING": "Billing",
+          "USE_SAME_AS_SHIPPING": "Use same as shipping",
+          "CONFIRM_ADDRESSES": "Confirm address",
+          "NEW_ADDRESS": "New address",
+          "USE_ADDRESS": "Select address",
+          "VIEW_ALL_SHIPPING": "View all shipping addresses",
+          "VIEW_ALL_BILLING": "View all billing addresses"
+        },
+        "address_list": {
+          "TITLE": "All addresses",
+          "USE_ADDRESS": "Use this address"
+        },
+        "payment": {
+          "TITLE": "Payment",
+          "PLACE_ORDER": "Place order"
+        }
+      },
+      "successful_purchase": {
+        "seo": {
+          "PAGE_TITLE": "Order placed successfully! | Printi",
+          "META_DESCRIPTION": "Order placed successfully! - Printi"
+        },
+        "TITLE": "Order #%s has been placed successfully!",
+        "SUB_TITLE": "Almost ready for production! Just need to finish up the below steps:",
+        "MY_ACCOUNT": "My account",
+        "SEND_FILE": "Send final design",
+        "sidebar": {
+          "TITLE": "Stay tuned",
+          "DELIVERY_ADDRESS": "Shipping address",
+          "ITEMS": [
+            "The delivery time shown is only valid if you upload your design before the deadline.",
+            "The delivery time can be changed for boleto payments.",
+            "Orders with design services: please complete designer briefing.",
+            "Your tax invoice will be sent after the order goes into production.",
+            "You can track your orders via the \"My account\" menu. Sign in:"
+          ]
+        },
+        "waiting_payment": {
+          "PAY_BOLETO": "Pay by boleto",
+          "COPY_BOLETO_CODE": "Copy boleto code",
+          "COPIED": "Copied!"
+        },
+        "order_summary": {
+          "TITLE": "Continue with your order",
+          "ITEM_ID": "Item #%s",
+          "PRODUCT": "Product",
+          "ESTIMATED_DELIVERY": "Estimated delivery",
+          "AFTER_ART_APPROVAL": "After design approval",
+          "BUSINESS_DAYS": "Business days",
+          "UPLOAD_UNTIL": "Upload by %s at %s",
+          "QUANTITY": "Quantity",
+          "PRICE": "Price",
+          "TOTAL": "Total",
+          "DISCOUNT": "Discount"
+        }
+      },
+      "repurchase_order": {
+        "MORE_INFO_TEXT": "The Products below have a configuration that no longer exists on our site. They will not be added to the Repurchase."
+      }
+    },
+    "account": {
+      "TITLE": "My account",
+      "GREETING": "Hello, ",
+      "LOGOUT": "Log out",
+      "additional_cost": {
+        "TITLE": "ADDITIONAL COSTS",
+        "BACK": "Go back to order details",
+        "DESCRIPTION": "Description",
+        "TOTAL": "Price",
+        "PAID": "Paid",
+        "CREATED_AT": "Created at",
+        "PAY_ADDITIONAL_COST": "Pay additional cost"
+      },
+      "additional_cost_payment": {
+        "TITLE": "ADDITIONAL COST PAYMENT",
+        "DESCRIPTION": "Description",
+        "TOTAL": "Price"
+      },
+      "my_orders": {
+        "seo": {
+          "PAGE_TITLE": "My account - My orders | Printi",
+          "META_DESCRIPTION": "My account - My orders - Printi"
+        },
+        "TITLE": "My orders",
+        "SUB_TITLE": "Check on your orders' status",
+        "NO_ORDERS": "You don't have any orders yet! :(",
+        "ticket": {
+          "ORDER": "Order",
+          "ORDER_NUMBER": "#",
+          "ORDER_ITEMS": "Order items",
+          "PRODUCT": "product",
+          "PRODUCTS": "products",
+          "ORDER_TOTAL": "Total",
+          "ORDER_DATE": "Order date: ",
+          "ORDER_STATUS": "Status",
+          "VIEW_DETAILS": "View details"
+        },
+        "order_details": {
+          "seo": {
+            "PAGE_TITLE": "My account - Order details | Printi",
+            "META_DESCRIPTION": "My account - Order details - Printi"
+          },
+          "ORDER": "Order",
+          "ORDER_NUMBER": "#",
+          "ORDER_ITEMS": "Order items",
+          "PRODUCT": "product",
+          "PRODUCTS": "products",
+          "ORDER_TOTAL": "Total",
+          "ORDER_DATE": "Order date: ",
+          "ORDER_STATUS": "Status",
+          "DISCOUNT": "Discount",
+          "actions": {
+            "TITLE": "Actions",
+            "PRINT_BOLETO": "Print boleto",
+            "GENERATE_NEW_BOLETO": "Generate new boleto",
+            "CHECK_INVOICE": "View invoice",
+            "CHANGE_DELIVERY_ADDRESS": "Change address",
+            "REPURCHASE_ORDER": "Repurchase Order"
+          },
+          "payment_data": {
+            "TITLE": "Payment",
+            "PAYMENT_METHOD": "Payment method",
+            "PAYMENT_METHOD_CHANGE": "Change payment method",
+            "ORDER_PAID": "Paid"
+          },
+          "delivery_data": {
+            "TITLE": "Delivery"
+          },
+          "item_details": {
+            "headers": {
+              "FILE": "File",
+              "DESCRIPTION": "Description",
+              "DATES": "Dates",
+              "ACTIONS": "Actions"
+            },
+            "UNIT": "unit",
+            "ITEM_STATUS": "Item status",
+            "ESTIMATED_DELIVERY": "Estimated delivery",
+            "AFTER_ART_APPROVAL": "After art approval",
+            "UPLOAD_DUE_DATE": "Upload due date",
+            "SEND_FILE": "Send file(s)",
+            "CHANGE_FILE": "Change file(s)",
+            "REPURCHASE_ITEM": "Repurchase Item",
+            "ALREADY_IN_PRODUCTION": "This is already in production!",
+            "TRACKING": "Tracking",
+            "ADDITIONAL_COST": "Additional cost",
+            "FILE_CREATED_BY_DESIGNER": "Your file will be created by our designers",
+            "SEND_BRIEFING": "Send briefing",
+            "VIEW_BRIEFING": "View briefing",
+            "VIEW_ART_CREATION_PROPOSALS": "View design service proposals"
+          },
+          "warning": {
+            "WAITING_UPLOAD": "We are still missing an upload from you. The delivery estimate is subject to change if the upload is not sent before the deadline.",
+            "WAITING_PAYMENT": "You have not yet paid your boleto."
+          }
+        }
+      },
+      "my_addresses": {
+        "seo": {
+          "PAGE_TITLE": "My account - My addresses | Printi",
+          "META_DESCRIPTION": "My account - My addresses - Printi"
+        },
+        "TITLE": "My addresses",
+        "SHIPPING_ADDRESSES": "Shipping addresses",
+        "BILLING_ADDRESSES": "Billing addresses",
+        "NEW_SHIPPING_ADDRESS": "New shipping address",
+        "NEW_BILLING_ADDRESS": "New billing address"
+      },
+      "my_register_data": {
+        "seo": {
+          "PAGE_TITLE": "My account - My profile | Printi",
+          "META_DESCRIPTION": "My account - My profile - Printi"
+        },
+        "TITLE": "My profile",
+        "CHANGE_PASSWORD": "Change password",
+        "CURRENT_PASSWORD": "Current password",
+        "NEW_PASSWORD": "New password",
+        "REPEAT_NEW_PASSWORD": "Confirm new password"
+      },
+      "my_saved_cards": {
+        "seo": {
+          "PAGE_TITLE": "My Account - My Saved Credit Cards | Printi",
+          "META_DESCRIPTION": "My Account - My Saved Credit Cards - Printi"
+        }
+      },
+      "my_saved_templates": {
+        "seo": {
+          "PAGE_TITLE": "My Account - My Saved Templates | Printi",
+          "META_DESCRIPTION": "My Account - My Saved Templates - Printi"
+        }
+      },
+      "cloud": {
+        "TITLE": "Cloud",
+        "cloud_orders": {
+          "TITLE": "Set the interval for your search and click the button below to generate your report (CSV format)",
+          "STARTS_AT": "starts at",
+          "FINISHES_AT": "finishes at",
+          "CHOOSE_DATE": "Choose a date",
+          "GENERATE_REPORT": "Generate Report",
+          "DOWNLOAD_LINK": "Click to download report",
+          "NO_DATA": "No record found",
+          "SELECT_DATES": "Please select starts at and finishes at"
+        }
+      }
+    }
+  },
+  "show_locale_select_modal": false,
+  "locale_select": [
+
+  ]
+}

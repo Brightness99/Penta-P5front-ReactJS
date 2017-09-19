@@ -5,13 +5,24 @@
  */
 
 import { REHYDRATE } from 'redux-persist/constants';
-import { createReducer } from 'utils/helpers';
+import { createReducer, mergeDeep } from 'utils/helpers';
 import locale from 'assets/json/localeMock.json';
 
-export const appState = {
-  ...locale,
-  rehydrated: false,
+const missingLocale = {
+  translate: {
+    common: {
+      STARTING_FROM: 'A partir de',
+    },
+  },
 };
+
+export const appState = mergeDeep(
+  {
+    ...locale,
+    rehydrated: false,
+  },
+  missingLocale
+);
 
 export default {
   locale: createReducer(appState, {

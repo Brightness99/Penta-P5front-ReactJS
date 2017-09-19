@@ -1,7 +1,5 @@
 // @flow
 
-import StringMask from 'string-mask';
-
 /**
  * @module Actions/Cart
  * @desc Actions for Cart
@@ -107,7 +105,7 @@ export function cartVoucherRemoveFetch(voucher: string): Object {
 
 /**
  * Cart Pickup Places Fetch
- * @param {number} zipcode
+ * @param {number} pickupPlaceId
  *
  * @returns {Object}
  */
