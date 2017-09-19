@@ -20,6 +20,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
+import FileMount from 'containers/FileMount';
 
 
 type Props = {
@@ -74,6 +75,7 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
+                      <Route path="/montagem-de-arquivos" component={FileMount} />
                       <Route path="/glossario" component={Glossary} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
