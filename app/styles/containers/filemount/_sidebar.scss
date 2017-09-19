@@ -1,7 +1,9 @@
 .atm-sidebar-file {
   flex: 1;
   background-color: $color-white;
-  margin-right: 2rem;
+  @include lg {
+    margin-right: 2rem;
+  }
   .qrk-accordion-sidebar {
     .mol-accordion-item {
       .atm-accordion-title {
@@ -30,8 +32,17 @@
       background-color: $color-light-grey;
       ul {
         padding: 2rem;
-        font-family: $font-family-open-sans;
-        font-size: $font-size-base;
+        li {
+          padding-top: 1rem; 
+          a {
+            color: $color-lightGray;
+            font-family: $font-family-open-sans;
+            font-size: $font-size-base;
+          }
+          .img-mrg-r {
+            margin-right: 1rem;
+          }
+        }
       }
     }
   }

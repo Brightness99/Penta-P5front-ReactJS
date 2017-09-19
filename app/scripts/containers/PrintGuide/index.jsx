@@ -14,7 +14,7 @@ type Props = {
   dispatch: () => {},
 };
 
-export class FileMount extends React.Component {
+export class PrintGuide extends React.Component {
 
   static props: Props;
 
@@ -27,7 +27,7 @@ export class FileMount extends React.Component {
         url: '/',
       },
       {
-        title: 'Montagem do arquivo',
+        title: 'Guia de impressão',
         url: '/montagem-do-arquivo',
       },
       {
@@ -40,7 +40,7 @@ export class FileMount extends React.Component {
         <div className="container">
           <div className="template-file-mount">
             {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-            <h2 className="title-file-mount">Montagem do arquivo</h2>
+            <h2 className="title-file-mount">Guia de impressão</h2>
             {!isMobile(screenSize) && <p className="subtitle-file-mount">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum</p>}
 
             <div className="org-content-file-mount">
@@ -63,5 +63,5 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileMount);
+export default connect(mapStateToProps, mapDispatchToProps)(PrintGuide);
 
