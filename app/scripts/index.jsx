@@ -6,6 +6,9 @@ import 'vendor/polyfills';
 // Rx
 import 'vendor/rxjs';
 
+// Locale
+import { localeFetch } from 'actions';
+
 // i18n
 import moment from 'moment';
 import 'moment/min/locales.min';
@@ -24,17 +27,23 @@ if (process.env.production) {
 }
 
 export function renderApp(RootComponent) {
-  const target = document.getElementById('react');
-  moment.locale('pt-BR');
-  /* istanbul ignore next */
-  if (target) {
-    ReactDOM.render(
-      <AppContainer>
-        <RootComponent store={store} />
-      </AppContainer>,
-      target
-    );
-  }
+  store.dispatch(localeFetch());
+  store.subscribe(() => {
+    /* istanbul ignore next */
+    if (store.getState().locale.LANGUAGE) {
+      const target = document.getElementById('react');
+      moment.locale(store.getState().locale.LANGUAGE.replace('_', '-'));
+
+      if (target) {
+        ReactDOM.render(
+          <AppContainer>
+            <RootComponent store={store} />
+          </AppContainer>,
+          target
+        );
+      }
+    }
+  });
 }
 
 renderApp(Root);

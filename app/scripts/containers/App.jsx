@@ -17,7 +17,6 @@ import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 import Upload from 'containers/Upload';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
@@ -83,7 +82,6 @@ export class App extends React.Component {
                       <Route component={Error404} />
                     </Switch>
                   </main>
-                  <Footer screenSize={app.screenSize} />
                 </div>
               )}
             />
