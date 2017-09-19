@@ -2,6 +2,7 @@
 // TODO: Carousel this
 import React from 'react';
 import Slider from 'react-slick';
+import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { Tabs, TabHeader, TabNav, TabBody } from 'components/Tabs';
 import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
@@ -36,7 +37,7 @@ export class InformationBlock extends React.Component {
     return children.map((item) => (
       <div className="card-productInformation" key={item.id}>
         <div className="card-productInformation-image">
-          <img src={`http://qa-cms.printi.com.br/files/${item.image.file}`} alt={item.image.title} />
+          <img src={`${config.basePath}files/${item.image.file}`} alt={item.image.title} />
         </div>
         <div className="card-productInformation-text">
           <h4 className="card-productInformation-title">{item.name}</h4>

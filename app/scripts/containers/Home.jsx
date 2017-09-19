@@ -29,8 +29,8 @@ const bannerImages = [
       TARGET: 'self',
     },
     file: {
-      DESKTOP: 'http://dev-cms.printi.com.br/files/2017-02/lan-amentos-printi.png',
-      MOBILE: 'http://dev-cms.printi.com.br/files/2017-02/1486471907_lan-amentos-printi.png',
+      DESKTOP: `${config.basePath}files/2017-02/lan-amentos-printi.png`,
+      MOBILE: `${config.basePath}files/2017-02/1486471907_lan-amentos-printi.png`,
     },
     ALT: 'promo carnaval',
   },
@@ -41,13 +41,13 @@ const bannerImages = [
     },
     file: {
       DESKTOP: '',
-      MOBILE: 'http://dev-cms.printi.com.br/files/2016-12/1482158857_matix.png',
+      MOBILE: `${config.basePath}files/2016-12/1482158857_matix.png`,
     },
     ALT: 'mobile only',
   },
   {
     file: {
-      DESKTOP: 'http://dev-cms.printi.com.br/files/2016-12/banner-desktop.png',
+      DESKTOP: `${config.basePath}files/2016-12/banner-desktop.png`,
       MOBILE: '',
     },
     ALT: 'teste somente desktop',

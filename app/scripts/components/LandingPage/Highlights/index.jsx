@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Slider from 'react-slick';
+import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { BlockTitle } from 'atoms/Titles';
 import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
@@ -19,7 +20,7 @@ const highlightsJson = {
         TITLE: 'Pague faturado na gráfica Printi',
       },
       image: {
-        URL: '/assets/final/img/destaque-pagar-faturado.jpg',
+        URL: 'assets/final/img/destaque-pagar-faturado.jpg',
         ALT: 'Pague faturado na gráfica Printi',
       },
     },
@@ -31,7 +32,7 @@ const highlightsJson = {
         TITLE: 'Baixe Gabaritos da grafica online Printi',
       },
       image: {
-        URL: '/assets/final/img/destaque-pagina-gabaritos.jpg',
+        URL: 'assets/final/img/destaque-pagina-gabaritos.jpg',
         ALT: 'Baixe Gabaritos da grafica online Printi',
       },
     },
@@ -43,7 +44,7 @@ const highlightsJson = {
         TITLE: 'Guia de impressão da grafica online melhor do Brasil',
       },
       image: {
-        URL: '/assets/final/img/destaque-guia-impressao.jpg',
+        URL: 'assets/final/img/destaque-guia-impressao.jpg',
         ALT: 'Guia de impressão da grafica online melhor do Brasil',
       },
     },
@@ -55,7 +56,7 @@ const highlightsJson = {
         TITLE: 'Montagem do arquivo da Printi melhor gráfica do Brasil',
       },
       image: {
-        URL: '/assets/final/img/destaque-montagem-arquivo.jpg',
+        URL: 'assets/final/img/destaque-montagem-arquivo.jpg',
         ALT: 'Montagem do arquivo da Printi melhor gráfica do Brasil',
       },
     },
@@ -67,7 +68,7 @@ const highlightsJson = {
         TITLE: 'Tutorial de cartões de visita da grafica online Printi',
       },
       image: {
-        URL: '/assets/final/img/destaque-tutorial-cartao-visita.jpg',
+        URL: 'assets/final/img/destaque-tutorial-cartao-visita.jpg',
         ALT: 'Tutorial de cartões de visita da grafica online Printi',
       },
     },
@@ -86,7 +87,7 @@ export class HighlightsBlock extends React.Component {
   renderHighlights = () => (
     highlightsJson.list.map((highlight) => (
       <NavLink to={highlight.link.URL} title={highlight.link.TITLE} key={highlight.link.URL} className="box-highlight">
-        <img src={`http://dev-cms.printi.com.br${highlight.image.URL}`} alt={highlight.image.ALT} />
+        <img src={`${config.basePath}${highlight.image.URL}`} alt={highlight.image.ALT} />
         <div className="desc-highlight">
           <h4 className="box-highlight-title">{highlight.TITLE}</h4>
           <p>{highlight.TEXT}</p>

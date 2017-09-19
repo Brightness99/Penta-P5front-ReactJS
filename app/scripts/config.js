@@ -3,9 +3,12 @@
  * @module config
  */
 
+// TODO: Update from basePath to cdn link
+
 import NPMPackage from '../../package.json';
 
-const apiUrl = 'http://dev-cms.printi.com.br';
+const apiUrl = 'http://qa-cms.printi.com.br';
+const basePath = 'http://qa-cms.printi.com.br/';
 
 const config = {
   name: NPMPackage.name,
@@ -14,6 +17,7 @@ const config = {
   startReactotron: false,
   apiUrl,
   apiKey: '9009f95101bf48b01a50928a2a71ed1ae9083',
+  basePath,
 };
 
 export default config;

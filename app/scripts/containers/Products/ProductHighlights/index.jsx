@@ -3,6 +3,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Slider from 'react-slick';
+import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { IntlMoney } from 'components/Intl/index';
 import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
@@ -40,7 +41,7 @@ export class ProductBlock extends React.Component {
             .sort((a, b) => a.order - b.order)
             .map((image) => (
               <img
-                src={`http://dev-cms.printi.com.br/files/${image.filename}`}
+                src={`${config.basePath}files/${image.filename}`}
                 alt={image.title}
                 key={image.filename}
               />
@@ -80,7 +81,7 @@ export class ProductBlock extends React.Component {
                 .map((image) => (
                   <div key={image.filename}>
                     <img
-                      src={`http://dev-cms.printi.com.br/files/${image.filename}`}
+                      src={`${config.basePath}files/${image.filename}`}
                       alt={image.title}
                     />
                   </div>

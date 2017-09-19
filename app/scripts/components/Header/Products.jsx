@@ -4,6 +4,7 @@ import React from 'react';
 import cx from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
+import config from 'config';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
@@ -113,7 +114,7 @@ export default class Products extends React.Component {
                     activeClassName="link-active"
                     to={`/${selectedCategory.image_link}`}
                   >
-                    <img src={`http://dev-cms.printi.com.br/files/${selectedCategory.image.file}`} alt={selectedCategory.image.alt} />
+                    <img src={`${config.basePath}files/${selectedCategory.image.file}`} alt={selectedCategory.image.alt} />
                   </NavLink>
                 </div>
               </div>
