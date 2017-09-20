@@ -1,0 +1,44 @@
+.method-item {
+	width: 32%;
+	margin-right: 2%;
+	border: 1px dashed #CCC;
+	height: 300px;
+	text-align: center;
+	img {
+		width: 65px;
+		height: 80px;
+		margin: 65px 0px 28px;
+	}
+
+	a {
+		font-size: 13px;
+		display: inline-block;
+		cursor: pointer;
+		color: #006EE3 !important;
+		cursor: pointer;
+	}
+
+	.link-1 {
+		margin-bottom: 8px;
+		a {
+			width: 180px;
+			border: 1px solid #006EE3;
+			border-radius: 3px;
+			padding: 7px 0px;
+			text-transform: uppercase;
+		}
+	}
+	
+	.link-2 {
+		a {
+			text-decoration: underline;
+		}
+	}
+	&:last-child {
+		margin-right: 0px !important;
+	}
+	@include is-only {
+		width: 100%;
+		margin: 10px 0px 0px;
+	}
+}

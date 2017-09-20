@@ -21,6 +21,7 @@ import Header from 'components/Header';
 import Upload from 'containers/Upload';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
+import Success from 'containers/Success';
 import CorporateSales from 'containers/CorporateSales';
 import FileMount from 'containers/FileMount';
 import PrintGuide from 'containers/PrintGuide';
@@ -81,6 +82,7 @@ export class App extends React.Component {
                       <Route path="/montagem-de-arquivos" component={FileMount} />
                       <Route path="/guia-de-impressao" component={PrintGuide} />
                       <Route path="/glossario" component={Glossary} />
+                      <Route path="/success" component={Success} />
                       <Route path="/imprensa" component={PrintiPress} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
