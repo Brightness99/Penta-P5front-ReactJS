@@ -20,6 +20,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
+import Success from 'containers/Success';
 
 
 type Props = {
@@ -75,6 +76,7 @@ export class App extends React.Component {
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
                       <Route path="/glossario" component={Glossary} />
+                      <Route path="/success" component={Success} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route exact path="/404" component={Error404} />
