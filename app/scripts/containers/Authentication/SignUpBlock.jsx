@@ -6,7 +6,7 @@ import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validata
 import { Button } from 'quarks/Inputs';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   locale: {},
   dispatch: () => {},

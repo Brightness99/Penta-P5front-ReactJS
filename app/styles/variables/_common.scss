@@ -24,6 +24,7 @@ $font-family-open-sans-semibold: 'Open Sans SemiBold', Helvetica, Arial, sans-se
 $font-family-base: $font-family-open-sans;
 
 $color-black: #000;
+$color-white: #ffffff;
 $color-almostBlack: #151617;
 $color-printi: #006ee3;
 $color-darkBlue: #0056b1;
@@ -54,6 +55,7 @@ $color-instagram: #ed4956;
 /* new colors */
 $color-printi-blue: #006ee3;
 $color-sky-blue: #66b0ff;
+$color-sky-blue-light: #e1effc;
 $color-deep-purple: #8261f8;
 $color-barbie-pink: #ff57a4;
 $color-green: #2fd463;
@@ -70,6 +72,11 @@ $color-error: #e67150;
 $color-melon: #ff815e;
 $color-warning: #d6b047;
 $color-maize: #f0c654;
+$color-opacity-silver: #898c90;
+$color-opacity-maize: #eee5ce;
+$color-tomato-error-dark: #EA4335;
+$color-tomato-error-light: #EFD2D0;
+$color-pastel-red-light: #fee0e1;
 
 // Bosons // TODO: Move that later
 $bsn-border-radius: 0.4rem;

@@ -1,0 +1,49 @@
+@import "additionalOptions/index";
+@import "availableStrategy/index";
+@import "uploadTypeSchemas/canvas/index";
+@import "uploadTypeSchemas/normal/index";
+
+.page-upload {
+	.container {
+		.upload-container {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      background-color: $color-white;
+      justify-content: center;
+      margin-bottom: 2rem;
+			.upload-container-centralized {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 2rem 0;
+        width: 93%;
+				@include md {
+			    width: 82%;
+			  }
+				@include lg {
+          justify-content: space-between;
+          flex-direction: row;
+			  }
+				.container-midSide {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+					@include lg {
+						width: 49%;
+					}
+				}
+			}
+      .upload-container-canvasCentralized {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 2rem 0;
+        width: 98%;
+        @include md {
+          width: 95%;
+        }
+        @include lg {
+        }
+      }
+		}
+	}
+}

@@ -39,10 +39,15 @@
 @import 'containers/products/index';
 @import 'containers/authentication/index';
 @import 'containers/myaccount/index';
+@import 'containers/upload/index';
 @import 'containers/home/index';
 @import 'containers/glossary/index';
 @import 'containers/cloud/index';
 @import 'containers/success/index';
+@import 'containers/corporateSales/index';
+@import 'containers/corporateSales/index';
+@import 'containers/filemount/index';
+@import 'containers/printipress/index';
 
 // *** Components
 @import 'components/back-to-top/index';
@@ -56,6 +61,7 @@
 @import 'components/breadcrumbs/index';
 @import 'components/tooltipster/index';
 @import 'components/carousel/index';
+@import 'components/alert/index';
 @import 'components/accordion/index';
 @import 'components/landing-page/index';
 

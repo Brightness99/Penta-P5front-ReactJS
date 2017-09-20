@@ -6,6 +6,7 @@ Requirements
 ===
 - node ^6.x
 - npm ^3.x
+- Access to Printi QA Environment (check with @lucca_mendonca)
 
 ###NVM
 Changin node.js version can be hard sometimes and it's harder to navigate between old and new versions.
@@ -44,3 +45,9 @@ Module build failed: Error: spawn /path/to/project/node_modules/pngquant-bin/ven
 This is a common bug with node-sass. This usually happens on new instalations or when node version is updated. Run `npm rebuild node-sass`to fix it.
 
 If the problem persists, delete `/node_modules` folder and execute `npm install` again.
+
+PS: If you're using OSX, you may need to install 'libpng' too.
+
+On Brew:
+
+`brew install libpng`

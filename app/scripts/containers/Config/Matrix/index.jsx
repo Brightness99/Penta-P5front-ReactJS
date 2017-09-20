@@ -54,7 +54,9 @@ export default class MatrixBlock extends React.Component {
 
   renderMatrix() {
     const { selection, dispatch, screenSize, matrix, templates, product, user, isCustomEnabled } = this.props;
-
+    console.log('templates:', templates);
+    console.log('dispatch:', dispatch);
+    console.log('product:', product);
     return (
       <div className="app__config__matrix">
         <Zipcode

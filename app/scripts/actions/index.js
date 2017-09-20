@@ -6,8 +6,9 @@
  */
 
 export * from './app';
-export * from './products';
 export * from './blog';
 export * from './cart';
-export * from './user';
+export * from './locale';
+export * from './products';
 export * from './settings';
+export * from './user';
