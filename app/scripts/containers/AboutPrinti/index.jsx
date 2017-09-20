@@ -7,6 +7,7 @@ import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 
 import AboutPrintiText from './AboutPrintiText';
+import TimelineAboutPrinti from './TimelineAboutPrinti';
 
 type Props = {
   app: AppStore,
@@ -33,11 +34,12 @@ export class AboutPrinti extends React.Component {
     return (
       <section>
         {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <div className="container">
-          <div className="tpl-about-printi">
+        <div className="tpl-about-printi">
+          <div className="container">
             <h2 className="title-about-printi">Sobre a printi</h2>
-            <AboutPrintiText />
           </div>
+          <AboutPrintiText />
+          <TimelineAboutPrinti />
         </div>
       </section>
     );
