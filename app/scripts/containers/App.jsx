@@ -8,6 +8,7 @@ import { getScreenSize } from 'utils/helpers';
 import { updateBrowserOptions } from 'actions';
 import Router from 'modules/ReduxRouter';
 
+import Footer from 'components/Footer';
 import Config from 'containers/Config';
 import Home from 'containers/Home';
 import Error404 from 'containers/Errors/404';
@@ -82,6 +83,7 @@ export class App extends React.Component {
                       <Route component={Error404} />
                     </Switch>
                   </main>
+                  <Footer />
                 </div>
               )}
             />
