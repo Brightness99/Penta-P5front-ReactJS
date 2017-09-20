@@ -20,7 +20,7 @@ type Props = {
   dispatch: () => {},
 };
 
-export class CorporateSales extends React.Component {
+export class CorporateSales extends React.Component<Props, {}> {
   renderBanner() {
     return (
       <div className="container">

@@ -12,3 +12,4 @@ export * from './locale';
 export * from './user';
 export * from './products';
 export * from './settings';
+export * from './contact-form';

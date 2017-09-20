@@ -92,7 +92,9 @@ export default class Input extends React.Component {
           className,
         )}
       >
-        {showLabel && <Label
+        {
+          showLabel &&
+          <Label
             className={cx(
               'app__qrk__input-label',
               (value || isFocused) && 'app__qrk__input-label--active'
@@ -100,7 +102,8 @@ export default class Input extends React.Component {
             forId={id}
           >
             {placeholder}
-          </Label>}
+          </Label>
+        }
         <input
           type={type}
           name={name}
