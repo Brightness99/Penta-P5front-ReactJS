@@ -25,8 +25,8 @@ export class PrintiPress extends React.Component {
     return (
       <section>
         <div className="tpl-printi-press">
+          <Breadcrumbs links={breadcrumb} />
           <div className="container">
-            <Breadcrumbs links={breadcrumb} />
             <h2 className="title-printi-press">Printi na imprensa</h2>
 
             <div className="org-printi-press">
