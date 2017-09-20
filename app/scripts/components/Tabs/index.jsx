@@ -39,11 +39,8 @@ export class Tabs extends React.Component {
   static state: State;
 
   handleClick = (ev) => {
-    console.log('tomar no meu cu');
     const { activeIndex } = this.state;
     const nextIndex = parseInt(ev.currentTarget.value, 10);
-
-    console.log(activeIndex, nextIndex);
 
     if (nextIndex !== activeIndex) {
       this.setState({
@@ -57,10 +54,12 @@ export class Tabs extends React.Component {
     const { activeIndex } = this.state;
 
     return (
-      <div className={cx(
-        'org-tabs',
-        className
-      )}>
+      <div
+        className={cx(
+          'org-tabs',
+          className
+        )}
+      >
         {children.map((child) => (
           React.cloneElement(
             child,
@@ -68,6 +67,7 @@ export class Tabs extends React.Component {
               ...child.props,
               activeIndex,
               onClick: this.handleClick,
+              key: child.type.displayName,
             }
           )
         ))}

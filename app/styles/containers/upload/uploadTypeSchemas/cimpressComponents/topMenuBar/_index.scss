@@ -1,0 +1,74 @@
+.upload__canvasSchema__topMenuBar {
+  display: flex;
+  width: 100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: $color-hrLightGray;
+  border-radius: 3px;
+  &-left {
+    display: flex;
+    width: 50%;
+    .topMenuBar_btn {
+      border-left: none !important;
+    }
+  }
+  &-right {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    .topMenuBar_btn {
+      border-right: none !important;
+    }
+  }
+  .topMenuBar_btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 6rem;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $color-hrLightGray;
+    box-sizing: border-box;
+    border-top: none;
+    border-bottom: none;
+    transition: 0.3s;
+    span {
+      display: flex;
+      font-family: $font-family-open-sans-regular;
+      font-size: 1rem;
+      color: $color-lightGray;
+      margin-top: 0.5rem;
+    }
+    i {
+      display: flex;
+      width: 2rem;
+      height: 2.5rem;
+      margin-bottom: 0.2rem;
+    }
+    &.topMenuBar_btn-info {
+      span {
+        color: $color-printi-blue;
+      }
+      i {
+        width: 2.5rem;
+        svg {
+          fill: $color-printi-blue;
+        }
+      }
+    }
+    &:hover {
+      background-color: $color-sky-blue-light;
+      span {
+        color: $color-printi-blue;
+      }
+      i {
+        svg {
+          fill: $color-printi-blue;
+        }
+      }
+    }
+  }
+}
