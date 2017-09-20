@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 type Props = {
   screenSize: string,
   locale?: {
-    SEE_ALL_LINKS: string,
+    VIEW_ALL_LINKS: string,
   },
   links: LocaleLink[],
 };
@@ -60,11 +60,11 @@ export class Links extends React.Component {
   }
 
   renderMobile() {
-    const { locale: { SEE_ALL_LINKS } } = this.props;
+    const { locale: { VIEW_ALL_LINKS } } = this.props;
     const { isExpanded } = this.state;
 
     const header = (<div>
-      {isExpanded ? this.AccordionClose : this.AccordionOpen} {SEE_ALL_LINKS}
+      {isExpanded ? this.AccordionClose : this.AccordionOpen} {VIEW_ALL_LINKS}
     </div>);
 
     return (
