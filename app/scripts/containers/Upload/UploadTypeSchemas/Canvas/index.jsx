@@ -15,7 +15,6 @@ type Props = {
 
 type State = {
   isReady: boolean,
-  isInvisible: boolean,
   isToogleOn: boolean,
 };
 
@@ -24,7 +23,6 @@ export default class Canvas extends React.Component {
     super(props);
     this.state = {
       isReady: false,
-      isInvisible: true,
       isToogleOn: true,
     };
   }
@@ -428,10 +426,10 @@ export default class Canvas extends React.Component {
   }
 
   render() {
-    const { isReady, isToogleOn, isInvisible } = this.state;
+    const { isReady, isToogleOn } = this.state;
 
     return (
-      <div className={`upload-container ${(isToogleOn) ? 'toogleOn' : 'toogleOff'} ${(isInvisible) ? 'invisible' : ''}`}>
+      <div className={`upload-container ${(isToogleOn) ? 'toogleOn' : 'toogleOff'}`}>
         <div className="upload-container-canvasCentralized">
           <div className="upload__canvasSchema">
           {
