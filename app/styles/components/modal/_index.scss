@@ -1,8 +1,8 @@
 .app__modal {
+  height: 100%;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
-  height: 100%;
   width: 100%;
   z-index: 8;
 
@@ -51,21 +51,22 @@
 
       a {
         @include center-child-flex();
+
         color: $color-black;
         font-size: $font-size-base;
         height: 3rem;
         pointer-events: all;
         width: 3rem;
 
+        @include md {
+          left: auto;
+          right: 0;
+        }
+
         svg {
           background-color: $color-white;
           border-radius: 50%;
           overflow: hidden;
-        }
-
-        @include md {
-          left: auto;
-          right: 0;
         }
       }
     }
