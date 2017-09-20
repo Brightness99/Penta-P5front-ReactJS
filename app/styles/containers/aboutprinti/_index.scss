@@ -5,6 +5,7 @@
     font-size: $font-size-lg;
     text-transform: uppercase;
   }
+  //text about printi
   .org-about-printi-text {
     display: flex;
     flex-direction: column;
@@ -37,5 +38,48 @@
         }
       }
     }
+  }
+  //icon about mentions
+  .org-about-printi-mentions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title-printi-mentions {
+      font-family: $font-family-open-sans-bold;
+      font-size: $font-size-xs;
+      text-transform: uppercase;
+    }
+    .mol-about-mentions {
+      max-width: 100%;
+      margin: 0 20rem;
+      .atm-icon-mentions {
+        width: calc(100% * (1/2) - 5rem);
+        margin: 0 0 0 10rem;
+        color: #151617;
+        display: inline-block;
+        flex-grow: 1;
+        //width: 100%;
+        margin-top: 1.2rem;
+        position: relative;
+        transition: 0.3s linear;
+        .qrk-icon {
+          order: 0.1rem solid #dbdddf;
+          border-radius: 0.3rem;
+          background-color: #fff;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          max-width: 100%;
+        }
+        &:nth-of-type(2n-1) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+  //timeline
+  .org-timeline-printi {
+    background-color: $color-white;
   }
 }

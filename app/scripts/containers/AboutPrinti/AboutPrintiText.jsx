@@ -27,11 +27,51 @@ export class AboutPrintiText extends React.Component {
       </div>
     );
   }
+  renderPrintiMentioned() {
+    return (
+      <div className="org-about-printi-mentions">
+        <h4 className="title-printi-mentions">fomos destacados aqui:</h4>
+        <div className="mol-about-mentions">
+          <div className="atm-icon-mentions">
+            <div className="qrk-icon">
+              1
+            </div>
+          </div>
+          <div className="atm-icon-mentions">
+            <div className="qrk-icon">
+              2
+            </div>
+          </div>
+          <div className="atm-icon-mentions">
+            <div className="qrk-icon">
+              3
+            </div>
+          </div>
+          <div className="atm-icon-mentions">
+            <div className="qrk-icon">
+              4
+            </div>
+          </div>
+          <div className="atm-icon-mentions">
+            <div className="qrk-icon">
+              5
+            </div>
+          </div>
+          <div className="atm-icon-mentions">
+            <div className="qrk-icon">
+              6
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   render() {
     return (
-      <div>
+      <div className="container">
         {this.renderAbout()}
+        {this.renderPrintiMentioned()}
       </div>
     );
   }
