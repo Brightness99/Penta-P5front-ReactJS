@@ -65,6 +65,9 @@ export EyeIcon from './Eye';
 export CloudIcon from './CloudIcon';
 export RepurchaseIcon from './RepurchaseIcon';
 export WatchIcon from './WatchIcon';
+export BarCodeFileIcon from './BarCodeFile';
+export ImageFileIcon from './ImageFile';
+export ReceiptFileIcon from './ReceiptFile';
 
 // Temporary
 export AngleRightIcon from './AngleRight';
