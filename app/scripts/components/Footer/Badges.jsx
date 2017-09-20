@@ -3,61 +3,60 @@
 // TODO: Add vendor scripts to open the certificates
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 type Props = {
   locale: {
-    certificates: LocaleFooterImages,
-    support: LocaleFooterImages,
-    payment_methods: LocaleFooterImages,
+    SUPPORT: string,
+    PAYMENT_METHODS: string,
+    SELOS_RECLAME: string,
+    security: {},
   },
 };
 
 const Badges = (props: Props) => {
-  const { locale: { certificates, payment_methods, support } } = props;
+  const { locale: { SUPPORT, PAYMENT_METHODS, security } } = props;
 
   return (
     <ul className="app__footer__badges container">
       <li className="app__footer__badges-item">
-        <span className="app__footer__badges-title">{certificates.TITLE}</span>
+        <span className="app__footer__badges-title">{security.SAFE_SITE}</span>
         <ul className="app__footer__badges-images">
           <li className="app__footer__badges-certificates">
-            <Link to="#">
+            <NavLink to="#">
               <img src={require('assets/media/images/certisign.png')} alt="Certisign" />
-            </Link>
+            </NavLink>
           </li>
           <li className="app__footer__badges-certificates">
-            <Link to="#">
+            <NavLink to="#">
               <img
                 className="norton"
                 src={'https://seal.websecurity.norton.com/getseal?' +
                 'at=0&sealid=2&dn=www.printi.com.br&lang=pt&tpt=transparent'}
                 alt="Norton Secured"
               />
-            </Link>
+            </NavLink>
           </li>
           <li className="app__footer__badges-certificates">
-            <Link to="#">
+            <NavLink to="#">
               <img src={require('assets/media/images/google.png')} alt="Google Safe Browsing" />
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </li>
       <li className="app__footer__badges-item">
-        <span className="app__footer__badges-title">{support.TITLE}</span>
+        <span className="app__footer__badges-title">{SUPPORT}</span>
         <ul className="app__footer__badges-images">
-          {support.images.map((d) => (
-            <li key={d.SRC}>
-              <Link to={d.URL} target="_blank" title={d.TITLE}>
-                <img src={require('assets/media/images/endeavor.png')} alt={d.ALT} />
-              </Link>
-            </li>
-          ))}
+          <li>
+            <NavLink to="https://endeavor.org.br" target="_blank" title="Endeavour">
+              <img src={require('assets/media/images/endeavor.png')} alt="Endeavour" />
+            </NavLink>
+          </li>
         </ul>
       </li>
       <li className="app__footer__badges-item">
-        <span className="app__footer__badges-title">{payment_methods.TITLE}</span>
+        <span className="app__footer__badges-title">{PAYMENT_METHODS}</span>
         <ul className="app__footer__badges-images">
           <li className="app__footer__badges-payments">
             <img src={require('assets/media/svg/payment_visa.svg')} alt="Visa" />
