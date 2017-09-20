@@ -69,6 +69,8 @@ export WatchIcon from './WatchIcon';
 // Temporary
 export AngleRightIcon from './AngleRight';
 export AngleLeftIcon from './AngleLeft';
+export OneFileIcon from './OneFileIcon';
+export MultipleFilesIcon from './MultipleFilesIcon';
 
 // new definitive icons
 export AngleDownIcon from './_AngleDown';

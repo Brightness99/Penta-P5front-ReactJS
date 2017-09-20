@@ -108,7 +108,7 @@ export class Upload extends React.Component {
   };
 
   renderAvailableStrategies = () => {
-    const availableStrategies = [1, 4];
+    const availableStrategies = [1, 2, 3, 4, 5];
 
     return availableStrategies.map(
       (strategy) => (
