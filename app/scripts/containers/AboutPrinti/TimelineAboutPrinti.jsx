@@ -1,6 +1,8 @@
 // @flow
-// https://codyhouse.co/demo/vertical-timeline/index.html
+
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { TransitionGroup } from 'react-transition-group';
 
 export class TimelineAboutPrinti extends React.Component {
   render() {
@@ -14,7 +16,6 @@ export class TimelineAboutPrinti extends React.Component {
             <span className="atm-line-timeline" />
             <div className="atm-card-timeline">
               <span className="qrk-number-card">1</span>
-
               <div className="qrk-text-card">
                 <div className="bsn-title-card">
                   <p className="title-data">10 de junho 2012</p>
@@ -30,7 +31,6 @@ export class TimelineAboutPrinti extends React.Component {
 
             <div className="atm-card-timeline">
               <span className="qrk-number-card">2</span>
-
               <div className="qrk-text-card">
                 <div className="bsn-title-card">
                   <p className="title-data">10 de junho 2012</p>
@@ -46,7 +46,6 @@ export class TimelineAboutPrinti extends React.Component {
 
             <div className="atm-card-timeline">
               <span className="qrk-number-card">3</span>
-
               <div className="qrk-text-card">
                 <div className="bsn-title-card">
                   <p className="title-data">10 de junho 2012</p>
@@ -62,7 +61,6 @@ export class TimelineAboutPrinti extends React.Component {
 
             <div className="atm-card-timeline">
               <span className="qrk-number-card">4</span>
-
               <div className="qrk-text-card">
                 <div className="bsn-title-card">
                   <p className="title-data">10 de junho 2012</p>
@@ -76,7 +74,9 @@ export class TimelineAboutPrinti extends React.Component {
               </div>
             </div>
           </div>
-
+          <div className="org-btn-more">
+            <Link to="#" className="btn-default btn-third btn-xs">Carregar mais histórias (4)</Link>
+          </div>
         </div>
       </div>
     );
