@@ -3,6 +3,7 @@
 @import "creditCard";
 @import "changepayment";
 @import "briefing";
+@import "mydata";
 
 .container-myaccount {
   @include lg {
@@ -1140,10 +1141,20 @@
       margin-top: 1.4rem;
     }
   }
-  .title-adresses {
-    margin: 2.2rem 0 1.6rem 0;
-    @include lg {
-      margin: 3.2rem 0 2.7rem 0;
+  .header-accordion {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    .title-addresses {
+      // margin: 2.2rem 0 1.6rem 0;
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-h4;
+      color: $color-black;
+      margin-bottom: 0;
+      @include lg {
+        // margin: 3.2rem 0 2.7rem 0;
+      }
     }
   }
   >div { 
@@ -1178,13 +1189,15 @@
   .box-addressDelivery {
     display: flex;
     flex-direction: row;
+    flex-direction: column;
     flex-wrap:nowrap;
-    overflow-x: auto;
+    //overflow-x: auto;
     margin-bottom: 0;
     @include lg {
       flex-wrap: wrap;
       overflow-x: hidden;
-      margin: 0 0 3.7rem 0;
+      flex-direction: row;
+      margin: 1rem 0 3.7rem 0;
     }
     > div {
       border: 1px solid #dbdddf;
@@ -1206,6 +1219,10 @@
       }
       &:nth-of-type(2n){
         margin-right: 0;
+        margin-left: 0;
+        @include lg {
+          margin-right: 0;
+        }
       }
       .headerTitle-address {
         display: flex;
