@@ -7,9 +7,10 @@
   }
   //text about printi
   .org-about-printi-text {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-top: 2rem;
     .title-about-printi-text {
       font-family: $font-family-nunito-light;
       font-size: $font-size-h2;
@@ -38,7 +39,7 @@
       font-size: $font-size-sm;
       @include lg {
         font-size: $font-size-lg;
-        margin: 1rem 4rem;
+        margin: 1rem 10rem;
       }
       .atm-about-printi {
         @include lg {
@@ -69,25 +70,26 @@
     }
     .mol-about-mentions {
       max-width: 100%;
-      margin: 0 20rem;
       .atm-icon-mentions {
-        width: calc(100% * (1/2) - 5rem);
-        margin: 0 0 0 10rem;
-        color: #151617;
+        width: calc((100%/2));
+        padding: 1rem 1rem;
+        color: $color-almostBlack;
         display: inline-block;
-        flex-grow: 1;
-        //width: 100%;
         margin-top: 1.2rem;
         position: relative;
         transition: 0.3s linear;
+        @include lg {
+          width: calc((100%/3));
+        }
         .qrk-icon {
-          order: 0.1rem solid #dbdddf;
+          border: 0.1rem solid $body-bg;
           border-radius: 0.3rem;
-          background-color: #fff;
+          background-color: $color-white;
           display: flex;
           align-items: center;
           flex-direction: column;
           max-width: 100%;
+          padding: 1rem 0rem;
         }
         &:nth-of-type(2n-1) {
           margin-left: 0;
@@ -142,29 +144,38 @@
           border-radius: 50%;
           width: 1rem;
           height: 1rem;
-          background-color: $body-bg;
+          background-color: transparent;
           position: absolute;
           left: -0.4rem;
           top: 0;
+          @include lg {
+            background-color: $body-bg;
+          }
         }
         &:after {
           content: '';
           border-radius: 50%;
           width: 1rem;
           height: 1rem;
-          background-color: $body-bg;
+          background-color: transparent;
           position: absolute;
           left: -0.4rem;
           bottom: 0;
+          @include lg {
+            background-color: $body-bg;
+          }
         }
       }
       .atm-card-timeline {
         position: relative;
         display: inline-block;
+        @include lg {
+          margin-top: -22rem;
+        }
         .qrk-number-card {
           position: absolute;
-          top: 8.3rem;
-          left: 48%;
+          top: 1rem;
+          left: 43%;
           border-radius: 50%;
           border: 0.1rem solid $body-bg;
           width: 3.8rem;
@@ -173,21 +184,33 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          @include lg {
+            top: 8.1rem;
+            left: 48%;
+          }
           &:after {
             content: '';
             width: 3rem;
             height: 0.1rem;
-            background-color: $body-bg;
+            background-color: transparent;
             position: absolute;
             right: -3rem;
             top: 54%;
+            @include lg {
+              background-color: $body-bg;
+            }
           }
         }
         .qrk-text-card {
           background-color: $body-bg;
           border-radius: 0.3rem;
           position: relative;
-          width: 46%;
+          width: 100%;
+          margin-top: 6rem;
+          @include lg  {
+            width: 46%;
+            margin-top: 0;
+          }
           .bsn-title-card {
             padding: 2.4rem;
             p {
@@ -220,6 +243,11 @@
             }
           }
         }
+        &:first-of-type {
+          @include lg {
+            margin-top: 0;
+          }
+        }
         &:nth-of-type(2n-1) {
           .qrk-text-card {
             float: right;
@@ -233,5 +261,10 @@
         }
       }
     }
+  }
+  .org-btn-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

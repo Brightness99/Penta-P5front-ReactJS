@@ -34,32 +34,32 @@ export class AboutPrintiText extends React.Component {
         <div className="mol-about-mentions">
           <div className="atm-icon-mentions">
             <div className="qrk-icon">
-              1
+              <img src={require('assets/media/images/forbes-logo.png')} alt="Forbes" />
             </div>
           </div>
           <div className="atm-icon-mentions">
             <div className="qrk-icon">
-              2
+              <img src={require('assets/media/images/valor-economico.png')} alt="Valor Econômico" />
             </div>
           </div>
           <div className="atm-icon-mentions">
             <div className="qrk-icon">
-              3
+              <img src={require('assets/media/images/info-exame.png')} alt="Exame" />
             </div>
           </div>
           <div className="atm-icon-mentions">
             <div className="qrk-icon">
-              4
+              <img src={require('assets/media/images/uol-logo.png')} alt="Uol" />
             </div>
           </div>
           <div className="atm-icon-mentions">
             <div className="qrk-icon">
-              5
+              <img src={require('assets/media/images/tech-crunch.png')} alt="Tech Crunch" />
             </div>
           </div>
           <div className="atm-icon-mentions">
             <div className="qrk-icon">
-              6
+              <img src={require('assets/media/images/inc-logo.png')} alt="INC" />
             </div>
           </div>
         </div>
