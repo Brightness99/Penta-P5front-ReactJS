@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render properly 1`] =
+`"<section>
+    <section>
+      <h2>Exclusive service</h2>
+      <ul>
+        <li>They order more than R $ 5 thousand</li>
+        <li>They have more than 50 employees</li>
+        <li>Have more than 10 units or franchises</li>
+        <section>
+          <button>left</button>
+          <button>1</button>
+          <button>2</button>
+          <button>right</button>
+          </section>
+    </section>"`;
