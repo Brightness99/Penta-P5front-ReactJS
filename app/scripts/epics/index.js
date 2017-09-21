@@ -30,6 +30,8 @@ import {
   cartUpsellingAddFetch
 } from './cart';
 
+import { contactFormSend } from './contact-form';
+
 export default combineEpics(
   userNewsletter,
   productsFetch,
@@ -52,5 +54,6 @@ export default combineEpics(
   cartUpdateFetch,
   cartUpsellingDateFetch,
   cartUpsellingAddFetch,
-  localeFetch
+  localeFetch,
+  contactFormSend,
 );

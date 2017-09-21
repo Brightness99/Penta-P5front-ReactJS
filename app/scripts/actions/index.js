@@ -11,4 +11,5 @@ export * from './cart';
 export * from './locale';
 export * from './products';
 export * from './settings';
+export * from './contact-form';
 export * from './user';
