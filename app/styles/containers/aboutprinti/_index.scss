@@ -81,5 +81,50 @@
   //timeline
   .org-timeline-printi {
     background-color: $color-white;
+    padding: 4rem 0;
+    margin-bottom: 2rem;
+    .mol-timeline {
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 18px;
+        height: 100%;
+        width: 4px;
+        background: #d7e4ed;
+        left: 50%;
+        margin-left: -2px;
+      }
+      .atm-card-timeline {
+        position: relative;
+        display: inline-block;
+        .qrk-number-card {
+          position: absolute;
+          top: 0;
+          border-radius: 50%;
+          border: 0.1rem solid $body-bg;
+          width: 3.8rem;
+          height: 3.8rem;
+          left: 50%;
+          margin-left: -30px;
+        }
+        .qrk-text-card {
+          width: 46%;
+          background-color: yellow;
+          position: relative;
+        }
+        &:nth-child(2n-1) {
+          .qrk-text-card {
+            float:right;
+          }
+        }
+      }
+    }
   }
 }
+
+
+
+
+//In this sprint, i made more pages in new front-end, the stylesheet and structure. 
+//So, i made: templates, referral, cloud, cloud editor,print press, glossary, print guide, and i am doing about printi page. 
