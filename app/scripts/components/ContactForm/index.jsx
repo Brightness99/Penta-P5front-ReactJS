@@ -72,12 +72,12 @@ class ContactForm extends React.PureComponent<Props, State> {
   render() {
     return (
       <section className="layout-contact__form">
-        <BlockTitle>Quer Saber Mais?</BlockTitle>
-        <h5 className="contact__form-subtitle">Preencha os campos abaixo:</h5>
+        <BlockTitle>{'Quer Saber Mais?'}</BlockTitle>
+        <h5 className="contact__form-subtitle">{'Preencha os campos abaixo:'}</h5>
         <form className="module-contact__form__container" onSubmit={(e) => this.handleSubmit(e)}>
           <InputEmail
             name="email"
-            placeholder="E-mail"
+            placeholder={'E-mail'}
             className="is-full__form-line"
             showLabel
             onValidate={this.handleValidatedInput}
@@ -87,7 +87,7 @@ class ContactForm extends React.PureComponent<Props, State> {
             id="first_name"
             name="first_name"
             type="text"
-            placeholder="Nome"
+            placeholder={'Nome'}
             pattern={/.+/}
             className="is-half__form-line"
             showLabel
@@ -147,11 +147,11 @@ class ContactForm extends React.PureComponent<Props, State> {
             required
             onChange={this.handleValidatedInput}
           >
-            <option>Até R$ 5.000 ao mês</option>
-            <option>De R$ 5.001 a R$ 10.000 ao mês</option>
-            <option>De R$ 10.001 a R$ 50.000 ao mês</option>
-            <option>De R$ 50.001 a R$ 100.000 ao mês</option>
-            <option>Mais de R$ 100.000 ao mês</option>
+            <option>{'Até R$ 5.000 ao mês'}</option>
+            <option>{'De R$ 5.001 a R$ 10.000 ao mês'}</option>
+            <option>{'De R$ 10.001 a R$ 50.000 ao mês'}</option>
+            <option>{'De R$ 50.001 a R$ 100.000 ao mês'}</option>
+            <option>{'Mais de R$ 100.000 ao mês'}</option>
           </Select>
           <Select
             id="position"
@@ -162,22 +162,22 @@ class ContactForm extends React.PureComponent<Props, State> {
             required
             onChange={this.handleValidatedInput}
           >
-            <option value="Assistente">Assistente</option>
-            <option value="Auxiliar">Auxiliar</option>
-            <option value="Analista">Analista</option>
-            <option value="Coordenador/Supervisor">Coordenador/Supervisor</option>
-            <option value="Gerente">Gerente</option>
-            <option value="Diretor">Diretor</option>
-            <option value="Presidente/Dono">Presidente/Dono</option>
-            <option value="Consultor">Consultor</option>
-            <option value="Outros">Outros</option>
+            <option>{'Assistente'}</option>
+            <option>{'Auxiliar'}</option>
+            <option>{'Analista'}</option>
+            <option>{'Coordenador/Supervisor'}</option>
+            <option>{'Gerente'}</option>
+            <option>{'Diretor'}</option>
+            <option>{'Presidente/Dono'}</option>
+            <option>{'Consultor'}</option>
+            <option>{'Outros'}</option>
           </Select>
           <Button
             type="submit"
             kind="success"
             disabled={!this.state.canSubmit}
           >
-            Entrar
+            {'Entrar'}
           </Button>
         </form>
       </section>

@@ -50,12 +50,6 @@ export default {
         ...action.payload,
       };
     },
-    [ContactFormConstants.CART_FETCH_REQUEST](state) {
-      return {
-        ...state,
-        isRunning: true,
-      };
-    },
     [ContactFormConstants.CONTACT_FORM_SUBMIT_SUCCESS](state, action) {
       return {
         ...state,
