@@ -4,7 +4,7 @@ import { AppConstants, ContactFormConstants } from 'constants/index';
 export function contactFormSend(action$) {
   return action$.ofType(ContactFormConstants.CONTACT_FORM_SUBMIT)
   .switchMap(action => {
-    const endpoint = `/v1/customers/verify-email/${action.payload.email}`;
+    const endpoint = `/v1/customers/verify-email/${action.payload.email.value}`;
 
     return rxAjax({
       endpoint,

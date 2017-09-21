@@ -119,7 +119,7 @@ export class InputRegex extends React.Component {
 
     return (
       <Input
-        className={`${cx(valid ? 'valid' : 'invalid', dirty && 'dirty')} ${className}`}
+        className={cx(valid ? 'valid' : 'invalid', dirty && 'dirty', className)}
         id={id}
         name={name}
         placeholder={placeholder}
