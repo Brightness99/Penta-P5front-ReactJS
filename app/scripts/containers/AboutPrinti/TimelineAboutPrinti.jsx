@@ -41,6 +41,14 @@ export class TimelineAboutPrinti extends React.Component {
                   <p className="title-text-card">CRAS JUSTO DAPIBUS</p>
                   <p className="text-card">Nulla vitae elit libero, a pharetra augue. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
                 </div>
+                <div className="bsn-text-card">
+                  <p className="title-text-card">CRAS JUSTO DAPIBUS</p>
+                  <p className="text-card">Nulla vitae elit libero, a pharetra augue. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                  <Link to="#" className="link-ler-mais">Ler mais</Link>
+                </div>
+                <div className="bsn-img-card">
+                  <img src={require('assets/media/images/valor-economico.png')} alt="Valor Econômico" />
+                </div>
               </div>
             </div>
 

@@ -173,16 +173,20 @@
           margin-top: -22rem;
         }
         .qrk-number-card {
+          align-items: center;
+          background-color: $color-white;
+          border-radius: 50%;
+          border: 0.1rem solid $body-bg;
+          color: $color-almostBlack;
+          display: flex;
+          font-weight: bold;
+          font-family: $font-family-open-sans-bold;
+          font-size: $font-size-xs;
           position: absolute;
           top: 1rem;
           left: 43%;
-          border-radius: 50%;
-          border: 0.1rem solid $body-bg;
           width: 3.8rem;
           height: 3.8rem;
-          background-color: $color-white;
-          display: flex;
-          align-items: center;
           justify-content: center;
           @include lg {
             top: 8.1rem;
@@ -207,6 +211,7 @@
           position: relative;
           width: 100%;
           margin-top: 6rem;
+          z-index: 2;
           @include lg  {
             width: 46%;
             margin-top: 0;
@@ -241,6 +246,31 @@
               font-family: $font-family-open-sans-light;
               color: $color-lightGray;
             }
+            .link-ler-mais {
+              font-family: $font-family-open-sans-regular;
+              font-size: $font-size-xs;
+              margin-top: 1rem;
+              display: flex;
+              align-items: center;
+              &:after {
+                content: "";
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 0.5rem;
+                width: 0; 
+                height: 0; 
+              
+                border-top: 0.5rem solid transparent;
+                border-bottom: 0.5rem solid transparent;
+                border-left: 0.5rem solid $color-printi-blue;
+              }
+              &:hover {
+                color: $color-printi-blue;
+              }
+            }
+          }
+          .bsn-img-card {
+            padding: 2.4rem;
           }
         }
         &:first-of-type {
