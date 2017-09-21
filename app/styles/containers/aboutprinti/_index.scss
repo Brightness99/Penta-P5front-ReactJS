@@ -12,29 +12,46 @@
     align-items: center;
     .title-about-printi-text {
       font-family: $font-family-nunito-light;
-      font-size: $font-size-xxx;
+      font-size: $font-size-h2;
       font-weight: 300;
       text-transform: none;
       padding-bottom: 0;
+      letter-spacing: -0.08rem;
+      text-align: center;
+      @include lg {
+        font-size: $font-size-xxx;
+      }
     }
     .subtitle-about-printi-text {
       color: $color-lightGray;
       font-family: $font-family-open-sans-light;
-      font-size: $font-size-lg;
+      font-size: $font-size-xs;
       font-style: italic;
+      text-align: center;
+      @include lg {
+        font-size: $font-size-lg;
+      }
     }
     .mol-about-printi-text {
       color: $color-lightGray;
       font-family: $font-family-open-sans-light;
-      font-size: $font-size-lg;
-      margin: 1rem 14rem;
+      font-size: $font-size-sm;
+      @include lg {
+        font-size: $font-size-lg;
+        margin: 1rem 4rem;
+      }
       .atm-about-printi {
-        margin: 3rem 13rem;
+        @include lg {
+          margin: 3rem 13rem;
+        }
         .p-blue {
           color: $color-printi-blue;
-          font-size: $font-size-il;
+          font-size: $font-size-sm;
           font-style: italic;
           font-weight: 300;
+          @include lg {
+            font-size: $font-size-il;
+          }
         }
       }
     }
@@ -81,50 +98,140 @@
   //timeline
   .org-timeline-printi {
     background-color: $color-white;
+    margin: 2rem 0;
     padding: 4rem 0;
-    margin-bottom: 2rem;
+    .title-timeline {
+      font-family: $font-family-nunito-light;
+      font-size: $font-size-h2;
+      font-weight: 300;
+      letter-spacing: -0.08rem;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      text-transform: none;
+      text-align: center;
+      @include lg {
+        font-size: $font-size-xxx;
+      }
+    }
+    .subtitle-timeline {
+      color: $color-lightGray;
+      font-family: $font-family-open-sans-light;
+      font-size: $font-size-xs;
+      font-style: italic;
+      text-align: center;
+      @include lg {
+        font-size: $font-size-lg;
+      }
+    }
     .mol-timeline {
-      &:before {
-        content: '';
+      margin: 4rem 0;
+      position: relative;
+      .atm-line-timeline {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: absolute;
         top: 0;
-        left: 18px;
-        height: 100%;
-        width: 4px;
-        background: #d7e4ed;
         left: 50%;
+        height: 100%;
+        width: 0.1rem;
+        background: $body-bg;
         margin-left: -2px;
+        &:before {
+          content: '';
+          border-radius: 50%;
+          width: 1rem;
+          height: 1rem;
+          background-color: $body-bg;
+          position: absolute;
+          left: -0.4rem;
+          top: 0;
+        }
+        &:after {
+          content: '';
+          border-radius: 50%;
+          width: 1rem;
+          height: 1rem;
+          background-color: $body-bg;
+          position: absolute;
+          left: -0.4rem;
+          bottom: 0;
+        }
       }
       .atm-card-timeline {
         position: relative;
         display: inline-block;
         .qrk-number-card {
           position: absolute;
-          top: 0;
+          top: 8.3rem;
+          left: 48%;
           border-radius: 50%;
           border: 0.1rem solid $body-bg;
           width: 3.8rem;
           height: 3.8rem;
-          left: 50%;
-          margin-left: -30px;
+          background-color: $color-white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:after {
+            content: '';
+            width: 3rem;
+            height: 0.1rem;
+            background-color: $body-bg;
+            position: absolute;
+            right: -3rem;
+            top: 54%;
+          }
         }
         .qrk-text-card {
-          width: 46%;
-          background-color: yellow;
+          background-color: $body-bg;
+          border-radius: 0.3rem;
           position: relative;
-        }
-        &:nth-child(2n-1) {
-          .qrk-text-card {
-            float:right;
+          width: 46%;
+          .bsn-title-card {
+            padding: 2.4rem;
+            p {
+              margin-bottom: 0;
+            }
+            .title-data {
+              font-family: $font-family-open-sans-bold;
+              font-size: $font-size-xs;
+              color: $color-printi-blue;
+            }
+            .title-card {
+              color: $color-black;
+              font-family: $font-family-nunito-regular;
+              font-size: $font-size-il;
+            }
           }
+          .bsn-text-card {
+            font-family: $font-family-open-sans-bold;
+            font-size: $font-size-base;
+            padding: 2.4rem;
+            p {
+              margin-bottom: 0;
+            }
+            .title-text-card {
+              margin-bottom: 1rem;
+            }
+            .text-card {
+              font-family: $font-family-open-sans-light;
+              color: $color-lightGray;
+            }
+          }
+        }
+        &:nth-of-type(2n-1) {
+          .qrk-text-card {
+            float: right;
+          }
+        }
+        &:nth-of-type(2n)
+          .qrk-number-card {
+            &:after {
+              left: -3rem;
+            }
         }
       }
     }
   }
 }
-
-
-
-
-//In this sprint, i made more pages in new front-end, the stylesheet and structure. 
-//So, i made: templates, referral, cloud, cloud editor,print press, glossary, print guide, and i am doing about printi page. 
