@@ -94,3 +94,6 @@ export ArrowsCloud from './ArrowsCloud';
 export InvoiceIcon from './InvoiceIcon';
 export SpecialProjectsIcon from './SpecialProjectsIcon';
 export AccountManagerIcon from './AccountManagerIcon';
+export ChatIcon from './ChatIcon';
+export PhoneIcon from './PhoneIcon';
+export PaperAirplaneFlying from './PaperAirplaneFlying';
