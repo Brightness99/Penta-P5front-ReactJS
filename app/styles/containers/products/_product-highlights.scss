@@ -1,0 +1,182 @@
+.org-product-highlights {
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 4rem;
+  padding: 4rem 0;
+
+  .slick-slider {
+    margin-bottom: 5.9rem;
+    width: 100%;
+  }
+
+  .container {
+    @include center-child-flex;
+  }
+
+  @include lg {
+    padding-top: 5.2rem;
+    margin-top: -5.2rem;
+  }
+}
+
+.mol-product-highlights {
+  &-header {
+    color: $color-almostBlack;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2.5rem;
+    text-align: center;
+  }
+
+  &-body {
+    @include center-child-flex;
+    flex-direction: column;
+
+    .atm-button-rounded {
+      width: calc(100% - 3rem);
+
+      @include lg {
+        width: auto;
+      }
+    }
+
+    @include lg {
+      align-items: flex-start;
+      display: inline-flex;
+      padding-left: 7rem;
+    }
+  }
+
+  &-carousel {
+    @include lg {
+      display: inline-flex;
+      height: 42rem;
+      position: relative;
+      width: 53rem;
+
+      .atm-carousel-arrow {
+        &--next{
+          right: 0;
+        }
+
+        &--prev{
+          left: 0;
+        }
+      }
+
+      .slick-slider {
+        margin-bottom: 0;
+        width: 100%;
+      }
+
+      .slick-slide {
+        height: 100%;
+        width: 100%;
+
+        img {
+          display: block;
+          height: 42rem;
+          width: 53rem;
+        }
+      }
+    }
+  }
+}
+
+.atm-product-highlights {
+  &-big {
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-xxl;
+    font-weight: 300;
+    letter-spacing: -0.06rem;
+    line-height: 0.94;
+
+    &--blue {
+      color: $color-printi-blue;
+      font-size: $font-size-xxl;
+    }
+
+    @include lg {
+      font-size: $font-size-xxx;
+      letter-spacing: -0.08rem;
+      line-height: 0.75;
+      margin-left: -0.1rem;
+    }
+  }
+
+  &-description {
+    font-size: $font-size-sm;
+    line-height: 1.43;
+    margin: 0;
+    padding: 2rem 0;
+
+    @include lg {
+      font-family: $font-family-nunito-regular;
+      font-size: $font-size-lg;
+      padding: 1rem 0;
+    }
+  }
+
+  &-price {
+    @include center-child-flex;
+    color: $color-lightGray;
+    font-size: $font-size-xs;
+    line-height: 1;
+    padding-bottom: 3rem;
+
+    @include lg {
+      align-items: flex-start;
+      flex-direction: column;
+
+      > span {
+        padding-top: 1rem;
+      }
+    }
+
+    .atm-product-highlights-big {
+      padding-left: 0.8rem;
+
+      @include lg {
+        padding-left: 0;
+        padding-right: 0.8rem;
+      }
+    }
+  }
+
+  &-spec {
+    color: $color-gray;
+    font-family: $font-family-open-sans-light;
+    font-size: $font-size-xs;
+    line-height: 1.25;
+    padding: 0.8rem 2.4rem 0;
+
+    @include lg {
+      text-align: left;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &-category {
+    color: $color-printi-blue;
+    font-weight: bold;
+    line-height: 1.67;
+    letter-spacing: 0.18rem;
+    padding-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  &-list {
+    color: #6a6f7a;
+    font-size: $font-size-xs;
+    padding-bottom: 4rem;
+    text-align: left;
+
+    > * {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

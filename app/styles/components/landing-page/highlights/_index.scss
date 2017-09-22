@@ -1,5 +1,5 @@
 .container-highlight {
-  margin-bottom: 7.5rem;
+  margin-bottom: 6.5rem;
 
   .boxes-highlight {
     margin: 0 -1rem;
@@ -52,5 +52,13 @@
         }
       }
     }
+  }
+
+  .atm-carousel-arrow--prev {
+    left: -5rem;
+  }
+
+  .atm-carousel-arrow--next {
+    right: -5rem;
   }
 }

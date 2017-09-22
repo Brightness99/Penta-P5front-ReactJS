@@ -16,8 +16,6 @@ const TabNav = (props: Props) => {
   const handleClick = (ev) => {
     const { onClick } = props;
 
-    console.log(onClick);
-
     if (typeof onClick === 'function') {
       onClick(ev);
     }

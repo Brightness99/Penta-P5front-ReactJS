@@ -8,6 +8,7 @@ import { getScreenSize } from 'utils/helpers';
 import { updateBrowserOptions } from 'actions';
 import Router from 'modules/ReduxRouter';
 
+import Footer from 'components/Footer';
 import Config from 'containers/Config';
 import Home from 'containers/Home';
 import Error404 from 'containers/Errors/404';
@@ -17,13 +18,18 @@ import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 import Upload from 'containers/Upload';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
+import Success from 'containers/Success';
+import CorporateSales from 'containers/CorporateSales';
+import FileMount from 'containers/FileMount';
+import PrintGuide from 'containers/PrintGuide';
+import PrintiPress from 'containers/PrintiPress';
+import AboutPrinti from 'containers/AboutPrinti';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   cart: {},
   dispatch: () => {},
   router: RouterStore,
@@ -74,16 +80,22 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
+                      <Route path="/montagem-de-arquivos" component={FileMount} />
+                      <Route path="/guia-de-impressao" component={PrintGuide} />
                       <Route path="/glossario" component={Glossary} />
+                      <Route path="/success" component={Success} />
+                      <Route path="/imprensa" component={PrintiPress} />
+                      <Route path="/sobre-a-printi" component={AboutPrinti} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route path="/:slug/upload/:itemId" component={Upload} />
                       <Route exact path="/404" component={Error404} />
                       <Route path="/cloud" component={CloudCompany} />
+                      <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route component={Error404} />
                     </Switch>
                   </main>
-                  <Footer screenSize={app.screenSize} />
+                  <Footer />
                 </div>
               )}
             />

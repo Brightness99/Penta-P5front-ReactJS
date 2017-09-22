@@ -15,7 +15,7 @@ import {
   settingsMatrixFetch,
   prepressDownloadFetch
 } from './settings';
-
+import { localeFetch } from './locale';
 import {
   cartBasicFetch,
   cartFetch,
@@ -29,6 +29,8 @@ import {
   cartUpsellingDateFetch,
   cartUpsellingAddFetch
 } from './cart';
+
+import { contactFormSend } from './contact-form';
 
 export default combineEpics(
   userNewsletter,
@@ -51,5 +53,7 @@ export default combineEpics(
   cartPickupFetch,
   cartUpdateFetch,
   cartUpsellingDateFetch,
-  cartUpsellingAddFetch
+  cartUpsellingAddFetch,
+  localeFetch,
+  contactFormSend,
 );

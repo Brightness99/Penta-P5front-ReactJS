@@ -9,7 +9,7 @@ import SignUpBlock from './SignUpBlock';
 import SocialBlock from './SocialBlock';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   locale: {},
   dispatch: () => {},

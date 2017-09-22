@@ -1,0 +1,54 @@
+.container-cloudTools {
+  background-color: $color-white;
+  padding: 1rem;
+  @include lg {
+    padding: 3rem;
+  }
+  .title-corporateSales {
+    line-height: 3rem;    
+  }
+}
+
+.subtitle-cloudTools {
+  font-family: $font-family-nunito-light;
+  font-size: $font-size-h2;
+  @include lg {
+    font-size: $font-size-xxx;
+  }
+}
+
+.text-cloudTools {
+  font-size: $font-family-open-sans-light;
+  font-size: $font-size-base;
+  line-height: 3rem;
+}
+
+.boxes-cloudTools {
+  display: inline-flex;
+  margin-top: 3rem;
+  flex-direction: column;
+  @include lg {
+    margin-top: 5rem;
+    flex-direction: row;
+  }
+  .box-cloudTools {
+    flex: 1;
+    margin-bottom: 2rem;
+    &:first-of-type {
+      @include lg {
+        box-sizing: border-box;
+        padding: 0 15rem 0 0;
+      }
+    }
+    .link-aboutCloud {
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-xs;
+      margin-left: 0;
+      text-align: center;
+      text-decoration: underline;
+      @include lg {
+        margin-left: 3rem;
+      }
+    }
+  }
+}

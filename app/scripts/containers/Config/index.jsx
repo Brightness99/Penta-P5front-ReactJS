@@ -20,7 +20,7 @@ import MatrixBlock from './Matrix';
 import Warning from './Warning';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   dispatch: () => {},
   locale: {},
   products: ProductStore,

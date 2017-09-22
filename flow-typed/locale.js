@@ -22,9 +22,56 @@ declare type HeaderLocaleType = {
   SIGN_UP: string,
 };
 
+declare type ProductLandingPageLocaleType = {
+  common: {
+    GET_STARTED: string,
+    CONFIGURE_PRODUCT: string,
+    UNAVAILABLE_PRODUCT: string,
+    UNAVAILABLE_TITLE: string,
+    EMAIl: string,
+    SEND: string,
+  },
+  description: {
+    STARTING_FROM: string,
+    NEXT_PAGE: string,
+  },
+  informations: {
+    TITLE: string,
+    HINTS: string,
+    HOW_TO_USE: string,
+  },
+  advantages: {
+    TITLE: string,
+    OTHER_ONLINE_PRINTING_COMPANIES: string,
+    TRADITIONAL_PRINTING_COMPANIES: string,
+    LIST: string[],
+    CHECK_AVAILABLE_PRODUCTS: string,
+  },
+  graphic_plant: {
+    OVER_TITLE: string,
+    TITLE: string,
+    PARAGRAPH: string,
+    LIST: string[],
+  },
+  print: {
+    TITLE: string,
+    QUESTIONS: string,
+  },
+  reviews: {
+    TITLE: string,
+    SUB_TITLE: string,
+    SUBMIT_REVIEW: string,
+  }
+};
+
+declare type PageLocaleType = {
+  product_landing_page: ProductLandingPageLocaleType,
+};
+
 declare type TranslateLocaleType = {
   common: CommonLocaleType,
   header: HeaderLocaleType,
+  page: PageLocaleType,
 };
 
 declare type LocaleType = {
