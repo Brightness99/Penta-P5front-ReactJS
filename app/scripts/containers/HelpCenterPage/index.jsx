@@ -5,6 +5,7 @@ import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 
 import RelationshipCentral from './RelationshipCentral';
+import VideosPrinti from './VideosPrinti';
 
 type Props = {
   app: AppStore,
@@ -36,6 +37,7 @@ export class HelpCenterPage extends React.Component {
         <div className="tpl-help-center">
           <div className="container">
             <h2>asdasda</h2>
+            <VideosPrinti />
             <RelationshipCentral />
           </div>
         </div>

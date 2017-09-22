@@ -8,7 +8,7 @@
           flex: 1;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          //align-items: center;
           .bsn-links-tel {
             display: flex;
             &:first-of-type {
@@ -18,6 +18,27 @@
           &:nth-of-type(2n) {
             margin: 0 2rem;
           }
+          .bsn-icon-title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            svg {
+              width: 1.5rem;
+              height: 1.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  .org-videos-printi {
+    .mol-videos-printi {
+      display: flex;
+      .atm-video {
+        flex: 1;
+        &:first-of-type {
+          flex: 2;
         }
       }
     }
