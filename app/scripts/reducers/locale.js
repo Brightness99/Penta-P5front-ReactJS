@@ -7,9 +7,6 @@
 import { REHYDRATE } from 'redux-persist/constants';
 import { createReducer, mergeDeep } from 'utils/helpers';
 import { LocaleConstants } from 'constants/index';
-import locale from 'assets/json/localeMock.json';
-
-console.log('tomar no cy', LocaleConstants);
 
 const missingLocale = {
   translate: {
@@ -22,7 +19,7 @@ const missingLocale = {
       PLACEHOLDER: 'Digite seu email...',
       BUTTON: 'inscrever',
       SUCCESS: 'E-mail cadastrado com sucesso',
-      FAILURE: 'Houve um problema ao cadastrar seu e-mail'
+      FAILURE: 'Houve um problema ao cadastrar seu e-mail',
     },
     footer: {
       links: [
@@ -85,8 +82,32 @@ const missingLocale = {
           TEXT: 'Mapa do site',
           URL: '/sitemap',
           TITLE: '',
-        }
+        },
       ],
+    },
+    page: {
+      product_settings: {
+        source: {
+          TITLE: 'Escolha a forma de criar seu produto',
+          order_source_options: [
+            {
+              source: 'upload',
+              title: 'Enviar minha arte final',
+              description: 'Faça upload de um arquivo finalizado para a impressão nos formatos suportados',
+            },
+            {
+              source: 'template',
+              title: 'Criar modelo online',
+              description: 'Escolha um design e inclua suas informações e imagens na nossa ferramenta de edição',
+            },
+            {
+              source: 'art_creation',
+              title: 'Contratar criação',
+              description: 'Contrate um profissional de design da Printi e tenha uma arte totalmente personalizada',
+            },
+          ],
+        },
+      },
     },
   },
 };

@@ -61,11 +61,70 @@ declare type ProductLandingPageLocaleType = {
     TITLE: string,
     SUB_TITLE: string,
     SUBMIT_REVIEW: string,
-  }
+  },
+};
+
+declare type ProductSettingsLocaleType = {
+  TITLE: string
+  seo: {
+    PAGE_TITLE: string,
+    META_DESCRIPTION: string,
+  },
+  BREADCRUMB_TITLE: string,
+  ADD_TO_CART: string,
+  options: {
+    TITLE: string,
+    COMBINATIONS: string,
+    MORE_INFO_TEXT: string,
+    TWO_PART_PRODUCT: string,
+    VIEW_MODE: string,
+    LIST: string,
+    PHOTOS: string,
+    CUSTOM_OPTION: string,
+  },
+  matrix: {
+    TITLE: string,
+    MORE_INFO_TEXT: string,
+    QTY_DATE_PRICE: string,
+    FREE: string,
+    SHIPPING: string,
+    QUANTITY: string,
+    BUSINESS_DAYS: string,
+    CUSTOM_QUANTITY: string,
+    ZIP_CODE_DELIVERY: string,
+    PICKUP_PLACE: string,
+  },
+  additional_options: {
+    TITLE: string,
+    MORE_INFO_TEXT: string,
+    FREE: string,
+  },
+  sidebar: {
+    TITLE: string,
+    ESTIMATED_DELIVERY: string,
+    QUANTITY: string,
+  },
+  prepress_template: {
+    TITLE: string,
+    SUB_TITLE: string,
+    ORIENTATION_CHOICE: string,
+    orientation: {
+      UNIQUE: string,
+      LANDSCAPE: string,
+      PORTRAIT: string,
+    },
+    SOFTWARE_CHOICE: string,
+  },
+  source: {
+    more_info: {
+      TEXT: string,
+    },
+  },
 };
 
 declare type PageLocaleType = {
   product_landing_page: ProductLandingPageLocaleType,
+  product_settings: ProductSettingsLocaleType,
 };
 
 declare type TranslateLocaleType = {
