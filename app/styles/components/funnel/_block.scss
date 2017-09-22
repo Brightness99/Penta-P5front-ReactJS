@@ -1,0 +1,34 @@
+.org-funnel-block {
+  background-color: $color-white;
+  margin-bottom: 2rem;
+
+  .mol-funnel-block {
+    &-header {
+      background-color: #f8f8f8;
+      display: flex;
+      padding: 2rem;
+
+      .atm-funnel-block-title {
+        align-items: center;
+        color: $color-almostBlack;
+        display: inline-flex;
+        flex-direction: column;
+        font-family: $font-family-nunito-light;
+        font-size: $font-size-xl;
+        justify-content: space-between;
+        line-height: 1;
+        margin-left: 1rem;
+        width: 100%;
+
+        @include lg {
+          flex-direction: row;
+        }
+      }
+    }
+
+    &-body {
+      display: flex;
+      padding: 2rem 3rem;
+    }
+  }
+}
