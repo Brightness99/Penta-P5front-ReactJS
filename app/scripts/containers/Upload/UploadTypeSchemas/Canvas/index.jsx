@@ -9,6 +9,7 @@ import SideTextBar from '../CimpressComponents/SideTextBar';
 import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
 import CanvasArea from '../CimpressComponents/CanvasArea';
 import Indicator from '../CimpressComponents/Indicator';
+import BottomMenuBar from '../CimpressComponents/BottomMenuBar';
 
 type Props = {
 };
@@ -229,7 +230,7 @@ export default class Canvas extends React.Component {
                 cropModalTitle: 'Defina como a imagem será recortada:',
                 cancelButton: 'Cancelar',
                 applyButton: 'Recortar',
-                previewDocumentButton: 'Prévia',
+                previewDocumentButton: 'Visualizar',
                 upload: {
                   infoText: 'Após adicionar os arquivos, arraste-os para a Área de edição.',
                 },
@@ -447,6 +448,7 @@ export default class Canvas extends React.Component {
                   <CanvasArea />
                 </div>
               </div>,
+              <BottomMenuBar />
             ]
           }
           </div>

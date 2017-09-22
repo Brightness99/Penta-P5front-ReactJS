@@ -1,0 +1,75 @@
+.upload__canvasSchema__bottomMenuBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  .dcl-widget-preview-document {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 14rem;
+    height: 4rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-printi;
+    color: $color-printi;
+    background-color: transparent;
+    border-radius: 0.3rem;
+    transition: 0.3s;
+    &:hover {
+      background-color: $color-sky-blue-light;
+    }
+    .eye_icon {
+      display: flex;
+      margin: 0 1rem 0 0;
+      svg {
+        fill: $color-printi;
+        margin: 0.3rem 0 0 0;
+      }
+    }
+    .dcl-preview-button {
+      display: flex;
+      height: auto;
+      .dcl-action-btn--preview {
+        padding: 0;
+        background-color: transparent;
+        color: $color-printi;
+        &:hover {
+          background-color: transparent;
+          color: $color-printi;
+        }
+        .dcl-action-btn__icon {
+          display: none;
+        }
+        .dcl-action-btn__description {
+          color: $color-printi;
+          font-family: $font-family-open-sans;
+          font-style: bold;
+          font-weight: 700;
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+  .bottomMenuBar_btn {
+    display: flex;
+    width: 14rem;
+    height: 4rem;
+    border-radius: 0.3rem;
+    transition: 0.3s;
+    justify-content: center;
+    &-finish {
+      border: none;
+      color: $color-white;
+      background-color: $color-green;
+      font-family: $font-family-open-sans;
+      font-style: bold;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin: 0 0 0 2rem;
+      &:hover {
+        background-color: $color-darkGreen;
+      }
+    }
+  }
+}

@@ -33,17 +33,17 @@ export class Upload extends React.Component {
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada.'
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 1'
       },
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após dsadsse período a previsão de entrega será alterada.'
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 2'
       },
       {
         type: 'error',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse perfgdgfíodo a previsão de entrega será alterada.'
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 3'
       }
     ];
 
@@ -108,7 +108,7 @@ export class Upload extends React.Component {
   };
 
   renderAvailableStrategies = () => {
-    const availableStrategies = [1, 2, 3, 4, 5];
+    const availableStrategies = [1, 2]; // 1 to 5
 
     return availableStrategies.map(
       (strategy) => (
@@ -123,7 +123,7 @@ export class Upload extends React.Component {
 
   renderUploadTypeSchema = () => {
     const globalFlags = {
-      upload_type: 'canvas',
+      upload_type: 'canvas', // can be "canvas", "scene" or "normal"
       from_my_account: false,
     };
 
