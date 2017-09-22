@@ -66,6 +66,9 @@ export CloudIcon from './CloudIcon';
 export RepurchaseIcon from './RepurchaseIcon';
 export WatchIcon from './WatchIcon';
 export EyeEmptyIcon from './EyeEmptyIcon';
+export BarCodeFileIcon from './BarCodeFile';
+export ImageFileIcon from './ImageFile';
+export ReceiptFileIcon from './ReceiptFile';
 
 // Temporary
 export AngleRightIcon from './AngleRight';
@@ -88,3 +91,6 @@ export GraficProduction from './GraficProduction';
 export ControlProduction from './ControlProduction';
 export MaterialProduction from './MaterialProduction';
 export ArrowsCloud from './ArrowsCloud';
+export InvoiceIcon from './InvoiceIcon';
+export SpecialProjectsIcon from './SpecialProjectsIcon';
+export AccountManagerIcon from './AccountManagerIcon';

@@ -1,11 +1,11 @@
 /*eslint-disable no-var, one-var, func-names, indent, prefer-arrow-callback, object-shorthand, no-console, newline-per-chained-call, one-var-declaration-per-line, prefer-template, vars-on-top */
-var path = require('path');
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
+const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
-var isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 
-var config = {
+const config = {
   context: path.join(__dirname, '../app'),
   resolve: {
     alias: {
@@ -47,16 +47,10 @@ var config = {
       {
         test: /\.(jpe?g|png|gif|svg|ico)$/i,
         use: [
-          'file?hash=sha512&digest=hex' + (isProd ? '&name=media/[name].[ext]' : ''),
           {
-            loader: 'image-webpack',
-            query: {
-              optipng: {
-                optimizationLevel: 5,
-              },
-              pngquant: {
-                quality: '75-90',
-              },
+            loader: 'file',
+            options: {
+              name: 'media/[name].[hash].[ext]',
             },
           },
         ],

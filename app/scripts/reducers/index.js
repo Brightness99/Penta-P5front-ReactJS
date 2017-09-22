@@ -11,6 +11,7 @@ import products from './products';
 import settings from './settings';
 import router from './router';
 import user from './user';
+import contactForm from './contact-form';
 
 export default {
   ...app,
@@ -21,4 +22,5 @@ export default {
   ...settings,
   ...router,
   ...user,
+  ...contactForm,
 };

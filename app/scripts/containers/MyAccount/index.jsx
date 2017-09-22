@@ -12,9 +12,10 @@ import CardsAccount from './CardsAccount';
 import TemplateModels from './TemplateModels';
 import Cloud from './Cloud';
 import Loyalty from './Loyalty';
+import CustomerData from './CustomerData';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   dispatch: () => {},
   children: any,

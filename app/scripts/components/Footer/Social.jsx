@@ -3,9 +3,16 @@
 import React from 'react';
 import SVG from 'react-inlinesvg';
 
-const Social = (props: { minified: boolean }) => (
+type Props = {
+  minified: boolean,
+  locale: {
+    SOCIAL: string,
+  }
+};
+
+const Social = (props: Props) => (
   <div className="app__footer__social">
-    {!props.minified && 'Encontre-nos em nossas redes sociais'}
+    {!props.minified && props.locale.SOCIAL}
     <div>
       <a
         className="app__footer__social-item app__footer__social-item--facebook"

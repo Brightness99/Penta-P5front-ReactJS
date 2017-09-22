@@ -6,10 +6,11 @@ import cx from 'classnames';
 import { Input } from 'quarks/Inputs';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   router: RouterStore,
   pattern: any,
   locale: {},
+  className: string,
   dispatch: () => {},
   id: string,
   name: string,
@@ -113,12 +114,12 @@ export class InputRegex extends React.Component {
   };
 
   render() {
-    const { id, name, type, showLabel, placeholder } = this.props;
+    const { id, name, type, showLabel, placeholder, className } = this.props;
     const { value, valid, dirty } = this.state;
 
     return (
       <Input
-        className={cx(valid ? 'valid' : 'invalid', dirty && 'dirty')}
+        className={cx(valid ? 'valid' : 'invalid', dirty && 'dirty', className)}
         id={id}
         name={name}
         placeholder={placeholder}
