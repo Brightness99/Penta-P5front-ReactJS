@@ -32,6 +32,8 @@ import {
 
 import { contactFormSend } from './contact-form';
 
+import { accountFetch, accountUpdate } from './account';
+
 export default combineEpics(
   userNewsletter,
   productsFetch,
@@ -56,4 +58,6 @@ export default combineEpics(
   cartUpsellingAddFetch,
   localeFetch,
   contactFormSend,
+  accountFetch,
+  accountUpdate,
 );
