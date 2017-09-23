@@ -65,6 +65,7 @@ export EyeIcon from './Eye';
 export CloudIcon from './CloudIcon';
 export RepurchaseIcon from './RepurchaseIcon';
 export WatchIcon from './WatchIcon';
+export EyeEmptyIcon from './EyeEmptyIcon';
 export BarCodeFileIcon from './BarCodeFile';
 export ImageFileIcon from './ImageFile';
 export ReceiptFileIcon from './ReceiptFile';
@@ -72,6 +73,8 @@ export ReceiptFileIcon from './ReceiptFile';
 // Temporary
 export AngleRightIcon from './AngleRight';
 export AngleLeftIcon from './AngleLeft';
+export OneFileIcon from './OneFileIcon';
+export MultipleFilesIcon from './MultipleFilesIcon';
 
 // new definitive icons
 export AngleDownIcon from './_AngleDown';

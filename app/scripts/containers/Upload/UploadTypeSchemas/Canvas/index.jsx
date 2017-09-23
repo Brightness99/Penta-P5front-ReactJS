@@ -9,20 +9,22 @@ import SideTextBar from '../CimpressComponents/SideTextBar';
 import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
 import CanvasArea from '../CimpressComponents/CanvasArea';
 import Indicator from '../CimpressComponents/Indicator';
+import BottomMenuBar from '../CimpressComponents/BottomMenuBar';
 
 type Props = {
 };
 
 type State = {
   isReady: boolean,
+  isToogleOn: boolean,
 };
 
 export default class Canvas extends React.Component {
   constructor(props: Props) {
     super(props);
-
     this.state = {
       isReady: false,
+      isToogleOn: true,
     };
   }
 
@@ -228,7 +230,7 @@ export default class Canvas extends React.Component {
                 cropModalTitle: 'Defina como a imagem será recortada:',
                 cancelButton: 'Cancelar',
                 applyButton: 'Recortar',
-                previewDocumentButton: 'Prévia',
+                previewDocumentButton: 'Visualizar',
                 upload: {
                   infoText: 'Após adicionar os arquivos, arraste-os para a Área de edição.',
                 },
@@ -400,9 +402,16 @@ export default class Canvas extends React.Component {
     };
 
     if (isReady && isReady !== prevState.isReady) {
-      console.log('Initiate Cimpress global.designer');
-      global.designer.start(cimpressDesignerSettings);
+      global.designer.start(cimpressDesignerSettings)
+      .then(
+        response => {
+          this.setState({
+            isToogleOn: false,
+          });
+        }
+      );
     }
+
   }
 
   static props: Props;
@@ -418,28 +427,31 @@ export default class Canvas extends React.Component {
   }
 
   render() {
-    const { isReady } = this.state;
+    const { isReady, isToogleOn } = this.state;
 
     return (
-      <div className="upload-container-canvasCentralized">
-        <div className="upload__canvasSchema">
-        {
-          !isReady ?
-          <Loading /> :
-          [
-            <TopMenuBar />,
-            <div className="upload__canvasSchema_mainAreaContainer">
-              <div className="upload__canvasSchema_sidebarContainer">
-                <SideImageBar />
-                <SideTextBar />
-              </div>
-              <div className="upload__canvasSchema_canvasContainer">
-                <CanvasToolBar />
-                <CanvasArea />
-              </div>
-            </div>,
-          ]
-        }
+      <div className={`upload-container ${(isToogleOn) ? 'toogleOn' : 'toogleOff'}`}>
+        <div className="upload-container-canvasCentralized">
+          <div className="upload__canvasSchema">
+          {
+            !isReady ?
+            <Loading /> :
+            [
+              <TopMenuBar />,
+              <div className="upload__canvasSchema_mainAreaContainer">
+                <div className="upload__canvasSchema_sidebarContainer">
+                  <SideImageBar />
+                  <SideTextBar />
+                </div>
+                <div className="upload__canvasSchema_canvasContainer">
+                  <CanvasToolBar />
+                  <CanvasArea />
+                </div>
+              </div>,
+              <BottomMenuBar />
+            ]
+          }
+          </div>
         </div>
       </div>
     );

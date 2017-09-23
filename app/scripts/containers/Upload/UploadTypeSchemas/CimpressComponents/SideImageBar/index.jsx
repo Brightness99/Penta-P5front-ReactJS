@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { MultipleFilesIcon, OneFileIcon } from 'components/Icons';
 
 type Props = {
 };
