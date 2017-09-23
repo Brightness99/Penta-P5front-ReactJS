@@ -19,6 +19,7 @@ type Props = {
   showLabel: boolean,
   required: boolean,
   equalsTo: any,
+  value: string,
   onClick?: () => {},
   onChange?: () => {},
   onFocus?: () => {},
@@ -30,7 +31,7 @@ export class InputRegex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: props.value || '',
       valid: false,
       dirty: false,
     };
