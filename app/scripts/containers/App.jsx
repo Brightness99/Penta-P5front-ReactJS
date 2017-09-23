@@ -26,6 +26,7 @@ import CorporateSales from 'containers/CorporateSales';
 import FileMount from 'containers/FileMount';
 import PrintGuide from 'containers/PrintGuide';
 import PrintiPress from 'containers/PrintiPress';
+import AboutPrinti from 'containers/AboutPrinti';
 
 type Props = {
   app: AppStoreType,
@@ -84,6 +85,7 @@ export class App extends React.Component {
                       <Route path="/glossario" component={Glossary} />
                       <Route path="/success" component={Success} />
                       <Route path="/imprensa" component={PrintiPress} />
+                      <Route path="/sobre-a-printi" component={AboutPrinti} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route path="/:slug/upload/:itemId" component={Upload} />

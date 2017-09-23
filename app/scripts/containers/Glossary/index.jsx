@@ -45,9 +45,9 @@ export class Glossary extends React.Component {
 
     return (
       <section>
-        <div className="container">
-          <div className="template-glossary">
-            <Breadcrumbs links={breadcrumb} />
+        <div className="template-glossary">
+          <Breadcrumbs links={breadcrumb} />
+          <div className="container">
             <h2 className="title-glossary">Glossário</h2>
             <p className="subtitle-glossary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum</p>
             <ContentTextGlossary />
