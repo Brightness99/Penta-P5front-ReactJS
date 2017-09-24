@@ -1,4 +1,6 @@
 .authentication {
+  margin: 0 auto 6rem;
+  max-width: 900px;
   &__social {
     display: flex;
     background-color: $color-white;
@@ -59,13 +61,23 @@
       margin: 0;
       display: inline-flex;
       flex-direction: column;
-      > input {
+      > * {
         margin-top: 1rem;
         width: 100%;
       }
-      > .atm-button-rounded {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    &__wrapper{
+      flex-direction: column;
+    }
+
+    &__block{
+      width: 100%;
+      margin-top: 2rem;
+      &__form{
+        width: 80%;
       }
     }
   }
