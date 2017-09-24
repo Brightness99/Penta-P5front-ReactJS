@@ -1,30 +1,22 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { userSignIn } from 'actions';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
 
+type FormType = {
+  email: { valid: boolean, value: string },
+  password: { valid: boolean, value: string },
+};
+
 type Props = {
-  app: AppStoreType,
-  router: RouterStore,
-  locale: {},
-  dispatch: () => {},
+  onSubmit: (email: string, password: string) => void
 };
 
-type State = {
-  canSubmit: boolean,
-  isSubmitted: boolean,
-  isRunning: boolean,
-  authentication: {
-    customerInfo: {},
-  },
-  form: {},
-};
+type State = { canSubmit: boolean, form: FormType };
 
-export class SignInBlock extends React.Component {
+export class SignInForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -34,27 +26,20 @@ export class SignInBlock extends React.Component {
         password: { valid: false, value: '' },
       },
       canSubmit: false,
-      isSubmitted: false,
-      isRunning: false,
     };
   }
 
-  componentWillUpdate(nextProps: Props, nextState: State) {
-    console.log('nextState');
-    console.log(nextState);
-  }
-
-  static props: Props;
-  static state: State;
+  props: Props;
+  state: State;
 
   handleSignIn = (ev) => {
     ev.preventDefault();
 
     const { form, canSubmit } = this.state;
-    const { dispatch } = this.props;
+    const { onSubmit } = this.props;
 
     if (canSubmit === true) {
-      dispatch(userSignIn(form.email.value, form.password.value));
+      onSubmit(form.email.value, form.password.value);
     }
   };
 
@@ -75,11 +60,10 @@ export class SignInBlock extends React.Component {
       });
     }
 
-    this.setState({ ...this.state, form: newState.form, canSubmit });
+    this.setState({ form: newState.form, canSubmit });
   };
 
   render() {
-    // const { locale } = this.props;
     const { canSubmit } = this.state;
 
     return (
@@ -103,25 +87,10 @@ export class SignInBlock extends React.Component {
             kind="success"
             disabled={!canSubmit}
           >
-          Entrar
+            Entrar
           </Button>
         </form>
       </div>
     );
   }
 }
-
-/* istanbul ignore next */
-function mapStateToProps(state) {
-  return {
-    app: state.app,
-    router: state.router,
-    locale: state.locale,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignInBlock);
