@@ -69,9 +69,9 @@ export function userSignUp(user): Object {
  *
  * @returns {Object}
  */
-export function userLogOut(email: string, password: string): Object {
+export function userLogOut(): Object {
   return {
     type: UserConstants.USER_AUTH_LOG_OUT_REQUEST,
-    payload: { email, password },
+    payload: {},
   };
 }

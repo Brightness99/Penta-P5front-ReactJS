@@ -11,6 +11,7 @@ import { UserConstants, SettingsConstants } from 'constants/index';
 
 export type UserState = {
   rehydrated: boolean,
+  isAuthorized: boolean,
   newsletter: {
     component: string,
     error: boolean,
@@ -46,6 +47,7 @@ export const userState:UserState = {
     error: false,
     message: '',
     customerInfo: {},
+    isAuthorized: false,
   },
   address: {
     isZipcodeValid: false,
@@ -147,6 +149,7 @@ export default {
           isRunning: false,
           customerInfo: action.payload,
         },
+        isAuthorized: true,
         updatedAt: action.meta.updatedAt,
       };
     },
@@ -165,8 +168,8 @@ export default {
     [UserConstants.USER_AUTH_SIGN_UP_REQUEST](state) {
       return {
         ...state,
-        registration: {
-          ...state.registration,
+        authentication: {
+          ...state.authentication,
           isRunning: true,
         },
       };
@@ -179,10 +182,44 @@ export default {
           customerInfo: action.payload,
           isRunning: false,
         },
+        isAuthorized: true,
         updatedAt: action.meta.updatedAt,
       };
     },
     [UserConstants.USER_AUTH_SIGN_UP_FAILURE](state, action) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          error: true,
+          isRunning: false,
+          message: action.payload.message,
+        },
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_LOG_OUT_REQUEST](state) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          isRunning: true,
+        },
+      };
+    },
+    [UserConstants.USER_AUTH_LOG_OUT_SUCCESS](state, action) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          customerInfo: action.payload,
+          isRunning: false,
+        },
+        isAuthorized: false,
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_LOG_OUT_FAILURE](state, action) {
       return {
         ...state,
         authentication: {
