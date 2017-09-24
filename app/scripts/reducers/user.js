@@ -1,3 +1,4 @@
+// @flow
 /**
  * @module Reducers/user
  * @desc user Reducer
@@ -8,7 +9,30 @@ import { createReducer } from 'utils';
 
 import { UserConstants, SettingsConstants } from 'constants/index';
 
-export const userState = {
+export type UserState = {
+  rehydrated: boolean,
+  newsletter: {
+    component: string,
+    error: boolean,
+    isRunning: boolean,
+    message: string,
+    subscribed: boolean,
+  },
+  authentication: {
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+    customerInfo: {},
+  },
+  address: {
+    isZipcodeValid: boolean,
+    zipcode: string,
+    zipcodeErrorMessage: string,
+  },
+  updatedAt: number,
+};
+
+export const userState:UserState = {
   rehydrated: false,
   newsletter: {
     component: '',
@@ -21,10 +45,6 @@ export const userState = {
     isRunning: false,
     error: false,
     message: '',
-    signInForm: {
-      email: '',
-      password: '',
-    },
     customerInfo: {},
   },
   address: {
@@ -110,12 +130,11 @@ export default {
         },
       };
     },
-    [UserConstants.USER_AUTH_SIGN_IN_REQUEST](state, action) {
+    [UserConstants.USER_AUTH_SIGN_IN_REQUEST](state) {
       return {
         ...state,
         authentication: {
           ...state.authentication,
-          signInForm: action.payload,
           isRunning: true,
         },
       };
@@ -132,6 +151,38 @@ export default {
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_FAILURE](state, action) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          error: true,
+          isRunning: false,
+          message: action.payload.message,
+        },
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_UP_REQUEST](state) {
+      return {
+        ...state,
+        registration: {
+          ...state.registration,
+          isRunning: true,
+        },
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_UP_SUCCESS](state, action) {
+      return {
+        ...state,
+        authentication: {
+          ...state.authentication,
+          customerInfo: action.payload,
+          isRunning: false,
+        },
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_UP_FAILURE](state, action) {
       return {
         ...state,
         authentication: {

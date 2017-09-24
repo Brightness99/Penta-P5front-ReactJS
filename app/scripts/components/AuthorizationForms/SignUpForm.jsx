@@ -5,32 +5,58 @@ import { BlockTitle } from 'atoms/Titles';
 import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
 
-type Props = {
-  app: AppStoreType,
-  router: RouterStore,
-  locale: {},
-  dispatch: () => {},
+type FormType = {
+  first_name: { valid: boolean, value: string },
+  email: { valid: boolean, value: string },
+  email_confirmation: { valid: boolean, value: string },
+  password: { valid: boolean, value: string },
 };
 
-export default class SignUpBlock extends React.Component {
+type Props = {
+  onSubmit: (data: FormType) => void
+};
+
+type State = { canSubmit: boolean, form: FormType };
+
+export class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       form: {
-        full_name: { valid: false, value: '' },
+        first_name: { valid: false, value: '' },
         email: { valid: false, value: '' },
-        email_repeat: { valid: false, value: '' },
+        email_confirmation: { valid: false, value: '' },
         password: { valid: false, value: '' },
       },
+      canSubmit: false,
     };
   }
 
-  static props: Props;
-  static state: State;
+  props: Props;
+  state: State;
 
   handleSubmit = (ev) => {
     ev.preventDefault();
+
+    const { form, canSubmit } = this.state;
+    const { onSubmit } = this.props;
+    if (canSubmit === true) {
+      const value = {
+        first_name: form.first_name.value,
+        email: form.email.value,
+        email_confirmation: form.email_confirmation.value,
+        password: form.password.value,
+        fingerprint: '',
+        socialType: '',
+        hubspot_subscribe: true,
+        socialData: {
+          socialId: '',
+          socialToken: '',
+        },
+      };
+      onSubmit(value);
+    }
   };
 
   handleValidatedInput = (name, value, valid) => {
@@ -63,7 +89,7 @@ export default class SignUpBlock extends React.Component {
         <hr />
         <form className="authentication__block__form" onSubmit={this.handleSubmit}>
           <InputFullName
-            name="full_name"
+            name="first_name"
             placeholder="Nome completo"
             onValidate={this.handleValidatedInput}
           />
@@ -73,7 +99,7 @@ export default class SignUpBlock extends React.Component {
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
-            name="email_repeat"
+            name="email_confirmation"
             placeholder="Repetir e-mail"
             equalsTo={form.email.value}
             onValidate={this.handleValidatedInput}
@@ -89,7 +115,7 @@ export default class SignUpBlock extends React.Component {
             kind="success"
             disabled={!canSubmit}
           >
-          Cadastrar
+            Cadastrar
           </Button>
         </form>
       </div>
