@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import { productFetch } from 'actions';
 import productsSelector from 'selectors/products';
 
-import { BlogBlock, CustomersRelyBlock } from 'components/LandingPage';
 import Loading from 'components/Loading';
-import Breadcrumbs from 'components/Breadcrumbs';
+import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock } from 'components/LandingPage';
 
 import ProductHighlightsBlock from './ProductHighlights';
 import ProductInformationBlock from './ProductInformation';
@@ -89,7 +88,7 @@ export class Products extends React.Component {
 
     return (
       <div>
-        <Breadcrumbs links={breadcrumb} />
+        <BreadcrumbsBlock links={breadcrumb} />
         <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
         <ProductInformationBlock
           screenSize={screenSize}
