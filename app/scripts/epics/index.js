@@ -31,6 +31,7 @@ import {
 } from './cart';
 
 import { contactFormSend } from './contact-form';
+import { socialLoginSettingsFetch } from './social-login-settings';
 
 import { accountFetch, accountUpdate } from './account';
 
@@ -62,4 +63,5 @@ export default combineEpics(
   contactFormSend,
   accountFetch,
   accountUpdate,
+  socialLoginSettingsFetch
 );

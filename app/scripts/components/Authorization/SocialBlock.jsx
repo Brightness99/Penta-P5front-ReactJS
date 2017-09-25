@@ -4,14 +4,11 @@ import SVG from 'react-inlinesvg';
 import { Button } from 'quarks/Inputs';
 
 type Props = {
-  app: AppStoreType,
-  router: RouterStore,
-  locale: {},
-  dispatch: () => {},
+
 };
 
-export default class SocialBlock extends React.Component {
-  static props: Props;
+export default class SocialBlock extends React.PureComponent {
+  props: Props;
 
   render() {
     return (
