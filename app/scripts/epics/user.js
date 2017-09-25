@@ -139,3 +139,30 @@ export function userLogOut(action$) {
         ]);
     });
 }
+
+export function userAuthValidate(action$) {
+  return action$.ofType(UserConstants.USER_AUTH_VALIDATE_REQUEST)
+    .switchMap(() => {
+      const endpoint = '/v2/customer/validate-auth';
+
+      return rxAjax({
+        endpoint,
+        payload: {},
+        method: 'POST',
+      })
+        .map(data => ({
+          type: UserConstants.USER_AUTH_VALIDATE_SUCCESS,
+          payload: data.response,
+          meta: { updatedAt: getUnixtime() },
+        }))
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: UserConstants.USER_AUTH_VALIDATE_CANCEL })
+        .catch(error => [
+          {
+            type: UserConstants.USER_AUTH_VALIDATE_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          },
+        ]);
+    });
+}

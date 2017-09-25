@@ -4,7 +4,12 @@
  */
 
 import { combineEpics } from 'redux-observable';
-import { userNewsletter, userSignIn, userSignUp, userLogOut } from './user';
+import {
+  userNewsletter,
+  userSignIn,
+  userSignUp,
+  userLogOut,
+  userAuthValidate } from './user';
 import { productsFetch } from './products';
 import { blogFetch } from './blog';
 import {
@@ -48,6 +53,7 @@ export default combineEpics(
   userSignIn,
   userSignUp,
   userLogOut,
+  userAuthValidate,
   cartBasicFetch,
   cartFetch,
   cartAddFetch,
