@@ -5,9 +5,13 @@ import SVG from 'react-inlinesvg';
 import Collapse, { Panel } from 'rc-collapse';
 import { Link } from 'react-router-dom';
 import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
+import { accountAddressCreate, accountAddressDelete } from 'actions';
+import { connect } from 'react-redux';
 
 type Props = {
   screenSize: string,
+  dispatch: () => {},
+  account: {},
 };
 
 type State = {
@@ -17,6 +21,7 @@ type State = {
 export class MyAddresses extends React.Component {
   constructor(props) {
     super(props);
+
 
     this.state = {
       isExpanded: false,
@@ -34,8 +39,117 @@ export class MyAddresses extends React.Component {
 
   AccordionOpen = <SVG src={require('assets/media/svg/icon_accordionopen.svg')} key="accordion-open" />;
 
+  handleCreateAddress = () => {
+    const { dispatch } = this.props;
+
+    const dataToCreate = {
+      type: 'billing',
+      receiver_name: 'Adam Holman',
+      zipcode: '01419-002',
+      city: 'São Paulo',
+      neighborhood: 'Cerqueira César',
+      state: 'SP',
+      street: 'Alameda Santos',
+      number: '2131',
+      additional_address: null
+    };
+
+    //dispatch(accountAddressCreate(dataToCreate));
+  }
+
+  handleDeleteAddress = (id) => {
+    const { dispatch } = this.props;
+
+    dispatch(accountAddressDelete({
+      id: id.toString()
+    }));
+  }
+
+  renderDesktopItems(items) {
+    return items.map((item) => {
+      return (
+        <div key={item.id.toString()}>
+          <div className="headerTitle-address">
+            <div>
+              <h5>{item.receiver_name}</h5>
+            </div>
+            <div className="text-edit">
+              <Link to="#"><i><PencilIcon /></i>Editar</Link>
+            </div>
+            <div className="text-delete" onClick={() => this.handleDeleteAddress(item.id)}>
+              <Link to="#"><i><TrashIcon /></i>Excluir</Link>
+            </div>
+          </div>
+          <div className="details-address">
+            <div className="details">
+              <p className="firstDetail">Nome</p>
+              <p className="secondDetail">{item.receiver_name}</p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">Endereço</p>
+              <p className="secondDetail">{item.additional_address} {item.street}</p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">Cidade/UF</p>
+              <p className="secondDetail">{item.city}/{item.state}</p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">CEP</p>
+              <p className="secondDetail">{item.zipcode}</p>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  }
+
+  renderMobileItems(items) {
+    return items.map((item) => {
+      return (
+        <div className="box-addressDelivery" key={item.id.toString()}>
+          <div>
+            <div className="headerTitle-address">
+              <div>
+                <h5>Minha Casa</h5>
+              </div>
+              <div className="text-edit">
+                <Link to="#"><i><PencilIcon /></i></Link>
+              </div>
+              <div className="text-delete">
+                <Link to="#"><i><TrashIcon /></i></Link>
+              </div>
+            </div>
+            <div className="details-address">
+              <div className="details">
+                <p className="firstDetail">Nome</p>
+                <p className="secondDetail">Diogo Capelo</p>
+              </div>
+              <div className="details">
+                <p className="firstDetail">Endereço</p>
+                <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
+              </div>
+              <div className="details">
+                <p className="firstDetail">Cidade/UF</p>
+                <p className="secondDetail">Guarulhos/SP</p>
+              </div>
+              <div className="details">
+                <p className="firstDetail">CEP</p>
+                <p className="secondDetail">07130-000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  }
+
   renderMobile() {
     const { isExpanded } = this.state;
+    const { account } = this.props;
+
+    let shippingItems = account.shipping ? this.renderMobileItems(account.shipping) : {};
+    let billingItems = account.billing ? this.renderMobileItems(account.billing) : {};
+
     const headerDelivery = (<div className="header-accordion">
       {isExpanded ? this.AccordionClose : this.AccordionOpen}
       <h4 className="title-addresses">Endereços de entrega</h4>
@@ -59,72 +173,7 @@ export class MyAddresses extends React.Component {
                 showArrow={false}
               >
                 <div>
-                  <div className="box-addressDelivery">
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Minha Casa</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i></Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i></Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <div className="headerTitle-address">
-                          <div>
-                            <h5>Casa da mãe</h5>
-                          </div>
-                          <div className="text-edit">
-                            <Link to="#"><i><PencilIcon /></i></Link>
-                          </div>
-                          <div className="text-delete">
-                            <Link to="#"><i><TrashIcon /></i></Link>
-                          </div>
-                        </div>
-                        <div className="details-address">
-                          <div className="details">
-                            <p className="firstDetail">Nome</p>
-                            <p className="secondDetail">Diogo Capelo</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Endereço</p>
-                            <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Cidade/UF</p>
-                            <p className="secondDetail">Guarulhos/SP</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">CEP</p>
-                            <p className="secondDetail">07130-000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {shippingItems}
                   <div className="btn-addresses--mobile">
                     <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
                   </div>
@@ -144,72 +193,7 @@ export class MyAddresses extends React.Component {
                 showArrow={false}
               >
                 <div>
-                  <div className="box-addressDelivery">
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Minha Casa</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i></Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i></Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <div className="headerTitle-address">
-                          <div>
-                            <h5>Casa da mãe</h5>
-                          </div>
-                          <div className="text-edit">
-                            <Link to="#"><i><PencilIcon /></i></Link>
-                          </div>
-                          <div className="text-delete">
-                            <Link to="#"><i><TrashIcon /></i></Link>
-                          </div>
-                        </div>
-                        <div className="details-address">
-                          <div className="details">
-                            <p className="firstDetail">Nome</p>
-                            <p className="secondDetail">Diogo Capelo</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Endereço</p>
-                            <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Cidade/UF</p>
-                            <p className="secondDetail">Guarulhos/SP</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">CEP</p>
-                            <p className="secondDetail">07130-000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {billingItems}
                   <div className="btn-addresses--mobile">
                     <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
                   </div>
@@ -224,6 +208,7 @@ export class MyAddresses extends React.Component {
 
   renderDesktop() {
     const { isExpanded } = this.state;
+    const { account } = this.props;
     const headerDelivery = (<div className="header-accordion">
       {isExpanded ? this.AccordionClose : this.AccordionOpen}
       <h4 className="title-addresses">Endereços de entrega</h4>
@@ -249,6 +234,9 @@ export class MyAddresses extends React.Component {
         title: 'Pedido nº483.093',
       },
     ];
+    let shippingItems = account.shipping ? this.renderDesktopItems(account.shipping) : {};
+    let billingItems = account.billing ? this.renderDesktopItems(account.billing) : {};
+
     return (
       <section className="container-myaddresses">
         <Breadcrumbs links={breadcrumb} />
@@ -266,72 +254,9 @@ export class MyAddresses extends React.Component {
             >
               <div>
                 <div className="box-addressDelivery">
-                  <div>
-                    <div className="headerTitle-address">
-                      <div>
-                        <h5>Minha Casa</h5>
-                      </div>
-                      <div className="text-edit">
-                        <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                      </div>
-                      <div className="text-delete">
-                        <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                      </div>
-                    </div>
-                    <div className="details-address">
-                      <div className="details">
-                        <p className="firstDetail">Nome</p>
-                        <p className="secondDetail">Diogo Capelo</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Endereço</p>
-                        <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Cidade/UF</p>
-                        <p className="secondDetail">Guarulhos/SP</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">CEP</p>
-                        <p className="secondDetail">07130-000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Casa da mãe</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {shippingItems}
                   <div className="box-addNewAddress">
-                    <Link to="#">
+                    <Link to="#" onClick={this.handleCreateAddress}>
                       <i><Plus /></i>
                     </Link>
                   </div>
@@ -352,70 +277,7 @@ export class MyAddresses extends React.Component {
             >
               <div>
                 <div className="box-addressDelivery">
-                  <div>
-                    <div className="headerTitle-address">
-                      <div>
-                        <h5>Minha Casa</h5>
-                      </div>
-                      <div className="text-edit">
-                        <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                      </div>
-                      <div className="text-delete">
-                        <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                      </div>
-                    </div>
-                    <div className="details-address">
-                      <div className="details">
-                        <p className="firstDetail">Nome</p>
-                        <p className="secondDetail">Diogo Capelo</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Endereço</p>
-                        <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Cidade/UF</p>
-                        <p className="secondDetail">Guarulhos/SP</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">CEP</p>
-                        <p className="secondDetail">07130-000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Casa da mãe</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {billingItems}
                   <div className="box-addNewAddress">
                     <Link to="#">
                       <i><Plus /></i>
@@ -439,4 +301,15 @@ export class MyAddresses extends React.Component {
   }
 }
 
-export default MyAddresses;
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyAddresses);
+

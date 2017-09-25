@@ -27,6 +27,7 @@ import FileMount from 'containers/FileMount';
 import PrintGuide from 'containers/PrintGuide';
 import PrintiPress from 'containers/PrintiPress';
 import AboutPrinti from 'containers/AboutPrinti';
+import HelpCenterPage from 'containers/HelpCenterPage';
 
 type Props = {
   app: AppStoreType,
@@ -82,6 +83,7 @@ export class App extends React.Component {
                       <Route path="/minha-conta" component={MyAccount} />
                       <Route path="/montagem-de-arquivos" component={FileMount} />
                       <Route path="/guia-de-impressao" component={PrintGuide} />
+                      <Route path="/central-de-ajuda" component={HelpCenterPage} />
                       <Route path="/glossario" component={Glossary} />
                       <Route path="/success" component={Success} />
                       <Route path="/imprensa" component={PrintiPress} />

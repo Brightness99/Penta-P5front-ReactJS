@@ -10,6 +10,7 @@ type Props = {
   placeholder: string,
   showLabel: boolean,
   required: boolean,
+  value: string,
   equalsTo: any,
   onClick?: () => {},
   onChange?: () => {},
