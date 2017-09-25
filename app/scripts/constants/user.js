@@ -26,4 +26,8 @@ export const UserConstants = keyMirror({
   USER_AUTH_LOG_OUT_SUCCESS: undefined,
   USER_AUTH_LOG_OUT_FAILURE: undefined,
   USER_AUTH_LOG_OUT_CANCEL: undefined,
+  USER_AUTH_VALIDATE_REQUEST: undefined,
+  USER_AUTH_VALIDATE_SUCCESS: undefined,
+  USER_AUTH_VALIDATE_FAILURE: undefined,
+  USER_AUTH_VALIDATE_CANCEL: undefined,
 });

@@ -185,6 +185,14 @@ export default {
         updatedAt: action.meta.updatedAt,
       };
     },
+    [UserConstants.USER_AUTH_VALIDATE_SUCCESS](state, action) {
+      return {
+        ...state,
+        customerInfo: action.payload,
+        isAuthorized: true,
+        updatedAt: action.meta.updatedAt,
+      };
+    },
     [UserConstants.USER_AUTH_SIGN_UP_REQUEST](state) {
       return {
         ...state,

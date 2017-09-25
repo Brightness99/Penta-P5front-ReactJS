@@ -75,3 +75,16 @@ export function userLogOut(): Object {
     payload: {},
   };
 }
+
+
+/**
+ * Customer authorization validate
+ *
+ * @returns {Object}
+ */
+export function userAuthValidate(): Object {
+  return {
+    type: UserConstants.USER_AUTH_VALIDATE_REQUEST,
+    payload: {},
+  };
+}
