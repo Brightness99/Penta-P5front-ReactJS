@@ -8,11 +8,10 @@ export class RelationshipCentral extends React.Component {
   render() {
     return (
       <div className="org-relationship-central">
-        <h3>Central de Relacionamento e-commerce</h3>
-        <div className="mol-relationship-central">
+        <h3 className="title-relationship-central">Central de Relacionamento e-commerce</h3>
 
+        <div className="mol-relationship-central">
           <div className="atm-link-central">
-            
             <div className="qrk-link-central">
               <div className="bsn-icon-title">
                 <ChatIcon />
@@ -39,22 +38,24 @@ export class RelationshipCentral extends React.Component {
                 <Link to="#" className="btn-default btn-third btn-xs">Você liga para a printi</Link>
               </div>
             </div>
-
           </div>
 
-          <h4>Venda corporativa</h4>
-          <div className="atm-link-central">
-            <div className="qrk-link-central">
-              <div className="bsn-icon-title">
-                <ChatIcon />
-                <p>Atendimento Corporativo</p>
-              </div>
-              <div>
-                <Link to="#" className="btn-default btn-third btn-xs">Quero saber mais</Link>
-                <Link to="#" className="btn-default btn-third btn-xs">Solicitar atendimento</Link>
+          <div>
+            <h4 className="title-relationship-central">Venda corporativa</h4>
+            <div className="atm-link-central">
+              <div className="qrk-link-central service-corporate">
+                <div className="bsn-icon-title">
+                  <ChatIcon />
+                  <p>Atendimento Corporativo</p>
+                </div>
+                <div className="bsn-links-tel">
+                  <Link to="#" className="btn-default btn-third btn-xs">Quero saber mais</Link>
+                  <Link to="#" className="btn-default btn-third btn-xs">Solicitar atendimento</Link>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     );
