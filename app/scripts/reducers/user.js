@@ -23,8 +23,18 @@ export type UserState = {
     isRunning: boolean,
     error: boolean,
     message: string,
-    customerInfo: {},
   },
+  registration: {
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+  },
+  logout: {
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+  },
+  customerInfo: {},
   address: {
     isZipcodeValid: boolean,
     zipcode: string,
@@ -35,6 +45,7 @@ export type UserState = {
 
 export const userState:UserState = {
   rehydrated: false,
+  isAuthorized: false,
   newsletter: {
     component: '',
     error: false,
@@ -46,9 +57,18 @@ export const userState:UserState = {
     isRunning: false,
     error: false,
     message: '',
-    customerInfo: {},
-    isAuthorized: false,
   },
+  registration: {
+    isRunning: false,
+    error: false,
+    message: '',
+  },
+  logout: {
+    isRunning: false,
+    error: false,
+    message: '',
+  },
+  customerInfo: {},
   address: {
     isZipcodeValid: false,
     zipcode: '',
@@ -147,8 +167,8 @@ export default {
         authentication: {
           ...state.authentication,
           isRunning: false,
-          customerInfo: action.payload,
         },
+        customerInfo: action.payload,
         isAuthorized: true,
         updatedAt: action.meta.updatedAt,
       };
@@ -168,8 +188,8 @@ export default {
     [UserConstants.USER_AUTH_SIGN_UP_REQUEST](state) {
       return {
         ...state,
-        authentication: {
-          ...state.authentication,
+        registration: {
+          ...state.registration,
           isRunning: true,
         },
       };
@@ -177,11 +197,11 @@ export default {
     [UserConstants.USER_AUTH_SIGN_UP_SUCCESS](state, action) {
       return {
         ...state,
-        authentication: {
-          ...state.authentication,
-          customerInfo: action.payload,
+        registration: {
+          ...state.registration,
           isRunning: false,
         },
+        customerInfo: action.payload,
         isAuthorized: true,
         updatedAt: action.meta.updatedAt,
       };
@@ -189,8 +209,8 @@ export default {
     [UserConstants.USER_AUTH_SIGN_UP_FAILURE](state, action) {
       return {
         ...state,
-        authentication: {
-          ...state.authentication,
+        registration: {
+          ...state.registration,
           error: true,
           isRunning: false,
           message: action.payload.message,
@@ -201,8 +221,8 @@ export default {
     [UserConstants.USER_AUTH_LOG_OUT_REQUEST](state) {
       return {
         ...state,
-        authentication: {
-          ...state.authentication,
+        logout: {
+          ...state.logout,
           isRunning: true,
         },
       };
@@ -210,11 +230,11 @@ export default {
     [UserConstants.USER_AUTH_LOG_OUT_SUCCESS](state, action) {
       return {
         ...state,
-        authentication: {
-          ...state.authentication,
-          customerInfo: action.payload,
+        logout: {
+          ...state.logout,
           isRunning: false,
         },
+        customerInfo: {},
         isAuthorized: false,
         updatedAt: action.meta.updatedAt,
       };
@@ -222,8 +242,8 @@ export default {
     [UserConstants.USER_AUTH_LOG_OUT_FAILURE](state, action) {
       return {
         ...state,
-        authentication: {
-          ...state.authentication,
+        logout: {
+          ...state.logout,
           error: true,
           isRunning: false,
           message: action.payload.message,

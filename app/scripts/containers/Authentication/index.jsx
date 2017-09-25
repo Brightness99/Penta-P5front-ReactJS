@@ -5,8 +5,7 @@ import cx from 'classnames';
 import { connect } from 'react-redux';
 import { PageTitle } from 'atoms/Titles';
 import { userSignIn, userSignUp } from 'actions';
-import { SignInForm } from 'components/AuthorizationForms/SignInForm';
-import { SignUpForm } from 'components/AuthorizationForms/SignUpForm';
+import { SignInForm, SignUpForm } from 'components/AuthorizationForms';
 import SocialBlock from './SocialBlock';
 
 type Props = {
