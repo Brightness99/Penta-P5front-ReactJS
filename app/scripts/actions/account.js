@@ -46,3 +46,10 @@ export function accountAddressDelete(data): Object {
     payload: data,
   };
 }
+
+export function accountSavedCreditCardFetch(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_REQUEST,
+    payload: {},
+  };
+}

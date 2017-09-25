@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import Cards from 'react-credit-cards';
 import { Input } from 'quarks/Inputs';
 import { BoxRadio, Select } from 'atoms/Inputs';
@@ -9,6 +10,7 @@ import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Chang
 
 type Props = {
   screenSize: string,
+  account: {},
 };
 
 export class CardsAccount extends React.Component {
@@ -188,4 +190,15 @@ export class CardsAccount extends React.Component {
   }
 }
 
-export default CardsAccount;
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardsAccount);
+
