@@ -44,19 +44,17 @@ class ContactForm extends React.PureComponent<Props, State> {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.canSubmit) {
-      const stateForm = this.state.form;
-      const form = Object.assign({}, stateForm, {
-        email: stateForm.email.value,
-        first_name: stateForm.first_name.value,
-        last_name: stateForm.last_name.value,
-        phone: stateForm.phone.value,
-        empresa: stateForm.empresa.value,
-        website: stateForm.website.value,
-        spending: stateForm.spending.value,
-        position: stateForm.position.value,
-        leaduri: '/venda-corporativa',
-      });
-      this.props.onSubmit(form);
+      const { onSubmit } = this.props;
+      const { form } = this.state;
+
+      if (typeof onSubmit === 'function') {
+        const formData = Object.keys(form)
+        .reduce((previousInput, nextInput) => ({
+          ...previousInput,
+          [nextInput]: form[nextInput].value,
+        }), {});
+        onSubmit(formData);
+      }
     }
   }
 
