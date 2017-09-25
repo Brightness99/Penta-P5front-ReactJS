@@ -4,16 +4,21 @@ import cx from 'classnames';
 
 import { connect } from 'react-redux';
 import { PageTitle } from 'atoms/Titles';
-import { userSignIn, userSignUp } from 'actions';
-import { SignInForm, SignUpForm } from 'components/AuthorizationForms';
-import SocialBlock from './SocialBlock';
+import { userSignIn, userSignUp, socialLoginSettingsFetch } from 'actions';
+import { SignInForm, SignUpForm, SocialBlock } from 'components/Authorization';
 
 type Props = {
   submitSignIn: (email: string, password: string) => void,
-  submitSignUp: (data: any) => void
+  submitSignUp: (data: any) => void,
+  socialLoginSettingsFetch: () => void,
+  socialLoginSettings: {},
 };
 
-export class Authentication extends React.PureComponent {
+export class Authentication extends React.Component {
+  componentDidMount() {
+    this.props.socialLoginSettingsFetch();
+  }
+
   static props: Props;
 
   render() {
@@ -33,9 +38,14 @@ export class Authentication extends React.PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  socialLoginSettings: state.socialLoginSettings,
+});
+
 const mapDispatchToProps = dispatch => ({
   submitSignIn: (email, password) => dispatch(userSignIn(email, password)),
   submitSignUp: data => dispatch(userSignUp(data)),
+  socialLoginSettingsFetch: () => dispatch(socialLoginSettingsFetch()),
 });
 
-export default connect(null, mapDispatchToProps)(Authentication);
+export default connect(mapStateToProps, mapDispatchToProps)(Authentication);
