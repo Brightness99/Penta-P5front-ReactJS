@@ -12,6 +12,7 @@ import settings from './settings';
 import router from './router';
 import user from './user';
 import contactForm from './contact-form';
+import account from './account';
 
 export default {
   ...app,
@@ -23,4 +24,5 @@ export default {
   ...router,
   ...user,
   ...contactForm,
+  ...account,
 };

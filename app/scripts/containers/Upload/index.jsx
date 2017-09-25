@@ -33,17 +33,17 @@ export class Upload extends React.Component {
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada.'
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 1'
       },
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após dsadsse período a previsão de entrega será alterada.'
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 2'
       },
       {
         type: 'error',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse perfgdgfíodo a previsão de entrega será alterada.'
+        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 3'
       }
     ];
 
@@ -108,7 +108,7 @@ export class Upload extends React.Component {
   };
 
   renderAvailableStrategies = () => {
-    const availableStrategies = [1, 4];
+    const availableStrategies = [1, 2]; // 1 to 5
 
     return availableStrategies.map(
       (strategy) => (
@@ -123,7 +123,7 @@ export class Upload extends React.Component {
 
   renderUploadTypeSchema = () => {
     const globalFlags = {
-      upload_type: 'canvas',
+      upload_type: 'canvas', // can be "canvas", "scene" or "normal"
       from_my_account: false,
     };
 
@@ -139,24 +139,7 @@ export class Upload extends React.Component {
     }
   };
 
-  render() {
-    const { dispatch } = this.props;
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Marca página',
-        url: '/configuracao-marca-pagina',
-      },
-      {
-        title: 'Enviar arte',
-        url: '',
-      },
-    ];
-
+  renderWarningExtraInfo = () => {
     const templates = {
       options: {
         vertical: ['illustrator', 'photoshop', 'photoshop'],
@@ -175,9 +158,30 @@ export class Upload extends React.Component {
       selectedOrientation: 'vertical',
     };
 
+    const { dispatch } = this.props;
+
     const product = {
       title: 'Cartão de Visita',
     };
+
+    return <Warning templates={templates} dispatch={dispatch} product={product} />;
+  };
+
+  render() {
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Marca página',
+        url: '/configuracao-marca-pagina',
+      },
+      {
+        title: 'Enviar arte',
+        url: '',
+      },
+    ];
 
     return (
       <div className="page-upload">
@@ -195,12 +199,10 @@ export class Upload extends React.Component {
               {this.renderAvailableStrategies()}
             </div>
           </div>
-          <div className="upload-container">
-            {this.renderUploadTypeSchema()}
-            {/*<div className="upload-container-centralized">
-              <Warning templates={templates} dispatch={dispatch} product={product} />
-            </div>*/}
-          </div>
+          {this.renderUploadTypeSchema()}
+          {/*<div className="upload-container-centralized">
+            {this.renderWarningExtraInfo()}
+          </div>*/}
         </div>
       </div>
     );

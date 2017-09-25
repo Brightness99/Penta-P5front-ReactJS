@@ -70,6 +70,10 @@ export class MyAccount extends React.Component {
           render={(props) => <CardsAccount {...props} screenSize={screenSize} />}
         />
         <Route
+          path="/minha-conta/meus-dados"
+          render={(props) => <CustomerData {...props} screenSize={screenSize} />}
+        />
+        <Route
           path="/minha-conta/modelos-salvos"
           render={(props) => <TemplateModels {...props} screenSize={screenSize} />}
         />
