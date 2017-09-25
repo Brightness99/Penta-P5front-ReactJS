@@ -118,6 +118,21 @@ export default {
         error: action.payload,
       };
     },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        isRunning: true,
+        isLoaded: false,
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        ...action.payload,
+        isRunning: false,
+        isLoaded: true,
+      };
+    },
   }),
 };
 
