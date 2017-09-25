@@ -8,7 +8,7 @@ type Props = {
 };
 
 const BreadcrumbsBlock = (props: Props) => {
-  const { links } = this.props;
+  const { links } = props;
 
   return (
     <div className="container">
