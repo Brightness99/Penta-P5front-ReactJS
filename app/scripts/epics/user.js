@@ -116,7 +116,7 @@ export function userSignUp(action$) {
 export function userLogOut(action$) {
   return action$.ofType(UserConstants.USER_AUTH_LOG_OUT_REQUEST)
     .switchMap(() => {
-      const endpoint = 'v2/customers/logout';
+      const endpoint = '/v2/customers/logout';
 
       return rxAjax({
         endpoint,
