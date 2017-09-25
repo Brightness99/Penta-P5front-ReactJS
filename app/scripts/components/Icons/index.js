@@ -97,3 +97,8 @@ export AccountManagerIcon from './AccountManagerIcon';
 export ChatIcon from './ChatIcon';
 export PhoneIcon from './PhoneIcon';
 export PaperAirplaneFlying from './PaperAirplaneFlying';
+export MoneySignIcon from './MoneySignIcon';
+export UserIcon from './UserIcon';
+export UserPlusIcon from './UserPlusIcon';
+export ArchiveIcon from './ArchiveIcon';
+export TasksIcon from './TasksIcon';

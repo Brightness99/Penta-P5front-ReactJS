@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 
+import SearchCentralRelationship from './SearchCentralRelationship';
+import ItensHelpcenter from './ItensHelpcenter';
 import RelationshipCentral from './RelationshipCentral';
 import VideosPrinti from './VideosPrinti';
 
@@ -36,8 +38,9 @@ export class HelpCenterPage extends React.Component {
         {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <div className="tpl-help-center">
           <div className="container">
-            <h2>asdasda</h2>
-            <VideosPrinti />
+            <SearchCentralRelationship />
+            <ItensHelpcenter />
+            <VideosPrinti screenSize={screenSize} />
             <RelationshipCentral />
           </div>
         </div>
@@ -48,7 +51,7 @@ export class HelpCenterPage extends React.Component {
 
 function mapStateToProps(state) {
   return { app: state.app };
-} 
+}
 
 function mapDispatchToProps(dispatch) {
   return { dispatch };
