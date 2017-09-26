@@ -125,7 +125,7 @@ export default {
       return {
         ...state,
         savedCreditCards: {
-          savedCreditCards: [],
+          cards: [],
           isRunning: true,
           isLoaded: false,
         },
@@ -135,7 +135,7 @@ export default {
       return {
         ...state,
         savedCreditCards: {
-          savedCreditCards: action.payload,
+          cards: action.payload,
           isRunning: false,
           isLoaded: true
         }
@@ -146,6 +146,31 @@ export default {
         ...state,
         savedCreditCards: {
           ...state.savedCreditCards,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state) {
+      return {
+        ...state,
+        savedCreditCards: {
+          ...state.savedCreditCards,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_SUCCESS](state, action) {
+
+      const updatedCards = state.savedCreditCards.cards.filter((item) => {
+        return item.id !== action.payload.id;
+      });
+
+      return {
+        ...state,
+        savedCreditCards: {
+          cards: updatedCards,
+          isRunning: false,
+          isLoaded: true,
           error: null,
         },
       };
