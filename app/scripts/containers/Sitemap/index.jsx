@@ -258,7 +258,7 @@ export class Sitemap extends React.Component {
           </div>
 
           <div className="list-columns">
-            <div className="3columns">
+            <div className="three-columns">
               CATEGORIAS
               <div className="atm-list">
                 <ul className="qrk-list-links">
@@ -289,7 +289,7 @@ export class Sitemap extends React.Component {
               </div>
             </div>
 
-            <div className="2columns">
+            <div className="two-columns">
               INSTITUCIONAL
               <div className="atm-list">
                 <ul className="qrk-list-links">
@@ -349,11 +349,11 @@ export class Sitemap extends React.Component {
             </div>
           </div>
 
-          <div>
-            <div>
+          <div className="list-columns">
+            <div className="two-columns">
               GUIA DE IMPRESSÃO
             </div>
-            <div>
+            <div className="two-columns">
               GRÁFICAS CIDADE
             </div>
           </div>
