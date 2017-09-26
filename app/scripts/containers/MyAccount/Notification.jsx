@@ -5,6 +5,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Select } from 'atoms/Inputs';
 import { ErrorText } from 'atoms/Texts';
 import { RadioButton } from 'components/Input';
+import Loading from 'components/Loading';
 import { accountNotificationUpdate, accountNotificationFetch } from 'actions';
 
 type Props = {
@@ -35,6 +36,15 @@ export class Notification extends React.Component {
     dispatch(accountNotificationFetch());
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { account } = nextProps;
+    if (account && account.notification) {
+      this.setState({
+        value: account.notification.sms_enabled,
+      });
+    }
+  }
+
   handleChange = (selected) => {
 
     this.setState({
@@ -55,13 +65,9 @@ export class Notification extends React.Component {
   renderForm() {
 
     const { account } = this.props;
-    let value = '';
 
     if (account.notification.isLoaded && !account.notification.isRunning) {
-      value = account.notification.sms_enabled;
-    }
-
-    if (value !== '') {
+      const { value } = this.state;
       return (
         <div>
           <div className="notification-option">
@@ -95,7 +101,9 @@ export class Notification extends React.Component {
       );
     }
 
-    return null;
+    return (
+      <Loading />
+    );
   }
 
   renderMobile() {
