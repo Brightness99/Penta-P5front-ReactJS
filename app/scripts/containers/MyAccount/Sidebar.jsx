@@ -44,6 +44,12 @@ export class Sidebar extends React.Component {
             </NavLink>
           </li>
           <li>
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/notificacoes">
+              <i><ModelsIcon /></i>
+              <span>Notificação</span>
+            </NavLink>
+          </li>
+          <li>
             <NavLink exact={true} activeClassName="is-active" to="/minha-conta/cloud">
               <i className="cloudIcon"><CloudIcon /></i>
               <span>Cloud</span>
