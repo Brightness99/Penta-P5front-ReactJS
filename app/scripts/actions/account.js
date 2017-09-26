@@ -76,9 +76,15 @@ export function accountSavedCreditCardDelete(cardId: number): Object {
   };
 }
 
-export function accountNotificationUpdate(data): Object {
+/**
+ * Update notifications settings
+ * @param {Object} notificationData
+ *
+ * @returns {Object}
+ */
+export function accountNotificationUpdate(notificationData: {}): Object {
   return {
     type: AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT,
-    payload: data,
+    payload: notificationData,
   };
 }
