@@ -155,6 +155,7 @@ export default {
         ...state,
         notification: {
           ...state.notification,
+          ...action.payload,
           error: null,
         }
       };
