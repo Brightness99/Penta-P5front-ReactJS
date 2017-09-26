@@ -8,6 +8,7 @@ import { isMobile } from 'utils/helpers';
 import { BoxRadio, Select } from 'atoms/Inputs';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { TrashIcon } from 'components/Icons';
+import Loading from 'components/Loading';
 import { accountSavedCreditCardDelete, accountSavedCreditCardFetch } from 'actions';
 import cx from 'classnames';
 
@@ -39,13 +40,12 @@ export class CardsAccount extends React.Component {
     dispatch(accountSavedCreditCardFetch());
   }
 
-  render() {
-    const { screenSize, account } = this.props;
+  renderItems() {
 
-    let cardItems;
+    const { account } = this.props;
 
     if (account.savedCreditCards.isLoaded && !account.savedCreditCards.isRunning) {
-      cardItems = account.savedCreditCards.savedCreditCards.map((item) => {
+      return account.savedCreditCards.cards.map((item) => {
         let cardImageElement;
         if (item.brand === 'mastercard') {
           cardImageElement = (
@@ -80,6 +80,14 @@ export class CardsAccount extends React.Component {
       });
     }
 
+    return (
+      <Loading />
+    );
+  }
+
+  render() {
+    const { screenSize } = this.props;
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -93,6 +101,7 @@ export class CardsAccount extends React.Component {
         title: 'Meus cartões',
       },
     ];
+
     return (
       <div className="container-creditCard">
         {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
@@ -100,7 +109,7 @@ export class CardsAccount extends React.Component {
           <h2 className="titl-creditCard">Minha conta</h2>
           <h3 className="subtitle-creditCard">Cartões salvos</h3>
           <div className="container-card">
-            {cardItems}
+            {this.renderItems()}
           </div>
         </div>
       </div>
