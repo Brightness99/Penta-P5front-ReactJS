@@ -7,5 +7,16 @@
     p {
       margin: 0;
     }
+    div {
+      &.qrk-type-of-loyalty {
+        background-color: $color-white;
+        color: #8261f8;
+        font-size: $font-size-il;
+        padding: 1rem 2rem;
+        border-radius: 50%;
+        font-family: $font-family-open-sans-bold;
+        text-transform: uppercase;
+      }
+    }
   }
 }
