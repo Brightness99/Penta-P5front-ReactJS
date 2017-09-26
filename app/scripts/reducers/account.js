@@ -222,11 +222,12 @@ export default {
         },
       };
     },
-    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT](state) {
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT](state, action) {
       return {
         ...state,
         notification: {
           ...state.notification,
+          ...action.payload,
           error: null,
         },
       };
