@@ -35,15 +35,14 @@ export function userNewsletterSignup(
 /**
  * Customer authentication
  *
- * @param {string} email
- * @param {string} password
+ * @param {object} userForm
  *
  * @returns {Object}
  */
-export function userSignIn(email: string, password: string): Object {
+export function userSignIn(userForm): Object {
   return {
     type: UserConstants.USER_AUTH_SIGN_IN_REQUEST,
-    payload: { email, password },
+    payload: userForm,
   };
 }
 

@@ -19,12 +19,10 @@ type GoogleFailureResult ={
 
 type FBSuccessResult ={
   status: string,
-  authResponse: {
-    accessToken: string,
-    expiresIn: string,
-    signedRequest: string,
-    userID: string
-  }
+  accessToken: string,
+  expiresIn: string,
+  signedRequest: string,
+  userID: string
 }
 
 type FBFailureResult ={
@@ -66,15 +64,14 @@ export default class SocialBlock extends React.PureComponent {
 
   loginFBSuccess=(data: FBSuccessResult) => {
     const { loginFBSuccess } = this.props;
-    if (!data.status) return;
+    if (data.status === '"not_authorized"') return;
 
     const result = {
       socialType: 'facebook',
       socialData: {
-        socialId: data.authResponse.userID,
-        socialToken: data.authResponse.accessToken,
+        socialId: data.userID,
+        socialToken: data.accessToken,
       },
-      isSuccess: true,
     };
     loginFBSuccess(result);
   };
@@ -85,7 +82,6 @@ export default class SocialBlock extends React.PureComponent {
 
     const result = {
       socialType: 'facebook',
-      isSuccess: false,
       error: data,
     };
 
@@ -101,7 +97,6 @@ export default class SocialBlock extends React.PureComponent {
         socialId: data.googleId,
         socialToken: data.tokenId,
       },
-      isSuccess: true,
     };
 
     loginGoogleSuccess(result);
@@ -113,7 +108,6 @@ export default class SocialBlock extends React.PureComponent {
     const result = {
       socialType: 'google',
       error: data,
-      isSuccess: false,
     };
 
     loginGoogleFailure(result);

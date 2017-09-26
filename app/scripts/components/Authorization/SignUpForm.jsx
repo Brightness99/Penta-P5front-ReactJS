@@ -4,6 +4,7 @@ import React from 'react';
 import { BlockTitle } from 'atoms/Titles';
 import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
+import Fingerprint from 'vendor/fingerprint2';
 
 type FormType = {
   first_name: { valid: boolean, value: string },
@@ -41,12 +42,16 @@ export default class SignUpForm extends React.PureComponent {
 
     const { form, canSubmit } = this.state;
     const { onSubmit } = this.props;
+
+    const fingerprint = document.getElementById('fingerprint').value;
+
     if (canSubmit === true) {
       const value = {
         first_name: form.first_name.value,
         email: form.email.value,
         email_confirmation: form.email_confirmation.value,
         password: form.password.value,
+        fingerprint,
       };
       onSubmit(value);
     }
@@ -72,6 +77,11 @@ export default class SignUpForm extends React.PureComponent {
     this.setState({ form: newState.form, canSubmit });
   };
 
+  componentDidMount = () => {
+    const fp = new Fingerprint();
+    fp.addContextToForm('signUpForm');
+  };
+
   render() {
     const { canSubmit } = this.state;
     const { form } = this.state;
@@ -80,7 +90,7 @@ export default class SignUpForm extends React.PureComponent {
       <div className="authentication__block">
         <BlockTitle>Cadastrar</BlockTitle>
         <hr />
-        <form className="authentication__block__form" onSubmit={this.handleSubmit}>
+        <form className="authentication__block__form" id="signUpForm" onSubmit={this.handleSubmit}>
           <InputFullName
             name="first_name"
             placeholder="Nome completo"

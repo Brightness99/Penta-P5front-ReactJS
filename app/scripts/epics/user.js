@@ -57,10 +57,7 @@ export function userSignIn(action$) {
 
       return rxAjax({
         endpoint,
-        payload: {
-          email: action.payload.email,
-          password: action.payload.password,
-        },
+        payload: action.payload,
         method: 'POST',
       })
         .do((data) => {
