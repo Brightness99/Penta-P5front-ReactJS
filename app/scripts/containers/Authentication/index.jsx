@@ -8,7 +8,7 @@ import { userSignIn, userSignUp, socialLoginSettingsFetch } from 'actions';
 import { SignInForm, SignUpForm, SocialBlock } from 'components/Authorization';
 
 type Props = {
-  submitSignIn: (email: string, password: string) => void,
+  submitSignIn: (data) => void,
   submitSignUp: (data: any) => void,
   socialLoginSettingsFetch: () => void,
   socialLoginSettings: {},
@@ -28,7 +28,6 @@ export class Authentication extends React.Component {
     }
     const result = Object.assign(data,
       {
-        fingerprint: '',
         socialType: '',
         hubspot_subscribe: true,
         socialData: {
@@ -40,12 +39,21 @@ export class Authentication extends React.Component {
     submitSignUp(result);
   };
 
-  socialLogin = (result) => {
+  socialLogin = (data) => {
     const { submitSignUp } = this.props;
+
     if (typeof submitSignUp !== 'function') {
       return;
     }
 
+    const result =  Object.assign(data,
+      {
+        hubspot_subscribe: true,
+        first_name: '',
+        email: '',
+        email_confirmation: '',
+        password: '',
+      });
     submitSignUp(result);
   };
 
@@ -61,7 +69,7 @@ export class Authentication extends React.Component {
             facebook={socialLoginSettings.socials.facebook}
             google={socialLoginSettings.socials.google} />
           <div className="authentication__wrapper">
-            <SignInForm onSubmit={(email, password) => submitSignIn && submitSignIn(email, password)} />
+            <SignInForm onSubmit={(data) => submitSignIn && submitSignIn(data)} />
             <SignUpForm onSubmit={this.signUp} />
           </div>
         </div>
@@ -75,7 +83,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  submitSignIn: (email, password) => dispatch(userSignIn(email, password)),
+  submitSignIn: (data) => dispatch(userSignIn(data)),
   submitSignUp: data => dispatch(userSignUp(data)),
   socialLoginSettingsFetch: () => dispatch(socialLoginSettingsFetch()),
 });
