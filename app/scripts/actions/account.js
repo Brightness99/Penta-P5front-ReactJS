@@ -47,10 +47,24 @@ export function accountAddressDelete(data): Object {
   };
 }
 
+export function accountSavedCreditCardFetch(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_REQUEST,
+    payload: {},
+  };
+}
+
 export function accountNotificationFetch(): Object {
   return {
     type: AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST,
     payload: {},
+  };
+}
+
+export function accountSavedCreditCardDelete(data): Object {
+  return {
+    type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE,
+    payload: data,
   };
 }
 
@@ -60,4 +74,3 @@ export function accountNotificationUpdate(data): Object {
     payload: data,
   };
 }
-

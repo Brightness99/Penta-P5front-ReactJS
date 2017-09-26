@@ -9,6 +9,7 @@ import { createReducer } from 'utils';
 import { AccountConstants } from 'constants/index';
 
 export const accountState = {
+  savedCreditCards: {},
   notification: {},
 };
 
@@ -57,7 +58,7 @@ export default {
         error: null,
       };
     },
-    [AccountConstants.ACCOUNT_UPDATE_SUBMIT_SUCCESS](state, action) {
+    [AccountConstants.ACCOUNT_UPDATE_SUBMIT_SUCCESS](state) {
       return {
         ...state,
         isRunning: false,
@@ -120,43 +121,33 @@ export default {
         error: action.payload,
       };
     },
-    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST](state) {
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_REQUEST](state) {
       return {
         ...state,
-        notification: {
+        savedCreditCards: {
+          savedCreditCards: [],
           isRunning: true,
           isLoaded: false,
-        }
+        },
       };
     },
-    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_SUCCESS](state, action) {
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_SUCCESS](state, action) {
       return {
         ...state,
-        notification: {
-          ...action.payload,
+        savedCreditCards: {
+          savedCreditCards: action.payload,
           isRunning: false,
-          isLoaded: true,
+          isLoaded: true
         }
       };
     },
-    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_FAILURE](state, action) {
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state) {
       return {
         ...state,
-        notification: {
-          ...state.notification,
-          isRunning: false,
-          isLoaded: true,
-          error: action.payload,
-        }
-      };
-    },
-    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT](state, action) {
-      return {
-        ...state,
-        notification: {
-          ...state.notification,
+        savedCreditCards: {
+          ...state.savedCreditCards,
           error: null,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS](state, action) {
@@ -167,7 +158,7 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: null,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE](state, action) {
@@ -178,7 +169,68 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
-        }
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        notification: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT](state) {
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        },
       };
     },
   }),
