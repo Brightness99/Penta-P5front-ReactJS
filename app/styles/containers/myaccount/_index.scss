@@ -1160,38 +1160,29 @@
   >div { 
     margin-bottom: 3rem;
     .btn-addresses--mobile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      margin-top: 2rem;  
-      a {
-        justify-content: center;
-        display: flex;
+      @include center-child-flex;
+      background: transparent;
+      margin-top: 2rem;
+
+      button {
         align-items: center;
-        flex: 1;
+        border: 0.1rem solid $color-lightGray;
+        color: $color-lightGray;
         font-size: 1rem;
-        height: 40px;
-        max-width: 200px;
-        border: 1px solid $color-lightGray;;
-        color: $color-lightGray;;
-        i {
-          margin-right: 8px;
-          svg {
-            path {
-              fill: $color-lightGray;
-            }
-          }
+        height: 4rem;
+        margin: 0;
+        max-width: 20rem;
+
+        svg {
+          fill: currentColor;
         }
       }
     }
   }
   .box-addressDelivery {
     display: flex;
-    flex-direction: row;
     flex-direction: column;
     flex-wrap:nowrap;
-    //overflow-x: auto;
     margin-bottom: 0;
     @include lg {
       flex-wrap: wrap;
@@ -1199,7 +1190,8 @@
       flex-direction: row;
       margin: 1rem 0 3.7rem 0;
     }
-    > div {
+    > div,
+    > button {
       border: 1px solid #dbdddf;
       border-radius: 2px;
       min-width: 270px;
@@ -1241,35 +1233,25 @@
             margin-bottom: 0;
           }
           &.text-edit, &.text-delete {
+            color: $color-printi-blue;
             font-family: $font-family-open-sans;
             font-size: $font-size-sm;
-            line-height: 2.14;
-          }
-          &.text-edit {
-            a {
-              color: $color-printi-blue;
-              i {
-                margin-right: 5px;
-                svg {
-                  fill: $color-printi-blue;
-                  width: 13px;
-                  height: 12px;
-                }
-              }
+            line-height: 1;
+
+            button {
+              background: transparent;
+              border: 0 transparent;
+              color: currentColor;
+            }
+            svg {
+              fill: currentColor;
+              height: 1.2rem;
+              margin-right: 0.8rem;
+              width: 1.3rem;
             }
           }
           &.text-delete {
-            a {
-              color: $color-melon;
-              i {
-                margin-right: 5px;
-                svg {
-                  fill: $color-melon;
-                  width: 13px;
-                  height: 12px;
-                }
-              }
-            }
+            color: $color-melon;
           }
         }
       }
@@ -1291,14 +1273,14 @@
           }
         }
       }
+
       &.box-addNewAddress {
-        max-width: 49.5%;
-        align-items: center;
-        justify-content: center;
-        display: flex;
+        @include center-child-flex
         background-color: $color-lightBlue;
-        border: 2px dotted $color-printi-blue;
+        border: 0.2rem dotted $color-printi-blue;
         cursor: pointer;
+        max-width: 49.5%;
+
         svg {
           fill: $color-printi-blue;
         }

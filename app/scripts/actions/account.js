@@ -40,10 +40,18 @@ export function accountAddressCreate(data): Object {
   };
 }
 
-export function accountAddressDelete(data): Object {
+/**
+ * Address Delete
+ * @param {number} addressId
+ *
+ * @returns {Object}
+ */
+export function accountAddressDelete(addressId: number): Object {
   return {
     type: AccountConstants.ACCOUNT_ADDRESS_DELETE,
-    payload: data,
+    payload: {
+      id: addressId,
+    },
   };
 }
 
