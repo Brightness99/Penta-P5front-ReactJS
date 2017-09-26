@@ -190,7 +190,8 @@ export class Header extends React.Component {
                 <MyAccountIcon />
               </button>
               <MyAccount screenSize={screenSize}
-                         isAuthorized={isAuthorized} />
+                         isAuthorized={isAuthorized}
+                         handleLogOut={this.handleLogOut} />
             </div>
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           </div>
