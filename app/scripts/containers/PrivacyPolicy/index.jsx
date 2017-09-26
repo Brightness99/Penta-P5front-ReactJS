@@ -29,8 +29,8 @@ export class PrivacyPolicy extends React.Component {
     ];
     return (
       <section>
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <div className="container">
+          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
           <div className="org-terms-use-privacy">
             <h2 className="title-terms-use-privacy">Política de privacidade</h2>
 
