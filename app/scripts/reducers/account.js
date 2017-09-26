@@ -43,7 +43,7 @@ export default {
         addresses: {
           isRunning: true,
           isLoaded: false,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_ADDRESS_FETCH_SUCCESS](state, action) {
@@ -53,17 +53,17 @@ export default {
           ...action.payload,
           isRunning: false,
           isLoaded: true,
-        }
+        },
       };
     },
-    [AccountConstants.ACCOUNT_ADDRESS_FETCH_FAILURE](state, action) {
+    [AccountConstants.ACCOUNT_ADDRESS_FETCH_FAILURE](state) {
       return {
         ...state,
         addresses: {
           ...state.addresses,
           isRunning: false,
           isLoaded: true,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_UPDATE_SUBMIT](state, action) {
@@ -95,11 +95,12 @@ export default {
         addresses: {
           ...action.payload,
           error: null,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_ADDRESS_CREATE_SUBMIT_SUCCESS](state, action) {
       state.addresses[action.payload.type.toLowerCase()].push(action.payload);
+
       return {
         ...state,
         addresses: {
@@ -107,7 +108,7 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: null,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_ADDRESS_CREATE_SUBMIT_FAILURE](state, action) {
@@ -117,26 +118,29 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
-        }
+        },
       };
     },
-    [AccountConstants.ACCOUNT_ADDRESS_DELETE](state, action) {
+    [AccountConstants.ACCOUNT_ADDRESS_DELETE](state) {
       return {
         ...state,
         addresses: {
-          ...action.payload,
+          ...state.addresses,
           error: null,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_ADDRESS_DELETE_SUCCESS](state, action) {
       return {
         ...state,
         addresses: {
+          ...state.addresses,
+          billing: state.addresses.billing.filter((item) => item.id !== action.payload.id),
+          shipping: state.addresses.shipping.filter((item) => item.id !== action.payload.id),
           isRunning: false,
           isLoaded: true,
           error: null,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_ADDRESS_DELETE_FAILURE](state, action) {
@@ -146,7 +150,7 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_REQUEST](state) {
@@ -165,8 +169,8 @@ export default {
         savedCreditCards: {
           savedCreditCards: action.payload,
           isRunning: false,
-          isLoaded: true
-        }
+          isLoaded: true,
+        },
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state) {

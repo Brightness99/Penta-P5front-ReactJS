@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
-import SVG from 'react-inlinesvg';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Collapse, { Panel } from 'rc-collapse';
-import { Link } from 'react-router-dom';
 import Loading from 'components/Loading';
-import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
+import { AccordionMinusIcon, AccordionPlusIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
 import { accountAddressCreate, accountAddressDelete, accountAddressFetch } from 'actions';
 import { connect } from 'react-redux';
 
@@ -16,22 +15,22 @@ type Props = {
 };
 
 type State = {
-  isExpanded: boolean,
+  isExpanded: {
+    shipping: false,
+    billing: false,
+  },
 };
 
 export class MyAddresses extends React.Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       isExpanded: false,
     };
   }
 
-  static defaultProps = {
-    screenSize: 'xs',
-  };
+  shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -39,12 +38,20 @@ export class MyAddresses extends React.Component {
     dispatch(accountAddressFetch());
   }
 
-  props: Props;
-  state: State;
+  static props: Props;
 
-  AccordionClose = <SVG src={require('assets/media/svg/icon_accordionclose.svg')} key="accordion-closed" />;
+  static state: State;
 
-  AccordionOpen = <SVG src={require('assets/media/svg/icon_accordionopen.svg')} key="accordion-open" />;
+  handleExpand = (pane) => {
+    const { isExpanded } = this.state;
+
+    this.setState({
+      isExpanded: {
+        ...isExpanded,
+        [pane]: !isExpanded[pane],
+      },
+    });
+  };
 
   handleCreateAddress = () => {
     const { dispatch } = this.props;
@@ -58,185 +65,156 @@ export class MyAddresses extends React.Component {
       state: 'SP',
       street: 'Alameda Santos',
       number: '2131',
-      additional_address: null
+      additional_address: null,
     };
 
-    //dispatch(accountAddressCreate(dataToCreate));
-  }
+    // dispatch(accountAddressCreate(dataToCreate));
+  };
 
-  handleDeleteAddress = (id) => {
+  handleDeleteAddress = (ev) => {
     const { dispatch } = this.props;
 
-    dispatch(accountAddressDelete({
-      id: id.toString()
-    }));
-  }
+    dispatch(accountAddressDelete(ev.currentTarget.value));
+  };
 
-  renderDesktopItems(type) {
+  renderAddButton(addressType) {
+    const { screenSize } = this.props;
 
-    const { account } = this.props;
-
-    if (account.addresses.isLoaded && !account.addresses.isRunning) {
-      return account.addresses[type].map((item) => {
-        return (
-          <div key={item.id.toString()}>
-            <div className="headerTitle-address">
-              <div>
-                <h5>{item.receiver_name}</h5>
-              </div>
-              <div className="text-edit">
-                <Link to="#"><i><PencilIcon /></i>Editar</Link>
-              </div>
-              <div className="text-delete" onClick={() => this.handleDeleteAddress(item.id)}>
-                <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-              </div>
-            </div>
-            <div className="details-address">
-              <div className="details">
-                <p className="firstDetail">Nome</p>
-                <p className="secondDetail">{item.receiver_name}</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">Endereço</p>
-                <p className="secondDetail">{item.additional_address} {item.street}</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">Cidade/UF</p>
-                <p className="secondDetail">{item.city}/{item.state}</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">CEP</p>
-                <p className="secondDetail">{item.zipcode}</p>
-              </div>
-            </div>
-          </div>
-        );
-      });
+    if (isMobile(screenSize)) {
+      return (
+        <div className="btn-addresses--mobile">
+          <button
+            className="atm-button-transparent"
+            value={addressType}
+            onClick={this.handleCreateAddress}
+          >
+            <AddressIcon />Novo endereço
+          </button>
+        </div>
+      );
     }
 
     return (
-      <Loading />
+      <button
+        className="box-addNewAddress"
+        value={addressType}
+        onClick={this.handleCreateAddress}
+      >
+        <i><Plus /></i>
+      </button>
     );
   }
 
-  renderMobileItems(type) {
-    const { account } = this.props;
+  renderItems(addresses) {
+    const { screenSize } = this.props;
 
-    if (account.addresses.isLoaded && !account.addresses.isRunning) {
-      return account.addresses[type].map((item) => {
-        return (
-          <div className="box-addressDelivery" key={item.id.toString()}>
-            <div>
-              <div className="headerTitle-address">
-                <div>
-                  <h5>{item.receiver_name}</h5>
-                </div>
-                <div className="text-edit">
-                  <Link to="#"><i><PencilIcon /></i></Link>
-                </div>
-                <div className="text-delete">
-                  <Link to="#"><i><TrashIcon /></i></Link>
-                </div>
-              </div>
-              <div className="details-address">
-                <div className="details">
-                  <p className="firstDetail">Nome</p>
-                  <p className="secondDetail">{item.receiver_name}</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">Endereço</p>
-                  <p className="secondDetail">{item.additional_address} {item.street}</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">Cidade/UF</p>
-                  <p className="secondDetail">{item.city}/{item.state}</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">CEP</p>
-                  <p className="secondDetail">{item.zipcode}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      });
+    if (!addresses) {
+      return null;
     }
 
-    return (
-      <Loading />
-    );
-  }
-
-  renderMobile() {
-    const { isExpanded } = this.state;
-
-    const headerDelivery = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de entrega</h4>
-    </div>);
-    const headerCollection = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de cobrança</h4>
-    </div>);
-    return (
-      <section className="container-myaddresses">
-        <div className="container">
-          <h2 className="title-myAddresses">Minha conta</h2>
-          <h3 className="subtitle-myAddresses">Meus endereços</h3>
+    return addresses.map((item) => (
+      <div key={item.id}>
+        <div className="headerTitle-address">
           <div>
-            <Collapse
-              onChange={this.handleExpand}
-            >
-              <Panel
-                header={headerDelivery}
-                headerClass="app__footer__links-header"
-                showArrow={false}
-              >
-                <div>
-                  {this.renderMobileItems('shipping')}
-                  <div className="btn-addresses--mobile">
-                    <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
-                  </div>
-                </div>
-
-              </Panel>
-            </Collapse>
+            <h5>{item.receiver_name}</h5>
           </div>
-
-          <div>
-            <Collapse
-              onChange={this.handleExpand}
+          <div className="text-edit">
+            <button
+              value={item.id}
             >
-              <Panel
-                header={headerCollection}
-                headerClass="app__footer__links-header"
-                showArrow={false}
-              >
-                <div>
-                  {this.renderMobileItems('billing')}
-                  <div className="btn-addresses--mobile">
-                    <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
-                  </div>
-                </div>
-              </Panel>
-            </Collapse>
+              <PencilIcon />
+              {!isMobile(screenSize) && 'Editar'}
+            </button>
+          </div>
+          <div className="text-delete">
+            <button
+              value={item.id}
+              onClick={this.handleDeleteAddress}
+            >
+              <TrashIcon />
+              {!isMobile(screenSize) && 'Excluir'}
+            </button>
           </div>
         </div>
-      </section>
-    );
+        <div className="details-address">
+          <div className="details">
+            <p className="firstDetail">Nome</p>
+            <p className="secondDetail">{item.receiver_name}</p>
+          </div>
+          <div className="details">
+            <p className="firstDetail">Endereço</p>
+            <p className="secondDetail">{item.additional_address} {item.street}</p>
+          </div>
+          <div className="details">
+            <p className="firstDetail">Cidade/UF</p>
+            <p className="secondDetail">{item.city}/{item.state}</p>
+          </div>
+          <div className="details">
+            <p className="firstDetail">CEP</p>
+            <p className="secondDetail">{item.zipcode}</p>
+          </div>
+        </div>
+      </div>
+    ));
   }
 
-  renderDesktop() {
+  renderPage() {
     const { isExpanded } = this.state;
-    const { account } = this.props;
-    const headerDelivery = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de entrega</h4>
-    </div>);
-    const headerCollection = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de cobrança</h4>
-    </div>);
+    const { account: { addresses } } = this.props;
+
+    return [
+      <div key="shippingItems">
+        <Collapse
+          onChange={() => this.handleExpand('shipping')}
+        >
+          <Panel
+            header={(
+              <div className="header-accordion">
+                {isExpanded.shipping ? <AccordionMinusIcon /> : <AccordionPlusIcon />}
+                <h4 className="title-addresses">Endereços de entrega</h4>
+              </div>
+            )}
+            headerClass="app__footer__links-header"
+            showArrow={false}
+          >
+            <div>
+              <div className="box-addressDelivery">
+                {this.renderItems(addresses.shipping)}
+                {this.renderAddButton('shipping')}
+              </div>
+            </div>
+          </Panel>
+        </Collapse>
+      </div>,
+      <div key="billingItems">
+        <Collapse
+          onChange={() => this.handleExpand('billing')}
+        >
+          <Panel
+            header={(
+              <div className="header-accordion">
+                {isExpanded.billing ? <AccordionMinusIcon /> : <AccordionPlusIcon />}
+                <h4 className="title-addresses">Endereços de cobrança</h4>
+              </div>
+            )}
+            headerClass="app__footer__links-header"
+            showArrow={false}
+          >
+            <div>
+              <div className="box-addressDelivery">
+                {this.renderItems(addresses.billing)}
+                {this.renderAddButton('billing')}
+              </div>
+            </div>
+          </Panel>
+        </Collapse>
+      </div>,
+    ];
+  }
+
+  render() {
+    const { screenSize, account: { addresses } } = this.props;
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -248,76 +226,17 @@ export class MyAddresses extends React.Component {
       },
       {
         title: 'Meus pedidos',
-        url: '/meus-pedidos',
-      },
-      {
-        title: 'Pedido nº483.093',
       },
     ];
-    let shippingItems = account.shipping ? this.renderDesktopItems(account.shipping) : {};
-    let billingItems = account.billing ? this.renderDesktopItems(account.billing) : {};
 
     return (
       <section className="container-myaddresses">
-        <Breadcrumbs links={breadcrumb} />
+        {isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h2>Minha conta</h2>
         <h3 className="subtitle-myAddresses">Meus endereços</h3>
-
-        <div>
-          <Collapse
-            onChange={this.handleExpand}
-          >
-            <Panel
-              header={headerDelivery}
-              headerClass="app__footer__links-header"
-              showArrow={false}
-            >
-              <div>
-                <div className="box-addressDelivery">
-                  {this.renderDesktopItems('shipping')}
-                  <div className="box-addNewAddress">
-                    <Link to="#" onClick={this.handleCreateAddress}>
-                      <i><Plus /></i>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </Panel>
-          </Collapse>
-        </div>
-
-        <div>
-          <Collapse
-            onChange={this.handleExpand}
-          >
-            <Panel
-              header={headerCollection}
-              headerClass="app__footer__links-header"
-              showArrow={false}
-            >
-              <div>
-                <div className="box-addressDelivery">
-                  {this.renderDesktopItems('billing')}
-                  <div className="box-addNewAddress">
-                    <Link to="#">
-                      <i><Plus /></i>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </Panel>
-          </Collapse>
-        </div>
+        {!addresses.isLoaded || addresses.isLoading ? <Loading /> : this.renderPage()}
       </section>
     );
-  }
-
-  render() {
-    const { screenSize } = this.props;
-
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
   }
 }
 
