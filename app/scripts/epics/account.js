@@ -239,7 +239,7 @@ export function accountSavedCreditCardFetch(action$) {
 export function accountSavedCreditCardDelete(action$) {
   return action$.ofType(AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE)
   .switchMap(action => {
-    const endpoint = `/v2/customers/credit-cards/` + action.payload.id;
+    const endpoint = `/v2/customers/credit-cards/${action.payload.id}`;
     return rxAjax({
       endpoint,
       method: 'DELETE',
