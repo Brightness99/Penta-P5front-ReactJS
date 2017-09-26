@@ -61,10 +61,18 @@ export function accountNotificationFetch(): Object {
   };
 }
 
-export function accountSavedCreditCardDelete(data): Object {
+/**
+ * Delete Saved Credit Card
+ * @param {number} cardId
+ *
+ * @returns {Object}
+ */
+export function accountSavedCreditCardDelete(cardId: number): Object {
   return {
     type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE,
-    payload: data,
+    payload: {
+      id: cardId,
+    },
   };
 }
 

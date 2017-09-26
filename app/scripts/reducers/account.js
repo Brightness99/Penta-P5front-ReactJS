@@ -105,7 +105,7 @@ export default {
         error: null,
       };
     },
-    [AccountConstants.ACCOUNT_ADDRESS_DELETE_SUCCESS](state, action) {
+    [AccountConstants.ACCOUNT_ADDRESS_DELETE_SUCCESS](state) {
       return {
         ...state,
         isRunning: false,
@@ -125,7 +125,7 @@ export default {
       return {
         ...state,
         savedCreditCards: {
-          savedCreditCards: [],
+          cards: [],
           isRunning: true,
           isLoaded: false,
         },
@@ -135,10 +135,10 @@ export default {
       return {
         ...state,
         savedCreditCards: {
-          savedCreditCards: action.payload,
+          cards: action.payload,
           isRunning: false,
-          isLoaded: true
-        }
+          isLoaded: true,
+        },
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state) {
@@ -146,6 +146,26 @@ export default {
         ...state,
         savedCreditCards: {
           ...state.savedCreditCards,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state) {
+      return {
+        ...state,
+        savedCreditCards: {
+          ...state.savedCreditCards,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_SUCCESS](state, action) {
+      return {
+        ...state,
+        savedCreditCards: {
+          cards: state.savedCreditCards.cards.filter((item) => item.id !== action.payload.id),
+          isRunning: false,
+          isLoaded: true,
           error: null,
         },
       };
