@@ -11,6 +11,7 @@ import ExclusiveService from './ExclusiveService';
 import Menu from './Menu';
 import SearchBar from './SearchBar';
 import Topbar from './Topbar';
+import LoyaltyTopbar from './LoyaltyTopbar';
 import Products from './Products';
 import MyAccount from './MyAccount';
 
@@ -149,6 +150,7 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
+        <LoyaltyTopbar />
         <Topbar handleClose={this.handlePaneHide} />
         <div className="org-header-content">
           <div className="container">
