@@ -1,0 +1,11 @@
+.org-loyalty-topbar {
+  background-color: #8261f8;
+  padding: 1rem;
+  .mol-loyalty-topbar {
+    display: flex;
+    justify-content: space-between;
+    p {
+      margin: 0;
+    }
+  }
+}
