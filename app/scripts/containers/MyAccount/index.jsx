@@ -10,6 +10,7 @@ import OrderListDetails from './OrderListDetails';
 import MyAddresses from './MyAddresses';
 import CardsAccount from './CardsAccount';
 import TemplateModels from './TemplateModels';
+import Notification from './Notification';
 import Cloud from './Cloud';
 import Loyalty from './Loyalty';
 import CustomerData from './CustomerData';
@@ -76,6 +77,10 @@ export class MyAccount extends React.Component {
         <Route
           path="/minha-conta/modelos-salvos"
           render={(props) => <TemplateModels {...props} screenSize={screenSize} />}
+        />
+        <Route
+          path="/minha-conta/notificacoes"
+          render={(props) => <Notification {...props} screenSize={screenSize} />}
         />
         <Route
           path="/minha-conta/cloud"

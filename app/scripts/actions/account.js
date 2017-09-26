@@ -46,3 +46,18 @@ export function accountAddressDelete(data): Object {
     payload: data,
   };
 }
+
+export function accountNotificationFetch(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST,
+    payload: {},
+  };
+}
+
+export function accountNotificationUpdate(data): Object {
+  return {
+    type: AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT,
+    payload: data,
+  };
+}
+
