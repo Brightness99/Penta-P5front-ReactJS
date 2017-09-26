@@ -5,7 +5,8 @@ import cx from 'classnames';
 import { connect } from 'react-redux';
 import { PageTitle } from 'atoms/Titles';
 import { userSignIn, userSignUp, socialLoginSettingsFetch } from 'actions';
-import { SignInForm, SignUpForm, SocialBlock } from 'components/Authorization';
+import { SignInForm, SignUpForm, SocialBlock, SocialSignUpForm } from 'components/Authorization';
+import Modal from 'components/Modal';
 
 type Props = {
   submitSignIn: (data) => void,
@@ -14,14 +15,32 @@ type Props = {
   socialLoginSettings: {},
 };
 
+type States = {
+  isModalOpen: boolean,
+  isSocialAuthInProgress: boolean,
+  facebookSocialInfo: {}
+}
+
 export class Authentication extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isModalOpen: false,
+      isSocialAuthInProgress: false,
+      facebookSocialInfo: null,
+    };
+  }
+
   componentDidMount() {
     this.props.socialLoginSettingsFetch();
   }
 
   static props: Props;
+  static state: States;
 
-  signUp=(data) => {
+  signUp = (data) => {
     const { submitSignUp } = this.props;
     if (typeof submitSignUp !== 'function') {
       return;
@@ -39,6 +58,26 @@ export class Authentication extends React.Component {
     submitSignUp(result);
   };
 
+  facebookLogin = (data) => {
+    this.setState({
+      isSocialAuthInProgress: true,
+      facebookSocialInfo: data,
+      isModalOpen: true,
+    });
+  };
+
+  facebookSignUp = (data) => {
+    const { submitSignUp } = this.props;
+
+    if (typeof submitSignUp !== 'function') {
+      return;
+    }
+
+    const result = Object.assign(data, this.state.facebookSocialInfo);
+
+    submitSignUp(result);
+  };
+
   socialLogin = (data) => {
     const { submitSignUp } = this.props;
 
@@ -46,10 +85,9 @@ export class Authentication extends React.Component {
       return;
     }
 
-    const result =  Object.assign(data,
+    const result = Object.assign(data,
       {
         hubspot_subscribe: true,
-        first_name: '',
         email: '',
         email_confirmation: '',
         password: '',
@@ -57,20 +95,43 @@ export class Authentication extends React.Component {
     submitSignUp(result);
   };
 
+  renderSignUpForm = () => {
+    if (this.state.isSocialAuthInProgress) {
+      return <SocialSignUpForm name={this.state.facebookSocialInfo.first_name} onSubmit={this.facebookSignUp} />;
+    }
+
+    return <SignUpForm onSubmit={this.signUp} />;
+  };
+
+  renderModalDialog = () => {
+    if (!this.state.isModalOpen) return '';
+
+    return (
+      <Modal title="Atenção" handleCloseModal={this.closeModal}>
+          Para acessar com o seu Facebook. Informar o Seu e-mail.
+        </Modal>);
+  };
+
+  closeModal = () => {
+    this.setState({ isModalOpen: false });
+  };
+
   render() {
     const { submitSignIn, socialLoginSettings } = this.props;
     return (
       <div className="container">
+        {this.renderModalDialog()}
         <PageTitle className="text-center">Entre ou cadastre-se</PageTitle>
         <div className={cx('authentication')}>
           <SocialBlock
-            loginFBSuccess={this.socialLogin}
+            loginFBSuccess={this.facebookLogin}
             loginGoogleSuccess={this.socialLogin}
             facebook={socialLoginSettings.socials.facebook}
-            google={socialLoginSettings.socials.google} />
+            google={socialLoginSettings.socials.google}
+          />
           <div className="authentication__wrapper">
             <SignInForm onSubmit={(data) => submitSignIn && submitSignIn(data)} />
-            <SignUpForm onSubmit={this.signUp} />
+            {this.renderSignUpForm()}
           </div>
         </div>
       </div>

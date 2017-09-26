@@ -4,7 +4,7 @@ import SVG from 'react-inlinesvg';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
-type GoogleSuccessResult ={
+type GoogleSuccessResult = {
   googleId: string,
   tokenId: string,
   accessToken: string,
@@ -12,23 +12,23 @@ type GoogleSuccessResult ={
   profileObj: Object
 }
 
-type GoogleFailureResult ={
+type GoogleFailureResult = {
   error: string,
   details: string
 }
 
-type FBSuccessResult ={
+type FBSuccessResult = {
   status: string,
   accessToken: string,
   expiresIn: string,
   signedRequest: string,
-  userID: string
+  userID: string,
+  name: string,
 }
 
-type FBFailureResult ={
-}
+type FBFailureResult = {}
 
-type SocialLoginResult ={
+type SocialLoginResult = {
   socialType: string,
   socialData: {
     socialId: string,
@@ -39,32 +39,32 @@ type SocialLoginResult ={
 }
 
 type Props = {
-    facebook: {
-      enabled: boolean,
-      credentials: {
-        app_id: string,
-        secret_key: string,
-      }
-    },
-    google: {
-      enabled: boolean,
-      credentials: {
-        client_id: string,
-        secret_key: string,
-      }
-    },
-    loginFBSuccess: (result: SocialLoginResult)=>void,
-    loginFBFailure: (result: SocialLoginResult)=>void,
-    loginGoogleSuccess: (result: SocialLoginResult)=>void,
-    loginGoogleFailure: (result: SocialLoginResult)=>void,
+  facebook: {
+    enabled: boolean,
+    credentials: {
+      app_id: string,
+      secret_key: string,
+    }
+  },
+  google: {
+    enabled: boolean,
+    credentials: {
+      client_id: string,
+      secret_key: string,
+    }
+  },
+  loginFBSuccess: (result: SocialLoginResult) => void,
+  loginFBFailure: (result: SocialLoginResult) => void,
+  loginGoogleSuccess: (result: SocialLoginResult) => void,
+  loginGoogleFailure: (result: SocialLoginResult) => void,
 };
 
 export default class SocialBlock extends React.PureComponent {
   props: Props;
 
-  loginFBSuccess=(data: FBSuccessResult) => {
+  loginFBSuccess = (data: FBSuccessResult) => {
     const { loginFBSuccess } = this.props;
-    if (data.status === '"not_authorized"') return;
+    if (data.status === '"not_authorized"' || !data.userID) return;
 
     const result = {
       socialType: 'facebook',
@@ -72,13 +72,16 @@ export default class SocialBlock extends React.PureComponent {
         socialId: data.userID,
         socialToken: data.accessToken,
       },
+      first_name: data.name,
     };
     loginFBSuccess(result);
   };
 
-  loginFBFailure= (data: FBFailureResult) => {
+  loginFBFailure = (data: FBFailureResult) => {
     const { loginFBFailure } = this.props;
-    if (typeof loginFBFailure !== 'function') { return; }
+    if (typeof loginFBFailure !== 'function') {
+      return;
+    }
 
     const result = {
       socialType: 'facebook',
@@ -88,7 +91,7 @@ export default class SocialBlock extends React.PureComponent {
     loginFBFailure(result);
   };
 
-  loginGoogleSuccess= (data: GoogleSuccessResult) => {
+  loginGoogleSuccess = (data: GoogleSuccessResult) => {
     const { loginGoogleSuccess } = this.props;
 
     const result = {
@@ -102,9 +105,11 @@ export default class SocialBlock extends React.PureComponent {
     loginGoogleSuccess(result);
   };
 
-  loginGoogleFailure= (data: GoogleFailureResult) => {
+  loginGoogleFailure = (data: GoogleFailureResult) => {
     const { loginGoogleFailure } = this.props;
-    if (typeof loginGoogleFailure !== 'function') { return; }
+    if (typeof loginGoogleFailure !== 'function') {
+      return;
+    }
     const result = {
       socialType: 'google',
       error: data,
