@@ -206,8 +206,6 @@ export function accountSavedCreditCardFetch(action$) {
         method: 'GET',
       })
         .map(data => {
-          console.log('--');
-          console.log(data);
           if (data.status === 200 && data.response) {
             return {
               type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_SUCCESS,
@@ -236,5 +234,42 @@ export function accountSavedCreditCardFetch(action$) {
           }]);
         });
     });
+}
+
+export function accountSavedCreditCardDelete(action$) {
+  return action$.ofType(AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE)
+  .switchMap(action => {
+    const endpoint = `/v2/customers/credit-cards/` + action.payload.id;
+    return rxAjax({
+      endpoint,
+      method: 'DELETE',
+    })
+    .map(data => {
+      if (data.status === 204) {
+        return {
+          type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_SUCCESS,
+          payload: {
+            id: action.payload.id
+          },
+          meta: { updatedAt: getUnixtime() },
+        };
+      }
+
+      return {
+        type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_FAILURE,
+        payload: { message: 'Algo de errado não está correto' },
+        meta: { updatedAt: getUnixtime() },
+      };
+    })
+    .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+    .defaultIfEmpty({ type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_CANCEL })
+    .catch(error => ([
+      {
+        type: AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_FAILURE,
+        payload: { message: error.message, status: error.status },
+        meta: { updatedAt: getUnixtime() },
+      },
+    ]));
+  });
 }
 
