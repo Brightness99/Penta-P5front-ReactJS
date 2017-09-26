@@ -8,7 +8,9 @@ import { createReducer } from 'utils';
 
 import { AccountConstants } from 'constants/index';
 
-export const accountState = {};
+export const accountState = {
+  notification: {},
+};
 
 export default {
   account: createReducer(accountState, {
@@ -121,47 +123,62 @@ export default {
     [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST](state) {
       return {
         ...state,
-        isRunning: true,
-        isLoaded: false,
+        notification: {
+          isRunning: true,
+          isLoaded: false,
+        }
       };
     },
     [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_SUCCESS](state, action) {
       return {
         ...state,
-        ...action.payload,
-        isRunning: false,
-        isLoaded: true,
+        notification: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        }
       };
     },
     [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_FAILURE](state, action) {
       return {
         ...state,
-        isRunning: false,
-        isLoaded: true,
-        error: action.payload,
+        notification: {
+          ...state.notification,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        }
       };
     },
     [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT](state, action) {
       return {
         ...state,
-        ...action.payload,
-        error: null,
+        notification: {
+          ...state.notification,
+          error: null,
+        }
       };
     },
     [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS](state, action) {
       return {
         ...state,
-        isRunning: false,
-        isLoaded: true,
-        error: null,
+        notification: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+          error: null,
+        }
       };
     },
     [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE](state, action) {
       return {
         ...state,
-        isRunning: false,
-        isLoaded: true,
-        error: action.payload,
+        notification: {
+          ...state.notification,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        }
       };
     },
   }),

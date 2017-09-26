@@ -5,7 +5,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Select } from 'atoms/Inputs';
 import { ErrorText } from 'atoms/Texts';
 import { RadioButton } from 'components/Input';
-import { accountNotificationUpdate } from 'actions';
+import { accountNotificationUpdate, accountNotificationFetch } from 'actions';
 
 type Props = {
   screenSize: string,
@@ -18,10 +18,8 @@ export class Notification extends React.Component {
   constructor(props) {
     super(props);
 
-    const { account } = this.props;
-
     this.state = {
-      value: account.sms_enabled || '0',
+      value: '',
     };
   }
 
@@ -30,6 +28,12 @@ export class Notification extends React.Component {
   };
   
   static props: Props;
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountNotificationFetch());
+  }
 
   handleChange = (selected) => {
 
@@ -48,6 +52,52 @@ export class Notification extends React.Component {
     }));
   }
 
+  renderForm() {
+
+    const { account } = this.props;
+    let value = '';
+
+    if (account.notification.isLoaded && !account.notification.isRunning) {
+      value = account.notification.sms_enabled;
+    }
+
+    if (value !== '') {
+      return (
+        <div>
+          <div className="notification-option">
+            <label>
+              <RadioButton
+                name='sms-notification'
+                value='yes'
+                checked={value === '1'}
+                onChange={() => { this.handleChange('1'); }}
+              />
+              Yes
+            </label>
+          </div>
+
+          <div className="notification-option">
+            <label>
+              <RadioButton
+                name='sms-notification'
+                value='no'
+                checked={value === '0'}
+                onChange={() => { this.handleChange('0'); }}
+              />
+              No
+            </label>
+          </div>
+
+          <div className="mol-checkout-pane-footer">
+            <button onClick={this.handleSave} className="atm-send-button">Save</button>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
   renderMobile() {
 
     const { account } = this.props;
@@ -58,7 +108,8 @@ export class Notification extends React.Component {
       <div className="container-myData">
         <h2>Minha conta</h2>
         <h3 className="title-myData">Notificação</h3>
-        <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
+        <p className="legend-myorder">Do you wish to receive SMS notifications?</p>
+        {form}
       </div>
     );
   }
@@ -79,7 +130,8 @@ export class Notification extends React.Component {
       },
     ];
 
-    const { value } = this.state;
+    const form = this.renderForm();
+
     return (
       <div className="container-myData">
         <Breadcrumbs links={breadcrumb} />
@@ -87,33 +139,7 @@ export class Notification extends React.Component {
         <h3 className="title-myData">Notificação</h3>
         <p className="legend-myorder">Do you wish to receive SMS notifications?</p>
 
-        <div className="notification-option">
-          <label>
-            <RadioButton
-              name='sms-notification'
-              value='yes'
-              checked={value === '1'}
-              onChange={() => { this.handleChange('1'); }}
-            />
-            Yes
-          </label>
-        </div>
-
-        <div className="notification-option">
-          <label>
-            <RadioButton
-              name='sms-notification'
-              value='no'
-              checked={value === '0'}
-              onChange={() => { this.handleChange('0'); }}
-            />
-            No
-          </label>
-        </div>
-
-        <div className="mol-checkout-pane-footer">
-          <button onClick={this.handleSave} className="atm-send-button">Save</button>
-        </div>
+        {form}
 
       </div>
     );
@@ -121,7 +147,7 @@ export class Notification extends React.Component {
 
   render() {
     const { screenSize } = this.props;
-
+    
     return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
       ? this.renderMobile()
       : this.renderDesktop();
