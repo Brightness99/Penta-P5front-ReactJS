@@ -118,6 +118,52 @@ export default {
         error: action.payload,
       };
     },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        isRunning: true,
+        isLoaded: false,
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        ...action.payload,
+        isRunning: false,
+        isLoaded: true,
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+        error: action.payload,
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT](state, action) {
+      return {
+        ...state,
+        ...action.payload,
+        error: null,
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS](state, action) {
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+        error: null,
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE](state, action) {
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+        error: action.payload,
+      };
+    },
   }),
 };
 
