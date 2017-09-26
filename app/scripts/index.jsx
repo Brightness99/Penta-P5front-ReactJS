@@ -7,7 +7,7 @@ import 'vendor/polyfills';
 import 'vendor/rxjs';
 
 // Locale
-import { localeFetch, accountFetch, accountAddressFetch, accountNotificationFetch } from 'actions';
+import { localeFetch, accountFetch, accountAddressFetch } from 'actions';
 
 // i18n
 import moment from 'moment';
@@ -30,7 +30,6 @@ export function renderApp(RootComponent) {
   store.dispatch(localeFetch());
   store.dispatch(accountFetch());
   store.dispatch(accountAddressFetch());
-  store.dispatch(accountNotificationFetch());
   store.subscribe(() => {
     /* istanbul ignore next */
     if (store.getState().locale.LANGUAGE) {
