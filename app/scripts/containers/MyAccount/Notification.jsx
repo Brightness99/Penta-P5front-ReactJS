@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { Select } from 'atoms/Inputs';
-import { ErrorText } from 'atoms/Texts';
 import { RadioButton } from 'components/Input';
 import Loading from 'components/Loading';
 import { accountNotificationUpdate, accountNotificationFetch } from 'actions';
@@ -15,20 +14,15 @@ type Props = {
 };
 
 export class Notification extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      value: '',
+      sms_enabled: '',
     };
   }
 
-  static defaultProps = {
-    screenSize: 'xs',
-  };
-  
-  static props: Props;
+  shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -40,43 +34,39 @@ export class Notification extends React.Component {
     const { account } = nextProps;
     if (account && account.notification) {
       this.setState({
-        value: account.notification.sms_enabled,
+        sms_enabled: account.notification.sms_enabled,
       });
     }
   }
 
-  handleChange = (selected) => {
+  static props: Props;
 
+  handleChange = (ev) => {
     this.setState({
-      value: selected,
+      [ev.currentTarget.name]: ev.currentTarget.value,
     });
-  }
+  };
 
   handleSave = () => {
-
     const { dispatch } = this.props;
-    const { value } = this.state;
 
-    dispatch(accountNotificationUpdate({
-      sms_enabled: value
-    }));
-  }
+    dispatch(accountNotificationUpdate(this.state));
+  };
 
   renderForm() {
+    const { sms_enabled } = this.state;
 
-    const { account } = this.props;
-
-    if (account.notification.isLoaded && !account.notification.isRunning) {
-      const { value } = this.state;
-      return (
+    return (
+      <div>
+        <p className="legend-myorder">Do you wish to receive SMS notifications?</p>
         <div>
           <div className="notification-option">
             <label>
               <RadioButton
-                name='sms-notification'
-                value='yes'
-                checked={value === '1'}
-                onChange={() => { this.handleChange('1'); }}
+                name="sms_enabled"
+                value="1"
+                checked={sms_enabled === '1'}
+                onChange={this.handleChange}
               />
               Yes
             </label>
@@ -85,10 +75,10 @@ export class Notification extends React.Component {
           <div className="notification-option">
             <label>
               <RadioButton
-                name='sms-notification'
-                value='no'
-                checked={value === '0'}
-                onChange={() => { this.handleChange('0'); }}
+                name="sms_enabled"
+                value="0"
+                checked={sms_enabled === '0'}
+                onChange={this.handleChange}
               />
               No
             </label>
@@ -98,31 +88,12 @@ export class Notification extends React.Component {
             <button onClick={this.handleSave} className="atm-send-button">Save</button>
           </div>
         </div>
-      );
-    }
-
-    return (
-      <Loading />
-    );
-  }
-
-  renderMobile() {
-
-    const { account } = this.props;
-
-    const form = this.renderForm();
-
-    return (
-      <div className="container-myData">
-        <h2>Minha conta</h2>
-        <h3 className="title-myData">Notificação</h3>
-        <p className="legend-myorder">Do you wish to receive SMS notifications?</p>
-        {form}
       </div>
     );
   }
 
-  renderDesktop() {
+  render() {
+    const { screenSize, account: { notification } } = this.props;
 
     const breadcrumb = [
       {
@@ -134,31 +105,18 @@ export class Notification extends React.Component {
         url: '/minha-conta',
       },
       {
-        title: 'Notificação',
+        title: 'Notificações',
       },
     ];
 
-    const form = this.renderForm();
-
     return (
       <div className="container-myData">
-        <Breadcrumbs links={breadcrumb} />
+        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h2>Minha conta</h2>
-        <h3 className="title-myData">Notificação</h3>
-        <p className="legend-myorder">Do you wish to receive SMS notifications?</p>
-
-        {form}
-
+        <h3 className="title-myData">Notificações</h3>
+        {!notification.isLoaded || notification.isRunning ? <Loading /> : this.renderForm()}
       </div>
     );
-  }
-
-  render() {
-    const { screenSize } = this.props;
-    
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
   }
 }
 
