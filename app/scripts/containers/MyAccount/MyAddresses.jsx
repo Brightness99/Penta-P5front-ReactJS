@@ -4,8 +4,9 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import SVG from 'react-inlinesvg';
 import Collapse, { Panel } from 'rc-collapse';
 import { Link } from 'react-router-dom';
+import Loading from 'components/Loading';
 import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
-import { accountAddressCreate, accountAddressDelete } from 'actions';
+import { accountAddressCreate, accountAddressDelete, accountAddressFetch } from 'actions';
 import { connect } from 'react-redux';
 
 type Props = {
@@ -31,6 +32,12 @@ export class MyAddresses extends React.Component {
   static defaultProps = {
     screenSize: 'xs',
   };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountAddressFetch());
+  }
 
   props: Props;
   state: State;
@@ -65,90 +72,103 @@ export class MyAddresses extends React.Component {
     }));
   }
 
-  renderDesktopItems(items) {
-    return items.map((item) => {
-      return (
-        <div key={item.id.toString()}>
-          <div className="headerTitle-address">
-            <div>
-              <h5>{item.receiver_name}</h5>
-            </div>
-            <div className="text-edit">
-              <Link to="#"><i><PencilIcon /></i>Editar</Link>
-            </div>
-            <div className="text-delete" onClick={() => this.handleDeleteAddress(item.id)}>
-              <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-            </div>
-          </div>
-          <div className="details-address">
-            <div className="details">
-              <p className="firstDetail">Nome</p>
-              <p className="secondDetail">{item.receiver_name}</p>
-            </div>
-            <div className="details">
-              <p className="firstDetail">Endereço</p>
-              <p className="secondDetail">{item.additional_address} {item.street}</p>
-            </div>
-            <div className="details">
-              <p className="firstDetail">Cidade/UF</p>
-              <p className="secondDetail">{item.city}/{item.state}</p>
-            </div>
-            <div className="details">
-              <p className="firstDetail">CEP</p>
-              <p className="secondDetail">{item.zipcode}</p>
-            </div>
-          </div>
-        </div>
-      );
-    });
-  }
+  renderDesktopItems(type) {
 
-  renderMobileItems(items) {
-    return items.map((item) => {
-      return (
-        <div className="box-addressDelivery" key={item.id.toString()}>
-          <div>
+    const { account } = this.props;
+
+    if (account.addresses.isLoaded && !account.addresses.isRunning) {
+      return account.addresses[type].map((item) => {
+        return (
+          <div key={item.id.toString()}>
             <div className="headerTitle-address">
               <div>
-                <h5>Minha Casa</h5>
+                <h5>{item.receiver_name}</h5>
               </div>
               <div className="text-edit">
-                <Link to="#"><i><PencilIcon /></i></Link>
+                <Link to="#"><i><PencilIcon /></i>Editar</Link>
               </div>
-              <div className="text-delete">
-                <Link to="#"><i><TrashIcon /></i></Link>
+              <div className="text-delete" onClick={() => this.handleDeleteAddress(item.id)}>
+                <Link to="#"><i><TrashIcon /></i>Excluir</Link>
               </div>
             </div>
             <div className="details-address">
               <div className="details">
                 <p className="firstDetail">Nome</p>
-                <p className="secondDetail">Diogo Capelo</p>
+                <p className="secondDetail">{item.receiver_name}</p>
               </div>
               <div className="details">
                 <p className="firstDetail">Endereço</p>
-                <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
+                <p className="secondDetail">{item.additional_address} {item.street}</p>
               </div>
               <div className="details">
                 <p className="firstDetail">Cidade/UF</p>
-                <p className="secondDetail">Guarulhos/SP</p>
+                <p className="secondDetail">{item.city}/{item.state}</p>
               </div>
               <div className="details">
                 <p className="firstDetail">CEP</p>
-                <p className="secondDetail">07130-000</p>
+                <p className="secondDetail">{item.zipcode}</p>
               </div>
             </div>
           </div>
-        </div>
-      );
-    });
+        );
+      });
+    }
+
+    return (
+      <Loading />
+    );
+  }
+
+  renderMobileItems(type) {
+    const { account } = this.props;
+
+    if (account.addresses.isLoaded && !account.addresses.isRunning) {
+      return account.addresses[type].map((item) => {
+        return (
+          <div className="box-addressDelivery" key={item.id.toString()}>
+            <div>
+              <div className="headerTitle-address">
+                <div>
+                  <h5>{item.receiver_name}</h5>
+                </div>
+                <div className="text-edit">
+                  <Link to="#"><i><PencilIcon /></i></Link>
+                </div>
+                <div className="text-delete">
+                  <Link to="#"><i><TrashIcon /></i></Link>
+                </div>
+              </div>
+              <div className="details-address">
+                <div className="details">
+                  <p className="firstDetail">Nome</p>
+                  <p className="secondDetail">{item.receiver_name}</p>
+                </div>
+                <div className="details">
+                  <p className="firstDetail">Endereço</p>
+                  <p className="secondDetail">{item.additional_address} {item.street}</p>
+                </div>
+                <div className="details">
+                  <p className="firstDetail">Cidade/UF</p>
+                  <p className="secondDetail">{item.city}/{item.state}</p>
+                </div>
+                <div className="details">
+                  <p className="firstDetail">CEP</p>
+                  <p className="secondDetail">{item.zipcode}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      });
+    }
+
+    return (
+      <Loading />
+    );
   }
 
   renderMobile() {
     const { isExpanded } = this.state;
-    const { account } = this.props;
-
-    let shippingItems = account.shipping ? this.renderMobileItems(account.shipping) : {};
-    let billingItems = account.billing ? this.renderMobileItems(account.billing) : {};
 
     const headerDelivery = (<div className="header-accordion">
       {isExpanded ? this.AccordionClose : this.AccordionOpen}
@@ -173,7 +193,7 @@ export class MyAddresses extends React.Component {
                 showArrow={false}
               >
                 <div>
-                  {shippingItems}
+                  {this.renderMobileItems('shipping')}
                   <div className="btn-addresses--mobile">
                     <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
                   </div>
@@ -193,7 +213,7 @@ export class MyAddresses extends React.Component {
                 showArrow={false}
               >
                 <div>
-                  {billingItems}
+                  {this.renderMobileItems('billing')}
                   <div className="btn-addresses--mobile">
                     <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
                   </div>
@@ -254,7 +274,7 @@ export class MyAddresses extends React.Component {
             >
               <div>
                 <div className="box-addressDelivery">
-                  {shippingItems}
+                  {this.renderDesktopItems('shipping')}
                   <div className="box-addNewAddress">
                     <Link to="#" onClick={this.handleCreateAddress}>
                       <i><Plus /></i>
@@ -277,7 +297,7 @@ export class MyAddresses extends React.Component {
             >
               <div>
                 <div className="box-addressDelivery">
-                  {billingItems}
+                  {this.renderDesktopItems('billing')}
                   <div className="box-addNewAddress">
                     <Link to="#">
                       <i><Plus /></i>
