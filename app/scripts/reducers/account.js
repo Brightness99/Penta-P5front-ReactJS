@@ -128,9 +128,36 @@ export default {
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_SUCCESS](state, action) {
       return {
         ...state,
-        ...action.payload,
+        savedCreditCards: action.payload,
         isRunning: false,
         isLoaded: true,
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state, action) {
+      return {
+        ...state,
+        ...action.payload,
+        error: null,
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_SUCCESS](state, action) {
+      const updatedCards = state.savedCreditCards.filter((item) => {
+        return item.id !== action.payload.id;
+      });
+      return {
+        ...state,
+        savedCreditCards: updatedCards,
+        isRunning: false,
+        isLoaded: true,
+        error: null,
+      };
+    },
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_FAILURE](state, action) {
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+        error: action.payload,
       };
     },
   }),

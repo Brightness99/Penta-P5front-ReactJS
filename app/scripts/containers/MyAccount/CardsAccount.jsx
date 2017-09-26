@@ -8,42 +8,24 @@ import { isMobile } from 'utils/helpers';
 import { BoxRadio, Select } from 'atoms/Inputs';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { TrashIcon } from 'components/Icons';
+import { accountSavedCreditCardDelete } from 'actions';
 import cx from 'classnames';
 
 type Props = {
   screenSize: string,
   account: {},
+  dispatch: () => {},
 };
 
 export class CardsAccount extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      number: '',
-      name: '',
-      exp: '',
-      cvc: '',
-      focused: '',
-    };
+
+  handleDeleteCard = (id) => {
+    const { dispatch } = this.props;
+
+    dispatch(accountSavedCreditCardDelete({
+      id: id.toString()
+    }));
   }
-
-  handleInputFocus = (e) => {
-    const target = e.target;
-
-    this.setState({
-      focused: target.name,
-    });
-  };
-
-  handleCallback(type, isValid) {
-    console.log(type, isValid); //eslint-disable-line no-console
-  }
-
-  handleChange = (ev) => {
-    this.setState({
-      [ev.currentTarget.name]: ev.currentTarget.value,
-    });
-  };
 
   static defaultProps = {
     screenSize: 'xs',
@@ -52,7 +34,46 @@ export class CardsAccount extends React.Component {
   static props: Props;
 
   render() {
-    const { screenSize } = this.props;
+    const { screenSize, account } = this.props;
+
+    let cardItems;
+
+    if (account.savedCreditCards) {
+      cardItems = account.savedCreditCards.map((item) => {
+        let cardImageElement;
+        if (item.brand === 'mastercard') {
+          cardImageElement = (
+            <img src={require('assets/media/images/mastercard.png')} alt="{item.brand}" />
+          );
+        } else {
+          cardImageElement = (
+            <img src={require('assets/media/images/visa-card.png')} alt="{item.brand}" />
+          );
+        }
+
+        return (
+          <div className="card-saved" key={item.id}>
+            <div className="card-save-info">
+              <div>
+                {cardImageElement}
+              </div>
+              <div className="cxnumber-card">
+                <p>{item.label}</p>
+              </div>
+              <div className={cx('card-valid', {
+                  invalid: item.expired === true
+                })}>
+                <p>{item.expiration_date}</p>
+              </div>
+              <div className="qrk-trash-icon" onClick={() => this.handleDeleteCard(item.id)}>
+                <TrashIcon />
+              </div>
+            </div>
+          </div>
+        );
+      });
+    }
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -73,54 +94,7 @@ export class CardsAccount extends React.Component {
           <h2 className="titl-creditCard">Minha conta</h2>
           <h3 className="subtitle-creditCard">Cartões salvos</h3>
           <div className="container-card">
-            <div className="card-saved">
-              <div className="card-save-info">
-                <div>
-                  <img src={require('assets/media/images/visa-card.png')} alt="Visa Card" />
-                </div>
-                <div className="number-card">
-                  <p>123 1231 231 23 123</p>
-                </div>
-                <div className="card-valid invalid">
-                  <p>05/17</p>
-                </div>
-                <div className="qrk-trash-icon">
-                  <TrashIcon />
-                </div>
-              </div>
-            </div>
-            <div className="card-saved">
-              <div className="card-save-info">
-                <div>
-                  <img src={require('assets/media/images/mastercard.png')} alt="Visa Card" />
-                </div>
-                <div className="number-card">
-                  <p>123 1231 231 23 123</p>
-                </div>
-                <div className="card-valid invalid">
-                  <p>05/17</p>
-                </div>
-                <div className="qrk-trash-icon">
-                  <TrashIcon />
-                </div>
-              </div>
-            </div>
-            <div className="card-saved">
-              <div className="card-save-info">
-                <div>
-                  <img src={require('assets/media/images/visa-card.png')} alt="Visa Card" />
-                </div>
-                <div className="number-card">
-                  <p>123 1231 231 23 123</p>
-                </div>
-                <div className="card-valid">
-                  <p>05/22</p>
-                </div>
-                <div className="qrk-trash-icon">
-                  <TrashIcon />
-                </div>
-              </div>
-            </div>
+            {cardItems}
           </div>
         </div>
       </div>
