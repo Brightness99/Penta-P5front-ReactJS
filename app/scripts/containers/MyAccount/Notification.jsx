@@ -58,7 +58,7 @@ export class Notification extends React.Component {
 
     return (
       <div>
-        <p className="legend-myorder">Do you wish to receive SMS notifications?</p>
+        <p className="legend-myorder">Deseja receber notificações por SMS?</p>
         <div>
           <div className="notification-option">
             <label>
@@ -68,7 +68,7 @@ export class Notification extends React.Component {
                 checked={sms_enabled === '1'}
                 onChange={this.handleChange}
               />
-              Yes
+              Sim
             </label>
           </div>
 
@@ -80,12 +80,12 @@ export class Notification extends React.Component {
                 checked={sms_enabled === '0'}
                 onChange={this.handleChange}
               />
-              No
+              Não
             </label>
           </div>
 
           <div className="mol-checkout-pane-footer">
-            <button onClick={this.handleSave} className="atm-send-button">Save</button>
+            <button onClick={this.handleSave} className="atm-send-button">Salvar</button>
           </div>
         </div>
       </div>
