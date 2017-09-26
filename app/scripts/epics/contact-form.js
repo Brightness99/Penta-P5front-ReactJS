@@ -4,12 +4,22 @@ import { AppConstants, ContactFormConstants } from 'constants/index';
 export function contactFormSend(action$) {
   return action$.ofType(ContactFormConstants.CONTACT_FORM_SUBMIT)
   .switchMap(action => {
-    const endpoint = `/v1/customers/verify-email/${action.payload.email.value}`;
+    const endpoint = `/v1/customers/verify-email/${action.payload.email}`;
 
     return rxAjax({
       endpoint,
-      payload: action.payload,
       method: 'GET',
+    })
+    .switchMap(data => {
+      if (data.status === 200 && data.response) {
+        const saveEndpoint = '/venda-corporativa/save';
+        return rxAjax({
+          endpoint: saveEndpoint,
+          payload: action.payload,
+          method: 'POST',
+        });
+      }
+      return {};
     })
     .map(data => {
       if (data.status === 200 && data.response) {
