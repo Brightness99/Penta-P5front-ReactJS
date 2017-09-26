@@ -2,15 +2,18 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
 
-import { corporateSalesFetch } from 'actions';
+import { submitContactForm as submitAction } from 'actions';
 import corporateSalesSelector from 'selectors/products';
+import type { ContactFormState } from 'reducers/contact-form';
 
 import { CustomersRelyBlock } from 'components/LandingPage';
+import Modal from 'components/Modal';
+import ContactForm from 'components/ContactForm';
 import MainBenefits from './MainBenefits';
 import CloudTools from './CloudTools';
 import RequestSample from './RequestSample';
+import type { DataType } from '../../actions/contact-form';
 
 type Props = {
   app: AppStoreType,
@@ -18,9 +21,34 @@ type Props = {
   locale: {},
   CorporateSales: {},
   dispatch: () => {},
+  contactForm: ContactFormState,
+  submitContactForm?: (data: DataType) => void,
 };
 
-export class CorporateSales extends React.Component<Props, {}> {
+type State = {
+  showContactModal: boolean,
+};
+
+export class CorporateSales extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
+    this.state = { showContactModal: false };
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.contactForm.isLoaded) {
+      this.handleShowingModal();
+    }
+  }
+
+  static props: Props;
+  static state: State;
+
+  handleShowingModal = () => {
+    this.setState({ showContactModal: !this.state.showContactModal });
+  };
+
   renderBanner() {
     return (
       <div className="container">
@@ -30,24 +58,35 @@ export class CorporateSales extends React.Component<Props, {}> {
   }
 
   render() {
+    const { submitContactForm } = this.props;
     return (
       <section>
+        {
+          this.state.showContactModal &&
+          <Modal handleCloseModal={this.handleCloseModal}>
+            <ContactForm onSubmit={data => submitContactForm && submitContactForm(data)} />
+          </Modal>
+        }
         {this.renderBanner()}
         <MainBenefits />
-        <CloudTools />
+        <CloudTools handleModalShowing={this.handleShowingModal} />
         <CustomersRelyBlock />
-        <RequestSample />
+        <RequestSample handleModalShowing={this.handleShowingModal} />
       </section>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return corporateSalesSelector(state);
+  return Object.assign({}, corporateSalesSelector(state), {
+    contactForm: state.contactForm,
+  });
 }
 
 function mapDispatchToProps(dispatch) {
-  return { dispatch };
+  return {
+    submitContactForm: data => dispatch(submitAction(data)),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CorporateSales);
