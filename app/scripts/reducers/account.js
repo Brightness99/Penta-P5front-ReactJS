@@ -9,7 +9,8 @@ import { createReducer } from 'utils';
 import { AccountConstants } from 'constants/index';
 
 export const accountState = {
-  savedCreditCards: {}
+  savedCreditCards: {},
+  notification: {},
 };
 
 export default {
@@ -57,7 +58,7 @@ export default {
         error: null,
       };
     },
-    [AccountConstants.ACCOUNT_UPDATE_SUBMIT_SUCCESS](state, action) {
+    [AccountConstants.ACCOUNT_UPDATE_SUBMIT_SUCCESS](state) {
       return {
         ...state,
         isRunning: false,
@@ -127,7 +128,7 @@ export default {
           savedCreditCards: [],
           isRunning: true,
           isLoaded: false,
-        }
+        },
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_SUCCESS](state, action) {
@@ -140,38 +141,96 @@ export default {
         }
       };
     },
-    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state, action) {
+    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state) {
       return {
         ...state,
         savedCreditCards: {
           ...state.savedCreditCards,
           error: null,
-        }
+        },
       };
     },
-    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_SUCCESS](state, action) {
-      const updatedCards = state.savedCreditCards.filter((item) => {
-        return item.id !== action.payload.id;
-      });
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS](state, action) {
       return {
         ...state,
-        savedCreditCards: {
-          savedCreditCards: updatedCards,
+        notification: {
+          ...action.payload,
           isRunning: false,
           isLoaded: true,
           error: null,
-        }
+        },
       };
     },
-    [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_FAILURE](state, action) {
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE](state, action) {
       return {
         ...state,
-        savedCreditCards: {
-          ...state.savedCreditCards,
+        notification: {
+          ...state.notification,
           isRunning: false,
           isLoaded: true,
           error: action.payload,
-        }
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        notification: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT](state) {
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE](state, action) {
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        },
       };
     },
   }),

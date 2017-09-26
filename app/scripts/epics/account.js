@@ -273,3 +273,81 @@ export function accountSavedCreditCardDelete(action$) {
   });
 }
 
+export function accountNotificationFetch(action$) {
+  return action$.ofType(AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST)
+  .switchMap(() => {
+      const endpoint = '/v2/customers/notifications';
+
+      return rxAjax({
+      endpoint,
+      method: 'GET',
+    })
+    .map(data => {
+      if (data.status === 200 && data.response) {
+        return {
+          type: AccountConstants.ACCOUNT_NOTIFICATION_FETCH_SUCCESS,
+          payload: data.response,
+          meta: { updatedAt: getUnixtime() },
+        };
+      }
+
+      return {
+        type: AccountConstants.ACCOUNT_NOTIFICATION_FETCH_FAILURE,
+        payload: { message: 'Algo de errado não está correto' },
+        meta: { updatedAt: getUnixtime() },
+        };
+      })
+      .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+      .defaultIfEmpty({ type: AccountConstants.ACCOUNT_NOTIFICATION_FETCH_CANCEL })
+      .catch(error => {
+        if (error.status === 404) {
+          push('/404');
+        }
+
+        return ([{
+          type: AccountConstants.ACCOUNT_NOTIFICATION_FETCH_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]);
+      });
+    });
+}
+
+export function accountNotificationUpdate(action$) {
+  return action$.ofType(AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT)
+  .switchMap(action => {
+    const endpoint = `/v2/customers/notifications`;
+
+    return rxAjax({
+      endpoint,
+      payload: action.payload,
+      method: 'PUT',
+    })
+      .map(data => {
+        if (data.status === 200) {
+          return {
+            type: AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS,
+            payload: {
+            sms_enabled: action.payload.sms_enabled
+            },
+            meta: { updatedAt: getUnixtime() },
+          };
+        }
+
+        return {
+          type: AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE,
+          payload: { message: 'Algo de errado não está correto' },
+          meta: { updatedAt: getUnixtime() },
+        };
+      })
+      .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+      .defaultIfEmpty({ type: AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_CANCEL })
+      .catch(error => ([
+        {
+          type: AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        },
+      ]));
+    });
+}
