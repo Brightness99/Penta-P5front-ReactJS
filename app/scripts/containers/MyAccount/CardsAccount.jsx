@@ -8,7 +8,7 @@ import { isMobile } from 'utils/helpers';
 import { BoxRadio, Select } from 'atoms/Inputs';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { TrashIcon } from 'components/Icons';
-import { accountSavedCreditCardDelete } from 'actions';
+import { accountSavedCreditCardDelete, accountSavedCreditCardFetch } from 'actions';
 import cx from 'classnames';
 
 type Props = {
@@ -33,13 +33,19 @@ export class CardsAccount extends React.Component {
 
   static props: Props;
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountSavedCreditCardFetch());
+  }
+
   render() {
     const { screenSize, account } = this.props;
 
     let cardItems;
 
-    if (account.savedCreditCards) {
-      cardItems = account.savedCreditCards.map((item) => {
+    if (account.savedCreditCards.isLoaded && !account.savedCreditCards.isRunning) {
+      cardItems = account.savedCreditCards.savedCreditCards.map((item) => {
         let cardImageElement;
         if (item.brand === 'mastercard') {
           cardImageElement = (

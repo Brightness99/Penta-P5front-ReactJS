@@ -8,7 +8,9 @@ import { createReducer } from 'utils';
 
 import { AccountConstants } from 'constants/index';
 
-export const accountState = {};
+export const accountState = {
+  savedCreditCards: {}
+};
 
 export default {
   account: createReducer(accountState, {
@@ -121,23 +123,30 @@ export default {
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_REQUEST](state) {
       return {
         ...state,
-        isRunning: true,
-        isLoaded: false,
+        savedCreditCards: {
+          savedCreditCards: [],
+          isRunning: true,
+          isLoaded: false,
+        }
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_FETCH_SUCCESS](state, action) {
       return {
         ...state,
-        savedCreditCards: action.payload,
-        isRunning: false,
-        isLoaded: true,
+        savedCreditCards: {
+          savedCreditCards: action.payload,
+          isRunning: false,
+          isLoaded: true
+        }
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE](state, action) {
       return {
         ...state,
-        ...action.payload,
-        error: null,
+        savedCreditCards: {
+          ...state.savedCreditCards,
+          error: null,
+        }
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_SUCCESS](state, action) {
@@ -146,18 +155,23 @@ export default {
       });
       return {
         ...state,
-        savedCreditCards: updatedCards,
-        isRunning: false,
-        isLoaded: true,
-        error: null,
+        savedCreditCards: {
+          savedCreditCards: updatedCards,
+          isRunning: false,
+          isLoaded: true,
+          error: null,
+        }
       };
     },
     [AccountConstants.ACCOUNT_SAVED_CREDIT_CARD_DELETE_FAILURE](state, action) {
       return {
         ...state,
-        isRunning: false,
-        isLoaded: true,
-        error: action.payload,
+        savedCreditCards: {
+          ...state.savedCreditCards,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
+        }
       };
     },
   }),
