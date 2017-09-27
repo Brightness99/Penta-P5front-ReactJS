@@ -5,6 +5,7 @@ import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
+import LogoLoyalty from 'components/LogoLoyalty';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
@@ -154,7 +155,7 @@ export class Header extends React.Component {
         <Topbar handleClose={this.handlePaneHide} />
         <div className="org-header-content">
           <div className="container">
-            <Logo small={!showTopbar} enableLink={true} />
+            <LogoLoyalty small={!showTopbar} enableLink={true} />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu
