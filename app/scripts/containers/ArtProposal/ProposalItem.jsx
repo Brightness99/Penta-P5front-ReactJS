@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import config from 'config';
 import Slider from 'react-slick';
 import Carousel from '../../components/Carousel';
+import { IconLeftButton } from '../../atoms/Buttons';
 import { DownloadIcon } from '../../components/Icons';
 
 const docs = [
@@ -127,10 +128,7 @@ export class ProposalItem extends React.Component {
         </div>
         <div className="item-footer">
           <div className="button-wrapper">
-            <button className="download-button">
-              <DownloadIcon />
-                DOWNLOAD Dos ARQUIVOS
-            </button>
+            <IconLeftButton icon={<DownloadIcon />} title="DOWNLOAD Dos ARQUIVOS" className="download-button" />
           </div>
           <div className="note">
             IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 

@@ -1,6 +1,15 @@
 .container {
     .header-artproposal {
-
+        .title {
+            font-size: $font-size-lg;
+            color: $color-almostBlack;
+            font-family: $font-family-open-sans-bold;
+        }
+        .destitle {
+            font-size: $font-size-base;
+            color: $color-lightGray;
+            font-family: $font-family-open-sans;
+        }
     }
     .container-artproposal {
         @include lg {
@@ -10,10 +19,9 @@
         .container-sidebarproposal {
             //height: 100%;
             box-sizing: border-box;
-            padding: 3rem 1rem 3rem 0rem;
+            padding: 0rem 1rem 3rem 0rem;
     
             .menu-proposal {
-                margin-top: 2.6rem;
                 width: 270px;
                 display: flex;
                 flex-direction: column;
@@ -24,7 +32,7 @@
                     width: 100%;
                     height: 6rem;
                     line-height: 6rem;
-                    font-family: $font-family-open-sans;
+                    font-family: $font-family-open-sans-bold;
                     font-size: $font-size-xs;
                     text-align: left;
                     background-color: white;
@@ -56,9 +64,8 @@
         }
     
         .container-proposal {
-            padding: 3rem 0rem 3rem 1rem;
+            padding: 0rem 0rem 3rem 1rem;
             .content-proposal {
-                margin-top: 2.6rem;
                 padding: 3rem;
                 background-color: white;
                 color: $color-almostBlack;
@@ -125,7 +132,6 @@
                         color: $color-lightGray;
                         .proposal-text {
                             font-size: $font-size-base;
-                            
                         }
                         .date {
                             display: inline-block;
@@ -186,19 +192,10 @@
                         .button-wrapper {
                             .download-button {
                                 padding: 1.0rem 5.8rem;
-                                position: relative;
-                                line-height: 2rem;
-                                border-radius: 2px;
                                 border: solid 1px $color-printi-blue;
                                 color: $color-printi-blue;
-                                background: transparent;
-                                white-space: nowrap;
+                                font-size: $font-size-xs;
                                 svg {
-                                    position: absolute;
-                                    width: 1.6rem;
-                                    height: 2.0rem;
-                                    left: 2.8rem;
-                                    top: 1.0rem;
                                     fill: $color-printi-blue;
                                 }
                             }
@@ -208,6 +205,65 @@
                             padding-top: 0.4rem;
                             color: $color-lightGray;
                         }
+                    }
+                }
+                .approval-button-wrapper {
+                    button {
+                        margin-right: 2.0rem;
+                        font-size: $font-size-xs;
+                    }
+                    .unchecked-button {
+                        border: solid 1px $color-hrLightGray;
+                        color: $color-almostBlack;
+                        svg {
+                            fill: $color-hrLightGray;
+                        }
+                    }
+                    .checked-button {
+                        border: solid 1px $color-printi-blue;
+                        background-color: $color-printi-blue;
+                        color: white;
+                        svg {
+                            fill: white;
+                        }
+                    }
+                }
+                .text-editor-wrapper {
+                    margin: 3rem 0rem;
+                    border-top: solid 1px $color-lightGray3;
+                    position: relative;
+                    width: 100%;
+                    height: 16rem;
+                    .text-editor {
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        top: 3rem; 
+                        bottom: 0;
+                        
+                    }
+                }
+
+                .bottom-button-wrapper {
+                    display: flex;
+                    justify-content: space-between;
+                    .add-button {
+                        border: solid 1px $color-printi-blue;
+                        color: $color-printi-blue;
+                        text-transform: uppercase;
+                        font-size: $font-size-xs;
+                        svg {
+                            fill: $color-printi-blue;
+                        }
+                    }
+                    .send-button {
+                        font-size: $font-size-xs;
+                        color: white;
+                        text-transform: uppercase;
+                        background-color: $color-green;
+                        border: solid 0px;
+                        border-radius: 2px;
+                        padding: 1.0rem 5.8rem;
                     }
                 }
             }

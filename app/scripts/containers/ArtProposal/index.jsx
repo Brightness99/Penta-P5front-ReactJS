@@ -54,6 +54,8 @@ export class ArtProposal extends React.Component {
       <div className="container">
         <div className="header-artproposal">
           <Breadcrumbs links={breadcrumb} />
+          <p className="title">PROPOSTA DE ARTE</p>
+          <p className="destitle">Acompanhe a criação da sua arte</p>
         </div>
         <div className="container-artproposal">
           <Sidebar screenSize={screenSize} />
