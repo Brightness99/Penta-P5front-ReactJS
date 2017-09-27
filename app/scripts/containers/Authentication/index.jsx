@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import cx from 'classnames';
+import Script from 'react-load-script';
 
 import { connect } from 'react-redux';
 import { PageTitle } from 'atoms/Titles';
@@ -18,7 +19,8 @@ type Props = {
 type States = {
   isModalOpen: boolean,
   isSocialAuthInProgress: boolean,
-  facebookSocialInfo: {}
+  facebookSocialInfo: {},
+  isFingerprintLoaded: boolean,
 }
 
 export class Authentication extends React.Component {
@@ -30,6 +32,7 @@ export class Authentication extends React.Component {
       isModalOpen: false,
       isSocialAuthInProgress: false,
       facebookSocialInfo: null,
+      isFingerprintLoaded: false,
     };
   }
 
@@ -68,12 +71,13 @@ export class Authentication extends React.Component {
 
   facebookSignUp = (data) => {
     const { submitSignUp } = this.props;
+    const { facebookSocialInfo } = this.state;
 
     if (typeof submitSignUp !== 'function') {
       return;
     }
 
-    const result = Object.assign(data, this.state.facebookSocialInfo);
+    const result = Object.assign(data, facebookSocialInfo);
 
     submitSignUp(result);
   };
@@ -96,11 +100,22 @@ export class Authentication extends React.Component {
   };
 
   renderSignUpForm = () => {
-    if (this.state.isSocialAuthInProgress) {
-      return <SocialSignUpForm name={this.state.facebookSocialInfo.first_name} onSubmit={this.facebookSignUp} />;
+    const { isFingerprintLoaded, isSocialAuthInProgress, facebookSocialInfo } = this.state;
+
+    if (isSocialAuthInProgress) {
+      return (
+        <SocialSignUpForm
+          name={facebookSocialInfo.first_name}
+          onSubmit={this.facebookSignUp}
+          isFingerprintLoaded={isFingerprintLoaded}
+        />);
     }
 
-    return <SignUpForm onSubmit={this.signUp} />;
+    return (
+      <SignUpForm
+        onSubmit={this.signUp}
+        isFingerprintLoaded={isFingerprintLoaded}
+      />);
   };
 
   renderModalDialog = () => {
@@ -116,10 +131,19 @@ export class Authentication extends React.Component {
     this.setState({ isModalOpen: false });
   };
 
+  handleScriptLoad = () => {
+    this.setState({ isFingerprintLoaded: true });
+  };
+
   render() {
     const { submitSignIn, socialLoginSettings } = this.props;
+    const { isFingerprintLoaded } = this.state;
     return (
       <div className="container">
+        <Script
+          url="https://dpmhrplvfkwad.cloudfront.net/printi/analytics.js"
+          onLoad={this.handleScriptLoad}
+        />
         {this.renderModalDialog()}
         <PageTitle className="text-center">Entre ou cadastre-se</PageTitle>
         <div className={cx('authentication')}>
@@ -130,7 +154,10 @@ export class Authentication extends React.Component {
             google={socialLoginSettings.socials.google}
           />
           <div className="authentication__wrapper">
-            <SignInForm onSubmit={(data) => submitSignIn && submitSignIn(data)} />
+            <SignInForm
+              onSubmit={(data) => submitSignIn && submitSignIn(data)}
+              isFingerprintLoaded={isFingerprintLoaded}
+            />
             {this.renderSignUpForm()}
           </div>
         </div>
