@@ -30,8 +30,8 @@ export class TermsOfUse extends React.Component {
     ];
     return (
       <section>
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <div className="container">
+          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
           <div className="org-terms-use-privacy">
             <h2 className="title-terms-use-privacy">termos de serviço e uso do site</h2>
 

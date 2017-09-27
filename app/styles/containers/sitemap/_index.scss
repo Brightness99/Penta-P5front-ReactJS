@@ -1,0 +1,76 @@
+.org-sitemap {
+  margin-bottom: 4rem;
+  .title-sitemap {
+    color: $color-almostBlack;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-lg;
+    margin: 2rem 0;
+    text-transform: uppercase;
+    @include lg {
+      margin-top: 0;
+    }
+  }
+  .list-columns {
+    display: flex;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .three-columns{
+      flex: 3;
+    }
+    .two-columns {
+      flex: 1;
+    }
+  }
+  .atm-list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .qrk-list-links {
+      border: 0.1rem solid $color-lightGray2;
+      border-radius: 0.3rem;
+      flex: 1;
+      padding: 2rem;
+      @include lg {
+        margin-right: 2rem;
+      }
+      li {
+        font-family: $font-family-open-sans-regular;
+        font-size: $font-size-sm;
+        margin-bottom: 1rem;
+        a {
+          display: block;
+          color: $color-lightGray;
+        }
+        svg {
+          width: 1.2rem;
+          height: 1rem;
+          fill: $color-lightGray;
+        }
+        &.title-list-link {
+          margin-bottom: 1rem;
+          font-size: $font-size-h4;
+          font-family: $font-family-nunito-regular;
+        }
+        &:hover {
+          text-decoration: underline;          
+          a {
+            color: $color-printi-blue;
+          }
+          svg {
+            fill: $color-printi-blue;
+          }
+        }
+        &:first-of-type {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

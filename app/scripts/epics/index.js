@@ -32,7 +32,17 @@ import {
 
 import { contactFormSend } from './contact-form';
 
-import { accountFetch, accountUpdate, accountAddressFetch, accountAddressCreate, accountAddressDelete } from './account';
+import {
+  accountFetch,
+  accountUpdate,
+  accountAddressFetch,
+  accountAddressCreate,
+  accountAddressDelete,
+  accountNotificationFetch,
+  accountNotificationUpdate,
+  accountSavedCreditCardFetch,
+  accountSavedCreditCardDelete
+} from './account';
 
 export default combineEpics(
   userNewsletter,
@@ -63,4 +73,8 @@ export default combineEpics(
   accountUpdate,
   accountAddressCreate,
   accountAddressDelete,
+  accountSavedCreditCardFetch,
+  accountSavedCreditCardDelete,
+  accountNotificationFetch,
+  accountNotificationUpdate,
 );
