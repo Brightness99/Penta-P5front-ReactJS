@@ -4,8 +4,8 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RichTextEditor from 'react-rte';
-import { CheckButton, IconLeftButton } from '../../atoms/Buttons';
-import { PictureIcon } from '../../components/Icons';
+import { CheckButton, IconLeftButton, TextButton, RoundedConfirmationButton } from 'atoms/Buttons';
+import { PictureIcon } from 'components/Icons';
 import ProposalItem from './ProposalItem';
 
 
@@ -15,24 +15,28 @@ type Props = {
 };
 
 export class ArtProposalContent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: RichTextEditor.createEmptyValue(),
+    };
+  }
+
   static defaultProps = {
     screenSize: 'xs',
   };
 
   static props: Props;
 
-  state = {
-    value: RichTextEditor.createEmptyValue()
-  }
-
-  onChange = (value) => {
-    this.setState({ value });
+  onChange = (val) => {
+    this.setState({ value: val });
     if (this.props.onChange) {
       // Send the changes up to the parent component as an HTML string.
       // This is here to demonstrate using `.toString()` but in a real app it
       // would be better to avoid generating a string on each change.
       this.props.onChange(
-        value.toString('html')
+        val.toString('html')
       );
     }
   };
@@ -77,7 +81,7 @@ export class ArtProposalContent extends React.Component {
           </div>
           <div className="bottom-button-wrapper">
             <IconLeftButton icon={<PictureIcon />} title="Adicionar arquivos" className="add-button" />
-            <button className="send-button" >enviar solicitação</button>
+            <TextButton className="send-button" >enviar solicitação</TextButton>
           </div>
         </div>
       </div>
