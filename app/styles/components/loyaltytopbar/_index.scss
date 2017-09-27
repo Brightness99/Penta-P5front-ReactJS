@@ -1,22 +1,58 @@
 .org-loyalty-topbar {
   background-color: #8261f8;
-  padding: 1rem;
+  padding: 0.6rem;
   .mol-loyalty-topbar {
+    align-items: center;
     display: flex;
     justify-content: space-between;
     p {
       margin: 0;
     }
     div {
+      align-items: center;
+      color: $color-white;
+      display: flex;
+      font-family: $font-family-open-sans-bold;
+      font-size: $font-size-xs;
+      justify-content: center;
       &.qrk-type-of-loyalty {
         background-color: $color-white;
+        box-sizing: border-box;
+        border-radius: 30px;
         color: #8261f8;
-        font-size: $font-size-il;
-        padding: 1rem 2rem;
-        border-radius: 50%;
-        font-family: $font-family-open-sans-bold;
+        font-size: $font-size-sm;
+        margin-right: 2rem;
         text-transform: uppercase;
+        text-align: center;
+        //width: 64px;
+        padding: 0rem 2rem;
+      }
+      svg {
+        width: 1rem;
+        height: 1rem;
+        fill: $color-white;
       }
     }
+  }
+}
+
+.org-logo-loyalty {
+  background-color: $color-white;
+  box-sizing: border-box;
+  color: $color-almostBlack;
+  font-family: $font-family-open-sans-bold;
+  font-size: $font-size-sm;
+  text-align: center;
+  //width: 64px;
+  padding-left: 1rem;
+  p {
+    margin-bottom: 0;
+  }
+  .mol-logo-loyalty {
+    background-color: #8261f8;
+    border-radius: 30px;
+    color: $color-white;
+    padding: 0 1rem;
+    text-transform: uppercase;
   }
 }
