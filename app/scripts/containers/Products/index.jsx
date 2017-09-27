@@ -10,6 +10,7 @@ import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock } from 'components/Land
 import ProductHighlightsBlock from './ProductHighlights';
 import ProductInformationBlock from './ProductInformation';
 import ProductDetailsBlock from './ProductDetails';
+import ProductBannerBlock from './ProductBanner';
 
 import InformationBlock from './InformationBlock';
 import TutorialBlock from './TutorialBlock';
@@ -17,7 +18,6 @@ import WarrantyBlock from './WarrantyBlock';
 import BenefitsBlock from './BenefitsBlock';
 import GraphicPlantBlock from './GraphicPlantBlock';
 import OpinionsBlock from './OpinionsBlock';
-import PrintProductBlock from './PrintProductBlock';
 
 type Props = {
   app: AppStoreType,
@@ -93,7 +93,7 @@ export class Products extends React.Component {
           <BlogBlock />
           <OpinionsBlock screenSize={screenSize} opinions={opinions} />
           <ProductDetailsBlock />
-          <PrintProductBlock product={product} print={print} screenSize={screenSize} />
+          <ProductBannerBlock />
         </div>
       </div>
     );
@@ -113,6 +113,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
-
