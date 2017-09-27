@@ -9,6 +9,7 @@ import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock } from 'components/Land
 
 import ProductHighlightsBlock from './ProductHighlights';
 import ProductInformationBlock from './ProductInformation';
+import ProductDetailsBlock from './ProductDetails';
 
 import InformationBlock from './InformationBlock';
 import TutorialBlock from './TutorialBlock';
@@ -16,7 +17,6 @@ import WarrantyBlock from './WarrantyBlock';
 import BenefitsBlock from './BenefitsBlock';
 import GraphicPlantBlock from './GraphicPlantBlock';
 import OpinionsBlock from './OpinionsBlock';
-import DetailsProductBlock from './DetailsProductBlock';
 import PrintProductBlock from './PrintProductBlock';
 
 type Props = {
@@ -61,7 +61,6 @@ export class Products extends React.Component {
       locale
     } = this.props;
 
-
     const breadcrumb = [
       {
         title: 'Home',
@@ -93,7 +92,7 @@ export class Products extends React.Component {
           <CustomersRelyBlock />
           <BlogBlock />
           <OpinionsBlock screenSize={screenSize} opinions={opinions} />
-          <DetailsProductBlock product={product} screenSize={screenSize} />
+          <ProductDetailsBlock />
           <PrintProductBlock product={product} print={print} screenSize={screenSize} />
         </div>
       </div>
