@@ -23,39 +23,32 @@ type Props = {
 export class Upload extends React.Component {
   static props: Props;
 
-  renderAlerts = () => {
-    const alerts = [
+  renderFlashMessages = () => {
+    let messages = [
       {
         type: 'error',
         title: 'Desculpe!',
-        content: 'Ocorreu um erro interno impossibilitando seu upload.'
+        message: 'Ocorreu um erro interno impossibilitando seu upload.',
       },
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 1'
+        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 1',
       },
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 2'
+        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 2',
       },
       {
         type: 'error',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 3'
-      }
+        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 3',
+      },
     ];
 
-    return alerts.map(
-      (alert) => (
-        <Alert
-          key={`${new Date()}-${alert.content}`}
-          type={alert.type}
-          title={alert.title}
-          content={alert.content}
-        />
-      )
+    return messages.map(
+      (message, index) => <Alert {...message} key={`${String(index)}_${Date()}`} />
     );
   };
 
@@ -188,7 +181,7 @@ export class Upload extends React.Component {
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
-          <div className="alert-container">{this.renderAlerts()}</div>
+          <div className="alert-container">{this.renderFlashMessages()}</div>
           <div className="upload-container">
             <div className="upload-container-centralized">
               {this.renderAdditionalOptions()}

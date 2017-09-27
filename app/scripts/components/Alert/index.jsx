@@ -8,7 +8,7 @@ import cx from 'classnames';
 type Props = {
   type: string,
   title: string,
-  content: string,
+  message: string,
 };
 
 const Alert = (props: Props) => {
@@ -40,7 +40,7 @@ const Alert = (props: Props) => {
         </div>
         <div className="alert-item-content-container">
           <span className="alert-item-title">{props.title}</span>
-          <p className="alert-item-content">{props.content}</p>
+          <p className="alert-item-content">{props.message}</p>
         </div>
       </div>
     </div>
