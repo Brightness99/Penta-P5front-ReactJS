@@ -1,9 +1,12 @@
 // @flow
 
-export type Fingerprint={
+type Fingerprint={
   addContextToForm: (id: string)=>void
 };
 
 declare var Fingerprint2: Fingerprint;
 
-export default Fingerprint2;
+exports.addFingerprint = (formId: string) => {
+  const fb = new Fingerprint2();
+  fb.addContextToForm(formId);
+};

@@ -4,7 +4,7 @@ import React from 'react';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
-import Fingerprint from 'vendor/fingerprint2';
+import { addFingerprint } from 'vendor/fingerprint2';
 
 type FormType = {
   email: { valid: boolean, value: string },
@@ -13,7 +13,8 @@ type FormType = {
 
 type Props = {
   name: string,
-  onSubmit: (data: FormType) => void
+  onSubmit: (data: FormType) => void,
+  isFingerprintLoaded: boolean,
 };
 
 type State = { canSubmit: boolean, form: FormType };
@@ -34,13 +35,23 @@ export default class SocialSignUpForm extends React.PureComponent {
   props: Props;
   state: State;
 
+  componentWillReceiveProps = (newProps: Props) => {
+    if (this.props.isFingerprintLoaded !== newProps.isFingerprintLoaded) {
+      addFingerprint('socialSignUpForm');
+    }
+  };
+
   handleSubmit = (ev) => {
     ev.preventDefault();
 
-    const { form, canSubmit } = this.state;
+    const { form, canSubmit, isFingerprintLoaded } = this.state;
     const { onSubmit, name } = this.props;
 
-    const fingerprint = document.getElementById('fingerprint').value;
+    let fingerprint = '';
+
+    if (isFingerprintLoaded) {
+      fingerprint = document.getElementById('fingerprint').value;
+    }
 
     if (canSubmit === true) {
       const value = {
@@ -71,11 +82,6 @@ export default class SocialSignUpForm extends React.PureComponent {
     }
 
     this.setState({ form: newState.form, canSubmit });
-  };
-
-  componentDidMount = () => {
-    const fp = new Fingerprint();
-    fp.addContextToForm('socialSignUpForm');
   };
 
   render() {
