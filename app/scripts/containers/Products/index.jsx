@@ -12,7 +12,6 @@ import ProductInformationBlock from './ProductInformation';
 import ProductDetailsBlock from './ProductDetails';
 import ProductBannerBlock from './ProductBanner';
 
-import InformationBlock from './InformationBlock';
 import TutorialBlock from './TutorialBlock';
 import WarrantyBlock from './WarrantyBlock';
 import BenefitsBlock from './BenefitsBlock';
@@ -22,7 +21,7 @@ import OpinionsBlock from './OpinionsBlock';
 type Props = {
   app: AppStoreType,
   router: RouterStore,
-  locale: LocaleType.translate.page.product_landing_page.informations,
+  locale: LocaleType,
   match: {},
   products: {},
   dispatch: () => {},

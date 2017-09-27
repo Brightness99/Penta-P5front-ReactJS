@@ -1,6 +1,7 @@
 // @flow
 // TODO: Carousel this
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Slider from 'react-slick';
 import config from 'config';
@@ -10,20 +11,17 @@ import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
 
 type Props = {
   screenSize: string,
-  category: string,
-  className: string,
   locale: {},
-  button?: typeof React.Component,
-  product: {}
+  products: {}
 };
 
-export class ProductBlock extends React.Component {
+export class ProductHightlightsBlock extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
   renderMobile() {
-    const { product } = this.props;
+    const { products: { product } } = this.props;
 
     return (
       <section className="org-product-highlights">
@@ -63,7 +61,7 @@ export class ProductBlock extends React.Component {
   }
 
   renderDesktop() {
-    const { product, category } = this.props;
+    const { products: { product, category } } = this.props;
 
     return (
       <section className="org-product-highlights">
@@ -118,4 +116,13 @@ export class ProductBlock extends React.Component {
   }
 }
 
-export default ProductBlock;
+function mapStateToProps(state) {
+  return {
+    screenSize: state.app.screenSize,
+    locale: state.locale,
+    router: state.router,
+    products: state.products,
+  };
+}
+
+export default connect(mapStateToProps)(ProductHightlightsBlock);
