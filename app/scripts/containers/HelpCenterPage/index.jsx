@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 
+import LoyaltyContainer from 'components/LoyaltyContainer';
+
 import SearchCentralRelationship from './SearchCentralRelationship';
 import ItensHelpcenter from './ItensHelpcenter';
 import RelationshipCentral from './RelationshipCentral';
@@ -35,9 +37,9 @@ export class HelpCenterPage extends React.Component {
 
     return (
       <section>
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <div className="tpl-help-center">
           <div className="container">
+            {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
             <SearchCentralRelationship />
             <ItensHelpcenter />
             <VideosPrinti screenSize={screenSize} />

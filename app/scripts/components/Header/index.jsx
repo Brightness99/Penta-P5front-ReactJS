@@ -151,11 +151,10 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
-        <LoyaltyTopbar />
         <Topbar handleClose={this.handlePaneHide} />
         <div className="org-header-content">
           <div className="container">
-            <LogoLoyalty small={!showTopbar} enableLink={true} />
+            <Logo small={!showTopbar} enableLink={true} />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu
