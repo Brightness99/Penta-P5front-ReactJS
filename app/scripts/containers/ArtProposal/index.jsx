@@ -3,8 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-
-import ProposalSidebar from './ProposalSidebar';
+import Breadcrumbs from 'components/Breadcrumbs';
+import Sidebar from './Sidebar';
 import ArtProposalContent from './ArtProposalContent';
 
 type Props = {
@@ -27,10 +27,38 @@ export class ArtProposal extends React.Component {
 
   renderDesktop() {
     const { app: { screenSize } } = this.props;
+
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Minha conta',
+        url: '/minha-conta',
+      },
+      {
+        title: 'Meus pedidos',
+        url: '/meus-pedidos',
+      },
+      {
+        title: 'Pedido nº483.093',
+      },
+      {
+        title: 'Proposta de art',
+        url: '/proposta-de-arte',
+      }
+    ];
+
     return (
-      <div className="container-artproposal">
-        <ProposalSidebar screenSize={screenSize} />
-        {this.renderContainer()}
+      <div className="container">
+        <div className="header-artproposal">
+          <Breadcrumbs links={breadcrumb} />
+        </div>
+        <div className="container-artproposal">
+          <Sidebar screenSize={screenSize} />
+          {this.renderContainer()}
+        </div>
       </div>
     );
   }
