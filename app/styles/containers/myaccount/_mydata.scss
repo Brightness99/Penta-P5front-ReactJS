@@ -6,6 +6,12 @@
 .container-myData {
   padding: 4rem 0 3rem 0;
   font-family: $font-family-open-sans;
+  .notification-option {
+    margin-bottom: 15px;
+    .app__input__radio {
+      vertical-align: middle;
+    }
+  }
   @include lg {
     flex: 5;
     background-color: $color-white;

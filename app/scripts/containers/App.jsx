@@ -31,6 +31,7 @@ import AboutPrinti from 'containers/AboutPrinti';
 import HelpCenterPage from 'containers/HelpCenterPage';
 import TermsOfUse from 'containers/TermsOfUse';
 import PrivacyPolicy from 'containers/PrivacyPolicy';
+import Sitemap from 'containers/Sitemap';
 
 type Props = {
   app: AppStoreType,
@@ -88,6 +89,7 @@ export class App extends React.Component {
                       <Route path="/guia-de-impressao" component={PrintGuide} />
                       <Route path="/central-de-ajuda" component={HelpCenterPage} />
                       <Route path="/politica-de-privacidade" component={PrivacyPolicy} />
+                      <Route path="/mapa-do-site" component={Sitemap} />
                       <Route path="/termos-de-servico-e-uso-do-site" component={TermsOfUse} />
                       <Route path="/glossario" component={Glossary} />
                       <Route path="/success" component={Success} />
