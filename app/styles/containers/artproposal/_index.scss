@@ -211,22 +211,23 @@
                     button {
                         margin-right: 2.0rem;
                         font-size: $font-size-xs;
-                    }
-                    .unchecked-button {
-                        border: solid 1px $color-hrLightGray;
-                        color: $color-almostBlack;
-                        svg {
-                            fill: $color-hrLightGray;
+                        &.unchecked-button {
+                            border: solid 1px $color-hrLightGray;
+                            color: $color-almostBlack;
+                            svg {
+                                fill: $color-hrLightGray;
+                            }
+                        }
+                        &.checked-button {
+                            border: solid 1px $color-printi-blue;
+                            background-color: $color-printi-blue;
+                            color: white;
+                            svg {
+                                fill: white;
+                            }
                         }
                     }
-                    .checked-button {
-                        border: solid 1px $color-printi-blue;
-                        background-color: $color-printi-blue;
-                        color: white;
-                        svg {
-                            fill: white;
-                        }
-                    }
+
                 }
                 .text-editor-wrapper {
                     margin: 3rem 0rem;
@@ -240,7 +241,6 @@
                         right: 0;
                         top: 3rem; 
                         bottom: 0;
-                        
                     }
                 }
 

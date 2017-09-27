@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import config from 'config';
 import Slider from 'react-slick';
-import Carousel from '../../components/Carousel';
-import { IconLeftButton } from '../../atoms/Buttons';
-import { DownloadIcon } from '../../components/Icons';
+import { IconLeftButton } from 'atoms/Buttons';
+import { DownloadIcon } from 'components/Icons';
 
 const docs = [
   {

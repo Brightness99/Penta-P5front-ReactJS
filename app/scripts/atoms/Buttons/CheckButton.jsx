@@ -2,7 +2,7 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { CheckCircleOIcon } from '../../components/Icons';
+import { CheckCircleOIcon } from 'components/Icons';
 
 type Props = {
   icon: any,
