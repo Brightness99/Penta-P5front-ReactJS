@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
 import { PageTitle } from 'atoms/Titles';
-import Alert from 'components/Alert';
+import FlashMessage from 'components/FlashMessage';
 import AdditionalOption from './AdditionalOption';
 import AvailableStrategy from './AvailableStrategy';
 import NormalSchema from './UploadTypeSchemas/Normal';
@@ -48,7 +48,7 @@ export class Upload extends React.Component {
     ];
 
     return messages.map(
-      (message, index) => <Alert {...message} key={`${String(index)}_${Date()}`} />
+      (message, index) => <FlashMessage {...message} key={`${String(index)}_${Date()}`} />
     );
   };
 
