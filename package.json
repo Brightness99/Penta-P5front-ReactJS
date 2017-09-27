@@ -133,6 +133,7 @@
     "react-inlinesvg": "^0.6.0",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
+    "react-rte": "^0.15.0",
     "react-slick": "^0.14.11",
     "react-transition-group": "^2.2.0",
     "redux": "^3.7.1",
