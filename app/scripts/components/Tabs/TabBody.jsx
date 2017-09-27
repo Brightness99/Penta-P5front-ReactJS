@@ -1,8 +1,6 @@
 // @flow
 
 import React from 'react';
-import { TransitionGroup } from 'react-transition-group';
-import { FadeToggle } from 'animations';
 
 type Props = {
   children: any,
