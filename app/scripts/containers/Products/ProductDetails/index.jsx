@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { BlockTitle } from 'atoms/Titles';
 
 type Props = {
-  className?: string,
   locale: {},
-  button?: typeof React.Component,
-  screenSize: string,
   product: {},
+  screenSize: string,
 };
 
 export class ProductDetailsBlock extends React.Component {
@@ -19,7 +18,7 @@ export class ProductDetailsBlock extends React.Component {
     return (
       <section className="container-detailsProduct">
         <div className="container">
-          <h4 className="detailsProduct-title">{locale.common.TITLE}</h4>
+          <BlockTitle>{locale.TITLE}</BlockTitle>
           {product.template_title1 && product.template_teaser1 && <div className="box-detailsProduct">
             <h5 className="detailsProduct-subtitle">{product.template_title1}</h5>
             <div className="fnt-text" dangerouslySetInnerHTML={{ __html: product.template_teaser1 }} />
@@ -37,7 +36,7 @@ export class ProductDetailsBlock extends React.Component {
 function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
-    locale: state.locale.translate.page.product_landing_page,
+    locale: state.locale.translate.page.product_landing_page.common,
     router: state.router,
     product: state.products.product,
   };

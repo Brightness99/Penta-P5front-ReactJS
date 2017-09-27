@@ -1,3 +1,5 @@
+@import 'product-banner';
+@import 'product-details';
 @import 'product-highlights';
 @import 'product-information';
 
@@ -594,69 +596,6 @@
     @include lg{
       flex-direction: row;
     }
-  }
-}
-
-.container-detailsProduct{
-  margin: 4.5rem 0;
-  .detailsProduct-title{
-    font-family: $font-family-open-sans-bold;
-    font-size: $font-size-h5;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    color: $color-almostBlack;
-    @include lg {
-      font-size: $font-size-base;
-    }
-  }
-  .detailsProduct-subtitle{
-    font-weight: lighter;
-    font-size: $font-size-h4;
-    font-family: $font-family-nunito-regular;
-    @include lg {
-      font-size: $font-size-xl;
-    }
-  }
-  .box-detailsProduct{
-    margin: 2.3rem 0;
-    .fnt-text{
-      font-family: $font-family-open-sans; 
-      font-size: $font-size-base;
-      font-weight: 400;
-      color: $color-lightGray;
-    }
-  }
-}
-
-.container-printiProduct{
-  box-sizing: border-box;
-  padding: 4rem 2rem;
-  background-color: #000;
-  margin-bottom: 6rem;
-  .printiProduct-title{
-    text-align: center;
-    color: $color-white;
-    font-size: $font-size-h4;
-    letter-spacing: -0.7px;
-    font-weight: 500;
-    @include lg {
-      font-size: $font-size-xxl;
-    }
-  }
-  .box-btn-printiProduct{
-    display: flex;
-    justify-content: center;
-    margin: 1.5rem 0;
-    .btn-default {
-      font-family: $font-family-open-sans;
-      font-size: $font-size-xxxs;
-    }
-  }
-  .fnt-text{
-    text-align: center;
-    font-family: $font-family-open-sans;
-    font-size: $font-size-h6;
-    color: $color-hrLightGray;
   }
 }
 
