@@ -102,3 +102,5 @@ export UserIcon from './UserIcon';
 export UserPlusIcon from './UserPlusIcon';
 export ArchiveIcon from './ArchiveIcon';
 export TasksIcon from './TasksIcon';
+export DownloadIcon from './DownloadIcon';
+

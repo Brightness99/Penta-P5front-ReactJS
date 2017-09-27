@@ -1,56 +1,217 @@
+.container {
+    .header-artproposal {
 
-.container-artproposal {
-    @include lg {
-        display: flex;
-        flex-direction: row;
     }
-    .container-sidebarproposal {
-        flex: 1;
-        //height: 100%;
-        box-sizing: border-box;
-        padding: 3rem 1.8rem 3rem 9rem;
-        border-right: 1px solid $color-lightGray2;
-
-        .menu-proposal {
-            margin-top: 2.6rem;
-            width: 270px;
+    .container-artproposal {
+        @include lg {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-
-            li {
-                width: 100%;
-                height: 6rem;
-                line-height: 6rem;
-                font-family: $font-family-open-sans;
-                font-size: $font-size-xs;
-                text-align: left;
-                background-color: white;
-                display: inline-flex;
-                border-bottom: solid 1px $color-hrLightGray;
-                a {
-                  color: $color-almostBlack;
-                  display: inline-flex;
-                  width: 100%;
-                  height: 100%;
-                  span {
-                    flex: 2;
-                    margin-left: 2.0rem;
-                  }
-                  &.is-active {
-                    color: $color-printi-blue;
-                    background-color: $color-lightBlue
-                  }
-                  &:hover {
-                    color: $color-printi-blue;
-                    background-color: $color-lightBlue
-                  }
+            flex-direction: row;
+        }
+        .container-sidebarproposal {
+            //height: 100%;
+            box-sizing: border-box;
+            padding: 3rem 1rem 3rem 0rem;
+    
+            .menu-proposal {
+                margin-top: 2.6rem;
+                width: 270px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+    
+                li {
+                    width: 100%;
+                    height: 6rem;
+                    line-height: 6rem;
+                    font-family: $font-family-open-sans;
+                    font-size: $font-size-xs;
+                    text-align: left;
+                    background-color: white;
+                    display: inline-flex;
+                    border-bottom: solid 1px $color-hrLightGray;
+                    a {
+                      color: $color-almostBlack;
+                      display: inline-flex;
+                      width: 100%;
+                      height: 100%;
+                      span {
+                        flex: 2;
+                        margin-left: 2.0rem;
+                      }
+                      &.is-active {
+                        color: $color-printi-blue;
+                        background-color: $color-lightBlue
+                      }
+                      &:hover {
+                        color: $color-printi-blue;
+                        background-color: $color-lightBlue
+                      }
+                    }
+                    &:last-of-type {
+                      border-bottom: none;
+                    }
                 }
-                &:last-of-type {
-                  border-bottom: none;
+            }
+        }
+    
+        .container-proposal {
+            padding: 3rem 0rem 3rem 1rem;
+            .content-proposal {
+                margin-top: 2.6rem;
+                padding: 3rem;
+                background-color: white;
+                color: $color-almostBlack;
+                font-family: $font-family-open-sans;
+                .proposal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    
+                    
+                    .title-proposal {
+                        font-size: $font-size-xxx;
+                    }
+                    .container-right {
+                        display: flex;
+                        .container-status {
+                            margin-left: 6.0rem;
+                            .sidetitle {
+                                font-size: $font-size-xs;   
+                                margin-bottom: 0.5rem;
+                                &.regular {
+                                    font-family: $font-family-open-sans-regular;
+                                } 
+                            }
+                            .status-image {
+                                
+                            }
+                        }
+                    }
+                }
+                .subtitle {
+                    font-size: $font-size-lg;
+                    padding: 3rem 0 2rem 0;
+                    font-family: $font-family-open-sans-bold;
+                }
+                .proposal-item {
+                    .item-header {
+                        display: flex;
+                        margin-bottom: 2rem;
+                        .avatar-wrapper {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 20px;
+                            background-color: white;
+                            border: solid 1px $color-lightGray3;
+                            image {
+                                max-width: 100%;
+                                max-height: 100%;
+                                height: 100%;
+                                object-fit: contain;
+                            }
+                        }
+                        .name-wrapper {
+                            font-size: $font-size-xs;
+                            padding: 2px 10px;
+                            .name {
+                                margin-bottom: 0;
+                            }
+                            .position {
+                                color: $color-printi;
+                            }
+                        }
+                    }
+                    .item-body {
+                        color: $color-lightGray;
+                        .proposal-text {
+                            font-size: $font-size-base;
+                            
+                        }
+                        .date {
+                            display: inline-block;
+                            background-color: $color-almostWhite;
+                            font-size: $font-size-xs;
+                            padding: 3px 10px;
+                            border-radius: 2px;
+                            margin: 1rem 0 2.5rem 0;
+                        }
+                        .box-docs-wrapper {
+                            width: 100%;
+                            height: 150px;
+                            position: relative;
+                            .box-docs {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                margin: 0 -1rem;
+                                .slider-docs {
+                                    left: 0;
+                                    margin: 0 -1rem 0 0;
+                                    .slider-doc-item {
+                                        position: relative;
+                                        width: 180px !important;
+                                        height: 150px !important;
+                                        border-radius: 2px;
+                                        margin-left: 1.0rem;
+                                        background-color: $color-almostWhite;
+                                        border: solid 1px $color-lightGray3;
+                                        .doc {
+                                            position: absolute;
+                                            left: 30px;
+                                            top: 30px;
+                                            right: 30px;
+                                            bottom: 30px;
+                                        }
+                                        img {
+                                            width: 100%;
+                                            height: 100%;
+                                            border-radius: 0.4rem;
+                                            display: block;
+                                            padding-bottom: 1px;
+                                            object-fit: cover;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        margin-bottom: 2rem;
+                    }
+                    .item-footer {
+                        display: flex;
+                        background-color: $color-lightWarning;
+                        font-size: $font-size-xs;
+                        padding: 1.0rem;
+                        .button-wrapper {
+                            .download-button {
+                                padding: 1.0rem 5.8rem;
+                                position: relative;
+                                line-height: 2rem;
+                                border-radius: 2px;
+                                border: solid 1px $color-printi-blue;
+                                color: $color-printi-blue;
+                                background: transparent;
+                                white-space: nowrap;
+                                svg {
+                                    position: absolute;
+                                    width: 1.6rem;
+                                    height: 2.0rem;
+                                    left: 2.8rem;
+                                    top: 1.0rem;
+                                    fill: $color-printi-blue;
+                                }
+                            }
+                        }
+                        .note {
+                            margin-left: 36px;
+                            padding-top: 0.4rem;
+                            color: $color-lightGray;
+                        }
+                    }
                 }
             }
         }
     }
+    
 }
