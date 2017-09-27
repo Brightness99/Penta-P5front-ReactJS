@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { productFetch } from 'actions';
-import productsSelector from 'selectors/products';
 
 import Loading from 'components/Loading';
 import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock } from 'components/LandingPage';
@@ -13,7 +12,6 @@ import ProductInformationBlock from './ProductInformation';
 import ProductDetailsBlock from './ProductDetails';
 import ProductBannerBlock from './ProductBanner';
 
-import InformationBlock from './InformationBlock';
 import TutorialBlock from './TutorialBlock';
 import WarrantyBlock from './WarrantyBlock';
 import BenefitsBlock from './BenefitsBlock';
@@ -23,7 +21,7 @@ import OpinionsBlock from './OpinionsBlock';
 type Props = {
   app: AppStoreType,
   router: RouterStore,
-  locale: LocaleType.translate.page.product_landing_page.informations,
+  locale: LocaleType,
   match: {},
   products: {},
   dispatch: () => {},
@@ -39,8 +37,8 @@ export class Products extends React.Component {
   static props: Props;
 
   renderMobile = () => {
-    const { products: { product, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
-    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } }, locale } = this.props;
+    const { products: { informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant } } } }, locale } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
@@ -48,7 +46,7 @@ export class Products extends React.Component {
 
     return (
       <div>
-        <ProductHighlightsBlock screenSize={screenSize} product={product} />
+        <ProductHighlightsBlock />
         <ProductInformationBlock
           screenSize={screenSize}
           informations={informations}
@@ -71,7 +69,7 @@ export class Products extends React.Component {
 
   renderDesktop = () => {
     const { products: { product, categories, informations, tutorials, opinions, isRunning, isLoaded }, app: { screenSize } } = this.props;
-    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant, print } } } }, locale } = this.props;
+    const { locale: { translate: { page: { product_landing_page: { advantages, graphic_plant } } } }, locale } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
