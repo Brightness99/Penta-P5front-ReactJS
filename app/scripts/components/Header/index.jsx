@@ -5,12 +5,14 @@ import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
+import LogoLoyalty from 'components/LogoLoyalty';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
 import Menu from './Menu';
 import SearchBar from './SearchBar';
 import Topbar from './Topbar';
+import LoyaltyTopbar from './LoyaltyTopbar';
 import Products from './Products';
 import MyAccount from './MyAccount';
 
