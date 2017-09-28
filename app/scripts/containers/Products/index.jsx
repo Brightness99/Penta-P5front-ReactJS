@@ -77,11 +77,7 @@ export class Products extends React.Component {
       <div>
         {!isMobile(screenSize) && <BreadcrumbsBlock links={breadcrumb} />}
         <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
-        <ProductInformationBlock
-          screenSize={screenSize}
-          informations={informations}
-          locale={locale.informations}
-        />
+        <ProductInformationBlock />
         <div>
           <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
           <WarrantyBlock screenSize={screenSize} />
@@ -90,9 +86,9 @@ export class Products extends React.Component {
           <CustomersRelyBlock />
           <BlogBlock />
           <OpinionsBlock screenSize={screenSize} opinions={opinions} />
-          <ProductDetailsBlock />
-          <ProductBannerBlock />
         </div>
+        <ProductDetailsBlock />
+        <ProductBannerBlock />
       </div>
     );
   }
