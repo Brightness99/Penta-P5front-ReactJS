@@ -11,6 +11,8 @@ import ProductHighlightsBlock from './ProductHighlights';
 import ProductInformationBlock from './ProductInformation';
 import ProductDetailsBlock from './ProductDetails';
 import ProductBannerBlock from './ProductBanner';
+import ProductOpinionsBlock from './ProductOpinions';
+import ProductWarrantyBlock from './ProductWarranty';
 
 import TutorialBlock from './TutorialBlock';
 import WarrantyBlock from './WarrantyBlock';
@@ -45,7 +47,6 @@ export class Products extends React.Component {
       products: {
         product,
         categories,
-        informations,
         tutorials,
         opinions,
         isRunning,
@@ -53,9 +54,7 @@ export class Products extends React.Component {
       },
       locale: {
         advantages,
-        graphic_plant
       },
-      locale
     } = this.props;
 
     const breadcrumb = [
@@ -79,12 +78,12 @@ export class Products extends React.Component {
         <ProductInformationBlock />
         <div>
           <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
-          <WarrantyBlock screenSize={screenSize} />
+          <ProductWarrantyBlock />
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
-          <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
+          <GraphicPlantBlock />
           <CustomersRelyBlock />
           <BlogBlock />
-          <OpinionsBlock screenSize={screenSize} opinions={opinions} />
+          <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
         </div>
         <ProductDetailsBlock />
         <ProductBannerBlock />

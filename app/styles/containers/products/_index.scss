@@ -2,15 +2,16 @@
 @import 'product-details';
 @import 'product-highlights';
 @import 'product-information';
+@import 'product-warranty';
 
 .container-tutorial{
   margin: 4.5rem 0;
   .tutorial-title{
     text-transform: uppercase;
-    font-size: $font-size-h5;
+    font-size: $font-size-lg;
     font-family: $font-family-open-sans-bold;
     letter-spacing: 0.1rem;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.6rem;
   }
   .container-boxTutorial{
     display: flex;
@@ -105,74 +106,6 @@
     @include lg{
       flex-direction: row;
     }
-  }
-}
-
-.container-warranty {
-  margin: 5.5rem 0 4.5rem 0;
-  display: flex;
-  flex-direction: column;
-  background-color: $color-lightGreenWarranty;
-  .box-image-warranty {
-    box-sizing: border-box;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    img{
-      position: relative; 
-    }
-    @include lg {
-      position: relative;
-      flex: 1;
-      img{
-        position: absolute;
-        bottom: -12px;
-      }
-    }
-  }
-  .box-text-warranty{
-    box-sizing: border-box;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    .warranty-title{
-      font-size: $font-size-h5;
-      font-weight: bold;
-    }
-    .warranty-text{
-      font-size: $font-size-sm;
-      font-weight: 400;
-      font-family: $font-family-open-sans;
-    }
-    @include lg{
-      flex: 2;
-    }
-  }
-  .box-btn-warranty{
-    flex: 1;
-    position: relative;
-    margin-top: 2rem;
-    >div{
-      .btn-default{
-        font-size: $font-size-xxxs;
-        font-family: $font-family-open-sans-semibold;
-      }
-      @include lg{
-        margin: 0 -50% 0 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-      }
-    }
-    @include lg{
-      margin-top: 0;
-    }
-  }
-  @include lg{
-    flex-direction: row;
-    height: 120px;
   }
 }
 
