@@ -5,7 +5,7 @@ import { productFetch } from 'actions';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 
 import Loading from 'components/Loading';
-import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock } from 'components/LandingPage';
+import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock, GraphicPlantBlock } from 'components/LandingPage';
 
 import ProductHighlightsBlock from './ProductHighlights';
 import ProductInformationBlock from './ProductInformation';
@@ -15,7 +15,6 @@ import ProductBannerBlock from './ProductBanner';
 import TutorialBlock from './TutorialBlock';
 import WarrantyBlock from './WarrantyBlock';
 import BenefitsBlock from './BenefitsBlock';
-import GraphicPlantBlock from './GraphicPlantBlock';
 import OpinionsBlock from './OpinionsBlock';
 
 type Props = {
