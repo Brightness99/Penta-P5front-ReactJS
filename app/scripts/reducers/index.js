@@ -13,6 +13,7 @@ import router from './router';
 import user from './user';
 import contactForm from './contact-form';
 import account from './account';
+import policy from './policy';
 
 export default {
   ...app,
@@ -25,4 +26,5 @@ export default {
   ...user,
   ...contactForm,
   ...account,
+  ...policy,
 };
