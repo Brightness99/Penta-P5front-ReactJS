@@ -30,6 +30,8 @@
           height: 420px;
           box-sizing: border-box;
           padding: 1rem 2rem;
+          margin-left: 2rem;
+          border-radius: 0.3rem;
         }
       }
       .title-smallbox {
@@ -38,6 +40,7 @@
         line-height: 2.14;
         letter-spacing: 1.4px;
         color: $color-almostBlack;
+        text-transform: uppercase;
       }
       .p-smallbox {
         font-family: $font-family-open-sans;
@@ -72,6 +75,7 @@
           margin-top: 1rem;
           font-weight: 600;
           font-size: $font-size-il;
+          font-family: $font-family-nunito-regular;
         }
       }
       .container-tutorialMobile {
@@ -86,6 +90,9 @@
           &:last-of-type {
             box-sizing: border-box;
             padding-left: 1rem;
+            @include lg {
+              padding-left: 0;
+            }
           }
         }
         @include lg {
@@ -188,6 +195,7 @@
         box-sizing: border-box;
         padding: 1.95rem 2rem;
         text-transform: uppercase;
+        display: block;
       }
       p{
         background-color: $color-white; 
@@ -234,8 +242,7 @@
       &:nth-of-type(2n){
         //height: 496px;
         height: auto;
-        box-shadow: 0px 3px 5px 6px $color-lightGray2;
-        z-index: 9;
+        z-index: 4;
         min-width: inherit;
         max-width: 390px;
         .benefitsCard-title{
@@ -255,6 +262,9 @@
           font-size: $font-size-xs;
           text-align: left;
           padding: 1.1rem 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           &:last-of-type {
             padding-bottom: 2.1rem;
             @include lg {
@@ -266,6 +276,10 @@
             font-family: $font-family-open-sans-light;
             padding: 0.8rem 3rem;
             font-size: $font-size-h6;
+            display: block;
+          }
+          .checkIcon {
+            margin-right: 0;
           }
         }
         .checkIcon{
@@ -279,13 +293,31 @@
         @include lg {
           //height: 505px;
           min-width: 390px;
+          box-shadow: 0px 3px 5px 6px $color-lightGray2;
         }
       }
       &:nth-of-type(2n-1){
-        margin-top: 2rem;
+        //margin-top: 2rem;
         margin-bottom: 2rem;
         @include lg {
           margin-top: 5rem;
+        }
+        p {
+          //display: flex;
+          //align-items: center;
+          //justify-content: left;
+          text-align: left;
+          @include lg {
+            text-align: center;
+          }
+          .checkIcon{
+            margin-left: 0;
+            margin-right: 1rem;
+            float: left;
+            @include lg {
+              margin-right: 2rem;
+            }
+          }
         }
       }
       .benefitsCard-btn{
@@ -294,6 +326,7 @@
         padding: 1.6rem 0;
         background-color: $color-white;
         .btn-default {
+          background-color: $color-green-light;
           font-size: $font-size-xxxs;
           font-family: $font-family-open-sans-semibold;
         }
@@ -339,7 +372,20 @@
       }
       &:nth-of-type(2n){
         flex: 2;
-        margin-right: inherit;
+        //margin-right: inherit;
+       // display: inline-flex;
+       //position: relative;
+       width: 100%;
+       @include lg {
+         width: 72rem;
+         height: 32rem;
+        }
+        .atm-carousel-arrow--prev {
+          left: 0;
+        }
+        .atm-carousel-arrow--next {
+          right: 0;
+        }
       }
       .graphicPlant-subtitle{
         margin: 2rem 0;
