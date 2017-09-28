@@ -42,7 +42,7 @@ export default class SearchBar extends React.Component {
     const { value } = this.state;
     ev.preventDefault();
 
-    push(`./busca?q=${value}`);
+    push(`./buscar?q=${value}`);
   };
 
   render() {
