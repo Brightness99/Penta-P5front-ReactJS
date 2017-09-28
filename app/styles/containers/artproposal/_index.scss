@@ -212,26 +212,10 @@
                     }
                 }
                 .approval-button-wrapper {
-                    button {
+                    .atm-box-radio {
                         margin-right: 2.0rem;
-                        font-size: $font-size-xs;
-                        &.unchecked-button {
-                            border: solid 1px $color-hrLightGray;
-                            color: $color-almostBlack;
-                            svg {
-                                fill: $color-hrLightGray;
-                            }
-                        }
-                        &.checked-button {
-                            border: solid 1px $color-printi-blue;
-                            background-color: $color-printi-blue;
-                            color: white;
-                            svg {
-                                fill: white;
-                            }
-                        }
+                        width: 180px;
                     }
-
                 }
                 .text-editor-wrapper {
                     margin: 3rem 0rem;
@@ -345,11 +329,12 @@
                         }
                     }
                 }
-                .check-button {
-                    width: 100%;
-                    text-align: left;
-                    margin-bottom: 1rem;
+                .approval-button-wrapper {
+                    .atm-box-radio {
+                        width: 100%;
+                    }
                 }
+                
                 .text-editor-wrapper {
                     border-top: none;
                     margin: 0rem 0rem 2rem;
