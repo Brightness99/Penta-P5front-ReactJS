@@ -54,8 +54,7 @@ export class Products extends React.Component {
       },
       locale: {
         advantages,
-        graphic_plant,
-        print,
+        graphic_plant
       },
       locale
     } = this.props;
