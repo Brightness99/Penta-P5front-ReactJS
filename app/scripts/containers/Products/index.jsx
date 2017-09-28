@@ -15,9 +15,7 @@ import ProductOpinionsBlock from './ProductOpinions';
 import ProductWarrantyBlock from './ProductWarranty';
 
 import TutorialBlock from './TutorialBlock';
-import WarrantyBlock from './WarrantyBlock';
 import BenefitsBlock from './BenefitsBlock';
-import OpinionsBlock from './OpinionsBlock';
 
 type Props = {
   app: AppStoreType,
