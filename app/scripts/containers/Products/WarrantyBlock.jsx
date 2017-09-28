@@ -15,10 +15,10 @@ export class WarrantyBlock extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <section className="container-warranty">
+      <section className="container-warranty">
+        <div className="container">
           <div className="box-image-warranty">
-            <img src={require('assets/media/images/img-warranty.png')} alt="adadasd" />
+            <img src={require('assets/media/images/img-warranty.png')} alt="100% Garantido" />
           </div>
           <div className="box-text-warranty">
             <h4 className="warranty-title">Qualidade garantida. Não corra risco com seus produtos!</h4>
@@ -29,8 +29,8 @@ export class WarrantyBlock extends React.Component {
               <Link className="btn-default btn-primary btn-lg" to="{'settingsPageLink'}">Configure este produto</Link>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     );
   }
 
