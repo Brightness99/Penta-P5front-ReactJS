@@ -194,14 +194,9 @@
                         font-size: $font-size-xs;
                         padding: 1.0rem;
                         .button-wrapper {
-                            .download-button {
-                                padding: 1.0rem 5.8rem;
-                                border: solid 1px $color-printi-blue;
-                                color: $color-printi-blue;
-                                font-size: $font-size-xs;
-                                svg {
-                                    fill: $color-printi-blue;
-                                }
+                            svg {
+                                width: 18px;
+                                height: 18px;
                             }
                         }
                         .note {
@@ -235,23 +230,8 @@
                 .bottom-button-wrapper {
                     display: flex;
                     justify-content: space-between;
-                    .add-button {
-                        border: solid 1px $color-printi-blue;
-                        color: $color-printi-blue;
-                        text-transform: uppercase;
-                        font-size: $font-size-xs;
-                        svg {
-                            fill: $color-printi-blue;
-                        }
-                    }
-                    .send-button {
-                        font-size: $font-size-xs;
-                        color: white;
-                        text-transform: uppercase;
-                        background-color: $color-green;
-                        border: solid 0px;
-                        border-radius: 2px;
-                        padding: 1.0rem 5.8rem;
+                    .atm-button-transparent {
+                        margin-top: 0px;
                     }
                 }
             }
@@ -347,6 +327,14 @@
                     button {
                         width: 100%;
                         margin-bottom: 3rem;
+                        text-transform: uppercase;
+                        &.atm-button-transparent {
+                            margin-top: 0;
+                            svg {
+                                width: 18px;
+                                height: 18px;
+                            }
+                        }
                     }
                 }
   
