@@ -80,6 +80,36 @@ export function userSignIn(action$) {
     });
 }
 
+export function userSocialSignIn(action$) {
+  return action$.ofType(UserConstants.USER_AUTH_SIGN_IN_SOCIAL_REQUEST)
+    .switchMap(action => {
+      const endpoint = '/v1/customers/login';
+
+      return rxAjax({
+        endpoint,
+        payload: action.payload,
+        method: 'POST',
+      })
+        .do((data) => {
+          if (data.status === 200) { push('/'); }
+        })
+        .map(data => ({
+          type: UserConstants.USER_AUTH_SIGN_IN_SOCIAL_SUCCESS,
+          payload: data.response,
+          meta: { updatedAt: getUnixtime() },
+        }))
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: UserConstants.USER_AUTH_SIGN_IN_SOCIAL_CANCEL })
+        .catch(error => [
+          {
+            type: UserConstants.USER_AUTH_SIGN_IN_SOCIAL_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          },
+        ]);
+    });
+}
+
 export function userSignUp(action$) {
   return action$.ofType(UserConstants.USER_AUTH_SIGN_UP_REQUEST)
     .switchMap(action => {
@@ -118,7 +148,7 @@ export function userLogOut(action$) {
       return rxAjax({
         endpoint,
         payload: {},
-        method: 'POST',
+        method: 'PUT',
       })
         .map(data => ({
           type: UserConstants.USER_AUTH_LOG_OUT_SUCCESS,
@@ -145,7 +175,7 @@ export function userAuthValidate(action$) {
       return rxAjax({
         endpoint,
         payload: {},
-        method: 'POST',
+        method: 'GET',
       })
         .map(data => ({
           type: UserConstants.USER_AUTH_VALIDATE_SUCCESS,
