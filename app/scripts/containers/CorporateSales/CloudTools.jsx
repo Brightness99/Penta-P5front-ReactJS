@@ -2,6 +2,7 @@
 
 import React from 'react';
 import cloudImage from 'assets/media/images/img-cloud.png';
+import { Link } from 'react-router-dom';
 
 type Props = {
   handleModalShowing: () => void,
@@ -23,12 +24,15 @@ class CloudTools extends React.Component<Props> {
                 a impressão e distribuição dos materiais. Tudo com total controle das quantidades e o uso correto da
                 marca.
               </p>
-              <button
-                className="btn-default btn-secondary btn-lg"
-                onClick={this.props.handleModalShowing}
-              >
-                Solicitar Atendimento
-              </button>
+              <div className="btns-cloud">
+                <button
+                  className="btn-default btn-secondary btn-lg"
+                  onClick={this.props.handleModalShowing}
+                >
+                  Solicitar Atendimento
+                </button>
+                <Link to="#">Ler mais sobre a cloud</Link>
+              </div>
             </div>
             <div className="box-cloudTools">
               <img src={cloudImage} alt="Menu" />
