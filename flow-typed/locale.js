@@ -1,3 +1,8 @@
+declare type SEOLocaleType = {
+  PAGE_TITLE: string,
+  META_DESCRIPTION: string,
+};
+
 declare type CommonLocaleType = {
   WARNING: string,
   OOPS: string,
