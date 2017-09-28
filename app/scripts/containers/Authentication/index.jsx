@@ -5,21 +5,30 @@ import Script from 'react-load-script';
 
 import { connect } from 'react-redux';
 import { PageTitle } from 'atoms/Titles';
-import { userSignIn, userSignUp, socialLoginSettingsFetch } from 'actions';
+import {
+  userSignIn,
+  userSignUp,
+  socialLoginSettingsFetch,
+  userSocialSignIn,
+  userSocialSignUp } from 'actions';
 import { SignInForm, SignUpForm, SocialBlock, SocialSignUpForm } from 'components/Authorization';
 import Modal from 'components/Modal';
 
 type Props = {
   submitSignIn: (data) => void,
   submitSignUp: (data: any) => void,
+  socialSignIn: (data) => void,
+  socialSignUp: (data) => void,
   socialLoginSettingsFetch: () => void,
   socialLoginSettings: {},
+  isSignUpActivated: boolean
 };
 
 type States = {
   isModalOpen: boolean,
   isSocialAuthInProgress: boolean,
   facebookSocialInfo: {},
+  googleSocialInfo: {},
   isFingerprintLoaded: boolean,
 }
 
@@ -40,63 +49,76 @@ export class Authentication extends React.Component {
     this.props.socialLoginSettingsFetch();
   }
 
+  componentWillReceiveProps= (nextProps: Props) => {
+    const { isSignUpActivated }  = this.props;
+    const nextSignUpState  = nextProps.isSignUpActivated;
+    const { facebookSocialInfo, googleSocialInfo } = this.state;
+
+    if (nextSignUpState && nextSignUpState !== isSignUpActivated) {
+      if (facebookSocialInfo) {
+        this.facebookSignUpConfiguration(facebookSocialInfo);
+      }
+      if (googleSocialInfo) {
+        this.signUp(googleSocialInfo);
+      }
+    }
+  };
+
   static props: Props;
   static state: States;
 
   signUp = (data) => {
     const { submitSignUp } = this.props;
+
     if (typeof submitSignUp !== 'function') {
       return;
     }
-    const result = Object.assign(data,
-      {
-        socialType: '',
-        hubspot_subscribe: true,
-        socialData: {
-          socialId: '',
-          socialToken: '',
-        },
-      });
 
-    submitSignUp(result);
+    submitSignUp(data);
   };
 
-  facebookLogin = (data) => {
+  facebookSignUpConfiguration = (facebookSocialInfo) => {
+    if (facebookSocialInfo.email) {
+      this.facebookSignUp({});
+    } else {
+      this.setState({
+        isModalOpen: true,
+        isSocialAuthInProgress: true,
+      });
+    }
+  };
+
+  facebookSignIn = (data) => {
+    const { socialSignIn } = this.props;
     this.setState({
-      isSocialAuthInProgress: true,
       facebookSocialInfo: data,
-      isModalOpen: true,
     });
+
+    socialSignIn(data);
   };
 
   facebookSignUp = (data) => {
-    const { submitSignUp } = this.props;
     const { facebookSocialInfo } = this.state;
-
-    if (typeof submitSignUp !== 'function') {
-      return;
-    }
-
     const result = Object.assign(data, facebookSocialInfo);
 
-    submitSignUp(result);
+    this.signUp(result);
   };
 
-  socialLogin = (data) => {
-    const { submitSignUp } = this.props;
+  googleSignIn = (data) => {
+    const { socialSignIn } = this.props;
+    this.setState({
+      googleSocialInfo: data,
+    });
 
-    if (typeof submitSignUp !== 'function') {
-      return;
-    }
+    socialSignIn(data);
+  };
 
-    const result = Object.assign(data,
-      {
-        hubspot_subscribe: true,
-        email: '',
-        email_confirmation: '',
-        password: '',
-      });
-    submitSignUp(result);
+  closeModal = () => {
+    this.setState({ isModalOpen: false });
+  };
+
+  handleScriptLoad = () => {
+    this.setState({ isFingerprintLoaded: true });
   };
 
   renderSignUpForm = () => {
@@ -123,16 +145,8 @@ export class Authentication extends React.Component {
 
     return (
       <Modal title="Atenção" handleCloseModal={this.closeModal}>
-          Para acessar com o seu Facebook. Informar o Seu e-mail.
-        </Modal>);
-  };
-
-  closeModal = () => {
-    this.setState({ isModalOpen: false });
-  };
-
-  handleScriptLoad = () => {
-    this.setState({ isFingerprintLoaded: true });
+        Para acessar com o seu Facebook. Informar o Seu e-mail.
+      </Modal>);
   };
 
   render() {
@@ -148,8 +162,8 @@ export class Authentication extends React.Component {
         <PageTitle className="text-center">Entre ou cadastre-se</PageTitle>
         <div className={cx('authentication')}>
           <SocialBlock
-            loginFBSuccess={this.facebookLogin}
-            loginGoogleSuccess={this.socialLogin}
+            loginFBSuccess={this.facebookSignIn}
+            loginGoogleSuccess={this.googleSignIn}
             facebook={socialLoginSettings.socials.facebook}
             google={socialLoginSettings.socials.google}
           />
@@ -168,11 +182,14 @@ export class Authentication extends React.Component {
 
 const mapStateToProps = state => ({
   socialLoginSettings: state.socialLoginSettings,
+  isSignUpActivated: state.user.socialAuthentication.userNotFound,
 });
 
 const mapDispatchToProps = dispatch => ({
   submitSignIn: (data) => dispatch(userSignIn(data)),
   submitSignUp: data => dispatch(userSignUp(data)),
+  socialSignIn: (data) => dispatch(userSocialSignIn(data)),
+  socialSignUp: (data) => dispatch(userSocialSignUp(data)),
   socialLoginSettingsFetch: () => dispatch(socialLoginSettingsFetch()),
 });
 

@@ -24,6 +24,17 @@ export type UserState = {
     error: boolean,
     message: string,
   },
+  socialAuthentication: {
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+    userNotFound: boolean
+  },
+  socialRegistration: {
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+  },
   registration: {
     isRunning: boolean,
     error: boolean,
@@ -54,6 +65,17 @@ export const userState:UserState = {
     subscribed: false,
   },
   authentication: {
+    isRunning: false,
+    error: false,
+    message: '',
+  },
+  socialAuthentication: {
+    isRunning: false,
+    error: false,
+    message: '',
+    userNotFound: false,
+  },
+  socialRegistration: {
     isRunning: false,
     error: false,
     message: '',
@@ -185,6 +207,40 @@ export default {
         updatedAt: action.meta.updatedAt,
       };
     },
+    [UserConstants.USER_AUTH_SIGN_IN_SOCIAL_REQUEST](state) {
+      return {
+        ...state,
+        socialAuthentication: {
+          ...state.socialAuthentication,
+          isRunning: true,
+        },
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_IN_SOCIAL_SUCCESS](state, action) {
+      return {
+        ...state,
+        socialAuthentication: {
+          ...state.socialAuthentication,
+          isRunning: false,
+        },
+        customerInfo: action.payload,
+        isAuthorized: true,
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_IN_SOCIAL_FAILURE](state, action) {
+      return {
+        ...state,
+        socialAuthentication: {
+          ...state.socialAuthentication,
+          error: true,
+          isRunning: false,
+          message: action.payload.message,
+          userNotFound: true,
+        },
+        updatedAt: action.meta.updatedAt,
+      };
+    },
     [UserConstants.USER_AUTH_VALIDATE_SUCCESS](state, action) {
       return {
         ...state,
@@ -219,6 +275,39 @@ export default {
         ...state,
         registration: {
           ...state.registration,
+          error: true,
+          isRunning: false,
+          message: action.payload.message,
+        },
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_UP_SOCIAL_REQUEST](state) {
+      return {
+        ...state,
+        socialRegistration: {
+          ...state.socialRegistration,
+          isRunning: true,
+        },
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_UP_SOCIAL_SUCCESS](state, action) {
+      return {
+        ...state,
+        socialRegistration: {
+          ...state.socialRegistration,
+          isRunning: false,
+        },
+        customerInfo: action.payload,
+        isAuthorized: true,
+        updatedAt: action.meta.updatedAt,
+      };
+    },
+    [UserConstants.USER_AUTH_SIGN_UP_SOCIAL_FAILURE](state, action) {
+      return {
+        ...state,
+        socialRegistration: {
+          ...state.socialRegistration,
           error: true,
           isRunning: false,
           message: action.payload.message,
