@@ -1,6 +1,11 @@
 // @flow
 import React from 'react';
+import config from 'config';
+import Slider from 'react-slick';
 import Carousel from 'components/Carousel';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { IntlMoney } from 'components/Intl/index';
+import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
 
 type Props = {
   screenSize: string,
@@ -34,7 +39,15 @@ export class GraphicPlantBlock extends React.Component {
           <h4 className="graphicPlant-title">{graphic_plant.OVER_TITLE}</h4>
           <div className="container-graphicPlant-block">
             <div className="box-graphicPlant">
-              <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico" />
+              <Slider
+                arrows={false}
+                dots={true}
+                dotsClass="atm-carousel-dots"
+                key="product-highlights-slider"
+              >
+                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico" />
+                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico2" />
+              </Slider>
             </div>
             <div className="box-graphicPlant">
               <h4 className="graphicPlant-subtitle">{graphic_plant.TITLE}</h4>
@@ -65,10 +78,16 @@ export class GraphicPlantBlock extends React.Component {
               </ul>
             </div>
             <div className="box-graphicPlant">
-              <Carousel>
+              <Slider
+                nextArrow={<NextArrow />}
+                prevArrow={<PrevArrow />}
+                dots={true}
+                dotsClass="atm-carousel-dots atm-carousel-dots--inline"
+                key="product-highlights-slider"
+              >
                 <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico" />
                 <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico2" />
-              </Carousel>
+              </Slider>
             </div>
           </div>
         </div>
