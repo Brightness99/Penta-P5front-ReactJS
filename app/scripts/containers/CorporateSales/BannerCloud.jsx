@@ -14,8 +14,8 @@ class BannerCloud extends React.Component<Props> {
   render() {
     return (
       <div>
-        <div className="container">
-          <div className="banner-corporate-sales">
+        <div className="banner-corporate-sales">
+          <div className="container">
             <img src={require('assets/media/images/corporate-sales.png')} alt="Atendimento exclusivo" />
             <div className="text-banner">
               <h2 className="title-banner">Atendimento exclusivo</h2>
