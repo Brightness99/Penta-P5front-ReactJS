@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RichTextEditor from 'react-rte';
 import { CheckButton, IconLeftButton, TextButton, RoundedConfirmationButton } from 'atoms/Buttons';
+import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 'components/Accordion/nAccordion';
 import { PictureIcon } from 'components/Icons';
 import ProposalItem from './ProposalItem';
 
@@ -42,6 +43,37 @@ export class ArtProposalContent extends React.Component {
   };
 
   renderMobile() {
+    return (
+      <div className="accordion-wrapper">
+        <Accordion>
+          <AccordionItem>
+            <AccordionItemTitle className="atm-header-menu-title">PROPOSTA 3</AccordionItemTitle>
+            <AccordionItemBody>{this.getProposal()}</AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
+        <Accordion>
+          <AccordionItem>
+            <AccordionItemTitle className="atm-header-menu-title">PROPOSTA 2</AccordionItemTitle>
+            <AccordionItemBody>{this.getProposal()}</AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
+        <Accordion>
+          <AccordionItem>
+            <AccordionItemTitle className="atm-header-menu-title">PROPOSTA 1</AccordionItemTitle>
+            <AccordionItemBody>{this.getProposal()}</AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
+        <Accordion>
+          <AccordionItem>
+            <AccordionItemTitle className="atm-header-menu-title">BREFING INICIAL</AccordionItemTitle>
+            <AccordionItemBody>{this.getProposal()}</AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    );
+  }
+
+  getProposal() {
     return (
       <div className="container-proposal">
         <div className="content-proposal">
