@@ -19,22 +19,20 @@ export class ProductBannerBlock extends React.Component {
     const { locale, product } = this.props;
 
     return (
-      <div className="container">
-        <section
-          className="container-printiProduct"
-          style={{
-            backgroundImage: product.image_bottom_banner ? `url('${config.basePath}${product.image_bottom_banner}` : '',
-          }}
-        >
-          <h4 className="printiProduct-title">{vsprintf(locale.print.TITLE, product.title.toLowerCase())}</h4>
-          <div className="box-btn-printiProduct">
-            <NavLink className="btn-default btn-primary btn-lg" to={`configuracao-${product.slug}`}>
-              {locale.common.CONFIGURE_PRODUCT}
-            </NavLink>
-          </div>
-          <p className="fnt-text">{locale.print.QUESTIONS}</p>
-        </section>
-      </div>
+      <section
+        className="container container-printiProduct"
+        style={{
+          backgroundImage: product.image_bottom_banner ? `url('${config.basePath}${product.image_bottom_banner}` : '',
+        }}
+      >
+        <h4 className="printiProduct-title">{vsprintf(locale.print.TITLE, product.title.toLowerCase())}</h4>
+        <div className="box-btn-printiProduct">
+          <NavLink className="btn-default btn-primary btn-lg" to={`configuracao-${product.slug}`}>
+            {locale.common.CONFIGURE_PRODUCT}
+          </NavLink>
+        </div>
+        <p className="fnt-text">{locale.print.QUESTIONS}</p>
+      </section>
     );
   }
 
