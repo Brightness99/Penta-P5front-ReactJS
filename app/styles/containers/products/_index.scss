@@ -178,25 +178,35 @@
   margin: 4.5rem 0;
   position: relative;
   font-family: $font-family-open-sans;
+
   .benefits-title{
     text-transform: uppercase;
     font-size: $font-size-h5;
     font-family: $font-family-open-sans; 
   }
+
   .container-benefitsCard{
     display:flex;
     flex-direction: column;
     box-sizing: border-box;
     padding: 0 1rem;
     margin-bottom: 4rem;
+
     .box-benefitsCard{
       flex: 1;
       .benefitsCard-title{
         box-sizing: border-box;
-        padding: 1.95rem 2rem;
+        padding: 0.7rem 0;
         text-transform: uppercase;
         display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include lg {
+          padding: 1.95rem 2rem;
+        }
       }
+
       p{
         background-color: $color-white; 
         margin-bottom: 0;
@@ -238,9 +248,17 @@
             }
           }
         }
+        .atm-printi-logo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            width: 9rem;
+          }
+        }
       }
+
       &:nth-of-type(2n){
-        //height: 496px;
         height: auto;
         z-index: 4;
         min-width: inherit;
@@ -249,24 +267,24 @@
           width: 100%;
           text-align: center;
           padding: 1.9rem 2rem;
+          @include lg {
+            padding: 2.2rem 2rem;
+          }
           svg{
             width: 150px;
             height: 69px;
-          }
-          @include lg {
-            //width: 390px;
           }
         }
         p{
           color: $color-almostBlack;
           font-size: $font-size-xs;
           text-align: left;
-          padding: 1.1rem 3rem;
+          padding: 0.99rem 3rem;
           display: flex;
           align-items: center;
           justify-content: center;
           &:last-of-type {
-            padding-bottom: 2.1rem;
+            padding: 1.1rem 3rem;
             @include lg {
               padding: 1.1rem 3rem;
             }
@@ -274,52 +292,43 @@
           @include lg {
             color: $color-lightGray;
             font-family: $font-family-open-sans-light;
-            padding: 0.8rem 3rem;
+            //padding: 0.8rem 3rem;
             font-size: $font-size-h6;
             display: block;
           }
-          .checkIcon {
-            margin-right: 0;
-          }
-        }
-        .checkIcon{
-          margin-left: 0;
-          margin-right: 1rem;
-          float: left;
-          @include lg {
-            margin-right: 2rem;
-          }
-        }
-        @include lg {
-          //height: 505px;
-          min-width: 390px;
-          box-shadow: 0px 3px 5px 6px $color-lightGray2;
-        }
-      }
-      &:nth-of-type(2n-1){
-        //margin-top: 2rem;
-        margin-bottom: 2rem;
-        @include lg {
-          margin-top: 5rem;
-        }
-        p {
-          //display: flex;
-          //align-items: center;
-          //justify-content: left;
-          text-align: left;
-          @include lg {
-            text-align: center;
-          }
           .checkIcon{
-            margin-left: 0;
-            margin-right: 1rem;
-            float: left;
+            margin: 0;
             @include lg {
               margin-right: 2rem;
             }
           }
         }
+        @include lg {
+          min-width: 390px;
+          box-shadow: 0px 3px 5px 6px $color-lightGray2;
+        }
       }
+
+      &:nth-of-type(2n-1){
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2rem;
+        @include lg {
+          margin-top: 5rem;
+        }
+        p {
+          display: flex;
+          align-items: center;
+          @include lg {
+            text-align: center;
+            display: block;
+          }
+          .checkIcon{
+            margin: 0 1rem;
+          }
+        }
+      }
+
       .benefitsCard-btn{
         display: flex;
         justify-content: center;
@@ -340,10 +349,10 @@
   }
   sub{
     color: $color-darkGray;
-    bottom: 0.75rem;
-    display: block;
-    text-align: center;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @include lg {
       position: absolute;
       right: 8rem;
@@ -388,12 +397,15 @@
         }
       }
       .graphicPlant-subtitle{
-        margin: 2rem 0;
+        margin: 4rem 0 2rem 0;        
         font-size: $font-size-il;
         font-family: $font-family-nunito-regular;
         line-height: 1.48;
         font-weight: lighter;
         color: $color-almostBlack;
+        @include lg {
+          margin: 2rem 0;
+        }
       }
       .fnt-text{
         font-family: $font-family-open-sans-light; 
@@ -696,6 +708,7 @@
     .btn-default {
       font-family: $font-family-open-sans;
       font-size: $font-size-xxxs;
+      background-color: $color-green-light;
     }
   }
   .fnt-text{
