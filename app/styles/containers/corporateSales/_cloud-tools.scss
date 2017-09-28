@@ -1,6 +1,6 @@
 .container-cloudTools {
   background-color: $color-white;
-  padding: 1rem;
+  padding: 4rem 1rem;
   @include lg {
     padding: 3rem;
   }
@@ -59,13 +59,18 @@
       }
       button {
         font-size: $font-size-xxxs;
+        margin: 2rem 0;
         @include lg {
-          margin-right: 3rem;
+          margin: 0 3rem 0 0;
         }
       }
       a {
         font-size: $font-size-xs;
         text-decoration: underline;
+        margin-bottom: 2rem;
+        @include lg {
+          margin-bottom: 0;
+        }
       }
     }
   }
