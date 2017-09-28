@@ -14,21 +14,14 @@
     background-color: $color-white;
     font-size: $font-size-sm;
     padding: 2rem;
-    .atm-terms-use-privacy {
-      margin: 3rem 0;
-      .title-text-terms {
+    
+    li {
+      margin: 1rem 0;
+      h2 {
         font-family: $font-family-open-sans-semibold;
         font-size: $font-size-base;
-        margin: 2rem 0;
+        margin: 3rem 0 2rem;
         padding-bottom: 0;
-      }
-      .qrk-list-text-terms {
-        li {
-          margin: 1rem 0;
-          span {
-            font-weight: bold;
-          }
-        }
       }
     }
   }
