@@ -14,3 +14,4 @@ export * from './products';
 export * from './settings';
 export * from './contact-form';
 export * from './account';
+export * from './terms';
