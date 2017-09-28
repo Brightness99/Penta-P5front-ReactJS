@@ -4,7 +4,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RichTextEditor from 'react-rte';
-import { IconLeftButton, TextButton, RoundedConfirmationButton } from 'atoms/Buttons';
+import { IconLeftButton, TextButton, RoundedTransparentButton, RoundedConfirmationButton } from 'atoms/Buttons';
 import { BoxRadio } from 'atoms/Inputs';
 import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 'components/Accordion/nAccordion';
 import { PictureIcon } from 'components/Icons';
@@ -137,8 +137,16 @@ export class ArtProposalContent extends React.Component {
             />
           </div>
           <div className="bottom-button-wrapper">
-            <IconLeftButton icon={<PictureIcon />} title="Adicionar arquivos" className="add-button" />
-            <TextButton className="send-button" >enviar solicitação</TextButton>
+            <RoundedTransparentButton>
+              <PictureIcon />
+              <span>Adicionar arquivos</span>
+            </RoundedTransparentButton>
+            <RoundedConfirmationButton
+              isEnabled={true}
+              onClick={() => {}}
+            >
+              enviar solicitação
+            </RoundedConfirmationButton>
           </div>
         </div>
       </div>
@@ -193,8 +201,16 @@ export class ArtProposalContent extends React.Component {
             />
           </div>
           <div className="bottom-button-wrapper">
-            <IconLeftButton icon={<PictureIcon />} title="Adicionar arquivos" className="add-button" />
-            <TextButton className="send-button" >enviar solicitação</TextButton>
+            <RoundedTransparentButton>
+              <PictureIcon />
+              <span>Adicionar arquivos</span>
+            </RoundedTransparentButton>
+            <RoundedConfirmationButton
+              isEnabled={true}
+              onClick={() => {}}
+            >
+              enviar solicitação
+            </RoundedConfirmationButton>
           </div>
         </div>
       </div>

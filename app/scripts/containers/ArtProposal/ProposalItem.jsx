@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import config from 'config';
 import Slider from 'react-slick';
-import { IconLeftButton } from 'atoms/Buttons';
+import { RoundedTransparentButton } from 'atoms/Buttons';
 import { DownloadIcon } from 'components/Icons';
 
 const docs = [
@@ -127,7 +127,10 @@ export class ProposalItem extends React.Component {
         </div>
         <div className="item-footer">
           <div className="button-wrapper">
-            <IconLeftButton icon={<DownloadIcon />} title="DOWNLOAD Dos ARQUIVOS" className="download-button" />
+            <RoundedTransparentButton>
+              <DownloadIcon />
+              <span>DOWNLOAD Dos ARQUIVOS</span>
+            </RoundedTransparentButton>
           </div>
           <div className="note">
             IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 
