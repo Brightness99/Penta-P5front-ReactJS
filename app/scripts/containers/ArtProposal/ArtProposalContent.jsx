@@ -43,7 +43,42 @@ export class ArtProposalContent extends React.Component {
 
   renderMobile() {
     return (
-      <div>d</div>
+      <div className="container-proposal">
+        <div className="content-proposal">
+          <div className="proposal-header">
+            <h2 className="title-proposal">Proposta 2</h2>
+            <div className="container-right">
+              <div className="container-status">
+                <p className="sidetitle regular">Última alteração</p>
+                <p className="sidetitle">22/04/2015 | 11:35</p>
+              </div>
+              <div className="container-status">
+                <p className="sidetitle regular">Status</p>
+                <span><image className="status-image" /></span>
+                <p className="sidetitle">22/04/2015 | 11:35</p>
+              </div>
+            </div>
+          </div>
+          <p className="subtitle">Alteração solicitada</p>
+          <ProposalItem />
+          <p className="subtitle">E agora, o que quer fazer? :)</p>
+          <div className="approval-button-wrapper">
+            <CheckButton title="Aprovar a proposta" className={(false) ? 'checked-button' : 'unchecked-button'} />
+            <CheckButton title="Solicitar alteração" className={(true) ? 'checked-button' : 'unchecked-button'} />
+          </div>
+          <div className="text-editor-wrapper">
+            <RichTextEditor
+              className="text-editor"
+              value={this.state.value}
+              onChange={this.onChange}
+            />
+          </div>
+          <div className="bottom-button-wrapper">
+            <IconLeftButton icon={<PictureIcon />} title="Adicionar arquivos" className="add-button" />
+            <TextButton className="send-button" >enviar solicitação</TextButton>
+          </div>
+        </div>
+      </div>
     );
   }
 

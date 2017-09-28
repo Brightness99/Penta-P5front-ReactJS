@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import cx from 'classnames';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Sidebar from './Sidebar';
 import ArtProposalContent from './ArtProposalContent';
@@ -19,8 +20,13 @@ export class ArtProposal extends React.Component {
 
   renderMobile() {
     return (
-      <div className="container-artproposal">
-        {this.renderContainer()}
+      <div className="container">
+        <div className={cx('header-artproposal', 'mobile-header-artproposal')}>
+          <p className="title">PROPOSTA DE ARTE</p>
+        </div>
+        <div className={cx('container-artproposal', 'mobile-container-proposal')}>
+          {this.renderContainer()}
+        </div>
       </div>
     );
   }

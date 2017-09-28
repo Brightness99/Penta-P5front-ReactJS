@@ -10,6 +10,9 @@
             color: $color-lightGray;
             font-family: $font-family-open-sans;
         }
+        &.mobile-header-artproposal {
+            margin: 3rem 0 1rem;
+        }
     }
     .container-artproposal {
         @include lg {
@@ -77,6 +80,7 @@
                     
                     .title-proposal {
                         font-size: $font-size-xxx;
+                        font-family: $font-family-open-sans;
                     }
                     .container-right {
                         display: flex;
@@ -266,6 +270,85 @@
                         padding: 1.0rem 5.8rem;
                     }
                 }
+            }
+        }
+
+        &.mobile-container-proposal {
+            margin-left: -15px;
+            margin-right: -15px;
+            .container-proposal {
+                margin-left: 0;
+            }
+            .content-proposal {
+                padding: 2rem;
+                .proposal-header {
+                    display: block;
+                    .title-proposal {
+                        font-family: $font-family-open-sans-bold;
+                        font-size: $font-size-xs;
+                        text-transform: uppercase;
+                    }
+                    .container-right {
+                        border-bottom: solid 1px $color-hrLightGray;
+                        padding-bottom: 1rem;
+                        .container-status {
+                            margin-left: 0;
+                            flex: 1;
+                        }
+                    }
+                }
+                .subtitle {
+                    padding: 2rem 0 0rem 0;
+                }
+                .proposal-item {
+                    .item-header {
+                        margin-top: 1rem;
+                        .name-wrapper {
+                            display: flex;
+                            p {
+                                line-height: 3.8rem;
+                                padding-right: 0.5rem;
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                    .slider-docs {
+                        margin: 0 -1rem 0 1rem !important;
+                    }
+                    .slider-doc-item:first-child {
+                        margin-left: 0 !important;
+                    }
+                    .item-footer {
+                        display: block;
+                        button {
+                            width: 100%
+                        }
+                        .note {
+                            margin-left: 0;
+                            padding-top: 1rem;
+                        }
+                    }
+                }
+                .check-button {
+                    width: 100%;
+                    text-align: left;
+                    margin-bottom: 1rem;
+                }
+                .text-editor-wrapper {
+                    border-top: none;
+                    margin: 0rem 0rem 2rem;
+                    .EditorToolbar__root___3_Aqz {
+                        display: none;
+                    }
+                }
+                .bottom-button-wrapper {
+                    display: block;
+                    button {
+                        width: 100%;
+                        margin-bottom: 3rem;
+                    }
+                }
+  
             }
         }
     }
