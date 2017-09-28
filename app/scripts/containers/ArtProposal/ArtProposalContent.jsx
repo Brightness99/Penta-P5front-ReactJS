@@ -4,7 +4,8 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RichTextEditor from 'react-rte';
-import { CheckButton, IconLeftButton, TextButton, RoundedConfirmationButton } from 'atoms/Buttons';
+import { IconLeftButton, TextButton, RoundedConfirmationButton } from 'atoms/Buttons';
+import { BoxRadio } from 'atoms/Inputs';
 import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 'components/Accordion/nAccordion';
 import { PictureIcon } from 'components/Icons';
 import ProposalItem from './ProposalItem';
@@ -15,12 +16,18 @@ type Props = {
   onChange: func
 };
 
+type State = {
+  activeButton: string,
+  value: any
+};
+
 export class ArtProposalContent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       value: RichTextEditor.createEmptyValue(),
+      activeButton: 'approve',
     };
   }
 
@@ -29,6 +36,8 @@ export class ArtProposalContent extends React.Component {
   };
 
   static props: Props;
+
+  static state: State;
 
   onChange = (val) => {
     this.setState({ value: val });
@@ -40,6 +49,12 @@ export class ArtProposalContent extends React.Component {
         val.toString('html')
       );
     }
+  };
+
+  handleSelection = (ev) => {
+    this.setState({
+      activeButton: ev.currentTarget.value,
+    });
   };
 
   renderMobile() {
@@ -74,6 +89,8 @@ export class ArtProposalContent extends React.Component {
   }
 
   getProposal() {
+    const { activeButton } = this.state;
+
     return (
       <div className="container-proposal">
         <div className="content-proposal">
@@ -95,8 +112,22 @@ export class ArtProposalContent extends React.Component {
           <ProposalItem />
           <p className="subtitle">E agora, o que quer fazer? :)</p>
           <div className="approval-button-wrapper">
-            <CheckButton title="Aprovar a proposta" className={(false) ? 'checked-button' : 'unchecked-button'} />
-            <CheckButton title="Solicitar alteração" className={(true) ? 'checked-button' : 'unchecked-button'} />
+            <BoxRadio
+              value="approve"
+              onChange={this.handleSelection}
+              name="pane-type"
+              checked={activeButton === 'approve'}
+            >
+              Aprovar a proposta
+            </BoxRadio>
+            <BoxRadio
+              value="request"
+              onChange={this.handleSelection}
+              name="pane-type"
+              checked={activeButton === 'request'}
+            >
+              Solicitar alteração
+            </BoxRadio>
           </div>
           <div className="text-editor-wrapper">
             <RichTextEditor
@@ -115,6 +146,7 @@ export class ArtProposalContent extends React.Component {
   }
 
   renderDesktop() {
+    const { activeButton } = this.state;
     return (
       <div className="container-proposal">
         <div className="content-proposal">
@@ -136,8 +168,22 @@ export class ArtProposalContent extends React.Component {
           <ProposalItem />
           <p className="subtitle">E agora, o que quer fazer? :)</p>
           <div className="approval-button-wrapper">
-            <CheckButton title="Aprovar a proposta" className={(false) ? 'checked-button' : 'unchecked-button'} />
-            <CheckButton title="Solicitar alteração" className={(true) ? 'checked-button' : 'unchecked-button'} />
+            <BoxRadio
+              value="approve"
+              onChange={this.handleSelection}
+              name="pane-type"
+              checked={activeButton === 'approve'}
+            >
+              Aprovar a proposta
+            </BoxRadio>
+            <BoxRadio
+              value="request"
+              onChange={this.handleSelection}
+              name="pane-type"
+              checked={activeButton === 'request'}
+            >
+              Solicitar alteração
+            </BoxRadio>
           </div>
           <div className="text-editor-wrapper">
             <RichTextEditor
