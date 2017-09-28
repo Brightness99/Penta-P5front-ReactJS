@@ -8,20 +8,20 @@ import cx from 'classnames';
 type Props = {
   type: string,
   title: string,
-  content: string,
+  message: string,
 };
 
-const Alert = (props: Props) => {
+const FlashMessage = (props: Props) => {
   const properties = (() => {
     switch (props.type) {
       case 'warning':
         return {
-          class: 'app__alert--warning',
+          class: 'app__flashmessage--warning',
           icon: <WarningFilled />,
         };
       case 'error':
         return {
-          class: 'app__alert--error',
+          class: 'app__flashmessage--error',
           icon: <WarningFilled />,
         };
       default:
@@ -33,19 +33,19 @@ const Alert = (props: Props) => {
   })();
 
   return (
-    <div className={cx('app__alert', properties.class)}>
-      <div className="alert-item-container">
-        <div className="alert-item-icon-container">
+    <div className={cx('app__flashmessage', properties.class)}>
+      <div className="flashmessage-item-container">
+        <div className="flashmessage-item-icon-container">
           {properties.icon}
         </div>
-        <div className="alert-item-content-container">
-          <span className="alert-item-title">{props.title}</span>
-          <p className="alert-item-content">{props.content}</p>
+        <div className="flashmessage-item-content-container">
+          <span className="flashmessage-item-title">{props.title}</span>
+          <p className="flashmessage-item-content">{props.message}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Alert;
+export default FlashMessage;
 

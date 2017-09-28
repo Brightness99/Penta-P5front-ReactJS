@@ -1,11 +1,11 @@
-.app__alert {
+.app__flashmessage {
 	border-left-width: 0.6rem;
   border-left-style: solid;
   border-left-color: $color-darkGray;
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
   color: $color-maize;
-	.alert-item-container {
+	.flashmessage-item-container {
 		display: flex;
 		flex-direction: row;
 		min-height: 3.5rem;
@@ -16,7 +16,7 @@
 		border-top-right-radius: 0.5rem;
 		border-bottom-right-radius: 0.5rem;
 		max-width: 100%;
-		.alert-item-icon-container {
+		.flashmessage-item-icon-container {
 			padding: 0.6rem;
 			display: flex;
 			align-items: flex-start;
@@ -27,15 +27,15 @@
 				margin: 0.5rem;
 			}
 		}
-		.alert-item-content-container {
+		.flashmessage-item-content-container {
 			display: flex;
 			flex-direction: column;
 			padding-left: 1rem;
-			.alert-item-title {
+			.flashmessage-item-title {
 			  font-weight: bold;
 			  padding: 1rem 0;
 			}
-			.alert-item-content {
+			.flashmessage-item-content {
 				margin: 0;
 				padding-bottom: 2rem;
   			padding-right: 4rem;
@@ -44,9 +44,9 @@
 	}
 	&--warning {
 		border-left-color: $color-maize;
-		.alert-item-container {
+		.flashmessage-item-container {
 			background-color: $color-opacity-maize;
-			.alert-item-icon-container {
+			.flashmessage-item-icon-container {
 				svg {
 					fill: $color-maize;
 				}
@@ -55,9 +55,9 @@
   }
   &--error {
 		border-left-color: $color-tomato-error-dark;
-		.alert-item-container {
+		.flashmessage-item-container {
 			background-color: $color-tomato-error-light;
-			.alert-item-icon-container {
+			.flashmessage-item-icon-container {
 				svg {
 					fill: $color-tomato-error-dark;
 				}

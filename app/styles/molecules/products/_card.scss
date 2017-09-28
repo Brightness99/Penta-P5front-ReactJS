@@ -6,7 +6,7 @@
 
   > a {
     background-color: $color-white;
-    border: 0.1rem solid #dbdddf;
+    border: 0.1rem solid $color-hrLightGray;
     border-radius: $bsn-border-radius;
     cursor: pointer;
     display: flex;
@@ -32,30 +32,33 @@
 }
 
 .atm-card-title {
-  color: #151617;
+  color: $color-almostBlack;
   font-family: $font-family-nunito-regular;
+  font-size: $font-size-base;
+  font-weight: 400;
   letter-spacing: -0.3px;
   padding-top: $grid-gutter-width / 3;
 }
 
 .atm-card-text {
-  color: #6a6f7a;
-  font-family: $font-family-open-sans;
+  color: $color-lightGray;
+  font-family: $font-family-open-sans-light;
   font-size: $font-size-xs;
   line-height: 1;
 
   > span {
-    font-size: 16px;
-    color: #006ee3;
+    font-family: $font-family-open-sans-regular;
+    font-size: $font-size-base;
+    color: $color-printi-blue;
   }
 }
 
 .atm-card-button {
   @include border-radius;
   align-items: center;
-  background-color: #36c265;
+  background-color: $color-green-light;
   box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
-  color: #ffffff;
+  color: $color-white;
   display: none;
   font-size: 10px;
   font-weight: bold;
@@ -65,7 +68,7 @@
   letter-spacing: 1px;
   position: absolute;
   text-transform: uppercase;
-  top: 50%;
+  top: 62%;
   transform: translate(-50%);
   width: 70%;
 }
