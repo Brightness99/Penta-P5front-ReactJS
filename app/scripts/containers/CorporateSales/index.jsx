@@ -6,12 +6,14 @@ import { connect } from 'react-redux';
 import { submitContactForm as submitAction } from 'actions';
 import corporateSalesSelector from 'selectors/products';
 import type { ContactFormState } from 'reducers/contact-form';
+import { Link } from 'react-router-dom';
 
 import { CustomersRelyBlock } from 'components/LandingPage';
 import Modal from 'components/Modal';
 import ContactForm from 'components/ContactForm';
 import MainBenefits from './MainBenefits';
 import CloudTools from './CloudTools';
+import BannerCloud from './BannerCloud';
 import RequestSample from './RequestSample';
 import type { DataType } from '../../actions/contact-form';
 
@@ -35,7 +37,6 @@ export class CorporateSales extends React.Component<Props, State> {
     this.state = { showContactModal: false };
   }
 
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.contactForm.isLoaded) {
       this.handleShowingModal();
@@ -49,13 +50,9 @@ export class CorporateSales extends React.Component<Props, State> {
     this.setState({ showContactModal: !this.state.showContactModal });
   };
 
-  renderBanner() {
-    return (
-      <div className="container">
-        <img src={require('assets/media/images/corporate-sales.png')} alt="Atendimento exclusivo" />
-      </div>
-    );
-  }
+  handleCloseModal = () => {
+    this.setState({ showContactModal: false });
+  };
 
   render() {
     const { submitContactForm } = this.props;
@@ -67,7 +64,7 @@ export class CorporateSales extends React.Component<Props, State> {
             <ContactForm onSubmit={data => submitContactForm && submitContactForm(data)} />
           </Modal>
         }
-        {this.renderBanner()}
+        <BannerCloud handleModalShowing={this.handleShowingModal} />        
         <MainBenefits />
         <CloudTools handleModalShowing={this.handleShowingModal} />
         <CustomersRelyBlock />

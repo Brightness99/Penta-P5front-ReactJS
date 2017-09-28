@@ -50,5 +50,23 @@
         margin-left: 3rem;
       }
     }
+    .btns-cloud {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      @include lg  {
+        flex-direction: row;
+      }
+      button {
+        font-size: $font-size-xxxs;
+        @include lg {
+          margin-right: 3rem;
+        }
+      }
+      a {
+        font-size: $font-size-xs;
+        text-decoration: underline;
+      }
+    }
   }
 }
