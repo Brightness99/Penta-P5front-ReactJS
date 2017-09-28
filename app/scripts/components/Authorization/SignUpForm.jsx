@@ -63,6 +63,12 @@ export default class SignUpForm extends React.PureComponent {
         email_confirmation: form.email_confirmation.value,
         password: form.password.value,
         fingerprint,
+        socialType: '',
+        hubspot_subscribe: true,
+        socialData: {
+          socialId: '',
+          socialToken: '',
+        },
       };
       onSubmit(value);
     }

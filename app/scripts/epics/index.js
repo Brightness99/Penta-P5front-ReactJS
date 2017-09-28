@@ -9,7 +9,9 @@ import {
   userSignIn,
   userSignUp,
   userLogOut,
-  userAuthValidate } from './user';
+  userAuthValidate,
+  userSocialSignIn,
+  userSocialSignUp } from './user';
 import { productsFetch } from './products';
 import { blogFetch } from './blog';
 import {
@@ -52,6 +54,8 @@ export default combineEpics(
   prepressDownloadFetch,
   userSignIn,
   userSignUp,
+  userSocialSignIn,
+  userSocialSignUp,
   userLogOut,
   userAuthValidate,
   cartBasicFetch,

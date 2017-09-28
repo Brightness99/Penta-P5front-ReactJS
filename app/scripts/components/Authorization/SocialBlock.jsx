@@ -9,7 +9,10 @@ type GoogleSuccessResult = {
   tokenId: string,
   accessToken: string,
   tokenObj: Object,
-  profileObj: Object
+  profileObj: {
+    name: string,
+    email: string,
+  }
 }
 
 type GoogleFailureResult = {
@@ -100,6 +103,8 @@ export default class SocialBlock extends React.PureComponent {
         socialId: data.googleId,
         socialToken: data.tokenId,
       },
+      first_name: data.profileObj.name,
+      email: data.profileObj.email,
     };
 
     loginGoogleSuccess(result);

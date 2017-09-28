@@ -61,10 +61,35 @@ export function userSignUp(user): Object {
 }
 
 /**
- * Customer logout
+ * Customer social authentication
  *
- * @param {string} email
- * @param {string} password
+ * @param {object} userForm
+ *
+ * @returns {Object}
+ */
+export function userSocialSignIn(userForm): Object {
+  return {
+    type: UserConstants.USER_AUTH_SIGN_IN_SOCIAL_REQUEST,
+    payload: userForm,
+  };
+}
+
+/**
+ * Customer social registration
+ *
+ * @param {user} user
+ *
+ * @returns {Object}
+ */
+export function userSocialSignUp(user): Object {
+  return {
+    type: UserConstants.USER_AUTH_SIGN_UP_SOCIAL_REQUEST,
+    payload: user,
+  };
+}
+
+/**
+ * Customer logout
  *
  * @returns {Object}
  */
