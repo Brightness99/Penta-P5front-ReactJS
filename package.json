@@ -131,6 +131,7 @@
     "react-dom": "^15.6.1",
     "react-facebook-login": "3.6.2",
     "react-google-login": "2.9.3",
+    "react-helmet": "^5.2.0",
     "react-history": "^0.18.2",
     "react-inlinesvg": "^0.6.0",
     "react-load-script": "0.0.6",

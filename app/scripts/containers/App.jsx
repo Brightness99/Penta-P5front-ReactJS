@@ -27,6 +27,11 @@ import FileMount from 'containers/FileMount';
 import PrintGuide from 'containers/PrintGuide';
 import PrintiPress from 'containers/PrintiPress';
 import AboutPrinti from 'containers/AboutPrinti';
+import HelpCenterPage from 'containers/HelpCenterPage';
+import TermsOfUse from 'containers/TermsOfUse';
+import PrivacyPolicy from 'containers/PrivacyPolicy';
+import Sitemap from 'containers/Sitemap';
+import Search from 'components/Search';
 
 type Props = {
   app: AppStoreType,
@@ -86,8 +91,13 @@ export class App extends React.Component {
                       <Route path="/minha-conta" component={MyAccount} />
                       <Route path="/montagem-de-arquivos" component={FileMount} />
                       <Route path="/guia-de-impressao" component={PrintGuide} />
+                      <Route path="/central-de-ajuda" component={HelpCenterPage} />
+                      <Route path="/politica-de-privacidade" component={PrivacyPolicy} />
+                      <Route path="/mapa-do-site" component={Sitemap} />
+                      <Route path="/termos-de-servico-e-uso-do-site" component={TermsOfUse} />
                       <Route path="/glossario" component={Glossary} />
                       <Route path="/success" component={Success} />
+                      <Route path="/buscar" component={Search} />
                       <Route path="/imprensa" component={PrintiPress} />
                       <Route path="/sobre-a-printi" component={AboutPrinti} />
                       <Route exact path="/test" component={Home} />

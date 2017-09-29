@@ -1,0 +1,28 @@
+.org-terms-use-privacy {
+  margin-bottom: 4rem;
+  .title-terms-use-privacy{
+    color: $color-almostBlack;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-lg;
+    margin: 2rem 0;
+    text-transform: uppercase;
+    @include lg {
+      margin-top: 0;
+    }
+  }
+  .mol-bg-terms-use-privacy {
+    background-color: $color-white;
+    font-size: $font-size-sm;
+    padding: 2rem;
+    
+    li {
+      margin: 1rem 0;
+      h2 {
+        font-family: $font-family-open-sans-semibold;
+        font-size: $font-size-base;
+        margin: 3rem 0 2rem;
+        padding-bottom: 0;
+      }
+    }
+  }
+}

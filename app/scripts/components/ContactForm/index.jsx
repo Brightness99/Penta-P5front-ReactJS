@@ -43,8 +43,18 @@ class ContactForm extends React.PureComponent<Props, State> {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (e.target.checkValidity()) {
-      this.props.onSubmit(this.state.form);
+    if (this.state.canSubmit) {
+      const { onSubmit } = this.props;
+      const { form } = this.state;
+
+      if (typeof onSubmit === 'function') {
+        const formData = Object.keys(form)
+        .reduce((previousInput, nextInput) => ({
+          ...previousInput,
+          [nextInput]: form[nextInput].value,
+        }), {});
+        onSubmit(formData);
+      }
     }
   }
 
@@ -130,8 +140,8 @@ class ContactForm extends React.PureComponent<Props, State> {
           <InputRegex
             id="website"
             name="website"
-            pattern={/.+/}
-            type="url"
+            pattern={/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/}
+            type="text"
             placeholder={'Site da Empresa'}
             className="is-full__form-line"
             showLabel
@@ -147,11 +157,11 @@ class ContactForm extends React.PureComponent<Props, State> {
             required
             onChange={this.handleValidatedInput}
           >
-            <option>{'Até R$ 5.000 ao mês'}</option>
-            <option>{'De R$ 5.001 a R$ 10.000 ao mês'}</option>
-            <option>{'De R$ 10.001 a R$ 50.000 ao mês'}</option>
-            <option>{'De R$ 50.001 a R$ 100.000 ao mês'}</option>
-            <option>{'Mais de R$ 100.000 ao mês'}</option>
+            <option value={5000}>{'Até R$ 5.000 ao mês'}</option>
+            <option value={10000}>{'De R$ 5.001 a R$ 10.000 ao mês'}</option>
+            <option value={50000}>{'De R$ 10.001 a R$ 50.000 ao mês'}</option>
+            <option value={100000}>{'De R$ 50.001 a R$ 100.000 ao mês'}</option>
+            <option value={100001}>{'Mais de R$ 100.000 ao mês'}</option>
           </Select>
           <Select
             id="position"
@@ -162,22 +172,22 @@ class ContactForm extends React.PureComponent<Props, State> {
             required
             onChange={this.handleValidatedInput}
           >
-            <option>{'Assistente'}</option>
-            <option>{'Auxiliar'}</option>
-            <option>{'Analista'}</option>
-            <option>{'Coordenador/Supervisor'}</option>
-            <option>{'Gerente'}</option>
-            <option>{'Diretor'}</option>
-            <option>{'Presidente/Dono'}</option>
-            <option>{'Consultor'}</option>
-            <option>{'Outros'}</option>
+            <option value={1016}>{'Assistente'}</option>
+            <option value={1017}>{'Auxiliar'}</option>
+            <option value={1018}>{'Analista'}</option>
+            <option value={1019}>{'Coordenador/Supervisor'}</option>
+            <option value={1020}>{'Gerente'}</option>
+            <option value={1021}>{'Diretor'}</option>
+            <option value={1022}>{'Presidente/Dono'}</option>
+            <option value={1023}>{'Consultor'}</option>
+            <option value={1024}>{'Outros'}</option>
           </Select>
           <Button
             type="submit"
             kind="success"
             disabled={!this.state.canSubmit}
           >
-            {'Entrar'}
+            {'Enviar'}
           </Button>
         </form>
       </section>

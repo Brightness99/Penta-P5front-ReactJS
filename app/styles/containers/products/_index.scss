@@ -1,194 +1,43 @@
+@import 'product-banner';
+@import 'product-details';
 @import 'product-highlights';
 @import 'product-information';
-
-.container-tutorial{
-  margin: 4.5rem 0;
-  .tutorial-title{
-    text-transform: uppercase;
-    font-size: $font-size-h5;
-    font-family: $font-family-open-sans-bold;
-    letter-spacing: 0.1rem;
-    margin-bottom: 1.8rem;
-  }
-  .container-boxTutorial{
-    display: flex;
-    flex-direction: column;
-    .box-tutorial{
-      position: relative;
-      flex: 2;
-      .img-bigBox {    
-        width: 100%;
-        @include lg {
-          height: 420px;
-        }
-      }
-      &:last-of-type{
-        flex:1;
-        overflow: auto;
-        @include lg {
-          background-color: $color-white;
-          height: 420px;
-          box-sizing: border-box;
-          padding: 1rem 2rem;
-        }
-      }
-      .title-smallbox {
-        font-family: $font-family-open-sans-bold;
-        font-size: $font-size-sm;
-        line-height: 2.14;
-        letter-spacing: 1.4px;
-        color: $color-almostBlack;
-      }
-      .p-smallbox {
-        font-family: $font-family-open-sans;
-        font-size: $font-size-h5;
-        line-height: 1.33;
-        text-align: left;
-        color: $color-almostBlack;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-      }
-      .tutorial-legendImg {
-        position: relative;
-        color: $color-white;
-        display: none;
-        @include lg {
-          position: absolute;
-          bottom: 7%;
-          left: 4%;
-          display: block;
-        }
-        .tutorial-legendImg-category{
-          font-size: $font-size-xxs;
-          text-align: center;
-          text-transform: uppercase;
-          box-sizing: border-box;
-          padding: 0.1rem 2rem;
-          border-radius: 10px;
-          border: 1px solid $color-white;
-          font-family: $font-family-open-sans; 
-        }
-        .tutorial-legendImg-title{
-          margin-top: 1rem;
-          font-weight: 600;
-          font-size: $font-size-il;
-        }
-      }
-      .container-tutorialMobile {
-        flex-direction: row;
-        display: flex;
-        align-items: flex-start;
-        >div {
-          flex: 1;
-          &:first-of-type{
-            border-radius: 3px;
-          }
-          &:last-of-type {
-            box-sizing: border-box;
-            padding-left: 1rem;
-          }
-        }
-        @include lg {
-          flex-direction: column;
-        }
-      }
-    }
-    @include lg{
-      flex-direction: row;
-    }
-  }
-}
-
-.container-warranty {
-  margin: 5.5rem 0 4.5rem 0;
-  display: flex;
-  flex-direction: column;
-  background-color: $color-lightGreenWarranty;
-  .box-image-warranty {
-    box-sizing: border-box;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    img{
-      position: relative; 
-    }
-    @include lg {
-      position: relative;
-      flex: 1;
-      img{
-        position: absolute;
-        bottom: -12px;
-      }
-    }
-  }
-  .box-text-warranty{
-    box-sizing: border-box;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    .warranty-title{
-      font-size: $font-size-h5;
-      font-weight: bold;
-    }
-    .warranty-text{
-      font-size: $font-size-sm;
-      font-weight: 400;
-      font-family: $font-family-open-sans;
-    }
-    @include lg{
-      flex: 2;
-    }
-  }
-  .box-btn-warranty{
-    flex: 1;
-    position: relative;
-    margin-top: 2rem;
-    >div{
-      .btn-default{
-        font-size: $font-size-xxxs;
-        font-family: $font-family-open-sans-semibold;
-      }
-      @include lg{
-        margin: 0 -50% 0 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-      }
-    }
-    @include lg{
-      margin-top: 0;
-    }
-  }
-  @include lg{
-    flex-direction: row;
-    height: 120px;
-  }
-}
+@import 'product-tutorials';
+@import 'product-warranty';
 
 .container-benefits{
   margin: 4.5rem 0;
   position: relative;
   font-family: $font-family-open-sans;
+
   .benefits-title{
     text-transform: uppercase;
-    font-size: $font-size-h5;
+    font-size: $font-size-lg;
     font-family: $font-family-open-sans; 
   }
+
   .container-benefitsCard{
     display:flex;
     flex-direction: column;
     box-sizing: border-box;
     padding: 0 1rem;
     margin-bottom: 4rem;
+
     .box-benefitsCard{
       flex: 1;
       .benefitsCard-title{
         box-sizing: border-box;
-        padding: 1.95rem 2rem;
+        padding: 0.7rem 0;
         text-transform: uppercase;
+        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include lg {
+          padding: 1.95rem 2rem;
+        }
       }
+
       p{
         background-color: $color-white; 
         margin-bottom: 0;
@@ -230,33 +79,43 @@
             }
           }
         }
+        .atm-printi-logo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            width: 9rem;
+          }
+        }
       }
+
       &:nth-of-type(2n){
-        //height: 496px;
         height: auto;
-        box-shadow: 0px 3px 5px 6px $color-lightGray2;
-        z-index: 9;
+        z-index: 4;
         min-width: inherit;
         max-width: 390px;
         .benefitsCard-title{
           width: 100%;
           text-align: center;
           padding: 1.9rem 2rem;
+          @include lg {
+            padding: 2.2rem 2rem;
+          }
           svg{
             width: 150px;
             height: 69px;
-          }
-          @include lg {
-            //width: 390px;
           }
         }
         p{
           color: $color-almostBlack;
           font-size: $font-size-xs;
           text-align: left;
-          padding: 1.1rem 3rem;
+          padding: 0.99rem 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           &:last-of-type {
-            padding-bottom: 2.1rem;
+            padding: 1.1rem 3rem;
             @include lg {
               padding: 1.1rem 3rem;
             }
@@ -264,36 +123,50 @@
           @include lg {
             color: $color-lightGray;
             font-family: $font-family-open-sans-light;
-            padding: 0.8rem 3rem;
+            //padding: 0.8rem 3rem;
             font-size: $font-size-h6;
+            display: block;
           }
-        }
-        .checkIcon{
-          margin-left: 0;
-          margin-right: 1rem;
-          float: left;
-          @include lg {
-            margin-right: 2rem;
+          .checkIcon{
+            margin: 0;
+            @include lg {
+              margin-right: 2rem;
+            }
           }
         }
         @include lg {
-          //height: 505px;
           min-width: 390px;
+          box-shadow: 0px 3px 5px 6px $color-lightGray2;
         }
       }
+
       &:nth-of-type(2n-1){
-        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
         margin-bottom: 2rem;
         @include lg {
           margin-top: 5rem;
         }
+        p {
+          display: flex;
+          align-items: center;
+          @include lg {
+            text-align: center;
+            display: block;
+          }
+          .checkIcon{
+            margin: 0 1rem;
+          }
+        }
       }
+
       .benefitsCard-btn{
         display: flex;
         justify-content: center;
         padding: 1.6rem 0;
         background-color: $color-white;
         .btn-default {
+          background-color: $color-green-light;
           font-size: $font-size-xxxs;
           font-family: $font-family-open-sans-semibold;
         }
@@ -307,70 +180,16 @@
   }
   sub{
     color: $color-darkGray;
-    bottom: 0.75rem;
-    display: block;
-    text-align: center;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @include lg {
       position: absolute;
       right: 8rem;
       bottom: 6rem;
       left: inherit;
       margin-bottom: 0;
-    }
-  }
-}
-
-.container-graphicPlant{
-  margin: 4.5rem 0;
-  .graphicPlant-title{
-    text-transform: uppercase;
-    font-size: $font-size-h5;
-    font-family: $font-family-open-sans-bold; 
-    letter-spacing: 0.1rem;
-  }
-  .container-graphicPlant-block{
-    display: flex;
-    flex-direction: column;
-    .box-graphicPlant{
-      flex: 1;
-      @include lg {
-        margin-right:4rem;
-      }
-      &:nth-of-type(2n){
-        flex: 2;
-        margin-right: inherit;
-      }
-      .graphicPlant-subtitle{
-        margin: 2rem 0;
-        font-size: $font-size-il;
-        font-family: $font-family-nunito-regular;
-        line-height: 1.48;
-        font-weight: lighter;
-        color: $color-almostBlack;
-      }
-      .fnt-text{
-        font-family: $font-family-open-sans-light; 
-        font-size: $font-size-h6;
-        // margin-bottom: 3rem;
-        color: $color-lightGray;
-        font-weight: 300;
-        line-height: 1.88;
-        margin-bottom: 0;
-        @include lg {
-          margin-bottom: inherit;
-        }
-      }
-      .list-item{
-        color: $color-lightGray;
-        font-weight: 300;
-        line-height: 1.88;
-        font-family: $font-family-open-sans-light; 
-        font-size: $font-size-h6;
-      }
-    }
-    @include lg{
-      flex-direction: row;
     }
   }
 }
@@ -594,69 +413,6 @@
     @include lg{
       flex-direction: row;
     }
-  }
-}
-
-.container-detailsProduct{
-  margin: 4.5rem 0;
-  .detailsProduct-title{
-    font-family: $font-family-open-sans-bold;
-    font-size: $font-size-h5;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    color: $color-almostBlack;
-    @include lg {
-      font-size: $font-size-base;
-    }
-  }
-  .detailsProduct-subtitle{
-    font-weight: lighter;
-    font-size: $font-size-h4;
-    font-family: $font-family-nunito-regular;
-    @include lg {
-      font-size: $font-size-xl;
-    }
-  }
-  .box-detailsProduct{
-    margin: 2.3rem 0;
-    .fnt-text{
-      font-family: $font-family-open-sans; 
-      font-size: $font-size-base;
-      font-weight: 400;
-      color: $color-lightGray;
-    }
-  }
-}
-
-.container-printiProduct{
-  box-sizing: border-box;
-  padding: 4rem 2rem;
-  background-color: #000;
-  margin-bottom: 6rem;
-  .printiProduct-title{
-    text-align: center;
-    color: $color-white;
-    font-size: $font-size-h4;
-    letter-spacing: -0.7px;
-    font-weight: 500;
-    @include lg {
-      font-size: $font-size-xxl;
-    }
-  }
-  .box-btn-printiProduct{
-    display: flex;
-    justify-content: center;
-    margin: 1.5rem 0;
-    .btn-default {
-      font-family: $font-family-open-sans;
-      font-size: $font-size-xxxs;
-    }
-  }
-  .fnt-text{
-    text-align: center;
-    font-family: $font-family-open-sans;
-    font-size: $font-size-h6;
-    color: $color-hrLightGray;
   }
 }
 

@@ -40,7 +40,19 @@ import {
 import { contactFormSend } from './contact-form';
 import { socialLoginSettingsFetch } from './social-login-settings';
 
-import { accountFetch, accountUpdate } from './account';
+import {
+  accountFetch,
+  accountUpdate,
+  accountAddressFetch,
+  accountAddressCreate,
+  accountAddressDelete,
+  accountNotificationFetch,
+  accountNotificationUpdate,
+  accountSavedCreditCardFetch,
+  accountSavedCreditCardDelete
+} from './account';
+
+import { termsFetch } from './terms';
 
 export default combineEpics(
   userNewsletter,
@@ -72,6 +84,14 @@ export default combineEpics(
   localeFetch,
   contactFormSend,
   accountFetch,
+  accountAddressFetch,
   accountUpdate,
-  socialLoginSettingsFetch
+  socialLoginSettingsFetch,
+  accountAddressCreate,
+  accountAddressDelete,
+  accountSavedCreditCardFetch,
+  accountSavedCreditCardDelete,
+  accountNotificationFetch,
+  accountNotificationUpdate,
+  termsFetch,
 );
