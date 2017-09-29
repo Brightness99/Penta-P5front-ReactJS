@@ -32,7 +32,6 @@ import TermsOfUse from 'containers/TermsOfUse';
 import PrivacyPolicy from 'containers/PrivacyPolicy';
 import Sitemap from 'containers/Sitemap';
 import Search from 'components/Search';
-import Footer from 'components/Footer';
 import Gabaritos from 'containers/Gabaritos';
 
 type Props = {
