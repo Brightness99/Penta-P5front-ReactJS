@@ -105,3 +105,7 @@ export UserPlusIcon from './UserPlusIcon';
 export ArchiveIcon from './ArchiveIcon';
 export TasksIcon from './TasksIcon';
 export GlassZoomIcon from './GlassZoomIcon';
+export ReferralIcon from './ReferralIcon';
+export LinkIcon from './LinkIcon';
+export GmailIcon from './GmailIcon';
+export FacebookIcon from './FacebookIcon';
