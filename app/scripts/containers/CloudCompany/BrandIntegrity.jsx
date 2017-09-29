@@ -17,7 +17,7 @@ export class BrandIntegrity extends React.Component {
   props: Props;
 
   render() {
-    const screenSize = this.props;
+    const { screenSize } = this.props;
     return (
       <div className="org-about-cloud">
         <div className={cx(isMobile(screenSize) && 'org-about-cloud-mobile')}>

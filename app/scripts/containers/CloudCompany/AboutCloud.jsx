@@ -16,11 +16,11 @@ export class AboutCloud extends React.Component {
   props: Props;
 
   render() {
-    const screenSize = this.props;
+    const { screenSize } = this.props;
     return (
       <div className="org-about-cloud">
-        <div className={cx(isMobile(screenSize) && 'org-about-cloud-mobile')}>
-          <div className={cx(isMobile(screenSize) && 'container')}>
+        <div className={cx(isMobile(screenSize) && ('org-about-cloud-mobile'))}>
+          <div className={cx(isMobile(screenSize) && ('container'))}>
             <div className="mol-texts-about-cloud">
               <div className="atm-text-cloud">
                 <h4 className="qrk-title-about-cloud">O que é a Cloud?</h4>

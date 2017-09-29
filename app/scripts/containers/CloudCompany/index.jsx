@@ -37,7 +37,6 @@ export class CloudCompany extends React.Component {
           <CustomersRelyBlock screenSize={screenSize} />
         </div>
         <GraphicPlantBlock />
-
       </section>
     );
   }

@@ -1,9 +1,11 @@
 .org-about-cloud {
-
   .org-about-cloud-mobile { 
     margin: 2rem 0;
     .mol-texts-about-cloud {
       flex-direction: column-reverse;
+      @include lg {
+        flex-direction: row;
+      }
       .atm-text-cloud {
         margin-left: 0;
         .qrk-title-about-cloud {
