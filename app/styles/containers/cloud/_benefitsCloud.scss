@@ -89,7 +89,8 @@
           display: flex;
           justify-content: space-between;
           padding: 2rem;
-          height: 130px;
+          //height: 130px;
+          height: 100px;
           &:nth-of-type(2n) {
             background-color: #f9f9f9;
           }
