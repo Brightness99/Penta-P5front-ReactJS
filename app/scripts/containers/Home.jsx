@@ -3,8 +3,8 @@
 import React from 'react';
 import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { Helmet } from "react-helmet";
-import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { Helmet } from 'react-helmet';
+import { shouldComponentUpdate } from 'utils/helpers';
 
 import { BannersBlock, HighlightsBlock, BlogBlock, CustomersRelyBlock, CategoriesCarouselBlock } from 'components/LandingPage';
 

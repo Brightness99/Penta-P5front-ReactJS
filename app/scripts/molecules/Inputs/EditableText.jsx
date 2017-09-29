@@ -34,7 +34,7 @@ export default class EditableText extends React.Component {
 
     if (value !== nextProps.value) {
       this.setState({
-        isEditing: false
+        isEditing: false,
       });
     }
   }

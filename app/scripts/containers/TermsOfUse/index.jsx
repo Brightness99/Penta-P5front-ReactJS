@@ -3,7 +3,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { termsFetch } from 'actions';
-import { Link } from 'react-router-dom';
 import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 
@@ -24,14 +23,9 @@ export class TermsOfUse extends React.Component {
 
   static props: Props;
 
-  createMarkup = (str) => {
-    return { __html: str };
-  }
-
   render() {
-    const { app: { screenSize } } = this.props;
-    const { terms } = this.props;
-    console.log('Terms of Use =========>', terms);
+    const { app: { screenSize }, terms } = this.props;
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -41,7 +35,6 @@ export class TermsOfUse extends React.Component {
         title: 'Termos de Uso',
       },
     ];
-    
     return (
       <section>
         <div className="container">
@@ -49,7 +42,7 @@ export class TermsOfUse extends React.Component {
           <div className="org-terms-use-privacy">
             <h2 className="title-terms-use-privacy">{terms.terms.title}</h2>
             <div className="mol-bg-terms-use-privacy">
-              <div dangerouslySetInnerHTML={this.createMarkup(terms.terms.content)} />
+              <div dangerouslySetInnerHTML={{ __html: terms.terms.content }} />
             </div>
           </div>
         </div>
