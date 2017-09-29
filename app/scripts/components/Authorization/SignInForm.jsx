@@ -46,9 +46,9 @@ export default class SignInForm extends React.PureComponent {
     const { form, canSubmit } = this.state;
     const { onSubmit } = this.props;
 
-    const fingerprint = getFingerprintFromForm('signInForm');
-
     if (canSubmit === true) {
+      const fingerprint = getFingerprintFromForm('signInForm');
+
       onSubmit({
         email: form.email.value,
         password: form.password.value,

@@ -26,7 +26,7 @@ type Props = {
 
 type States = {
   isModalOpen: boolean,
-  isSocialAuthInProgress: boolean,
+  forFacebookNeedEmail: boolean,
   facebookSocialInfo: {},
   googleSocialInfo: {},
   isFingerprintLoaded: boolean,
@@ -39,7 +39,7 @@ export class Authentication extends React.Component {
 
     this.state = {
       isModalOpen: false,
-      isSocialAuthInProgress: false,
+      forFacebookNeedEmail: false,
       facebookSocialInfo: null,
       isFingerprintLoaded: false,
     };
@@ -52,15 +52,9 @@ export class Authentication extends React.Component {
   componentWillReceiveProps= (nextProps: Props) => {
     const { isSignUpActivated }  = this.props;
     const nextSignUpState  = nextProps.isSignUpActivated;
-    const { facebookSocialInfo, googleSocialInfo } = this.state;
 
     if (nextSignUpState && nextSignUpState !== isSignUpActivated) {
-      if (facebookSocialInfo) {
-        this.facebookSignUpConfiguration(facebookSocialInfo);
-      }
-      if (googleSocialInfo) {
-        this.signUp(googleSocialInfo);
-      }
+      this.socialSignUpActivated();
     }
   };
 
@@ -77,13 +71,34 @@ export class Authentication extends React.Component {
     submitSignUp(data);
   };
 
+  signIn = (data) => {
+    const { submitSignIn } = this.props;
+
+    if (typeof submitSignIn !== 'function') {
+      return;
+    }
+
+    submitSignIn(data);
+  };
+
+  socialSignUpActivated = () => {
+    const { facebookSocialInfo, googleSocialInfo } = this.state;
+
+    if (facebookSocialInfo) {
+      this.facebookSignUpConfiguration(facebookSocialInfo);
+    }
+    if (googleSocialInfo) {
+      this.signUp(googleSocialInfo);
+    }
+  };
+
   facebookSignUpConfiguration = (facebookSocialInfo) => {
     if (facebookSocialInfo.email) {
       this.facebookSignUp({});
     } else {
       this.setState({
         isModalOpen: true,
-        isSocialAuthInProgress: true,
+        forFacebookNeedEmail: true,
       });
     }
   };
@@ -122,9 +137,9 @@ export class Authentication extends React.Component {
   };
 
   renderSignUpForm = () => {
-    const { isFingerprintLoaded, isSocialAuthInProgress, facebookSocialInfo } = this.state;
+    const { isFingerprintLoaded, forFacebookNeedEmail, facebookSocialInfo } = this.state;
 
-    if (isSocialAuthInProgress) {
+    if (forFacebookNeedEmail) {
       return (
         <SocialSignUpForm
           name={facebookSocialInfo.first_name}
@@ -149,7 +164,7 @@ export class Authentication extends React.Component {
   };
 
   render() {
-    const { submitSignIn, socialLoginSettings } = this.props;
+    const { socialLoginSettings } = this.props;
     const { isFingerprintLoaded } = this.state;
     return (
       <div className="container">
@@ -169,7 +184,7 @@ export class Authentication extends React.Component {
           />
           <div className="authentication__wrapper">
             <SignInForm
-              onSubmit={(data) => submitSignIn && submitSignIn(data)}
+              onSubmit={this.signIn}
               isFingerprintLoaded={isFingerprintLoaded}
             />
             {this.renderSignUpForm()}
