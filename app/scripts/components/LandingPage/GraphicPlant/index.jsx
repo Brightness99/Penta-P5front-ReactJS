@@ -34,7 +34,7 @@ export class GraphicPlantBlock extends React.Component {
     return (
       <section className="container-graphicPlant">
         <div className="container">
-          <h4 className="graphicPlant-title">{graphic_plant.OVER_TITLE}</h4>
+          <h4 className="atm__block-title">{graphic_plant.OVER_TITLE}</h4>
           <div className="container-graphicPlant-block">
             <div className="box-graphicPlant">
               <h4 className="graphicPlant-subtitle">{graphic_plant.TITLE}</h4>
@@ -44,15 +44,7 @@ export class GraphicPlantBlock extends React.Component {
               </ul>
             </div>
             <div className="box-graphicPlant">
-              <Slider
-                nextArrow={<NextArrow />}
-                prevArrow={<PrevArrow />}
-                dots={true}
-                dotsClass="atm-carousel-dots atm-carousel-dots--inline"
-                key="product-highlights-slider"
-              >
-                <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico" />
-              </Slider>
+              <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico" />
             </div>
           </div>
         </div>
