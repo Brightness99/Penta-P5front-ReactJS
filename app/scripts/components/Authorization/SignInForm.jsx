@@ -1,30 +1,26 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { userSignIn } from 'actions';
+import ErrorField from 'components/ErrorField';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
+import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
+
+type FormType = {
+  email: { valid: boolean, value: string },
+  password: { valid: boolean, value: string },
+};
 
 type Props = {
-  app: AppStoreType,
-  router: RouterStore,
-  locale: {},
-  dispatch: () => {},
+  onSubmit: (email: string, password: string) => void,
+  isFingerprintLoaded: boolean,
+  errorMessage: string,
 };
 
-type State = {
-  canSubmit: boolean,
-  isSubmitted: boolean,
-  isRunning: boolean,
-  authentication: {
-    customerInfo: {},
-  },
-  form: {},
-};
+type State = { canSubmit: boolean, form: FormType };
 
-export class SignInBlock extends React.Component {
+export default class SignInForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -34,27 +30,33 @@ export class SignInBlock extends React.Component {
         password: { valid: false, value: '' },
       },
       canSubmit: false,
-      isSubmitted: false,
-      isRunning: false,
     };
   }
 
-  componentWillUpdate(nextProps: Props, nextState: State) {
-    console.log('nextState');
-    console.log(nextState);
-  }
+  props: Props;
+  state: State;
 
-  static props: Props;
-  static state: State;
+  componentWillReceiveProps = (newProps: Props) => {
+    if (this.props.isFingerprintLoaded !== newProps.isFingerprintLoaded) {
+      addFingerprint('signInForm');
+    }
+  };
 
   handleSignIn = (ev) => {
     ev.preventDefault();
 
     const { form, canSubmit } = this.state;
-    const { dispatch } = this.props;
+    const { onSubmit } = this.props;
 
     if (canSubmit === true) {
-      dispatch(userSignIn(form.email.value, form.password.value));
+      const fingerprint = getFingerprintFromForm('signInForm');
+
+      onSubmit({
+        email: form.email.value,
+        password: form.password.value,
+        stay_connected: true,
+        fingerprint,
+      });
     }
   };
 
@@ -75,18 +77,17 @@ export class SignInBlock extends React.Component {
       });
     }
 
-    this.setState({ ...this.state, form: newState.form, canSubmit });
+    this.setState({ form: newState.form, canSubmit });
   };
 
   render() {
-    // const { locale } = this.props;
     const { canSubmit } = this.state;
-
+    const { errorMessage } = this.props;
     return (
       <div className="authentication__block">
         <BlockTitle>Entrar</BlockTitle>
         <hr />
-        <form className="authentication__block__form" onSubmit={this.handleSignIn}>
+        <form className="authentication__block__form" id="signInForm" onSubmit={this.handleSignIn}>
           <InputEmail
             name="email"
             placeholder="E-mail"
@@ -98,30 +99,16 @@ export class SignInBlock extends React.Component {
             placeholder="Senha"
             onValidate={this.handleValidatedInput}
           />
+          <ErrorField message={errorMessage} />
           <Button
             type="submit"
             kind="success"
             disabled={!canSubmit}
           >
-          Entrar
+            Entrar
           </Button>
         </form>
       </div>
     );
   }
 }
-
-/* istanbul ignore next */
-function mapStateToProps(state) {
-  return {
-    app: state.app,
-    router: state.router,
-    locale: state.locale,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignInBlock);

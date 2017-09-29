@@ -2,35 +2,52 @@
 import React from 'react';
 
 import { BlockTitle } from 'atoms/Titles';
-import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
+import { InputEmail } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
+import { addFingerprint } from 'vendor/fingerprint2';
 
-type Props = {
-  app: AppStoreType,
-  router: RouterStore,
-  locale: {},
-  dispatch: () => {},
+type FormType = {
+  email: { valid: boolean, value: string },
+  email_confirmation: { valid: boolean, value: string },
 };
 
-export default class SignUpBlock extends React.Component {
+type Props = {
+  name: string,
+  onSubmit: (data: FormType) => void,
+};
+
+type State = { canSubmit: boolean, form: FormType };
+
+export default class SocialSignUpForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       form: {
-        full_name: { valid: false, value: '' },
         email: { valid: false, value: '' },
-        email_repeat: { valid: false, value: '' },
-        password: { valid: false, value: '' },
+        email_confirmation: { valid: false, value: '' },
       },
+      canSubmit: false,
     };
   }
 
-  static props: Props;
-  static state: State;
+  props: Props;
+  state: State;
 
   handleSubmit = (ev) => {
     ev.preventDefault();
+
+    const { form, canSubmit } = this.state;
+    const { onSubmit, name } = this.props;
+
+    if (canSubmit === true) {
+      const value = {
+        first_name: name,
+        email: form.email.value,
+        email_confirmation: form.email_confirmation.value,
+      };
+      onSubmit(value);
+    }
   };
 
   handleValidatedInput = (name, value, valid) => {
@@ -59,28 +76,18 @@ export default class SignUpBlock extends React.Component {
 
     return (
       <div className="authentication__block">
-        <BlockTitle>Cadastrar</BlockTitle>
+        <BlockTitle>Sou novo cliente, {this.props.name}</BlockTitle>
         <hr />
-        <form className="authentication__block__form" onSubmit={this.handleSubmit}>
-          <InputFullName
-            name="full_name"
-            placeholder="Nome completo"
-            onValidate={this.handleValidatedInput}
-          />
+        <form className="authentication__block__form" id="socialSignUpForm" onSubmit={this.handleSubmit}>
           <InputEmail
             name="email"
             placeholder="E-mail"
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
-            name="email_repeat"
+            name="email_confirmation"
             placeholder="Repetir e-mail"
             equalsTo={form.email.value}
-            onValidate={this.handleValidatedInput}
-          />
-          <InputPassword
-            name="password"
-            placeholder="Senha"
             onValidate={this.handleValidatedInput}
           />
           <Button
@@ -89,7 +96,7 @@ export default class SignUpBlock extends React.Component {
             kind="success"
             disabled={!canSubmit}
           >
-          Cadastrar
+            Cadastrar
           </Button>
         </form>
       </div>
