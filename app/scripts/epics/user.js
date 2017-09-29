@@ -73,7 +73,7 @@ export function userSignIn(action$) {
         .catch(error => [
           {
             type: UserConstants.USER_AUTH_SIGN_IN_FAILURE,
-            payload: { message: error.message, status: error.status },
+            payload: { message: 'Atenção: Login e/ou senha inválidos', status: error.status },
             meta: { updatedAt: getUnixtime() },
           },
         ]);
@@ -180,7 +180,10 @@ export function userSignUp(action$) {
         .catch(error => [
           {
             type: UserConstants.USER_AUTH_SIGN_UP_FAILURE,
-            payload: { message: error.message, status: error.status },
+            payload: {
+              message: 'Atenção: este e-mail já está cadastrado. Por favor efetuar login.',
+              status: error.status,
+            },
             meta: { updatedAt: getUnixtime() },
           },
         ]);

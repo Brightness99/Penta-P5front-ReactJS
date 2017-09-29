@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 
+import ErrorField from 'components/ErrorField';
 import { BlockTitle } from 'atoms/Titles';
 import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
@@ -16,6 +17,7 @@ type FormType = {
 type Props = {
   onSubmit: (data: FormType) => void,
   isFingerprintLoaded: boolean,
+  errorMessage: string,
 };
 
 type State = { canSubmit: boolean, form: FormType };
@@ -91,8 +93,8 @@ export default class SignUpForm extends React.PureComponent {
   };
 
   render() {
-    const { canSubmit } = this.state;
-    const { form } = this.state;
+    const { canSubmit, form } = this.state;
+    const { errorMessage } = this.props;
 
     return (
       <div className="authentication__block">
@@ -120,6 +122,7 @@ export default class SignUpForm extends React.PureComponent {
             placeholder="Senha"
             onValidate={this.handleValidatedInput}
           />
+          <ErrorField message={errorMessage} />
           <Button
             type="submit"
             name="sign_in"
