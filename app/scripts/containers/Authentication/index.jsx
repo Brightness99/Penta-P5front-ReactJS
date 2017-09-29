@@ -21,7 +21,9 @@ type Props = {
   socialSignUp: (data) => void,
   socialLoginSettingsFetch: () => void,
   socialLoginSettings: {},
-  isSignUpActivated: boolean
+  isSignUpActivated: boolean,
+  signInErrorMessage: string,
+  signUpErrorMessage: string,
 };
 
 type States = {
@@ -137,7 +139,11 @@ export class Authentication extends React.Component {
   };
 
   renderSignUpForm = () => {
-    const { isFingerprintLoaded, forFacebookNeedEmail, facebookSocialInfo } = this.state;
+    const {
+      isFingerprintLoaded,
+      forFacebookNeedEmail,
+      facebookSocialInfo } = this.state;
+    const { signUpErrorMessage } = this.props;
 
     if (forFacebookNeedEmail) {
       return (
@@ -151,6 +157,7 @@ export class Authentication extends React.Component {
       <SignUpForm
         onSubmit={this.signUp}
         isFingerprintLoaded={isFingerprintLoaded}
+        errorMessage={signUpErrorMessage}
       />);
   };
 
@@ -164,7 +171,7 @@ export class Authentication extends React.Component {
   };
 
   render() {
-    const { socialLoginSettings } = this.props;
+    const { socialLoginSettings, signInErrorMessage } = this.props;
     const { isFingerprintLoaded } = this.state;
     return (
       <div className="container">
@@ -186,6 +193,7 @@ export class Authentication extends React.Component {
             <SignInForm
               onSubmit={this.signIn}
               isFingerprintLoaded={isFingerprintLoaded}
+              errorMessage={signInErrorMessage}
             />
             {this.renderSignUpForm()}
           </div>
@@ -198,6 +206,8 @@ export class Authentication extends React.Component {
 const mapStateToProps = state => ({
   socialLoginSettings: state.socialLoginSettings,
   isSignUpActivated: state.user.socialAuthentication.userNotFound,
+  signInErrorMessage: state.user.authentication.message,
+  signUpErrorMessage: state.user.registration.message,
 });
 
 const mapDispatchToProps = dispatch => ({

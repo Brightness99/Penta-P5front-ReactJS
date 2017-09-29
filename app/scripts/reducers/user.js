@@ -180,6 +180,8 @@ export default {
         authentication: {
           ...state.authentication,
           isRunning: true,
+          error: false,
+          message: '',
         },
       };
     },
@@ -213,6 +215,9 @@ export default {
         socialAuthentication: {
           ...state.socialAuthentication,
           isRunning: true,
+          error: false,
+          message: '',
+          userNotFound: false,
         },
       };
     },
@@ -255,6 +260,8 @@ export default {
         registration: {
           ...state.registration,
           isRunning: true,
+          error: false,
+          message: '',
         },
       };
     },
@@ -288,6 +295,8 @@ export default {
         socialRegistration: {
           ...state.socialRegistration,
           isRunning: true,
+          error: false,
+          message: '',
         },
       };
     },
@@ -321,6 +330,8 @@ export default {
         logout: {
           ...state.logout,
           isRunning: true,
+          error: false,
+          message: '',
         },
       };
     },
