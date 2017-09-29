@@ -2,112 +2,8 @@
 @import 'product-details';
 @import 'product-highlights';
 @import 'product-information';
+@import 'product-tutorials';
 @import 'product-warranty';
-
-.container-tutorial{
-  margin: 4.5rem 0;
-  .tutorial-title{
-    text-transform: uppercase;
-    font-size: $font-size-lg;
-    font-family: $font-family-open-sans-bold;
-    letter-spacing: 0.1rem;
-    margin-bottom: 1.6rem;
-  }
-  .container-boxTutorial{
-    display: flex;
-    flex-direction: column;
-    .box-tutorial{
-      position: relative;
-      flex: 2;
-      .img-bigBox {    
-        width: 100%;
-        @include lg {
-          height: 420px;
-        }
-      }
-      &:last-of-type{
-        flex:1;
-        overflow: auto;
-        @include lg {
-          background-color: $color-white;
-          height: 420px;
-          box-sizing: border-box;
-          padding: 1rem 2rem;
-          margin-left: 2rem;
-          border-radius: 0.3rem;
-        }
-      }
-      .title-smallbox {
-        font-family: $font-family-open-sans-bold;
-        font-size: $font-size-sm;
-        line-height: 2.14;
-        letter-spacing: 1.4px;
-        color: $color-almostBlack;
-        text-transform: uppercase;
-      }
-      .p-smallbox {
-        font-family: $font-family-open-sans;
-        font-size: $font-size-h5;
-        line-height: 1.33;
-        text-align: left;
-        color: $color-almostBlack;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-      }
-      .tutorial-legendImg {
-        position: relative;
-        color: $color-white;
-        display: none;
-        @include lg {
-          position: absolute;
-          bottom: 7%;
-          left: 4%;
-          display: block;
-        }
-        .tutorial-legendImg-category{
-          font-size: $font-size-xxs;
-          text-align: center;
-          text-transform: uppercase;
-          box-sizing: border-box;
-          padding: 0.1rem 2rem;
-          border-radius: 10px;
-          border: 1px solid $color-white;
-          font-family: $font-family-open-sans; 
-        }
-        .tutorial-legendImg-title{
-          margin-top: 1rem;
-          font-weight: 600;
-          font-size: $font-size-il;
-          font-family: $font-family-nunito-regular;
-        }
-      }
-      .container-tutorialMobile {
-        flex-direction: row;
-        display: flex;
-        align-items: flex-start;
-        >div {
-          flex: 1;
-          &:first-of-type{
-            border-radius: 3px;
-          }
-          &:last-of-type {
-            box-sizing: border-box;
-            padding-left: 1rem;
-            @include lg {
-              padding-left: 0;
-            }
-          }
-        }
-        @include lg {
-          flex-direction: column;
-        }
-      }
-    }
-    @include lg{
-      flex-direction: row;
-    }
-  }
-}
 
 .container-benefits{
   margin: 4.5rem 0;
@@ -116,7 +12,7 @@
 
   .benefits-title{
     text-transform: uppercase;
-    font-size: $font-size-h5;
+    font-size: $font-size-lg;
     font-family: $font-family-open-sans; 
   }
 

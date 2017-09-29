@@ -1,6 +1,7 @@
 // @flow
 
 export BannersBlock from './Banners';
+export BenefitsBlock from './Benefits';
 export BlogBlock from './Blog';
 export BreadcrumbsBlock from './Breadcrumbs';
 export CategoriesCarouselBlock from './CategoriesCarousel';

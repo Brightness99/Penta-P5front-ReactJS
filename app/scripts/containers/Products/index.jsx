@@ -5,7 +5,13 @@ import { productFetch } from 'actions';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 
 import Loading from 'components/Loading';
-import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock, GraphicPlantBlock } from 'components/LandingPage';
+import {
+  BlogBlock,
+  BenefitsBlock,
+  BreadcrumbsBlock,
+  CustomersRelyBlock,
+  GraphicPlantBlock
+} from 'components/LandingPage';
 
 import ProductHighlightsBlock from './ProductHighlights';
 import ProductInformationBlock from './ProductInformation';
@@ -13,9 +19,7 @@ import ProductDetailsBlock from './ProductDetails';
 import ProductBannerBlock from './ProductBanner';
 import ProductOpinionsBlock from './ProductOpinions';
 import ProductWarrantyBlock from './ProductWarranty';
-
-import TutorialBlock from './TutorialBlock';
-import BenefitsBlock from './BenefitsBlock';
+import ProductTutorialsBlock from './ProductTutorials';
 
 type Props = {
   app: AppStoreType,
@@ -75,7 +79,7 @@ export class Products extends React.Component {
         <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
         <ProductInformationBlock />
         <div>
-          <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
+          <ProductTutorialsBlock screenSize={screenSize} tutorials={tutorials} />
           <ProductWarrantyBlock />
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
           <GraphicPlantBlock />
