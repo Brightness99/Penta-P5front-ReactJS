@@ -34,6 +34,7 @@ import Sitemap from 'containers/Sitemap';
 import Search from 'components/Search';
 import Gabaritos from 'containers/Gabaritos';
 import Templateslp from 'containers/Templateslp';
+import Referral from 'containers/Referral';
 
 type Props = {
   app: AppStoreType,
@@ -106,6 +107,7 @@ export class App extends React.Component {
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route path="/:slug/upload/:itemId" component={Upload} />
+                      <Route path="/indicacoes" component={Referral} />
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/gabaritos" component={Gabaritos} />
