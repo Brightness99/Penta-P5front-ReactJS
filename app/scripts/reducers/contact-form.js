@@ -44,16 +44,16 @@ export default {
         rehydrated: true,
       });
     },
-    [ContactFormConstants.CONTACT_FORM_SUBMIT](state, action) {
+    [ContactFormConstants.CONTACT_FORM_SUBMIT](state) {
       return {
         ...state,
-        ...action.payload,
+        isRunning: true,
+        isLoaded: false,
       };
     },
-    [ContactFormConstants.CONTACT_FORM_SUBMIT_SUCCESS](state, action) {
+    [ContactFormConstants.CONTACT_FORM_SUBMIT_SUCCESS](state) {
       return {
         ...state,
-        ...action.payload,
         isRunning: false,
         isLoaded: true,
       };

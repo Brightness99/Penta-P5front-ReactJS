@@ -49,6 +49,9 @@
 @import 'containers/filemount/index';
 @import 'containers/printipress/index';
 @import 'containers/aboutprinti/index';
+@import 'containers/helpcenter/index';
+@import 'containers/terms-use-privacy-policy/index';
+@import 'containers/sitemap/index';
 
 // *** Components
 @import 'components/back-to-top/index';
@@ -62,10 +65,12 @@
 @import 'components/breadcrumbs/index';
 @import 'components/tooltipster/index';
 @import 'components/carousel/index';
-@import 'components/alert/index';
+@import 'components/flashmessage/index';
 @import 'components/accordion/index';
 @import 'components/landing-page/index';
 @import 'components/authorization/index';
+@import 'components/funnel/index';
+@import 'components/loyaltycontainers/index';
 
 // *** Bosons
 @import 'bosons/index';

@@ -1,17 +1,24 @@
 // @flow
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
-import SVG from 'react-inlinesvg';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Collapse, { Panel } from 'rc-collapse';
-import { Link } from 'react-router-dom';
-import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
+import Loading from 'components/Loading';
+import { AccordionMinusIcon, AccordionPlusIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
+import { accountAddressCreate, accountAddressDelete, accountAddressFetch } from 'actions';
+import { connect } from 'react-redux';
 
 type Props = {
   screenSize: string,
+  dispatch: () => {},
+  account: {},
 };
 
 type State = {
-  isExpanded: boolean,
+  isExpanded: {
+    shipping: false,
+    billing: false,
+  },
 };
 
 export class MyAddresses extends React.Component {
@@ -23,215 +30,191 @@ export class MyAddresses extends React.Component {
     };
   }
 
-  static defaultProps = {
-    screenSize: 'xs',
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountAddressFetch());
+  }
+
+  static props: Props;
+
+  static state: State;
+
+  handleExpand = (pane) => {
+    const { isExpanded } = this.state;
+
+    this.setState({
+      isExpanded: {
+        ...isExpanded,
+        [pane]: !isExpanded[pane],
+      },
+    });
   };
 
-  props: Props;
-  state: State;
+  handleCreateAddress = () => {
+    const { dispatch } = this.props;
 
-  AccordionClose = <SVG src={require('assets/media/svg/icon_accordionclose.svg')} key="accordion-closed" />;
+    const dataToCreate = {
+      type: 'billing',
+      receiver_name: 'Adam Holman',
+      zipcode: '01419-002',
+      city: 'São Paulo',
+      neighborhood: 'Cerqueira César',
+      state: 'SP',
+      street: 'Alameda Santos',
+      number: '2131',
+      additional_address: null,
+    };
 
-  AccordionOpen = <SVG src={require('assets/media/svg/icon_accordionopen.svg')} key="accordion-open" />;
+    // dispatch(accountAddressCreate(dataToCreate));
+  };
 
-  renderMobile() {
-    const { isExpanded } = this.state;
-    const headerDelivery = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de entrega</h4>
-    </div>);
-    const headerCollection = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de cobrança</h4>
-    </div>);
-    return (
-      <section className="container-myaddresses">
-        <div className="container">
-          <h2 className="title-myAddresses">Minha conta</h2>
-          <h3 className="subtitle-myAddresses">Meus endereços</h3>
-          <div>
-            <Collapse
-              onChange={this.handleExpand}
-            >
-              <Panel
-                header={headerDelivery}
-                headerClass="app__footer__links-header"
-                showArrow={false}
-              >
-                <div>
-                  <div className="box-addressDelivery">
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Minha Casa</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i></Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i></Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <div className="headerTitle-address">
-                          <div>
-                            <h5>Casa da mãe</h5>
-                          </div>
-                          <div className="text-edit">
-                            <Link to="#"><i><PencilIcon /></i></Link>
-                          </div>
-                          <div className="text-delete">
-                            <Link to="#"><i><TrashIcon /></i></Link>
-                          </div>
-                        </div>
-                        <div className="details-address">
-                          <div className="details">
-                            <p className="firstDetail">Nome</p>
-                            <p className="secondDetail">Diogo Capelo</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Endereço</p>
-                            <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Cidade/UF</p>
-                            <p className="secondDetail">Guarulhos/SP</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">CEP</p>
-                            <p className="secondDetail">07130-000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="btn-addresses--mobile">
-                    <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
-                  </div>
-                </div>
+  handleDeleteAddress = (ev) => {
+    const { dispatch } = this.props;
 
-              </Panel>
-            </Collapse>
-          </div>
+    dispatch(accountAddressDelete(ev.currentTarget.value));
+  };
 
-          <div>
-            <Collapse
-              onChange={this.handleExpand}
-            >
-              <Panel
-                header={headerCollection}
-                headerClass="app__footer__links-header"
-                showArrow={false}
-              >
-                <div>
-                  <div className="box-addressDelivery">
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Minha Casa</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i></Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i></Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <div className="headerTitle-address">
-                          <div>
-                            <h5>Casa da mãe</h5>
-                          </div>
-                          <div className="text-edit">
-                            <Link to="#"><i><PencilIcon /></i></Link>
-                          </div>
-                          <div className="text-delete">
-                            <Link to="#"><i><TrashIcon /></i></Link>
-                          </div>
-                        </div>
-                        <div className="details-address">
-                          <div className="details">
-                            <p className="firstDetail">Nome</p>
-                            <p className="secondDetail">Diogo Capelo</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Endereço</p>
-                            <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">Cidade/UF</p>
-                            <p className="secondDetail">Guarulhos/SP</p>
-                          </div>
-                          <div className="details">
-                            <p className="firstDetail">CEP</p>
-                            <p className="secondDetail">07130-000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="btn-addresses--mobile">
-                    <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><AddressIcon /></i>Novo endereço</Link>
-                  </div>
-                </div>
-              </Panel>
-            </Collapse>
-          </div>
+  renderAddButton(addressType) {
+    const { screenSize } = this.props;
+
+    if (isMobile(screenSize)) {
+      return (
+        <div className="btn-addresses--mobile">
+          <button
+            className="atm-button-transparent"
+            value={addressType}
+            onClick={this.handleCreateAddress}
+          >
+            <AddressIcon />Novo endereço
+          </button>
         </div>
-      </section>
+      );
+    }
+
+    return (
+      <button
+        className="box-addNewAddress"
+        value={addressType}
+        onClick={this.handleCreateAddress}
+      >
+        <i><Plus /></i>
+      </button>
     );
   }
 
-  renderDesktop() {
+  renderItems(addresses) {
+    const { screenSize } = this.props;
+
+    if (!addresses) {
+      return null;
+    }
+
+    return addresses.map((item) => (
+      <div key={item.id}>
+        <div className="headerTitle-address">
+          <div>
+            <h5>{item.receiver_name}</h5>
+          </div>
+          <div className="text-edit">
+            <button
+              value={item.id}
+            >
+              <PencilIcon />
+              {!isMobile(screenSize) && 'Editar'}
+            </button>
+          </div>
+          <div className="text-delete">
+            <button
+              value={item.id}
+              onClick={this.handleDeleteAddress}
+            >
+              <TrashIcon />
+              {!isMobile(screenSize) && 'Excluir'}
+            </button>
+          </div>
+        </div>
+        <div className="details-address">
+          <div className="details">
+            <p className="firstDetail">Nome</p>
+            <p className="secondDetail">{item.receiver_name}</p>
+          </div>
+          <div className="details">
+            <p className="firstDetail">Endereço</p>
+            <p className="secondDetail">{item.additional_address} {item.street}</p>
+          </div>
+          <div className="details">
+            <p className="firstDetail">Cidade/UF</p>
+            <p className="secondDetail">{item.city}/{item.state}</p>
+          </div>
+          <div className="details">
+            <p className="firstDetail">CEP</p>
+            <p className="secondDetail">{item.zipcode}</p>
+          </div>
+        </div>
+      </div>
+    ));
+  }
+
+  renderPage() {
     const { isExpanded } = this.state;
-    const headerDelivery = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de entrega</h4>
-    </div>);
-    const headerCollection = (<div className="header-accordion">
-      {isExpanded ? this.AccordionClose : this.AccordionOpen}
-      <h4 className="title-addresses">Endereços de cobrança</h4>
-    </div>);
+    const { account: { addresses } } = this.props;
+
+    return [
+      <div key="shippingItems">
+        <Collapse
+          onChange={() => this.handleExpand('shipping')}
+        >
+          <Panel
+            header={(
+              <div className="header-accordion">
+                {isExpanded.shipping ? <AccordionMinusIcon /> : <AccordionPlusIcon />}
+                <h4 className="title-addresses">Endereços de entrega</h4>
+              </div>
+            )}
+            headerClass="app__footer__links-header"
+            showArrow={false}
+          >
+            <div>
+              <div className="box-addressDelivery">
+                {this.renderItems(addresses.shipping)}
+                {this.renderAddButton('shipping')}
+              </div>
+            </div>
+          </Panel>
+        </Collapse>
+      </div>,
+      <div key="billingItems">
+        <Collapse
+          onChange={() => this.handleExpand('billing')}
+        >
+          <Panel
+            header={(
+              <div className="header-accordion">
+                {isExpanded.billing ? <AccordionMinusIcon /> : <AccordionPlusIcon />}
+                <h4 className="title-addresses">Endereços de cobrança</h4>
+              </div>
+            )}
+            headerClass="app__footer__links-header"
+            showArrow={false}
+          >
+            <div>
+              <div className="box-addressDelivery">
+                {this.renderItems(addresses.billing)}
+                {this.renderAddButton('billing')}
+              </div>
+            </div>
+          </Panel>
+        </Collapse>
+      </div>,
+    ];
+  }
+
+  render() {
+    const { screenSize, account: { addresses } } = this.props;
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -243,200 +226,29 @@ export class MyAddresses extends React.Component {
       },
       {
         title: 'Meus pedidos',
-        url: '/meus-pedidos',
-      },
-      {
-        title: 'Pedido nº483.093',
       },
     ];
+
     return (
       <section className="container-myaddresses">
-        <Breadcrumbs links={breadcrumb} />
+        {isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h2>Minha conta</h2>
         <h3 className="subtitle-myAddresses">Meus endereços</h3>
-
-        <div>
-          <Collapse
-            onChange={this.handleExpand}
-          >
-            <Panel
-              header={headerDelivery}
-              headerClass="app__footer__links-header"
-              showArrow={false}
-            >
-              <div>
-                <div className="box-addressDelivery">
-                  <div>
-                    <div className="headerTitle-address">
-                      <div>
-                        <h5>Minha Casa</h5>
-                      </div>
-                      <div className="text-edit">
-                        <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                      </div>
-                      <div className="text-delete">
-                        <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                      </div>
-                    </div>
-                    <div className="details-address">
-                      <div className="details">
-                        <p className="firstDetail">Nome</p>
-                        <p className="secondDetail">Diogo Capelo</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Endereço</p>
-                        <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Cidade/UF</p>
-                        <p className="secondDetail">Guarulhos/SP</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">CEP</p>
-                        <p className="secondDetail">07130-000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Casa da mãe</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="box-addNewAddress">
-                    <Link to="#">
-                      <i><Plus /></i>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </Panel>
-          </Collapse>
-        </div>
-
-        <div>
-          <Collapse
-            onChange={this.handleExpand}
-          >
-            <Panel
-              header={headerCollection}
-              headerClass="app__footer__links-header"
-              showArrow={false}
-            >
-              <div>
-                <div className="box-addressDelivery">
-                  <div>
-                    <div className="headerTitle-address">
-                      <div>
-                        <h5>Minha Casa</h5>
-                      </div>
-                      <div className="text-edit">
-                        <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                      </div>
-                      <div className="text-delete">
-                        <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                      </div>
-                    </div>
-                    <div className="details-address">
-                      <div className="details">
-                        <p className="firstDetail">Nome</p>
-                        <p className="secondDetail">Diogo Capelo</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Endereço</p>
-                        <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">Cidade/UF</p>
-                        <p className="secondDetail">Guarulhos/SP</p>
-                      </div>
-                      <div className="details">
-                        <p className="firstDetail">CEP</p>
-                        <p className="secondDetail">07130-000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <div className="headerTitle-address">
-                        <div>
-                          <h5>Casa da mãe</h5>
-                        </div>
-                        <div className="text-edit">
-                          <Link to="#"><i><PencilIcon /></i>Editar</Link>
-                        </div>
-                        <div className="text-delete">
-                          <Link to="#"><i><TrashIcon /></i>Excluir</Link>
-                        </div>
-                      </div>
-                      <div className="details-address">
-                        <div className="details">
-                          <p className="firstDetail">Nome</p>
-                          <p className="secondDetail">Diogo Capelo</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Endereço</p>
-                          <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">Cidade/UF</p>
-                          <p className="secondDetail">Guarulhos/SP</p>
-                        </div>
-                        <div className="details">
-                          <p className="firstDetail">CEP</p>
-                          <p className="secondDetail">07130-000</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="box-addNewAddress">
-                    <Link to="#">
-                      <i><Plus /></i>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </Panel>
-          </Collapse>
-        </div>
+        {!addresses.isLoaded || addresses.isLoading ? <Loading /> : this.renderPage()}
       </section>
     );
   }
-
-  render() {
-    const { screenSize } = this.props;
-
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
-  }
 }
 
-export default MyAddresses;
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyAddresses);
+
