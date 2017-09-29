@@ -4,7 +4,7 @@ import React from 'react';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
-import { addFingerprint } from 'vendor/fingerprint2';
+import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
 
 type FormType = {
   email: { valid: boolean, value: string },
@@ -43,19 +43,16 @@ export default class SignInForm extends React.PureComponent {
   handleSignIn = (ev) => {
     ev.preventDefault();
 
-    const { form, canSubmit, isFingerprintLoaded } = this.state;
+    const { form, canSubmit } = this.state;
     const { onSubmit } = this.props;
 
-    let fingerprint = '';
-
-    if (isFingerprintLoaded) {
-      fingerprint = document.getElementById('fingerprint').value;
-    }
+    const fingerprint = getFingerprintFromForm('signInForm');
 
     if (canSubmit === true) {
       onSubmit({
         email: form.email.value,
         password: form.password.value,
+        stay_connected: true,
         fingerprint,
       });
     }

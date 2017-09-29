@@ -4,6 +4,8 @@ import SVG from 'react-inlinesvg';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
+import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
+
 type GoogleSuccessResult = {
   googleId: string,
   tokenId: string,
@@ -27,6 +29,7 @@ type FBSuccessResult = {
   signedRequest: string,
   userID: string,
   name: string,
+  email: string,
 }
 
 type FBFailureResult = {}
@@ -60,14 +63,23 @@ type Props = {
   loginFBFailure: (result: SocialLoginResult) => void,
   loginGoogleSuccess: (result: SocialLoginResult) => void,
   loginGoogleFailure: (result: SocialLoginResult) => void,
+  isFingerprintLoaded: boolean,
 };
 
 export default class SocialBlock extends React.PureComponent {
+  componentWillReceiveProps = (newProps: Props) => {
+    if (this.props.isFingerprintLoaded !== newProps.isFingerprintLoaded) {
+      addFingerprint('fakeFormForSocial');
+    }
+  };
+
   props: Props;
 
   loginFBSuccess = (data: FBSuccessResult) => {
     const { loginFBSuccess } = this.props;
     if (data.status === '"not_authorized"' || !data.userID) return;
+
+    const fingerprint = getFingerprintFromForm('fakeFormForSocial');
 
     const result = {
       socialType: 'facebook',
@@ -75,7 +87,11 @@ export default class SocialBlock extends React.PureComponent {
         socialId: data.userID,
         socialToken: data.accessToken,
       },
+      email: data.email,
+      hubspot_subscribe: true,
+      stay_connected: true,
       first_name: data.name,
+      fingerprint,
     };
     loginFBSuccess(result);
   };
@@ -97,12 +113,17 @@ export default class SocialBlock extends React.PureComponent {
   loginGoogleSuccess = (data: GoogleSuccessResult) => {
     const { loginGoogleSuccess } = this.props;
 
+    const fingerprint = getFingerprintFromForm('fakeFormForSocial');
+
     const result = {
       socialType: 'google',
       socialData: {
         socialId: data.googleId,
         socialToken: data.tokenId,
       },
+      fingerprint,
+      hubspot_subscribe: true,
+      stay_connected: true,
       first_name: data.profileObj.name,
       email: data.profileObj.email,
     };
@@ -166,6 +187,7 @@ export default class SocialBlock extends React.PureComponent {
       <div className="authentication__social">
         {this.renderFacebookLogin()}
         {this.renderGoogleLogin()}
+         <form id='fakeFormForSocial' />
       </div>
     );
   }

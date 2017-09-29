@@ -129,7 +129,6 @@ export class Authentication extends React.Component {
         <SocialSignUpForm
           name={facebookSocialInfo.first_name}
           onSubmit={this.facebookSignUp}
-          isFingerprintLoaded={isFingerprintLoaded}
         />);
     }
 
@@ -166,6 +165,7 @@ export class Authentication extends React.Component {
             loginGoogleSuccess={this.googleSignIn}
             facebook={socialLoginSettings.socials.facebook}
             google={socialLoginSettings.socials.google}
+            isFingerprintLoaded={isFingerprintLoaded}
           />
           <div className="authentication__wrapper">
             <SignInForm

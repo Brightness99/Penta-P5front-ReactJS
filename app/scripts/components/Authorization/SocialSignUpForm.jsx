@@ -14,7 +14,6 @@ type FormType = {
 type Props = {
   name: string,
   onSubmit: (data: FormType) => void,
-  isFingerprintLoaded: boolean,
 };
 
 type State = { canSubmit: boolean, form: FormType };
@@ -32,33 +31,20 @@ export default class SocialSignUpForm extends React.PureComponent {
     };
   }
 
-  componentWillReceiveProps = (newProps: Props) => {
-    if (this.props.isFingerprintLoaded !== newProps.isFingerprintLoaded) {
-      addFingerprint('socialSignUpForm');
-    }
-  };
-
   props: Props;
   state: State;
 
   handleSubmit = (ev) => {
     ev.preventDefault();
 
-    const { form, canSubmit, isFingerprintLoaded } = this.state;
+    const { form, canSubmit } = this.state;
     const { onSubmit, name } = this.props;
-
-    let fingerprint = '';
-
-    if (isFingerprintLoaded) {
-      fingerprint = document.getElementById('fingerprint').value;
-    }
 
     if (canSubmit === true) {
       const value = {
         first_name: name,
         email: form.email.value,
         email_confirmation: form.email_confirmation.value,
-        fingerprint,
       };
       onSubmit(value);
     }
