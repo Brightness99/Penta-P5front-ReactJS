@@ -64,7 +64,6 @@ export class ProductWarrantyBlock extends React.Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
