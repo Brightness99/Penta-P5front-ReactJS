@@ -1,6 +1,10 @@
 .container-warranty {
   margin-bottom: 4rem;
 
+  @include lg {
+    margin-top: 6.5rem;
+  }
+
   .container-warranty-content {
     background-color: $color-lightGreenWarranty;
     display: flex;
