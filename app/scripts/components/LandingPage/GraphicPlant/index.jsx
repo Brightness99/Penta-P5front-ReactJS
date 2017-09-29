@@ -47,9 +47,9 @@ export class GraphicPlantBlock extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    screenSize: state.app.screenSize,
     locale: state.locale.translate.page.product_landing_page.graphic_plant,
   };
 }
 
 export default connect(mapStateToProps)(GraphicPlantBlock);
+
