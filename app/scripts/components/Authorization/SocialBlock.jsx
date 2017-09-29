@@ -40,7 +40,11 @@ type SocialLoginResult = {
     socialId: string,
     socialToken: string,
   },
-  isSuccess: boolean,
+  fingerprint: string,
+  email: string,
+  hubspot_subscribe: boolean,
+  stay_connected: boolean,
+  first_name: string,
   error: {}
 }
 
