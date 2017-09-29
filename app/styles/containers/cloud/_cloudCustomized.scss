@@ -4,6 +4,12 @@
   @include lg {
     padding: 4rem 0;
   }
+  .slider-cloud-customized {
+    .atm-carousel-dots {
+      margin: -2.2rem 0 0;
+      bottom: 0rem;
+    }
+  }
   .mol-cloud-customized {
     &:last-of-type {
       margin-top: 4rem;
@@ -40,11 +46,5 @@
         }
       }
     }
-  }
-}
-
-.slider-cloud-customized {
-  .atm-carousel-dots {
-    margin: -2.2rem 0 0;
   }
 }

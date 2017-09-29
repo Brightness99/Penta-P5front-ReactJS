@@ -114,7 +114,6 @@ class CloudCustomized extends React.Component {
                   </div>
                 </div>
               </div>
-
             </Slider>
           </div>
         </div>
@@ -124,7 +123,7 @@ class CloudCustomized extends React.Component {
 
   renderMobile() {
     return (
-      <div>
+      <div className="org-cloud-customized">
         {this.renderSliderSimplePlataform()}
         {this.renderSliderProcessCloud()}
       </div>
