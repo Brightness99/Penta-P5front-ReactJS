@@ -76,14 +76,14 @@ export default class ProductOpinionsBlock extends React.Component {
     return list
       .slice(0, visible)
       .map((item) => (
-          <div className="opinion-boxText" key={item.id}>
-            <p className="opinion-title">{item.title}</p>
-            <ul className="opinion-stars">{this.renderStars(item.stars)}</ul>
-            <p className="opinion-text">"{item.content}"</p>
-            <sub>{item.author}</sub>
-          </div>
-        )
-      );
+        <div className="opinion-boxText" key={item.id}>
+          <p className="opinion-title">{item.title}</p>
+          <ul className="opinion-stars">{this.renderStars(item.stars)}</ul>
+          <p className="opinion-text">"{item.content}"</p>
+          <sub>{item.author}</sub>
+        </div>
+      )
+    );
   }
 
   renderListTotalOpinions() {
@@ -92,15 +92,15 @@ export default class ProductOpinionsBlock extends React.Component {
     return [1, 2, 3, 4, 5]
       .sort((a, b) => b - a)
       .map((item) => (
-          <div key={`opinons-stars-${item}`} className="opinions-percentual-stars">
-            <ul className="opinion-stars">
-              {this.renderStars(item)}
-            </ul>
-            {this.loaderStars(stars[item])}
-            <p className="opinions-star-number">{stars[item] || 0}</p>
-          </div>
-        )
-      );
+        <div key={`opinons-stars-${item}`} className="opinions-percentual-stars">
+          <ul className="opinion-stars">
+            {this.renderStars(item)}
+          </ul>
+          {this.loaderStars(stars[item])}
+          <p className="opinions-star-number">{stars[item] || 0}</p>
+        </div>
+      )
+    );
   }
 
   loaderStars(item = 0) {

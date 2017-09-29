@@ -1,12 +1,8 @@
 // @flow
 import React from 'react';
-import cx from 'classnames';
 import { connect } from 'react-redux';
-import config from 'config';
-import Slider from 'react-slick';
 import { BlockTitle } from 'atoms/Titles';
-import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
+import { shouldComponentUpdate } from 'utils/helpers';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
@@ -17,26 +13,6 @@ export class GraphicPlantBlock extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
-
-  renderSlider = (children) => {
-    const { locale, screenSize } = this.props;
-
-    return (
-      <Slider
-        arrows={!isMobile(screenSize)}
-        nextArrow={<NextArrow />}
-        prevArrow={<PrevArrow />}
-        dots={true}
-        dotsClass={cx(
-          'atm-carousel-dots',
-          !isMobile(screenSize) && 'atm-carousel-dots--inline',
-        )}
-        key="product-highlights-slider"
-      >
-        {children}
-      </Slider>
-    );
-  };
 
   render() {
     const { locale } = this.props;
