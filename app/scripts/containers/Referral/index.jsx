@@ -103,7 +103,7 @@ export class Referral extends React.Component {
               <div className="container">
                 <div className="atm-infos">
                   <p>Depois de convidar seus amigos, você poderá visualizar o statos das indicações.</p>
-                  <p>Em caso de dúvida, visite a nossa <Link to="#">Central de ajuda</Link></p>
+                  <p>Em caso de dúvida, visite a nossa <Link to="/central-de-ajuda">Central de ajuda</Link></p>
                 </div>
               </div>
             </div>
