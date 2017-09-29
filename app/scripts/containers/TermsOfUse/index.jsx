@@ -159,7 +159,7 @@ export class TermsOfUse extends React.Component {
               </div>
 
               <div className="atm-terms-use-privacy">
-                <h4 className="title-text-terms">POLÍTICA DE TROCAS E DEVOLUÇÕES:</h4>  
+                <h4 className="title-text-terms">POLÍTICA DE TROCAS E DEVOLUÇÕES:</h4>
                 <ul className="qrk-list-text-terms">
                   <li><span>43)</span> A tolerância do eventual descumprimento de quaisquer das cláusulas e condições do presente contrato não constituirá novação das obrigações aqui estipuladas e tampouco impedirá ou inibirá a exigibilidade das mesmas a qualquer tempo.</li>
                   <li><span>44)</span> A PRINTI não será responsabilizada, caso o conteúdo dos arquivos enviados estejam com problemas de correção dos textos, nomes, telefones, erros ortográficos e outros itens que compõem a arte, bem como não seguir as dicas de qualidade informadas no SITE, para que a produção esteja perfeita e o trabalho não seja perdido.</li>

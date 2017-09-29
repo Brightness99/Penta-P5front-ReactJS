@@ -7,10 +7,6 @@ import config from 'config';
 import { BlockTitle } from 'atoms/Titles';
 
 type Props = {
-  className: string,
-  locale: {},
-  button?: typeof React.Component,
-  screenSize: string,
   tutorials: {},
 };
 
@@ -18,7 +14,6 @@ export class ProductTutorialsBlock extends React.Component {
 
   props: Props;
 
-  // <img src={item.image.file} alt={item.image.title} />
   renderBigBox() {
     const { tutorials } = this.props;
 
@@ -37,7 +32,7 @@ export class ProductTutorialsBlock extends React.Component {
   renderSmallBox() {
     const { tutorials } = this.props;
 
-    return tutorials.small_box.links.map((item, key) => (
+    return tutorials.small_box.links.map((item) => (
       <div key={item.id}>
         <NavLink to={item.external_link} target="_blank">
           <div className="container-tutorialMobile">
@@ -75,8 +70,6 @@ export class ProductTutorialsBlock extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    app: state.app,
-    locale: state.locale.translate.page.product_landing_page,
     tutorials: state.products.tutorials,
   };
 }

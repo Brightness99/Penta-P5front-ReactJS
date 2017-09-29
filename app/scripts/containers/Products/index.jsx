@@ -44,15 +44,14 @@ export class Products extends React.Component {
   render() {
     const {
       app: {
-        screenSize
+        screenSize,
       },
       products: {
         product,
         categories,
-        tutorials,
         opinions,
         isRunning,
-        isLoaded
+        isLoaded,
       },
       locale: {
         advantages,
@@ -79,7 +78,7 @@ export class Products extends React.Component {
         <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
         <ProductInformationBlock />
         <div>
-          <ProductTutorialsBlock screenSize={screenSize} tutorials={tutorials} />
+          <ProductTutorialsBlock />
           <ProductWarrantyBlock />
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
           <GraphicPlantBlock />

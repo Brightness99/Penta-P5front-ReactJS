@@ -50,14 +50,13 @@ export class Cart extends React.Component {
     if (use_pickup_places) {
       dispatch(cartPickupFetch(pickup_place_id));
     }
-
   }
 
   componentWillUpdate(nextProps) {
     const { cart: { voucher, data: { use_pickup_places } }, dispatch } = this.props;
     const nextCart = nextProps.cart;
 
-    if (nextCart.voucher.voucher_name && voucher.voucher_name !== nextCart.voucher.voucher_name ) {
+    if (nextCart.voucher.voucher_name && voucher.voucher_name !== nextCart.voucher.voucher_name) {
       this.setState({
         isVoucherActive: true,
       });
@@ -69,6 +68,8 @@ export class Cart extends React.Component {
   }
 
   static props: Props;
+
+  static state: State;
 
   handleVoucherToggle = () => {
     const { isVoucherActive } = this.state;
@@ -87,7 +88,7 @@ export class Cart extends React.Component {
   renderDesktop() {
     const {
       app: {
-        screenSize
+        screenSize,
       },
       cart: {
         data: {
@@ -175,7 +176,7 @@ export class Cart extends React.Component {
   renderMobile() {
     const {
       app: {
-        screenSize
+        screenSize,
       },
       cart: {
         data: {
@@ -183,7 +184,7 @@ export class Cart extends React.Component {
           items,
           zipcode,
           use_pickup_places,
-          pickup_place_id
+          pickup_place_id,
         },
         voucher,
         count,
