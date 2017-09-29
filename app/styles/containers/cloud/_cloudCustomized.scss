@@ -25,6 +25,10 @@
       .qrk-desc-text-customized {
         border: 0.1rem solid $color-hrLightGray;
         flex: 1;
+        margin: 0 0.5rem;
+        @include lg {
+          margin: 0;
+        }
         img {
           width: 100%;
         }
