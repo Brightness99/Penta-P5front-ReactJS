@@ -4,8 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { CustomersRely } from 'components/LandingPage';
-import GraphicPlantBlock from 'containers/GraphicPlantBlock/GraphicPlantBlock';
+import { CustomersRelyBlock, GraphicPlant } from 'components/LandingPage';
 import BannerCloud from './BannerCloud';
 import AboutCloud from './AboutCloud';
 import BenefitsCloud from './BenefitsCloud';
@@ -17,8 +16,8 @@ import GuiteCloud from './GuiteCloud';
 type Props = {
   app: AppStore,
   router: RouterStore,
+  locale: {},
   dispatch: () => {},
-  children: any,
 };
 
 export class CloudCompany extends React.Component {
@@ -36,22 +35,18 @@ export class CloudCompany extends React.Component {
         <OrderPlataform screenSize={screenSize} />
         <GuiteCloud screenSize={screenSize} />
         <div className="org-customers-rely">
-          <CustomersRely screenSize={screenSize} />
+          <CustomersRelyBlock />
         </div>
-        <GraphicPlantBlock screenSize={screenSize} />
+        <GraphicPlant />
       </section>
     );
   }
 }
 
-/* istanbul ignore next */
 function mapStoreToProps(state) {
-  return ({
-    app: state.app,
-  });
+  return { app: state.app };
 }
 
-/* istanbul ignore next */
 function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
