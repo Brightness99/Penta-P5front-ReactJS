@@ -1,38 +1,11 @@
 .authentication {
+  margin: 0 auto 6rem;
+  max-width: 800rem;
   &__social {
     display: flex;
     background-color: $color-white;
     justify-content: center;
     padding: 1rem;
-    &__button {
-      align-items: center;
-      height: 4rem;
-      text-align: center;
-      width: 4rem;
-      &:first-child {
-        margin-right: 1rem;
-      }
-      > span {
-        color: $color-white;
-        fill: currentcolor;
-        width: 90%;
-        margin-top: -0.5rem;
-        svg {
-          height: auto;
-          max-height: 100%;
-          width: 100%;
-        }
-      }
-      &.facebook {
-        @include button-background-color($color-facebook, 15%);
-      }
-      &.google {
-        > span {
-          max-width: 3rem;
-        }
-        @include button-background-color($color-google, 15%);
-      }
-    }
   }
   &__wrapper {
     display: inline-flex;
@@ -59,13 +32,23 @@
       margin: 0;
       display: inline-flex;
       flex-direction: column;
-      > input {
+      > * {
         margin-top: 1rem;
         width: 100%;
       }
-      > .atm-button-rounded {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    &__wrapper{
+      flex-direction: column;
+    }
+
+    &__block{
+      width: 100%;
+      margin-top: 2rem;
+      &__form{
+        width: 80%;
       }
     }
   }
