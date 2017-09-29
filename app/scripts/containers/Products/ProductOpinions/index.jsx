@@ -18,7 +18,7 @@ type State = {
   visible: number,
 }
 
-export default class OpinionsBlock extends React.Component {
+export default class ProductOpinionsBlock extends React.Component {
   constructor(props) {
     super(props);
 

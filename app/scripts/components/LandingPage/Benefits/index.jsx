@@ -25,7 +25,7 @@ export default class BenefitsBlock extends React.Component {
       <p key={`advantages-${item}`}><i className="checkIcon"><CheckIcon /></i>{item}</p>
     ));
   }
-  
+
   renderMobile() {
     const { advantages } = this.props;
 

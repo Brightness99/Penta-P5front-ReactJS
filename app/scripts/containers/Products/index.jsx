@@ -5,24 +5,26 @@ import { productFetch } from 'actions';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 
 import Loading from 'components/Loading';
-import { BlogBlock, CustomersRelyBlock, BreadcrumbsBlock } from 'components/LandingPage';
+import {
+  BlogBlock,
+  BenefitsBlock,
+  BreadcrumbsBlock,
+  CustomersRelyBlock,
+  GraphicPlantBlock
+} from 'components/LandingPage';
 
 import ProductHighlightsBlock from './ProductHighlights';
 import ProductInformationBlock from './ProductInformation';
-
-import InformationBlock from './InformationBlock';
-import TutorialBlock from './TutorialBlock';
-import WarrantyBlock from './WarrantyBlock';
-import BenefitsBlock from './BenefitsBlock';
-import GraphicPlantBlock from './GraphicPlantBlock';
-import OpinionsBlock from './OpinionsBlock';
-import DetailsProductBlock from './DetailsProductBlock';
-import PrintProductBlock from './PrintProductBlock';
+import ProductDetailsBlock from './ProductDetails';
+import ProductBannerBlock from './ProductBanner';
+import ProductOpinionsBlock from './ProductOpinions';
+import ProductWarrantyBlock from './ProductWarranty';
+import ProductTutorialsBlock from './ProductTutorials';
 
 type Props = {
   app: AppStoreType,
   router: RouterStore,
-  locale: LocaleType.translate.page.product_landing_page.informations,
+  locale: LocaleType,
   match: {},
   products: {},
   dispatch: () => {},
@@ -42,25 +44,19 @@ export class Products extends React.Component {
   render() {
     const {
       app: {
-        screenSize
+        screenSize,
       },
       products: {
         product,
         categories,
-        informations,
-        tutorials,
         opinions,
         isRunning,
-        isLoaded
+        isLoaded,
       },
       locale: {
         advantages,
-        graphic_plant,
-        print,
       },
-      locale
     } = this.props;
-
 
     const breadcrumb = [
       {
@@ -80,22 +76,18 @@ export class Products extends React.Component {
       <div>
         {!isMobile(screenSize) && <BreadcrumbsBlock links={breadcrumb} />}
         <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
-        <ProductInformationBlock
-          screenSize={screenSize}
-          informations={informations}
-          locale={locale.informations}
-        />
+        <ProductInformationBlock />
         <div>
-          <TutorialBlock screenSize={screenSize} tutorials={tutorials} />
-          <WarrantyBlock screenSize={screenSize} />
+          <ProductTutorialsBlock />
+          <ProductWarrantyBlock />
           <BenefitsBlock screenSize={screenSize} advantages={advantages} />
-          <GraphicPlantBlock screenSize={screenSize} graphic_plant={graphic_plant} />
+          <GraphicPlantBlock />
           <CustomersRelyBlock />
           <BlogBlock />
-          <OpinionsBlock screenSize={screenSize} opinions={opinions} />
-          <DetailsProductBlock product={product} screenSize={screenSize} />
-          <PrintProductBlock product={product} print={print} screenSize={screenSize} />
+          <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
         </div>
+        <ProductDetailsBlock />
+        <ProductBannerBlock />
       </div>
     );
   }
@@ -114,6 +106,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
-
