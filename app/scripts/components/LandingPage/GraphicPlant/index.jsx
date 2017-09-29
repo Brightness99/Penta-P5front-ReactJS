@@ -45,7 +45,6 @@ export class GraphicPlantBlock extends React.Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
