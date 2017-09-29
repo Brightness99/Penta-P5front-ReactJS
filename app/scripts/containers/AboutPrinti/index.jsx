@@ -33,8 +33,8 @@ export class AboutPrinti extends React.Component {
 
     return (
       <section>
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <div className="tpl-about-printi">
+          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
           <div className="container">
             <h2 className="title-about-printi">Sobre a printi</h2>
           </div>
