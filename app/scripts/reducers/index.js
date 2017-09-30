@@ -15,6 +15,7 @@ import contactForm from './contact-form';
 import account from './account';
 import socialLoginSettings from './social-login-settings';
 import terms from './terms';
+import header from './header';
 
 export default {
   ...app,
@@ -29,4 +30,5 @@ export default {
   ...account,
   ...socialLoginSettings,
   ...terms,
+  ...header,
 };
