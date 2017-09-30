@@ -4,12 +4,11 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RichTextEditor from 'react-rte';
-import { IconLeftButton, TextButton, RoundedTransparentButton, RoundedConfirmationButton } from 'atoms/Buttons';
+import { RoundedTransparentButton, RoundedConfirmationButton } from 'atoms/Buttons';
 import { BoxRadio } from 'atoms/Inputs';
 import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 'components/Accordion/nAccordion';
 import { PictureIcon } from 'components/Icons';
 import ProposalItem from './ProposalItem';
-
 
 type Props = {
   screenSize: string,
@@ -18,7 +17,8 @@ type Props = {
 
 type State = {
   activeButton: string,
-  value: any
+  value: any,
+  editorWidth: number,
 };
 
 export class ArtProposalContent extends React.Component {
@@ -28,6 +28,7 @@ export class ArtProposalContent extends React.Component {
     this.state = {
       value: RichTextEditor.createEmptyValue(),
       activeButton: 'approve',
+      editorWidth: 500,
     };
   }
 
@@ -39,17 +40,14 @@ export class ArtProposalContent extends React.Component {
 
   static state: State;
 
-  onChange = (val) => {
-    this.setState({ value: val });
-    if (this.props.onChange) {
-      // Send the changes up to the parent component as an HTML string.
-      // This is here to demonstrate using `.toString()` but in a real app it
-      // would be better to avoid generating a string on each change.
-      this.props.onChange(
-        val.toString('html')
-      );
-    }
-  };
+  componentDidMount() {
+    const { screenSize } = this.props;
+    const width = document.getElementsByClassName('container')[0].clientWidth;
+    const minusWidth = ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize) ? 40 : 380;
+    this.setState({ editorWidth: width - minusWidth });
+  }
+
+  onChange = (val) => {};
 
   handleSelection = (ev) => {
     this.setState({
@@ -88,12 +86,11 @@ export class ArtProposalContent extends React.Component {
     );
   }
 
-  getProposal() {
-    const { activeButton } = this.state;
-
+  getProposal = () => {
+    const { activeButton, editorWidth } = this.state;
     return (
       <div className="container-proposal">
-        <div className="content-proposal">
+        <div className="content-proposal" id="content">
           <div className="proposal-header">
             <h2 className="title-proposal">Proposta 2</h2>
             <div className="container-right">
@@ -131,6 +128,7 @@ export class ArtProposalContent extends React.Component {
           </div>
           <div className="text-editor-wrapper">
             <RichTextEditor
+              style={{ width: editorWidth }}
               className="text-editor"
               value={this.state.value}
               onChange={this.onChange}
@@ -154,7 +152,7 @@ export class ArtProposalContent extends React.Component {
   }
 
   renderDesktop() {
-    const { activeButton } = this.state;
+    const { activeButton, editorWidth } = this.state;
     return (
       <div className="container-proposal">
         <div className="content-proposal">
@@ -193,13 +191,12 @@ export class ArtProposalContent extends React.Component {
               Solicitar alteração
             </BoxRadio>
           </div>
-          <div className="text-editor-wrapper">
-            <RichTextEditor
-              className="text-editor"
-              value={this.state.value}
-              onChange={this.onChange}
-            />
-          </div>
+          <RichTextEditor
+            style={{ width: editorWidth }}
+            className="text-editor"
+            value={this.state.value}
+            onChange={this.onChange}
+          />
           <div className="bottom-button-wrapper">
             <RoundedTransparentButton>
               <PictureIcon />
