@@ -7,6 +7,7 @@ import config from 'config';
 import Slider from 'react-slick';
 import { RoundedTransparentButton } from 'atoms/Buttons';
 import { DownloadIcon } from 'components/Icons';
+import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
 
 const docs = [
   {
@@ -73,10 +74,12 @@ export class ProposalItem extends React.Component {
                 className="slider-docs"
                 dots={false}
                 infinite={false}
+                nextArrow={<NextArrow />}
+                prevArrow={<PrevArrow />}
                 dotsClass="atm-carousel-dots"
                 autoplay={false}
                 slidesToShow={3}
-                slidesToScroll={1}
+                slidesToScroll={3}
               >
                 {this.renderDocs()}
               </Slider>
