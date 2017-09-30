@@ -15,8 +15,8 @@ import GuiteCloud from './GuiteCloud';
 type Props = {
   app: AppStore,
   router: RouterStore,
+  locale: {},
   dispatch: () => {},
-  children: any,
 };
 
 export class CloudCompany extends React.Component {
@@ -42,14 +42,10 @@ export class CloudCompany extends React.Component {
   }
 }
 
-/* istanbul ignore next */
 function mapStoreToProps(state) {
-  return ({
-    app: state.app,
-  });
+  return { app: state.app };
 }
 
-/* istanbul ignore next */
 function mapDispatchToProps(dispatch) {
   return { dispatch };
 }

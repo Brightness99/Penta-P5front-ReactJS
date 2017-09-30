@@ -32,8 +32,8 @@ export class PrintiPress extends React.Component {
     return (
       <section>
         <div className="tpl-printi-press">
-          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
           <div className="container">
+            {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
             <h2 className="title-printi-press">Printi na imprensa</h2>
 
             <div className="org-printi-press">
