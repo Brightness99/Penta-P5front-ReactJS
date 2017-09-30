@@ -1,6 +1,7 @@
 // @flow
 // TODO: Carousel this
 import React from 'react';
+import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
@@ -9,10 +10,8 @@ import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
 
 type Props = {
   screenSize: string,
-  className: string,
-  locale: {},
-  button?: typeof React.Component,
-  informations: {},
+  locale: ProductLandingPageLocaleType.informations,
+  informations: ProductsStoreType.informations,
 };
 
 export class InformationBlock extends React.Component {
@@ -86,4 +85,13 @@ export class InformationBlock extends React.Component {
   }
 }
 
-export default InformationBlock;
+
+function mapStateToProps(state) {
+  return {
+    screenSize: state.app.screenSize,
+    locale: state.locale.translate.page.product_landing_page.informations,
+    informations: state.products.informations,
+  };
+}
+
+export default connect(mapStateToProps)(InformationBlock);

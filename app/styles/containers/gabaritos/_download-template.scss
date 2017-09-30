@@ -1,0 +1,143 @@
+.org-download-template {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+  @include lg {
+    flex-direction: row;
+  }
+  .title-atm-preview {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-xxx;
+  }
+  .title-atm-sidebar {
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-il;
+  }
+  .mol-sidebar-download-template {
+    background-color: $color-white;
+    border-radius: 0.3rem;
+    flex: 1;
+    margin-right: 2rem;
+    padding: 3rem 1.8rem;
+    .atm-sidebar-download-template {
+      .qrk-list-sidebar {
+        color: $color-lightGray;
+        font-family: $font-family-open-sans-light;
+        font-size: $font-size-base;
+        margin: 1.5rem 0;
+      }
+    }
+    .atm-sidebar-choose-download {
+      .qrk-list-download {
+        li {
+          // display: flex;
+          margin: 1.5rem 0;
+          .btn-default {
+            border: 0.1rem solid;
+            margin-left: 1.7rem;
+            padding: 0.5rem 2.922rem;
+            width: 150px;
+          }
+        }
+      }
+    }
+  }
+  .mol-sidebar-preview {
+    background-color: $color-white;
+    border-radius: 0.3rem;
+    flex: 3;
+    padding: 3rem 3rem 1.7rem;
+    .atm-image-preview {
+      display: flex;
+      justify-content: space-around;
+      margin: 3rem 0;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+        margin: 5rem 0;
+      }
+      .qrk-image-preview {
+        margin-bottom: 2rem;
+        @include lg {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .atm-list-sidebar-preview {
+      border-top: 0.1rem solid #eee;
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-xs;
+      li {
+        align-items: center;
+        display: flex;
+        margin: 1rem 0;
+        @include lg {
+          display: inline-flex;
+          margin: 1.1rem 0 0 1rem;
+        }
+        &:before {
+          content: '';
+          height: 2rem;
+          margin-right: 1rem;
+          width: 2rem;
+          @include lg {
+            border-radius: 1.5rem;
+          }
+        }
+        &.final-format {
+          &:before {
+            background-color: $color-sky-blue;
+          }
+        }
+        &.safety-margin {
+          &:before {
+            background-color: $color-yellow;
+          }
+        }
+        &.bleed {
+          &:before {
+            background-color: $color-barbie-pink;
+          }
+        }
+        &.creases {
+          &:before {
+            background: repeating-linear-gradient(
+              to right, 
+              white, 
+              #ddccdd 4px, 
+              white 4px, 
+              #dcdcdc 4px, 
+              white 4px, 
+              #dcdcdc 5px
+            );
+          }
+        }
+        &:first-of-type {
+          margin-left: 0; 
+        }
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+    .atm-legend-preview {
+      color: $color-lightGray;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      font-style: italic;
+    }
+  }
+  .mol-footer-preview {
+    background-color: $color-lightGreenWarranty;
+    padding: 2rem 0;
+    .text-footer-preview {
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      font-weight: 600;
+      text-align: center;
+    }
+    .btn-default {
+      margin-top: 2rem;
+    }
+  }
+}

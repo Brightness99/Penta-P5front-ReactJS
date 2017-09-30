@@ -3,21 +3,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
+import { policyFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 
 type Props = {
   app: AppStore,
   router: RouterStore,
   locale: {},
+  policy: {},
   dispatch: () => {},
 };
 
 export class PrivacyPolicy extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(policyFetch());
+  }
 
   static props: Props;
 
   render() {
-    const { app: { screenSize } } = this.props;
+    const { app: { screenSize }, policy } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -27,6 +34,7 @@ export class PrivacyPolicy extends React.Component {
         title: 'Política de Privacidade',
       },
     ];
+    console.log('policy ===> ', policy);
     return (
       <section>
         <div className="container">
@@ -116,7 +124,10 @@ export class PrivacyPolicy extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { app: state.app };
+  return {
+    app: state.app,
+    policy: state.policy,
+ };
 }
 
 function mapDispatchToProps(dispatch) {

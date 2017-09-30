@@ -108,6 +108,17 @@ const missingLocale = {
           ],
         },
       },
+      product_landing_page: {
+        warranty: {
+          image: {
+            SRC: '',
+            ALT: '100% Garantido',
+          },
+          TITLE: 'Qualidade garantida. Não corra risco com seus produtos!',
+          DESCRIPTION: 'A nossa satisfação é a sua satisfação. Não ficou satisfeito com a qualidade do material que recebeu? Nós vamos reimprimi-lo! Sem custos e sem burocracia.',
+          BUTTON: 'Configure este produto',
+        },
+      },
     },
   },
 };
