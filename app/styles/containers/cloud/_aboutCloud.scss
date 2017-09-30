@@ -1,5 +1,26 @@
 .org-about-cloud {
-  // margin: 4rem 0;
+  .org-about-cloud-mobile { 
+    margin: 2rem 0;
+    .mol-texts-about-cloud {
+      flex-direction: column-reverse;
+      @include lg {
+        flex-direction: row;
+      }
+      .atm-text-cloud {
+        margin-left: 0;
+        .qrk-title-about-cloud {
+          margin-top: 2rem;
+        }
+        &.img-note-cloud {
+          img {
+            height: auto;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
   .mol-texts-about-cloud {
     display: flex;
     flex-direction: column;
@@ -55,11 +76,13 @@
 }
 .qrk-subtitle-about-cloud {
   font-family: $font-family-nunito-regular;
-  font-size: $font-size-h4;
+  font-size: $font-size-lg;
   font-weight: 400;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  text-align: center;
   @include lg {
-    font-size: $font-size-lg;
+    margin-top: 3rem;
+    text-align: left;
   }
 }
 .qrk-p-about-cloud {
@@ -68,16 +91,5 @@
   font-size: $font-size-xs;
   @include lg {
     font-size: $font-size-base;
-  }
-}
-
-.org-about-cloud-mobile {
-  margin: 2rem 0;
-  .mol-texts-about-cloud {
-    display: flex;
-    flex-direction: column;
-    .atm-text-cloud {
-      flex: 1;
-    }
   }
 }
