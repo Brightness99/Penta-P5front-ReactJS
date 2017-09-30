@@ -38,55 +38,13 @@ const docs = [
       URL: 'assets/final/img/destaque-tutorial-cartao-visita.jpg',
       ALT: 'Tutorial de cartões de visita da grafica online Printi',
     },
-  }
+  },
 ];
 
 export class ProposalItem extends React.Component {
-
-  // renderMobile() {
-  //   return (
-  //     <div className="proposal-item">
-  //       <div className="item-header">
-  //         <div className="avatar-wrapper">
-  //           <image src="" />
-  //         </div>
-  //         <div className="name-wrapper">
-  //           <p className="name">Enviado por</p>
-  //           <p className="position">Designer Printi</p>
-  //         </div>
-  //       </div>
-  //       <p className="proposal-text">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor fringilla. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Sed posuere consectetur est at lobortis.</p>
-  //       <div className="date">Enviado em 20/04/2015 | 16:45</div>
-  //       <div className="box-doc">
-  //         <Carousel>
-  //           <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico" />
-  //           <img src="https://d2ofpir5gh0cbr.cloudfront.net/assets/final/img/parque.jpg" alt="Parque Gráfico2" />
-  //         </Carousel>
-  //       </div>
-  //       <div className="item-footer">
-  //         <div className="">
-  //           <button className="download-button">
-  //             <SearchIcon />
-  //               DOWNLOAD Dos ARQUIVOS
-  //           </button>
-  //         </div>
-  //         <div className="note">
-  //           IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // renderDesktop() {
-  //   return (
-  //     0
-  //   );
-  // }
-
   renderDocs = () => (
-    docs.map((doc) => ( 
-      <div className="slider-doc-item">
+    docs.map((doc, index) => (
+      <div className="slider-doc-item" key={index.toString()}>
         <div className="doc">
           <img src={`${config.basePath}${doc.image.URL}`} alt={doc.image.ALT} />
         </div>
