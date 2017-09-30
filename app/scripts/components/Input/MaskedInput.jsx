@@ -93,7 +93,7 @@ export default class MaskedInput extends React.Component {
           type="text"
           onChange={this.onChange}
           value={inputValue}
-          ref={(c) => (this._input = c)}
+          ref={(c) => (this._input = c)} // eslint-disable-line no-return-assign
         />
         <button onClick={this.onClick} className="app__reset_zipcode">
           <TimesCircleIcon />

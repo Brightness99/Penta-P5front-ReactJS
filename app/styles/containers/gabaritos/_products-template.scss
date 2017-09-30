@@ -1,0 +1,45 @@
+.org-productsTemplates {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-family: $font-family-open-sans-bold;
+  font-size: $font-size-xs;
+  margin: 0 0 3.7rem 0;
+  flex-direction: column;
+  @include lg {
+    flex-direction: row;
+  }
+  li {
+    align-items: flex-start;
+    background: $color-white;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    flex-basis: calc((100% / 3) - 1.4rem);
+    flex-direction: column;
+    height: 6rem;
+    justify-content: center;
+    margin: 0 0 2rem 0;
+    padding: 2rem 1rem;
+    position: relative;
+    text-transform: uppercase;
+    transition-delay: 0.04s;
+    transition-timing-function: ease-in-out;
+    @include lg {
+      margin: 0 0.7rem 2rem 0.7rem;
+    }
+    p { margin-bottom: 0; }
+    &:hover {
+      background-color: $color-printi-blue;
+      color: $color-white;
+    }
+    &:nth-of-type(3n-2) {
+      margin-left: 0;
+    }
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+  }
+}

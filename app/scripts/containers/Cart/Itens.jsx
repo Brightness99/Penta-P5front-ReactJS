@@ -85,7 +85,7 @@ export default class CartItens extends React.Component {
   };
 
   renderModal() {
-    const { items, locale, dispatch, upselling } = this.props;
+    const { items, locale, dispatch } = this.props;
     const { modal, isUpsellSelected } = this.state;
 
     if (!modal.type || !modal.itemId || !['details', 'upsellDate'].includes(modal.type)) {
@@ -261,8 +261,8 @@ export default class CartItens extends React.Component {
       <div className="org-cart-item-list">
         <Slider {...sliderSettings}>
           {Object.keys(items).map(item => (
-            <div>
-              <div className="org-cart-item" key={item}>
+            <div key={item}>
+              <div className="org-cart-item">
                 <div className="mol-cart-item-header">
                   <ProductImage thumbnail={items[item].thumbnail} failbackImage={failbackImage} alt={items[item].final_product.name} />
                   {this.renderProductInfos(items[item], item, 1)}

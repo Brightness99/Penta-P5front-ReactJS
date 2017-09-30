@@ -5,7 +5,7 @@
 import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, LocaleConstants } from 'constants/index';
 
-export function localeFetch(action$, store) {
+export function localeFetch(action$) {
   return action$.ofType(LocaleConstants.LOCALE_FETCH_REQUEST)
     .switchMap(() => {
       const endpoint = '/v2/locale';

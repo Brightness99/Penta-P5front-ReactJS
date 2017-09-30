@@ -1,0 +1,112 @@
+.org-chooseSettings {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-family: $font-family-open-sans-bold;
+  font-size: $font-size-xs;
+  margin: 0 0 1.7rem 0;
+  flex-direction: column;
+  @include lg {
+    flex-direction: row;
+    margin: 0 0 3.7rem 0;
+  }
+  .mol-chooseSettings{
+    align-items: flex-start;
+    background: $color-white;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    flex-basis: calc((100% / 3) - 1.4rem);
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 0 2rem 0;
+    padding: 2rem 1rem;
+    position: relative;
+    text-transform: uppercase;
+    transition-delay: 0.04s;
+    transition-timing-function: ease-in-out;
+    @include lg {
+      margin: 0 0.7rem 2rem 0.7rem;
+    }
+    &:nth-of-type(3n-2) {
+      margin-left: 0;
+    }
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+    span {
+      align-items: center;
+      border: 0.1rem solid $color-lightGray3;
+      border-radius: 1.5rem;
+      color: $color-lightGray3;
+      display: flex;
+      font-family: $font-family-nunito-regular;
+      font-size: $font-size-lg;
+      height: 3rem;
+      justify-content: center;
+      position: relative;
+      width: 3rem;
+    }
+    .title-chooseSettings {
+      font-family: $font-family-open-sans-light;
+      font-size: $font-size-xs;
+      margin-bottom: 0;
+      text-transform: none;
+      @include lg {
+        font-size: $font-size-base;
+      }
+    }
+    .org-checkout-content-data {
+      width: 100%;
+      margin-top: 0;
+      .atm-checkout-input-one {
+        width: 100%;
+      }
+    }
+    .atm-numberSetting {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0 2.6rem;
+      width: 100%;
+    }
+  }
+}
+
+
+.org-links-chooseSettings {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  @include lg {
+    margin-bottom: 4rem;
+    flex-direction: row;
+  }
+  .atm-link {
+    align-items: center;
+    color: $color-printi-blue;
+    font-family: $font-family-open-sans-regular;
+    font-size: $font-size-xs;
+    margin: 1.2rem 0;
+    @include lg {
+      display: inline-flex;
+      color: $color-lightGray;
+    }
+    svg {
+      fill: $color-printi-blue;
+      margin-right: 0.5rem;
+      width: 0.9rem;
+      @include lg {
+        fill: $color-lightGray;
+      }
+    }
+  }
+  .btn-default {
+    padding: 1.1rem 7.7rem;
+  }
+  &.footer-page {
+    margin-bottom: 4rem;
+  }
+}

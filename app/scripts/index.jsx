@@ -7,7 +7,7 @@ import 'vendor/polyfills';
 import 'vendor/rxjs';
 
 // Locale
-import { localeFetch, accountFetch } from 'actions';
+import { localeFetch, accountFetch, userAuthValidate } from 'actions';
 
 // i18n
 import moment from 'moment';
@@ -29,6 +29,7 @@ if (process.env.production) {
 export function renderApp(RootComponent) {
   store.dispatch(localeFetch());
   store.dispatch(accountFetch());
+  store.dispatch(userAuthValidate());
   store.subscribe(() => {
     /* istanbul ignore next */
     if (store.getState().locale.LANGUAGE) {
