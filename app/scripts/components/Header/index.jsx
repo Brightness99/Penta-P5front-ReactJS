@@ -5,14 +5,13 @@ import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
-import LogoLoyalty from 'components/LogoLoyalty';
+import { userLogOut } from 'actions';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
 import Menu from './Menu';
 import SearchBar from './SearchBar';
 import Topbar from './Topbar';
-import LoyaltyTopbar from './LoyaltyTopbar';
 import Products from './Products';
 import MyAccount from './MyAccount';
 
@@ -21,6 +20,7 @@ type Props = {
   links: {},
   dispatch: () => {},
   totalCartItems: number,
+  isAuthorized: boolean,
 };
 
 type State = {
@@ -105,8 +105,12 @@ export class Header extends React.Component {
     });
   };
 
+  handleLogOut=() => {
+    this.props.dispatch(userLogOut());
+  };
+
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized } = this.props;
     const { activePane } = this.state;
 
     return (
@@ -134,6 +138,8 @@ export class Header extends React.Component {
         <MyAccount
           isHidden={activePane !== 'account'}
           handleClose={this.handlePaneHide}
+          handleLogOut={this.handleLogOut}
+          isAuthorized={isAuthorized}
           screenSize={screenSize}
         />
       </header>
@@ -141,7 +147,7 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -183,7 +189,9 @@ export class Header extends React.Component {
               <button className="atm-header-icon-button">
                 <MyAccountIcon />
               </button>
-              <MyAccount screenSize={screenSize} />
+              <MyAccount screenSize={screenSize}
+                         isAuthorized={isAuthorized}
+                         handleLogOut={this.handleLogOut} />
             </div>
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           </div>

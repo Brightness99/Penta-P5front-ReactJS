@@ -14,6 +14,8 @@ import user from './user';
 import contactForm from './contact-form';
 import account from './account';
 import policy from './policy';
+import socialLoginSettings from './social-login-settings';
+import terms from './terms';
 
 export default {
   ...app,
@@ -27,4 +29,6 @@ export default {
   ...contactForm,
   ...account,
   ...policy,
+  ...socialLoginSettings,
+  ...terms,
 };

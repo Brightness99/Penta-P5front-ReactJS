@@ -15,3 +15,5 @@ export * from './settings';
 export * from './contact-form';
 export * from './user';
 export * from './policy';
+export * from './social-login-settings';
+export * from './terms';

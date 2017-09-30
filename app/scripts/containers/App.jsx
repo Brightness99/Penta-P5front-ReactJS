@@ -31,6 +31,10 @@ import HelpCenterPage from 'containers/HelpCenterPage';
 import TermsOfUse from 'containers/TermsOfUse';
 import PrivacyPolicy from 'containers/PrivacyPolicy';
 import Sitemap from 'containers/Sitemap';
+import Search from 'components/Search';
+import Gabaritos from 'containers/Gabaritos';
+import Templateslp from 'containers/Templateslp';
+import Referral from 'containers/Referral';
 
 type Props = {
   app: AppStoreType,
@@ -38,6 +42,7 @@ type Props = {
   dispatch: () => {},
   router: RouterStore,
   locale: {},
+  isAuthorized: boolean
 };
 
 export class App extends React.Component {
@@ -63,7 +68,7 @@ export class App extends React.Component {
   };
 
   render() {
-    const { app, dispatch, router, cart } = this.props;
+    const { app, dispatch, router, cart, isAuthorized } = this.props;
 
     let html = (<div className="loader">Loading</div>);
 
@@ -76,7 +81,10 @@ export class App extends React.Component {
               path="/"
               render={() => (
                 <div key="app" className="app">
-                  <Header screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count} />
+                  <Header
+                    screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count}
+                    isAuthorized={isAuthorized}
+                  />
                   <main className="app__main">
                     <Switch>
                       <Route exact path="/" component={Home} />
@@ -92,14 +100,18 @@ export class App extends React.Component {
                       <Route path="/termos-de-servico-e-uso-do-site" component={TermsOfUse} />
                       <Route path="/glossario" component={Glossary} />
                       <Route path="/success" component={Success} />
+                      <Route path="/buscar" component={Search} />
                       <Route path="/imprensa" component={PrintiPress} />
                       <Route path="/sobre-a-printi" component={AboutPrinti} />
+                      <Route path="/cloud" component={CloudCompany} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route path="/:slug/upload/:itemId" component={Upload} />
+                      <Route path="/indicacoes" component={Referral} />
                       <Route exact path="/404" component={Error404} />
-                      <Route path="/cloud" component={CloudCompany} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
+                      <Route exact path="/gabaritos" component={Gabaritos} />
+                      <Route exact path="/modelos" component={Templateslp} />
                       <Route component={Error404} />
                     </Switch>
                   </main>
@@ -123,6 +135,7 @@ function mapStateToProps(state) {
     cart: state.cart,
     router: state.router,
     locale: state.locale,
+    isAuthorized: state.user.isAuthorized,
   };
 }
 
