@@ -21,10 +21,6 @@ export default class CartFooter extends React.Component {
     this.handleResize();
   }
 
-  static componentWillUnmount() {
-    document.querySelector('body').classList.remove('has-stick-footer');
-  }
-
   componentWillUpdate(nextProps) {
     if (isMobile(nextProps.screenSize) !== isMobile(this.props.screenSize)) {
       this.handleResize();

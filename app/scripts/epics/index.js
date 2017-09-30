@@ -4,7 +4,14 @@
  */
 
 import { combineEpics } from 'redux-observable';
-import { userNewsletter, userSignIn } from './user';
+import {
+  userNewsletter,
+  userSignIn,
+  userSignUp,
+  userLogOut,
+  userAuthValidate,
+  userSocialSignIn,
+  userSocialSignUp } from './user';
 import { productsFetch } from './products';
 import { blogFetch } from './blog';
 import {
@@ -31,6 +38,7 @@ import {
 } from './cart';
 
 import { contactFormSend } from './contact-form';
+import { socialLoginSettingsFetch } from './social-login-settings';
 
 import {
   accountFetch,
@@ -44,6 +52,8 @@ import {
   accountSavedCreditCardDelete
 } from './account';
 
+import { termsFetch } from './terms';
+
 export default combineEpics(
   userNewsletter,
   productsFetch,
@@ -55,6 +65,11 @@ export default combineEpics(
   settingsMatrixFetch,
   prepressDownloadFetch,
   userSignIn,
+  userSignUp,
+  userSocialSignIn,
+  userSocialSignUp,
+  userLogOut,
+  userAuthValidate,
   cartBasicFetch,
   cartFetch,
   cartAddFetch,
@@ -71,10 +86,12 @@ export default combineEpics(
   accountFetch,
   accountAddressFetch,
   accountUpdate,
+  socialLoginSettingsFetch,
   accountAddressCreate,
   accountAddressDelete,
   accountSavedCreditCardFetch,
   accountSavedCreditCardDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
+  termsFetch,
 );

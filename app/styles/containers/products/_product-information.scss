@@ -1,8 +1,5 @@
 .container-productInformation {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 6.5rem;
-  overflow-y: hidden;
+  margin-bottom: 4rem;
 
   .atm-tab-active {
     background-color: $color-white;
@@ -31,7 +28,7 @@
     }
 
     &-image {
-      align-self: center;
+      //align-self: center;
       display: flex;
       flex: 0 0 auto;
 
@@ -48,7 +45,10 @@
     &-text {
       display: flex;
       flex-direction: column;
-      padding: 0 0 0 3rem;
+      padding: 1rem;
+      @include lg {
+        padding: 0 0 0 3rem;
+      }
       .card-productInformation-title {
         color: $color-almostBlack;
         font-family: $font-family-nunito-regular;

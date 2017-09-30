@@ -310,3 +310,23 @@
     }
   }
 }
+
+.org-search-page {
+  margin-top: 3rem;
+  @include lg  {
+    margin-top: 2rem;
+  }
+  .gsc-input-box {
+    height: 34px;
+  }
+  .cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2 {
+    width: initial!important;
+    height: initial!important;
+    padding: 9px 34px;
+    margin-top: 3px;
+  }
+  .gsc-control-cse {
+    //border-color: transparent;
+    //background-color: transparent;
+  }
+}
