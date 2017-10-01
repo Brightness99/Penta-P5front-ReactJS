@@ -14,6 +14,7 @@ import {
   userSocialSignUp } from './user';
 import { productsFetch } from './products';
 import { blogFetch } from './blog';
+import { printiPressFetch } from './printi-press';
 import {
   settingsFetch,
   settingsOptionsFetch,
@@ -70,6 +71,7 @@ export default combineEpics(
   userSocialSignUp,
   userLogOut,
   userAuthValidate,
+  printiPressFetch,
   cartBasicFetch,
   cartFetch,
   cartAddFetch,
