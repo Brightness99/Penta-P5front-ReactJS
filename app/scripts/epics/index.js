@@ -14,6 +14,7 @@ import {
   userSocialSignUp } from './user';
 import { productsFetch } from './products';
 import { blogFetch } from './blog';
+import { glossarySlugFetch, glossaryFetch } from './glossary';
 import {
   settingsFetch,
   settingsOptionsFetch,
@@ -58,6 +59,8 @@ export default combineEpics(
   userNewsletter,
   productsFetch,
   blogFetch,
+  glossarySlugFetch,
+  glossaryFetch,
   settingsFetch,
   settingsOptionsFetch,
   settingsSourceFetch,
