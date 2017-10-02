@@ -55,7 +55,7 @@ export class ProductOpinionsBlock extends React.Component {
     return (
       <ul className="opinion-stars">
         {Array.from([1, 2, 3, 4, 5], (value) => (
-          <li className={cx('opinion-stars-item', value <= stars && 'opinion-stars-item-filled')}>
+          <li className={cx('opinion-stars-item', value <= stars && 'opinion-stars-item-filled')} key={value}>
             <StarIcon />
           </li>
         ))}
@@ -87,9 +87,7 @@ export class ProductOpinionsBlock extends React.Component {
       .sort((a, b) => b - a)
       .map((item) => (
         <div key={`opinons-stars-${item}`} className="opinions-percentual-stars">
-          <ul className="opinion-stars">
-            {this.renderStars(item)}
-          </ul>
+          {this.renderStars(item)}
           {this.loaderStars(stars[item])}
           <p className="opinions-star-number">{stars[item] || 0}</p>
         </div>
@@ -105,7 +103,7 @@ export class ProductOpinionsBlock extends React.Component {
         <div
           className="linePercentual"
           style={{
-            width: `${(item * 100) / opinions.count}%`
+            width: `${(item * 100) / opinions.count}%`,
           }}
         />
       </div>
@@ -160,9 +158,9 @@ export class ProductOpinionsBlock extends React.Component {
 
     return (
       <div className="box-opinions">
-        <p className="opinion-textEvaluation">
+        <div className="opinion-textEvaluation">
           {`${locale.GENERAL_REVIEW}: `}{this.renderStars(Math.round(parseFloat(opinions.avgNumber)))}{` ${vsprintf(locale.TOTAL_REVIEWS, opinions.count)}.`}
-        </p>
+        </div>
         {this.renderListTotalOpinions()}
       </div>
     );
