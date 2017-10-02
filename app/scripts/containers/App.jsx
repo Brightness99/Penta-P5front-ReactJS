@@ -16,6 +16,7 @@ import Products from 'containers/Products';
 import Authentication from 'containers/Authentication';
 import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
+import ArtProposal from 'containers/ArtProposal';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Upload from 'containers/Upload';
@@ -111,6 +112,7 @@ export class App extends React.Component {
                       <Route path="/indicacoes" component={Referral} />
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
+                      <Route exact path="/proposta-de-arte" component={ArtProposal} />
                       <Route exact path="/gabaritos" component={Gabaritos} />
                       <Route exact path="/modelos" component={Templateslp} />
                       <Route component={Error404} />
