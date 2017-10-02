@@ -47,12 +47,12 @@ export class Products extends React.Component {
         screenSize,
       },
       products: {
-        product,
-        categories,
-        opinions,
+        product: {
+          title,
+        },
         isRunning,
         isLoaded,
-      }
+      },
     } = this.props;
 
     const breadcrumb = [
@@ -61,7 +61,7 @@ export class Products extends React.Component {
         url: '/',
       },
       {
-        title: product.title,
+        title,
       },
     ];
 
@@ -72,7 +72,7 @@ export class Products extends React.Component {
     return (
       <div>
         {!isMobile(screenSize) && <BreadcrumbsBlock links={breadcrumb} />}
-        <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
+        <ProductHighlightsBlock />
         <ProductInformationBlock />
         <ProductTutorialsBlock />
         <ProductWarrantyBlock />
@@ -80,7 +80,7 @@ export class Products extends React.Component {
         <GraphicPlantBlock />
         <CustomersRelyBlock />
         <BlogBlock />
-        <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
+        <ProductOpinionsBlock />
         <ProductDetailsBlock />
         <ProductBannerBlock />
       </div>
