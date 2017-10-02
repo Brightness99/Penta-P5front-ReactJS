@@ -52,10 +52,7 @@ export class Products extends React.Component {
         opinions,
         isRunning,
         isLoaded,
-      },
-      locale: {
-        advantages,
-      },
+      }
     } = this.props;
 
     const breadcrumb = [
@@ -77,15 +74,13 @@ export class Products extends React.Component {
         {!isMobile(screenSize) && <BreadcrumbsBlock links={breadcrumb} />}
         <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
         <ProductInformationBlock />
-        <div>
-          <ProductTutorialsBlock />
-          <ProductWarrantyBlock />
-          <BenefitsBlock screenSize={screenSize} advantages={advantages} />
-          <GraphicPlantBlock />
-          <CustomersRelyBlock />
-          <BlogBlock />
-          <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
-        </div>
+        <ProductTutorialsBlock />
+        <ProductWarrantyBlock />
+        <BenefitsBlock />
+        <GraphicPlantBlock />
+        <CustomersRelyBlock />
+        <BlogBlock />
+        <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
         <ProductDetailsBlock />
         <ProductBannerBlock />
       </div>
