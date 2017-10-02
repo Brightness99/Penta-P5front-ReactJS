@@ -1,24 +1,29 @@
 // @flow
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import Loading from 'components/Loading';
+import { accountOrderFetch } from 'actions';
 import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, CardsIcon, RepurchaseIcon, WatchIcon } from 'components/Icons';
-
+import cx from 'classnames';
 
 type Props = {
   screenSize: string,
-};
-
-type State = {
-  secondStep: boolean,
+  account: {},
+  dispatch: () => {},
 };
 
 export class OrderList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      secondStep: false,
-    };
+
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountOrderFetch());
   }
 
   static defaultProps = {
@@ -29,151 +34,112 @@ export class OrderList extends React.Component {
   state: State;
 
   showDetails = () => {
-    const { secondStep } = this.state;
-    this.setState({
-      secondStep: !secondStep,
-    });
+    
   }
 
-  renderMobile() {
-    return (
-      <div className="container-myorder">
-        <div className="container">
-          <h2 className="title-myorder">Minha conta</h2>
-          <h3 className="subtitle-myorder">Meus pedidos</h3>
-          <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
-          <div className="box-detailsOrder pendingPayment">
-            <div className="box-firstPart">
-              <div>
-                <p className="title-myorderMobile">Pedido</p>
-                <p className="subtitle-myorderMobile">Nº 210.016</p>
-              </div>
-            </div>
-            <span className="detach" />
-            <div className="box-secondPart">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><Clipboard /></i>
-                </div>
-                <div>
-                  <p className="title-secondPart">Itens do pedido</p>
-                  <p className="txt-secondPart">4 produtos</p>
-                </div>
-              </div>
-              <div className="box-statusMobile">
-                <div className="box-secondPart-mobile">
-                  <div>
-                    <i><ExclamationMark /></i>
-                  </div>
-                  <div>
-                    <p className="title-statusMobile">status</p>
-                    <p className="subtitle-statusMobile">Aguardando pagamento</p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><CodeBar /></i>
-                  <span>imprimir boleto</span>
-                </Link>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><Receipt /></i>
-                  <span>enviar comprovante</span>
-                </Link>
-                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
-              </div>
-            </div>
-          </div>
+  renderItems() {
+    const { account: { orders }, screenSize } = this.props;
 
-          <div className="box-detailsOrder inTransport">
-            <div className="box-firstPart">
-              <div>
-                <p className="title-myorderMobile">Pedido</p>
-                <p className="subtitle-myorderMobile">Nº 210.016</p>
-              </div>
-            </div>
-            <span className="detach" />
-            <div className="box-secondPart">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><Clipboard /></i>
-                </div>
-                <div>
-                  <p className="title-secondPart">Itens do pedido</p>
-                  <p className="txt-secondPart">4 produtos</p>
-                </div>
-              </div>
-              <div className="box-statusMobile">
-                <div className="box-secondPart-mobile">
-                  <div>
-                    <i><WatchIcon /></i>
-                  </div>
-                  <div>
-                    <p className="title-statusMobile">status</p>
-                    <p className="subtitle-statusMobile">Em transporte</p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><CodeBar /></i>
-                  <span>acompanhar pedido</span>
-                </Link>
-                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
-              </div>
-            </div>
-          </div>
+    if (orders.list.length <= 0) {
+      return <p>There are no orders</p>;
+    }
 
-          <div className="box-detailsOrder delivered">
-            <div className="box-firstPart">
-              <div>
-                <p className="title-myorderMobile">Pedido</p>
-                <p className="subtitle-myorderMobile">Nº 210.016</p>
-              </div>
-            </div>
-            <span className="detach" />
-            <div className="box-secondPart">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><Clipboard /></i>
-                </div>
-                <div>
-                  <p className="title-secondPart">Itens do pedido</p>
-                  <p className="txt-secondPart">4 produtos</p>
-                </div>
-              </div>
-              <div className="box-statusMobile">
-                <div className="box-secondPart-mobile">
-                  <div>
-                    <i><CodeBar /></i>
-                  </div>
-                  <div>
-                    <p className="title-statusMobile">status</p>
-                    <p className="subtitle-statusMobile">Entregue</p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><CodeBar /></i>
-                  <span>imprimir boleto</span>
-                </Link>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><Receipt /></i>
-                  <span>enviar comprovante</span>
-                </Link>
-                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
-              </div>
+    if (isMobile(screenSize)) {
+      return orders.list.map((item) => (
+        <div className="box-detailsOrder delivered" key={item.info.id}>
+          <div className="box-firstPart">
+            <div>
+              <p className="title-myorderMobile">Pedido</p>
+              <p className="subtitle-myorderMobile">Nº {item.info.id}</p>
             </div>
           </div>
-          <button className="btn-default btn-third btn-xs">carregar mais pedidos (4)</button>
+          <span className="detach" />
+          <div className="box-secondPart">
+            <div className="box-secondPart-mobile">
+              <div>
+                <i><Clipboard /></i>
+              </div>
+              <div>
+                <p className="title-secondPart">Itens do pedido</p>
+                <p className="txt-secondPart">{item.items_label}</p>
+              </div>
+            </div>
+            <div className="box-statusMobile">
+              <div className="box-secondPart-mobile">
+                <div>
+                  <i><CodeBar /></i>
+                </div>
+                <div>
+                  <p className="title-statusMobile">{item.status_label}</p>
+                  <p className="subtitle-statusMobile">{item.status_value}</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+                <i><CodeBar /></i>
+                <span>{item.actions.invoice.label}</span>
+              </Link>
+              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+                <i><Receipt /></i>
+                <span>{item.actions.upload.label}</span>
+              </Link>
+              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">{item.actions.details.label}</Link>
+            </div>
+          </div>
+        </div>
+      ));
+    }
+
+    return orders.list.map((item) => (
+      <div className={cx('box-detailsOrder', {
+        delivered: item.status_value === 'Em andamento',
+        pendingPayment: item.status_value === 'Aguardando pagamento',
+        inTransport: item.status_value === ''
+      })} key={item.info.id}>
+        <div className="box-firstPart">
+          <div>
+            <p>{item.info.id}</p>
+          </div>
+          <div>
+            <p>{item.date_value}</p>
+          </div>
+          <div className="flagOrder">
+            <p>{item.status_value}</p>
+          </div>
+          <div className="box-icons">
+            <div className="icons">
+              <Link to="#" className="btn-icons">
+                {item.actions.invoice.label}
+              </Link>
+              <Link to="#" className="btn-icons">
+                {item.actions.upload.label}
+              </Link>
+            </div>
+            <Link to={`/minha-conta/pedidos/${item.info.id}`} className="icons align-text" onClick={this.showDetails}>{item.actions.details.label}</Link>
+          </div>
+        </div>
+        <div className="box-secondPart">
+          <div className="box-images">
+            <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
+            <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
+            <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
+          </div>
+          <div>
+            <p className="title-secondPart">Itens do pedido</p>
+            <p className="txt-secondPart">{item.items_label}</p>
+          </div>
+          <div>
+            <p className="title-secondPart">Valor total</p>
+            <p className="txt-secondPart">R$ {item.info.total_price}</p>
+          </div>
         </div>
       </div>
-    );
+    ));
   }
 
-  renderDesktop() {
-    const { secondStep } = this.state;
+  render() {
+    const { account: { orders }, screenSize } = this.props;
 
     const breadcrumb = [
       {
@@ -190,144 +156,31 @@ export class OrderList extends React.Component {
     ];
     return (
       <div className="container-myorder">
-        <Breadcrumbs links={breadcrumb} />
+        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h2>Minha conta</h2>
         <h3 className="subtitle-myorder">Meus pedidos</h3>
         <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
-        <ul className="box-tableOrder">
+        {!isMobile(screenSize) && (<ul className="box-tableOrder">
           <li>Nº do pedido</li>
           <li>Realizado em</li>
           <li>Status</li>
           <li>Ações</li>
-        </ul>
-        <div className="box-detailsOrder delivered">
-          <div className="box-firstPart">
-            <div>
-              <p>483093</p>
-            </div>
-            <div>
-              <p>30/08/2016</p>
-            </div>
-            <div className="flagOrder">
-              <p>Pedido entregue</p>
-            </div>
-            <div className="box-icons">
-              <div className="icons">
-                <Link to="#" className="btn-icons">
-                  <DocumentDownload />
-                </Link>
-                <Link to="#" className="btn-icons">
-                  <RepurchaseIcon />
-                </Link>
-              </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
-            </div>
-          </div>
-          {secondStep && (<div className="box-secondPart">
-            <div className="box-images">
-              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
-            </div>
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">3 produtos</p>
-            </div>
-            <div>
-              <p className="title-secondPart">Valor total</p>
-              <p className="txt-secondPart">R$ 2.050,30</p>
-            </div>
-          </div>)}
-        </div>
-        <div className="box-detailsOrder pendingPayment">
-          <div className="box-firstPart">
-            <div>
-              <p>483093</p>
-            </div>
-            <div>
-              <p>30/08/2016</p>
-            </div>
-            <div className="flagOrder">
-              <p>Aguardando pagamento</p>
-            </div>
-            <div className="box-icons">
-              <div className="icons">
-                <Link to="#" className="btn-icons">
-                  <CodeBar />
-                </Link>
-                <Link to="#" className="btn-icons">
-                  <Receipt />
-                </Link>
-              </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
-            </div>
-          </div>
-          {secondStep && (<div className="box-secondPart">
-            <div className="box-images">
-              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
-            </div>
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">3 produtos</p>
-            </div>
-            <div>
-              <p className="title-secondPart">Valor total</p>
-              <p className="txt-secondPart">R$ 2.050,30</p>
-            </div>
-          </div>)}
-        </div>
-        <div className="box-detailsOrder inTransport">
-          <div className="box-firstPart">
-            <div>
-              <p>483093</p>
-            </div>
-            <div>
-              <p>30/08/2016</p>
-            </div>
-            <div className="flagOrder">
-              <p>Em transporte</p>
-            </div>
-            <div className="box-icons">
-              <div className="icons">
-                <Link to="#" className="btn-icons">
-                  <Receipt />
-                </Link>
-                <Link to="#" className="btn-icons">
-                  <RepurchaseIcon />
-                </Link>
-              </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
-            </div>
-          </div>
-          {secondStep && (<div className="box-secondPart">
-            <div className="box-images">
-              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
-            </div>
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">3 produtos</p>
-            </div>
-            <div>
-              <p className="title-secondPart">Valor total</p>
-              <p className="txt-secondPart">R$ 2.050,30</p>
-            </div>
-          </div>)}
-        </div>
+        </ul>)}
+        {!orders.isLoaded || orders.isRunning ? <Loading /> : this.renderItems()}
       </div>
     );
   }
-
-  render() {
-    const { screenSize } = this.props;
-
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
-  }
 }
 
-export default OrderList;
+function mapStateToProps(state) {
+  return {
+    screenSize: state.app.screenSize,
+    account: state.account,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderList);
