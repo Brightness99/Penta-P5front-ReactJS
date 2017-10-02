@@ -80,9 +80,7 @@ export class Products extends React.Component {
         <GraphicPlantBlock />
         <CustomersRelyBlock />
         <BlogBlock />
-        <div>
-          <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
-        </div>
+        <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
         <ProductDetailsBlock />
         <ProductBannerBlock />
       </div>
