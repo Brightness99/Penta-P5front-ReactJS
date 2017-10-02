@@ -14,6 +14,7 @@ export * from './products';
 export * from './settings';
 export * from './contact-form';
 export * from './account';
+export * from './policy';
 export * from './social-login-settings';
 export * from './terms';
 export * from './header';

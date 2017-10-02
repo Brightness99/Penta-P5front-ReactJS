@@ -54,6 +54,7 @@ import {
   accountOrderFetch,
 } from './account';
 
+import { policyFetch } from './policy';
 import { termsFetch } from './terms';
 
 export default combineEpics(
@@ -96,6 +97,7 @@ export default combineEpics(
   accountNotificationFetch,
   accountNotificationUpdate,
   accountOrderFetch,
+  policyFetch,
   termsFetch,
   productCategoriesFetch
 );
