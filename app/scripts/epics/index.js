@@ -53,6 +53,7 @@ import {
   accountSavedCreditCardDelete
 } from './account';
 
+import { policyFetch } from './policy';
 import { termsFetch } from './terms';
 
 export default combineEpics(
@@ -94,6 +95,7 @@ export default combineEpics(
   accountSavedCreditCardDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
+  policyFetch,
   termsFetch,
   productCategoriesFetch
 );
