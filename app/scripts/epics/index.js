@@ -13,6 +13,7 @@ import {
   userSocialSignIn,
   userSocialSignUp } from './user';
 import { productsFetch } from './products';
+import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
 import {
   settingsFetch,
@@ -95,5 +96,6 @@ export default combineEpics(
   accountNotificationFetch,
   accountNotificationUpdate,
   policyFetch,
-  termsFetch
+  termsFetch,
+  productCategoriesFetch
 );

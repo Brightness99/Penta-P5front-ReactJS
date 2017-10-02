@@ -1,0 +1,15 @@
+.check-button {
+    padding: 1.0rem 4.0rem;
+    position: relative;
+    line-height: 2rem;
+    border-radius: 2px;
+    background: transparent;
+    white-space: nowrap;
+    svg {
+        position: absolute;
+        width: 2.0rem;
+        height: 2.0rem;
+        top: 1.0rem;
+        left: 1.0rem;
+    }
+}
