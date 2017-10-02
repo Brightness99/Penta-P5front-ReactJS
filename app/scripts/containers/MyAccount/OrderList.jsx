@@ -8,7 +8,7 @@ import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Loading from 'components/Loading';
 import { accountOrderFetch } from 'actions';
 import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, CardsIcon, RepurchaseIcon, WatchIcon } from 'components/Icons';
-
+import cx from 'classnames';
 
 type Props = {
   screenSize: string,
@@ -16,17 +16,7 @@ type Props = {
   dispatch: () => {},
 };
 
-type State = {
-  secondStep: boolean,
-};
-
 export class OrderList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      secondStep: false,
-    };
-  }
 
   shouldComponentUpdate = shouldComponentUpdate;
 
@@ -44,15 +34,11 @@ export class OrderList extends React.Component {
   state: State;
 
   showDetails = () => {
-    const { secondStep } = this.state;
-    this.setState({
-      secondStep: !secondStep,
-    });
+    
   }
 
   renderItems() {
     const { account: { orders }, screenSize } = this.props;
-    const { secondStep } = this.state;
 
     if (orders.list.length <= 0) {
       return <p>There are no orders</p>;
@@ -60,11 +46,11 @@ export class OrderList extends React.Component {
 
     if (isMobile(screenSize)) {
       return orders.list.map((item) => (
-        <div className="box-detailsOrder delivered" key={item.id}>
+        <div className="box-detailsOrder delivered" key={item.info.id}>
           <div className="box-firstPart">
             <div>
               <p className="title-myorderMobile">Pedido</p>
-              <p className="subtitle-myorderMobile">Nº {item.id}</p>
+              <p className="subtitle-myorderMobile">Nº {item.info.id}</p>
             </div>
           </div>
           <span className="detach" />
@@ -75,7 +61,7 @@ export class OrderList extends React.Component {
               </div>
               <div>
                 <p className="title-secondPart">Itens do pedido</p>
-                <p className="txt-secondPart">{item.item_count} produtos</p>
+                <p className="txt-secondPart">{item.items_label}</p>
               </div>
             </div>
             <div className="box-statusMobile">
@@ -84,21 +70,21 @@ export class OrderList extends React.Component {
                   <i><CodeBar /></i>
                 </div>
                 <div>
-                  <p className="title-statusMobile">status</p>
-                  <p className="subtitle-statusMobile">Entregue</p>
+                  <p className="title-statusMobile">{item.status_label}</p>
+                  <p className="subtitle-statusMobile">{item.status_value}</p>
                 </div>
               </div>
             </div>
             <div>
               <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
                 <i><CodeBar /></i>
-                <span>imprimir boleto</span>
+                <span>{item.actions.invoice.label}</span>
               </Link>
               <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
                 <i><Receipt /></i>
-                <span>enviar comprovante</span>
+                <span>{item.actions.upload.label}</span>
               </Link>
-              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
+              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">{item.actions.details.label}</Link>
             </div>
           </div>
         </div>
@@ -106,30 +92,34 @@ export class OrderList extends React.Component {
     }
 
     return orders.list.map((item) => (
-      <div className="box-detailsOrder delivered" key={item.id}>
+      <div className={cx('box-detailsOrder', {
+        delivered: item.status_value === 'Em andamento',
+        pendingPayment: item.status_value === 'Aguardando pagamento',
+        inTransport: item.status_value === ''
+      })} key={item.info.id}>
         <div className="box-firstPart">
           <div>
-            <p>{item.id}</p>
+            <p>{item.info.id}</p>
           </div>
           <div>
-            <p>{moment(new Date(item.created_at)).format('DD/MM/YYYY')}</p>
+            <p>{item.date_value}</p>
           </div>
           <div className="flagOrder">
-            <p>Pedido entregue</p>
+            <p>{item.status_value}</p>
           </div>
           <div className="box-icons">
             <div className="icons">
               <Link to="#" className="btn-icons">
-                <DocumentDownload />
+                {item.actions.invoice.label}
               </Link>
               <Link to="#" className="btn-icons">
-                <RepurchaseIcon />
+                {item.actions.upload.label}
               </Link>
             </div>
-            <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
+            <Link to={`/minha-conta/pedidos/${item.info.id}`} className="icons align-text" onClick={this.showDetails}>{item.actions.details.label}</Link>
           </div>
         </div>
-        {secondStep && (<div className="box-secondPart">
+        <div className="box-secondPart">
           <div className="box-images">
             <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
             <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
@@ -137,19 +127,18 @@ export class OrderList extends React.Component {
           </div>
           <div>
             <p className="title-secondPart">Itens do pedido</p>
-            <p className="txt-secondPart">{item.item_count} produtos</p>
+            <p className="txt-secondPart">{item.items_label}</p>
           </div>
           <div>
             <p className="title-secondPart">Valor total</p>
-            <p className="txt-secondPart">R$ {item.total_price}</p>
+            <p className="txt-secondPart">R$ {item.info.total_price}</p>
           </div>
-        </div>)}
+        </div>
       </div>
     ));
   }
 
   render() {
-    const { secondStep } = this.state;
     const { account: { orders }, screenSize } = this.props;
 
     const breadcrumb = [
@@ -171,12 +160,12 @@ export class OrderList extends React.Component {
         <h2>Minha conta</h2>
         <h3 className="subtitle-myorder">Meus pedidos</h3>
         <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
-        <ul className="box-tableOrder">
+        {!isMobile(screenSize) && (<ul className="box-tableOrder">
           <li>Nº do pedido</li>
           <li>Realizado em</li>
           <li>Status</li>
           <li>Ações</li>
-        </ul>
+        </ul>)}
         {!orders.isLoaded || orders.isRunning ? <Loading /> : this.renderItems()}
       </div>
     );

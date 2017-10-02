@@ -349,7 +349,7 @@ export function accountNotificationUpdate(action$) {
 export function accountOrderFetch(action$) {
   return action$.ofType(AccountConstants.ACCOUNT_ORDER_FETCH_REQUEST)
     .switchMap(() => {
-      const endpoint = '/v2/customers/orders';
+      const endpoint = '/v2/customers/orders?order=desc&sort=created_at&page=1&per_page=10';
       return rxAjax({
         endpoint,
         method: 'GET',
