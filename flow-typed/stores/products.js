@@ -29,6 +29,19 @@ declare type ProductStoreInformationsType = {
   utilizations: ProductStoreInformationsChildrenType[],
 };
 
+declare type YouTubeTutorialVideo = {
+  url: string,
+  width: string,
+  height: string,
+  ratio: string,
+  title: string,
+  authorname: string,
+  authorurl: string,
+  html: string,
+  thumbnail: string,
+  responsive: string,
+};
+
 declare type ProductsStoreType = {
   isRunning: boolean,
   isReady: boolean,
