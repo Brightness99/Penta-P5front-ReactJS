@@ -21,6 +21,11 @@
     cursor: pointer;
   }
 
+  &--blue {
+    background-color: $color-printi-blue;
+    cursor: pointer;
+  }
+
   &:hover {
     color: $color-white;
     text-decoration: none;
