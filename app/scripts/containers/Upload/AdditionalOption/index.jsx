@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { PlayCircleIcon } from 'components/Icons';
-import { RadioButton } from 'components/Input';
 
 type Props = {
   title: string,
@@ -10,16 +9,13 @@ type Props = {
 };
 
 const AdditionalOption = (props: Props) => {
-  console.log('propriedades de additional option:');
-  console.log(props);
-
-  const renderOptions = () => {
-    return props.options.map(
+  const renderOptions = () => (
+    props.options.map(
       (option) => (
-        <p>{option.label}</p>
+        <p key={option.label}>{option.label}</p>
       )
-    );
-  };
+    )
+  );
 
   return (
     <div className="container-midSide">
