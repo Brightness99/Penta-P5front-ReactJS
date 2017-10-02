@@ -42,7 +42,8 @@ type Props = {
   dispatch: () => {},
   router: RouterStore,
   locale: {},
-  isAuthorized: boolean
+  isAuthorized: boolean,
+  headerConfig: {}
 };
 
 export class App extends React.Component {
@@ -68,7 +69,7 @@ export class App extends React.Component {
   };
 
   render() {
-    const { app, dispatch, router, cart, isAuthorized } = this.props;
+    const { app, dispatch, router, cart, isAuthorized, headerConfig } = this.props;
 
     let html = (<div className="loader">Loading</div>);
 
@@ -83,7 +84,7 @@ export class App extends React.Component {
                 <div key="app" className="app">
                   <Header
                     screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count}
-                    isAuthorized={isAuthorized}
+                    isAuthorized={isAuthorized} config={headerConfig}
                   />
                   <main className="app__main">
                     <Switch>
@@ -136,6 +137,7 @@ function mapStateToProps(state) {
     router: state.router,
     locale: state.locale,
     isAuthorized: state.user.isAuthorized,
+    headerConfig: state.header,
   };
 }
 

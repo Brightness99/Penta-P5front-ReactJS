@@ -21,6 +21,7 @@ type Props = {
   dispatch: () => {},
   totalCartItems: number,
   isAuthorized: boolean,
+  config: {}
 };
 
 type State = {
@@ -110,7 +111,7 @@ export class Header extends React.Component {
   };
 
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
     const { activePane } = this.state;
 
     return (
@@ -133,6 +134,7 @@ export class Header extends React.Component {
         <Menu
           screenSize={screenSize}
           isHidden={activePane !== 'menu'}
+          categories={config.productCategories.categories}
           handleClose={this.handlePaneHide}
         />
         <MyAccount
@@ -147,7 +149,7 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -189,9 +191,11 @@ export class Header extends React.Component {
               <button className="atm-header-icon-button">
                 <MyAccountIcon />
               </button>
-              <MyAccount screenSize={screenSize}
-                         isAuthorized={isAuthorized}
-                         handleLogOut={this.handleLogOut} />
+              <MyAccount
+                screenSize={screenSize}
+                isAuthorized={isAuthorized}
+                handleLogOut={this.handleLogOut}
+              />
             </div>
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           </div>
@@ -204,6 +208,7 @@ export class Header extends React.Component {
         <Products
           screenSize={screenSize}
           isHidden={activePane !== 'products'}
+          categories={config.productCategories.categories}
           handleClose={this.handlePaneHide}
         />
       </header>
