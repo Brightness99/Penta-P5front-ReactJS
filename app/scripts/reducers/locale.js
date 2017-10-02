@@ -86,6 +86,14 @@ const missingLocale = {
       ],
     },
     page: {
+      home: {
+        blog: {
+          TITLE: 'Últimas do Blog',
+          TO_READ: 'para ler',
+          TIME_MEASURE: 'min',
+          DATE_FORMAT: 'D MMM',
+        },
+      },
       product_settings: {
         source: {
           TITLE: 'Escolha a forma de criar seu produto',
