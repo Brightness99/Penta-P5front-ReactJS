@@ -13,6 +13,7 @@ import {
   userSocialSignIn,
   userSocialSignUp } from './user';
 import { productsFetch } from './products';
+import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
 import { glossarySlugFetch, glossaryFetch } from './glossary';
 import {
@@ -50,9 +51,11 @@ import {
   accountNotificationFetch,
   accountNotificationUpdate,
   accountSavedCreditCardFetch,
-  accountSavedCreditCardDelete
+  accountSavedCreditCardDelete,
+  accountOrderFetch,
 } from './account';
 
+import { policyFetch } from './policy';
 import { termsFetch } from './terms';
 
 export default combineEpics(
@@ -96,5 +99,8 @@ export default combineEpics(
   accountSavedCreditCardDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
+  accountOrderFetch,
+  policyFetch,
   termsFetch,
+  productCategoriesFetch
 );

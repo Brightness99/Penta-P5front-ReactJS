@@ -2,24 +2,26 @@
 
 import React from 'react';
 import cx from 'classnames';
-
+import { connect } from 'react-redux';
+import { vsprintf } from 'sprintf-js';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { StarIcon } from 'components/Icons';
+import { BlockTitle } from 'atoms/Titles';
 
 type Props = {
-  className: string,
+  screenSize: AppStoreType.screenSize,
   locale: {},
-  button?: typeof React.Component,
-  screenSize: string,
   opinions: {},
+  product: {},
 };
 
 type State = {
   load: number,
   visible: number,
-}
+};
 
-export default class ProductOpinionsBlock extends React.Component {
-  constructor(props) {
+export class ProductOpinionsBlock extends React.Component {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -28,13 +30,11 @@ export default class ProductOpinionsBlock extends React.Component {
     };
   }
 
-  static defaultProps = {
-    screenSize: 'xs',
-  }
+  shouldComponentUpdate = shouldComponentUpdate;
 
-  props: Props;
+  static props: Props;
 
-  state: State;
+  static state: State;
 
   moreComments = () => {
     const { opinions: { list } } = this.props;
@@ -49,22 +49,16 @@ export default class ProductOpinionsBlock extends React.Component {
         visible: list.length,
       });
     }
-  }
+  };
 
-  renderStars = (stars: number) => (
-    Array.from({ length: 5 }, (v, k) => (
-      <li className={cx('opinion-stars-item', k + 1 <= stars && 'opinion-stars-item-filled')}>
-        <StarIcon />
-      </li>
-    ))
-  )
-
-  starSubtitle() {
-    const { opinions } = this.props;
-
+  renderStars(stars: number) {
     return (
       <ul className="opinion-stars">
-        {this.renderStars(opinions.avgNumber)}
+        {Array.from([1, 2, 3, 4, 5], (value) => (
+          <li className={cx('opinion-stars-item', value <= stars && 'opinion-stars-item-filled')} key={value}>
+            <StarIcon />
+          </li>
+        ))}
       </ul>
     );
   }
@@ -93,9 +87,7 @@ export default class ProductOpinionsBlock extends React.Component {
       .sort((a, b) => b - a)
       .map((item) => (
         <div key={`opinons-stars-${item}`} className="opinions-percentual-stars">
-          <ul className="opinion-stars">
-            {this.renderStars(item)}
-          </ul>
+          {this.renderStars(item)}
           {this.loaderStars(stars[item])}
           <p className="opinions-star-number">{stars[item] || 0}</p>
         </div>
@@ -105,45 +97,99 @@ export default class ProductOpinionsBlock extends React.Component {
 
   loaderStars(item = 0) {
     const { opinions } = this.props;
-    const percentual = (item * 100) / opinions.count;
 
     return (
       <div className="loader">
-        <div className={`linePercentual star-${percentual}`} />
+        <div
+          className="linePercentual"
+          style={{
+            width: `${(item * 100) / opinions.count}%`,
+          }}
+        />
+      </div>
+    );
+  }
+
+  renderOpinions() {
+    const { opinions, product, locale } = this.props;
+    const { visible, load } = this.state;
+
+    return (
+      <div className="box-opinions">
+        <div className="box-formOpinions">
+          <h5 className="opnions-subtitle">{locale.YOUR_OPINION}</h5>
+          <a
+            className="atm-button-rounded atm-button-rounded--blue"
+            href={`mailto:suporte@printi.com.br?subject=Avaliação do produto ${product.name}`}
+          >
+            {locale.SUBMIT_REVIEW}
+          </a>
+        </div>
+        <div className="container-boxOpinions">
+          {this.renderListOpinions()}
+          {opinions.list.length - visible > 0 &&
+            <button className="atm-button-transparent" onClick={this.moreComments}>
+              {locale.LOAD_MORE} ({opinions.list.length - visible > load ? load : opinions.list.length - visible })
+            </button>
+          }
+        </div>
+      </div>
+    );
+  }
+
+  renderMobile() {
+    const { opinions, locale } = this.props;
+
+    return (
+      <div className="box-opinions">
+        <div className="box-opinions--mobile">
+          <div className="box-opinions-total">{opinions.avgNumber.replace('.', ',')}</div>
+          <div className="box-opinions-stars">
+            {this.renderStars(Math.round(parseFloat(opinions.avgNumber)))}
+            <span>{opinions.count} {locale.REVIEWS}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderDesktop() {
+    const { opinions, locale } = this.props;
+
+    return (
+      <div className="box-opinions">
+        <div className="opinion-textEvaluation">
+          {`${locale.GENERAL_REVIEW}: `}{this.renderStars(Math.round(parseFloat(opinions.avgNumber)))}{` ${vsprintf(locale.TOTAL_REVIEWS, opinions.count)}.`}
+        </div>
+        {this.renderListTotalOpinions()}
       </div>
     );
   }
 
   render() {
-    const { opinions } = this.props;
-    const { visible, load } = this.state;
+    const { screenSize, locale } = this.props;
 
     return (
       <section className="container-opinions">
         <div className="container">
-          <h4 className="opinions-title">Mais opiniões</h4>
+          <BlockTitle>{locale.TITLE}</BlockTitle>
           <div className="container-boxOpinions">
-            <div className="box-opinions">
-              <h5 className="opinion-titleNumber"><span>94</span>% dos clientes recomendam este produto</h5>
-              <p className="opinion-textEvaluation">Avaliação geral: {this.starSubtitle()} de {opinions.count} avaliações.</p>
-              {this.renderListTotalOpinions()}
-            </div>
-            <div className="box-opinions">
-              <div className="box-formOpinions">
-                <h5 className="opnions-subtitle">E você, o que achou?</h5>
-                <form>
-                  <input type="text" className="input-text" placeholder="Envie a sua opinião..." />
-                  <input type="submit" className="btn-default btn-secondary btn-lg input-submit" name="opinions" value="Enviar" />
-                </form>
-              </div>
-              <div className="container-boxOpinions">
-                {this.renderListOpinions()}
-              </div>
-              {opinions.list.length - visible > 0 && <button className="btn-default btn-third btn-xs" onClick={this.moreComments}>carregar mais avaliações ({opinions.list.length - visible > load ? load : opinions.list.length - visible })</button>}
-            </div>
+            {isMobile(screenSize) ? this.renderMobile() : this.renderDesktop()}
+            {this.renderOpinions()}
           </div>
         </div>
       </section>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    screenSize: state.app.screenSize,
+    locale: state.locale.translate.page.product_landing_page.reviews,
+    opinions: state.products.opinions,
+    product: state.products.product,
+  };
+}
+
+export default connect(mapStateToProps)(ProductOpinionsBlock);

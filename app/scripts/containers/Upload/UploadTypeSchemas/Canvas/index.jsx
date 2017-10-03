@@ -29,14 +29,14 @@ export default class Canvas extends React.Component {
   }
 
   componentDidMount() {
-    const oStyle = document.createElement("link");
-    oStyle.type = "text/css";
-    oStyle.rel = "stylesheet";
+    const oStyle = document.createElement('link');
+    oStyle.type = 'text/css';
+    oStyle.rel = 'stylesheet';
     document.head.appendChild(oStyle);
     oStyle.href = '//dcl.cimpress.io/1.4.7/dcl.css';
 
-    const oScript = document.createElement("script");
-    oScript.type = "text/javascript";
+    const oScript = document.createElement('script');
+    oScript.type = 'text/javascript';
     oScript.onerror = this.handleError;
     oScript.onload = this.handleLoad;
     document.body.appendChild(oScript);
@@ -54,40 +54,40 @@ export default class Canvas extends React.Component {
               apiKey: '580de974cffe5feedb620793053d32354ff56e68b650c8400314c273f3d46172',
             },
             font: {
-              defaultFont: "Alegreya Sans",
+              defaultFont: 'Alegreya Sans',
               availableFonts: [
-                "Roboto",
-                "Alegreya",
-                "Alegreya Sans",
-                "Alfa Slab One",
-                "Amatic SC",
-                "Archivo Narrow",
-                "BenchNine",
-                "Bree Serif",
-                "Cherry Swash",
-                "Cookie",
-                "Courgette",
-                "Crete Round",
-                "EB Garamond",
-                "Gabriela",
-                "Great Vibes",
-                "Handlee",
-                "Life Savers",
-                "Marmelad",
-                "News Cycle",
-                "Noto Sans",
-                "Offside",
-                "Oleo Script",
-                "Patua One",
-                "Rancho",
-                "Satisfy",
-                "Slabo 27px",
-                "Stint Ultra Condensed",
-                "Text Me One",
-                "Yesteryear",
-              ]
-            }
-          }
+                'Roboto',
+                'Alegreya',
+                'Alegreya Sans',
+                'Alfa Slab One',
+                'Amatic SC',
+                'Archivo Narrow',
+                'BenchNine',
+                'Bree Serif',
+                'Cherry Swash',
+                'Cookie',
+                'Courgette',
+                'Crete Round',
+                'EB Garamond',
+                'Gabriela',
+                'Great Vibes',
+                'Handlee',
+                'Life Savers',
+                'Marmelad',
+                'News Cycle',
+                'Noto Sans',
+                'Offside',
+                'Oleo Script',
+                'Patua One',
+                'Rancho',
+                'Satisfy',
+                'Slabo 27px',
+                'Stint Ultra Condensed',
+                'Text Me One',
+                'Yesteryear',
+              ],
+            },
+          },
         },
         localization: {
           language: 'pt',
@@ -213,14 +213,14 @@ export default class Canvas extends React.Component {
                   },
                   fontSize: {
                     default: 'Tamanho da fonte',
-                  }
+                  },
                 },
                 color: {
                   providedColors: 'Cores padrão',
                   recentColors: 'Cores recentes',
                   canvasColors: 'Cores recentes',
                   customColor: 'Cores editadas',
-                }
+                },
               },
               widgets: {
                 addButtonTextField: 'Adicionar texto',
@@ -335,9 +335,9 @@ export default class Canvas extends React.Component {
               enabled: true,
               containerElement: '.sideImageBar__buttonContainer',
               template: () => {
-                const button = document.createElement('button'),
-                  icon = document.createElement('i'),
-                  span = document.createElement('span');
+                const button = document.createElement('button');
+                const icon = document.createElement('i');
+                const span = document.createElement('span');
 
                 button.setAttribute('class', 'sideImageBar__buttonContainer_button');
 
@@ -350,7 +350,7 @@ export default class Canvas extends React.Component {
 
                 return button;
               },
-            }
+            },
           },
           zoomStrategy: {
             resizeEnabled: false,
@@ -379,22 +379,22 @@ export default class Canvas extends React.Component {
             enabled: true,
             margin: false,
           },
-        }
+        },
       },
       surfaceSpecifications: {
         surfaces: [
           {
-            name: "UNIQUE1",
+            name: 'UNIQUE1',
             widthInMm: 186,
             heightInMm: 56,
-            processType: "Print",
+            processType: 'Print',
             trim: 3,
           },
           {
-            name: "UNIQUE2",
+            name: 'UNIQUE2',
             widthInMm: 186,
             heightInMm: 56,
-            processType: "Print",
+            processType: 'Print',
             trim: 3,
           },
         ],
@@ -404,27 +404,28 @@ export default class Canvas extends React.Component {
     if (isReady && isReady !== prevState.isReady) {
       global.designer.start(cimpressDesignerSettings)
       .then(
-        response => {
+        () => {
           this.setState({
             isToogleOn: false,
           });
         }
       );
     }
-
   }
 
   static props: Props;
 
+  static state: State;
+
   handleError = (oError) => {
-    throw new URIError("The script " + oError.target.src + " is not accessible.");
+    throw new URIError(`The script ${oError.target.src} is not accessible.`);
   };
 
   handleLoad = () => {
     this.setState({
       isReady: true,
     });
-  }
+  };
 
   render() {
     const { isReady, isToogleOn } = this.state;
@@ -433,24 +434,24 @@ export default class Canvas extends React.Component {
       <div className={`upload-container ${(isToogleOn) ? 'toogleOn' : 'toogleOff'}`}>
         <div className="upload-container-canvasCentralized">
           <div className="upload__canvasSchema">
-          {
-            !isReady ?
-            <Loading /> :
-            [
-              <TopMenuBar />,
-              <div className="upload__canvasSchema_mainAreaContainer">
-                <div className="upload__canvasSchema_sidebarContainer">
-                  <SideImageBar />
-                  <SideTextBar />
-                </div>
-                <div className="upload__canvasSchema_canvasContainer">
-                  <CanvasToolBar />
-                  <CanvasArea />
-                </div>
-              </div>,
-              <BottomMenuBar />
-            ]
-          }
+            {
+              !isReady
+                ? <Loading />
+                : [
+                  <TopMenuBar key="top-menu-bar" />,
+                  <div className="upload__canvasSchema_mainAreaContainer" key="upload__canvasSchema_mainAreaContainer">
+                    <div className="upload__canvasSchema_sidebarContainer">
+                      <SideImageBar />
+                      <SideTextBar />
+                    </div>
+                    <div className="upload__canvasSchema_canvasContainer">
+                      <CanvasToolBar />
+                      <CanvasArea />
+                    </div>
+                  </div>,
+                  <BottomMenuBar key="bottom-menu-bar" />,
+                ]
+            }
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@ import Products from 'containers/Products';
 import Authentication from 'containers/Authentication';
 import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
+import ArtProposal from 'containers/ArtProposal';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Upload from 'containers/Upload';
@@ -42,7 +43,8 @@ type Props = {
   dispatch: () => {},
   router: RouterStore,
   locale: {},
-  isAuthorized: boolean
+  isAuthorized: boolean,
+  headerConfig: {}
 };
 
 export class App extends React.Component {
@@ -68,7 +70,7 @@ export class App extends React.Component {
   };
 
   render() {
-    const { app, dispatch, router, cart, isAuthorized } = this.props;
+    const { app, dispatch, router, cart, isAuthorized, headerConfig } = this.props;
 
     let html = (<div className="loader">Loading</div>);
 
@@ -83,7 +85,7 @@ export class App extends React.Component {
                 <div key="app" className="app">
                   <Header
                     screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count}
-                    isAuthorized={isAuthorized}
+                    isAuthorized={isAuthorized} config={headerConfig}
                   />
                   <main className="app__main">
                     <Switch>
@@ -110,6 +112,7 @@ export class App extends React.Component {
                       <Route path="/indicacoes" component={Referral} />
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
+                      <Route exact path="/proposta-de-arte" component={ArtProposal} />
                       <Route exact path="/gabaritos" component={Gabaritos} />
                       <Route exact path="/modelos" component={Templateslp} />
                       <Route component={Error404} />
@@ -136,6 +139,7 @@ function mapStateToProps(state) {
     router: state.router,
     locale: state.locale,
     isAuthorized: state.user.isAuthorized,
+    headerConfig: state.header,
   };
 }
 
