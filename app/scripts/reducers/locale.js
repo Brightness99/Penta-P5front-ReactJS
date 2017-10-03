@@ -86,6 +86,14 @@ const missingLocale = {
       ],
     },
     page: {
+      home: {
+        blog: {
+          TITLE: 'Últimas do Blog',
+          TO_READ: 'para ler',
+          TIME_MEASURE: 'min',
+          DATE_FORMAT: 'D MMM',
+        },
+      },
       product_settings: {
         source: {
           TITLE: 'Escolha a forma de criar seu produto',
@@ -117,6 +125,16 @@ const missingLocale = {
           TITLE: 'Qualidade garantida. Não corra risco com seus produtos!',
           DESCRIPTION: 'A nossa satisfação é a sua satisfação. Não ficou satisfeito com a qualidade do material que recebeu? Nós vamos reimprimi-lo! Sem custos e sem burocracia.',
           BUTTON: 'Configure este produto',
+        },
+        reviews: {
+          TITLE: 'mais opiniões',
+          CLIENTS_REVIEWS: '% dos clientes recomendam este produto',
+          REVIEWS: 'avaliações',
+          YOUR_OPINION: 'E você, o que achou?',
+          GENERAL_REVIEW: 'Avaliação geral',
+          EMAIL_SUBJECT: 'Avaliação do produto',
+          LOAD_MORE: 'carregar mais avaliações',
+          TOTAL_REVIEWS: 'de %s avaliações',
         },
       },
     },

@@ -32,7 +32,7 @@ const AvailableStrategy = (props: Props) => {
         case 1:
           return {
             icon: [
-              <UploadSendLaterIcon />,
+              <UploadSendLaterIcon key="upload-send-later-icon" />,
             ],
             title: 'Enviar arte mais tarde',
             description: 'Você pode concluir seu pedido e enviar a arte mais tarde',
@@ -40,8 +40,8 @@ const AvailableStrategy = (props: Props) => {
         case 2:
           return {
             icon: [
-              <UploadUniqueFileIcon />,
-              <span>PDF</span>,
+              <UploadUniqueFileIcon key="upload-unique-file-icon" />,
+              <span key="upload-pdf">PDF</span>,
             ],
             title: 'Enviar arte agora',
             description: 'Enviar as artes da frente e do verso em um único arquivo',
@@ -49,8 +49,8 @@ const AvailableStrategy = (props: Props) => {
         case 3:
           return {
             icon: [
-              <UploadUniqueFileIcon />,
-              <span>PDF</span>,
+              <UploadUniqueFileIcon key="upload-unique-file-icon" />,
+              <span key="upload-pdf">PDF</span>,
             ],
             title: 'Enviar arte agora',
             description: 'Enviar as artes da frente e do verso em um único arquivo',
@@ -58,13 +58,13 @@ const AvailableStrategy = (props: Props) => {
         case 4:
           return {
             icon: [
-              <div className="splitIcon splitIcon-left">
+              <div className="splitIcon splitIcon-left" key="splitIcon-left">
                 <UploadUniqueFileIcon />
-                <span>Frente</span>
+                <span key="upload-frente">Frente</span>
               </div>,
-              <div className="splitIcon splitIcon-right">
+              <div className="splitIcon splitIcon-right" key="splitIcon-right">
                 <UploadUniqueFileIcon />
-                <span>Verso</span>
+                <span key="upload-verso">Verso</span>
               </div>,
             ],
             title: 'Dois arquivos',
@@ -73,8 +73,8 @@ const AvailableStrategy = (props: Props) => {
         case 5:
           return {
             icon: [
-              <UploadMultipleFilesIcon />,
-              <span>PDF</span>,
+              <UploadMultipleFilesIcon key="upload-multiple-file-icon" />,
+              <span key="upload-pdf">PDF</span>,
             ],
             title: 'Multiplos arquivos',
             description: 'Enviar arte em multiplos arquivos',
@@ -82,8 +82,8 @@ const AvailableStrategy = (props: Props) => {
         default:
           return {
             icon: [
-              <UploadMultipleFilesIcon />,
-              <span>PDF</span>,
+              <UploadMultipleFilesIcon key="upload-multiple-file-icon" />,
+              <span key="upload-pdf">PDF</span>,
             ],
             title: 'Multiplos arquivos',
             description: 'Enviar arte em multiplos arquivos',

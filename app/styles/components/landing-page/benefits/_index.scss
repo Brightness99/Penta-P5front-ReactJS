@@ -1,0 +1,135 @@
+.container-benefits{
+  margin-bottom: 4rem;
+  position: relative;
+
+  .container-benefitsCard{
+    align-self: center;
+    display:flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    margin-bottom: 4rem;
+    position: relative;
+
+    @include lg{
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .box-benefitsCard{
+      display: flex;
+      flex-direction: column;
+      width: 30rem;
+
+      .atm-printi-logo {
+        svg {
+          width: 15rem;
+        }
+      }
+
+      .benefitsCard {
+        @include center-child-flex;
+        background-color: $color-white;
+        color: #6a6f7a;
+        font-size: $font-size-xs;
+        height: 4rem;
+        margin: 0 1.2rem;
+        padding: 0 0.8rem;
+        z-index: 1;
+
+        @include lg {
+          font-size: $font-size-base;
+          margin: 0;
+          padding: 0 3rem;
+        }
+
+        &-title {
+          @include center-child-flex;
+          color: $color-almostBlack;
+          font-size: $font-size-base;
+          height: 12rem;
+          text-transform: uppercase;
+
+          @include lg {
+            height: 6rem;
+            margin-top: 6rem;
+          }
+        }
+
+        &-icon {
+          svg {
+            fill: $color-green;
+            width: 1.6rem;
+          }
+
+          &-close {
+            svg {
+              fill: $color-red;
+              width: 1.4rem;
+            }
+          }
+        }
+
+        &:nth-of-type(2n-1) {
+          background: #f9f9f9;
+        }
+      }
+
+      &-printi {
+        background-color: #f9f9f9;
+
+        @include lg {
+          box-shadow: 0 0.4rem 0.8rem 0 rgba(83, 117, 153, 0.5);
+          width: 39rem;
+          z-index: 2;
+        }
+
+        .benefitsCard {
+          &-icon {
+            justify-content: flex-start;
+
+            svg {
+              margin-right: 1.6rem;
+            }
+          }
+
+          &-title {
+            height: 12rem;
+            margin: 0;
+          }
+
+          &-btn {
+            height: 8rem;
+          }
+        }
+      }
+    }
+  }
+
+  sub{
+    @include center-child-flex;
+    color: $color-darkGray;
+    margin: 2rem 0;
+
+    @include lg {
+      position: absolute;
+      right: 8rem;
+      bottom: 6rem;
+      left: inherit;
+      margin-bottom: 0;
+    }
+  }
+
+  .atm-button-rounded {
+    margin-top: 1.6rem;
+    width: 100%;
+
+    @include lg {
+      margin-top: 0;
+      width: auto;
+    }
+  }
+
+  .slick-list {
+    overflow: visible;
+  }
+}
