@@ -1,0 +1,16 @@
+
+.template-glossary {
+  margin-bottom: 2rem;
+  .title-glossary {
+    color: $color-almostBlack;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-lg;
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+  .subtitle-glossary {
+    color: $color-lightGray;
+    font-family: $font-family-open-sans-light;
+    font-size: $font-size-base;
+  }
+}
