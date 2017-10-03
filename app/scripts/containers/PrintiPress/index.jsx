@@ -1,23 +1,34 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
+import { PrintiPressItem } from 'components/PrintiPressItem';
+import { printiPressFetch } from 'actions';
+import { Link } from 'react-router-dom';
 
 type Props = {
-  app: AppStore,
-  router: RouterStore,
-  locale: {},
-  dispatch: () => {},
+  screenSize: string,
+  pressFetch: () => void,
+  pressList: []
 };
 
 export class PrintiPress extends React.Component {
 
+  componentDidMount = () => {
+    const { pressFetch } = this.props;
+
+    if (typeof pressFetch !== 'function') {
+      return;
+    }
+
+    pressFetch();
+  };
+
   static props: Props;
 
   render() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize, pressList } = this.props;
 
     const breadcrumb = [
       {
@@ -37,138 +48,11 @@ export class PrintiPress extends React.Component {
             <h2 className="title-printi-press">Printi na imprensa</h2>
 
             <div className="org-printi-press">
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#"  className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
-              <Link to="#" className="mol-printi-press">
-                <div className="atm-content-printi-press">
-                  <img src={require('assets/media/images/img-exame.png')} alt="Contratar" />
-                  <div className="qrk-text-printi-press">
-                    <p className="title-content">Printi anuncia fusão com americana Vistaprint</p>
-                    {!isMobile(screenSize) &&
-                      <p className="text-content">A gráfica online Printi mira mercado publicitário. Startup tem sido procurada por empresas com budgets menores...</p>
-                    }
-                  </div>
-                </div>
-              </Link>
+              {
+                pressList.map((x) =>
+                  <PrintiPressItem item={x} key={x.id} />
+                 )
+              }
             </div>
             <div className="org-container-btn">
               <Link to="#" className="btn-default btn-third btn-xs">Carregar mais notícias (4)</Link>
@@ -180,12 +64,13 @@ export class PrintiPress extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { app: state.app };
-}
+const mapStateToProps = (state) => ({
+  screenSize: state.app.screenSize,
+  pressList: state.printiPress.press,
+});
 
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
+const mapDispatchToProps = (dispatch) => ({
+  pressFetch: () => dispatch(printiPressFetch()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrintiPress);
