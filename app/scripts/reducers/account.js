@@ -12,6 +12,7 @@ export const accountState = {
   savedCreditCards: {},
   notification: {},
   addresses: {},
+  selectedOrder: {},
 };
 
 export default {
@@ -274,6 +275,35 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        selectedOrder: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        selectedOrder: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_FAILURE](state) {
+      return {
+        ...state,
+        selectedOrder: {
+          ...state.selectedOrder,
+          isRunning: false,
+          isLoaded: true,
         },
       };
     },
