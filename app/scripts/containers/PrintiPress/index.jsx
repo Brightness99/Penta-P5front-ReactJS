@@ -50,7 +50,7 @@ export class PrintiPress extends React.Component {
             <div className="org-printi-press">
               {
                 pressList.map((x) =>
-                    <PrintiPressItem item={x} key={x.id} />
+                  <PrintiPressItem item={x} key={x.id} />
                  )
               }
             </div>
