@@ -7,7 +7,7 @@
 import { AccountConstants } from 'constants/account';
 
 /**
- * Product Fetch
+ * Account Fetch
  * @param {string} slug
  *
  * @returns {Object}
@@ -112,3 +112,15 @@ export function accountOrderDetailFetch(orderId: number): Object {
   };
 }
 
+/**
+ * Order Fetch
+ * @param {string} slug
+ *
+ * @returns {Object}
+ */
+export function accountOrderFetch(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_ORDER_FETCH_REQUEST,
+    payload: {},
+  };
+}

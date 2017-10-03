@@ -13,6 +13,7 @@ export const accountState = {
   notification: {},
   addresses: {},
   selectedOrder: {},
+  orders: {},
 };
 
 export default {
@@ -287,11 +288,31 @@ export default {
         },
       };
     },
+    [AccountConstants.ACCOUNT_ORDER_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        orders: {
+          list: [],
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
     [AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_SUCCESS](state, action) {
       return {
         ...state,
         selectedOrder: {
           ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ORDER_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        orders: {
+          list: action.payload,
           isRunning: false,
           isLoaded: true,
         },
@@ -304,6 +325,17 @@ export default {
           ...state.selectedOrder,
           isRunning: false,
           isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ORDER_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        orders: {
+          ...state.orders,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
         },
       };
     },

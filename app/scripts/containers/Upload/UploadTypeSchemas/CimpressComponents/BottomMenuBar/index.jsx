@@ -3,19 +3,13 @@
 import React from 'react';
 import { EyeEmptyIcon } from 'components/Icons';
 
-type Props = {
-  preview: boolean,
-  finish: boolean,
-};
-
-const BottomMenuBar = (props: Props) => {
-
+const BottomMenuBar = () => {
   const saveTemplate = () => {
     global.designer.preview.getPreview({
       size: {
         width: 300,
-        height: 300
-      }
+        height: 300,
+      },
     }).then(
       (thumbResponse) => {
         console.log('### thumbnail: ###');

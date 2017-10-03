@@ -24,7 +24,7 @@ export class Upload extends React.Component {
   static props: Props;
 
   renderFlashMessages = () => {
-    let messages = [
+    const messages = [
       {
         type: 'error',
         title: 'Desculpe!',
@@ -68,7 +68,7 @@ export class Upload extends React.Component {
             value: false,
             price: 30,
           },
-        ]
+        ],
       },
       {
         title: 'Checagem do arquivo',
@@ -84,7 +84,7 @@ export class Upload extends React.Component {
             value: false,
             price: 25,
           },
-        ]
+        ],
       },
     ];
 
@@ -193,9 +193,9 @@ export class Upload extends React.Component {
             </div>
           </div>
           {this.renderUploadTypeSchema()}
-          {/*<div className="upload-container-centralized">
+          {/* <div className="upload-container-centralized">
             {this.renderWarningExtraInfo()}
-          </div>*/}
+          </div> */}
         </div>
       </div>
     );
