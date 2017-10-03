@@ -47,14 +47,11 @@ export class Products extends React.Component {
         screenSize,
       },
       products: {
-        product,
-        categories,
-        opinions,
+        product: {
+          title,
+        },
         isRunning,
         isLoaded,
-      },
-      locale: {
-        advantages,
       },
     } = this.props;
 
@@ -64,7 +61,7 @@ export class Products extends React.Component {
         url: '/',
       },
       {
-        title: product.title,
+        title,
       },
     ];
 
@@ -75,17 +72,15 @@ export class Products extends React.Component {
     return (
       <div>
         {!isMobile(screenSize) && <BreadcrumbsBlock links={breadcrumb} />}
-        <ProductHighlightsBlock category={categories[categories.length - 1]} product={product} screenSize={screenSize} />
+        <ProductHighlightsBlock />
         <ProductInformationBlock />
-        <div>
-          <ProductTutorialsBlock />
-          <ProductWarrantyBlock />
-          <BenefitsBlock screenSize={screenSize} advantages={advantages} />
-          <GraphicPlantBlock />
-          <CustomersRelyBlock />
-          <BlogBlock />
-          <ProductOpinionsBlock screenSize={screenSize} opinions={opinions} />
-        </div>
+        <ProductTutorialsBlock />
+        <ProductWarrantyBlock />
+        <BenefitsBlock />
+        <GraphicPlantBlock />
+        <CustomersRelyBlock />
+        <BlogBlock />
+        <ProductOpinionsBlock />
         <ProductDetailsBlock />
         <ProductBannerBlock />
       </div>

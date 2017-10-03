@@ -13,9 +13,11 @@ import router from './router';
 import user from './user';
 import contactForm from './contact-form';
 import account from './account';
+import policy from './policy';
 import socialLoginSettings from './social-login-settings';
 import terms from './terms';
 import printiPress from './printi-press';
+import header from './header';
 
 export default {
   ...app,
@@ -28,7 +30,9 @@ export default {
   ...user,
   ...contactForm,
   ...account,
+  ...policy,
   ...socialLoginSettings,
   ...terms,
   ...printiPress,
+  ...header,
 };

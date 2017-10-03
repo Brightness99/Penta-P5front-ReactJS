@@ -7,7 +7,7 @@ import 'vendor/polyfills';
 import 'vendor/rxjs';
 
 // Locale
-import { localeFetch, accountFetch, userAuthValidate } from 'actions';
+import { localeFetch, accountFetch, userAuthValidate, productCategoriesFetch } from 'actions';
 
 // i18n
 import moment from 'moment';
@@ -26,10 +26,15 @@ if (process.env.production) {
   require('offline-plugin/runtime').install();
 }
 
-export function renderApp(RootComponent) {
+function fetchInfo() {
   store.dispatch(localeFetch());
   store.dispatch(accountFetch());
   store.dispatch(userAuthValidate());
+  store.dispatch(productCategoriesFetch());
+}
+
+export function renderApp(RootComponent) {
+  fetchInfo();
   store.subscribe(() => {
     /* istanbul ignore next */
     if (store.getState().locale.LANGUAGE) {
