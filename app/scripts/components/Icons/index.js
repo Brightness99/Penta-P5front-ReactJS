@@ -104,6 +104,8 @@ export UserIcon from './UserIcon';
 export UserPlusIcon from './UserPlusIcon';
 export ArchiveIcon from './ArchiveIcon';
 export TasksIcon from './TasksIcon';
+export DownloadIcon from './DownloadIcon';
+export PictureIcon from './PictureIcon';
 export GlassZoomIcon from './GlassZoomIcon';
 export ReferralIcon from './ReferralIcon';
 export LinkIcon from './LinkIcon';

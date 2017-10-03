@@ -27,7 +27,7 @@ export class ProductBannerBlock extends React.Component {
       >
         <h4 className="printiProduct-title">{vsprintf(locale.print.TITLE, product.title.toLowerCase())}</h4>
         <div className="box-btn-printiProduct">
-          <NavLink className="btn-default btn-primary btn-lg" to={`configuracao-${product.slug}`}>
+          <NavLink className="atm-button-rounded atm-button-rounded--enabled" to={`configuracao-${product.slug}`}>
             {locale.common.CONFIGURE_PRODUCT}
           </NavLink>
         </div>
