@@ -17,7 +17,10 @@
     .atm-list-link {
       font-family   : $font-family-open-sans-light;
       font-size     : $font-size-base;
+      width           : 100%;
       margin-bottom : 0;
+      display: grid;
+      grid-template-rows: 3rem;
       @include lg {
         margin : 1rem 0;
       }
@@ -39,6 +42,16 @@
         a {
           color : $color-black;
         }
+      }
+      @media (min-width: 1024px) {
+        grid-template-columns: 1fr 1fr 1fr;
+
+      }
+      @media (min-width: 480px) and (max-width: 1024px) {
+        grid-template-columns: 1fr 1fr;
+      }
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
       }
     }
   }
