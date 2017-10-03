@@ -33,9 +33,11 @@ class GlossaryList extends React.Component {
     if (!isLoaded) return '...loading';
 
     return glossaryList.map((x) =>
-      <GlossaryListByLetter key={x.key}
-                            letter={x.key}
-                            items={x.value} />);
+      <GlossaryListByLetter
+        key={x.key}
+        letter={x.key}
+        items={x.value}
+      />);
   };
 
   render() {
@@ -52,14 +54,14 @@ class GlossaryList extends React.Component {
     ];
     return (
       <section className="template-glossary">
+        <div className="container">
           <Breadcrumbs links={breadcrumb} />
-          <div className="container">
-            <h2 className="title-glossary">Glossário</h2>
-            <AlphabetList filter={glossaryListFilter} indexes={availableIndexes} screenSize={screenSize} />
-            {
-              this.renderList()
-            }
-          </div>
+          <h2 className="title-glossary">Glossário</h2>
+          <AlphabetList filter={glossaryListFilter} indexes={availableIndexes} screenSize={screenSize} />
+          {
+            this.renderList()
+          }
+        </div>
       </section>
     );
   }

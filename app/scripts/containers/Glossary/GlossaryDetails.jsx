@@ -4,8 +4,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { glossarySlugFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
+import { isMobile } from 'utils/helpers';
 
 type Props = {
+  screenSize: string,
   match: {
     params: {
       slug: string,
@@ -40,7 +42,7 @@ class GlossaryDetails extends React.Component {
   }
 
   render() {
-    const { match, isRunning, glossary } = this.props;
+    const { match, isRunning, glossary, screenSize } = this.props;
     const title = isRunning ? match.params.slug : glossary.title;
     const breadcrumb = [
       {
@@ -56,8 +58,8 @@ class GlossaryDetails extends React.Component {
       },
     ];
     return (
-      <div>
-        <Breadcrumbs links={breadcrumb} />
+      <div className="container">
+        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         {this.renderContent()}
       </div>
     );

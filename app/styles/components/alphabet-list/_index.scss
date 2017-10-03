@@ -2,6 +2,7 @@
   overflow-x: scroll;
   width: 100%;
 }
+
 .org-alphabet-list {
   background-color: $color-printi-blue;
   border-radius: 0.3rem;
@@ -11,6 +12,7 @@
   font-size: $font-size-sm;
   justify-content: space-around;
   padding: 1.4rem 0;
+  margin-top: 1rem;
   max-width: 99999px;
   width: 361%;
   @include lg {
