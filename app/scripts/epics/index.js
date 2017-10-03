@@ -15,6 +15,7 @@ import {
 import { productsFetch } from './products';
 import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
+import { glossarySlugFetch, glossaryFetch } from './glossary';
 import {
   settingsFetch,
   settingsOptionsFetch,
@@ -61,6 +62,8 @@ export default combineEpics(
   userNewsletter,
   productsFetch,
   blogFetch,
+  glossarySlugFetch,
+  glossaryFetch,
   settingsFetch,
   settingsOptionsFetch,
   settingsSourceFetch,
