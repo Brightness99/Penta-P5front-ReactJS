@@ -17,6 +17,7 @@ import policy from './policy';
 import socialLoginSettings from './social-login-settings';
 import terms from './terms';
 import header from './header';
+import artCreation from './art-creation';
 
 export default {
   ...app,
@@ -33,4 +34,5 @@ export default {
   ...socialLoginSettings,
   ...terms,
   ...header,
+  ...artCreation,
 };
