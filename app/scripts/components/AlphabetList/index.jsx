@@ -4,7 +4,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'utils/helpers';
 import cx from 'classnames';
-import './alphabet-list.style.scss';
 
 type Props = {
   screenSize: string,
