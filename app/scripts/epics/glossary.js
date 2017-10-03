@@ -4,6 +4,7 @@
  */
 import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, GlossaryConstants } from 'constants/index';
+import { push } from 'modules/ReduxRouter';
 
 
 export function glossaryFetch(action$) {
@@ -50,12 +51,16 @@ export function glossarySlugFetch(action$) {
         }))
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
         .defaultIfEmpty({ type: GlossaryConstants.GLOSSARY_SLUG_FETCH_CANCEL })
-        .catch(error => [
-          {
+        .catch(error =>  {
+          if (error.status === 404) {
+            push('/404');
+          }
+
+          return ([{
             type: GlossaryConstants.GLOSSARY_SLUG_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
-          },
-        ]);
+          }]);
+        });
     });
 }

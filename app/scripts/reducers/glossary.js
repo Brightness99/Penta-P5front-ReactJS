@@ -19,7 +19,6 @@ export type GlossaryState = {
   },
   glossarySlug: {
     isRunning: boolean,
-    isLoaded: boolean,
     error: boolean,
     message: string,
     glossary: {}
@@ -102,7 +101,6 @@ export default {
         glossarySlug: {
           ...state.glossarySlug,
           isRunning: true,
-          isLoaded: false,
           error: false,
         },
       };
@@ -113,8 +111,7 @@ export default {
         glossarySlug: {
           ...state.glossarySlug,
           isRunning: false,
-          isLoaded: true,
-          glossaryList: action.payload,
+          glossary: action.payload,
         },
         updatedAt: action.meta.updatedAt,
       };
