@@ -59,8 +59,11 @@ class GlossaryDetails extends React.Component {
     ];
     return (
       <div className="container">
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        {this.renderContent()}
+        <div className="template-glossary">
+          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
+          <h2 className="title-glossary">Glossário</h2>
+          {this.renderContent()}
+        </div>
       </div>
     );
   }
