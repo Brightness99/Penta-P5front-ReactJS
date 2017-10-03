@@ -50,7 +50,8 @@ import {
   accountNotificationFetch,
   accountNotificationUpdate,
   accountSavedCreditCardFetch,
-  accountSavedCreditCardDelete
+  accountSavedCreditCardDelete,
+  accountOrderDetailFetch
 } from './account';
 
 import { termsFetch } from './terms';
@@ -94,6 +95,7 @@ export default combineEpics(
   accountSavedCreditCardDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
+  accountOrderDetailFetch,
   termsFetch,
   productCategoriesFetch
 );
