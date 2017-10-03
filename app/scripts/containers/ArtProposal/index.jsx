@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
+import { proposalsFetch } from 'actions';
 import Sidebar from './Sidebar';
 import ArtProposalContent from './ArtProposalContent';
 
@@ -12,9 +13,19 @@ type Props = {
   router: RouterStore,
   dispatch: () => {},
   children: any,
+  artCreation: {}
 };
 
+//TODO | Ken: This will be replaced with the real item id.
+const order_item_id = '801901';
+
 export class ArtProposal extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(proposalsFetch(order_item_id));
+  }
+
   static props: Props;
 
   renderMobile() {
@@ -91,8 +102,8 @@ export class ArtProposal extends React.Component {
   }
 
   render() {
-    const { app: { screenSize } } = this.props;
-
+    const { app: { screenSize }, artCreation } = this.props;
+    console.log('proposals ===> ', artCreation);
     return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
       ? this.renderMobile()
       : this.renderDesktop();
@@ -100,9 +111,10 @@ export class ArtProposal extends React.Component {
 }
 
 /* istanbul ignore next */
-function mapStoreToProps(state) {
+function mapStateToProps(state) {
   return ({
     app: state.app,
+    artCreation: state.artCreation,
   });
 }
 
@@ -111,4 +123,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStoreToProps, mapDispatchToProps)(ArtProposal);
+export default connect(mapStateToProps, mapDispatchToProps)(ArtProposal);
