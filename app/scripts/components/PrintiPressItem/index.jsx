@@ -18,7 +18,7 @@ export class PrintiPressItem extends React.PureComponent {
 
   render() {
     const { item } = this.props;
-    const url = config.basePath + 'files/' + item.image.file;
+    const url = `${config.basePath}files/${item.image.file}`;
     return (
       <a href={item.url_press} className="mol-printi-press">
         <div className="atm-content-printi-press">
