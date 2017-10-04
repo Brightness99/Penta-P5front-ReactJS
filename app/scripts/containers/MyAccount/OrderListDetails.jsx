@@ -96,7 +96,11 @@ export class OrderListDetails extends React.Component {
             </div>
             <div className="details">
               <p className="firstDetail">Endereço</p>
-              <p className="secondDetail">{billingAddressInfo[0].additional_address} {billingAddressInfo[0].street}</p>
+              <p className="secondDetail">
+                {billingAddressInfo[0].street}, {billingAddressInfo[0].number}
+                {billingAddressInfo[0].additional_address && ' - ' + billingAddressInfo[0].additional_address}
+                {billingAddressInfo[0].neighborhood && billingAddressInfo[0].neighborhood + ', '} {billingAddressInfo[0].state} - {billingAddressInfo[0].zipcode}
+              </p>
             </div>
             <div className="details">
               <p className="firstDetail">Cidade/UF</p>
@@ -122,7 +126,11 @@ export class OrderListDetails extends React.Component {
             </div>
             <div className="details">
               <p className="firstDetail">Endereço</p>
-              <p className="secondDetail">{shippingAddressInfo[0].additional_address} {shippingAddressInfo[0].street}</p>
+              <p className="secondDetail">
+                {shippingAddressInfo[0].street}, {shippingAddressInfo[0].number}
+                {shippingAddressInfo[0].additional_address && ' - ' + shippingAddressInfo[0].additional_address}
+                {shippingAddressInfo[0].neighborhood && shippingAddressInfo[0].neighborhood + ', '} {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
+              </p>
             </div>
             <div className="details">
               <p className="firstDetail">Cidade/UF</p>
@@ -257,6 +265,9 @@ export class OrderListDetails extends React.Component {
   }
 
   renderMobile() {
+
+    const { account: { selectedOrder } } = this.props;
+
     return (
       <div className="container">
         <div className="box-headerDetails headerDetails--mobile">
@@ -265,7 +276,7 @@ export class OrderListDetails extends React.Component {
             <Link to="#"><i><ArrowCarousel /></i>Voltar</Link>
           </div>
         </div>
-        {this.renderWarningMessage()}
+        {selectedOrder.messages[0] && this.renderWarningMessage()}
         <div className="btns-details">
           {this.renderActionButtons()}
         </div>
@@ -278,6 +289,8 @@ export class OrderListDetails extends React.Component {
 
   renderDesktop() {
 
+    const { account: { selectedOrder } } = this.props;
+
     return (
       <div>
         <div className="box-headerDetails">
@@ -286,7 +299,7 @@ export class OrderListDetails extends React.Component {
             {this.renderActionButtons()}
           </div>
         </div>
-        {this.renderWarningMessage()}
+        {selectedOrder.messages[0] && this.renderWarningMessage()}
         {this.renderAddressInfo()}
         {this.renderDesktopProducts()}
       </div>
@@ -295,7 +308,7 @@ export class OrderListDetails extends React.Component {
 
   render() {
     const { screenSize, account: { selectedOrder } } = this.props;
-    
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -307,7 +320,7 @@ export class OrderListDetails extends React.Component {
       },
       {
         title: 'Meus pedidos',
-        url: '/meus-pedidos',
+        url: '/minha-conta/meus-pedidos',
       },
       {
         title: 'Pedido nº' + (selectedOrder.info && selectedOrder.info.id),

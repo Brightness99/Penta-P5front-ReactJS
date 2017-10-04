@@ -16,6 +16,8 @@ import account from './account';
 import policy from './policy';
 import socialLoginSettings from './social-login-settings';
 import terms from './terms';
+import printiPress from './printi-press';
+import glossary from './glossary';
 import header from './header';
 
 export default {
@@ -32,5 +34,7 @@ export default {
   ...policy,
   ...socialLoginSettings,
   ...terms,
+  ...printiPress,
+  ...glossary,
   ...header,
 };

@@ -387,8 +387,8 @@ export function accountOrderDetailFetch(action$) {
 
 export function accountOrderFetch(action$) {
   return action$.ofType(AccountConstants.ACCOUNT_ORDER_FETCH_REQUEST)
-    .switchMap(() => {
-      const endpoint = '/v2/customers/orders?order=desc&sort=created_at&page=1&per_page=10';
+    .switchMap((action) => {
+      const endpoint = `/v2/customers/orders?order=${action.payload.order}&sort=${action.payload.sort}&page=${action.payload.page}&per_page=${action.payload.perPage}`;
       return rxAjax({
         endpoint,
         method: 'GET',
@@ -397,7 +397,10 @@ export function accountOrderFetch(action$) {
         if (data.status === 200) {
           return {
             type: AccountConstants.ACCOUNT_ORDER_FETCH_SUCCESS,
-            payload: data.response,
+            payload: {
+              list: data.response,
+              total_count: parseInt(data.xhr.getResponseHeader('x-total-count'), 10),
+            },
             meta: { updatedAt: getUnixtime() },
           };
         }

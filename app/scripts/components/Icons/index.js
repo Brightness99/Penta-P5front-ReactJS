@@ -77,6 +77,7 @@ export OneFileIcon from './OneFileIcon';
 export MultipleFilesIcon from './MultipleFilesIcon';
 export AccordionMinusIcon from './AccordionMinus';
 export AccordionPlusIcon from './AccordionPlus';
+export NFIcon from './NF';
 
 // new definitive icons
 export AngleDownIcon from './_AngleDown';
