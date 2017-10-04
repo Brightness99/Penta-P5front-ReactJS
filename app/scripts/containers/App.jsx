@@ -101,7 +101,7 @@ export class App extends React.Component {
                       <Route path="/mapa-do-site" component={Sitemap} />
                       <Route path="/termos-de-servico-e-uso-do-site" component={TermsOfUse} />
                       <Route path="/glossario" component={Glossary} />
-                      <Route path="/success" component={Success} />
+                      <Route path="/success/:orderNumber" component={Success} />
                       <Route path="/buscar" component={Search} />
                       <Route path="/imprensa" component={PrintiPress} />
                       <Route path="/sobre-a-printi" component={AboutPrinti} />

@@ -1,7 +1,11 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckCircleIcon, MyAccountIcon, RefreshIcon } from 'components/Icons';
+import { successfulPurchaseFetch } from 'actions';
+import Loading from 'components/Loading';
 import WarningMessage from './WarningMessage';
 import MethodItem from './MethodItem';
 import ProductItem from './ProductItem';
@@ -11,74 +15,97 @@ type Props = {
   app: AppStore,
   router: RouterStore,
   locale: {},
+  successfulPurchase: {},
   dispatch: () => {},
+  match: {},
 };
 
 export class Success extends React.Component {
+  shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
+  componentDidMount() {
+    const { dispatch, match: { params: { orderNumber } }  } = this.props;
+
+    dispatch(successfulPurchaseFetch(orderNumber));
+  }
+
   renderSubTotalMobile() {
+
+    const { successfulPurchase } = this.props;
 
     return (
       <div className="sub-total">
         <div className="mb-total-label">TOTAL</div>
-        <div className="mb-total-value">R$ 150,00</div>
+        <div className="mb-total-value">R$ {successfulPurchase.order.info.total_price}</div>
       </div>
     );
   }
 
   renderSubTotalDesktop() {
 
+    const { successfulPurchase } = this.props;
+
     return (
       <div className="sub-total">
 
         <div className="sub-total-row">
           <div className="key">Sub-total</div>
-          <div className="value">R$150,00</div>
+          <div className="value">R$ {successfulPurchase.order.info.total_price}</div>
         </div>
 
         <div className="sub-total-row">
           <div className="key">Cupom</div>
-          <div className="value">--</div>
+          <div className="value">R$ {successfulPurchase.order.info.total_discount_price}</div>
         </div>
 
         <div className="sub-total-row">
           <div className="key">Total</div>
-          <div className="value total-value">R$135,00</div>
+          <div className="value total-value">R$ {successfulPurchase.order.info.total_price}</div>
         </div>
 
       </div>
     );
   }
 
+  renderActions(actions) {
+    return Object.keys(actions).map((key) => (
+      actions[key].enabled && <MethodItem buttonText={actions[key].label} key={key} linkText="Copiar código do boleto" />
+    ));
+  }
+
+  renderProductItems(items) {
+    return items.map((item) => (
+      <ProductItem item={item} key={item.info.id} />
+    ));
+  }
+
   render() {
 
-    const { app: { screenSize } } = this.props;
-    const subTotal = ['xs', 'is', 'sm', 'ix'].includes(screenSize)
-      ? this.renderSubTotalMobile()
-      : this.renderSubTotalDesktop();
+    const { app: { screenSize }, successfulPurchase, match: { params: { orderNumber } } } = this.props;
+
+    const shippingAddressInfo = (successfulPurchase.isLoaded && !successfulPurchase.isRunning) ? successfulPurchase.order.info.addresses.filter((address) => address.type === 'SHIPPING') : {};
 
     return (
       <section>
         <div className="container">
-          <div className="template-success">
+          {(!successfulPurchase.isLoaded || successfulPurchase.isRunning) && <Loading />}
+          {successfulPurchase.isLoaded && !successfulPurchase.isRunning && <div className="template-success">
 
             <div className="success-message atm-success-text">
               <CheckCircleIcon />
-              <span>Pedido nº485343 efetuado com sucesso!</span>
+              <span>Pedido nº{successfulPurchase.order.info.id} efetuado com sucesso!</span>
             </div>
 
             <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
 
             <div>
-              <WarningMessage />
+              <WarningMessage message={successfulPurchase.order.messages[0].message} />
             </div>
 
             <div className="method-container">
-              <MethodItem buttonText="Ver boleto" linkText="Copiar código do boleto" />
-              <MethodItem buttonText="Enviar comprovante" linkText="Envie para agilizar o pedido" />
-              <MethodItem buttonText="Enviar arte final" linkText="Envie até as 14:00 do dia 20/11/2016" />
+              {this.renderActions(successfulPurchase.order.actions)}
             </div>
 
             <div className="main-container">
@@ -106,12 +133,11 @@ export class Success extends React.Component {
                 </div>
 
                 <div className="product-item-body">
-                  <ProductItem />
-                  <ProductItem />
+                  {this.renderProductItems(successfulPurchase.order.info.items)}
                 </div>
 
                 <div className="product-sub-total">
-                  { subTotal }
+                  {isMobile(screenSize) ? this.renderSubTotalMobile() : this.renderSubTotalDesktop()}
                 </div>
 
               </div>
@@ -129,15 +155,19 @@ export class Success extends React.Component {
                 </div>
 
                 <div className="my-account">
-                  <a>
+                  <Link to={'/minha-conta/pedidos/' + orderNumber}>
                     <MyAccountIcon />
                     <div>MINHA CONTA</div>
-                  </a>
+                  </Link>
                 </div>
 
                 <h3>endereço de entrega</h3>
 
-                <div className="address">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Guarulhos, SP - 07133-000</div>
+                <div className="address">
+                  {shippingAddressInfo[0].street}, {shippingAddressInfo[0].number}
+                  {shippingAddressInfo[0].additional_address && '- ' + shippingAddressInfo[0].additional_address}
+                  {shippingAddressInfo[0].neighborhood && shippingAddressInfo[0].neighborhood + ', '} {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
+                </div>
 
                 <div className="delivery-address">
                   <RefreshIcon />
@@ -148,7 +178,7 @@ export class Success extends React.Component {
 
             </div>
 
-          </div>
+          </div>}
         </div>
       </section>
     );
@@ -156,7 +186,10 @@ export class Success extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { app: state.app };
+  return {
+    app: state.app,
+    successfulPurchase: state.successfulPurchase,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
