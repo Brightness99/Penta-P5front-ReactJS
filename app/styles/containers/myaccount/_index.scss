@@ -6,6 +6,8 @@
 @import "mydata";
 @import "referral";
 
+@import 'order-list';
+
 .title-myaccount {
   font-family: $font-family-open-sans-bold;
   font-size: $font-size-lg;
@@ -102,7 +104,7 @@
       margin-bottom: 2.4rem;
     }
     .title-myorder {
-      padding: 2rem 0 0.5rem 0;      
+      padding: 2rem 0 0.5rem 0;
     }
     .subtitle-myorder {
       font-family: $font-family-nunito-light;
@@ -157,7 +159,7 @@
       box-sizing: border-box;
       border-radius: 3px;
       margin-bottom: 1rem;
-      background-color: $color-white; 
+      background-color: $color-white;
       @include lg {
         padding: 1rem 1.4rem;
         border: 1px solid $color-hrLightGray;
@@ -173,7 +175,7 @@
             border-radius: 7.5px;
           }
         }
-      } 
+      }
       &.delivered {
         border-top: 10px solid $color-green;
         @include lg {
@@ -238,7 +240,7 @@
         flex-direction: column;
         padding: 1rem 1.4rem 2rem 1.4rem;
         @include lg {
-          padding: 1.2rem 1.4rem;          
+          padding: 1.2rem 1.4rem;
           align-items: center;
           flex-direction: row;
         }

@@ -1,0 +1,706 @@
+.container-myorder {
+  @include lg {
+    background-color: $color-white;
+    flex: 5;
+    box-sizing: border-box;
+    padding: 2rem 6rem 3rem 6rem;
+  }
+  .container {
+    width: auto;
+  }
+
+  .title-myorder {
+    padding: 2rem 0 0.5rem 0;
+  }
+  .subtitle-myorder {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-h4;
+    font-weight: 300;
+    line-height: 1.11;
+    text-align: left;
+    color: $color-almostBlack;
+    text-transform: none;
+    margin-top: 1.4rem;
+    padding-bottom: 0;
+    @include lg {
+      font-size: $font-size-xl;
+      margin-top: 2.4rem;
+    }
+  }
+
+  .legend-myorder {
+    font-family: $font-family-open-sans-light;
+    font-size: $font-size-h6;
+    font-weight: 300;
+    line-height: 1.25;
+    text-align: left;
+    color: $color-lightGray;
+  }
+
+  .org-orders {
+    &-desktop {
+      width: 100%;
+
+      .org-orders-header {
+        border-radius: 0.4rem;
+        background-color: #f8f8f8;
+        border: 0.1rem solid #dbdddf;
+        color: #151617;
+        font-size: $font-size-xs;
+        font-weight: bold;
+        letter-spacing: 0.12rem;
+        padding: 1rem 3rem;
+      }
+
+      .org-orders-header > li,
+      .org-orders-list-data > div {
+        display: inline-flex;
+
+        &:first-child {
+          width: 15%;
+        }
+
+        &:nth-child(2) {
+          width: 20%;
+        }
+
+        &:nth-child(3) {
+          width: 30%;
+        }
+
+        &:nth-child(4) {
+          width: 25%;
+        }
+
+        &:nth-child(5) {
+          width: 10%;
+        }
+      }
+
+      .org-orders-list {
+        > li {
+          border-radius: 0.4rem;
+          border: 0.1rem solid #dbdddf;
+          border-left: 0.5rem solid #c7c9cb;
+          color: #151617;
+          flex-direction: column;
+          margin-bottom: 1rem;
+          padding: 0 3rem 0 2.5rem;
+          transition: 0.3s ease;
+
+          &.Shipping {
+            border-left-color: #f4dd1d;
+
+            .org-orders-list-data i {
+              background-color: #f4dd1d;
+            }
+          }
+
+          &.waitingPayment {
+            border-left-color: #e95f5f;
+
+            .org-orders-list-data i {
+              background-color: #e95f5f;
+            }
+          }
+
+          &.Shipped {
+            border-left-color: #6ec38b;
+
+            .org-orders-list-data i {
+              background-color: #6ec38b;
+            }
+          }
+
+          .atm-transparent-button {
+            margin-right: 1rem;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+
+          > div {
+            align-items: center;
+            display: flex;
+          }
+
+          &:last-child {
+            margin: 0;
+          }
+
+          .org-orders-list-data {
+            height: 8rem;
+
+            > div {
+              align-items: center;
+              display: inline-flex;
+              a {
+                color: $color-printi-blue;
+                font-size: $font-size-xs;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
+            i {
+              background-color: #c7c9cb;
+              border-radius: 1rem;
+              height: 1rem;
+              width: 1rem;
+              margin-right: 1.2rem;
+            }
+          }
+
+          .org-orders-list-expand {
+            border: 0 transparent;
+            height: 0;
+            overflow: hidden;
+            transition: 0.3s ease;
+
+            > div {
+              display: inline-flex;
+              color: #6a6f7a;
+              flex-direction: column;
+              font-size: $font-size-xs;
+              justify-content: flex-start;
+
+              > span {
+                color: $color-almostBlack;
+                font-size: $font-size-base;
+              }
+
+              &:first-child {
+                margin-left: 35%;
+                width: 30%;
+              }
+
+              &:last-child {
+                width: 25%;
+              }
+            }
+          }
+
+          &:hover {
+            box-shadow: 0px 4px 18px 2px rgba(83, 117, 153, 0.5);
+            transform: scale(1.01);
+
+            .org-orders-list-expand {
+              border-top: 0.1rem solid #dbdddf;
+              height: 8rem;
+            }
+          }
+        }
+      }
+    }
+
+    &-mobile {
+      display: flex;
+      flex-direction: column;
+
+      .org-orders-list {
+        > li {
+          background-color: $color-white;
+          border: 0 transparent;
+          border-radius: 0.4rem;
+          border-top: 1rem solid #c7c9cb;
+          margin-bottom: 2rem;
+
+          &:last-child {
+            margin: 0;
+          }
+
+          &.Shipping {
+            border-top-color: #f4dd1d;
+
+            .mol-orders-body .mol-orders-status {
+              i {
+                background-color: #f4dd1d;
+              }
+
+              > div span {
+                color: #f4dd1d;
+              }
+            }
+          }
+
+          &.waitingPayment {
+            border-top-color: #e95f5f;
+
+            .mol-orders-body .mol-orders-status {
+              i {
+                background-color: #e95f5f;
+              }
+
+              > div span {
+                color: #e95f5f;
+              }
+            }
+          }
+
+          &.Shipped {
+            border-top-color: #6ec38b;
+
+            .mol-orders-body .mol-orders-status {
+              i {
+                background-color: #6ec38b;
+              }
+
+              >d iv span {
+                color: #6ec38b;
+              }
+            }
+          }
+
+          .mol-orders-header {
+            color: #151617;
+            display: inline-flex;
+            flex-direction: column;
+            font-size: $font-size-xs;
+            padding: 3rem 2rem;
+
+            span {
+              font-size: $font-size-lg;
+              font-weight: bold;
+              line-height: 1.11;
+              letter-spacing: 0.18rem;
+            }
+          }
+
+          .detach {
+            height: 0.1rem;
+            border-bottom: 0.1rem dashed #eee;
+            width: 100%;
+            display: block;
+            position: relative;
+
+            &:before, &:after {
+              background: #eee;
+              border-radius: 50%;
+              content: "";
+              display: block;
+              height: 1.2rem;
+              position: absolute;
+              top: -0.6rem;
+              width: 1.2rem;
+            }
+
+            &:before {
+              left: -0.6rem
+            }
+
+            &:after {
+              right: -0.6rem;
+            }
+          }
+
+          .mol-orders-body {
+            padding: 3rem 2rem;
+
+            .mol-orders-items {
+              align-items: center;
+              display: flex;
+              justify-content: flex-start;
+
+              svg {
+                height: 2.1rem;
+                margin-right: 1.2rem;
+                width: auto;
+              }
+
+              > div {
+                display: flex;
+                flex-direction: column;
+                font-size: $font-size-xs;
+
+                > span {
+                  font-size: $font-size-lg;
+                  line-height: 1.11;
+                }
+              }
+            }
+
+            .mol-orders-status {
+              align-items: center;
+              display: flex;
+              margin-top: 2.4rem;
+
+              i {
+                background-color: #c7c9cb;
+                border-radius: 2.2rem;
+                display: flex;
+                height: 2.2rem;
+                margin-right: 0.8rem;
+                width: 2.2rem;
+              }
+
+              > div {
+                color: #151617;
+                display: flex;
+                flex-direction: column;
+                font-size: $font-size-xs;
+
+                span {
+                  font-size: $font-size-lg;
+                  line-height: 1.11;
+                  color: #c7c9cb;
+                }
+              }
+            }
+
+            .mol-orders-actions {
+              margin-top: 2rem;
+            }
+
+            .mol-orders-details {
+              margin-top: 2rem;
+              width: 100%;
+
+              > a {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .atm-button-transparent {
+    width: 100%;
+  }
+
+  .atm-orders-load-more {
+    @include center-child-flex;
+    margin-top: 3rem;
+    width: 100%;
+
+    > button {
+      width: 100%;
+
+      @include lg {
+        width: 30rem;
+      }
+    }
+  }
+
+  .box-tableOrder {
+    display: flex;
+    font-family: $font-family-open-sans-bold;
+    flex-direction: row;
+    background-color: #f8f8f8;
+    border: 1px solid $color-hrLightGray;
+    box-sizing: border-box;
+    padding: 1rem 1.9rem;
+    border-radius: 0.03rem;
+    li {
+      font-size: $font-size-xs;
+      font-weight: bold;
+      line-height: 2.5;
+      color: $color-almostBlack;
+      text-transform: uppercase;
+      flex: 1;
+      &:nth-of-type(3n) {
+        flex: 2;
+      }
+      &:last-of-type {
+        flex: 2;
+      }
+    }
+  }
+  .box-detailsOrder {
+    transition: box-shadow .3s;
+    border: 1px solid $color-hrLightGray;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    background-color: $color-white;
+    @include lg {
+      padding: 1rem 1.4rem;
+      border: 1px solid $color-hrLightGray;
+    }
+    &.delivered, &.pendingPayment, &.inTransport {
+      .flagOrder p {
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          margin-right: 5px;
+          border-radius: 7.5px;
+        }
+      }
+    }
+    &.delivered {
+      border-top: 10px solid $color-green;
+      @include lg {
+        border-top: 1px solid $color-hrLightGray;
+        border-left: 5px solid $color-green;
+      }
+      .flagOrder p {
+        &:before {
+          background-color: $color-green
+        }
+      }
+      .box-statusMobile {
+        i {
+          svg {
+            fill: $color-Lightgreen;
+          }
+        }
+        .subtitle-statusMobile {
+          color: $color-Lightgreen;
+        }
+      }
+    }
+    &.pendingPayment {
+      border-top: 10px solid $color-melon;
+      @include lg {
+        border-top: 1px solid $color-hrLightGray;
+        border-left: 5px solid $color-melon;
+      }
+      .flagOrder p {
+        &:before {
+          background-color: $color-melon
+        }
+      }
+      .box-statusMobile {
+        i {
+          svg {
+            fill: $color-melon;
+          }
+        }
+        .subtitle-statusMobile {
+          color: $color-melon;
+        }
+      }
+    }
+    &.inTransport {
+      border-top: 10px solid $color-maize;
+      @include lg {
+        border-top: 1px solid $color-hrLightGray;
+        border-left: 5px solid $color-maize;
+      }
+      .flagOrder p {
+        &:before {
+          background-color: $color-maize;
+        }
+      }
+      .subtitle-statusMobile {
+        color: $color-maize;
+      }
+    }
+    .box-firstPart {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.4rem 2rem 1.4rem;
+      @include lg {
+        padding: 1.2rem 1.4rem;
+        align-items: center;
+        flex-direction: row;
+      }
+      div {
+        flex: 1;
+        font-family: $font-family-open-sans;
+        font-size: $font-size-base;
+        line-height: 1.25;
+        text-align: left;
+        color: $color-almostBlack;
+        p {
+          margin-bottom: 0;
+        }
+        &:nth-of-type(3n) {
+          flex: 2;
+        }
+        &:last-of-type {
+          flex: 2;
+          align-items: center;
+        }
+        .title-myorderMobile {
+          font-size: 12px;
+          line-height: 1.67;
+        }
+        .subtitle-myorderMobile {
+          font-family: $font-family-open-sans-bold;
+          font-size: $font-size-h5;
+          font-weight: bold;
+          line-height: 1.11;
+          letter-spacing: 1.8px;
+          text-align: left;
+          color: $color-almostBlack;
+        }
+      }
+      .box-icons {
+        display: flex;
+        .icons {
+          flex: 1;
+          &.align-text {
+            text-align: right;
+            font-size: $font-size-xs;
+          }
+          .btn-icons {
+            border: 1px solid $color-printi-blue;
+            box-sizing: border-box;
+            padding: 0.5rem 0rem;
+            border-radius: 2px;
+            margin-right: 1rem;
+            float: left;
+            height: 30px;
+            font-size: 12px;
+            line-height: 18px;
+            text-align: center;
+            width: 150px;
+            margin-top: 3px;
+            svg {
+              //width: 25px;
+              //height: 20px;
+              fill: $color-printi-blue;
+            }
+          }
+        }
+      }
+    }
+    .detach {
+      height: 1px;
+      border-bottom: .1rem dashed #eee;
+      width: 100%;
+      display: block;
+      position: relative;
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: .9em;
+        height: .9em;
+        background: #eee;
+        border-radius: 50%;
+        top: -0.7rem;
+      }
+      &:before {
+        left: -4px;
+      }
+      &:after {
+        right: -4px;
+      }
+    }
+    .box-secondPart {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.4rem 3rem;
+      @include lg {
+        padding: 1rem 1.4rem 0;
+        margin-top: 1rem;
+        flex-direction: row;
+        border-top: 1px solid $color-hrLightGray;
+      }
+      > div {
+        flex: 1;
+        &.box-images {
+          img {
+            margin: 0 0.5rem;
+            &:first-of-type {
+              margin-left: 0;
+            }
+            &:last-of-type {
+              margin-right: 0;
+            }
+          }
+        }
+        .title-secondPart {
+          font-family: $font-family-open-sans;
+          font-size: 12px;
+          line-height: 1.67;
+          text-align: left;
+          color: $color-almostBlack;
+          font-size: $font-size-xs;
+          margin-bottom: 0;
+          @include lg {
+            color: $color-lightGray;
+          }
+        }
+        .txt-secondPart {
+          font-size: $font-size-h5;
+          line-height: 1.11;
+          color: $color-almostBlack;
+          @include lg {
+            font-size: $font-size-base;
+            line-height: 1.25;
+          }
+        }
+      }
+      .box-statusMobile {
+        font-family: $font-family-open-sans;
+        .title-statusMobile {
+          font-size: $font-size-xs;
+          line-height: 1.67;
+          color: $color-almostBlack;
+          margin-bottom: 0;
+        }
+        .subtitle-statusMobile {
+          font-size: $font-size-h5;
+          line-height: 1.11;
+        }
+      }
+      .btn-default {
+        text-align: left;
+        margin-bottom: 1rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include lg {
+          text-align: inherit;
+        }
+        i {
+          flex: 1;
+          svg {
+            width: 2rem;
+            height: inherit;
+            fill: $color-lightGray;
+          }
+        }
+        span {
+          flex: 6;
+        }
+        &:last-of-type {
+          margin-top: 1.1rem;
+          font-size: $font-size-xs;
+          line-height: 1.67;
+          text-align: center;
+          color: $color-white;
+          margin-bottom: 0;
+          .txt-secondPart {
+            font-size: $font-size-base;
+            line-height: 1.25;
+            color: $color-almostBlack;
+          }
+        }
+        .box-secondPart-mobile {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1.2rem;
+          > div {
+            &:first-of-type {
+              flex: 1;
+              margin-right: 2rem;
+            }
+            &:last-of-type {
+              flex: 8;
+            }
+            svg {
+              //height: inherit;
+              //width: inherit;
+            }
+          }
+        }
+      }
+      &:hover {
+        @include lg {
+          box-shadow: 0px 3px 5px 6px $color-lightGray2;
+        }
+      }
+    }
+  }
+}
