@@ -15,6 +15,8 @@ import {
 import { productsFetch } from './products';
 import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
+import { printiPressFetch } from './printi-press';
+import { glossarySlugFetch, glossaryFetch } from './glossary';
 import {
   settingsFetch,
   settingsOptionsFetch,
@@ -65,6 +67,8 @@ export default combineEpics(
   userNewsletter,
   productsFetch,
   blogFetch,
+  glossarySlugFetch,
+  glossaryFetch,
   settingsFetch,
   settingsOptionsFetch,
   settingsSourceFetch,
@@ -77,6 +81,7 @@ export default combineEpics(
   userSocialSignUp,
   userLogOut,
   userAuthValidate,
+  printiPressFetch,
   cartBasicFetch,
   cartFetch,
   cartAddFetch,
