@@ -1,8 +1,9 @@
 // *** Vendor
 @import '~sass-mediaqueries/media-queries';
-@import '~slick-carousel/slick/slick.css';
-@import '~slick-carousel/slick/slick-theme.css';
-@import '~react-credit-cards/lib/styles';
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import '~react-credit-cards/lib/styles.scss';
+@import '~react-dates/lib/css/_datepicker.css';
 
 // *** Vendor customization
 @import 'vendor/rc-collapse';
