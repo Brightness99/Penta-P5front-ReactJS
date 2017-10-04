@@ -61,100 +61,175 @@ export class OrderList extends React.Component {
   };
 
   renderItemsO() {
-    const { account: { orders }, screenSize } = this.props;
+    const { orders } = this.props;
 
     if (orders.list.length <= 0) {
       return <p>There are no orders</p>;
     }
 
-    if (isMobile(screenSize)) {
-      return orders.list.map((item) => (
-        <div className="box-detailsOrder delivered" key={item.info.id}>
-          <div className="box-firstPart">
-            <div>
-              <p className="title-myorderMobile">Pedido</p>
-              <p className="subtitle-myorderMobile">Nº {item.info.id}</p>
-            </div>
-          </div>
-          <span className="detach" />
-          <div className="box-secondPart">
-            <div className="box-secondPart-mobile">
-              <div>
-                <i><Clipboard /></i>
-              </div>
-              <div>
-                <p className="title-secondPart">Itens do pedido</p>
-                <p className="txt-secondPart">{item.items_label}</p>
-              </div>
-            </div>
-            <div className="box-statusMobile">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><CodeBar /></i>
-                </div>
-                <div>
-                  <p className="title-statusMobile">{item.status_label}</p>
-                  <p className="subtitle-statusMobile">{item.status_value}</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                <i><CodeBar /></i>
-                <span>{item.actions.invoice.label}</span>
-              </Link>
-              <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                <i><Receipt /></i>
-                <span>{item.actions.upload.label}</span>
-              </Link>
-              <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">{item.actions.details.label}</Link>
-            </div>
+    return orders.list.map((item) => (
+      <div className="box-detailsOrder delivered" key={item.info.id}>
+        <div className="box-firstPart">
+          <div>
+            <p className="title-myorderMobile">Pedido</p>
+            <p className="subtitle-myorderMobile">Nº {item.info.id}</p>
           </div>
         </div>
-      ));
-    }
-
-    return null;
+        <span className="detach" />
+        <div className="box-secondPart">
+          <div className="box-secondPart-mobile">
+            <div>
+              <i><Clipboard /></i>
+            </div>
+            <div>
+              <p className="title-secondPart">Itens do pedido</p>
+              <p className="txt-secondPart">{item.items_label}</p>
+            </div>
+          </div>
+          <div className="box-statusMobile">
+            <div className="box-secondPart-mobile">
+              <div>
+                <i><CodeBar /></i>
+              </div>
+              <div>
+                <p className="title-statusMobile">{item.status_label}</p>
+                <p className="subtitle-statusMobile">{item.status_value}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+              <i><CodeBar /></i>
+              <span>{item.actions.invoice.label}</span>
+            </Link>
+            <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
+              <i><Receipt /></i>
+              <span>{item.actions.upload.label}</span>
+            </Link>
+            <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">{item.actions.details.label}</Link>
+          </div>
+        </div>
+      </div>
+    ));
   }
 
   renderActions(order) {
-    return Object.keys(order.actions)
-      .filter((key) => key !== 'details' && order.actions[key].enabled)
-      .slice(0, 2)
-      .map((key) => {
-        let icon = null;
+    const { screenSize } = this.props;
 
-        switch (key) {
-          case 'boleto':
-            icon = <CodeBar />;
-            break;
-          case 'invoice':
-            icon = <NFIcon />;
-            break;
-          case 'upload':
-            icon = <ImageFileIcon />;
-            break;
-          default:
-            icon = null;
-            break;
+    if (Object.keys(order.actions).length <= 0) {
+      return null;
+    }
+
+    return (
+      <div className="mol-orders-actions">
+        {
+          Object.keys(order.actions)
+            .filter((key) => key !== 'details' && order.actions[key].enabled)
+            .slice(0, 2)
+            .map((key) => {
+              let icon = null;
+
+              switch (key) {
+                case 'boleto':
+                  icon = <CodeBar />;
+                  break;
+                case 'invoice':
+                  icon = <NFIcon />;
+                  break;
+                case 'upload':
+                  icon = <ImageFileIcon />;
+                  break;
+                default:
+                  icon = null;
+                  break;
+              }
+
+              if (isMobile(screenSize)) {
+                return (
+                  <Link
+                    to={order.actions[key].path || ''}
+                    className="atm-button-transparent"
+                    key={key}
+                  >
+                    {icon}{order.actions[key].label}
+                  </Link>
+                );
+              }
+
+              return (
+                <Tooltip
+                  key={key}
+                  text={order.actions[key].label}
+                >
+                  <Link to={order.actions[key].path || ''} className="atm-transparent-button">
+                    {icon}
+                  </Link>
+                </Tooltip>
+              );
+            })
         }
-
-        return (
-          <Tooltip
-            key={key}
-            text={order.actions[key].label}
-          >
-            <Link to={order.actions[key].path || ''} className="atm-transparent-button">
-              {icon}
-            </Link>
-          </Tooltip>
-        );
-      });
+      </div>
+    );
   }
 
   renderMobile() {
+    const { orders } = this.props;
+    const { page } = this.state;
+
     return (
-      <div>123</div>
+      <div className="org-orders-mobile">
+        <ul className="org-orders-list">
+          {orders.list.map((order) => (
+            <li
+              key={order.info.id}
+              className={order.status_class}
+            >
+              <div className="mol-orders-header">
+                Pedido <span>Nº {order.info.id}</span>
+              </div>
+              <span className="detach" />
+              <div className="mol-orders-body">
+                <div className="mol-orders-items">
+                  <Clipboard />
+                  <div>
+                    Itens do pedido
+                    <span>{order.items_label}</span>
+                  </div>
+                </div>
+                <div className="mol-orders-status">
+                  <i />
+                  <div>
+                    Status
+                    <span>{order.status_value}</span>
+                  </div>
+                </div>
+                {this.renderActions(order)}
+                  {order.actions.details.enabled &&
+                    <div className="mol-orders-details">
+                      <Link
+                        to={`/minha-conta/pedidos/${order.info.id}`}
+                        className="atm-button-rounded atm-button-rounded--blue"
+                      >
+                        {order.actions.details.label}
+                      </Link>
+                    </div>
+                  }
+              </div>
+            </li>
+          ))}
+          {orders.isLoaded && orders.isRunning && <Loading />}
+        </ul>
+        {page < Math.ceil(orders.total_count / 10) &&
+        <div className="atm-orders-load-more">
+          <button
+            className="atm-button-transparent"
+            onClick={this.handleLoadMore}
+          >
+            Carregar mais pedidos
+          </button>
+        </div>
+        }
+      </div>
     );
   }
 
@@ -163,29 +238,27 @@ export class OrderList extends React.Component {
     const { page } = this.state;
 
     return (
-      <div className="org-opinions-desktop">
-        <ul className="org-opinions-header">
+      <div className="org-orders-desktop">
+        <ul className="org-orders-header">
           <li>Nº DO PEDIDO</li>
           <li>REALIZADO EM</li>
           <li>STATUS</li>
           <li>AÇÕES</li>
         </ul>
-        <ul className="org-opinions-list">
+        <ul className="org-orders-list">
           {orders.list.map((order) => (
             <li
               key={order.info.id}
               className={order.status_class}
             >
-              <div className="org-opinions-list-data">
+              <div className="org-orders-list-data">
                 <div>{order.info.id}</div>
                 <div><IntlDate>{order.info.created_at}</IntlDate></div>
                 <div><i />{order.status_value}</div>
-                <div>
-                  {this.renderActions(order)}
-                </div>
+                {this.renderActions(order)}
                 <div>{order.actions.details.enabled && <Link to={`/minha-conta/pedidos/${order.info.id}`}>{order.actions.details.label}</Link>}</div>
               </div>
-              <div className="org-opinions-list-expand">
+              <div className="org-orders-list-expand">
                 <div>
                   Itens do pedido
                   <span>{order.items_label}</span>
@@ -200,7 +273,7 @@ export class OrderList extends React.Component {
           {orders.isLoaded && orders.isRunning && <Loading />}
         </ul>
         {page < Math.ceil(orders.total_count / 10) &&
-          <div className="atm-opinions-load-more">
+          <div className="atm-orders-load-more">
             <button
               className="atm-button-transparent"
               onClick={this.handleLoadMore}

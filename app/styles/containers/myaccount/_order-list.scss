@@ -37,11 +37,11 @@
     color: $color-lightGray;
   }
 
-  .org-opinions {
+  .org-orders {
     &-desktop {
       width: 100%;
 
-      .org-opinions-header {
+      .org-orders-header {
         border-radius: 0.4rem;
         background-color: #f8f8f8;
         border: 0.1rem solid #dbdddf;
@@ -52,8 +52,8 @@
         padding: 1rem 3rem;
       }
 
-      .org-opinions-header > li,
-      .org-opinions-list-data > div {
+      .org-orders-header > li,
+      .org-orders-list-data > div {
         display: inline-flex;
 
         &:first-child {
@@ -77,7 +77,7 @@
         }
       }
 
-      .org-opinions-list {
+      .org-orders-list {
         > li {
           border-radius: 0.4rem;
           border: 0.1rem solid #dbdddf;
@@ -91,7 +91,7 @@
           &.Shipping {
             border-left-color: #f4dd1d;
 
-            .org-opinions-list-data i {
+            .org-orders-list-data i {
               background-color: #f4dd1d;
             }
           }
@@ -99,7 +99,7 @@
           &.waitingPayment {
             border-left-color: #e95f5f;
 
-            .org-opinions-list-data i {
+            .org-orders-list-data i {
               background-color: #e95f5f;
             }
           }
@@ -107,7 +107,7 @@
           &.Shipped {
             border-left-color: #6ec38b;
 
-            .org-opinions-list-data i {
+            .org-orders-list-data i {
               background-color: #6ec38b;
             }
           }
@@ -129,7 +129,7 @@
             margin: 0;
           }
 
-          .org-opinions-list-data {
+          .org-orders-list-data {
             height: 8rem;
 
             > div {
@@ -154,7 +154,7 @@
             }
           }
 
-          .org-opinions-list-expand {
+          .org-orders-list-expand {
             border: 0 transparent;
             height: 0;
             overflow: hidden;
@@ -187,7 +187,7 @@
             box-shadow: 0px 4px 18px 2px rgba(83, 117, 153, 0.5);
             transform: scale(1.01);
 
-            .org-opinions-list-expand {
+            .org-orders-list-expand {
               border-top: 0.1rem solid #dbdddf;
               height: 8rem;
             }
@@ -195,15 +195,194 @@
         }
       }
     }
+
+    &-mobile {
+      display: flex;
+      flex-direction: column;
+
+      .org-orders-list {
+        > li {
+          background-color: $color-white;
+          border: 0 transparent;
+          border-radius: 0.4rem;
+          border-top: 1rem solid #c7c9cb;
+          margin-bottom: 2rem;
+
+          &:last-child {
+            margin: 0;
+          }
+
+          &.Shipping {
+            border-top-color: #f4dd1d;
+
+            .mol-orders-body .mol-orders-status {
+              i {
+                background-color: #f4dd1d;
+              }
+
+              > div span {
+                color: #f4dd1d;
+              }
+            }
+          }
+
+          &.waitingPayment {
+            border-top-color: #e95f5f;
+
+            .mol-orders-body .mol-orders-status {
+              i {
+                background-color: #e95f5f;
+              }
+
+              > div span {
+                color: #e95f5f;
+              }
+            }
+          }
+
+          &.Shipped {
+            border-top-color: #6ec38b;
+
+            .mol-orders-body .mol-orders-status {
+              i {
+                background-color: #6ec38b;
+              }
+
+              >d iv span {
+                color: #6ec38b;
+              }
+            }
+          }
+
+          .mol-orders-header {
+            color: #151617;
+            display: inline-flex;
+            flex-direction: column;
+            font-size: $font-size-xs;
+            padding: 3rem 2rem;
+
+            span {
+              font-size: $font-size-lg;
+              font-weight: bold;
+              line-height: 1.11;
+              letter-spacing: 0.18rem;
+            }
+          }
+
+          .detach {
+            height: 0.1rem;
+            border-bottom: 0.1rem dashed #eee;
+            width: 100%;
+            display: block;
+            position: relative;
+
+            &:before, &:after {
+              background: #eee;
+              border-radius: 50%;
+              content: "";
+              display: block;
+              height: 1.2rem;
+              position: absolute;
+              top: -0.6rem;
+              width: 1.2rem;
+            }
+
+            &:before {
+              left: -0.6rem
+            }
+
+            &:after {
+              right: -0.6rem;
+            }
+          }
+
+          .mol-orders-body {
+            padding: 3rem 2rem;
+
+            .mol-orders-items {
+              align-items: center;
+              display: flex;
+              justify-content: flex-start;
+
+              svg {
+                height: 2.1rem;
+                margin-right: 1.2rem;
+                width: auto;
+              }
+
+              > div {
+                display: flex;
+                flex-direction: column;
+                font-size: $font-size-xs;
+
+                > span {
+                  font-size: $font-size-lg;
+                  line-height: 1.11;
+                }
+              }
+            }
+
+            .mol-orders-status {
+              align-items: center;
+              display: flex;
+              margin-top: 2.4rem;
+
+              i {
+                background-color: #c7c9cb;
+                border-radius: 2.2rem;
+                display: flex;
+                height: 2.2rem;
+                margin-right: 0.8rem;
+                width: 2.2rem;
+              }
+
+              > div {
+                color: #151617;
+                display: flex;
+                flex-direction: column;
+                font-size: $font-size-xs;
+
+                span {
+                  font-size: $font-size-lg;
+                  line-height: 1.11;
+                  color: #c7c9cb;
+                }
+              }
+            }
+
+            .mol-orders-actions {
+              margin-top: 2rem;
+            }
+
+            .mol-orders-details {
+              margin-top: 2rem;
+              width: 100%;
+
+              > a {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
-  .atm-opinions-load-more {
+  .atm-button-transparent {
+    width: 100%;
+  }
+
+  .atm-orders-load-more {
     @include center-child-flex;
     margin-top: 3rem;
     width: 100%;
 
     > button {
-      width: 30rem;
+      width: 100%;
+
+      @include lg {
+        width: 30rem;
+      }
     }
   }
 
