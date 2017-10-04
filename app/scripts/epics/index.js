@@ -15,6 +15,7 @@ import {
 import { productsFetch } from './products';
 import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
+import { printiPressFetch } from './printi-press';
 import { glossarySlugFetch, glossaryFetch } from './glossary';
 import { siteMapFetch } from './site-map';
 import {
@@ -53,6 +54,7 @@ import {
   accountNotificationUpdate,
   accountSavedCreditCardFetch,
   accountSavedCreditCardDelete,
+  accountOrderDetailFetch,
   accountOrderFetch,
 } from './account';
 
@@ -77,6 +79,7 @@ export default combineEpics(
   userSocialSignUp,
   userLogOut,
   userAuthValidate,
+  printiPressFetch,
   cartBasicFetch,
   cartFetch,
   cartAddFetch,
@@ -100,6 +103,7 @@ export default combineEpics(
   accountSavedCreditCardDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
+  accountOrderDetailFetch,
   accountOrderFetch,
   policyFetch,
   termsFetch,
