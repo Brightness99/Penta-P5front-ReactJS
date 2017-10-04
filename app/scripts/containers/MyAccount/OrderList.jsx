@@ -4,11 +4,12 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { accountOrdersFetch } from 'actions';
 import Loading from 'components/Loading';
 import Tooltip from 'components/Tooltipster';
-import { accountOrdersFetch } from 'actions';
 import { CodeBar, Receipt, ImageFileIcon, NFIcon, Clipboard } from 'components/Icons';
 import { IntlDate, IntlMoney } from 'components/Intl';
+import { PageTitle } from 'atoms/Titles';
 
 type Props = {
   screenSize: string,
@@ -59,59 +60,6 @@ export class OrderList extends React.Component {
       page: page + 1,
     });
   };
-
-  renderItemsO() {
-    const { orders } = this.props;
-
-    if (orders.list.length <= 0) {
-      return <p>There are no orders</p>;
-    }
-
-    return orders.list.map((item) => (
-      <div className="box-detailsOrder delivered" key={item.info.id}>
-        <div className="box-firstPart">
-          <div>
-            <p className="title-myorderMobile">Pedido</p>
-            <p className="subtitle-myorderMobile">Nº {item.info.id}</p>
-          </div>
-        </div>
-        <span className="detach" />
-        <div className="box-secondPart">
-          <div className="box-secondPart-mobile">
-            <div>
-              <i><Clipboard /></i>
-            </div>
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">{item.items_label}</p>
-            </div>
-          </div>
-          <div className="box-statusMobile">
-            <div className="box-secondPart-mobile">
-              <div>
-                <i><CodeBar /></i>
-              </div>
-              <div>
-                <p className="title-statusMobile">{item.status_label}</p>
-                <p className="subtitle-statusMobile">{item.status_value}</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-              <i><CodeBar /></i>
-              <span>{item.actions.invoice.label}</span>
-            </Link>
-            <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-              <i><Receipt /></i>
-              <span>{item.actions.upload.label}</span>
-            </Link>
-            <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">{item.actions.details.label}</Link>
-          </div>
-        </div>
-      </div>
-    ));
-  }
 
   renderActions(order) {
     const { screenSize } = this.props;
@@ -177,7 +125,7 @@ export class OrderList extends React.Component {
     const { page } = this.state;
 
     return (
-      <div className="org-orders-mobile">
+      <div className="org-orders org-orders-mobile">
         <ul className="org-orders-list">
           {orders.list.map((order) => (
             <li
@@ -238,7 +186,7 @@ export class OrderList extends React.Component {
     const { page } = this.state;
 
     return (
-      <div className="org-orders-desktop">
+      <div className="org-orders org-orders-desktop">
         <ul className="org-orders-header">
           <li>Nº DO PEDIDO</li>
           <li>REALIZADO EM</li>
@@ -315,11 +263,11 @@ export class OrderList extends React.Component {
       },
     ];
     return (
-      <div className="container-myorder">
+      <div className="container-myaccount-content">
         {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <h2>Minha conta</h2>
-        <h3 className="subtitle-myorder">Meus pedidos</h3>
-        <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
+        <PageTitle>Minha conta</PageTitle>
+        <h3 className="atm-myorder-title">Meus pedidos</h3>
+        <span className="atm-myorder-subtitle">Acompanhe os status do seus pedidos</span>
         {this.renderItems()}
       </div>
     );
