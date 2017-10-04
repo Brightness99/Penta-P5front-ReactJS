@@ -4,3 +4,4 @@
  */
 
 export settingsSelector from './settings';
+export filteredGlossarySelector from './glossary';

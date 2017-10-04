@@ -13,7 +13,12 @@ export const accountState = {
   notification: {},
   addresses: {},
   selectedOrder: {},
-  orders: {},
+  orders: {
+    list: [],
+    total_count: 0,
+    isRunning: false,
+    isLoaded: false,
+  },
 };
 
 export default {
@@ -292,9 +297,10 @@ export default {
       return {
         ...state,
         orders: {
-          list: [],
+          list: state.orders.isLoaded ? state.orders.list : accountState.orders.list,
+          total_count: 0,
           isRunning: true,
-          isLoaded: false,
+          isLoaded: state.orders.isLoaded,
         },
       };
     },
@@ -312,7 +318,8 @@ export default {
       return {
         ...state,
         orders: {
-          list: action.payload,
+          list: !state.isLoaded ? action.payload.list : state.orders.list.concat(action.payload.list),
+          total_count: action.payload.total_count,
           isRunning: false,
           isLoaded: true,
         },
