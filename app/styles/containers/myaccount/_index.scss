@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: row;
   }
+
   .container-sidebarAccount {
     flex: 1;
     //height: 100%;
@@ -90,6 +91,46 @@
     }
   }
 
+  &-content {
+    padding: 3rem 0 4rem;
+
+    @include lg {
+      background-color: $color-white;
+      flex: 5;
+      padding: 2rem 6rem 3rem 6rem;
+    }
+
+    .app__breadcrumb {
+      margin-bottom: 2.4rem;
+      padding: 0;
+    }
+
+    .atm__page-title {
+      margin-bottom: 4rem;
+      padding: 0;
+
+      @include lg {
+        margin-bottom: 5rem;
+      }
+    }
+
+    .atm-myorder-title {
+      color: $color-almostBlack;
+      font-family: $font-family-nunito-light;
+      font-size: 2.1rem;
+      letter-spacing: normal;
+      line-height: 1;
+      margin-left: -0.2rem;
+      padding: 0;
+      text-transform: none;
+
+      @include lg {
+        font-size: 2.7rem;
+      }
+    }
+
+  }
+
   .container-myorder {
     @include lg {
       background-color: $color-white;
@@ -99,9 +140,6 @@
     }
     .container {
       width: auto;
-    }
-    .app__breadcrumb {
-      margin-bottom: 2.4rem;
     }
     .title-myorder {
       padding: 2rem 0 0.5rem 0;
@@ -1129,9 +1167,6 @@
   }
   .container {
     width: auto;
-  }
-  .app__breadcrumb {
-    margin-bottom: 2.4rem;
   }
   .title-myAddresses {
     margin-top:2.8rem;
