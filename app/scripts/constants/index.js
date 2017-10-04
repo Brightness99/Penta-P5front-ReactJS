@@ -19,3 +19,4 @@ export * from './social-login-settings';
 export * from './terms';
 export * from './glossary';
 export * from './header';
+export * from './site-map';
