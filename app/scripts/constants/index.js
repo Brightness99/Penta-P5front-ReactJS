@@ -20,3 +20,4 @@ export * from './terms';
 export * from './printi-press';
 export * from './glossary';
 export * from './header';
+export * from './site-map';
