@@ -7,7 +7,7 @@ import cx from 'classnames';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Sidebar from './Sidebar';
 import OrderList from './OrderList';
-import OrderListDetails from './OrderListDetails';
+import OrderDetails from './OrderDetails';
 import MyAddresses from './MyAddresses';
 import CardsAccount from './CardsAccount';
 import TemplateModels from './TemplateModels';
@@ -40,7 +40,7 @@ export class MyAccount extends React.Component {
             <Switch>
               <Route
                 path="/minha-conta/pedidos/:orderNumber"
-                render={(props) => <OrderListDetails {...props} screenSize={screenSize} />}
+                render={(props) => <OrderDetails {...props} screenSize={screenSize} />}
               />
               <Route
                 render={(props) => <OrderList {...props} screenSize={screenSize} />}

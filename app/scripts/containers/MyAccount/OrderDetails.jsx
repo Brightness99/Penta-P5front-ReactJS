@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import Helmet from 'react-helmet';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,15 +9,17 @@ import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel } from 'components/Icons';
 import { accountOrderDetailFetch } from 'actions';
 import Loading from 'components/Loading';
+import { PageTitle } from 'atoms/Titles';
 
 type Props = {
   screenSize: string,
   account: {},
   match: {},
+  locale: {},
   dispatch: () => {},
 };
 
-export class OrderListDetails extends React.Component {
+export class OrderDetails extends React.Component {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
@@ -25,10 +28,6 @@ export class OrderListDetails extends React.Component {
 
     dispatch(accountOrderDetailFetch(orderNumber));
   }
-
-  static defaultProps = {
-    screenSize: 'xs',
-  };
 
   static props: Props;
 
@@ -306,8 +305,19 @@ export class OrderListDetails extends React.Component {
     );
   }
 
+  renderOrder() {
+    const { screenSize, locale } = this.props;
+
+    return null;
+
+    // return [
+    //   <h3 className="atm-myorder-title">{locale.my_orders.TITLE}</h3>,
+    //   isMobile(screenSize) ? this.renderMobile() : this.renderDesktop(),
+    // ];
+  }
+
   render() {
-    const { screenSize, account: { selectedOrder } } = this.props;
+    const { screenSize, account: { selectedOrder }, locale } = this.props;
 
     const breadcrumb = [
       {
@@ -328,11 +338,16 @@ export class OrderListDetails extends React.Component {
     ];
 
     return (
-      <section className="container-myaccountdetails">
-        {!isMobile(screenSize) && selectedOrder.isLoaded && !selectedOrder.isRunning && <Breadcrumbs links={breadcrumb} />}
-        <h2>Minha conta</h2>
-        {!selectedOrder.isLoaded || selectedOrder.isRunning ? <Loading /> : (isMobile(screenSize) ? this.renderMobile() : this.renderDesktop())}
-      </section>
+
+      <div className="container-myaccount-content">
+        <Helmet>
+          <title>{locale.my_orders.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.my_orders.seo.META_DESCRIPTION} />
+        </Helmet>
+        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
+        <PageTitle>{locale.TITLE}</PageTitle>
+        {this.renderOrder()}
+      </div>
     );
   }
 }
@@ -341,6 +356,7 @@ function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
     account: state.account,
+    locale: state.locale.translate.account,
   };
 }
 
@@ -348,4 +364,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderListDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);
