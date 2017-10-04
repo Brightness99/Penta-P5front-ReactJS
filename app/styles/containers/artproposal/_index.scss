@@ -47,6 +47,7 @@
             span {
               flex: 2;
               margin-left: 2.0rem;
+              cursor: pointer;
             }
             &.is-active {
               color: $color-printi-blue;
@@ -54,7 +55,7 @@
             }
             &:hover {
               color: $color-printi-blue;
-              background-color: $color-lightBlue
+              background-color: $color-lightBlue;
             }
           }
           &:last-of-type {
@@ -142,6 +143,7 @@
               width: 100%;
               height: 150px;
               position: relative;
+              margin-bottom: 2rem;
               .box-docs {
                 position: absolute;
                 top: 0;
@@ -185,28 +187,28 @@
                 }
               }
             }
-            margin-bottom: 2rem;
-          }
-          .item-footer {
-            display: flex;
-            background-color: $color-lightWarning;
-            font-size: $font-size-xs;
-            padding: 1.0rem;
-            .button-wrapper {
-              .atm-button-transparent {
-                  margin-top: 0;
+            .download-container{
+              display: flex;
+              background-color: $color-lightWarning;
+              font-size: $font-size-xs;
+              padding: 1.0rem;
+              .button-wrapper {
+                .atm-button-transparent {
+                    margin-top: 0;
+                }
+                svg {
+                    width: 18px;
+                    height: 18px;
+                }
               }
-              svg {
-                  width: 18px;
-                  height: 18px;
+              .note {
+                margin-left: 36px;
+                padding-top: 0.4rem;
+                color: $color-lightGray;
               }
             }
-            .note {
-              margin-left: 36px;
-              padding-top: 0.4rem;
-              color: $color-lightGray;
-            }
           }
+
         }
         .approval-button-wrapper {
           .atm-box-radio {
@@ -297,7 +299,7 @@
             .slider-doc-item:first-child {
                 margin-left: 0 !important;
             }
-            .item-footer {
+            .download-container {
                 display: block;
                 button {
                     width: 100%

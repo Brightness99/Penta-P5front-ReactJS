@@ -42,32 +42,36 @@ const docs = [
   },
 ];
 
+type Props = {
+  proposal: {},
+  type: string,
+}
+
 export class ProposalItem extends React.Component {
-  renderDocs = () => (
-    docs.map((doc, index) => (
+
+  static props: Props;
+
+  renderFiles = (files) => (
+    files.map((file, index) => (
       <div className="slider-doc-item" key={index.toString()}>
         <div className="doc">
-          <img src={`${config.basePath}${doc.image.URL}`} alt={doc.image.ALT} />
+          <embed src={file.file_url} />
+          {/* <img src={file.file_url} alt={file.file_name} /> */}
         </div>
       </div>
     ))
   );
 
   render() {
-    return (
-      <div className="proposal-item">
-        <div className="item-header">
-          <div className="avatar-wrapper">
-            <image src="" />
-          </div>
-          <div className="name-wrapper">
-            <p className="name">Enviado por</p>
-            <p className="position">Designer Printi</p>
-          </div>
-        </div>
-        <div className="item-body">
-          <p className="proposal-text">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor fringilla. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Sed posuere consectetur est at lobortis.</p>
-          <div className="date">Enviado em 20/04/2015 | 16:45</div>
+    const { proposal, type } = this.props;
+    //Todo | get current name
+    const currentName = 'Diogo Capelo';
+    const name = (type === 'customer') ? currentName : proposal.designer_name;
+    const message = (type === 'customer') ? proposal.customer_message : proposal.designer_message;
+    const date = (type === 'customer') ? proposal.customer_message_at : proposal.sent_at;  //?
+    const sliderMark = (type === 'designer') ?
+      (
+        <div>
           <div className="box-docs-wrapper">
             <div className="box-docs">
               <Slider
@@ -81,21 +85,39 @@ export class ProposalItem extends React.Component {
                 slidesToShow={3}
                 slidesToScroll={3}
               >
-                {this.renderDocs()}
+                {this.renderFiles(proposal.files)}
               </Slider>
             </div>
           </div>
+          <div className="download-container">
+            <div className="button-wrapper">
+              <RoundedTransparentButton>
+                <DownloadIcon />
+                <span>DOWNLOAD Dos ARQUIVOS</span>
+              </RoundedTransparentButton>
+            </div>
+            <div className="note">
+              IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 
+            </div>
+          </div>
         </div>
-        <div className="item-footer">
-          <div className="button-wrapper">
-            <RoundedTransparentButton>
-              <DownloadIcon />
-              <span>DOWNLOAD Dos ARQUIVOS</span>
-            </RoundedTransparentButton>
+      ) :
+      null;
+    return (
+      <div className="proposal-item">
+        <div className="item-header">
+          <div className="avatar-wrapper">
+            <image src="" />
           </div>
-          <div className="note">
-            IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 
+          <div className="name-wrapper">
+            <p className="name">Enviado por</p>
+            <p className="position">{name}</p>
           </div>
+        </div>
+        <div className="item-body">
+          <p className="proposal-text"><div dangerouslySetInnerHTML={{ __html: message }} /></p>
+          <div className="date">Enviado em {date}</div>
+          {sliderMark}
         </div>
       </div>
     );

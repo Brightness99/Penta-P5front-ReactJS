@@ -13,20 +13,33 @@ type Props = {
   router: RouterStore,
   dispatch: () => {},
   children: any,
-  artCreation: {}
+  artCreation: any,
+};
+
+type State = {
+  activeIndex: number,
 };
 
 //TODO | Ken: This will be replaced with the real item id.
 const order_item_id = '801901';
 
 export class ArtProposal extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeIndex: 0,
+    };
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
-
     dispatch(proposalsFetch(order_item_id));
   }
 
   static props: Props;
+
+  static state: State;
 
   renderMobile() {
     return (
@@ -41,8 +54,14 @@ export class ArtProposal extends React.Component {
     );
   }
 
+  sideBarClickHandler = (index) => {
+    this.setState({ activeIndex: index });
+  }
+
   renderDesktop() {
-    const { app: { screenSize } } = this.props;
+    const { app: { screenSize }, artCreation } = this.props;
+    const { activeIndex } = this.state;
+    let sideBar = null;
 
     const breadcrumb = [
       {
@@ -74,7 +93,12 @@ export class ArtProposal extends React.Component {
           <p className="destitle">Acompanhe a criação da sua arte</p>
         </div>
         <div className="container-artproposal">
-          <Sidebar screenSize={screenSize} />
+          <Sidebar
+            screenSize={screenSize}
+            proposals={artCreation.proposals}
+            activeIndex={activeIndex}
+            onSidebarItemClick={this.sideBarClickHandler}
+          />
           {this.renderContainer()}
         </div>
       </div>
@@ -82,28 +106,27 @@ export class ArtProposal extends React.Component {
   }
 
   renderContainer() {
-    const { app: { screenSize } } = this.props;
-
-    return (
-      <Switch>
-        <Route
-          path="/proposta-de-arte/a"
-          render={(props) => <ArtProposalContent {...props} screenSize={screenSize} />}
-        />
-        <Route
-          path="/proposta-de-arte/b"
-          render={(props) => <ArtProposalContent {...props} screenSize={screenSize} />}
-        />
-        <Route
-          render={(props) => <ArtProposalContent {...props} screenSize={screenSize} />}
-        />
-      </Switch>
-    );
+    const { app: { screenSize }, artCreation } = this.props;
+    let containerMark = null;
+    if (artCreation.isLoaded) {
+      if (this.state.activeIndex === '') {
+        this.setState({
+          activeIndex: artCreation.proposals[0].id,
+        });
+      }
+      containerMark = (
+        <ArtProposalContent
+          activeIndex={this.state.activeIndex}
+          proposals={artCreation.proposals}
+          screenSize={screenSize}
+        />);
+    }
+    console.log('artCreation ===> ', artCreation);
+    return containerMark;
   }
 
   render() {
-    const { app: { screenSize }, artCreation } = this.props;
-    console.log('proposals ===> ', artCreation);
+    const { app: { screenSize } } = this.props;
     return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
       ? this.renderMobile()
       : this.renderDesktop();
