@@ -1,366 +1,347 @@
-.container-myorder {
+.atm-myorder-subtitle {
+  color: $color-lightGray;
+  display: block;
+  font-size: $font-size-sm;
+  font-weight: 300;
+  line-height: 1.25;
+  margin: 0.5rem 0 2.5rem;
+
   @include lg {
-    background-color: $color-white;
-    flex: 5;
-    box-sizing: border-box;
-    padding: 2rem 6rem 3rem 6rem;
+    font-size: $font-size-base;
+    margin: 1.2rem 0 1.6rem;
   }
-  .container {
-    width: auto;
-  }
+}
 
-  .title-myorder {
-    padding: 2rem 0 0.5rem 0;
-  }
-  .subtitle-myorder {
-    font-family: $font-family-nunito-light;
-    font-size: $font-size-h4;
-    font-weight: 300;
-    line-height: 1.11;
-    text-align: left;
-    color: $color-almostBlack;
-    text-transform: none;
-    margin-top: 1.4rem;
-    padding-bottom: 0;
-    @include lg {
-      font-size: $font-size-xl;
-      margin-top: 2.4rem;
+.org-orders {
+  &-desktop {
+    width: 100%;
+
+    .org-orders-header {
+      border-radius: 0.4rem;
+      background-color: #f8f8f8;
+      border: 0.1rem solid #dbdddf;
+      color: #151617;
+      font-size: $font-size-xs;
+      font-weight: bold;
+      letter-spacing: 0.12rem;
+      padding: 1rem 3rem;
     }
-  }
 
-  .legend-myorder {
-    font-family: $font-family-open-sans-light;
-    font-size: $font-size-h6;
-    font-weight: 300;
-    line-height: 1.25;
-    text-align: left;
-    color: $color-lightGray;
-  }
+    .org-orders-header > li,
+    .org-orders-list-data > div {
+      display: inline-flex;
 
-  .org-orders {
-    &-desktop {
-      width: 100%;
+      &:first-child {
+        width: 15%;
+      }
 
-      .org-orders-header {
+      &:nth-child(2) {
+        width: 20%;
+      }
+
+      &:nth-child(3) {
+        width: 30%;
+      }
+
+      &:nth-child(4) {
+        width: 25%;
+      }
+
+      &:nth-child(5) {
+        width: 10%;
+      }
+    }
+
+    .org-orders-list {
+      > li {
         border-radius: 0.4rem;
-        background-color: #f8f8f8;
         border: 0.1rem solid #dbdddf;
+        border-left: 0.5rem solid #c7c9cb;
         color: #151617;
-        font-size: $font-size-xs;
-        font-weight: bold;
-        letter-spacing: 0.12rem;
-        padding: 1rem 3rem;
-      }
+        flex-direction: column;
+        margin-bottom: 1rem;
+        padding: 0 3rem 0 2.5rem;
+        transition: 0.3s ease;
 
-      .org-orders-header > li,
-      .org-orders-list-data > div {
-        display: inline-flex;
+        &.Shipping {
+          border-left-color: #f4dd1d;
 
-        &:first-child {
-          width: 15%;
-        }
-
-        &:nth-child(2) {
-          width: 20%;
-        }
-
-        &:nth-child(3) {
-          width: 30%;
-        }
-
-        &:nth-child(4) {
-          width: 25%;
-        }
-
-        &:nth-child(5) {
-          width: 10%;
-        }
-      }
-
-      .org-orders-list {
-        > li {
-          border-radius: 0.4rem;
-          border: 0.1rem solid #dbdddf;
-          border-left: 0.5rem solid #c7c9cb;
-          color: #151617;
-          flex-direction: column;
-          margin-bottom: 1rem;
-          padding: 0 3rem 0 2.5rem;
-          transition: 0.3s ease;
-
-          &.Shipping {
-            border-left-color: #f4dd1d;
-
-            .org-orders-list-data i {
-              background-color: #f4dd1d;
-            }
+          .org-orders-list-data i {
+            background-color: #f4dd1d;
           }
+        }
 
-          &.waitingPayment {
-            border-left-color: #e95f5f;
+        &.waitingPayment {
+          border-left-color: #e95f5f;
 
-            .org-orders-list-data i {
-              background-color: #e95f5f;
-            }
+          .org-orders-list-data i {
+            background-color: #e95f5f;
           }
+        }
 
-          &.Shipped {
-            border-left-color: #6ec38b;
+        &.Shipped {
+          border-left-color: #6ec38b;
 
-            .org-orders-list-data i {
-              background-color: #6ec38b;
-            }
+          .org-orders-list-data i {
+            background-color: #6ec38b;
           }
+        }
 
-          .atm-transparent-button {
-            margin-right: 1rem;
+        .atm-transparent-button {
+          margin-right: 1rem;
+          padding: 0;
+          width: 6rem;
 
-            &:last-child {
-              margin-right: 0;
-            }
+          &:last-child {
+            margin-right: 0;
           }
+        }
+
+        > div {
+          align-items: center;
+          display: flex;
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+
+        .org-orders-list-data {
+          height: 8rem;
 
           > div {
             align-items: center;
-            display: flex;
-          }
+            display: inline-flex;
 
-          &:last-child {
-            margin: 0;
-          }
+            &:last-child {
+              justify-content: flex-end;
+            }
 
-          .org-orders-list-data {
-            height: 8rem;
+            a {
+              color: $color-printi-blue;
+              font-size: $font-size-xs;
 
-            > div {
-              align-items: center;
-              display: inline-flex;
-              a {
-                color: $color-printi-blue;
-                font-size: $font-size-xs;
-
-                &:hover {
-                  text-decoration: underline;
-                }
+              &:hover {
+                text-decoration: underline;
               }
             }
+          }
 
-            i {
-              background-color: #c7c9cb;
-              border-radius: 1rem;
-              height: 1rem;
-              width: 1rem;
-              margin-right: 1.2rem;
+          i {
+            background-color: #c7c9cb;
+            border-radius: 1rem;
+            height: 1rem;
+            width: 1rem;
+            margin-right: 1.2rem;
+          }
+        }
+
+        .org-orders-list-expand {
+          border: 0 transparent;
+          height: 0;
+          overflow: hidden;
+          transition: 0.3s ease;
+
+          > div {
+            display: inline-flex;
+            color: #6a6f7a;
+            flex-direction: column;
+            font-size: $font-size-xs;
+            justify-content: flex-start;
+
+            > span {
+              color: $color-almostBlack;
+              font-size: $font-size-base;
+            }
+
+            &:first-child {
+              margin-left: 35%;
+              width: 30%;
+            }
+
+            &:last-child {
+              width: 25%;
             }
           }
+        }
+
+        &:hover {
+          box-shadow: 0px 4px 18px 2px rgba(83, 117, 153, 0.5);
+          transform: scale(1.01);
 
           .org-orders-list-expand {
-            border: 0 transparent;
-            height: 0;
-            overflow: hidden;
-            transition: 0.3s ease;
-
-            > div {
-              display: inline-flex;
-              color: #6a6f7a;
-              flex-direction: column;
-              font-size: $font-size-xs;
-              justify-content: flex-start;
-
-              > span {
-                color: $color-almostBlack;
-                font-size: $font-size-base;
-              }
-
-              &:first-child {
-                margin-left: 35%;
-                width: 30%;
-              }
-
-              &:last-child {
-                width: 25%;
-              }
-            }
-          }
-
-          &:hover {
-            box-shadow: 0px 4px 18px 2px rgba(83, 117, 153, 0.5);
-            transform: scale(1.01);
-
-            .org-orders-list-expand {
-              border-top: 0.1rem solid #dbdddf;
-              height: 8rem;
-            }
+            border-top: 0.1rem solid #dbdddf;
+            height: 8rem;
           }
         }
       }
     }
+  }
 
-    &-mobile {
-      display: flex;
-      flex-direction: column;
+  &-mobile {
+    display: flex;
+    flex-direction: column;
 
-      .org-orders-list {
-        > li {
-          background-color: $color-white;
-          border: 0 transparent;
-          border-radius: 0.4rem;
-          border-top: 1rem solid #c7c9cb;
-          margin-bottom: 2rem;
+    .org-orders-list {
+      > li {
+        background-color: $color-white;
+        border: 0 transparent;
+        border-radius: 0.4rem;
+        border-top: 1rem solid #c7c9cb;
+        margin-bottom: 2rem;
 
-          &:last-child {
-            margin: 0;
-          }
+        &:last-child {
+          margin: 0;
+        }
 
-          &.Shipping {
-            border-top-color: #f4dd1d;
+        &.Shipping {
+          border-top-color: #f4dd1d;
 
-            .mol-orders-body .mol-orders-status {
-              i {
-                background-color: #f4dd1d;
-              }
+          .mol-orders-body .mol-orders-status {
+            i {
+              background-color: #f4dd1d;
+            }
 
-              > div span {
-                color: #f4dd1d;
-              }
+            > div span {
+              color: #f4dd1d;
             }
           }
+        }
 
-          &.waitingPayment {
-            border-top-color: #e95f5f;
+        &.waitingPayment {
+          border-top-color: #e95f5f;
 
-            .mol-orders-body .mol-orders-status {
-              i {
-                background-color: #e95f5f;
-              }
+          .mol-orders-body .mol-orders-status {
+            i {
+              background-color: #e95f5f;
+            }
 
-              > div span {
-                color: #e95f5f;
-              }
+            > div span {
+              color: #e95f5f;
             }
           }
+        }
 
-          &.Shipped {
-            border-top-color: #6ec38b;
+        &.Shipped {
+          border-top-color: #6ec38b;
 
-            .mol-orders-body .mol-orders-status {
-              i {
-                background-color: #6ec38b;
-              }
+          .mol-orders-body .mol-orders-status {
+            i {
+              background-color: #6ec38b;
+            }
 
-              >d iv span {
-                color: #6ec38b;
-              }
+            > div span {
+              color: #6ec38b;
             }
           }
+        }
 
-          .mol-orders-header {
-            color: #151617;
-            display: inline-flex;
-            flex-direction: column;
-            font-size: $font-size-xs;
-            padding: 3rem 2rem;
+        .mol-orders-header {
+          color: #151617;
+          display: inline-flex;
+          flex-direction: column;
+          font-size: $font-size-xs;
+          padding: 3rem 2rem;
 
-            span {
-              font-size: $font-size-lg;
-              font-weight: bold;
-              line-height: 1.11;
-              letter-spacing: 0.18rem;
-            }
+          span {
+            font-size: $font-size-lg;
+            font-weight: bold;
+            line-height: 1.11;
+            letter-spacing: 0.18rem;
           }
+        }
 
-          .detach {
-            height: 0.1rem;
-            border-bottom: 0.1rem dashed #eee;
-            width: 100%;
+        .detach {
+          height: 0.1rem;
+          border-bottom: 0.1rem dashed #eee;
+          width: 100%;
+          display: block;
+          position: relative;
+
+          &:before, &:after {
+            background: #eee;
+            border-radius: 50%;
+            content: "";
             display: block;
-            position: relative;
+            height: 1.2rem;
+            position: absolute;
+            top: -0.6rem;
+            width: 1.2rem;
+          }
 
-            &:before, &:after {
-              background: #eee;
-              border-radius: 50%;
-              content: "";
-              display: block;
-              height: 1.2rem;
-              position: absolute;
-              top: -0.6rem;
-              width: 1.2rem;
+          &:before {
+            left: -0.6rem
+          }
+
+          &:after {
+            right: -0.6rem;
+          }
+        }
+
+        .mol-orders-body {
+          padding: 3rem 2rem;
+
+          .mol-orders-items {
+            align-items: center;
+            display: flex;
+            justify-content: flex-start;
+
+            svg {
+              height: 2.1rem;
+              margin-right: 1.2rem;
+              width: auto;
             }
 
-            &:before {
-              left: -0.6rem
-            }
+            > div {
+              display: flex;
+              flex-direction: column;
+              font-size: $font-size-xs;
 
-            &:after {
-              right: -0.6rem;
+              > span {
+                font-size: $font-size-lg;
+                line-height: 1.11;
+              }
             }
           }
 
-          .mol-orders-body {
-            padding: 3rem 2rem;
+          .mol-orders-status {
+            align-items: center;
+            display: flex;
+            margin-top: 2.4rem;
 
-            .mol-orders-items {
-              align-items: center;
+            i {
+              background-color: #c7c9cb;
+              border-radius: 2.2rem;
               display: flex;
-              justify-content: flex-start;
-
-              svg {
-                height: 2.1rem;
-                margin-right: 1.2rem;
-                width: auto;
-              }
-
-              > div {
-                display: flex;
-                flex-direction: column;
-                font-size: $font-size-xs;
-
-                > span {
-                  font-size: $font-size-lg;
-                  line-height: 1.11;
-                }
-              }
+              height: 2.2rem;
+              margin-right: 0.8rem;
+              width: 2.2rem;
             }
 
-            .mol-orders-status {
-              align-items: center;
+            > div {
+              color: #151617;
               display: flex;
-              margin-top: 2.4rem;
+              flex-direction: column;
+              font-size: $font-size-xs;
 
-              i {
-                background-color: #c7c9cb;
-                border-radius: 2.2rem;
-                display: flex;
-                height: 2.2rem;
-                margin-right: 0.8rem;
-                width: 2.2rem;
-              }
-
-              > div {
-                color: #151617;
-                display: flex;
-                flex-direction: column;
-                font-size: $font-size-xs;
-
-                span {
-                  font-size: $font-size-lg;
-                  line-height: 1.11;
-                  color: #c7c9cb;
-                }
+              span {
+                font-size: $font-size-lg;
+                line-height: 1.11;
+                color: #c7c9cb;
               }
             }
+          }
 
-            .mol-orders-actions {
-              margin-top: 2rem;
-            }
+          .mol-orders-actions {
+            margin-top: 2rem;
+          }
 
-            .mol-orders-details {
-              margin-top: 2rem;
+          .mol-orders-details {
+            margin-top: 2rem;
+            width: 100%;
+
+            > a {
               width: 100%;
-
-              > a {
-                width: 100%;
-              }
             }
           }
         }
