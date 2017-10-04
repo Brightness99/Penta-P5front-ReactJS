@@ -1,3 +1,124 @@
-.testando {
-  background-color: red;
+.DateRangePickerInput {
+  border: 0 solid transparent;
+}
+.CalendarMonth--vertical {
+  margin-top: 9rem;
+}
+.CalendarDay--selected-span {
+  background-color: $color-sky-blue;
+  border: 0.1rem double $color-white;
+}
+
+.CalendarDay--selected-start, 
+.CalendarDay--selected-end, 
+.CalendarDay--selected {
+  background-color: $color-printi-blue;
+  border: 0.1rem double $color-white;
+}
+
+.DateInput__display-text {
+  font-family: $font-family-open-sans;
+  padding: 0.1rem 4rem;
+  &:first-of-type {
+    padding-left: 0; 
+  }
+  &:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.container-cloud {
+  background-color: $color-white;
+  font-family: $font-family-open-sans;
+  padding: 4rem 0 3rem 0;
+  @include lg {
+    background-color: $color-white;
+    box-sizing: border-box;
+    flex: 5;
+    margin-bottom: 0;
+    padding: 2rem 6rem 0 6rem;
+  }
+  .subtitle-cloud {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-h4;
+    font-weight: 300;
+    line-height: 1.11;
+    text-align: left;
+    color: $color-almostBlack;
+    text-transform: none;
+    margin-top: 1.4rem;
+    padding-bottom: 0;
+    @include lg {
+      font-size: $font-size-xl;
+      margin-top: 2.4rem;
+    }
+  }
+  .box-cloudDate {
+    margin: 2rem 0;
+    @include lg {
+      margin: 1rem 0;
+    }
+    .label-dateInitialFinal {
+      margin: 2rem;
+      &:first-of-type {
+        margin-left: 0;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+    .DateRangePicker {
+      border-color: transparent;
+      border-radius: 0;
+      .DateRangePickerInput {
+        border-color: transparent;
+        &__arrow {
+          margin: 0 1rem;
+        }
+        .DateInput {
+          font-size: $font-size-base;
+          padding: inherit;
+          width: auto;
+          &__input {
+            cursor: pointer;
+          }
+          &__display-text--focused {
+            background-color: $color-white;
+            border-bottom: 0.1rem solid $color-printi-blue;
+            color: $color-lightGray;
+          }
+        }
+      }
+      .DayPickerKeyboardShortcuts {
+        &__show--bottom-right {
+          border-right: 33.3rem solid $color-printi-blue;
+          &:hover {
+            border-right: 3.3rem solid $color-printi-blue;
+          }
+        }
+      }
+    }
+  }
+  .btn-downloadCloud {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    .btn-default {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      @include lg {
+        justify-content: flex-end;
+      }
+      i {
+        height: 1.5rem;
+        margin-right: .5rem;
+        svg {
+          fill: $color-white;
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
+    }
+  }
 }
