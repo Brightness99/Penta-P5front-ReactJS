@@ -3,14 +3,12 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Breadcrumbs from 'components/Breadcrumbs';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { accountOrdersFetch } from 'actions';
 import Loading from 'components/Loading';
 import Tooltip from 'components/Tooltipster';
 import { CodeBar, ImageFileIcon, NFIcon, Clipboard } from 'components/Icons';
 import { IntlDate, IntlMoney } from 'components/Intl';
-import { PageTitle } from 'atoms/Titles';
 
 type Props = {
   screenSize: string,
@@ -18,6 +16,7 @@ type Props = {
   orders: {},
   locale: {},
   dispatch: () => {},
+  setBreadcrumbs: () => {},
 };
 
 type State = {
@@ -40,6 +39,8 @@ export class OrderList extends React.Component {
     const { page } = this.state;
 
     dispatch(accountOrdersFetch(page));
+
+    this.handleBreadcrumbs();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,6 +55,18 @@ export class OrderList extends React.Component {
   static props: Props;
 
   static state: State;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs, locale } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: locale.TITLE,
+        },
+      ]);
+    }
+  };
 
   handleLoadMore = () => {
     const { page } = this.state;
@@ -135,21 +148,21 @@ export class OrderList extends React.Component {
               className={order.status_class}
             >
               <div className="mol-orders-header">
-                {locale.my_orders.ticket.ORDER} <span>{locale.my_orders.ticket.ORDER_NUMBER} {order.info.id}</span>
+                {locale.ticket.ORDER} <span>{locale.ticket.ORDER_NUMBER} {order.info.id}</span>
               </div>
               <span className="detach" />
               <div className="mol-orders-body">
                 <div className="mol-orders-items">
                   <Clipboard />
                   <div>
-                    {locale.my_orders.ticket.ORDER_ITEMS}
+                    {locale.ticket.ORDER_ITEMS}
                     <span>{order.items_label}</span>
                   </div>
                 </div>
                 <div className="mol-orders-status">
                   <i />
                   <div>
-                    {locale.my_orders.ticket.ORDER_STATUS}
+                    {locale.ticket.ORDER_STATUS}
                     <span>{order.status_value}</span>
                   </div>
                 </div>
@@ -175,7 +188,7 @@ export class OrderList extends React.Component {
             className="atm-button-transparent"
             onClick={this.handleLoadMore}
           >
-            {locale.my_orders.LOAD_MORE}
+            {locale.LOAD_MORE}
           </button>
         </div>
         }
@@ -190,10 +203,10 @@ export class OrderList extends React.Component {
     return (
       <div className="org-orders org-orders-desktop">
         <ul className="org-orders-header">
-          <li>{locale.my_orders.ticket.ORDER}</li>
-          <li>{locale.my_orders.ticket.ORDER_DATE}</li>
-          <li>{locale.my_orders.ticket.ORDER_STATUS}</li>
-          <li>{locale.my_orders.order_details.actions.TITLE}</li>
+          <li>{locale.ticket.ORDER}</li>
+          <li>{locale.ticket.ORDER_DATE}</li>
+          <li>{locale.ticket.ORDER_STATUS}</li>
+          <li>{locale.order_details.actions.TITLE}</li>
         </ul>
         <ul className="org-orders-list">
           {orders.list.map((order) => (
@@ -210,11 +223,11 @@ export class OrderList extends React.Component {
               </div>
               <div className="org-orders-list-expand">
                 <div>
-                  {locale.my_orders.ticket.ORDER_ITEMS}
+                  {locale.ticket.ORDER_ITEMS}
                   <span>{order.items_label}</span>
                 </div>
                 <div>
-                  {locale.my_orders.ticket.ORDER_TOTAL}
+                  {locale.ticket.ORDER_TOTAL}
                   <IntlMoney>{order.info.total_price}</IntlMoney>
                 </div>
               </div>
@@ -228,7 +241,7 @@ export class OrderList extends React.Component {
               className="atm-button-transparent"
               onClick={this.handleLoadMore}
             >
-              {locale.my_orders.LOAD_MORE}
+              {locale.LOAD_MORE}
             </button>
           </div>
         }
@@ -246,7 +259,7 @@ export class OrderList extends React.Component {
     if (orders.list.length <= 0) {
       return (
         <div>
-          {locale.my_orders.NO_ORDERS}
+          {locale.NO_ORDERS}
         </div>
       );
     }
@@ -255,32 +268,17 @@ export class OrderList extends React.Component {
   }
 
   render() {
-    const { screenSize, locale } = this.props;
+    const { locale } = this.props;
 
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: locale.TITLE,
-        url: '/minha-conta',
-      },
-      {
-        title: locale.my_orders.TITLE,
-      },
-    ];
     return (
-      <div className="container-myaccount-content">
-        <Helmet>
-          <title>{locale.my_orders.seo.PAGE_TITLE}</title>
-          <meta name="description" content={locale.my_orders.seo.META_DESCRIPTION} />
-        </Helmet>
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <PageTitle>{locale.TITLE}</PageTitle>
-        <h3 className="atm-myorder-title">{locale.my_orders.TITLE}</h3>
-        <span className="atm-myorder-subtitle">{locale.my_orders.SUB_TITLE}</span>
+      <div>
+        <h3 className="atm-myorder-title">{locale.TITLE}</h3>
+        <span className="atm-myorder-subtitle">{locale.SUB_TITLE}</span>
         {this.renderItems()}
+        <Helmet>
+          <title>{locale.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.seo.META_DESCRIPTION} />
+        </Helmet>
       </div>
     );
   }
@@ -290,7 +288,7 @@ function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
     orders: state.account.orders,
-    locale: state.locale.translate.account,
+    locale: state.locale.translate.account.my_orders,
   };
 }
 
