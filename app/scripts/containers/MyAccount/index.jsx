@@ -3,7 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-
+import cx from 'classnames';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Sidebar from './Sidebar';
 import OrderList from './OrderList';
 import OrderListDetails from './OrderListDetails';
@@ -17,35 +18,19 @@ import CustomerData from './CustomerData';
 import Referral from './Referral';
 
 type Props = {
-  app: AppStoreType,
+  screenSize: AppStoreType.screenSize,
   router: RouterStore,
   dispatch: () => {},
   children: any,
 };
 
 export class MyAccount extends React.Component {
+  shouldComponentUpdate = shouldComponentUpdate;
+
   static props: Props;
 
-  renderMobile() {
-    return (
-      <div className="container-myaccount">
-        {this.renderContainer()}
-      </div>
-    );
-  }
-
-  renderDesktop() {
-    const { app: { screenSize } } = this.props;
-    return (
-      <div className="container-myaccount">
-        <Sidebar screenSize={screenSize} />
-        {this.renderContainer()}
-      </div>
-    );
-  }
-
   renderContainer() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
 
     return (
       <Switch>
@@ -103,18 +88,26 @@ export class MyAccount extends React.Component {
   }
 
   render() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return (
+      <div
+        className={cx(
+          'container-myaccount',
+          isMobile(screenSize) && 'container',
+        )}
+      >
+        {!isMobile(screenSize) && <Sidebar screenSize={screenSize} />}
+         {this.renderContainer()}
+      </div>
+    );
   }
 }
 
 /* istanbul ignore next */
 function mapStoreToProps(state) {
   return ({
-    app: state.app,
+    screenSize: state.app.screenSize,
   });
 }
 
