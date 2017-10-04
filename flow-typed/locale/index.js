@@ -70,7 +70,7 @@ declare type ProductLandingPageLocaleType = {
 };
 
 declare type ProductSettingsLocaleType = {
-  TITLE: string
+  TITLE: string,
   seo: {
     PAGE_TITLE: string,
     META_DESCRIPTION: string,
@@ -156,3 +156,4 @@ declare type LocaleType = {
   UPDATED_AT: string,
   translate: TranslateLocaleType,
 };
+
