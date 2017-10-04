@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
-import Breadcrumbs from 'components/Breadcrumbs';
-import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Breadcrumbs from 'components/Breadcrumbs';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { accountOrdersFetch } from 'actions';
 import Loading from 'components/Loading';
 import Tooltip from 'components/Tooltipster';
-import { CodeBar, Receipt, ImageFileIcon, NFIcon, Clipboard } from 'components/Icons';
+import { CodeBar, ImageFileIcon, NFIcon, Clipboard } from 'components/Icons';
 import { IntlDate, IntlMoney } from 'components/Intl';
 import { PageTitle } from 'atoms/Titles';
 
@@ -15,6 +16,7 @@ type Props = {
   screenSize: string,
   account: {},
   orders: {},
+  locale: {},
   dispatch: () => {},
 };
 
@@ -121,7 +123,7 @@ export class OrderList extends React.Component {
   }
 
   renderMobile() {
-    const { orders } = this.props;
+    const { orders, locale } = this.props;
     const { page } = this.state;
 
     return (
@@ -133,35 +135,35 @@ export class OrderList extends React.Component {
               className={order.status_class}
             >
               <div className="mol-orders-header">
-                Pedido <span>Nº {order.info.id}</span>
+                {locale.my_orders.ticket.ORDER} <span>{locale.my_orders.ticket.ORDER_NUMBER} {order.info.id}</span>
               </div>
               <span className="detach" />
               <div className="mol-orders-body">
                 <div className="mol-orders-items">
                   <Clipboard />
                   <div>
-                    Itens do pedido
+                    {locale.my_orders.ticket.ORDER_ITEMS}
                     <span>{order.items_label}</span>
                   </div>
                 </div>
                 <div className="mol-orders-status">
                   <i />
                   <div>
-                    Status
+                    {locale.my_orders.ticket.ORDER_STATUS}
                     <span>{order.status_value}</span>
                   </div>
                 </div>
                 {this.renderActions(order)}
-                  {order.actions.details.enabled &&
-                    <div className="mol-orders-details">
-                      <Link
-                        to={`/minha-conta/pedidos/${order.info.id}`}
-                        className="atm-button-rounded atm-button-rounded--blue"
-                      >
-                        {order.actions.details.label}
-                      </Link>
-                    </div>
-                  }
+                {order.actions.details.enabled &&
+                  <div className="mol-orders-details">
+                    <Link
+                      to={`/minha-conta/pedidos/${order.info.id}`}
+                      className="atm-button-rounded atm-button-rounded--blue"
+                    >
+                      {order.actions.details.label}
+                    </Link>
+                  </div>
+                }
               </div>
             </li>
           ))}
@@ -173,7 +175,7 @@ export class OrderList extends React.Component {
             className="atm-button-transparent"
             onClick={this.handleLoadMore}
           >
-            Carregar mais pedidos
+            {locale.my_orders.LOAD_MORE}
           </button>
         </div>
         }
@@ -182,16 +184,16 @@ export class OrderList extends React.Component {
   }
 
   renderDesktop() {
-    const { orders } = this.props;
+    const { orders, locale } = this.props;
     const { page } = this.state;
 
     return (
       <div className="org-orders org-orders-desktop">
         <ul className="org-orders-header">
-          <li>Nº DO PEDIDO</li>
-          <li>REALIZADO EM</li>
-          <li>STATUS</li>
-          <li>AÇÕES</li>
+          <li>{locale.my_orders.ticket.ORDER}</li>
+          <li>{locale.my_orders.ticket.ORDER_DATE}</li>
+          <li>{locale.my_orders.ticket.ORDER_STATUS}</li>
+          <li>{locale.my_orders.order_details.actions.TITLE}</li>
         </ul>
         <ul className="org-orders-list">
           {orders.list.map((order) => (
@@ -208,11 +210,11 @@ export class OrderList extends React.Component {
               </div>
               <div className="org-orders-list-expand">
                 <div>
-                  Itens do pedido
+                  {locale.my_orders.ticket.ORDER_ITEMS}
                   <span>{order.items_label}</span>
                 </div>
                 <div>
-                  Valor total
+                  {locale.my_orders.ticket.ORDER_TOTAL}
                   <IntlMoney>{order.info.total_price}</IntlMoney>
                 </div>
               </div>
@@ -226,7 +228,7 @@ export class OrderList extends React.Component {
               className="atm-button-transparent"
               onClick={this.handleLoadMore}
             >
-              Carregar mais pedidos
+              {locale.my_orders.LOAD_MORE}
             </button>
           </div>
         }
@@ -235,19 +237,25 @@ export class OrderList extends React.Component {
   }
 
   renderItems() {
-    const { orders, screenSize } = this.props;
-
-    console.log('isRunning', orders.isRunning, 'isLoaded', orders.isLoaded);
+    const { orders, screenSize, locale } = this.props;
 
     if (!orders.isLoaded && orders.isRunning) {
       return <Loading />;
+    }
+
+    if (orders.list.length <= 0) {
+      return (
+        <div>
+          {locale.my_orders.NO_ORDERS}
+        </div>
+      );
     }
 
     return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 
   render() {
-    const { screenSize } = this.props;
+    const { screenSize, locale } = this.props;
 
     const breadcrumb = [
       {
@@ -255,19 +263,23 @@ export class OrderList extends React.Component {
         url: '/',
       },
       {
-        title: 'Minha conta',
+        title: locale.TITLE,
         url: '/minha-conta',
       },
       {
-        title: 'Meus pedidos',
+        title: locale.my_orders.TITLE,
       },
     ];
     return (
       <div className="container-myaccount-content">
+        <Helmet>
+          <title>{locale.my_orders.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.my_orders.seo.META_DESCRIPTION} />
+        </Helmet>
         {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <PageTitle>Minha conta</PageTitle>
-        <h3 className="atm-myorder-title">Meus pedidos</h3>
-        <span className="atm-myorder-subtitle">Acompanhe os status do seus pedidos</span>
+        <PageTitle>{locale.TITLE}</PageTitle>
+        <h3 className="atm-myorder-title">{locale.my_orders.TITLE}</h3>
+        <span className="atm-myorder-subtitle">{locale.my_orders.SUB_TITLE}</span>
         {this.renderItems()}
       </div>
     );
@@ -278,6 +290,7 @@ function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
     orders: state.account.orders,
+    locale: state.locale.translate.account,
   };
 }
 
