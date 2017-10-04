@@ -18,6 +18,7 @@ import socialLoginSettings from './social-login-settings';
 import terms from './terms';
 import glossary from './glossary';
 import header from './header';
+import siteMap from './site-map';
 
 export default {
   ...app,
@@ -35,4 +36,5 @@ export default {
   ...terms,
   ...glossary,
   ...header,
+  ...siteMap,
 };
