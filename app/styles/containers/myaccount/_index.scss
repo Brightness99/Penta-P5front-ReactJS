@@ -478,9 +478,9 @@
       display: flex;
       align-items: center;
       height: 30px;
-      max-width: 200px;
       border: 1px solid $color-lightGray;
       color: $color-lightGray;
+      margin-top: 1rem;
       i {
         margin-right: 1rem;
         display: flex;
@@ -495,14 +495,16 @@
         }
       }
       &:first-of-type {
-        margin-bottom: 1rem;
+        margin-top: 0rem;
       }
       @include lg {
         border: 1px solid $color-printi-blue;
         color: $color-printi-blue;
+        margin-left: 2rem;
+        margin-top: 0;
         &:first-of-type {
-          margin-right: 2rem;
-          margin-bottom: 0;
+          margin-left: 0;
+          margin-top: 0;
         }
       }
     }

@@ -98,6 +98,21 @@ export function accountNotificationUpdate(notificationData: {}): Object {
 }
 
 /**
+ * Order Detail Fetch
+ * @param {number} orderId
+ *
+ * @returns {Object}
+ */
+export function accountOrderDetailFetch(orderId: number): Object {
+  return {
+    type: AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_REQUEST,
+    payload: {
+      id: orderId,
+    },
+  };
+}
+
+/**
  * Order List Fetch
  * @param {number} page
  *
