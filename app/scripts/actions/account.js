@@ -98,14 +98,34 @@ export function accountNotificationUpdate(notificationData: {}): Object {
 }
 
 /**
- * Order Fetch
- * @param {string} slug
+ * Order Detail Fetch
+ * @param {number} orderId
  *
  * @returns {Object}
  */
-export function accountOrderFetch(): Object {
+export function accountOrderDetailFetch(orderId: number): Object {
+  return {
+    type: AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_REQUEST,
+    payload: {
+      id: orderId,
+    },
+  };
+}
+
+/**
+ * Order List Fetch
+ * @param {number} page
+ *
+ * @returns {Object}
+ */
+export function accountOrdersFetch(page: number): Object {
   return {
     type: AccountConstants.ACCOUNT_ORDER_FETCH_REQUEST,
-    payload: {},
+    payload: {
+      order: 'desc',
+      sort: 'created_at',
+      page,
+      perPage: 10,
+    },
   };
 }
