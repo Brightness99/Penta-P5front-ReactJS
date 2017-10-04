@@ -81,9 +81,17 @@ export class Success extends React.Component {
     ));
   }
 
+  renderStayTunedItems() {
+    const { locale } = this.props;
+
+    return locale.translate.page.successful_purchase.sidebar.ITEMS.map((item) => (
+      <StayTunedItem text={item} key={item} />
+    ));
+  }
+
   render() {
 
-    const { app: { screenSize }, successfulPurchase, match: { params: { orderNumber } } } = this.props;
+    const { app: { screenSize }, locale, successfulPurchase, match: { params: { orderNumber } } } = this.props;
 
     const shippingAddressInfo = (successfulPurchase.isLoaded && !successfulPurchase.isRunning) ? successfulPurchase.order.info.addresses.filter((address) => address.type === 'SHIPPING') : {};
 
@@ -100,9 +108,9 @@ export class Success extends React.Component {
 
             <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
 
-            <div>
+            {successfulPurchase.order.messages[0] && <div>
               <WarningMessage message={successfulPurchase.order.messages[0].message} />
-            </div>
+            </div>}
 
             <div className="method-container">
               {this.renderActions(successfulPurchase.order.actions)}
@@ -143,15 +151,10 @@ export class Success extends React.Component {
               </div>
 
               <div className="stay-tuned-container">
-                <h3>FIQUE ATENTO</h3>
+                <h3>{locale.translate.page.successful_purchase.sidebar.TITLE}</h3>
 
                 <div>
-                  <StayTunedItem text='O prazo de entrega é válido somente após a confirmação do pagamento do boleto' />
-                  <StayTunedItem text='É possível alterar a arte envia até o momento que antecede a ida do seu material para a produção' />
-                  <StayTunedItem text='É possível alterar o endereço de entrega até o momento que antecede a postagem do seu pedido*' />
-                  <StayTunedItem text='Acompanhe o status do seu pedido através dos emails' />
-                  <StayTunedItem text='A nota fiscal será enviada por email após a postagem do seu pedido' />
-                  <StayTunedItem text='Você pode acompanhar seus pedidos através do menu “Minha conta”. Acesse:' />
+                  {this.renderStayTunedItems()}
                 </div>
 
                 <div className="my-account">
@@ -161,11 +164,11 @@ export class Success extends React.Component {
                   </Link>
                 </div>
 
-                <h3>endereço de entrega</h3>
+                <h3>{locale.translate.page.successful_purchase.sidebar.DELIVERY_ADDRESS}</h3>
 
                 <div className="address">
                   {shippingAddressInfo[0].street}, {shippingAddressInfo[0].number}
-                  {shippingAddressInfo[0].additional_address && '- ' + shippingAddressInfo[0].additional_address}
+                  {shippingAddressInfo[0].additional_address && ' - ' + shippingAddressInfo[0].additional_address}
                   {shippingAddressInfo[0].neighborhood && shippingAddressInfo[0].neighborhood + ', '} {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
                 </div>
 
@@ -188,6 +191,7 @@ export class Success extends React.Component {
 function mapStateToProps(state) {
   return {
     app: state.app,
+    locale: state.locale,
     successfulPurchase: state.successfulPurchase,
   };
 }
