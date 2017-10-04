@@ -17,19 +17,37 @@ type Props = {
   match: {},
   locale: {},
   dispatch: () => {},
+  setBreadcrumbs: () => {},
 };
 
 export class OrderDetails extends React.Component {
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
     const { dispatch, match: { params: { orderNumber } } } = this.props;
 
     dispatch(accountOrderDetailFetch(orderNumber));
+
+    this.handleBreadcrumbs();
   }
 
   static props: Props;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs, locale, account: { selectedOrder }, match: { params: { orderNumber } } } = this.props;
+    console.log('CY');
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: locale.TITLE,
+          url: '/minha-conta/pedidos',
+        },
+        {
+          title: `${locale.order_details.ORDER} ${locale.order_details.ORDER_NUMBER.toLowerCase()}${orderNumber}`,
+        },
+      ]);
+    }
+  };
 
   renderActionButtons() {
     const { account: { selectedOrder } } = this.props;
@@ -317,35 +335,14 @@ export class OrderDetails extends React.Component {
   }
 
   render() {
-    const { screenSize, account: { selectedOrder }, locale } = this.props;
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Meus pedidos',
-        url: '/minha-conta/meus-pedidos',
-      },
-      {
-        title: 'Pedido nº' + (selectedOrder.info && selectedOrder.info.id),
-      },
-    ];
+    const { account: { selectedOrder }, locale } = this.props;
 
     return (
-
       <div className="container-myaccount-content">
         <Helmet>
-          <title>{locale.my_orders.seo.PAGE_TITLE}</title>
-          <meta name="description" content={locale.my_orders.seo.META_DESCRIPTION} />
+          <title>{locale.order_details.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.order_details.seo.META_DESCRIPTION} />
         </Helmet>
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <PageTitle>{locale.TITLE}</PageTitle>
         {this.renderOrder()}
       </div>
     );
@@ -356,7 +353,7 @@ function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
     account: state.account,
-    locale: state.locale.translate.account,
+    locale: state.locale.translate.account.my_orders,
   };
 }
 
