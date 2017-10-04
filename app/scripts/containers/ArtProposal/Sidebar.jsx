@@ -1,36 +1,60 @@
-// flow
+// @flow
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+type Props = {
+  proposals: {},
+  activeIndex: number,
+  onSidebarItemClick: () => {},
+};
+
+type State = {
+  activeIndex: number
+}
+
 export class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeIndex: props.activeIndex,
+    };
+  }
+  static props: Props;
+
+  handleClick = (index) => {
+    this.props.onSidebarItemClick(index);
+    this.setState({ activeIndex: index });
+  }
+
+  renderItem() {
+    const { proposals } = this.props;
+    const { activeIndex } = this.state;
+    let itemMark = null;
+    if (Object.getOwnPropertyNames(proposals).length !== 0) {
+      const length = proposals.length;
+      itemMark = proposals.map((item, index) => (
+        <li key={item.id}>
+          <a
+            onClick={() => this.handleClick(index)}
+            className={(index === activeIndex) ? 'is-active' : ''}
+          >
+            <span>PROPOSTA {length - index}</span>
+          </a>
+        </li>
+      ));
+    }
+    return itemMark;
+  }
+
   render() {
     return (
       <div className="container-sidebarproposal">
-
         <ul className="menu-proposal">
-          <li>
-            <NavLink exact={true} activeClassName="is-active" to="#">
-              <span>PROPOSTA 3</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact={true} activeClassName="is-active" to="#">
-              <span>PROPOSTA 2</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact={true} activeClassName="is-active" to="#">
-              <span>PROPOSTA 1</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact={true} activeClassName="is-active" to="#">
-              <span>BRIEFING INICIAL</span>
-            </NavLink>
-          </li>
+          {this.renderItem()}
         </ul>
       </div>
     );
   }
 }
 export default Sidebar;
+
