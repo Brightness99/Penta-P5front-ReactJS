@@ -3,6 +3,7 @@ import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import config from 'config';
 import Slider from 'react-slick';
 import { RoundedTransparentButton } from 'atoms/Buttons';
@@ -55,7 +56,7 @@ export class ProposalItem extends React.Component {
     files.map((file, index) => (
       <div className="slider-doc-item" key={index.toString()}>
         <div className="doc">
-          <embed src={file.file_url} />
+          {/* <embed src={file.file_url} /> */}
           {/* <img src={file.file_url} alt={file.file_name} /> */}
         </div>
       </div>
@@ -82,8 +83,8 @@ export class ProposalItem extends React.Component {
                 prevArrow={<PrevArrow />}
                 dotsClass="atm-carousel-dots"
                 autoplay={false}
-                slidesToShow={3}
-                slidesToScroll={3}
+                slidesToShow={4}
+                slidesToScroll={1}
               >
                 {this.renderFiles(proposal.files)}
               </Slider>
@@ -97,14 +98,14 @@ export class ProposalItem extends React.Component {
               </RoundedTransparentButton>
             </div>
             <div className="note">
-              IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 
+              <strong>IMPORTANTE!</strong> Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 
             </div>
           </div>
         </div>
       ) :
       null;
     return (
-      <div className="proposal-item">
+      <div className={cx('proposal-item', (type === 'customer') ? 'customer-item' : '')}>
         <div className="item-header">
           <div className="avatar-wrapper">
             <image src="" />

@@ -39,6 +39,37 @@ export default {
         isLoaded: true,
       };
     },
+    [ArtCreationConstants.PROPOSALS_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+        error: action.payload,
+      };
+    },
+    [ArtCreationConstants.NEW_PROPOSAL_REQUEST_REQUEST](state) {
+      return {
+        ...state,
+        isRunning: true,
+        isLoaded: false,
+      };
+    },
+    [ArtCreationConstants.NEW_PROPOSAL_REQUEST_SUCCESS](state, action) {
+      console.log('action ====>', action);
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+      };
+    },
+    [ArtCreationConstants.NEW_PROPOSAL_REQUEST_FAILURE](state, action) {
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+        error: action.payload,
+      };
+    },
   }),
 };
 

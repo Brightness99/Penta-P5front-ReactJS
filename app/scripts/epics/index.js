@@ -60,7 +60,8 @@ import {
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
 import {
-  proposalsFetch
+  proposalsFetch,
+  newProposalRequest,
 } from './art-creation';
 
 export default combineEpics(
@@ -110,5 +111,6 @@ export default combineEpics(
   policyFetch,
   termsFetch,
   productCategoriesFetch,
-  proposalsFetch
+  proposalsFetch,
+  newProposalRequest,
 );
