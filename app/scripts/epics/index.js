@@ -58,6 +58,10 @@ import {
   accountOrderFetch,
 } from './account';
 
+import {
+  successfulPurchaseFetch,
+} from './successful-purchase';
+
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
 
@@ -108,5 +112,6 @@ export default combineEpics(
   policyFetch,
   termsFetch,
   productCategoriesFetch,
+  successfulPurchaseFetch,
   siteMapFetch,
 );
