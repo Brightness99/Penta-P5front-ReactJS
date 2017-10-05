@@ -1,271 +1,314 @@
 // @flow
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel } from 'components/Icons';
+import { accountOrderDetailFetch } from 'actions';
+import Loading from 'components/Loading';
 
 type Props = {
   screenSize: string,
+  account: {},
+  match: {},
+  dispatch: () => {},
 };
 
 export class OrderListDetails extends React.Component {
+
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  componentDidMount() {
+    const { dispatch, match: { params: { orderNumber } } } = this.props;
+
+    dispatch(accountOrderDetailFetch(orderNumber));
+  }
+
   static defaultProps = {
     screenSize: 'xs',
   };
 
   static props: Props;
 
-  renderMobile() {
-    return (
-      <section className="container-myaccountdetails">
-        <div className="container">
-          <h2>Minha conta</h2>
-          <div className="box-headerDetails headerDetails--mobile">
-            <div>
-              <h3 className="subtitle-details">Pedido nº483.093</h3>
-              <p className="total-value">Valor total: <span>R$ 350,00</span></p>
-            </div>
-            <div>
-              <Link to="#"><i><ArrowCarousel /></i>Voltar</Link>
-            </div>
-          </div>
-          <div className="box-warningDetails">
-            <div>
-              <i><Warning /></i>
-            </div>
-            <div>
-              <p><span>Atenção!</span> Você ainda não enviou o arquivo de alguns produtos. A previsão de entrega esta sujeita a alteração caso o arquivo não seja enviado até dia 16/04/2015.</p>
-            </div>
-            <div>
-              <i><CloseIcon /></i>
-            </div>
-          </div>
-          <div className="btns-details">
-            <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><CodeBar /></i>Imprimir boleto</Link>
-            <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><Receipt /></i>Enviar comprovante</Link>
-          </div>
-          <div className="box-paymentDetails-dataDelivery">
-            <div className="box-paymentDetails">
-              <div className="box-headerDetails">
-                <h4 className="title-details">Dados de pagamento</h4>
-              </div>
-              <div className="paymentDetails-dataDelivery">
-                <div className="details">
-                  <p className="firstDetail">Nome</p>
-                  <p className="secondDetail">Diogo Capelo</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">Endereço</p>
-                  <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">Cidade/UF</p>
-                  <p className="secondDetail">Guarulhos/SP</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">CEP</p>
-                  <p className="secondDetail">07130-000</p>
-                </div>
-                <p className="paymentMethod-details">forma de pagamento: <span className="typeMethod">boleto</span></p>
-                <Link to="#" className="link-alterDetails--mobile"><Change />Alterar forma de pagamento</Link>
-              </div>
-            </div>
-            <div className="box-dataDelivery">
-              <div className="box-headerDetails">
-                <h4 className="title-details">Entrega</h4>
-              </div>
-              <div className="paymentDetails-dataDelivery">
-                <div className="details">
-                  <p className="firstDetail">Nome</p>
-                  <p className="secondDetail">Diogo Capelo</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">Endereço</p>
-                  <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apto 102 Torre Pequim - Cocala</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">Cidade/UF</p>
-                  <p className="secondDetail">Guarulhos/SP</p>
-                </div>
-                <div className="details">
-                  <p className="firstDetail">CEP</p>
-                  <p className="secondDetail">07130-000</p>
-                </div>
-                <Link to="#" className="link-alterDetails--mobile"><Change />Alterar dados de entrega</Link>
-              </div>
-            </div>
-          </div>
-          <div className="box-detailsAboutProduct allright">
-            <div className="header-detailsAboutProduct header-detailsAboutProduct--mobile">
-              <h4 className="title-detailsAboutProduct">Cartão de visita</h4>
-              <div className="alignTitles--mobile">
-                <p className="title-numberOrder">[item nº 593328]</p>
-                <Link to="#">
-                  + Toque para mais detalhes
-                </Link>
-              </div>
-            </div>
-            <div className="box-aboutProduct">
-              <div className="box-statusAboutProduct-mobile">
-                <ul className="status-aboutProduct scroll-statusMobile">
-                  <li className="allright">
-                    <span />
-                    <p className="legend-statusProduct">Arquivo recebido</p>
-                  </li>
-                  <li>
-                    <span />
-                    <p className="legend-statusProduct">Produto em produção</p>
-                  </li>
-                  <li>
-                    <span />
-                    <p className="legend-statusProduct">Produto em transporte</p>
-                  </li>
-                  <li>
-                    <span />
-                    <p className="legend-statusProduct">Produto entregue</p>
-                  </li>
-                </ul>
-              </div>
-              <div className="box-detailsTransport">
-                <div className="details-product">
-                  <div className="detail imageProduct">
-                    <div className="title-imageProduct--mobile">
-                      <p className="title--mobile">Arquivo</p>
-                    </div>
-                    <div>
-                      <div className="box-imageProduct--mobile">
-                        <div>
-                          <img src={require('assets/media/images/captura-de-tela.png')} alt="imagem" />
-                        </div>
-                        <div>
-                          <h5 className="title-status"><i><CheckIcon /></i>Enviado</h5>
-                          <p>A imagem ao lado é meramente ilustrativa.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="detail">
-                    <div className="title-imageProduct--mobile">
-                      <p className="title--mobile">Datas</p>
-                    </div>
-                    <div>
-                      <div className="box-calendarProduct--mobile">
-                        <div className="icon-calendarProduct">
-                          <CalendarIcon />
-                        </div>
-                        <div className="text-calendarProduct">
-                          <p>Previsão de entrega</p>
-                          <p className="title-data">20/04/2015</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="detail">
-                    <div className="title-imageProduct--mobile">
-                      <p className="title--mobile">Ações</p>
-                    </div>
-                    <div>
-                      <Link className="btn-default btn-quarter fnt-sbold btn-lg w-mxw" to="#"><i><Archive /></i>Acompanhar o pedido</Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  renderActionButtons() {
+    const { account: { selectedOrder } } = this.props;
 
-          <div className="box-detailsAboutProduct attention">
-            <div className="header-detailsAboutProduct header-detailsAboutProduct--mobile">
-              <h4 className="title-detailsAboutProduct">Cartão de visita</h4>
-              <div className="alignTitles--mobile">
-                <p className="title-numberOrder">[item nº 593328]</p>
-                <Link to="#">
-                  + Toque para mais detalhes
-                </Link>
-              </div>
+    return Object.keys(selectedOrder.actions).map((key) => (
+      selectedOrder.actions[key].enabled && <Link to="#" key={key} className="btn-default btn-quarter fnt-bold btn-lg">{selectedOrder.actions[key].label}</Link>
+    ));
+  }
+
+  renderItemActionButtons(item) {
+
+    return Object.keys(item.actions).map((key) => (
+      item.actions[key].enabled && <Link key={key} className="btn-default btn-quarter fnt-sbold btn-lg" to="#"><i><Archive /></i>{item.actions[key].label}</Link>
+    ));
+  }
+
+  renderSummary() {
+    const { account: { selectedOrder } } = this.props;
+
+    return (
+      <div>
+        <h3 className="subtitle-details">Pedido nº{selectedOrder.info.id}</h3>
+        <p className="total-value">Valor total: <span>R$ {selectedOrder.info.total_price}</span></p>
+      </div>
+    );
+  }
+
+  renderWarningMessage() {
+
+    const { account: { selectedOrder } } = this.props;
+
+    return (
+      <div className="box-warningDetails">
+        <div>
+          <i><Warning /></i>
+        </div>
+        <div>
+          <p><span>Atenção!</span> {selectedOrder.messages[0].message}</p>
+        </div>
+        <div>
+          <i><CloseIcon /></i>
+        </div>
+      </div>
+    );
+  }
+
+  renderAddressInfo() {
+    const { screenSize, account: { selectedOrder } } = this.props;
+    const billingAddressInfo = selectedOrder.info.addresses.filter((address) => address.type === 'BILLING');
+    const shippingAddressInfo = selectedOrder.info.addresses.filter((address) => address.type === 'SHIPPING');
+    
+    return (
+      <div className="box-paymentDetails-dataDelivery">
+        <div className="box-paymentDetails">
+          <div className="box-headerDetails">
+            <h4 className="title-details">Dados de pagamento</h4>
+            {!isMobile(screenSize) && <Link to="#" className="link-alterDetails"><Change />Alterar</Link>}
+          </div>
+          <div className="paymentDetails-dataDelivery">
+            <div className="details">
+              <p className="firstDetail">Nome</p>
+              <p className="secondDetail">{billingAddressInfo[0].receiver_name}</p>
             </div>
-            <div className="box-aboutProduct">
-              <div className="box-statusAboutProduct-mobile">
-                <ul className="status-aboutProduct scroll-statusMobile">
-                  <li>
-                    <span />
-                    <p className="legend-statusProduct">Arquivo recebido</p>
-                  </li>
-                  <li>
-                    <span />
-                    <p className="legend-statusProduct">Produto em produção</p>
-                  </li>
-                  <li>
-                    <span />
-                    <p className="legend-statusProduct">Produto em transporte</p>
-                  </li>
-                  <li>
-                    <span />
-                    <p className="legend-statusProduct">Produto entregue</p>
-                  </li>
-                </ul>
-              </div>
-              <div className="box-detailsTransport">
-                <div className="details-product">
-                  <div className="detail imageProduct">
-                    <div className="title-imageProduct--mobile">
-                      <p className="title--mobile">Arquivo</p>
+            <div className="details">
+              <p className="firstDetail">Endereço</p>
+              <p className="secondDetail">
+                {billingAddressInfo[0].street}, {billingAddressInfo[0].number}
+                {billingAddressInfo[0].additional_address && ' - ' + billingAddressInfo[0].additional_address}
+                {billingAddressInfo[0].neighborhood && billingAddressInfo[0].neighborhood + ', '} {billingAddressInfo[0].state} - {billingAddressInfo[0].zipcode}
+              </p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">Cidade/UF</p>
+              <p className="secondDetail">{billingAddressInfo[0].city}/{billingAddressInfo[0].state}</p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">CEP</p>
+              <p className="secondDetail">{billingAddressInfo[0].zipcode}</p>
+            </div>
+            <p className="paymentMethod-details">forma de pagamento: <span className="typeMethod">{selectedOrder.payment_method_name}</span></p>
+            {isMobile(screenSize) && <Link to="#" className="link-alterDetails--mobile"><Change />Alterar forma de pagamento</Link>}
+          </div>
+        </div>
+        <div className="box-dataDelivery">
+          <div className="box-headerDetails">
+            <h4 className="title-details">Entrega</h4>
+            {!isMobile(screenSize) && <Link to="#" className="link-alterDetails"><Change />Alterar</Link>}
+          </div>
+          <div className="paymentDetails-dataDelivery">
+            <div className="details">
+              <p className="firstDetail">Nome</p>
+              <p className="secondDetail">{shippingAddressInfo[0].receiver_name}</p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">Endereço</p>
+              <p className="secondDetail">
+                {shippingAddressInfo[0].street}, {shippingAddressInfo[0].number}
+                {shippingAddressInfo[0].additional_address && ' - ' + shippingAddressInfo[0].additional_address}
+                {shippingAddressInfo[0].neighborhood && shippingAddressInfo[0].neighborhood + ', '} {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
+              </p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">Cidade/UF</p>
+              <p className="secondDetail">{shippingAddressInfo[0].city}/{shippingAddressInfo[0].state}</p>
+            </div>
+            <div className="details">
+              <p className="firstDetail">CEP</p>
+              <p className="secondDetail">{shippingAddressInfo[0].zipcode}</p>
+            </div>
+            {isMobile(screenSize) && <Link to="#" className="link-alterDetails--mobile"><Change />Alterar dados de entrega</Link>}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderMobileProducts() {
+    const { account: { selectedOrder } } = this.props;
+
+    return selectedOrder.info.items.map((item) => (
+      <div className="box-detailsAboutProduct allright" key={item.info.id}>
+        <div className="header-detailsAboutProduct header-detailsAboutProduct--mobile">
+          <h4 className="title-detailsAboutProduct">{item.info.alias}</h4>
+          <div className="alignTitles--mobile">
+            <p className="title-numberOrder">[item nº {item.info.id}]</p>
+            <Link to="#">
+              + Toque para mais detalhes
+            </Link>
+          </div>
+        </div>
+        <div className="box-aboutProduct">
+          <div className="box-statusAboutProduct-mobile">
+            <ul className="status-aboutProduct scroll-statusMobile">
+              <li className="allright">
+                <p className="legend-statusProduct">{item.info.customer_status_name}</p>
+              </li>
+            </ul>
+          </div>
+          <div className="box-detailsTransport">
+            <div className="details-product">
+              <div className="detail imageProduct">
+                <div className="title-imageProduct--mobile">
+                  <p className="title--mobile">Arquivo</p>
+                </div>
+                <div>
+                  <div className="box-imageProduct--mobile">
+                    <div>
+                      <img src={require('assets/media/images/captura-de-tela.png')} alt="imagem" />
                     </div>
                     <div>
-                      <div className="box-imageProduct--mobile">
-                        <div>
-                          <img src={require('assets/media/images/captura-de-tela.png')} alt="imagem" />
-                        </div>
-                        <div>
-                          <h5 className="title-status"><i><ExclamationMark /></i>Atenção</h5>
-                          <p>A imagem ao lado é meramente ilustrativa.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="detail">
-                    <div className="title-imageProduct--mobile">
-                      <p className="title--mobile">Datas</p>
-                    </div>
-                    <div>
-                      <div className="box-calendarProduct--mobile">
-                        <div className="icon-calendarProduct">
-                          <CalendarIcon />
-                        </div>
-                        <div className="text-calendarProduct">
-                          <p>Previsão de entrega</p>
-                          <p className="title-data">20/04/2015</p>
-                        </div>
-                      </div>
-                      <div className="box-calendarProduct--mobile text-uploadArt">
-                        <div className="icon-calendarProduct">
-                          <CalendarIcon />
-                        </div>
-                        <div className="text-calendarProduct">
-                          <p>Prazo de upload da arte</p>
-                          <p className="title-data">20/04/2015</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="detail">
-                    <div className="title-imageProduct--mobile">
-                      <p className="title--mobile">Ações</p>
-                    </div>
-                    <div>
-                      <p>Para enviar sua arte, você precisa acessar sua conta através de um computador desktop.</p>
+                      <h5 className="title-status"><i><CheckIcon /></i>{item.upload_message.title}</h5>
+                      <p>{item.upload_message.message}</p>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="detail">
+                <div className="title-imageProduct--mobile">
+                  <p className="title--mobile">Datas</p>
+                </div>
+                <div>
+                  <div className="box-calendarProduct--mobile">
+                    <div className="icon-calendarProduct">
+                      <CalendarIcon />
+                    </div>
+                    <div className="text-calendarProduct">
+                      <p>Previsão de entrega</p>
+                      <p className="title-data">{(moment(new Date(item.info.expected_delivery_date))).format('DD/MM/YYYY')}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="detail">
+                <div className="title-imageProduct--mobile">
+                  <p className="title--mobile">Ações</p>
+                </div>
+                <div>
+                  {this.renderItemActionButtons(item)}
+                </div>
+              </div>
             </div>
           </div>
-          <Link to="#" className="btn-default btn-quarter btn-xs fnt-bold">Carregar todos produtos (2)</Link>
         </div>
-      </section>
+      </div>
+    ));
+  }
+
+  renderDesktopProducts() {
+    const { account: { selectedOrder } } = this.props;
+
+    return selectedOrder.info.items.map((item) => (
+      <div className="box-detailsAboutProduct allright" key={item.info.id}>
+        <div className="header-detailsAboutProduct">
+          <h4 className="title-detailsAboutProduct">{item.info.alias}</h4>
+          <p className="title-numberOrder">[item nº {item.info.id}]</p>
+          <Link to="#">
+            + Mais detalhes
+          </Link>
+        </div>
+        <div className="box-aboutProduct">
+          <ul className="status-aboutProduct">
+            <li className="allright">{item.info.customer_status_name}</li>
+          </ul>
+          <div className="box-detailsTransport">
+            <ul className="titlesDetails-product">
+              <li>Arquivo</li>
+              <li>Datas</li>
+              <li>Ações</li>
+            </ul>
+            <div className="details-product">
+              <div className="detail imageProduct">
+                <div>
+                  <img src={require('assets/media/images/captura-de-tela.png')} alt="imagem" />
+                </div>
+                <div>
+                  <h5 className="title-status"><i><CheckIcon /></i>{item.upload_message.title}</h5>
+                  <p>{item.upload_message.message}</p>
+                </div>
+              </div>
+              <div className="detail">
+                <p className="title-data">{(moment(new Date(item.info.expected_delivery_date))).format('DD/MM/YYYY')}</p>
+                <p>Previsão de entrega</p>
+              </div>
+              <div className="detail">
+                {this.renderItemActionButtons(item)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ));
+  }
+
+  renderMobile() {
+
+    const { account: { selectedOrder } } = this.props;
+
+    return (
+      <div className="container">
+        <div className="box-headerDetails headerDetails--mobile">
+          {this.renderSummary()}
+          <div>
+            <Link to="#"><i><ArrowCarousel /></i>Voltar</Link>
+          </div>
+        </div>
+        {selectedOrder.messages[0] && this.renderWarningMessage()}
+        <div className="btns-details">
+          {this.renderActionButtons()}
+        </div>
+        {this.renderAddressInfo()}
+        {this.renderMobileProducts()}
+        <Link to="#" className="btn-default btn-quarter btn-xs fnt-bold">Carregar todos produtos (2)</Link>
+      </div>
     );
   }
 
   renderDesktop() {
+
+    const { account: { selectedOrder } } = this.props;
+
+    return (
+      <div>
+        <div className="box-headerDetails">
+          {this.renderSummary()}
+          <div className="btns-details">
+            {this.renderActionButtons()}
+          </div>
+        </div>
+        {selectedOrder.messages[0] && this.renderWarningMessage()}
+        {this.renderAddressInfo()}
+        {this.renderDesktopProducts()}
+      </div>
+    );
+  }
+
+  render() {
+    const { screenSize, account: { selectedOrder } } = this.props;
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -277,183 +320,32 @@ export class OrderListDetails extends React.Component {
       },
       {
         title: 'Meus pedidos',
-        url: '/meus-pedidos',
+        url: '/minha-conta/meus-pedidos',
       },
       {
-        title: 'Pedido nº483.093',
+        title: 'Pedido nº' + (selectedOrder.info && selectedOrder.info.id),
       },
     ];
+
     return (
       <section className="container-myaccountdetails">
-        <Breadcrumbs links={breadcrumb} />
+        {!isMobile(screenSize) && selectedOrder.isLoaded && !selectedOrder.isRunning && <Breadcrumbs links={breadcrumb} />}
         <h2>Minha conta</h2>
-        <div className="box-headerDetails">
-          <div>
-            <h3 className="subtitle-details">Pedido nº483.093</h3>
-            <p className="total-value">Valor total: <span>R$ 350,00</span></p>
-          </div>
-          <div className="btns-details">
-            <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><CodeBar /></i>Imprimir boleto</Link>
-            <Link to="#" className="btn-default btn-quarter fnt-bold btn-lg"><i><Receipt /></i>Enviar comprovante</Link>
-          </div>
-        </div>
-        <div className="box-warningDetails">
-          <div>
-            <i><Warning /></i>
-          </div>
-          <div>
-            <p><span>Atenção!</span> Você ainda não enviou o arquivo de alguns produtos. A previsão de entrega esta sujeita a alteração caso o arquivo não seja enviado até dia 16/04/2015.</p>
-          </div>
-          <div>
-            <i><CloseIcon /></i>
-          </div>
-        </div>
-        <div className="box-paymentDetails-dataDelivery">
-          <div className="box-paymentDetails">
-            <div className="box-headerDetails">
-              <h4 className="title-details">Dados de pagamento</h4>
-              <Link to="#" className="link-alterDetails"><Change />Alterar</Link>
-            </div>
-            <div className="paymentDetails-dataDelivery">
-              <div className="details">
-                <p className="firstDetail">Nome</p>
-                <p className="secondDetail">Diogo Capelo</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">Endereço</p>
-                <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Torre Pequim - Cocala</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">Cidade/UF</p>
-                <p className="secondDetail">Guarulhos/SP</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">CEP</p>
-                <p className="secondDetail">07130-000</p>
-              </div>
-              <p className="paymentMethod-details">forma de pagamento: <span className="typeMethod">boleto</span></p>
-            </div>
-          </div>
-          <div className="box-dataDelivery">
-            <div className="box-headerDetails">
-              <h4 className="title-details">Entrega</h4>
-              <Link to="#" className="link-alterDetails"><Change />Alterar</Link>
-            </div>
-            <div className="paymentDetails-dataDelivery">
-              <div className="details">
-                <p className="firstDetail">Nome</p>
-                <p className="secondDetail">Diogo Capelo</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">Endereço</p>
-                <p className="secondDetail">Av. Brigadeiro Faria Lima, 1451 - Apto 102 Torre Pequim - Cocala</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">Cidade/UF</p>
-                <p className="secondDetail">Guarulhos/SP</p>
-              </div>
-              <div className="details">
-                <p className="firstDetail">CEP</p>
-                <p className="secondDetail">07130-000</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="box-detailsAboutProduct allright">
-          <div className="header-detailsAboutProduct">
-            <h4 className="title-detailsAboutProduct">Cartão de visita</h4>
-            <p className="title-numberOrder">[item nº 593328]</p>
-            <Link to="#">
-              + Mais detalhes
-            </Link>
-          </div>
-          <div className="box-aboutProduct">
-            <ul className="status-aboutProduct">
-              <li className="allright"><span>1</span>Arquivo recebido</li>
-              <li><span>2</span>Produto em produção</li>
-              <li><span>3</span>Produto em transporte</li>
-              <li><span>4</span>Produto entregue</li>
-            </ul>
-            <div className="box-detailsTransport">
-              <ul className="titlesDetails-product">
-                <li>Arquivo</li>
-                <li>Datas</li>
-                <li>Ações</li>
-              </ul>
-              <div className="details-product">
-                <div className="detail imageProduct">
-                  <div>
-                    <img src={require('assets/media/images/captura-de-tela.png')} alt="imagem" />
-                  </div>
-                  <div>
-                    <h5 className="title-status"><i><CheckIcon /></i>Enviado</h5>
-                    <p>A imagem ao lado é meramente ilustrativa.</p>
-                  </div>
-                </div>
-                <div className="detail">
-                  <p className="title-data">20/04/2015</p>
-                  <p>Previsão de entrega</p>
-                </div>
-                <div className="detail">
-                  <Link className="btn-default btn-quarter fnt-sbold btn-lg" to="#"><i><Archive /></i>Alterar arquivo</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="box-detailsAboutProduct attention">
-          <div className="header-detailsAboutProduct">
-            <h4 className="title-detailsAboutProduct">Cartão de visita</h4>
-            <p className="title-numberOrder">[item nº 593328]</p>
-            <Link to="#">
-              + Mais detalhes
-            </Link>
-          </div>
-          <div className="box-aboutProduct">
-            <ul className="status-aboutProduct">
-              <li className="attention"><span>1</span>Arquivo recebido</li>
-              <li><span>2</span>Produto em produção</li>
-              <li><span>3</span>Produto em transporte</li>
-              <li><span>4</span>Produto entregue</li>
-            </ul>
-            <div className="box-detailsTransport">
-              <ul className="titlesDetails-product">
-                <li>Arquivo</li>
-                <li>Datas</li>
-                <li>Ações</li>
-              </ul>
-              <div className="details-product">
-                <div className="detail imageProduct">
-                  <div>
-                    <img src={require('assets/media/images/captura-de-tela.png')} alt="imagem" />
-                  </div>
-                  <div>
-                    <h5 className="title-status"><i><ExclamationMark /></i>Atenção</h5>
-                    <p>O arquivo deste produto ainda não foi enviado.</p>
-                  </div>
-                </div>
-                <div className="detail attention">
-                  <p className="title-data">20/04/2015</p>
-                  <p>Previsão de entrega</p>
-                </div>
-                <div className="detail">
-                  <Link className="btn-default btn-quarter fnt-sbold btn-lg" to="#"><i><Archive /></i>Enviar arquivo</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {!selectedOrder.isLoaded || selectedOrder.isRunning ? <Loading /> : (isMobile(screenSize) ? this.renderMobile() : this.renderDesktop())}
       </section>
     );
   }
-
-  render() {
-    const { screenSize } = this.props;
-
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
-  }
 }
 
-export default OrderListDetails;
+function mapStateToProps(state) {
+  return {
+    screenSize: state.app.screenSize,
+    account: state.account,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderListDetails);
