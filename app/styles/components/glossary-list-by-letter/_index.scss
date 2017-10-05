@@ -19,8 +19,9 @@
       font-size     : $font-size-base;
       width           : 100%;
       margin-bottom : 0;
-      display: grid;
-      grid-template-rows: 3rem;
+      //display: grid;
+      display: flex;
+      //grid-template-rows: 3rem;
       @include lg {
         margin : 1rem 0;
       }
@@ -28,6 +29,7 @@
         margin-top : 1rem;
       }
       li {
+        width: calc(100%/4);
         &:before {
           border-bottom  : 0.5rem solid transparent;
           border-left    : 0.5rem solid $color-black;
@@ -56,3 +58,9 @@
     }
   }
 }
+
+
+Bom dia! 
+Meu nome é Natália, sou desenvolvedora front-end há 3 anos, e gostaria de avançar nos conhecimentos.
+Atualmente estou estudando React e trabalhando com o mesmo.
+
