@@ -7,6 +7,7 @@ import moment from 'moment';
 type Props = {
   app: AppStore,
   item: Object,
+  handleShowingModal: () => void,
 };
 
 class ProductItem extends React.Component {
@@ -14,18 +15,18 @@ class ProductItem extends React.Component {
 
   renderDesktop() {
 
-    const { item } = this.props;
+    const { item, handleShowingModal } = this.props;
 
     return (
       <div className="product-item-row">
-        <div className="product-item-col product-item-col-product">
+        <div className="product-item-col-product">
           <img src={require('assets/media/images/img.png')} alt="Product" />
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
             <div>{item.info.parts[0].format}</div>
             <div>{item.info.parts[0].color} - {item.info.parts[0].stock}</div>
-            <div><a>Ver mais...</a></div>
+            <div><a onClick={() => handleShowingModal(item)}>Ver mais...</a></div>
           </div>
         </div>
 
