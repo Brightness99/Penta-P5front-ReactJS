@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: row;
   }
+
   .container-sidebarAccount {
     flex: 1;
     //height: 100%;
@@ -90,6 +91,45 @@
     }
   }
 
+  &-content {
+    padding: 3rem 0 4rem;
+
+    @include lg {
+      background-color: $color-white;
+      flex: 5;
+      padding: 2rem 6rem 3rem 6rem;
+    }
+
+    .app__breadcrumb {
+      margin-bottom: 2.4rem;
+      padding: 0;
+    }
+
+    .atm__page-title {
+      margin-bottom: 4rem;
+      padding: 0;
+
+      @include lg {
+        margin-bottom: 5rem;
+      }
+    }
+
+    .atm-myorder-title {
+      color: $color-almostBlack;
+      font-family: $font-family-nunito-light;
+      font-size: 2.1rem;
+      letter-spacing: normal;
+      line-height: 1;
+      margin-left: -0.2rem;
+      padding: 0;
+      text-transform: none;
+
+      @include lg {
+        font-size: 2.7rem;
+      }
+    }
+  }
+
   .container-myorder {
     @include lg {
       background-color: $color-white;
@@ -99,9 +139,6 @@
     }
     .container {
       width: auto;
-    }
-    .app__breadcrumb {
-      margin-bottom: 2.4rem;
     }
     .title-myorder {
       padding: 2rem 0 0.5rem 0;
@@ -478,9 +515,9 @@
       display: flex;
       align-items: center;
       height: 30px;
-      max-width: 200px;
       border: 1px solid $color-lightGray;
       color: $color-lightGray;
+      margin-top: 1rem;
       i {
         margin-right: 1rem;
         display: flex;
@@ -495,14 +532,16 @@
         }
       }
       &:first-of-type {
-        margin-bottom: 1rem;
+        margin-top: 0rem;
       }
       @include lg {
         border: 1px solid $color-printi-blue;
         color: $color-printi-blue;
+        margin-left: 2rem;
+        margin-top: 0;
         &:first-of-type {
-          margin-right: 2rem;
-          margin-bottom: 0;
+          margin-left: 0;
+          margin-top: 0;
         }
       }
     }
@@ -1129,9 +1168,6 @@
   }
   .container {
     width: auto;
-  }
-  .app__breadcrumb {
-    margin-bottom: 2.4rem;
   }
   .title-myAddresses {
     margin-top:2.8rem;
