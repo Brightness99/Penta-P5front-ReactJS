@@ -66,4 +66,9 @@ export const AccountConstants = keyMirror({
   ACCOUNT_ORDER_FETCH_SUCCESS: undefined,
   ACCOUNT_ORDER_FETCH_FAILURE: undefined,
   ACCOUNT_ORDER_FETCH_CANCEL: undefined,
+
+  ACCOUNT_LOYALTY_FETCH_REQUEST: undefined,
+  ACCOUNT_LOYALTY_FETCH_SUCCESS: undefined,
+  ACCOUNT_LOYALTY_FETCH_FAILURE: undefined,
+  ACCOUNT_LOYALTY_FETCH_CANCEL: undefined,
 });

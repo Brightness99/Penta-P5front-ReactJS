@@ -19,6 +19,7 @@ export const accountState = {
     isRunning: false,
     isLoaded: false,
   },
+  loyalty: {},
 };
 
 export default {
@@ -343,6 +344,35 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_LOYALTY_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        loyalty: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_LOYALTY_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        loyalty: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_LOYALTY_FETCH_FAILURE](state) {
+      return {
+        ...state,
+        loyalty: {
+          ...state.loyalty,
+          isRunning: false,
+          isLoaded: true,
         },
       };
     },

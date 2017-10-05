@@ -1,17 +1,27 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { CheckIcon, PrintiClub, CloseIcon } from 'components/Icons';
+import { accountLoyaltyFetch } from 'actions';
 
 type Props = {
   screenSize: string,
+  account: {},
+  dispatch: () => {},
 };
 
 export class Loyalty extends React.Component {
   static defaultProps = {
     screenSize: 'xs',
   };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountLoyaltyFetch(216984));
+  }
 
   static props: Props;
 
@@ -226,7 +236,7 @@ export class Loyalty extends React.Component {
   }
 
   render() {
-    const { screenSize } = this.props;
+    const { screenSize, account } = this.props;
 
     return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
       ? this.renderMobile()
@@ -234,4 +244,15 @@ export class Loyalty extends React.Component {
   }
 }
 
-export default Loyalty;
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Loyalty);
+
