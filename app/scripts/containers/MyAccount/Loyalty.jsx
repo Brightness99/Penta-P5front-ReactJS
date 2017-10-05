@@ -17,7 +17,7 @@ type Props = {
 
 export class Loyalty extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
-  
+
   static defaultProps = {
     screenSize: 'xs',
   };
@@ -181,7 +181,7 @@ export class Loyalty extends React.Component {
   }
 
   render() {
-    const { screenSize, account } = this.props;
+    const { screenSize, account: { loyalty } } = this.props;
     console.log(loyalty.error);
 
     return isMobile(screenSize)
