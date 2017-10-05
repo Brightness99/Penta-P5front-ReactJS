@@ -129,3 +129,18 @@ export function accountOrdersFetch(page: number): Object {
     },
   };
 }
+
+/**
+ * Loyalty Fetch
+ * @param {number} customerId
+ *
+ * @returns {Object}
+ */
+export function accountLoyaltyFetch(customerId: number): Object {
+  return {
+    type: AccountConstants.ACCOUNT_LOYALTY_FETCH_REQUEST,
+    payload: {
+      id: customerId,
+    },
+  };
+}
