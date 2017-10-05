@@ -172,10 +172,10 @@ export class Success extends React.Component {
                   {shippingAddressInfo[0].neighborhood && shippingAddressInfo[0].neighborhood + ', '} {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
                 </div>
 
-                <div className="delivery-address">
+                <Link to={'/minha-conta/pedidos/' + orderNumber} className="delivery-address">
                   <RefreshIcon />
                   <div>Alterar endereço de entrega</div>
-                </div>
+                </Link>
 
               </div>
 
