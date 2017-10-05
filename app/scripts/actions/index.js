@@ -21,3 +21,4 @@ export * from './printi-press';
 export * from './glossary';
 export * from './header';
 export * from './art-creation';
+export * from './site-map';

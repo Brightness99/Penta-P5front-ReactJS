@@ -17,6 +17,7 @@ import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
 import { printiPressFetch } from './printi-press';
 import { glossarySlugFetch, glossaryFetch } from './glossary';
+import { siteMapFetch } from './site-map';
 import {
   settingsFetch,
   settingsOptionsFetch,
@@ -113,4 +114,5 @@ export default combineEpics(
   productCategoriesFetch,
   proposalsFetch,
   newProposalRequest,
+  siteMapFetch,
 );
