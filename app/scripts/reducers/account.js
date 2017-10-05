@@ -366,13 +366,14 @@ export default {
         },
       };
     },
-    [AccountConstants.ACCOUNT_LOYALTY_FETCH_FAILURE](state) {
+    [AccountConstants.ACCOUNT_LOYALTY_FETCH_FAILURE](state, action) {
       return {
         ...state,
         loyalty: {
           ...state.loyalty,
           isRunning: false,
           isLoaded: true,
+          error: action.payload,
         },
       };
     },
