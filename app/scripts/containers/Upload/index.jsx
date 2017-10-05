@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { cartAddFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
 import { PageTitle } from 'atoms/Titles';
@@ -13,9 +13,6 @@ import CanvasSchema from './UploadTypeSchemas/Canvas';
 import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
 
 type Props = {
-  app: AppStore,
-  router: RouterStore,
-  locale: {},
   match: {},
   dispatch: () => {},
 };
