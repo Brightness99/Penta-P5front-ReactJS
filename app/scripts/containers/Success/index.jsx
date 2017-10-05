@@ -6,10 +6,12 @@ import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckCircleIcon, MyAccountIcon, RefreshIcon } from 'components/Icons';
 import { successfulPurchaseFetch } from 'actions';
 import Loading from 'components/Loading';
+import Modal from 'components/Modal';
 import WarningMessage from './WarningMessage';
 import MethodItem from './MethodItem';
 import ProductItem from './ProductItem';
 import StayTunedItem from './StayTunedItem';
+import ProductModalItem from './ProductModalItem';
 
 type Props = {
   app: AppStore,
@@ -20,8 +22,21 @@ type Props = {
   match: {},
 };
 
+type State = {
+  showDetailModal: boolean,
+  selectedItem: Object,
+};
+
 export class Success extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
+
+  constructor(props) {
+    super(props);
+    this.state = { 
+      showDetailModal: false,
+      selectedItem: null,
+    };
+  }
 
   static props: Props;
 
@@ -30,6 +45,17 @@ export class Success extends React.Component {
 
     dispatch(successfulPurchaseFetch(orderNumber));
   }
+
+  handleShowingModal = (item) => {
+    this.setState({
+      showDetailModal: !this.state.showDetailModal,
+      selectedItem: item,
+    });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showDetailModal: false });
+  };
 
   renderSubTotalMobile() {
 
@@ -77,7 +103,7 @@ export class Success extends React.Component {
 
   renderProductItems(items) {
     return items.map((item) => (
-      <ProductItem item={item} key={item.info.id} />
+      <ProductItem item={item} key={item.info.id} handleShowingModal={this.handleShowingModal} />
     ));
   }
 
@@ -92,12 +118,19 @@ export class Success extends React.Component {
   render() {
 
     const { app: { screenSize }, locale, successfulPurchase, match: { params: { orderNumber } } } = this.props;
+    const { selectedItem } = this.state;
 
     const shippingAddressInfo = (successfulPurchase.isLoaded && !successfulPurchase.isRunning) ? successfulPurchase.order.info.addresses.filter((address) => address.type === 'SHIPPING') : {};
 
     return (
       <section>
         <div className="container">
+
+          {this.state.showDetailModal &&
+          <Modal handleCloseModal={this.handleCloseModal}>
+            <ProductModalItem item={selectedItem} />
+          </Modal>}
+
           {(!successfulPurchase.isLoaded || successfulPurchase.isRunning) && <Loading />}
           {successfulPurchase.isLoaded && !successfulPurchase.isRunning && <div className="template-success">
 
