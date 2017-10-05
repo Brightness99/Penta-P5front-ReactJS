@@ -17,5 +17,7 @@ export * from './user';
 export * from './policy';
 export * from './social-login-settings';
 export * from './terms';
+export * from './printi-press';
+export * from './glossary';
 export * from './header';
 export * from './art-creation';
