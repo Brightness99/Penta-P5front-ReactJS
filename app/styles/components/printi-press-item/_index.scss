@@ -1,0 +1,75 @@
+.mol-printi-press {
+  color: $color-almostBlack;
+  display: inline-block;
+  transition: 0.3s linear;
+  margin: 1rem;
+  &:hover {
+    box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+    transform: scale(1.05);
+  }
+  .atm-content-printi-press {
+    border: 0.1rem solid $color-hrLightGray;
+    border-radius: 0.3rem;
+    background-color: $color-white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 25rem;
+    height: auto;
+    min-height: 15rem;
+    img {
+      width: 100%;
+    }
+    .qrk-text-printi-press {
+      padding: 0.8rem 2.2rem;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: $color-white;
+      @include lg {
+        background-color: $color-white;
+        color: $color-almostBlack;
+        padding: 2rem 1rem;
+        position: relative;
+      }
+      .title-content {
+        font-size: $font-size-sm;
+        font-weight: bold;
+        position: relative;
+        min-height: 2rem;
+        @include lg {
+          font-size: $font-size-base;
+        }
+        &:after {
+          content: "";
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 10px;
+          width: 0;
+          height: 0;
+          border-top: 0.6rem solid transparent;
+          border-bottom: 0.6rem solid transparent;
+          border-left: 0.6rem solid $color-white;
+          position: absolute;
+          right: 0;
+          bottom: 0.4rem;
+          @include lg {
+            border-left: 0.6rem solid $color-black;
+          }
+        }
+      }
+      .text-content {
+        display: none;
+        @include lg {
+          display: inline;
+        }
+        color: $color-lightGray;
+        font-family: $font-family-open-sans-regular;
+        font-size: $font-size-xs;
+        font-weight: 400;
+      }
+    }
+  }
+}

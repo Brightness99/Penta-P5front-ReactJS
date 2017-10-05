@@ -1,0 +1,25 @@
+.atm-transparent-button {
+  @include center-child-flex;
+  background-color: transparent;
+  border: 0.1rem solid $color-printi;
+  border-radius: 0.4rem;
+  color: $color-printi;
+  display: flex;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-xxxs;
+  height: 3rem;
+  letter-spacing: 0.1rem;
+  margin: 0;
+  padding: 0 2rem;
+  text-transform: uppercase;
+
+  > svg {
+    fill: currentColor;
+    height: 2rem;
+    width: auto;
+  }
+
+  &:hover {
+    background-color: #cfe0f2;
+  }
+}

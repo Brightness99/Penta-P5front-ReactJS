@@ -12,7 +12,13 @@ export const accountState = {
   savedCreditCards: {},
   notification: {},
   addresses: {},
-  orders: {},
+  selectedOrder: {},
+  orders: {
+    list: [],
+    total_count: 0,
+    isRunning: false,
+    isLoaded: false,
+  },
 };
 
 export default {
@@ -278,13 +284,33 @@ export default {
         },
       };
     },
+    [AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        selectedOrder: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
     [AccountConstants.ACCOUNT_ORDER_FETCH_REQUEST](state) {
       return {
         ...state,
         orders: {
-          list: [],
+          list: state.orders.isLoaded ? state.orders.list : accountState.orders.list,
+          total_count: 0,
           isRunning: true,
-          isLoaded: false,
+          isLoaded: state.orders.isLoaded,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        selectedOrder: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
         },
       };
     },
@@ -292,7 +318,18 @@ export default {
       return {
         ...state,
         orders: {
-          list: action.payload,
+          list: !state.isLoaded ? action.payload.list : state.orders.list.concat(action.payload.list),
+          total_count: action.payload.total_count,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ORDER_DETAIL_FETCH_FAILURE](state) {
+      return {
+        ...state,
+        selectedOrder: {
+          ...state.selectedOrder,
           isRunning: false,
           isLoaded: true,
         },
