@@ -81,7 +81,8 @@
           .container-right {
             display: flex;
             .container-status {
-              margin-left: 6.0rem;
+              min-width: 100px;
+              margin-left: 40px;
               .sidetitle {
                 font-size: $font-size-xs;
                 margin-bottom: 0.5rem;
@@ -89,16 +90,39 @@
                     font-family: $font-family-open-sans-regular;
                 }
               }
-              .status-image {}
+              .statuslabel {
+                font-size: $font-size-xs;
+                float: right;
+                margin-left: 0.5rem;
+                margin-bottom: 0.5rem;
+              }
+              svg {
+                width: 1.1rem;
+                height: 1.1rem;
+                margin-bottom: 0.3rem;
+              }
+              .status-waiting_customer svg{
+                fill: $color-warning;
+              }
+              .status-approved svg {
+                fill: $color-success;
+              }
+              .status-disapproved svg{
+                fill: $color-tomato-error-dark;
+              }
             }
           }
         }
         .subtitle {
           font-size: $font-size-lg;
-          padding: 3rem 0 2rem 0;
+          padding: 3rem 0 0 0;
           font-family: $font-family-open-sans-bold;
         }
         .proposal-item {
+          margin-top: 30px;
+          &.customer-item {
+            border-bottom: solid 1px $color-hrLightGray;
+          }
           .item-header {
             display: flex;
             margin-bottom: 2rem;
@@ -133,10 +157,10 @@
             }
             .date {
               display: inline-block;
-              background-color: $color-almostWhite;
+              background-color: $color-grayWhite;
               font-size: $font-size-xs;
               padding: 3px 10px;
-              border-radius: 2px;
+              border-radius: 3px;
               margin: 1rem 0 2.5rem 0;
             }
             .box-docs-wrapper {
@@ -203,7 +227,7 @@
               }
               .note {
                 margin-left: 36px;
-                padding-top: 0.4rem;
+                align-self: center;
                 color: $color-lightGray;
               }
             }
@@ -211,6 +235,8 @@
 
         }
         .approval-button-wrapper {
+          padding-bottom: 30px;
+          border-bottom: solid 1px $color-hrLightGray;
           .atm-box-radio {
               margin-right: 2.0rem;
               width: 180px;
@@ -226,8 +252,21 @@
         .bottom-button-wrapper {
           display: flex;
           justify-content: space-between;
+          margin-top: 30px;
+          .check-label {
+            font-size: 1.2rem;
+            line-height: 4rem;
+            color: $color-lightGray;
+          }
           .atm-button-transparent {
             margin-top: 0px;
+          }
+          .app__input__checkbox--checked {
+            span {
+              fill: $color-white;
+              background: $color-printi-blue;
+              border: 0.1rem solid $color-printi-blue;
+            }
           }
         }
       }
@@ -245,7 +284,7 @@
           font-size: $font-size-xs;
           text-transform: uppercase;
           padding-left: 24px;
-          border-top: solid 1px $color-hrLightGray;
+          border-bottom: solid 1px $color-hrLightGray;
           svg {
             position: absolute;
             right: 0;
@@ -299,7 +338,7 @@
             .slider-doc-item:first-child {
                 margin-left: 0 !important;
             }
-            .download-container {
+            .item-body .download-container {
                 display: block;
                 button {
                     width: 100%
@@ -315,15 +354,11 @@
             width: 100%;
           }
         }
-        .text-editor-wrapper {
-          border-top: none;
-          margin: 0rem 0rem 2rem;
-          .EditorToolbar__root___3_Aqz {
-            display: none;
-          }
-          .public-DraftEditor-content {
-            min-height: 10rem;
-          }
+        .EditorToolbar__root___3_Aqz {
+          display: none;
+        }
+        .public-DraftEditor-content {
+          min-height: 10rem;
         }
         .bottom-button-wrapper {
           display: block;
@@ -338,6 +373,10 @@
                 height: 18px;
               }
             }
+          }
+          .check-label {
+            line-height: 2rem;
+              margin-bottom: 3rem;
           }
         }
       }
