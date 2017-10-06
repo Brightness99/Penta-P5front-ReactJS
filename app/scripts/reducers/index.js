@@ -20,6 +20,7 @@ import printiPress from './printi-press';
 import glossary from './glossary';
 import header from './header';
 import artCreation from './art-creation';
+import successfulPurchase from './successful-purchase';
 import siteMap from './site-map';
 
 export default {
@@ -40,5 +41,6 @@ export default {
   ...glossary,
   ...header,
   ...artCreation,
+  ...successfulPurchase,
   ...siteMap,
 };
