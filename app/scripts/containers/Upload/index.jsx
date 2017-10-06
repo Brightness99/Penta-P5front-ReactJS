@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import mock from 'assets/json/uploadMock.json';
 import { cartAddFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
 import { PageTitle } from 'atoms/Titles';
 import FlashMessage from 'components/FlashMessage';
-import AdditionalOption from './AdditionalOption';
+import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
 import AvailableStrategy from './AvailableStrategy';
 import NormalSchema from './UploadTypeSchemas/Normal';
 import CanvasSchema from './UploadTypeSchemas/Canvas';
@@ -21,84 +22,15 @@ export class Upload extends React.Component {
   static props: Props;
 
   renderFlashMessages = () => {
-    const messages = [
-      {
-        type: 'error',
-        title: 'Desculpe!',
-        message: 'Ocorreu um erro interno impossibilitando seu upload.',
-      },
-      {
-        type: 'warning',
-        title: 'Atenção!',
-        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 1',
-      },
-      {
-        type: 'warning',
-        title: 'Atenção!',
-        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 2',
-      },
-      {
-        type: 'error',
-        title: 'Atenção!',
-        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 3',
-      },
-    ];
+    const messages = mock.flashMessages;
 
     return messages.map(
       (message, index) => <FlashMessage {...message} key={`${String(index)}_${Date()}`} />
     );
   };
 
-  renderAdditionalOptions = () => {
-    const additionalOptions = [
-      {
-        title: 'Formato do arquivo',
-        video: 'http://www.youtube.com',
-        options: [
-          {
-            label: 'Arquivo PDF (fechado para impressão)',
-            value: true,
-            price: 0,
-          },
-          {
-            label: 'Arquivo AI, INDD, PSD, JPG (aberto)',
-            value: false,
-            price: 30,
-          },
-        ],
-      },
-      {
-        title: 'Checagem do arquivo',
-        video: 'http://www.youtube.com',
-        options: [
-          {
-            label: 'Checagem padrão',
-            value: true,
-            price: 0,
-          },
-          {
-            label: 'Checagem profissional',
-            value: false,
-            price: 25,
-          },
-        ],
-      },
-    ];
-
-    return additionalOptions.map(
-      (additionalOption) => (
-        <AdditionalOption
-          key={`${new Date()}-${additionalOption.title}`}
-          title={additionalOption.title}
-          video={additionalOption.video}
-          options={additionalOption.options}
-        />
-      )
-    );
-  };
-
   renderAvailableStrategies = () => {
-    const availableStrategies = [1, 2, 3, 4, 5]; // 1 to 5
+    const availableStrategies = mock.availableStrategies;
 
     return availableStrategies.map(
       (strategy) => (
@@ -112,10 +44,7 @@ export class Upload extends React.Component {
   };
 
   renderUploadTypeSchema = () => {
-    const globalFlags = {
-      upload_type: 'canvas', // can be "canvas", "scene" or "normal"
-      from_my_account: false,
-    };
+    const globalFlags = mock.globalFlags;
 
     switch (globalFlags.upload_type) {
       case 'normal':
@@ -158,6 +87,7 @@ export class Upload extends React.Component {
   };
 
   render() {
+    const additionalOptions = mock.additionalOptions;
     const breadcrumb = [
       {
         title: 'Home',
@@ -180,9 +110,7 @@ export class Upload extends React.Component {
           <PageTitle>envie sua arte final</PageTitle>
           <div className="alert-container">{this.renderFlashMessages()}</div>
           <div className="upload-container">
-            <div className="upload-container-centralized">
-              {this.renderAdditionalOptions()}
-            </div>
+            <AdditionalUploadOptions items={additionalOptions} />
           </div>
           <div className="upload-container">
             <div className="upload-container-centralized">
