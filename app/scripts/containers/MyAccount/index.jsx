@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import cx from 'classnames';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { PageTitle } from 'atoms/Titles';
+import Breadcrumbs from 'components/Breadcrumbs';
 import Sidebar from './Sidebar';
 import OrderList from './OrderList';
-import OrderListDetails from './OrderListDetails';
+import OrderDetails from './OrderDetails';
 import MyAddresses from './MyAddresses';
 import CardsAccount from './CardsAccount';
 import TemplateModels from './TemplateModels';
@@ -20,14 +22,48 @@ import Referral from './Referral';
 type Props = {
   screenSize: AppStoreType.screenSize,
   router: RouterStore,
-  dispatch: () => {},
+  locale: AccountLocaleType,
   children: any,
+  dispatch: () => {},
+};
+
+type State = {
+  breadcrumbs: {},
 };
 
 export class MyAccount extends React.Component {
+  constructor(props: Props) {
+    super(props);
+
+    this.defaultBreadcrumbs = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: props.locale.TITLE,
+        url: '/minha-conta',
+      },
+    ];
+
+    this.state = {
+      breadcrumbs: this.defaultBreadcrumbs,
+    };
+  }
+
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
+
+  static state: State;
+
+  static defaultBreadcrumbs: [];
+
+  handleBreadcrumbs = (breadcrumbs) => {
+    this.setState({
+      breadcrumbs: this.defaultBreadcrumbs.concat(breadcrumbs),
+    });
+  };
 
   renderContainer() {
     const { screenSize } = this.props;
@@ -40,10 +76,10 @@ export class MyAccount extends React.Component {
             <Switch>
               <Route
                 path="/minha-conta/pedidos/:orderNumber"
-                render={(props) => <OrderListDetails {...props} screenSize={screenSize} />}
+                render={(props) => <OrderDetails {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
               />
               <Route
-                render={(props) => <OrderList {...props} screenSize={screenSize} />}
+                render={(props) => <OrderList {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
               />
             </Switch>
           )}
@@ -81,14 +117,15 @@ export class MyAccount extends React.Component {
           render={(props) => <Referral {...props} screenSize={screenSize} />}
         />
         <Route
-          render={(props) => <OrderList {...props} screenSize={screenSize} />}
+          render={(props) => <OrderList {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
       </Switch>
     );
   }
 
   render() {
-    const { screenSize } = this.props;
+    const { screenSize, locale } = this.props;
+    const { breadcrumbs } = this.state;
 
     return (
       <div
@@ -98,7 +135,11 @@ export class MyAccount extends React.Component {
         )}
       >
         {!isMobile(screenSize) && <Sidebar screenSize={screenSize} />}
+        <div className="container-myaccount-content">
+          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumbs} />}
+          <PageTitle>{locale.TITLE}</PageTitle>
          {this.renderContainer()}
+        </div>
       </div>
     );
   }
@@ -108,6 +149,7 @@ export class MyAccount extends React.Component {
 function mapStoreToProps(state) {
   return ({
     screenSize: state.app.screenSize,
+    locale: state.locale.translate.account,
   });
 }
 
