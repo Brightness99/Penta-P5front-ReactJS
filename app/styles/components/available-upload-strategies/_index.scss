@@ -1,0 +1,16 @@
+@import "available-upload-icon";
+@import "available-upload-strategy";
+@import "available-upload-extra-info";
+
+.available-upload-strategies-container {
+  width          : 100%;
+  margin         : 2rem 0;
+  padding        : 0 3rem;
+  display        : flex;
+  flex-direction : column;
+  .strategies {
+    display         : flex;
+    flex-direction  : row;
+    justify-content : space-between;
+  }
+}

@@ -5,6 +5,7 @@ import mock from 'assets/json/uploadMock.json';
 import { cartAddFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
+import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
 import { PageTitle } from 'atoms/Titles';
 import FlashMessage from 'components/FlashMessage';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
@@ -26,20 +27,6 @@ export class Upload extends React.Component {
 
     return messages.map(
       (message, index) => <FlashMessage {...message} key={`${String(index)}_${Date()}`} />
-    );
-  };
-
-  renderAvailableStrategies = () => {
-    const availableStrategies = mock.availableStrategies;
-
-    return availableStrategies.map(
-      (strategy) => (
-        <AvailableStrategy
-          key={`${new Date()}-${strategy}`}
-          totalStrategies={availableStrategies.length}
-          strategy={strategy}
-        />
-      )
     );
   };
 
@@ -88,6 +75,8 @@ export class Upload extends React.Component {
 
   render() {
     const additionalOptions = mock.additionalOptions;
+    const availableStrategies = mock.availableStrategies;
+
     const breadcrumb = [
       {
         title: 'Home',
@@ -113,14 +102,9 @@ export class Upload extends React.Component {
             <AdditionalUploadOptions items={additionalOptions} />
           </div>
           <div className="upload-container">
-            <div className="upload-container-centralized">
-              {this.renderAvailableStrategies()}
-            </div>
+            <AvailableUploadStrategies availableStrategies={availableStrategies} />
           </div>
           {this.renderUploadTypeSchema()}
-          {/* <div className="upload-container-centralized">
-            {this.renderWarningExtraInfo()}
-          </div> */}
         </div>
       </div>
     );
