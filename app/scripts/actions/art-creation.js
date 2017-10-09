@@ -23,17 +23,50 @@ export function proposalsFetch(id: string): Object {
 
 /**
  * new Proposal Request
- * @param {Object} newProposal
+ * @param {Object} data
  *
  * @returns {Object}
  */
-export function newProposalRequest(newProposal: Object): Object {
+export function newProposalRequest(data: Object): Object {
   return {
     type: ArtCreationConstants.NEW_PROPOSAL_REQUEST_REQUEST,
     payload: {
-      order_item_id: newProposal.order_item_id,
-      proposal_id: newProposal.proposal_id,
-      customer_message: newProposal.customer_message,
+      order_item_id: data.order_item_id,
+      proposal_id: data.proposal_id,
+      customer_message: data.customer_message,
+    },
+  };
+}
+
+/**
+ * new Proposal Request
+ * @param {Object} data
+ *
+ * @returns {Object}
+ */
+export function approveProposalRequest(data: Object): Object {
+  return {
+    type: ArtCreationConstants.APPROVE_PROPOSAL_REQUEST,
+    payload: {
+      order_item_id: data.order_item_id,
+      proposal_id: data.proposal_id,
+    },
+  };
+}
+
+/**
+ * new Proposal Request
+ * @param {Object} data
+ *
+ * @returns {Object}
+ */
+export function fetchSingleFileRequest(data: Object): Object {
+  return {
+    type: ArtCreationConstants.SINGLE_FILE_FETCH_REQUEST,
+    payload: {
+      order_item_id: data.order_item_id,
+      proposal_id: data.proposal_id,
+      file_id: data.file_id,
     },
   };
 }

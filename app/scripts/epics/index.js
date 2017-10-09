@@ -67,6 +67,8 @@ import { termsFetch } from './terms';
 import {
   proposalsFetch,
   newProposalRequest,
+  approveProposalRequest,
+  fetchSingleFileRequest
 } from './art-creation';
 
 export default combineEpics(
@@ -118,6 +120,8 @@ export default combineEpics(
   productCategoriesFetch,
   proposalsFetch,
   newProposalRequest,
+  approveProposalRequest,
+  fetchSingleFileRequest,
   successfulPurchaseFetch,
   siteMapFetch,
 );

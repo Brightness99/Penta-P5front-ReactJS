@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RichTextEditor from 'react-rte';
 import { isObject } from 'utils/helpers';
-import { newProposalRequest } from 'actions';
+import { newProposalRequest, approveProposalRequest, fetchSingleFileRequest } from 'actions';
 import { RoundedTransparentButton, RoundedConfirmationButton } from 'atoms/Buttons';
 import { BoxRadio } from 'atoms/Inputs';
 import { CheckBox } from 'components/Input';
@@ -38,7 +38,8 @@ export class ArtProposalContent extends React.Component {
       customerMessageValue: RichTextEditor.createEmptyValue(),
       activeButton: 'approve',
       editorWidth: 500,
-      activeIndex: '',
+      proposal: props.proposals[props.activeIndex],
+      activeIndex: props.activeIndex,
       confirmChecked: false,
     };
   }
@@ -89,16 +90,28 @@ export class ArtProposalContent extends React.Component {
     this.setState({ confirmChecked: !confirmChecked });
   };
 
-  sendRequest = () => {
+  confirmButtonClickHandler = () => {
+    const { dispatch } = this.props;
+    const { proposal } = this.state;
+    const payload = {
+      order_item_id: proposal.order_item_id,
+      proposal_id: proposal.id,
+    };
+    dispatch(approveProposalRequest(payload));
+  };
+
+  addFileButtonClickHandler = () => {
+  };
+
+  requestButtonClickHandler = () => {
     const { dispatch } = this.props;
     const { proposal, customerMessage } = this.state;
-    const newProposal = {
+    const payload = {
       order_item_id: proposal.order_item_id,
       proposal_id: proposal.id,
       customer_message: customerMessage,
     };
-    console.log('sendRequest newProposal called =======>', newProposal);
-    dispatch(newProposalRequest(newProposal));
+    dispatch(newProposalRequest(payload));
   }
 
   renderMobile() {
@@ -137,8 +150,8 @@ export class ArtProposalContent extends React.Component {
       const customerProposalItemMark = (proposal.customer_message == null) ?
         null :
         (<ProposalItem proposal={proposal} type={'customer'} />);
-      //const waitingMark = (proposal.status === 'waiting_customer') ?
-      const waitingMark = (true) ?
+      const waitingMark = (proposal.status === 'waiting_customer') ?
+      //const waitingMark = (true) ?
         (
           <div>
             <p className="subtitle">E agora, o que quer fazer? :)</p>
@@ -174,8 +187,8 @@ export class ArtProposalContent extends React.Component {
                     </label>
                   </div>
                   <RoundedConfirmationButton
-                    isEnabled={true}
-                    onClick={() => {}}
+                    isEnabled={confirmChecked}
+                    onClick={this.confirmButtonClickHandler}
                   >
                     Confirmar aprovação
                   </RoundedConfirmationButton>
@@ -190,13 +203,13 @@ export class ArtProposalContent extends React.Component {
                     onChange={this.onCustomerMessageChange}
                   />
                   <div className="bottom-button-wrapper">
-                    <RoundedTransparentButton>
+                    <RoundedTransparentButton onClick={this.addFileButtonClickHandler}>
                       <PictureIcon />
                       <span>Adicionar arquivos</span>
                     </RoundedTransparentButton>
                     <RoundedConfirmationButton
                       isEnabled={true}
-                      onClick={this.sendRequest}
+                      onClick={this.requestButtonClickHandler}
                     >
                       enviar solicitação
                     </RoundedConfirmationButton>
@@ -244,109 +257,107 @@ export class ArtProposalContent extends React.Component {
     const { activeButton, editorWidth, proposal, activeIndex, confirmChecked } = this.state;
     const { proposals } = this.props;
     let renderMark = null;
-    if (isObject(proposal)) {
-      const proposalTitle = `Proposta ${proposals.length - activeIndex}`;
+    const proposalTitle = `Proposta ${proposals.length - activeIndex}`;
 
-      const customerProposalItemMark = (proposal.customer_message == null) ?
-        null :
-        (<ProposalItem proposal={proposal} type={'customer'} />);
-      //const waitingMark = (proposal.status === 'waiting_customer') ?
-      const waitingMark = (true) ?
-        (
-          <div>
-            <p className="subtitle">E agora, o que quer fazer? :)</p>
-            <div className="approval-button-wrapper">
-              <BoxRadio
-                value="approve"
-                onChange={this.handleSelection}
-                name="pane-type"
-                checked={activeButton === 'approve'}
-              >
-                Aprovar a proposta
-              </BoxRadio>
-              <BoxRadio
-                value="request"
-                onChange={this.handleSelection}
-                name="pane-type"
-                checked={activeButton === 'request'}
-              >
-                Solicitar alteração
-              </BoxRadio>
-            </div>
-            {
-              (activeButton === 'approve') ?
-              (
-                <div className="bottom-button-wrapper">
-                  <div>
-                    <label className="check-label">
-                      <CheckBox
-                        onChange={this.handleConfirmChecked}
-                        checked={confirmChecked}
-                      />
-                      Estou ciente de que após aprovar a proposta não será possível solicitar novas alterações.
-                    </label>
-                  </div>
-                  <RoundedConfirmationButton
-                    isEnabled={true}
-                    onClick={() => {}}
-                  >
-                    Confirmar aprovação
-                  </RoundedConfirmationButton>
-                </div>
-              ) :
-              (
-                <div>
-                  <RichTextEditor
-                    style={{ width: editorWidth }}
-                    className="text-editor"
-                    value={this.state.customerMessageValue}
-                    onChange={this.onCustomerMessageChange}
-                  />
-                  <div className="bottom-button-wrapper">
-                    <RoundedTransparentButton>
-                      <PictureIcon />
-                      <span>Adicionar arquivos</span>
-                    </RoundedTransparentButton>
-                    <RoundedConfirmationButton
-                      isEnabled={true}
-                      onClick={this.sendRequest}
-                    >
-                      enviar solicitação
-                    </RoundedConfirmationButton>
-                  </div>
-                </div>
-              )
-            }
+    const customerProposalItemMark = (proposal.customer_message == null) ?
+      null :
+      (<ProposalItem proposal={proposal} type={'customer'} />);
+    const waitingMark = (proposal.status === 'waiting_customer') ?
+    //const waitingMark = (true) ?
+      (
+        <div>
+          <p className="subtitle">E agora, o que quer fazer? :)</p>
+          <div className="approval-button-wrapper">
+            <BoxRadio
+              value="approve"
+              onChange={this.handleSelection}
+              name="pane-type"
+              checked={activeButton === 'approve'}
+            >
+              Aprovar a proposta
+            </BoxRadio>
+            <BoxRadio
+              value="request"
+              onChange={this.handleSelection}
+              name="pane-type"
+              checked={activeButton === 'request'}
+            >
+              Solicitar alteração
+            </BoxRadio>
           </div>
-        ) :
-        null;
-      renderMark = (
-        <div className="container-proposal">
-          <div className="content-proposal">
-            <div className="proposal-header">
-              <h2 className="title-proposal">{proposalTitle}</h2>
-              <div className="container-right">
-                <div className="container-status">
-                  <p className="sidetitle regular">Última alteração</p>
-                  <p className="sidetitle">{proposal.updated_at}</p>
-                </div>
-                <div className="container-status">
-                  <p className="sidetitle regular">Status</p>
-                  <label className={`status-${proposal.status}`} >
-                    <StatusIcon />
-                    <p className="statuslabel">{proposal.status}</p>
+          {
+            (activeButton === 'approve') ?
+            (
+              <div className="bottom-button-wrapper">
+                <div>
+                  <label className="check-label">
+                    <CheckBox
+                      onChange={this.handleConfirmChecked}
+                      checked={confirmChecked}
+                    />
+                    Estou ciente de que após aprovar a proposta não será possível solicitar novas alterações.
                   </label>
                 </div>
+                <RoundedConfirmationButton
+                  isEnabled={confirmChecked}
+                  onClick={this.confirmButtonClickHandler}
+                >
+                  Confirmar aprovação
+                </RoundedConfirmationButton>
+              </div>
+            ) :
+            (
+              <div>
+                <RichTextEditor
+                  style={{ width: editorWidth }}
+                  className="text-editor"
+                  value={this.state.customerMessageValue}
+                  onChange={this.onCustomerMessageChange}
+                />
+                <div className="bottom-button-wrapper">
+                  <RoundedTransparentButton onClick={this.addFileButtonClickHandler}>
+                    <PictureIcon />
+                    <span>Adicionar arquivos</span>
+                  </RoundedTransparentButton>
+                  <RoundedConfirmationButton
+                    isEnabled={true}
+                    onClick={this.requestButtonClickHandler}
+                  >
+                    enviar solicitação
+                  </RoundedConfirmationButton>
+                </div>
+              </div>
+            )
+          }
+        </div>
+      ) :
+      null;
+    renderMark = (
+      <div className="container-proposal">
+        <div className="content-proposal">
+          <div className="proposal-header">
+            <h2 className="title-proposal">{proposalTitle}</h2>
+            <div className="container-right">
+              <div className="container-status">
+                <p className="sidetitle regular">Última alteração</p>
+                <p className="sidetitle">{proposal.updated_at}</p>
+              </div>
+              <div className="container-status">
+                <p className="sidetitle regular">Status</p>
+                <label className={`status-${proposal.status}`} >
+                  <StatusIcon />
+                  <p className="statuslabel">{proposal.status}</p>
+                </label>
               </div>
             </div>
-            <p className="subtitle">Alteração solicitada</p>
-            {customerProposalItemMark}
-            <ProposalItem proposal={proposal} type={'designer'} />
-            {waitingMark}
           </div>
+          <p className="subtitle">Alteração solicitada</p>
+          {customerProposalItemMark}
+          <ProposalItem proposal={proposal} type={'designer'} />
+          {waitingMark}
         </div>
-      );
-    }
+      </div>
+    );
     return renderMark;
   }
 

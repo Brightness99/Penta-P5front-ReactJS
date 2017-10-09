@@ -20,4 +20,12 @@ export const ArtCreationConstants = keyMirror({
   NEW_PROPOSAL_REQUEST_SUCCESS: undefined,
   NEW_PROPOSAL_REQUEST_FAILURE: undefined,
   NEW_PROPOSAL_REQUEST_CANCEL: undefined,
+  APPROVE_PROPOSAL_REQUEST: undefined,
+  APPROVE_PROPOSAL_SUCCESS: undefined,
+  APPROVE_PROPOSAL_FAILURE: undefined,
+  APPROVE_PROPOSAL_CANCEL: undefined,
+  SINGLE_FILE_FETCH_REQUEST: undefined,
+  SINGLE_FILE_FETCH_SUCCESS: undefined,
+  SINGLE_FILE_FETCH_FAILURE: undefined,
+  SINGLE_FILE_FETCH_CANCEL: undefined,
 });

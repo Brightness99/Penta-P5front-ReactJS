@@ -10,39 +10,6 @@ import { RoundedTransparentButton } from 'atoms/Buttons';
 import { DownloadIcon } from 'components/Icons';
 import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
 
-const docs = [
-  {
-    image: {
-      URL: 'assets/final/img/destaque-pagar-faturado.jpg',
-      ALT: 'Pague faturado na gráfica Printi',
-    },
-  },
-  {
-    image: {
-      URL: 'assets/final/img/destaque-pagina-gabaritos.jpg',
-      ALT: 'Baixe Gabaritos da grafica online Printi',
-    },
-  },
-  {
-    image: {
-      URL: 'assets/final/img/destaque-guia-impressao.jpg',
-      ALT: 'Guia de impressão da grafica online melhor do Brasil',
-    },
-  },
-  {
-    image: {
-      URL: 'assets/final/img/destaque-montagem-arquivo.jpg',
-      ALT: 'Montagem do arquivo da Printi melhor gráfica do Brasil',
-    },
-  },
-  {
-    image: {
-      URL: 'assets/final/img/destaque-tutorial-cartao-visita.jpg',
-      ALT: 'Tutorial de cartões de visita da grafica online Printi',
-    },
-  },
-];
-
 type Props = {
   proposal: {},
   type: string,
@@ -62,6 +29,17 @@ export class ProposalItem extends React.Component {
       </div>
     ))
   );
+
+  downloadButtonClickHandler = () => {
+    // const { dispatch } = this.props;
+    // const { proposal, customerMessage } = this.state;
+    // const payload = {
+    //   order_item_id: proposal.order_item_id,
+    //   proposal_id: proposal.id,
+    //   customer_message: customerMessage,
+    // };
+    // dispatch(newProposalRequest(payload));
+  }
 
   render() {
     const { proposal, type } = this.props;
@@ -92,7 +70,7 @@ export class ProposalItem extends React.Component {
           </div>
           <div className="download-container">
             <div className="button-wrapper">
-              <RoundedTransparentButton>
+              <RoundedTransparentButton onClick={this.downloadButtonClickHandler}>
                 <DownloadIcon />
                 <span>DOWNLOAD Dos ARQUIVOS</span>
               </RoundedTransparentButton>
