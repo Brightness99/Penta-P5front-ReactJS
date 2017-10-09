@@ -12,11 +12,12 @@
 
   .additional-option-container{
     display: flex;
-    width: 40rem;
+    width: 80%;
     padding-top: 1rem;
     padding-bottom: 1rem;
     flex-direction: column;
     @include lg {
+      width: 40rem;
       margin-left: 3rem;
       &:first-of-type {
         padding-right: 3rem;
