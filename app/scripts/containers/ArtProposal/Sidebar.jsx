@@ -33,7 +33,7 @@ export class Sidebar extends React.Component {
     if (Object.getOwnPropertyNames(proposals).length !== 0) {
       const length = proposals.length;
       itemMark = proposals.map((item, index) => (
-        <li key={item.id}>
+        <li key={index.toString()}>
           <a
             onClick={() => this.handleClick(index)}
             className={(index === activeIndex) ? 'is-active' : ''}

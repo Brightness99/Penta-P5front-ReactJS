@@ -21,8 +21,8 @@ type State = {
 };
 
 //TODO | Ken: This will be replaced with the real item id.
-const order_item_id = '801901';
-
+//const order_item_id = '801901';
+const order_item_id = '801904';
 export class ArtProposal extends React.Component {
   constructor(props) {
     super(props);
@@ -62,6 +62,7 @@ export class ArtProposal extends React.Component {
     const { app: { screenSize }, artCreation } = this.props;
     const { activeIndex } = this.state;
     let sideBar = null;
+    console.log('artCreation in the index ======>', artCreation);
 
     const breadcrumb = [
       {
@@ -92,37 +93,36 @@ export class ArtProposal extends React.Component {
           <p className="title">PROPOSTA DE ARTE</p>
           <p className="destitle">Acompanhe a criação da sua arte</p>
         </div>
-        <div className="container-artproposal">
-          <Sidebar
-            screenSize={screenSize}
-            proposals={artCreation.proposals}
-            activeIndex={activeIndex}
-            onSidebarItemClick={this.sideBarClickHandler}
-          />
-          {this.renderContainer()}
-        </div>
+        {
+          (artCreation.proposals.isLoaded) ?
+          (
+            <div className="container-artproposal">
+              <Sidebar
+                screenSize={screenSize}
+                proposals={artCreation.proposals.list}
+                activeIndex={activeIndex}
+                onSidebarItemClick={this.sideBarClickHandler}
+              />
+              {this.renderContainer()}
+            </div>
+          ) :
+          null
+        }
       </div>
     );
   }
 
   renderContainer() {
     const { app: { screenSize }, artCreation } = this.props;
-    let containerMark = null;
-    if (artCreation.isLoaded) {
-      if (this.state.activeIndex === '') {
-        this.setState({
-          activeIndex: artCreation.proposals[0].id,
-        });
-      }
-      containerMark = (
-        <ArtProposalContent
-          activeIndex={this.state.activeIndex}
-          proposals={artCreation.proposals}
-          screenSize={screenSize}
-        />);
-    }
-    console.log('artCreation ===> ', artCreation);
-    return containerMark;
+    console.log('proposals map to artpropsalcontent ====>', artCreation.proposals.list);
+    console.log('proposals map to artpropsalcontent ====>', artCreation.proposals.list);
+    return (
+      <ArtProposalContent
+        activeIndex={this.state.activeIndex}
+        proposals={artCreation.proposals.list}
+        screenSize={screenSize}
+      />
+    );
   }
 
   render() {
