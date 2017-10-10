@@ -30,12 +30,13 @@ export default class AdditionalUploadOption extends React.Component {
     const { handleOptionSelected, options } = this.props;
     const label = ev.currentTarget.value;
     const option = options.find(x => x.label === label);
-    if (typeof handleOptionSelected === 'function' && option) {
-      handleOptionSelected(option);
-    }
     this.setState({
       activeRadio: label,
     });
+
+    if (typeof handleOptionSelected === 'function' && option) {
+      handleOptionSelected(option);
+    }
   };
 
   renderPriceTitle = (option) => {

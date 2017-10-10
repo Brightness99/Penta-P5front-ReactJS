@@ -12,7 +12,6 @@ import { FunnelBlock } from 'components/Funnel';
 import MoreInfo from 'components/MoreInfo';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
 import UploadTypeSchemes from 'components/UploadTypeSchemes';
-import NormalSchema from './UploadTypeSchemas/Normal';
 import CanvasSchema from './UploadTypeSchemas/Canvas';
 import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
 
@@ -21,8 +20,22 @@ type Props = {
   dispatch: () => {},
 };
 
+type State = {
+  currentStep: number,
+  selectedAdditionalParameters: []
+}
+
 export class Upload extends React.Component {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      currentStep: 0,
+      selectedAdditionalParameters: [],
+    };
+  }
+
   static props: Props;
+  static state: State;
 
   renderFlashMessages = () => {
     const messages = mock.flashMessages;
@@ -36,14 +49,12 @@ export class Upload extends React.Component {
     const globalFlags = mock.globalFlags;
 
     switch (globalFlags.upload_type) {
-      case 'normal':
-        return <NormalSchema />;
       case 'canvas':
         return <CanvasSchema />;
       case 'sku_scene':
         return <SkuSceneSchema />;
       default:
-        return <NormalSchema />;
+        return <UploadTypeSchemes />;
     }
   };
 
@@ -75,10 +86,80 @@ export class Upload extends React.Component {
     return <Warning templates={templates} dispatch={dispatch} product={product} />;
   };
 
-  render() {
-    const additionalOptions = mock.additionalOptions;
-    const availableStrategies = mock.availableStrategies;
+  handleStepFinished(options: {}, step: number) {
+    const { currentStep } = this.state;
+    switch (step) {
+      case 1:
+        this.setState({
+          selectedAdditionalParameters: options,
+        });
+        break;
+      default:
+    }
+    if (currentStep + 1 === step) {
+      this.setState({
+        currentStep: step,
+      });
+    }
+  }
 
+  renderAdditionalParameters() {
+    const { currentStep } = this.state;
+    const additionalOptions = mock.additionalOptions;
+    const step = 1;
+    return (
+      <FunnelBlock
+        order={step}
+        isComplete={currentStep >= step}
+        header={[
+          <span key="source-block-title">Configurações adicionais</span>,
+          <MoreInfo key="source-block-more-info" text="Mais informações" />,
+        ]}
+      >
+        <AdditionalUploadOptions
+          items={additionalOptions}
+          handleOptionsChanged={(options) => this.handleStepFinished(options, step)}
+        />
+      </FunnelBlock>
+    );
+  }
+
+  renderUploadTypeSchemes() {
+    const { currentStep } = this.state;
+    const availableStrategies = mock.availableStrategies;
+    const step = 2;
+    return (
+      <FunnelBlock
+        order={step}
+        isComplete={currentStep === step}
+        header={[
+          <span key="source-block-title">Como você quer enviar sua arte?</span>,
+          <MoreInfo key="source-block-more-info" text="Mais informações" />,
+        ]}
+      >
+        <AvailableUploadStrategies availableStrategies={availableStrategies} />
+      </FunnelBlock>
+    );
+  }
+
+  renderFileUploadBlock() {
+    const { currentStep } = this.state;
+    const step = 3;
+    return (
+      <FunnelBlock
+        order={step}
+        isComplete={currentStep === step}
+        header={[
+          <span key="source-block-title">Enviar arquivo da arte</span>,
+          <MoreInfo key="source-block-more-info" text="Mais informações" />,
+        ]}
+      >
+        {this.renderUploadTypeSchema()}
+      </FunnelBlock>
+    );
+  }
+
+  render() {
     const breadcrumb = [
       {
         title: 'Home',
@@ -100,33 +181,15 @@ export class Upload extends React.Component {
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
           <div className="alert-container">{this.renderFlashMessages()}</div>
-          <FunnelBlock
-            order="1"
-            header={[
-              <span key="source-block-title">Configurações adicionais</span>,
-              <MoreInfo key="source-block-more-info" text="Mais informações" />,
-            ]}
-          >
-            <AdditionalUploadOptions items={additionalOptions} />
-          </FunnelBlock>
-          <FunnelBlock
-            order="2"
-            header={[
-              <span key="source-block-title">Como você quer enviar sua arte?</span>,
-              <MoreInfo key="source-block-more-info" text="Mais informações" />,
-            ]}
-          >
-            <AvailableUploadStrategies availableStrategies={availableStrategies} />
-          </FunnelBlock>
-          <FunnelBlock
-            order="3"
-            header={[
-              <span key="source-block-title">Enviar arquivo da arte</span>,
-              <MoreInfo key="source-block-more-info" text="Mais informações" />,
-            ]}
-          >
-            <UploadTypeSchemes multipleFiles="true" />
-          </FunnelBlock>
+          {
+            this.renderAdditionalParameters()
+          }
+          {
+            this.renderUploadTypeSchemes()
+          }
+          {
+            this.renderFileUploadBlock()
+          }
         </div>
       </div>
     );
