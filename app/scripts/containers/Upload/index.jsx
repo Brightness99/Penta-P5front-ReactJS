@@ -8,8 +8,9 @@ import Warning from 'containers/Config/Warning';
 import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
 import { PageTitle } from 'atoms/Titles';
 import FlashMessage from 'components/FlashMessage';
+import { FunnelBlock } from 'components/Funnel';
+import MoreInfo from 'components/MoreInfo';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
-import AvailableStrategy from './AvailableStrategy';
 import NormalSchema from './UploadTypeSchemas/Normal';
 import CanvasSchema from './UploadTypeSchemas/Canvas';
 import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
@@ -98,12 +99,24 @@ export class Upload extends React.Component {
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
           <div className="alert-container">{this.renderFlashMessages()}</div>
-          <div className="upload-container">
+          <FunnelBlock
+            order="1"
+            header={[
+              <span key="source-block-title">Configurações adicionais</span>,
+              <MoreInfo key="source-block-more-info" text="Mais informações" />,
+            ]}
+          >
             <AdditionalUploadOptions items={additionalOptions} />
-          </div>
-          <div className="upload-container">
+          </FunnelBlock>
+          <FunnelBlock
+            order="2"
+            header={[
+              <span key="source-block-title">Como você quer enviar sua arte?</span>,
+              <MoreInfo key="source-block-more-info" text="Mais informações" />,
+            ]}
+          >
             <AvailableUploadStrategies availableStrategies={availableStrategies} />
-          </div>
+          </FunnelBlock>
           {this.renderUploadTypeSchema()}
         </div>
       </div>
