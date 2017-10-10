@@ -1,0 +1,1 @@
+export NormalUploadType from './NormalUploadType';
