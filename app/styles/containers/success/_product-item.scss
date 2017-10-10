@@ -95,6 +95,7 @@
 		}
 		img {
 			max-width: 130px;
+			max-height: 130px;
 			margin-right: 15px;
 			@include is-only {
 				max-width: 85px;
@@ -121,6 +122,16 @@
 					font-size: 13px;
 					color: #006EE3;
 					text-decoration: underline;
+					cursor: pointer;
+				}
+			}
+		}
+		&.modal-content {
+			width: 100% !important;
+			.content {
+				font-size: 13px;
+				span {
+					font-weight: 700;
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import Helmet from 'react-helmet';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,29 +9,45 @@ import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel } from 'components/Icons';
 import { accountOrderDetailFetch } from 'actions';
 import Loading from 'components/Loading';
+import { PageTitle } from 'atoms/Titles';
 
 type Props = {
   screenSize: string,
   account: {},
   match: {},
+  locale: {},
   dispatch: () => {},
+  setBreadcrumbs: () => {},
 };
 
-export class OrderListDetails extends React.Component {
-
+export class OrderDetails extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
     const { dispatch, match: { params: { orderNumber } } } = this.props;
 
     dispatch(accountOrderDetailFetch(orderNumber));
+
+    this.handleBreadcrumbs();
   }
 
-  static defaultProps = {
-    screenSize: 'xs',
-  };
-
   static props: Props;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs, locale, account: { selectedOrder }, match: { params: { orderNumber } } } = this.props;
+    console.log('CY');
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: locale.TITLE,
+          url: '/minha-conta/pedidos',
+        },
+        {
+          title: `${locale.order_details.ORDER} ${locale.order_details.ORDER_NUMBER.toLowerCase()}${orderNumber}`,
+        },
+      ]);
+    }
+  };
 
   renderActionButtons() {
     const { account: { selectedOrder } } = this.props;
@@ -306,33 +323,28 @@ export class OrderListDetails extends React.Component {
     );
   }
 
-  render() {
-    const { screenSize, account: { selectedOrder } } = this.props;
+  renderOrder() {
+    const { screenSize, locale } = this.props;
 
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Meus pedidos',
-        url: '/minha-conta/meus-pedidos',
-      },
-      {
-        title: 'Pedido nº' + (selectedOrder.info && selectedOrder.info.id),
-      },
-    ];
+    return null;
+
+    // return [
+    //   <h3 className="atm-myorder-title">{locale.my_orders.TITLE}</h3>,
+    //   isMobile(screenSize) ? this.renderMobile() : this.renderDesktop(),
+    // ];
+  }
+
+  render() {
+    const { account: { selectedOrder }, locale } = this.props;
 
     return (
-      <section className="container-myaccountdetails">
-        {!isMobile(screenSize) && selectedOrder.isLoaded && !selectedOrder.isRunning && <Breadcrumbs links={breadcrumb} />}
-        <h2>Minha conta</h2>
-        {!selectedOrder.isLoaded || selectedOrder.isRunning ? <Loading /> : (isMobile(screenSize) ? this.renderMobile() : this.renderDesktop())}
-      </section>
+      <div className="container-myaccount-content">
+        <Helmet>
+          <title>{locale.order_details.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.order_details.seo.META_DESCRIPTION} />
+        </Helmet>
+        {this.renderOrder()}
+      </div>
     );
   }
 }
@@ -341,6 +353,7 @@ function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
     account: state.account,
+    locale: state.locale.translate.account.my_orders,
   };
 }
 
@@ -348,4 +361,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderListDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);
