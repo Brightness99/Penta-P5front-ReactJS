@@ -169,8 +169,9 @@
       .atm-card-timeline {
         position: relative;
         display: inline-block;
+        width: 100%;
         @include lg {
-          margin-top: -22rem;
+          margin-top: -19rem;
         }
         .qrk-number-card {
           align-items: center;
@@ -184,7 +185,7 @@
           font-size: $font-size-xs;
           position: absolute;
           top: 1rem;
-          left: 43%;
+          left: calc(50% - 1.9rem);
           width: 3.8rem;
           height: 3.8rem;
           justify-content: center;
@@ -216,6 +217,9 @@
             width: 46%;
             margin-top: 0;
           }
+          img {
+            width: 100%;
+          }
           .bsn-title-card {
             padding: 2.4rem;
             p {
@@ -236,6 +240,7 @@
             font-family: $font-family-open-sans-bold;
             font-size: $font-size-base;
             padding: 2.4rem;
+            display: inline-block;
             p {
               margin-bottom: 0;
             }

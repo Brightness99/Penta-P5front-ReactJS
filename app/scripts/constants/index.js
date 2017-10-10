@@ -22,3 +22,5 @@ export * from './glossary';
 export * from './header';
 export * from './successful-purchase';
 export * from './site-map';
+export * from './about';
+
