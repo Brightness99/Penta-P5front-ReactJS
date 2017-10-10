@@ -11,6 +11,7 @@ import FlashMessage from 'components/FlashMessage';
 import { FunnelBlock } from 'components/Funnel';
 import MoreInfo from 'components/MoreInfo';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
+import UploadTypeSchemes from 'components/UploadTypeSchemes';
 import NormalSchema from './UploadTypeSchemas/Normal';
 import CanvasSchema from './UploadTypeSchemas/Canvas';
 import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
@@ -117,7 +118,15 @@ export class Upload extends React.Component {
           >
             <AvailableUploadStrategies availableStrategies={availableStrategies} />
           </FunnelBlock>
-          {this.renderUploadTypeSchema()}
+          <FunnelBlock
+            order="3"
+            header={[
+              <span key="source-block-title">Enviar arquivo da arte</span>,
+              <MoreInfo key="source-block-more-info" text="Mais informações" />,
+            ]}
+          >
+            <UploadTypeSchemes multipleFiles="true" />
+          </FunnelBlock>
         </div>
       </div>
     );

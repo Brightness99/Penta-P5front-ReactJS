@@ -1,5 +1,4 @@
 // @flow
-
 import React from 'react';
 import { CalendarIcon, HelpIcon, FileIcon } from 'components/Icons';
 
@@ -8,6 +7,6 @@ const FileFormatIcon = (props: { title: string }) => (
     <FileIcon />
     <span>{props.title}</span>
   </section>
-  );
+);
 
 export default FileFormatIcon;

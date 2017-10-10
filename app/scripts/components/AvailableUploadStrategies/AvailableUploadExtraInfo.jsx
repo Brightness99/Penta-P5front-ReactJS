@@ -3,7 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CalendarIcon, HelpIcon, FileIcon } from 'components/Icons';
-import FileFormatIcon from './FileFormatIcon';
+import FileFormatIcon from 'components/FileFormatIcon';
 
 const AvailableUploadExtraInfo = () => (
   <section className="available-upload-extra-info">
