@@ -22,8 +22,8 @@ export class TimelineAboutPrinti extends React.Component {
             <p className="title-data">{timeline.date}</p>
             <p className="title-card">{timeline.title}</p>
           </div>
-          {/* <img src={`${config.basePath}${timeline.image.file}`} alt="Como tudo começou" /> */}
-          <img src={require('assets/media/images/como-tudo-comecou.png')} alt="Como tudo começou" />
+          <img src={`${config.basePath}files/${timeline.image.file}`} alt="Como tudo começou" />
+          {/* <img src={require('assets/media/images/como-tudo-comecou.png')} alt="Como tudo começou" /> */}
           <div className="bsn-text-card">
             <p className="title-text-card">{timeline.image.title}</p>
             <p className="text-card">{timeline.excerpt}</p>
