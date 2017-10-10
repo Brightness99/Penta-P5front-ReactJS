@@ -22,6 +22,7 @@ type Props = {
 
 type State = {
   currentStep: number,
+  selectedStrategy: number,
   selectedAdditionalParameters: []
 }
 
@@ -87,11 +88,17 @@ export class Upload extends React.Component {
   };
 
   handleStepFinished(options: {}, step: number) {
+    console.log("I'm here");
     const { currentStep } = this.state;
     switch (step) {
       case 1:
         this.setState({
           selectedAdditionalParameters: options,
+        });
+        break;
+      case 2:
+        this.setState({
+          selectedStrategy: options,
         });
         break;
       default:
@@ -131,13 +138,14 @@ export class Upload extends React.Component {
     return (
       <FunnelBlock
         order={step}
-        isComplete={currentStep === step}
+        isComplete={currentStep >= step}
         header={[
           <span key="source-block-title">Como você quer enviar sua arte?</span>,
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
         ]}
       >
-        <AvailableUploadStrategies availableStrategies={availableStrategies} />
+        <AvailableUploadStrategies availableStrategies={availableStrategies}
+                                   handleSelectedStrategy={(options) => this.handleStepFinished(options, step)} />
       </FunnelBlock>
     );
   }
@@ -148,7 +156,7 @@ export class Upload extends React.Component {
     return (
       <FunnelBlock
         order={step}
-        isComplete={currentStep === step}
+        isComplete={currentStep >= step}
         header={[
           <span key="source-block-title">Enviar arquivo da arte</span>,
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
