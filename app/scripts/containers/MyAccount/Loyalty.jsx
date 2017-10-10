@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckIcon, PrintiClub, CloseIcon } from 'components/Icons';
 import Loading from 'components/Loading';
+import { ErrorText } from 'atoms/Texts';
 import { accountLoyaltyFetch } from 'actions';
 import cx from 'classnames';
 
@@ -23,17 +24,22 @@ export class Loyalty extends React.Component {
   };
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, account } = this.props;
 
-    dispatch(accountLoyaltyFetch(35330));
+    dispatch(accountLoyaltyFetch(account.id));
   }
 
   static props: Props;
 
   renderPage() {
 
-    const { screenSize } = this.props;
+    const { screenSize, account: { loyalty } } = this.props;
 
+    if (loyalty.error) {
+      return (<div>
+        <ErrorText>Something went wrong.</ErrorText>
+      </div>);
+    }
     return (
       <div>
         <ul className="tab-loyalty">
@@ -42,7 +48,7 @@ export class Loyalty extends React.Component {
         </ul>
 
         <div className="box-clubGold">
-          <h3 className="title-clubGold">Printi Club Gold</h3>
+          <h3 className="title-clubGold">{loyalty.loyalty_tier_name}</h3>
           <p className="subtitle-clubGold">Seu saldo nos últimos 12 meses:</p>
          
           {isMobile(screenSize) && <div className="boxes-gold">
@@ -169,6 +175,7 @@ export class Loyalty extends React.Component {
         title: 'Printi Club',
       },
     ];
+
     return (
       <div className="container-loyalty">
         <Breadcrumbs links={breadcrumb} />
@@ -182,7 +189,6 @@ export class Loyalty extends React.Component {
 
   render() {
     const { screenSize, account: { loyalty } } = this.props;
-    console.log(loyalty.error);
 
     return isMobile(screenSize)
       ? this.renderMobile()
