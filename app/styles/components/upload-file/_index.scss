@@ -1,0 +1,31 @@
+.upload-file-container {
+  display         : flex;
+  flex-direction  : column;
+  justify-content : center;
+  align-items     : center;
+  border          : 1px dashed #c7c9cb;
+  margin          : 1rem;
+  border-radius   : 3px;
+  width           : 372px;
+  height          : 192px;
+  .icons {
+    display        : flex;
+    flex-direction : row;
+  }
+  p {
+    color: #6a6f7a;
+    font-size: 1.2rem;
+  }
+  button {
+    border-radius    : 3px;
+    border           : 1px solid #006ee3;
+    color: #006ee3;
+    background-color : transparent;
+    text-transform: uppercase;
+    padding: 0.3rem 2rem;
+  }
+  &.active{
+    background-color: #eef3f9;
+    border: 1px dashed #006ee3;
+  }
+}

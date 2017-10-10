@@ -3,37 +3,16 @@
 
 .page-upload {
 	.container {
-		.upload-container {
-      align-items: center;
+    .upload-container-canvasCentralized {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      background-color: $color-white;
-      margin-bottom: 2rem;
-			.upload-container-centralized {
-        display: flex;
-        flex-direction: column;
-        margin: 0 0 2rem 0;
-        width: 93%;
-				@include md {
-			    width: 82%;
-			  }
-				@include lg {
-          justify-content: space-between;
-          flex-direction: row;
-			  }
-			}
-      .upload-container-canvasCentralized {
-        display: flex;
-        flex-direction: column;
-        margin: 0 0 2rem 0;
-        width: 98%;
-        @include md {
-          width: 95%;
-        }
-        @include lg {
-        }
+      margin: 0 0 2rem 0;
+      width: 98%;
+      @include md {
+        width: 95%;
       }
-		}
+      @include lg {
+      }
+    }
 	}
 }
