@@ -9,7 +9,7 @@ type Props = {
   uploadFileProgresses: { fileName: string, progress: number }
 }
 
-export default class UploadTypeSchemes extends React.Component {
+export default class NormalUploadType extends React.Component {
   static defaultProps = {
     multipleFiles: false,
     uploadFileProgresses: [],

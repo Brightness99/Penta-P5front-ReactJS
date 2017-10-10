@@ -11,7 +11,7 @@ import FlashMessage from 'components/FlashMessage';
 import { FunnelBlock } from 'components/Funnel';
 import MoreInfo from 'components/MoreInfo';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
-import UploadTypeSchemes from 'components/UploadTypeSchemes';
+import { NormalUploadType } from 'components/UploadTypes';
 import CanvasSchema from './UploadTypeSchemas/Canvas';
 import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
 
@@ -55,7 +55,7 @@ export class Upload extends React.Component {
       case 'sku_scene':
         return <SkuSceneSchema />;
       default:
-        return <UploadTypeSchemes />;
+        return <NormalUploadType />;
     }
   };
 
@@ -88,7 +88,6 @@ export class Upload extends React.Component {
   };
 
   handleStepFinished(options: {}, step: number) {
-    console.log("I'm here");
     const { currentStep } = this.state;
     switch (step) {
       case 1:
@@ -144,8 +143,13 @@ export class Upload extends React.Component {
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
         ]}
       >
-        <AvailableUploadStrategies availableStrategies={availableStrategies}
-                                   handleSelectedStrategy={(options) => this.handleStepFinished(options, step)} />
+        {
+          currentStep >= 1 &&
+          <AvailableUploadStrategies
+            availableStrategies={availableStrategies}
+            handleSelectedStrategy={(options) => this.handleStepFinished(options, step)}
+          />
+        }
       </FunnelBlock>
     );
   }
@@ -162,7 +166,10 @@ export class Upload extends React.Component {
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
         ]}
       >
-        {this.renderUploadTypeSchema()}
+        {
+          currentStep >= 2 &&
+          this.renderUploadTypeSchema()
+        }
       </FunnelBlock>
     );
   }
