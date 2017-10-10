@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarIcon, HelpIcon } from 'components/Icons';
+import { CalendarIcon, HelpIcon, FileIcon } from 'components/Icons';
+import FileFormatIcon from './FileFormatIcon';
 
 const AvailableUploadExtraInfo = () => (
   <section className="available-upload-extra-info">
@@ -17,8 +18,10 @@ const AvailableUploadExtraInfo = () => (
       <HelpIcon />
       <section className="content">
         <span className="title">Baixar gabarito deste produto</span>
-        <section>
-            icons
+        <section className="icon-list">
+          <FileFormatIcon title="AI" />
+          <FileFormatIcon title="EPS" />
+          <FileFormatIcon title="PSD" />
         </section>
         <span className="description">Precisa de ajuda? <Link to="#">Clique aqui</Link></span>
       </section>
