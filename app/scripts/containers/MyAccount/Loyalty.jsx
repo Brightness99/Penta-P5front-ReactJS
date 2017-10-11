@@ -7,13 +7,11 @@ import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckIcon, PrintiClub, CloseIcon } from 'components/Icons';
 import Loading from 'components/Loading';
 import { ErrorText } from 'atoms/Texts';
-import { accountLoyaltyFetch } from 'actions';
 import cx from 'classnames';
 
 type Props = {
   screenSize: string,
   account: {},
-  dispatch: () => {},
 };
 
 export class Loyalty extends React.Component {
@@ -22,12 +20,6 @@ export class Loyalty extends React.Component {
   static defaultProps = {
     screenSize: 'xs',
   };
-
-  componentDidMount() {
-    const { dispatch, account } = this.props;
-
-    dispatch(accountLoyaltyFetch(account.id));
-  }
 
   static props: Props;
 
@@ -202,9 +194,5 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Loyalty);
+export default connect(mapStateToProps)(Loyalty);
 

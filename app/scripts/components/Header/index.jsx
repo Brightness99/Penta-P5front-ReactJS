@@ -1,10 +1,12 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
-import Logo from 'components/Logo';
+import LogoLoyalty from 'components/LogoLoyalty';
+import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
 import { userLogOut } from 'actions';
 
 import Cart from './Cart';
@@ -21,7 +23,8 @@ type Props = {
   dispatch: () => {},
   totalCartItems: number,
   isAuthorized: boolean,
-  config: {}
+  config: {},
+  account: {},
 };
 
 type State = {
@@ -111,18 +114,19 @@ export class Header extends React.Component {
   };
 
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
     const { activePane } = this.state;
 
     return (
       <header className="org-header">
+        {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
         <div className="mol-mobile-header">
           <div className="mol-header-button mol-header-button--menu">
             <button onClick={this.handleShowMenu} className="atm-header-icon-button">
               <MenuIcon />
             </button>
           </div>
-          <Logo enableLink={true} />
+          <LogoLoyalty enableLink={true} />
           <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           <div className="mol-header-button">
             <button onClick={this.handleShowMyAccount} className="atm-header-icon-button">
@@ -149,7 +153,7 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -160,9 +164,10 @@ export class Header extends React.Component {
         )}
       >
         <Topbar handleClose={this.handlePaneHide} />
+        {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
         <div className="org-header-content">
           <div className="container">
-            <Logo small={!showTopbar} enableLink={true} />
+            <LogoLoyalty small={!showTopbar} enableLink={true} />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu
@@ -222,4 +227,11 @@ export class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+export default connect(mapStateToProps)(Header);
+
