@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
+import { fileMountFetch, fileMountItemFetch } from 'actions';
 
 import Sidebar from './Sidebar';
 import ContentText from './ContentText';
@@ -10,13 +11,22 @@ import ContentText from './ContentText';
 type Props = {
   app: AppStore,
   router: RouterStore,
-  locale: {},
+  fileMount: {},
   dispatch: () => {},
 };
 
 export class FileMount extends React.Component {
-
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fileMountFetch());
+  }
   static props: Props;
+
+  selectItem = (slug) => {
+    const { dispatch } = this.props;
+    dispatch(fileMountItemFetch(slug));
+    //dispatch(fileMountItemFetch('formato-final-e-numero-de-paginas-no-illustrator'));
+  };
 
   render() {
     const { app: { screenSize } } = this.props;
@@ -34,7 +44,7 @@ export class FileMount extends React.Component {
         title: 'Como criar seu arquivo para impressão no illustrator',
       },
     ];
-
+    const { fileMount } = this.props;
     return (
       <section>
         <div className="container">
@@ -44,8 +54,8 @@ export class FileMount extends React.Component {
             {!isMobile(screenSize) && <p className="subtitle-file-mount">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum</p>}
 
             <div className="org-content-file-mount">
-              <Sidebar screenSize={screenSize} />
-              {!isMobile(screenSize) && <ContentText />}
+              <Sidebar screenSize={screenSize} selectItem={this.selectItem} />
+              {!isMobile(screenSize) && <ContentText fileMount={fileMount} />}
             </div>
 
           </div>
@@ -56,7 +66,10 @@ export class FileMount extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { app: state.app };
+  return {
+    app: state.app,
+    fileMount: state.fileMount,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
