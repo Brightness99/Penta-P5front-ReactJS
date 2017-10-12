@@ -17,19 +17,19 @@ const fileMountList = [
     list: [
       {
         title: 'Illustrator',
-        slug: '/como-criar-o-seu-arquivo-para-impressao-no-illustrator',
+        slug: 'como-criar-o-seu-arquivo-para-impressao-no-illustrator',
       },
       {
         title: 'Photoshop',
-        slug: '/como-criar-o-seu-arquivo-para-impressao-no-photoshop',
+        slug: 'como-criar-o-seu-arquivo-para-impressao-no-photoshop',
       },
       {
         title: 'InDesign',
-        slug: '/como-criar-o-seu-arquivo-para-impressao-no-indesign',
+        slug: 'como-criar-o-seu-arquivo-para-impressao-no-indesign',
       },
       {
         title: 'Corel Draw',
-        slug: '/como-criar-o-seu-arquivo-para-impressao-no-corel-draw',
+        slug: 'como-criar-o-seu-arquivo-para-impressao-no-corel-draw',
       },
     ],
   },
@@ -38,19 +38,19 @@ const fileMountList = [
     list: [
       {
         title: 'Illustrator',
-        slug: '/formato-final-e-numero-de-paginas-no-illustrator',
+        slug: 'formato-final-e-numero-de-paginas-no-illustrator',
       },
       {
         title: 'Photoshop',
-        slug: '/formato-final-e-numero-de-paginas-no-photoshop',
+        slug: 'formato-final-e-numero-de-paginas-no-photoshop',
       },
       {
         title: 'InDesign',
-        slug: '/formato-final-e-numero-de-paginas-no-indesign',
+        slug: 'formato-final-e-numero-de-paginas-no-indesign',
       },
       {
         title: 'Corel Draw',
-        slug: '/formato-final-e-numero-de-paginas-no-corel-draw',
+        slug: 'formato-final-e-numero-de-paginas-no-corel-draw',
       },
     ],
   },
@@ -59,19 +59,19 @@ const fileMountList = [
     list: [
       {
         title: 'Illustrator',
-        slug: '/sangria-e-margem-de-seguranca-no-illustrator',
+        slug: 'sangria-e-margem-de-seguranca-no-illustrator',
       },
       {
         title: 'Photoshop',
-        slug: '/sangria-e-margem-de-seguranca-no-photoshop',
+        slug: 'sangria-e-margem-de-seguranca-no-photoshop',
       },
       {
         title: 'InDesign',
-        slug: '/sangria-e-margem-de-seguranca-no-indesign',
+        slug: 'sangria-e-margem-de-seguranca-no-indesign',
       },
       {
         title: 'Corel Draw',
-        slug: '/sangria-e-margem-de-seguranca-no-corel-draw',
+        slug: 'sangria-e-margem-de-seguranca-no-corel-draw',
       },
     ],
   },
@@ -80,19 +80,19 @@ const fileMountList = [
     list: [
       {
         title: 'Illustrator',
-        slug: '/usando-imagens-em-seus-documentos-no-illustrator',
+        slug: 'usando-imagens-em-seus-documentos-no-illustrator',
       },
       {
         title: 'Photoshop',
-        slug: '/usando-imagens-em-seus-documentos-no-photoshop',
+        slug: 'usando-imagens-em-seus-documentos-no-photoshop',
       },
       {
         title: 'InDesign',
-        slug: '/usando-imagens-em-seus-documentos-no-indesign',
+        slug: 'usando-imagens-em-seus-documentos-no-indesign',
       },
       {
         title: 'Corel Draw',
-        slug: '/usando-imagens-em-seus-documentos-no-corel-draw',
+        slug: 'usando-imagens-em-seus-documentos-no-corel-draw',
       },
     ],
   },
@@ -101,19 +101,19 @@ const fileMountList = [
     list: [
       {
         title: 'Illustrator',
-        slug: '/convertendo-seu-arquivo-para-cmyk-no-illustrator',
+        slug: 'convertendo-seu-arquivo-para-cmyk-no-illustrator',
       },
       {
         title: 'Photoshop',
-        slug: '/convertendo-seu-arquivo-para-cmyk-no-photoshop',
+        slug: 'convertendo-seu-arquivo-para-cmyk-no-photoshop',
       },
       {
         title: 'InDesign',
-        slug: '/convertendo-seu-arquivo-para-cmyk-no-indesign',
+        slug: 'convertendo-seu-arquivo-para-cmyk-no-indesign',
       },
       {
         title: 'Corel Draw',
-        slug: '/convertendo-seu-arquivo-para-cmyk-no-corel-draw',
+        slug: 'convertendo-seu-arquivo-para-cmyk-no-corel-draw',
       },
     ],
   },
@@ -122,19 +122,19 @@ const fileMountList = [
     list: [
       {
         title: 'Illustrator',
-        slug: '/como-usar-fontes-nos-seus-textos-no-illustrator',
+        slug: 'como-usar-fontes-nos-seus-textos-no-illustrator',
       },
       {
         title: 'Photoshop',
-        slug: '/como-usar-fontes-nos-seus-textos-no-photoshop',
+        slug: 'como-usar-fontes-nos-seus-textos-no-photoshop',
       },
       {
         title: 'InDesign',
-        slug: '/como-usar-fontes-nos-seus-textos-no-indesign',
+        slug: 'como-usar-fontes-nos-seus-textos-no-indesign',
       },
       {
         title: 'Corel Draw',
-        slug: '/como-usar-fontes-nos-seus-textos-no-corel-draw',
+        slug: 'como-usar-fontes-nos-seus-textos-no-corel-draw',
       },
     ],
   },
@@ -143,19 +143,19 @@ const fileMountList = [
     list: [
       {
         title: 'Illustrator',
-        slug: '/como-gerar-um-arquivo-pdf-x1a-no-illustrator',
+        slug: 'como-gerar-um-arquivo-pdf-x1a-no-illustrator',
       },
       {
         title: 'Photoshop',
-        slug: '/como-gerar-um-arquivo-pdf-x1a-no-photoshop',
+        slug: 'como-gerar-um-arquivo-pdf-x1a-no-photoshop',
       },
       {
         title: 'InDesign',
-        slug: '/como-gerar-um-arquivo-pdf-x1a-no-indesign',
+        slug: 'como-gerar-um-arquivo-pdf-x1a-no-indesign',
       },
       {
         title: 'Corel Draw',
-        slug: '/como-gerar-um-arquivo-pdf-x1a-no-corel-draw',
+        slug: 'como-gerar-um-arquivo-pdf-x1a-no-corel-draw',
       },
     ],
   },
@@ -164,7 +164,7 @@ const fileMountList = [
     list: [
       {
         title: 'Como configurar o cinza',
-        slug: '/como-configurar-o-cinza-corretamente',
+        slug: 'como-configurar-o-cinza-corretamente',
       },
     ],
   },
@@ -173,7 +173,7 @@ const fileMountList = [
     list: [
       {
         title: 'Usando a cor preto',
-        slug: '/usando-a-cor-preto-de-forma-correta',
+        slug: 'usando-a-cor-preto-de-forma-correta',
       },
     ],
   },
@@ -182,7 +182,7 @@ const fileMountList = [
     list: [
       {
         title: 'Linhas finas e textos pequenos',
-        slug: '/linhas-finas-e-textos-pequenos',
+        slug: 'linhas-finas-e-textos-pequenos',
       },
     ],
   },
@@ -191,7 +191,7 @@ const fileMountList = [
     list: [
       {
         title: 'Como fazer um boneco?',
-        slug: '/o-que-e-um-boneco-como-fazer-um-boneco',
+        slug: 'o-que-e-um-boneco-como-fazer-um-boneco',
       },
     ],
   },
@@ -200,7 +200,7 @@ const fileMountList = [
     list: [
       {
         title: 'Dobras e vincos',
-        slug: '/dobras-e-vincos',
+        slug: 'dobras-e-vincos',
       },
     ],
   },
@@ -209,8 +209,38 @@ const fileMountList = [
 export class Sidebar extends React.Component {
   props: Props;
 
-  handleItemClick() {
-    this.props.selectItem('formato-final-e-numero-de-paginas-no-illustrator');
+  handleItemClick(slug) {
+    this.props.selectItem(slug);
+  }
+
+  renderAccordionItem(list) {
+    const renderMark = list.map((accordionItem, accordionIndex) => {
+      let imageMark = null;
+      switch (accordionItem.title) {
+        case 'Illustrator':
+          imageMark = <img src={require('assets/media/images/illustrator.png')} alt="Illustrator" className="img-mrg-r" />;
+          break;
+        case 'Photoshop':
+          imageMark = <img src={require('assets/media/images/photoshop.png')} alt="Photoshop" className="img-mrg-r" />;
+          break;
+        case 'InDesign':
+          imageMark = <img src={require('assets/media/images/indesign.png')} alt="InDesign" className="img-mrg-r" />;
+          break;
+        case 'Corel Draw':
+          imageMark = <img src={require('assets/media/images/coreldraw.png')} alt="CorelDraw" className="img-mrg-r" />;
+          break;
+        default:
+          imageMark = null;
+      }
+      return (
+        <li key={accordionIndex.toString()}>
+          <NavLink to="#" onClick={() => this.handleItemClick(accordionItem.slug)}>
+            {imageMark}{accordionItem.title}
+          </NavLink>
+        </li>
+      );
+    });
+    return renderMark;
   }
 
   renderList() {
@@ -218,75 +248,17 @@ export class Sidebar extends React.Component {
       return (
         <Accordion key={index.toString()} className="qrk-accordion-sidebar">
           <AccordionItem>
-            <AccordionItemTitle><span className="circle-number">1</span>{item.title}</AccordionItemTitle>
+            <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
             <AccordionItemBody>
               <ul>
-                {
-                  item.list.map((accordionItem, accordionIndex) => (
-                    <li key={accordionIndex.toString()}>
-                      <NavLink to="#" onClick={() => this.handleItemClick()}>
-                        <img src={require('assets/media/images/illustrator.png')} alt="Illustrator" className="img-mrg-r" />Illustrator
-                      </NavLink>
-                    </li>
-                  ))
-                }
-                {/* <li>
-                  <NavLink to="#" onClick={() => this.handleItemClick()}>
-                    <img src={require('assets/media/images/illustrator.png')} alt="Illustrator" className="img-mrg-r" />Illustrator
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="#">
-                    <img src={require('assets/media/images/photoshop.png')} alt="Photoshop" className="img-mrg-r" />Photoshop
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="#">
-                    <img src={require('assets/media/images/indesign.png')} alt="InDesign" className="img-mrg-r" />InDesign
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="#">
-                    <img src={require('assets/media/images/coreldraw.png')} alt="CorelDraw" className="img-mrg-r" />CorelDraw
-                  </NavLink>
-                </li> */}
+                {this.renderAccordionItem(item.list)}
               </ul>
             </AccordionItemBody>
           </AccordionItem>
       </Accordion>
       );
     });
-    return (
-      <Accordion className="qrk-accordion-sidebar">
-        <AccordionItem>
-          <AccordionItemTitle><span className="circle-number">1</span>Criar arquivo</AccordionItemTitle>
-          <AccordionItemBody>
-            <ul>
-              <li>
-                <NavLink to="#" onClick={() => this.handleItemClick()}>
-                  <img src={require('assets/media/images/illustrator.png')} alt="Illustrator" className="img-mrg-r" />Illustrator
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="#">
-                  <img src={require('assets/media/images/photoshop.png')} alt="Photoshop" className="img-mrg-r" />Photoshop
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="#">
-                  <img src={require('assets/media/images/indesign.png')} alt="InDesign" className="img-mrg-r" />InDesign
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="#">
-                  <img src={require('assets/media/images/coreldraw.png')} alt="CorelDraw" className="img-mrg-r" />CorelDraw
-                </NavLink>
-              </li>
-            </ul>
-          </AccordionItemBody>
-        </AccordionItem>
-      </Accordion>
-    );
+    return renderMark;
   }
 
   renderListMobile() {
