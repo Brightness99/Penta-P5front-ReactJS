@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import mock from 'assets/json/uploadMock.json';
-import { cartAddFetch } from 'actions';
+import { uploadFetch, uploadFileRequest } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
 import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
@@ -10,14 +10,24 @@ import { PageTitle } from 'atoms/Titles';
 import FlashMessage from 'components/FlashMessage';
 import { FunnelBlock } from 'components/Funnel';
 import MoreInfo from 'components/MoreInfo';
+import Loading from 'components/Loading';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
 import { NormalUploadType } from 'components/UploadTypes';
 import CanvasSchema from './UploadTypeSchemas/Canvas';
 import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
 
 type Props = {
-  match: {},
-  dispatch: () => {},
+  match: {
+    params: {
+      slug: string,
+      itemId: string,
+    }
+  },
+  isLoading: boolean,
+  uploadInfo: {},
+  uploadInfoFetch: (slug, itemId) => void,
+  uploadFile: (file) => void,
+  dispatch: () => void,
 };
 
 type State = {
@@ -35,27 +45,42 @@ export class Upload extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { slug, itemId } = this.props.match.params;
+    const { uploadInfoFetch } = this.props;
+
+    uploadInfoFetch(slug, itemId);
+  }
+
   static props: Props;
   static state: State;
 
   renderFlashMessages = () => {
-    const messages = mock.flashMessages;
+    const { uploadInfo } = this.props;
+    const messages = uploadInfo.flashMessages;
+
+    if (!messages) return '';
 
     return messages.map(
-      (message, index) => <FlashMessage {...message} key={`${String(index)}_${Date()}`} />
+      (message, index) => <FlashMessage {...message} key={`${String(index)}`} />
     );
   };
 
-  renderUploadTypeSchema = () => {
-    const globalFlags = mock.globalFlags;
+  handleUploadFile = (file: {}) => {
+    this.props.uploadFile(file);
+  };
 
-    switch (globalFlags.upload_type) {
+  renderUploadTypeSchema = () => {
+    const { uploadInfo } = this.props;
+    const globalFlags = uploadInfo.globalFlags;
+
+     switch (globalFlags.upload_type) {
       case 'canvas':
         return <CanvasSchema />;
       case 'sku_scene':
         return <SkuSceneSchema />;
       default:
-        return <NormalUploadType />;
+        return <NormalUploadType handleUploadFile={this.handleUploadFile} />;
     }
   };
 
@@ -132,7 +157,8 @@ export class Upload extends React.Component {
 
   renderUploadTypeSchemes() {
     const { currentStep } = this.state;
-    const availableStrategies = mock.availableStrategies;
+    const { uploadInfo } = this.props;
+    const availableStrategies = uploadInfo.availableStrategies;
     const step = 2;
     return (
       <FunnelBlock
@@ -175,6 +201,7 @@ export class Upload extends React.Component {
   }
 
   render() {
+    const { isLoading } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -189,6 +216,8 @@ export class Upload extends React.Component {
         url: '',
       },
     ];
+
+    if (isLoading) return <Loading />;
 
     return (
       <div className="page-upload">
@@ -211,17 +240,16 @@ export class Upload extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return ({
-    app: state.app,
-    router: state.router,
-    locale: state.locale,
-  });
-}
+const mapStateToProps = (state) => ({
+  isLoading: state.upload.isRunning,
+  uploadInfo: state.upload.object,
+});
 
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+  uploadInfoFetch: (slug, itemId) => dispatch(uploadFetch(slug, itemId)),
+  uploadFile: (file) => dispatch(uploadFileRequest(file)),
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Upload);
