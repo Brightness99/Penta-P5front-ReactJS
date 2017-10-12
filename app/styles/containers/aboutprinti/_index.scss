@@ -39,7 +39,7 @@
       font-size: $font-size-sm;
       @include lg {
         font-size: $font-size-lg;
-        margin: 1rem 10rem;
+        margin: 3.6rem 10rem;
       }
       .atm-about-printi {
         @include lg {
@@ -149,7 +149,7 @@
           left: -0.4rem;
           top: 0;
           @include lg {
-            background-color: $body-bg;
+            background-color: $color-printi-blue;
           }
         }
         &:after {
@@ -162,7 +162,7 @@
           left: -0.4rem;
           bottom: 0;
           @include lg {
-            background-color: $body-bg;
+            background-color: $color-printi-blue;
           }
         }
       }
@@ -191,15 +191,15 @@
           justify-content: center;
           @include lg {
             top: 8.1rem;
-            left: 48%;
+            left: calc(50% - 1.9rem);
           }
           &:after {
             content: '';
-            width: 3rem;
+            width: 4rem;
             height: 0.1rem;
             background-color: transparent;
             position: absolute;
-            right: -3rem;
+            right: -4rem;
             top: 54%;
             @include lg {
               background-color: $body-bg;
@@ -219,7 +219,7 @@
           }
           img {
             width: 100%;
-            min-height: 16rem;
+            min-height: 19rem;
           }
           .bsn-title-card {
             padding: 2.4rem;
@@ -292,7 +292,7 @@
         &:nth-of-type(2n)
           .qrk-number-card {
             &:after {
-              left: -3rem;
+              left: -4rem;
             }
         }
       }
