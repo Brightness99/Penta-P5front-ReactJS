@@ -7,7 +7,10 @@
 import { UploadConstants } from 'constants/index';
 
 /**
- * Fetching social login settings
+ * Fetching upload info
+ *
+ * @param {string} slug
+ * @param {string} itemId
  *
  * @returns {Object}
  */
@@ -18,5 +21,18 @@ export function uploadFetch(slug: string, itemId: string): Object {
       slug,
       itemId,
     },
+  };
+}
+/**
+ * upload file request
+ *
+ * @param {Object} file
+ *
+ * @returns {Object}
+ */
+export function uploadFileRequest(file: {}): Object {
+  return {
+    type: UploadConstants.UPLOAD_FILE_REQUEST,
+    payload: file,
   };
 }

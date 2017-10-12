@@ -17,13 +17,17 @@ export default class NormalUploadType extends React.Component {
 
   props: Props;
 
+  handleUploadFile = (file: {}) => {
+    this.props.handleUploadFile(file);
+  };
+
   renderUploadFiles() {
     const { multipleFiles } = this.props;
     if (multipleFiles) {
       return [<UploadFile key="arte1" />, <UploadFile key="arte2" />];
     }
     return (
-      <UploadFile key="arte1" />
+      <UploadFile handleFileChanged={this.handleUploadFile} key="arte1" />
     );
   }
 

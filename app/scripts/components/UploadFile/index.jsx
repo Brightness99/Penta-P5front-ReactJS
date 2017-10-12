@@ -23,7 +23,7 @@ export default class UploadFile extends React.Component {
   props: Props;
   state: Props;
 
-  onDrop(file) {
+  onDrop = (file) => {
     const { handleFileChanged } = this.props;
     this.setState({
       file,
@@ -33,7 +33,7 @@ export default class UploadFile extends React.Component {
     if (typeof handleFileChanged === 'function') {
       handleFileChanged(file);
     }
-  }
+  };
 
   render() {
     return (

@@ -8,3 +8,4 @@
 export * from './api';
 export * from './helpers';
 export * from './settings';
+export * from './rxFileUpload';
