@@ -21,16 +21,19 @@ export class FileMount extends React.Component {
     dispatch(fileMountFetch());
   }
   static props: Props;
+  state = {
+    breadcrumbTitle: '',
+  }
 
   selectItem = (slug) => {
     const { dispatch } = this.props;
     dispatch(fileMountItemFetch(slug));
-    //dispatch(fileMountItemFetch('formato-final-e-numero-de-paginas-no-illustrator'));
+    this.setState({ breadcrumbTitle: slug });
   };
 
   render() {
     const { app: { screenSize } } = this.props;
-
+    const { breadcrumbTitle } = this.state;
     const breadcrumb = [
       {
         title: 'Home',
@@ -41,7 +44,7 @@ export class FileMount extends React.Component {
         url: '/montagem-do-arquivo',
       },
       {
-        title: 'Como criar seu arquivo para impressão no illustrator',
+        title: breadcrumbTitle,
       },
     ];
     const { fileMount } = this.props;
