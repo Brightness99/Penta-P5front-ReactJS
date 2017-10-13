@@ -430,7 +430,7 @@ export function accountOrderFetch(action$) {
 export function accountLoyaltyFetch(action$) {
   return action$.ofType(AccountConstants.ACCOUNT_LOYALTY_FETCH_REQUEST)
     .switchMap((action) => {
-      const endpoint = `/v2/customers/${action.payload.id}/loyalty_tier`;
+      const endpoint = `/v2/customers/loyalty_program`;
       return rxAjax({
         endpoint,
         method: 'GET',
