@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { isMobile } from 'utils/helpers';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { PageTitle } from 'atoms/Titles';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { fileMountFetch, fileMountItemFetch } from 'actions';
 
@@ -15,15 +16,29 @@ type Props = {
   dispatch: () => {},
 };
 
+type State = {
+  breadcrumbTitle: string,
+};
+
 export class FileMount extends React.Component {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      breadcrumbTitle: '',
+    };
+  }
+
+  shouldComponentUpdate = shouldComponentUpdate;
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fileMountFetch());
   }
+
   static props: Props;
-  state = {
-    breadcrumbTitle: '',
-  }
+
+  static state: State;
 
   selectItem = (slug) => {
     const { dispatch } = this.props;
@@ -53,14 +68,11 @@ export class FileMount extends React.Component {
         <div className="container">
           <div className="template-file-mount">
             {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-            <h2 className="title-file-mount">Montagem do arquivo</h2>
-            {!isMobile(screenSize) && <p className="subtitle-file-mount">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum</p>}
-
+            <PageTitle>Montagem do arquivo</PageTitle>
             <div className="org-content-file-mount">
               <Sidebar screenSize={screenSize} selectItem={this.selectItem} />
               <ContentText fileMount={fileMount} />
             </div>
-
           </div>
         </div>
       </section>

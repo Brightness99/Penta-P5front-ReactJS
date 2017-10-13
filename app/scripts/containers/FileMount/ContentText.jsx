@@ -13,7 +13,7 @@ export class ContentText extends React.Component {
   render() {
     const { fileMount } = this.props;
     const renderMark = (fileMount && fileMount.isLoaded) ?
-      (<div className="atm-content-file" dangerouslySetInnerHTML={{ __html: fileMount.mountData.content }} />) :
+      (<div dangerouslySetInnerHTML={{ __html: fileMount.mountData.content }} />) :
       null;
     return (
       <div className="atm-content-file">
