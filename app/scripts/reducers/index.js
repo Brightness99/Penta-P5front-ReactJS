@@ -22,6 +22,7 @@ import header from './header';
 import successfulPurchase from './successful-purchase';
 import siteMap from './site-map';
 import fileMount from './file-mount';
+import guide from './guide';
 
 export default {
   ...app,
@@ -43,4 +44,5 @@ export default {
   ...successfulPurchase,
   ...siteMap,
   ...fileMount,
+  ...guide,
 };
