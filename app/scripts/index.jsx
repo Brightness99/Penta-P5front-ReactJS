@@ -38,7 +38,7 @@ export function renderApp(RootComponent) {
   store.subscribe(() => {
 
     if (!store.getState().account.loyalty.isRunning && !store.getState().account.loyalty.isLoaded && store.getState().account.id) {
-      store.dispatch(accountLoyaltyFetch(store.getState().account.id));
+      store.dispatch(accountLoyaltyFetch());
     }
 
     /* istanbul ignore next */
