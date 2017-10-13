@@ -68,6 +68,7 @@ import {
   fileMountFetch,
   fileMountItemFetch
 } from './file-mount';
+import { guideFetch } from './guide';
 
 export default combineEpics(
   userNewsletter,
@@ -119,5 +120,6 @@ export default combineEpics(
   successfulPurchaseFetch,
   siteMapFetch,
   fileMountFetch,
-  fileMountItemFetch
+  fileMountItemFetch,
+  guideFetch
 );
