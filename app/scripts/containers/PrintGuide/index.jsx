@@ -60,7 +60,7 @@ export class PrintGuide extends React.Component {
 
             <div className="org-content-file-mount">
               <Sidebar screenSize={screenSize} selectItem={this.selectItem} />
-              {!isMobile(screenSize) && <ContentText guide={guide} />}
+              <ContentText guide={guide} />
             </div>
 
           </div>
