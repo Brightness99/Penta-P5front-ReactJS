@@ -94,7 +94,7 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
-                      <Route path="/montagem-de-arquivos" component={FileMount} />
+                      <Route path="/montagem-do-arquivo" component={FileMount} />
                       <Route path="/guia-de-impressao" component={PrintGuide} />
                       <Route path="/central-de-ajuda" component={HelpCenterPage} />
                       <Route path="/politica-de-privacidade" component={PrivacyPolicy} />
