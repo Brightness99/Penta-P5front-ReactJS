@@ -35,6 +35,10 @@
     background-color: $color-white;
     padding: 1rem 2rem;
     width: 49%;
+    .atm__block-title{
+      padding: 0;
+      margin: 2rem 0;
+    }
     &:first-child {
       margin-right: 2%;
     }

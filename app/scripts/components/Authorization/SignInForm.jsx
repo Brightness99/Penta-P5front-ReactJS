@@ -85,7 +85,7 @@ export default class SignInForm extends React.PureComponent {
     const { errorMessage } = this.props;
     return (
       <div className="authentication__block">
-        <BlockTitle>Entrar</BlockTitle>
+        <BlockTitle>Já sou cadastrado</BlockTitle>
         <hr />
         <form className="authentication__block__form" id="signInForm" onSubmit={this.handleSignIn}>
           <InputEmail
