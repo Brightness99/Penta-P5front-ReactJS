@@ -180,8 +180,7 @@ export class Authentication extends React.Component {
           onLoad={this.handleScriptLoad}
         />
         {this.renderModalDialog()}
-        <PageTitle className="text-center">Entre ou cadastre-se</PageTitle>
-        <div className={cx('authentication')}>
+        <div className="authentication">
           <SocialBlock
             loginFBSuccess={this.facebookSignIn}
             loginGoogleSuccess={this.googleSignIn}
@@ -189,6 +188,7 @@ export class Authentication extends React.Component {
             google={socialLoginSettings.socials.google}
             isFingerprintLoaded={isFingerprintLoaded}
           />
+          <span className="title_between_blocks">OU</span>
           <div className="authentication__wrapper">
             <SignInForm
               onSubmit={this.signIn}
