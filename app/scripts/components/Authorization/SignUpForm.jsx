@@ -104,22 +104,26 @@ export default class SignUpForm extends React.PureComponent {
           <InputFullName
             name="first_name"
             placeholder="Nome completo"
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email"
             placeholder="E-mail"
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email_confirmation"
             placeholder="Repetir e-mail"
             equalsTo={form.email.value}
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputPassword
             name="password"
             placeholder="Senha"
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <ErrorField message={errorMessage} />
