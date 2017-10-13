@@ -210,7 +210,11 @@ export class Sidebar extends React.Component {
   props: Props;
 
   handleItemClick(slug) {
-    this.props.selectItem(slug);
+    const { selectItem } = this.props;
+
+    if (typeof selectItem === 'function') {
+      selectItem(slug);
+    }
   }
 
   renderAccordionItem(list) {
@@ -234,9 +238,9 @@ export class Sidebar extends React.Component {
       }
       return (
         <li key={accordionIndex.toString()}>
-          <NavLink to="#" onClick={() => this.handleItemClick(accordionItem.slug)}>
+          <button onClick={() => this.handleItemClick(accordionItem.slug, accordionItem.title)}>
             {imageMark}{accordionItem.title}
-          </NavLink>
+          </button>
         </li>
       );
     });
