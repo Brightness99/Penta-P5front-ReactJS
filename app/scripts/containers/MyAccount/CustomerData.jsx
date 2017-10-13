@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Input } from 'quarks/Inputs';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
-import { Select } from 'atoms/Inputs';
+import { BoxRadio, Select } from 'atoms/Inputs';
 import { ErrorText } from 'atoms/Texts';
 import { CheckBox } from 'components/Input';
+import Loading from 'components/Loading';
 import { NavLink, Link } from 'react-router-dom';
 import { accountUpdate } from 'actions';
 
@@ -14,6 +15,10 @@ type Props = {
   screenSize: string,
   account: {},
   dispatch: () => {},
+};
+
+type State = {
+  activeForm: string,
 };
 
 export class CustomerData extends React.Component {
@@ -26,6 +31,7 @@ export class CustomerData extends React.Component {
       current_password: '',
       new_password: '',
       new_password_repeat: '',
+      activeForm: 'person',
     };
   }
 
@@ -34,6 +40,15 @@ export class CustomerData extends React.Component {
   };
   
   static props: Props;
+
+  componentWillReceiveProps(nextProps) {
+    const { account } = nextProps;
+    if (account) {
+      this.setState({
+        ...nextProps.account,
+      });
+    }
+  }
 
   handleChangeName = (e) => {
     let names = e.target.value.split(' ');
@@ -46,27 +61,185 @@ export class CustomerData extends React.Component {
   handleClick = () => {
     const { dispatch } = this.props;
 
-    let dataToUpdate = { ...this.state };
-    if (dataToUpdate.current_password !== '' && dataToUpdate.new_password !== '' && dataToUpdate.new_password_repeat !== '') {
+    const { id, first_name, last_name, cpf, phone, gender, cloud_manager, cnpj, company_name, employee_number, state_registration, current_password, new_password, new_password_repeat } = this.state;
+    
+    this.setState({
+      error: null,
+    });
+
+    let dataToUpdate = {
+      id, 
+      first_name,
+      last_name,
+      cpf,
+      phone, 
+      gender, 
+      cloud_manager, 
+      cnpj, 
+      company_name, 
+      employee_number, 
+      state_registration,
+    };
+
+    if (current_password !== '' && new_password !== '' && new_password_repeat !== '') {
       dataToUpdate.change_password = {
-        current_password: dataToUpdate.current_password,
-        new_password: dataToUpdate.new_password,
-        new_password_repeat: dataToUpdate.new_password_repeat
+        current_password: current_password,
+        new_password: new_password,
+        new_password_repeat: new_password_repeat
       };
+
+      if (new_password !== new_password_repeat) {
+        this.setState({
+          error: 'Password does not match!'
+        });
+        return;
+      }
     }
 
     dispatch(accountUpdate(dataToUpdate));
   }
 
-  renderForm() {
+  handleSelection = (ev) => {
+    this.setState({
+      activeForm: ev.currentTarget.value,
+    });
+  }
 
+  renderPersonalData() {
+    return (
+      <form className="org-checkout-content-data">
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-two"
+          placeholder="Nome Completo"
+          value={this.state.first_name + ' ' + this.state.last_name}
+          onChange={this.handleChangeName}
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="CPF"
+          value={this.state.cpf}
+          onChange={(e) => { this.setState({ cpf: e.target.value }); }}
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="Telefone"
+          value={this.state.phone}
+          onChange={(e) => { this.setState({ phone: e.target.value }); }}
+        />
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-gender"
+          showLabel={true}
+          id="data-pane-gender"
+          placeholder="Sexo"
+          value={this.state.gender}
+          onChange={(e) => { this.setState({ gender: e.target.value }); }}
+          required={true}
+        >
+          <option value={'M'}>Masculino</option>
+          <option value={'F'}>Feminino</option>
+        </Select>
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-area"
+          showLabel={true}
+          id="data-pane-area"
+          placeholder="Área de Atuação"
+          value={this.state.cloud_manager}
+          onChange={(e) => { this.setState({ cloud_manager: e.target.value }); }}
+          required={true}
+        >
+          <option value={1}>Gráfica</option>
+          <option value={2}>Agência</option>
+        </Select>
+      </form>
+    );
+  }
+
+  renderEnterpriseData() {
+    return (
+      <form className="org-checkout-content-data">
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-two"
+          placeholder="Nome Completo"
+          value={this.state.first_name + ' ' + this.state.last_name}
+          onChange={this.handleChangeName}
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="CNPJ"
+          value={this.state.cnpj}
+          onChange={(e) => { this.setState({ cnpj: e.target.value }); }}
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-two"
+          placeholder="Razão Social"
+          value={this.state.company_name}
+          onChange={(e) => { this.setState({ company_name: e.target.value }); }}
+        />
+        <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="Telefone/Celular"
+          value={this.state.phone}
+          onChange={(e) => { this.setState({ phone: e.target.value }); }}
+        />
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-area"
+          showLabel={true}
+          id="data-pane-area"
+          placeholder="Área de Atuação"
+          required={true}
+        >
+          <option value={1}>Gráfica</option>
+          <option value={2}>Agência</option>
+        </Select>
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-collaborators"
+          showLabel={true}
+          id="data-pane-collaborators"
+          placeholder="Número de funcionários"
+          value={this.state.employee_number}
+          onChange={(e) => { this.setState({ employee_number: e.target.value }); }}
+          required={true}
+        >
+          <option value={'1'}>1</option>
+          <option value={'2'}>2</option>
+        </Select>
+        <Select
+          className="atm-checkout-input atm-checkout-input-one"
+          name="data-pane-state"
+          showLabel={true}
+          id="data-pane-state"
+          placeholder="Inscrição Estadual"
+          value={this.state.state_registration}
+          onChange={(e) => { this.setState({ state_registration: e.target.value }); }}
+          required={true}
+        >
+          <option value={'sp'}>SP</option>
+          <option value={'rj'}>RJ</option>
+        </Select>
+      </form>
+    );
+  }
+
+  renderForm() {
+    const { activeForm, error } = this.state;
     const { account } = this.props;
 
     let errorMessage;
-    if (account.error) {
+    if (account.error || error) {
       errorMessage = (
         <div className="mol-checkout-pane-footer">
-          <ErrorText>{account.error.message}</ErrorText>
+          <ErrorText>{account.error ? account.error.message : error}</ErrorText>
         </div>
       );
     }
@@ -74,63 +247,27 @@ export class CustomerData extends React.Component {
     return (
       <div>
         <h3 className="title-myData">Meus dados</h3>
-        <form className="org-checkout-content-data">
-          <Input
-            showLabel={true}
-            className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Nome Completo"
-            value={this.state.first_name + ' ' + this.state.last_name}
-            onChange={this.handleChangeName}
-          />
-          <Input
-            showLabel={true}
-            className="atm-checkout-input atm-checkout-input-one"
-            placeholder="CNPJ"
-            value={this.state.cnpj}
-            onChange={(e) => { this.setState({ cnpj: e.target.value }); }}
-          />
-          <Select
-            className="atm-checkout-input atm-checkout-input-one"
-            name="data-pane-gender"
-            showLabel={true}
-            id="data-pane-gender"
-            placeholder="Nº de funcionários"
-            value={this.state.employee_number}
-            onChange={(e) => { this.setState({ employee_number: e.target.value }); }}
-            required={true}
+
+
+        <div className="mol-data-pane-choser">
+          <BoxRadio
+            value="person"
+            onChange={this.handleSelection}
+            name="pane-type"
+            checked={activeForm === 'person'}
           >
-            <option value={'0'}>de 2 a 19 funcionários</option>
-            <option value={'1 '}>de 100 a 300 funcionários</option>
-          </Select>
-          <Input
-            showLabel={true}
-            className="atm-checkout-input atm-checkout-input-one disabled"
-            placeholder="Inscrição estadual"
-            value={this.state.state_registration}
-            onChange={(e) => { this.setState({ state_registration: e.target.value }); }}
-          />
-          <Input
-            showLabel={true}
-            className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Telefone"
-            value={this.state.phone}
-            onChange={(e) => { this.setState({ phone: e.target.value }); }}
-          />
-          <InputEmail
-            className="atm-checkout-input atm-checkout-input-one"
-            name="email"
-            placeholder="E-mail"
-            showLabel={true}
-            value={this.state.email}
-            onChange={(e) => { this.setState({ email: e.target.value }); }}
-            onValidate={this.handleValidatedInput}
-          />
-          <label className="atm-up-sell-checkbox atm-up-sell-checkbox--checked">
-            <CheckBox 
-              checked={this.state.id_state_registration}
-              onChange={(e) => { this.setState({ id_state_registration: e.target.checked }); }} />Isento de inscrição estadual
-          </label>
-        </form>
+            Pessoa Física
+          </BoxRadio>
+          <BoxRadio
+            value="enterprise"
+            onChange={this.handleSelection}
+            name="pane-type"
+            checked={activeForm === 'enterprise'}
+          >
+            Pessoa Jurídica
+          </BoxRadio>
+        </div>
+        {activeForm === 'person' ? this.renderPersonalData() : this.renderEnterpriseData()}
 
         <h4 className="title-changePass">Mudar senha</h4>
         <form className="org-checkout-content-data">
@@ -182,20 +319,20 @@ export class CustomerData extends React.Component {
 
     const { account } = this.props;
 
-    const form = this.renderForm();
-
     return (
       <div className="container-myData">
         <div className="container">
           <h2>Minha conta</h2>
           <h3 className="title-myData">Meus dados</h3>
-          {form}
+          {!account.isLoaded || account.isRunning ? <Loading /> : this.renderForm()}
         </div>
       </div>
     );
   }
 
   renderDesktop() {
+
+    const { account } = this.props;
 
     const breadcrumb = [
       {
@@ -211,13 +348,11 @@ export class CustomerData extends React.Component {
       },
     ];
 
-    const form = this.renderForm();
-
     return (
       <div className="container-myData">
         <Breadcrumbs links={breadcrumb} />
         <h2>Minha conta</h2>
-        {form}
+        {!account.isLoaded || account.isRunning ? <Loading /> : this.renderForm()}
       </div>
     );
   }
