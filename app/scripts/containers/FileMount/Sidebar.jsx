@@ -261,33 +261,105 @@ export class Sidebar extends React.Component {
     return renderMark;
   }
 
-  renderListMobile() {
+  renderListMobile(index, list) {
+    const renderMark = list.map((accordionItem, accordionIndex) => {
+      let imageMark = null;
+      switch (accordionItem.title) {
+        case 'Illustrator':
+          imageMark = <img src={require('assets/media/images/illustrator.png')} alt="Illustrator" className="img-mrg-r" />;
+          break;
+        case 'Photoshop':
+          imageMark = <img src={require('assets/media/images/photoshop.png')} alt="Photoshop" className="img-mrg-r" />;
+          break;
+        case 'InDesign':
+          imageMark = <img src={require('assets/media/images/indesign.png')} alt="InDesign" className="img-mrg-r" />;
+          break;
+        case 'Corel Draw':
+          imageMark = <img src={require('assets/media/images/coreldraw.png')} alt="CorelDraw" className="img-mrg-r" />;
+          break;
+        default:
+          imageMark = null;
+      }
+      return (
+        <AccordionItem key={accordionIndex.toString()} >
+          <AccordionItemTitle handleClick={() => this.handleItemClick(accordionItem.slug)}>
+            {imageMark}{accordionItem.title}
+          </AccordionItemTitle>
+        </AccordionItem>
+      );
+    });
     return (
       <Accordion className="qrk-accordion-sidebar accordion-mobile">
-        <AccordionItem>
-          <AccordionItemTitle>Illustrator</AccordionItemTitle>
-          <AccordionItemBody>
-            <ContentText />
-          </AccordionItemBody>
-        </AccordionItem>
+        {renderMark}
       </Accordion>
     );
   }
 
+  // renderListMobile() {
+  //   return (
+  //     <Accordion className="qrk-accordion-sidebar accordion-mobile">
+  //       <AccordionItem key="1">
+  //         <AccordionItemTitle>Illustrator</AccordionItemTitle>
+  //         <AccordionItemBody>
+  //           <ContentText />
+  //         </AccordionItemBody>
+  //       </AccordionItem>
+  //       <AccordionItem key="2">
+  //         <AccordionItemTitle>Illustrator</AccordionItemTitle>
+  //         <AccordionItemBody>
+  //           <ContentText />
+  //         </AccordionItemBody>
+  //       </AccordionItem>
+  //       <AccordionItem key="3">
+  //         <AccordionItemTitle>Illustrator</AccordionItemTitle>
+  //         <AccordionItemBody>
+  //           <ContentText />
+  //         </AccordionItemBody>
+  //       </AccordionItem>
+  //     </Accordion>
+  //   );
+  // }
+
   renderMobile() {
+    const renderMark = fileMountList.map((item, index) => (
+      <Accordion key={index.toString()} className="qrk-accordion-sidebar">
+        <AccordionItem>
+          <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
+          <AccordionItemBody>
+            {this.renderListMobile(index, item.list)}
+          </AccordionItemBody>
+        </AccordionItem>
+      </Accordion>
+    ));
     return (
       <div className="atm-sidebar-file">
-        <Accordion className="qrk-accordion-sidebar">
-          <AccordionItem>
-            <AccordionItemTitle>Criar Arquivo</AccordionItemTitle>
-            <AccordionItemBody>
-              {this.renderListMobile()}
-            </AccordionItemBody>
-          </AccordionItem>
-        </Accordion>
+        {renderMark}
       </div>
     );
   }
+
+  // renderMobile() {
+  //   return (
+  //     <div className="atm-sidebar-file">
+  //       <Accordion className="qrk-accordion-sidebar">
+  //         <AccordionItem>
+  //           <AccordionItemTitle>Criar Arquivo</AccordionItemTitle>
+  //           <AccordionItemBody>
+  //             {this.renderListMobile()}
+  //           </AccordionItemBody>
+  //         </AccordionItem>
+  //       </Accordion>
+  //       <Accordion className="qrk-accordion-sidebar">
+  //         <AccordionItem>
+  //           <AccordionItemTitle>Criar Arquivo</AccordionItemTitle>
+  //           <AccordionItemBody>
+  //             {this.renderListMobile()}
+  //           </AccordionItemBody>
+  //         </AccordionItem>
+  //       </Accordion>
+  //     </div>
+  //   );
+  // }
 
   renderDesktop() {
     return (

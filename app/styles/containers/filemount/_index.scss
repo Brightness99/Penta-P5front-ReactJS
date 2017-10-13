@@ -24,8 +24,9 @@
 }
 
 .org-content-file-mount {
-  display: flex;
+  display: block;
   @include lg {
     margin-top: 2rem;
+    display: flex;
   }
 }

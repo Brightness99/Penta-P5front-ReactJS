@@ -21,11 +21,17 @@
           padding: 0.05rem 0.887rem;          
           margin-right: 1rem;
         }
+        img {
+          margin-right: 1.2rem;
+        }
       }
       svg {
         fill: $color-almostBlack;
         position: absolute;
         right: 1rem;
+      }
+      .mol-accordion-item .atm-accordion-title {
+        padding: 1rem 2rem;
       }
     }
     .atm-accordion-item-body {

@@ -120,30 +120,33 @@ export class Sidebar extends React.Component {
     return renderMark;
   }
 
-  renderListMobile() {
+  renderListMobile(index, list) {
+    const renderMark = list.map((accordionItem, accordionIndex) => (
+      <AccordionItem key={accordionIndex.toString()} >
+        <AccordionItemTitle handleClick={() => this.handleItemClick(accordionItem.slug)}>{accordionItem.title}</AccordionItemTitle>
+      </AccordionItem>
+    ));
     return (
       <Accordion className="qrk-accordion-sidebar accordion-mobile">
-        <AccordionItem>
-          <AccordionItemTitle>Formatos de papel</AccordionItemTitle>
-          <AccordionItemBody>
-            <ContentText />
-          </AccordionItemBody>
-        </AccordionItem>
+        {renderMark}
       </Accordion>
     );
   }
 
   renderMobile() {
+    const renderMark = guideList.map((item, index) => (
+      <Accordion key={index.toString()} className="qrk-accordion-sidebar">
+        <AccordionItem>
+          <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
+          <AccordionItemBody>
+            {this.renderListMobile(index, item.list)}
+          </AccordionItemBody>
+        </AccordionItem>
+      </Accordion>
+    ));
     return (
       <div className="atm-sidebar-file">
-        <Accordion className="qrk-accordion-sidebar">
-          <AccordionItem>
-            <AccordionItemTitle>Formatos e sangria</AccordionItemTitle>
-            <AccordionItemBody>
-              {this.renderListMobile()}
-            </AccordionItemBody>
-          </AccordionItem>
-        </Accordion>
+        {renderMark}
       </div>
     );
   }
