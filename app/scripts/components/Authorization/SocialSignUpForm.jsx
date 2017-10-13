@@ -14,6 +14,12 @@ type FormType = {
 type Props = {
   name: string,
   onSubmit: (data: FormType) => void,
+  locale: {
+    TITLE: string,
+    EMAIL_PLACEHOLDER: string,
+    CONFIRM_EMAIL_PLACEHOLDER: string,
+    BUTTON_TITLE: string,
+  },
 };
 
 type State = { canSubmit: boolean, form: FormType };
@@ -71,22 +77,26 @@ export default class SocialSignUpForm extends React.PureComponent {
   };
 
   render() {
-    const { canSubmit } = this.state;
-    const { form } = this.state;
-
+    const { canSubmit, form } = this.state;
+    const { name, locale: {
+      TITLE,
+      EMAIL_PLACEHOLDER,
+      CONFIRM_EMAIL_PLACEHOLDER,
+      BUTTON_TITLE,
+    } } = this.props;
     return (
       <div className="authentication__block">
-        <BlockTitle>Sou novo cliente, {this.props.name}</BlockTitle>
+        <BlockTitle>{`${TITLE},${name}`}</BlockTitle>
         <hr />
         <form className="authentication__block__form" id="socialSignUpForm" onSubmit={this.handleSubmit}>
           <InputEmail
             name="email"
-            placeholder="E-mail"
+            placeholder={EMAIL_PLACEHOLDER}
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email_confirmation"
-            placeholder="Repetir e-mail"
+            placeholder={CONFIRM_EMAIL_PLACEHOLDER}
             equalsTo={form.email.value}
             onValidate={this.handleValidatedInput}
           />
@@ -96,7 +106,7 @@ export default class SocialSignUpForm extends React.PureComponent {
             kind="success"
             disabled={!canSubmit}
           >
-            Cadastrar
+            {BUTTON_TITLE}
           </Button>
         </form>
       </div>
