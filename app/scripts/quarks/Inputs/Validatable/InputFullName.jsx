@@ -62,7 +62,7 @@ export default class InputFullName extends React.Component {
   };
 
   render() {
-    const pattern = /^[a-zA-Z]+\s+[a-zA-Z]+$/;
+    const pattern = /^([a-zA-Z]+\s?\b){2,}$/;
     const elementProps = {
       ...this.props,
       type: 'text',

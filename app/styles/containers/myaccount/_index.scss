@@ -1326,7 +1326,7 @@
       }
 
       &.box-addNewAddress {
-        @include center-child-flex
+        @include center-child-flex;
         background-color: $color-lightBlue;
         border: 0.2rem dotted $color-printi-blue;
         cursor: pointer;

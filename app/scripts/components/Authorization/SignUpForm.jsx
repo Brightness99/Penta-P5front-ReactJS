@@ -98,7 +98,7 @@ export default class SignUpForm extends React.PureComponent {
 
     return (
       <div className="authentication__block">
-        <BlockTitle>Cadastrar</BlockTitle>
+        <BlockTitle>Sou novo cliente</BlockTitle>
         <hr />
         <form className="authentication__block__form" id="signUpForm" onSubmit={this.handleSubmit}>
           <InputFullName
