@@ -154,7 +154,6 @@ export default class SocialBlock extends React.PureComponent {
       return (
         <FacebookLogin
           appId={facebook.credentials.app_id}
-          autoLoad={true}
           fields="name,email,picture"
           textButton={''}
           callback={this.loginFBSuccess}
