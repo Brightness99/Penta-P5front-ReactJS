@@ -58,7 +58,7 @@ export class FileMount extends React.Component {
 
             <div className="org-content-file-mount">
               <Sidebar screenSize={screenSize} selectItem={this.selectItem} />
-              {!isMobile(screenSize) && <ContentText fileMount={fileMount} />}
+              <ContentText fileMount={fileMount} />
             </div>
 
           </div>
