@@ -189,6 +189,7 @@ export default class SocialBlock extends React.PureComponent {
   render() {
     return (
       <div className="authentication__social">
+        <h3>Acesse com:</h3>
         {this.renderFacebookLogin()}
         {this.renderGoogleLogin()}
          <form id='fakeFormForSocial' />
