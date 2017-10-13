@@ -97,6 +97,7 @@ export default class SignInForm extends React.PureComponent {
           <InputPassword
             name="password"
             placeholder="Senha"
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <ErrorField message={errorMessage} />
