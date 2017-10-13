@@ -16,6 +16,12 @@ type Props = {
   onSubmit: (email: string, password: string) => void,
   isFingerprintLoaded: boolean,
   errorMessage: string,
+  locale: {
+    TITLE: string,
+    EMAIL_PLACEHOLDER: string,
+    PASSWORD_PLACEHOLDER: string,
+    BUTTON_TITLE: string
+  }
 };
 
 type State = { canSubmit: boolean, form: FormType };
@@ -82,21 +88,21 @@ export default class SignInForm extends React.PureComponent {
 
   render() {
     const { canSubmit } = this.state;
-    const { errorMessage } = this.props;
+    const { errorMessage, locale: { TITLE, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, BUTTON_TITLE } } = this.props;
     return (
       <div className="authentication__block">
-        <BlockTitle>Já sou cadastrado</BlockTitle>
+        <BlockTitle>{TITLE}</BlockTitle>
         <hr />
         <form className="authentication__block__form" id="signInForm" onSubmit={this.handleSignIn}>
           <InputEmail
             name="email"
-            placeholder="E-mail"
+            placeholder={EMAIL_PLACEHOLDER}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputPassword
             name="password"
-            placeholder="Senha"
+            placeholder={PASSWORD_PLACEHOLDER}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
@@ -106,7 +112,7 @@ export default class SignInForm extends React.PureComponent {
             kind="success"
             disabled={!canSubmit}
           >
-            Entrar
+            {BUTTON_TITLE}
           </Button>
         </form>
       </div>

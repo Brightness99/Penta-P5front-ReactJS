@@ -68,6 +68,9 @@ type Props = {
   loginGoogleSuccess: (result: SocialLoginResult) => void,
   loginGoogleFailure: (result: SocialLoginResult) => void,
   isFingerprintLoaded: boolean,
+  locale: {
+    TITLE: string
+  }
 };
 
 export default class SocialBlock extends React.PureComponent {
@@ -186,12 +189,13 @@ export default class SocialBlock extends React.PureComponent {
   };
 
   render() {
+    const { locale: { TITLE } } = this.props;
     return (
       <div className="authentication__social">
-        <h3>Acesse com:</h3>
+        <h3>{TITLE}:</h3>
         {this.renderFacebookLogin()}
         {this.renderGoogleLogin()}
-         <form id='fakeFormForSocial' />
+        <form id="fakeFormForSocial" />
       </div>
     );
   }

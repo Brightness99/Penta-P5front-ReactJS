@@ -1,16 +1,15 @@
 // @flow
 import React from 'react';
-import cx from 'classnames';
 import Script from 'react-load-script';
 
 import { connect } from 'react-redux';
-import { PageTitle } from 'atoms/Titles';
 import {
   userSignIn,
   userSignUp,
   socialLoginSettingsFetch,
   userSocialSignIn,
-  userSocialSignUp } from 'actions';
+  userSocialSignUp
+} from 'actions';
 import { SignInForm, SignUpForm, SocialBlock, SocialSignUpForm } from 'components/Authorization';
 import Modal from 'components/Modal';
 
@@ -24,6 +23,7 @@ type Props = {
   isSignUpActivated: boolean,
   signInErrorMessage: string,
   signUpErrorMessage: string,
+  locale: {}
 };
 
 type States = {
@@ -51,9 +51,9 @@ export class Authentication extends React.Component {
     this.props.socialLoginSettingsFetch();
   }
 
-  componentWillReceiveProps= (nextProps: Props) => {
-    const { isSignUpActivated }  = this.props;
-    const nextSignUpState  = nextProps.isSignUpActivated;
+  componentWillReceiveProps = (nextProps: Props) => {
+    const { isSignUpActivated } = this.props;
+    const nextSignUpState = nextProps.isSignUpActivated;
 
     if (nextSignUpState && nextSignUpState !== isSignUpActivated) {
       this.socialSignUpActivated();
@@ -142,12 +142,14 @@ export class Authentication extends React.Component {
     const {
       isFingerprintLoaded,
       forFacebookNeedEmail,
-      facebookSocialInfo } = this.state;
-    const { signUpErrorMessage } = this.props;
+      facebookSocialInfo,
+    } = this.state;
+    const { signUpErrorMessage, locale: { signup_block, signup_social_block } } = this.props;
 
     if (forFacebookNeedEmail) {
       return (
         <SocialSignUpForm
+          locale={signup_social_block}
           name={facebookSocialInfo.first_name}
           onSubmit={this.facebookSignUp}
         />);
@@ -155,6 +157,7 @@ export class Authentication extends React.Component {
 
     return (
       <SignUpForm
+        locale={signup_block}
         onSubmit={this.signUp}
         isFingerprintLoaded={isFingerprintLoaded}
         errorMessage={signUpErrorMessage}
@@ -162,16 +165,23 @@ export class Authentication extends React.Component {
   };
 
   renderModalDialog = () => {
+    const { locale: { attention_modal: { TITLE, CONTENT } } } = this.props;
     if (!this.state.isModalOpen) return '';
 
     return (
-      <Modal title="Atenção" handleCloseModal={this.closeModal}>
-        Para acessar com o seu Facebook. Informar o Seu e-mail.
+      <Modal title={TITLE} handleCloseModal={this.closeModal}>
+        {CONTENT}
       </Modal>);
   };
 
   render() {
-    const { socialLoginSettings, signInErrorMessage } = this.props;
+    const {
+      socialLoginSettings, signInErrorMessage, locale: {
+        TITLE_BETWEEN_BLOCKS,
+        signin_block,
+        social_block,
+      },
+    } = this.props;
     const { isFingerprintLoaded } = this.state;
     return (
       <div className="container">
@@ -182,15 +192,17 @@ export class Authentication extends React.Component {
         {this.renderModalDialog()}
         <div className="authentication">
           <SocialBlock
+            locale={social_block}
             loginFBSuccess={this.facebookSignIn}
             loginGoogleSuccess={this.googleSignIn}
             facebook={socialLoginSettings.socials.facebook}
             google={socialLoginSettings.socials.google}
             isFingerprintLoaded={isFingerprintLoaded}
           />
-          <span className="title_between_blocks">OU</span>
+          <span className="title_between_blocks">{TITLE_BETWEEN_BLOCKS}</span>
           <div className="authentication__wrapper">
             <SignInForm
+              locale={signin_block}
               onSubmit={this.signIn}
               isFingerprintLoaded={isFingerprintLoaded}
               errorMessage={signInErrorMessage}
@@ -208,6 +220,7 @@ const mapStateToProps = state => ({
   isSignUpActivated: state.user.socialAuthentication.userNotFound,
   signInErrorMessage: state.user.authentication.message,
   signUpErrorMessage: state.user.registration.message,
+  locale: state.locale.translate.page.authentication,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -18,6 +18,14 @@ type Props = {
   onSubmit: (data: FormType) => void,
   isFingerprintLoaded: boolean,
   errorMessage: string,
+  locale: {
+    TITLE: string,
+    FULL_NAME_PLACEHOLDER: string,
+    EMAIL_PLACEHOLDER: string,
+    CONFIRM_EMAIL_PLACEHOLDER: string,
+    PASSWORD_PLACEHOLDER: string,
+    BUTTON_TITLE: string
+  }
 };
 
 type State = { canSubmit: boolean, form: FormType };
@@ -94,35 +102,44 @@ export default class SignUpForm extends React.PureComponent {
 
   render() {
     const { canSubmit, form } = this.state;
-    const { errorMessage } = this.props;
+    const {
+      errorMessage, locale: {
+        TITLE,
+        FULL_NAME_PLACEHOLDER,
+        EMAIL_PLACEHOLDER,
+        CONFIRM_EMAIL_PLACEHOLDER,
+        PASSWORD_PLACEHOLDER,
+        BUTTON_TITLE,
+      },
+    } = this.props;
 
     return (
       <div className="authentication__block">
-        <BlockTitle>Sou novo cliente</BlockTitle>
+        <BlockTitle>{TITLE}</BlockTitle>
         <hr />
         <form className="authentication__block__form" id="signUpForm" onSubmit={this.handleSubmit}>
           <InputFullName
             name="first_name"
-            placeholder="Nome completo"
+            placeholder={FULL_NAME_PLACEHOLDER}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email"
-            placeholder="E-mail"
+            placeholder={EMAIL_PLACEHOLDER}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email_confirmation"
-            placeholder="Repetir e-mail"
+            placeholder={CONFIRM_EMAIL_PLACEHOLDER}
             equalsTo={form.email.value}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputPassword
             name="password"
-            placeholder="Senha"
+            placeholder={PASSWORD_PLACEHOLDER}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
@@ -133,7 +150,7 @@ export default class SignUpForm extends React.PureComponent {
             kind="success"
             disabled={!canSubmit}
           >
-            Cadastrar
+            {BUTTON_TITLE}
           </Button>
         </form>
       </div>
