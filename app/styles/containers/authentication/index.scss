@@ -17,9 +17,14 @@
   }
   &__social {
     display: flex;
-    background-color: $color-white;
     justify-content: center;
+    align-items: center;
+    background-color: $color-white;
     padding: 1rem;
+    h3 {
+      padding: 0;
+      margin-right: 1rem;
+    }
   }
   &__wrapper {
     display: inline-flex;
