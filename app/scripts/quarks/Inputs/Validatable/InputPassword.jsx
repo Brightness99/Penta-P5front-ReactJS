@@ -8,6 +8,7 @@ type Props = {
   name: string,
   placeholder: string,
   showLabel: boolean,
+  showPassword: boolean,
   required: boolean,
   equalsTo: any,
   onClick?: () => {},
@@ -19,7 +20,6 @@ type Props = {
 
 export default class InputPassword extends React.Component {
   static props: Props;
-  static state: State;
 
   handleClick = (ev) => {
     const { onClick } = this.props;
@@ -61,11 +61,18 @@ export default class InputPassword extends React.Component {
     }
   };
 
+  getInputType = () => {
+    const { showPassword } = this.props;
+
+    if (showPassword) return 'text';
+    return 'password';
+  };
+
   render() {
     const pattern = /^([a-zA-Z0-9_-]){6,99}$/;
     const elementProps = {
       ...this.props,
-      type: 'password',
+      type: this.getInputType(),
       pattern,
     };
 
