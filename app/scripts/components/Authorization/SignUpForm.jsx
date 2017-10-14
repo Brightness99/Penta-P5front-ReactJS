@@ -4,6 +4,9 @@ import React from 'react';
 import ErrorField from 'components/ErrorField';
 import { CheckBox } from 'components/Input';
 import { BlockTitle } from 'atoms/Titles';
+import EyeIcon from 'components/Icons/Eye';
+import EyeSlashIcon from 'components/Icons/EyeSlash';
+import IconToggleButton from 'components/IconToggleButton';
 import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
 import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
@@ -29,7 +32,12 @@ type Props = {
   }
 };
 
-type State = { canSubmit: boolean, form: FormType, hubspotSubscribe: boolean };
+type State = {
+  canSubmit: boolean,
+  form: FormType,
+  hubspotSubscribe: boolean,
+  showPassword: boolean
+};
 
 export default class SignUpForm extends React.PureComponent {
   constructor(props) {
@@ -44,6 +52,7 @@ export default class SignUpForm extends React.PureComponent {
       },
       canSubmit: false,
       hubspotSubscribe: false,
+      showPassword: false,
     };
   }
 
@@ -108,8 +117,14 @@ export default class SignUpForm extends React.PureComponent {
     });
   };
 
+  handleToggleChanged = (value) => {
+    this.setState({
+      showPassword: value,
+    });
+  };
+
   render() {
-    const { canSubmit, form, hubspotSubscribe } = this.state;
+    const { canSubmit, form, hubspotSubscribe, showPassword } = this.state;
     const {
       errorMessage, locale: {
         TITLE,
@@ -147,10 +162,19 @@ export default class SignUpForm extends React.PureComponent {
           />
           <InputPassword
             name="password"
+            showPassword={showPassword}
             placeholder={PASSWORD_PLACEHOLDER}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
+          <section className="show-password-block">
+            <IconToggleButton
+              onChange={this.handleToggleChanged}
+              title="Esconder senha"
+              iconChecked={<EyeSlashIcon />}
+              iconUnchecked={<EyeIcon />}
+            />
+          </section>
           <ErrorField message={errorMessage} />
           <Button
             type="submit"
