@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import ErrorField from 'components/ErrorField';
+import { CheckBox } from 'components/Input';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
@@ -9,7 +10,7 @@ import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
 
 type FormType = {
   email: { valid: boolean, value: string },
-  password: { valid: boolean, value: string },
+  password: { valid: boolean, value: string},
 };
 
 type Props = {
@@ -24,7 +25,7 @@ type Props = {
   }
 };
 
-type State = { canSubmit: boolean, form: FormType };
+type State = { canSubmit: boolean, form: FormType, stayConnected: boolean };
 
 export default class SignInForm extends React.PureComponent {
   constructor(props) {
@@ -35,6 +36,7 @@ export default class SignInForm extends React.PureComponent {
         email: { valid: false, value: '' },
         password: { valid: false, value: '' },
       },
+      stayConnected: false,
       canSubmit: false,
     };
   }
@@ -51,7 +53,7 @@ export default class SignInForm extends React.PureComponent {
   handleSignIn = (ev) => {
     ev.preventDefault();
 
-    const { form, canSubmit } = this.state;
+    const { form, canSubmit, stayConnected } = this.state;
     const { onSubmit } = this.props;
 
     if (canSubmit === true) {
@@ -62,6 +64,7 @@ export default class SignInForm extends React.PureComponent {
         password: form.password.value,
         stay_connected: true,
         fingerprint,
+        stayConnected,
       });
     }
   };
@@ -86,8 +89,14 @@ export default class SignInForm extends React.PureComponent {
     this.setState({ form: newState.form, canSubmit });
   };
 
+  handleCheckedStateChanged = (event) => {
+    this.setState({
+      stayConnected: event.target.checked,
+    });
+  };
+
   render() {
-    const { canSubmit } = this.state;
+    const { canSubmit, stayConnected } = this.state;
     const { errorMessage, locale: { TITLE, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, BUTTON_TITLE } } = this.props;
     return (
       <div className="authentication__block">
@@ -114,6 +123,16 @@ export default class SignInForm extends React.PureComponent {
           >
             {BUTTON_TITLE}
           </Button>
+          <section className="authentication__block__form__footer">
+            <label>
+              <CheckBox
+                checked={stayConnected}
+                onChange={this.handleCheckedStateChanged}
+              />
+              <span>Permanecer conectado</span>
+            </label>
+            <Link to="#">Esqueci minha senha</Link>
+          </section>
         </form>
       </div>
     );

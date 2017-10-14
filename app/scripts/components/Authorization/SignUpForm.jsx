@@ -2,6 +2,7 @@
 import React from 'react';
 
 import ErrorField from 'components/ErrorField';
+import { CheckBox } from 'components/Input';
 import { BlockTitle } from 'atoms/Titles';
 import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
@@ -28,7 +29,7 @@ type Props = {
   }
 };
 
-type State = { canSubmit: boolean, form: FormType };
+type State = { canSubmit: boolean, form: FormType, hubspotSubscribe: boolean };
 
 export default class SignUpForm extends React.PureComponent {
   constructor(props) {
@@ -42,6 +43,7 @@ export default class SignUpForm extends React.PureComponent {
         password: { valid: false, value: '' },
       },
       canSubmit: false,
+      hubspotSubscribe: false,
     };
   }
 
@@ -57,7 +59,7 @@ export default class SignUpForm extends React.PureComponent {
   handleSubmit = (ev) => {
     ev.preventDefault();
 
-    const { form, canSubmit } = this.state;
+    const { form, canSubmit, hubspotSubscribe } = this.state;
     const { onSubmit } = this.props;
 
     if (canSubmit === true) {
@@ -68,9 +70,9 @@ export default class SignUpForm extends React.PureComponent {
         email: form.email.value,
         email_confirmation: form.email_confirmation.value,
         password: form.password.value,
+        hubspotSubscribe,
         fingerprint,
         socialType: '',
-        hubspot_subscribe: true,
         socialData: {
           socialId: '',
           socialToken: '',
@@ -100,8 +102,14 @@ export default class SignUpForm extends React.PureComponent {
     this.setState({ form: newState.form, canSubmit });
   };
 
+  handleCheckedStateChanged = (event) => {
+    this.setState({
+      hubspotSubscribe: event.target.checked,
+    });
+  };
+
   render() {
-    const { canSubmit, form } = this.state;
+    const { canSubmit, form, hubspotSubscribe } = this.state;
     const {
       errorMessage, locale: {
         TITLE,
@@ -152,6 +160,15 @@ export default class SignUpForm extends React.PureComponent {
           >
             {BUTTON_TITLE}
           </Button>
+          <section className="authentication__block__form__footer">
+            <label>
+              <CheckBox
+                checked={hubspotSubscribe}
+                onChange={this.handleCheckedStateChanged}
+              />
+              <span>Quero receber ofertas exclusivas e novidades por e-mail</span>
+            </label>
+          </section>
         </form>
       </div>
     );

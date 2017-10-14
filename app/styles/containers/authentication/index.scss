@@ -52,6 +52,22 @@
       margin: 0;
       display: inline-flex;
       flex-direction: column;
+      &__footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        label, a{
+            font-size: 1.2rem;
+        }
+        label{
+          display : flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .app__input__checkbox span{
+          margin-right: 1rem;
+        }
+      }
       > * {
         margin-top: 1rem;
         width: 100%;
