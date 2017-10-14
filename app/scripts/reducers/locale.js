@@ -158,7 +158,7 @@ const missingLocale = {
           BUTTON_TITLE: 'Entrar',
         },
         social_block: {
-          TITLE: 'Acesse com:',
+          TITLE: 'Acesse com',
         },
         signup_social_block: {
           TITLE: 'Sou novo cliente',
