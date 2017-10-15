@@ -4,7 +4,6 @@ import React from 'react';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
-import { addFingerprint } from 'vendor/fingerprint2';
 
 type FormType = {
   email: { valid: boolean, value: string },

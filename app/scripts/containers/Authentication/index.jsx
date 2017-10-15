@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import Script from 'react-load-script';
-
 import { connect } from 'react-redux';
+import { Tabs, TabHeader, TabNav, TabBody } from 'components/Tabs';
 import {
   userSignIn,
   userSignUp,
@@ -10,7 +10,9 @@ import {
   userSocialSignIn,
   userSocialSignUp
 } from 'actions';
+import cx from 'classnames';
 import { SignInForm, SignUpForm, SocialBlock, SocialSignUpForm } from 'components/Authorization';
+import { isMobile } from 'utils';
 import Modal from 'components/Modal';
 
 type Props = {
@@ -20,15 +22,16 @@ type Props = {
   socialSignUp: (data) => void,
   socialLoginSettingsFetch: () => void,
   socialLoginSettings: {},
-  isSignUpActivated: boolean,
+  isSocialUserNotFound: boolean,
   signInErrorMessage: string,
   signUpErrorMessage: string,
-  locale: {}
+  locale: {},
+  screenSize: string,
 };
 
 type States = {
   isModalOpen: boolean,
-  forFacebookNeedEmail: boolean,
+  facebookEmailNotFound: boolean,
   facebookSocialInfo: {},
   googleSocialInfo: {},
   isFingerprintLoaded: boolean,
@@ -41,7 +44,7 @@ export class Authentication extends React.Component {
 
     this.state = {
       isModalOpen: false,
-      forFacebookNeedEmail: false,
+      facebookEmailNotFound: false,
       facebookSocialInfo: null,
       isFingerprintLoaded: false,
     };
@@ -52,11 +55,11 @@ export class Authentication extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps: Props) => {
-    const { isSignUpActivated } = this.props;
-    const nextSignUpState = nextProps.isSignUpActivated;
+    const { isSocialUserNotFound } = this.props;
+    const nextIsSocialUserNotFound = nextProps.isSocialUserNotFound;
 
-    if (nextSignUpState && nextSignUpState !== isSignUpActivated) {
-      this.socialSignUpActivated();
+    if (nextIsSocialUserNotFound && nextIsSocialUserNotFound !== isSocialUserNotFound) {
+      this.socialUserNotFound();
     }
   };
 
@@ -83,7 +86,7 @@ export class Authentication extends React.Component {
     submitSignIn(data);
   };
 
-  socialSignUpActivated = () => {
+  socialUserNotFound = () => {
     const { facebookSocialInfo, googleSocialInfo } = this.state;
 
     if (facebookSocialInfo) {
@@ -100,7 +103,7 @@ export class Authentication extends React.Component {
     } else {
       this.setState({
         isModalOpen: true,
-        forFacebookNeedEmail: true,
+        facebookEmailNotFound: true,
       });
     }
   };
@@ -134,19 +137,19 @@ export class Authentication extends React.Component {
     this.setState({ isModalOpen: false });
   };
 
-  handleScriptLoad = () => {
+  handleScriptLoaded = () => {
     this.setState({ isFingerprintLoaded: true });
   };
 
   renderSignUpForm = () => {
     const {
       isFingerprintLoaded,
-      forFacebookNeedEmail,
+      facebookEmailNotFound,
       facebookSocialInfo,
     } = this.state;
     const { signUpErrorMessage, locale: { signup_block, signup_social_block } } = this.props;
 
-    if (forFacebookNeedEmail) {
+    if (facebookEmailNotFound) {
       return (
         <SocialSignUpForm
           locale={signup_social_block}
@@ -174,41 +177,89 @@ export class Authentication extends React.Component {
       </Modal>);
   };
 
-  render() {
-    const {
-      socialLoginSettings, signInErrorMessage, locale: {
-        TITLE_BETWEEN_BLOCKS,
-        signin_block,
-        social_block,
-      },
-    } = this.props;
+  renderSignIn = () => {
+    const { signInErrorMessage, locale: { signin_block } } = this.props;
     const { isFingerprintLoaded } = this.state;
+
+    return (<SignInForm
+      locale={signin_block}
+      onSubmit={this.signIn}
+      isFingerprintLoaded={isFingerprintLoaded}
+      errorMessage={signInErrorMessage}
+    />);
+  };
+
+  renderSocialBlock = () => {
+    const { socialLoginSettings, locale: { social_block } } = this.props;
+    const { isFingerprintLoaded } = this.state;
+    return (
+      <SocialBlock
+        locale={social_block}
+        loginFBSuccess={this.facebookSignIn}
+        loginGoogleSuccess={this.googleSignIn}
+        facebook={socialLoginSettings.socials.facebook}
+        google={socialLoginSettings.socials.google}
+        isFingerprintLoaded={isFingerprintLoaded}
+      />);
+  };
+
+  renderDesktop = () => {
+    const { locale: { TITLE_BETWEEN_BLOCKS } } = this.props;
+    return (
+      <div className="authentication">
+        {this.renderSocialBlock()}
+        <span className="title_between_blocks">{TITLE_BETWEEN_BLOCKS}</span>
+        <div className="authentication__wrapper">
+          {this.renderSignIn()}
+          {this.renderSignUpForm()}
+        </div>
+      </div>
+    );
+  };
+
+  renderMobile = () => {
+    const { locale: { TITLE_BETWEEN_BLOCKS } } = this.props;
+
+    return (
+      <Tabs>
+        <TabHeader>
+          <TabNav key="sign-in">Entrar</TabNav>
+          <TabNav key="sign-up">Cadastrar</TabNav>
+        </TabHeader>
+        <TabBody>
+          <section>
+            {this.renderSocialBlock()}
+            <span className="title_between_blocks">{TITLE_BETWEEN_BLOCKS}</span>
+            {this.renderSignIn()}
+          </section>
+          <section>
+            {this.renderSignUpForm()}
+          </section>
+        </TabBody>
+      </Tabs>);
+  };
+
+  renderContent = () => {
+    const { screenSize } = this.props;
+    const isMobileLayout = isMobile(screenSize);
+
+    if (isMobileLayout) return this.renderMobile();
+    return this.renderDesktop();
+  };
+
+  render() {
+    const { screenSize } = this.props;
+    const isMobileLayout = isMobile(screenSize);
+
     return (
       <div className="container">
         <Script
           url="https://dpmhrplvfkwad.cloudfront.net/printi/analytics.js"
-          onLoad={this.handleScriptLoad}
+          onLoad={this.handleScriptLoaded}
         />
         {this.renderModalDialog()}
-        <div className="authentication">
-          <SocialBlock
-            locale={social_block}
-            loginFBSuccess={this.facebookSignIn}
-            loginGoogleSuccess={this.googleSignIn}
-            facebook={socialLoginSettings.socials.facebook}
-            google={socialLoginSettings.socials.google}
-            isFingerprintLoaded={isFingerprintLoaded}
-          />
-          <span className="title_between_blocks">{TITLE_BETWEEN_BLOCKS}</span>
-          <div className="authentication__wrapper">
-            <SignInForm
-              locale={signin_block}
-              onSubmit={this.signIn}
-              isFingerprintLoaded={isFingerprintLoaded}
-              errorMessage={signInErrorMessage}
-            />
-            {this.renderSignUpForm()}
-          </div>
+        <div className={cx('authentication', isMobileLayout && 'mobile')}>
+          {this.renderContent()}
         </div>
       </div>
     );
@@ -217,10 +268,11 @@ export class Authentication extends React.Component {
 
 const mapStateToProps = state => ({
   socialLoginSettings: state.socialLoginSettings,
-  isSignUpActivated: state.user.socialAuthentication.userNotFound,
+  isSocialUserNotFound: state.user.socialAuthentication.userNotFound,
   signInErrorMessage: state.user.authentication.message,
   signUpErrorMessage: state.user.registration.message,
   locale: state.locale.translate.page.authentication,
+  screenSize: state.app.screenSize,
 });
 
 const mapDispatchToProps = dispatch => ({
