@@ -53,8 +53,8 @@
       display        : inline-flex;
       flex-direction : column;
       .show-password-block {
-        display : flex;
-        justify-content: flex-end;
+        display         : flex;
+        justify-content : flex-end;
       }
       &__footer {
         display         : flex;
@@ -81,6 +81,9 @@
   }
 
   @media only screen and (max-width : 768px) {
+    .atm__block-title, hr {
+      display : none;
+    }
     &__wrapper {
       flex-direction : column;
     }
