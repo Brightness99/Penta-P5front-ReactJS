@@ -39,7 +39,7 @@
       font-size: $font-size-sm;
       @include lg {
         font-size: $font-size-lg;
-        margin: 1rem 10rem;
+        margin: 3.6rem 10rem;
       }
       .atm-about-printi {
         @include lg {
@@ -149,7 +149,7 @@
           left: -0.4rem;
           top: 0;
           @include lg {
-            background-color: $body-bg;
+            background-color: $color-printi-blue;
           }
         }
         &:after {
@@ -162,15 +162,16 @@
           left: -0.4rem;
           bottom: 0;
           @include lg {
-            background-color: $body-bg;
+            background-color: $color-printi-blue;
           }
         }
       }
       .atm-card-timeline {
         position: relative;
         display: inline-block;
+        width: 100%;
         @include lg {
-          margin-top: -22rem;
+          margin-top: -19rem;
         }
         .qrk-number-card {
           align-items: center;
@@ -184,21 +185,21 @@
           font-size: $font-size-xs;
           position: absolute;
           top: 1rem;
-          left: 43%;
+          left: calc(50% - 1.9rem);
           width: 3.8rem;
           height: 3.8rem;
           justify-content: center;
           @include lg {
             top: 8.1rem;
-            left: 48%;
+            left: calc(50% - 1.9rem);
           }
           &:after {
             content: '';
-            width: 3rem;
+            width: 4rem;
             height: 0.1rem;
             background-color: transparent;
             position: absolute;
-            right: -3rem;
+            right: -4rem;
             top: 54%;
             @include lg {
               background-color: $body-bg;
@@ -215,6 +216,10 @@
           @include lg  {
             width: 46%;
             margin-top: 0;
+          }
+          img {
+            width: 100%;
+            min-height: 19rem;
           }
           .bsn-title-card {
             padding: 2.4rem;
@@ -236,6 +241,7 @@
             font-family: $font-family-open-sans-bold;
             font-size: $font-size-base;
             padding: 2.4rem;
+            display: inline-block;
             p {
               margin-bottom: 0;
             }
@@ -286,7 +292,7 @@
         &:nth-of-type(2n)
           .qrk-number-card {
             &:after {
-              left: -3rem;
+              left: -4rem;
             }
         }
       }

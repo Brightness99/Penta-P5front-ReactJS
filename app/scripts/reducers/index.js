@@ -21,6 +21,7 @@ import glossary from './glossary';
 import header from './header';
 import successfulPurchase from './successful-purchase';
 import siteMap from './site-map';
+import about from './about';
 
 export default {
   ...app,
@@ -41,4 +42,5 @@ export default {
   ...header,
   ...successfulPurchase,
   ...siteMap,
+  ...about,
 };

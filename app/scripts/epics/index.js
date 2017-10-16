@@ -64,6 +64,7 @@ import {
 
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
+import { aboutFetch } from './about';
 
 export default combineEpics(
   userNewsletter,
@@ -111,6 +112,7 @@ export default combineEpics(
   accountOrderFetch,
   policyFetch,
   termsFetch,
+  aboutFetch,
   productCategoriesFetch,
   successfulPurchaseFetch,
   siteMapFetch,

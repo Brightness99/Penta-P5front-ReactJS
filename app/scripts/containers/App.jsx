@@ -104,7 +104,7 @@ export class App extends React.Component {
                       <Route path="/success/:orderNumber" component={Success} />
                       <Route path="/buscar" component={Search} />
                       <Route path="/printi-na-imprensa" component={PrintiPress} />
-                      <Route path="/sobre-a-printi" component={AboutPrinti} />
+                      <Route path="/sobre-printi" component={AboutPrinti} />
                       <Route path="/cloud" component={CloudCompany} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
