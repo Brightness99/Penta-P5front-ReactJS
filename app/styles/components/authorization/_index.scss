@@ -1,41 +1,48 @@
 .google-login-button {
-  align-items: center;
-  height: 4rem;
-  text-align: center;
-  width: 4rem;
+  align-items : center;
+  height      : 4rem;
+  text-align  : center;
+  width       : 80%;
+  margin-top  : 1rem;
+  @include lg {
+    width      : 4rem;
+    margin-top : 0;
+  }
   > span {
-    color: $color-white;
-    fill: currentcolor;
-    width: 90%;
-    margin-top: -0.5rem;
-    max-width: 3rem;
+    color      : $color-white;
+    fill       : currentcolor;
+    width      : 90%;
+    margin-top : -0.5rem;
+    max-width  : 3rem;
 
     svg {
-      height: auto;
-      max-height: 100%;
-      width: 100%;
+      height     : auto;
+      max-height : 100%;
+      width      : 100%;
     }
   }
   @include button-background-color($color-google, 15%);
 }
 
-
-.facebook-login-button{
-  align-items: center;
-  height: 4rem;
-  text-align: center;
-  width: 4rem;
-  margin-right: 1rem;
+.facebook-login-button {
+  align-items : center;
+  height      : 4rem;
+  text-align  : center;
+  width       : 80%;
+  @include lg {
+    width        : 4rem;
+    margin-right : 1rem;
+  }
   > span {
-    color: $color-white;
-    fill: currentcolor;
-    width: 90%;
-    margin-top: -0.5rem;
+    color      : $color-white;
+    fill       : currentcolor;
+    width      : 90%;
+    margin-top : -0.5rem;
 
     svg {
-      height: auto;
-      max-height: 100%;
-      width: 100%;
+      height     : auto;
+      max-height : 100%;
+      width      : 100%;
     }
   }
   @include button-background-color($color-facebook, 15%);

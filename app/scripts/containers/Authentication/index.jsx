@@ -10,7 +10,6 @@ import {
   userSocialSignIn,
   userSocialSignUp
 } from 'actions';
-import cx from 'classnames';
 import { SignInForm, SignUpForm, SocialBlock, SocialSignUpForm } from 'components/Authorization';
 import { isMobile } from 'utils';
 import Modal from 'components/Modal';
@@ -169,7 +168,8 @@ export class Authentication extends React.Component {
 
   renderModalDialog = () => {
     const { locale: { attention_modal: { TITLE, CONTENT } } } = this.props;
-    if (!this.state.isModalOpen) return '';
+    const { isModalOpen } = this.state;
+    if (!isModalOpen) return '';
 
     return (
       <Modal title={TITLE} handleCloseModal={this.closeModal}>
@@ -190,8 +190,10 @@ export class Authentication extends React.Component {
   };
 
   renderSocialBlock = () => {
-    const { socialLoginSettings, locale: { social_block } } = this.props;
+    const { socialLoginSettings, locale: { social_block }, screenSize } = this.props;
     const { isFingerprintLoaded } = this.state;
+    const isMobileLayout = isMobile(screenSize);
+
     return (
       <SocialBlock
         locale={social_block}
@@ -200,57 +202,62 @@ export class Authentication extends React.Component {
         facebook={socialLoginSettings.socials.facebook}
         google={socialLoginSettings.socials.google}
         isFingerprintLoaded={isFingerprintLoaded}
+        isMobile={isMobileLayout}
       />);
   };
 
-  renderDesktop = () => {
+  renderTitleBetweenBlocks = () => {
     const { locale: { TITLE_BETWEEN_BLOCKS } } = this.props;
     return (
-      <div className="authentication">
-        {this.renderSocialBlock()}
-        <span className="title_between_blocks">{TITLE_BETWEEN_BLOCKS}</span>
-        <div className="authentication__wrapper">
-          {this.renderSignIn()}
-          {this.renderSignUpForm()}
-        </div>
-      </div>
+      <section className="title_between_blocks">
+        <span>{TITLE_BETWEEN_BLOCKS}</span>
+      </section>
     );
   };
 
-  renderMobile = () => {
-    const { locale: { TITLE_BETWEEN_BLOCKS } } = this.props;
+  renderDesktop = () => (
+    <section>
+      {this.renderSocialBlock()}
+      {this.renderTitleBetweenBlocks()}
+      <div className="authentication__wrapper">
+        {this.renderSignIn()}
+        {this.renderSignUpForm()}
+      </div>
+    </section>
+  );
 
-    return (
-      <Tabs>
-        <TabHeader>
-          <TabNav key="sign-in">Entrar</TabNav>
-          <TabNav key="sign-up">Cadastrar</TabNav>
-        </TabHeader>
-        <TabBody>
-          <section>
-            {this.renderSocialBlock()}
-            <span className="title_between_blocks">{TITLE_BETWEEN_BLOCKS}</span>
-            {this.renderSignIn()}
-          </section>
-          <section>
-            {this.renderSignUpForm()}
-          </section>
-        </TabBody>
-      </Tabs>);
-  };
+  renderMobile = (signIn, signUp) => (
+    <Tabs>
+      <TabHeader>
+        <TabNav key="sign-in">{signIn}</TabNav>
+        <TabNav key="sign-up">{signUp}</TabNav>
+      </TabHeader>
+      <TabBody>
+        <section>
+          {this.renderSocialBlock()}
+          {this.renderTitleBetweenBlocks()}
+          {this.renderSignIn()}
+        </section>
+        <section>
+          {this.renderSignUpForm()}
+        </section>
+      </TabBody>
+    </Tabs>);
 
   renderContent = () => {
-    const { screenSize } = this.props;
+    const {
+      screenSize, locale: {
+        TITLE_MOBILE_SIGN_UP,
+        TITLE_MOBILE_SIGN_IN,
+      },
+    } = this.props;
     const isMobileLayout = isMobile(screenSize);
 
-    if (isMobileLayout) return this.renderMobile();
+    if (isMobileLayout) return this.renderMobile(TITLE_MOBILE_SIGN_IN, TITLE_MOBILE_SIGN_UP);
     return this.renderDesktop();
   };
 
   render() {
-    const { screenSize } = this.props;
-    const isMobileLayout = isMobile(screenSize);
-
     return (
       <div className="container">
         <Script
@@ -258,7 +265,7 @@ export class Authentication extends React.Component {
           onLoad={this.handleScriptLoaded}
         />
         {this.renderModalDialog()}
-        <div className={cx('authentication', isMobileLayout && 'mobile')}>
+        <div className="authentication">
           {this.renderContent()}
         </div>
       </div>
