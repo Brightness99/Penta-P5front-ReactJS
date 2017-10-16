@@ -18,6 +18,7 @@ type Props = {
   screenSize: string,
   isHidden: boolean,
   handleClose: () => {},
+  categories: [];
 };
 
 export default class Menu extends React.Component {
@@ -26,7 +27,7 @@ export default class Menu extends React.Component {
   static props: Props;
 
   renderMobile() {
-    const { screenSize } = this.props;
+    const { screenSize, categories } = this.props;
     return (
       <div className="mol-header-menu-content">
         <NavLink
@@ -46,7 +47,10 @@ export default class Menu extends React.Component {
           Central de Ajuda
         </NavLink>
         <span className="atm-header-menu-title">Produtos</span>
-        <Products screenSize={screenSize} />
+        <Products
+          screenSize={screenSize}
+          categories={categories}
+        />
         <Accordion>
           <AccordionItem>
             <AccordionItemTitle className="atm-header-menu-title">Modelos</AccordionItemTitle>

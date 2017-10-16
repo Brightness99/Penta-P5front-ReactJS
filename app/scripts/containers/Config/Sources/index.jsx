@@ -1,15 +1,14 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import cx from 'classnames';
-import Modal from 'components/Modal';
-import { RoundedConfirmationButton } from 'atoms/Buttons';
 import { settingsSourceFetch, settingsSourceReset } from 'actions';
 import { RefreshIcon, SettingsArtCreationIcon, SettingsTweakIcon, SettingsUploadIcon } from 'components/Icons';
-
-import { RadioButton, CheckBox } from 'components/Input';
-
-import ConfigBlock from '../ConfigBlock';
+import Modal from 'components/Modal';
+import { RadioButton } from 'components/Input';
+import MoreInfo from 'components/MoreInfo';
+import { FunnelBlock } from 'components/Funnel';
+import { ArtCreationModal } from '../Modals';
 
 type Props = {
   locale: LocaleState,
@@ -25,12 +24,6 @@ type State = {
   reselection: boolean,
   openArtModal: boolean,
   isArtCheckboxChecked: boolean,
-};
-
-const images = {
-  upload: <SettingsUploadIcon />,
-  template: <SettingsTweakIcon />,
-  art_creation: <SettingsArtCreationIcon />,
 };
 
 export default class SourcesBlock extends React.Component {
@@ -113,70 +106,53 @@ export default class SourcesBlock extends React.Component {
     this.handleSourceChange(ev.currentTarget.value);
   };
 
+  handleImage(source) {
+    switch (source) {
+      case 'upload':
+        return <SettingsUploadIcon />;
+      case 'template':
+        return <SettingsTweakIcon />;
+      case 'art_creation':
+        return <SettingsArtCreationIcon />;
+      default:
+        return null;
+    }
+  }
+
   renderSelectedBlock() {
     const { source: { selectedSource }, locale } = this.props;
+
+    const localeSource = locale.order_source_options
+      .filter((sources) => sources.source === selectedSource)
+      .reduce((prevSource, nextSource) => nextSource, {});
 
     return (
       <div className="org-selected-source">
         <div className="mol-selected-source">
           <div>
-            <div className="atm-settings-image">{images[selectedSource]}</div>
-            <span>{locale[selectedSource].TITLE}</span>
+            <div className="atm-settings-image">{this.handleImage(selectedSource)}</div>
+            <span>{localeSource.title}</span>
           </div>
-          <p>{locale[selectedSource].SUBTITLE}</p>
+          <p>{localeSource.description}</p>
         </div>
-        <div className="atm-blue-link" onClick={this.handleReselection} role="link">
+        <button className="atm-blue-link" onClick={this.handleReselection}>
           <RefreshIcon /> Alterar forma de criar o produto
-        </div>
+        </button>
       </div>
     );
   }
 
   renderArtCreationValidation() {
     const { isArtCheckboxChecked } = this.state;
+
     return (
       <Modal handleCloseModal={this.handleArtModalClose}>
-        <div className="app__sources-block__art-validation">
-          <div>
-            <h2>Regras da Criação de Arte</h2>
-            <p>Olá!</p>
-            <p>Vamos conhecer mais sobre o serviço de criação de arte?</p>
-            <ul>
-              <li>Um designer será o responsável pela criação da sua arte.</li>
-              <li>O serviço prestado dá direito a uma montagem por pedido.</li>
-              <li>Após o pagamento você irá preencher um briefing (formulário) no qual proverá as informações necessárias para a criação da arte.</li>
-              <li>Serão permitidas apenas TRÊS alterações por pedido. A partir da 4ª alteração é gerado um custo adicional de R$ 10,00 (para cada nova alteração).</li>
-              <li>O preenchimento do briefing tem prazo de 30 dias. Caso nossos profissionais não recebam interação neste período, o pedido será cancelado e um e-mail com orientações de como proceder com uma nova compra será encaminhado.</li>
-            </ul>
-            <p>Neste serviço <b>NÃO</b> estão inclusos:</p>
-            <ul>
-              <li>Criação, edição ou vetorização de logotipos.</li>
-              <li>Criação e revisão de textos, o conteúdo é de sua responsabilidade.</li>
-              <li>Nós não possuímos bancos de imagens, nem as retiramos de sites de busca, portanto estas são de sua responsabilidade.</li>
-            </ul>
-          </div>
-        </div>
-        <div className="app__sources-block__art-validation__footer">
-          <div>
-            <label>
-              <CheckBox
-                onChange={this.handleArtModalConfirmation}
-                checked={isArtCheckboxChecked}
-              />
-              Li e aceito as regras da criação de arte.
-            </label>
-          </div>
-          <div>
-            <div role="link" onClick={this.handleArtModalClose}>CANCELAR</div>
-            <RoundedConfirmationButton
-              isEnabled={isArtCheckboxChecked}
-              onClick={this.handleArtModalSubmit}
-              value="art_creation"
-            >
-              OK
-            </RoundedConfirmationButton>
-          </div>
-        </div>
+        <ArtCreationModal
+          isChecked={isArtCheckboxChecked}
+          onConfirmation={this.handleArtModalConfirmation}
+          onCancel={this.handleArtModalClose}
+          onSubmit={this.handleArtModalSubmit}
+        />
       </Modal>
     );
   }
@@ -204,11 +180,11 @@ export default class SourcesBlock extends React.Component {
               onChange={blockName === 'art_creation' ? this.handleArtModalOpen : this.handleSourceSelection}
               checked={selectedSource === blockName}
             />
-            {locale.TITLE}
+            {locale.title}
           </div>
         </label>
         <p>
-          {locale.SUBTITLE}
+          {locale.description}
         </p>
       </div>
     );
@@ -221,14 +197,22 @@ export default class SourcesBlock extends React.Component {
       <div className="app__config__creation">
         {Object.keys(enabledSources)
           .filter((source) => enabledSources[source])
-          .map((source) => this.renderBlock(source, images[source], locale[source]))
+          .map(
+            (source) => this.renderBlock(
+              source,
+              this.handleImage(source),
+              locale.order_source_options
+                .filter((sources) => sources.source === source)
+                .reduce((prevSources, nextSources) => nextSources, {})
+            )
+          )
         }
       </div>
     );
   }
 
   render() {
-    const { source: { selectedSource }, locale, screenSize, order, isComplete } = this.props;
+    const { source: { selectedSource }, locale, order } = this.props;
     const { reselection, openArtModal } = this.state;
 
     let block = null;
@@ -240,18 +224,18 @@ export default class SourcesBlock extends React.Component {
     }
 
     return (
-      <ConfigBlock
-        locale={locale}
-        screenSize={screenSize}
+      <FunnelBlock
         order={order}
-        isComplete={isComplete}
+        isComplete={selectedSource}
         className="app__config__sources-block"
+        header={[
+          <span key="source-block-title">{locale.TITLE}</span>,
+          <MoreInfo key="source-block-more-info" text={locale.more_info.TEXT} />,
+        ]}
       >
-        <div>
-          {block}
-          {openArtModal && this.renderArtCreationValidation()}
-        </div>
-      </ConfigBlock>
+        {block}
+        {openArtModal && this.renderArtCreationValidation()}
+      </FunnelBlock>
     );
   }
 }

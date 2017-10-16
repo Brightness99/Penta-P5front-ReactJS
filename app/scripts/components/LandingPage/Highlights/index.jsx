@@ -13,7 +13,7 @@ const highlightsJson = {
   TITLE: 'Destaques',
   list: [
     {
-      TITLE: 'SAIBA COMO PAGAR FATURADO',
+      TITLE: 'Saiba como pagar faturado',
       TEXT: 'Conte com os benefícios e facilidades do pagamento faturado. Veja como solicitar o seu.',
       link: {
         URL: '/solicitacao-faturamento',
@@ -25,7 +25,7 @@ const highlightsJson = {
       },
     },
     {
-      TITLE: 'VEJA COMO EDITAR SUA ARTE',
+      TITLE: 'Veja como editar sua arte',
       TEXT: 'Baixe o gabarito e edite seu arquivo nos padrões recomendados para impressão.',
       link: {
         URL: '/download-de-gabaritos',
@@ -61,7 +61,7 @@ const highlightsJson = {
       },
     },
     {
-      TITLE: 'TUTORIAL DE CARTÃO DE VISITA',
+      TITLE: 'Tutorial de cartão de visita',
       TEXT: 'Aprenda sobre as especificações, características e formas de uso dos cartões de visita.',
       link: {
         URL: '/tutoriais/cartao-de-visita',

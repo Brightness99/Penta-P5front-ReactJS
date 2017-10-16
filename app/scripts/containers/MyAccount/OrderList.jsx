@@ -1,333 +1,299 @@
 // @flow
 import React from 'react';
-import Breadcrumbs from 'components/Breadcrumbs';
+import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CodeBar, Receipt, ExclamationMark, DocumentDownload, Clipboard, CardsIcon, RepurchaseIcon, WatchIcon } from 'components/Icons';
-
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { accountOrdersFetch } from 'actions';
+import Loading from 'components/Loading';
+import Tooltip from 'components/Tooltipster';
+import { CodeBar, ImageFileIcon, NFIcon, Clipboard } from 'components/Icons';
+import { IntlDate, IntlMoney } from 'components/Intl';
 
 type Props = {
   screenSize: string,
+  account: {},
+  orders: {},
+  locale: {},
+  dispatch: () => {},
+  setBreadcrumbs: () => {},
 };
 
 type State = {
-  secondStep: boolean,
+  page: number,
 };
 
 export class OrderList extends React.Component {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
+
     this.state = {
-      secondStep: false,
+      page: 1,
     };
   }
 
-  static defaultProps = {
-    screenSize: 'xs',
-  };
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const { page } = this.state;
+
+    dispatch(accountOrdersFetch(page));
+
+    this.handleBreadcrumbs();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { dispatch } = this.props;
+    const { page } = this.state;
+
+    if (prevState.page !== page) {
+      dispatch(accountOrdersFetch(page));
+    }
+  }
 
   static props: Props;
-  state: State;
 
-  showDetails = () => {
-    const { secondStep } = this.state;
+  static state: State;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs, locale } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: locale.TITLE,
+        },
+      ]);
+    }
+  };
+
+  handleLoadMore = () => {
+    const { page } = this.state;
+
     this.setState({
-      secondStep: !secondStep,
+      page: page + 1,
     });
+  };
+
+  renderActions(order) {
+    const { screenSize } = this.props;
+
+    if (Object.keys(order.actions).length <= 0) {
+      return null;
+    }
+
+    return (
+      <div className="mol-orders-actions">
+        {
+          Object.keys(order.actions)
+            .filter((key) => key !== 'details' && order.actions[key].enabled)
+            .slice(0, 2)
+            .map((key) => {
+              let icon = null;
+
+              switch (key) {
+                case 'boleto':
+                  icon = <CodeBar />;
+                  break;
+                case 'invoice':
+                  icon = <NFIcon />;
+                  break;
+                case 'upload':
+                  icon = <ImageFileIcon />;
+                  break;
+                default:
+                  icon = null;
+                  break;
+              }
+
+              if (isMobile(screenSize)) {
+                return (
+                  <Link
+                    to={order.actions[key].path || ''}
+                    className="atm-button-transparent"
+                    key={key}
+                  >
+                    {icon}{order.actions[key].label}
+                  </Link>
+                );
+              }
+
+              return (
+                <Tooltip
+                  key={key}
+                  text={order.actions[key].label}
+                >
+                  <Link to={order.actions[key].path || ''} className="atm-transparent-button">
+                    {icon}
+                  </Link>
+                </Tooltip>
+              );
+            })
+        }
+      </div>
+    );
   }
 
   renderMobile() {
+    const { orders, locale } = this.props;
+    const { page } = this.state;
+
     return (
-      <div className="container-myorder">
-        <div className="container">
-          <h2 className="title-myorder">Minha conta</h2>
-          <h3 className="subtitle-myorder">Meus pedidos</h3>
-          <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
-          <div className="box-detailsOrder pendingPayment">
-            <div className="box-firstPart">
-              <div>
-                <p className="title-myorderMobile">Pedido</p>
-                <p className="subtitle-myorderMobile">Nº 210.016</p>
+      <div className="org-orders org-orders-mobile">
+        <ul className="org-orders-list">
+          {orders.list.map((order) => (
+            <li
+              key={order.info.id}
+              className={order.status_class}
+            >
+              <div className="mol-orders-header">
+                {locale.ticket.ORDER} <span>{locale.ticket.ORDER_NUMBER} {order.info.id}</span>
               </div>
-            </div>
-            <span className="detach" />
-            <div className="box-secondPart">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><Clipboard /></i>
-                </div>
-                <div>
-                  <p className="title-secondPart">Itens do pedido</p>
-                  <p className="txt-secondPart">4 produtos</p>
-                </div>
-              </div>
-              <div className="box-statusMobile">
-                <div className="box-secondPart-mobile">
+              <span className="detach" />
+              <div className="mol-orders-body">
+                <div className="mol-orders-items">
+                  <Clipboard />
                   <div>
-                    <i><ExclamationMark /></i>
-                  </div>
-                  <div>
-                    <p className="title-statusMobile">status</p>
-                    <p className="subtitle-statusMobile">Aguardando pagamento</p>
+                    {locale.ticket.ORDER_ITEMS}
+                    <span>{order.items_label}</span>
                   </div>
                 </div>
-              </div>
-              <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><CodeBar /></i>
-                  <span>imprimir boleto</span>
-                </Link>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><Receipt /></i>
-                  <span>enviar comprovante</span>
-                </Link>
-                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="box-detailsOrder inTransport">
-            <div className="box-firstPart">
-              <div>
-                <p className="title-myorderMobile">Pedido</p>
-                <p className="subtitle-myorderMobile">Nº 210.016</p>
-              </div>
-            </div>
-            <span className="detach" />
-            <div className="box-secondPart">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><Clipboard /></i>
-                </div>
-                <div>
-                  <p className="title-secondPart">Itens do pedido</p>
-                  <p className="txt-secondPart">4 produtos</p>
-                </div>
-              </div>
-              <div className="box-statusMobile">
-                <div className="box-secondPart-mobile">
+                <div className="mol-orders-status">
+                  <i />
                   <div>
-                    <i><WatchIcon /></i>
-                  </div>
-                  <div>
-                    <p className="title-statusMobile">status</p>
-                    <p className="subtitle-statusMobile">Em transporte</p>
+                    {locale.ticket.ORDER_STATUS}
+                    <span>{order.status_value}</span>
                   </div>
                 </div>
-              </div>
-              <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><CodeBar /></i>
-                  <span>acompanhar pedido</span>
-                </Link>
-                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="box-detailsOrder delivered">
-            <div className="box-firstPart">
-              <div>
-                <p className="title-myorderMobile">Pedido</p>
-                <p className="subtitle-myorderMobile">Nº 210.016</p>
-              </div>
-            </div>
-            <span className="detach" />
-            <div className="box-secondPart">
-              <div className="box-secondPart-mobile">
-                <div>
-                  <i><Clipboard /></i>
-                </div>
-                <div>
-                  <p className="title-secondPart">Itens do pedido</p>
-                  <p className="txt-secondPart">4 produtos</p>
-                </div>
-              </div>
-              <div className="box-statusMobile">
-                <div className="box-secondPart-mobile">
-                  <div>
-                    <i><CodeBar /></i>
+                {this.renderActions(order)}
+                {order.actions.details.enabled &&
+                  <div className="mol-orders-details">
+                    <Link
+                      to={`/minha-conta/pedidos/${order.info.id}`}
+                      className="atm-button-rounded atm-button-rounded--blue"
+                    >
+                      {order.actions.details.label}
+                    </Link>
                   </div>
-                  <div>
-                    <p className="title-statusMobile">status</p>
-                    <p className="subtitle-statusMobile">Entregue</p>
-                  </div>
-                </div>
+                }
               </div>
-              <div>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><CodeBar /></i>
-                  <span>imprimir boleto</span>
-                </Link>
-                <Link className="btn-default btn-quarter fnt-bold btn-lg" to="#">
-                  <i><Receipt /></i>
-                  <span>enviar comprovante</span>
-                </Link>
-                <Link className="btn-default btn-secondary fnt-bold btn-lg" to="#">ver detalhes</Link>
-              </div>
-            </div>
-          </div>
-          <button className="btn-default btn-third btn-xs">carregar mais pedidos (4)</button>
+            </li>
+          ))}
+          {orders.isLoaded && orders.isRunning && <Loading />}
+        </ul>
+        {page < Math.ceil(orders.total_count / 10) &&
+        <div className="atm-orders-load-more">
+          <button
+            className="atm-button-transparent"
+            onClick={this.handleLoadMore}
+          >
+            {locale.LOAD_MORE}
+          </button>
         </div>
+        }
       </div>
     );
   }
 
   renderDesktop() {
-    const { secondStep } = this.state;
+    const { orders, locale } = this.props;
+    const { page } = this.state;
 
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Meus pedidos',
-      },
-    ];
     return (
-      <div className="container-myorder">
-        <Breadcrumbs links={breadcrumb} />
-        <h2>Minha conta</h2>
-        <h3 className="subtitle-myorder">Meus pedidos</h3>
-        <p className="legend-myorder">Acompanhe os status do seus pedidos</p>
-        <ul className="box-tableOrder">
-          <li>Nº do pedido</li>
-          <li>Realizado em</li>
-          <li>Status</li>
-          <li>Ações</li>
+      <div className="org-orders org-orders-desktop">
+        <ul className="org-orders-header">
+          <li>{locale.ticket.ORDER}</li>
+          <li>{locale.ticket.ORDER_DATE}</li>
+          <li>{locale.ticket.ORDER_STATUS}</li>
+          <li>{locale.order_details.actions.TITLE}</li>
         </ul>
-        <div className="box-detailsOrder delivered">
-          <div className="box-firstPart">
-            <div>
-              <p>483093</p>
-            </div>
-            <div>
-              <p>30/08/2016</p>
-            </div>
-            <div className="flagOrder">
-              <p>Pedido entregue</p>
-            </div>
-            <div className="box-icons">
-              <div className="icons">
-                <Link to="#" className="btn-icons">
-                  <DocumentDownload />
-                </Link>
-                <Link to="#" className="btn-icons">
-                  <RepurchaseIcon />
-                </Link>
+        <ul className="org-orders-list">
+          {orders.list.map((order) => (
+            <li
+              key={order.info.id}
+              className={order.status_class}
+            >
+              <div className="org-orders-list-data">
+                <div>{order.info.id}</div>
+                <div><IntlDate>{order.info.created_at}</IntlDate></div>
+                <div><i />{order.status_value}</div>
+                {this.renderActions(order)}
+                <div>{order.actions.details.enabled && <Link to={`/minha-conta/pedidos/${order.info.id}`}>{order.actions.details.label}</Link>}</div>
               </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
-            </div>
-          </div>
-          {secondStep && (<div className="box-secondPart">
-            <div className="box-images">
-              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
-            </div>
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">3 produtos</p>
-            </div>
-            <div>
-              <p className="title-secondPart">Valor total</p>
-              <p className="txt-secondPart">R$ 2.050,30</p>
-            </div>
-          </div>)}
-        </div>
-        <div className="box-detailsOrder pendingPayment">
-          <div className="box-firstPart">
-            <div>
-              <p>483093</p>
-            </div>
-            <div>
-              <p>30/08/2016</p>
-            </div>
-            <div className="flagOrder">
-              <p>Aguardando pagamento</p>
-            </div>
-            <div className="box-icons">
-              <div className="icons">
-                <Link to="#" className="btn-icons">
-                  <CodeBar />
-                </Link>
-                <Link to="#" className="btn-icons">
-                  <Receipt />
-                </Link>
+              <div className="org-orders-list-expand">
+                <div>
+                  {locale.ticket.ORDER_ITEMS}
+                  <span>{order.items_label}</span>
+                </div>
+                <div>
+                  {locale.ticket.ORDER_TOTAL}
+                  <IntlMoney>{order.info.total_price}</IntlMoney>
+                </div>
               </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
-            </div>
+            </li>
+          ))}
+          {orders.isLoaded && orders.isRunning && <Loading />}
+        </ul>
+        {page < Math.ceil(orders.total_count / 10) &&
+          <div className="atm-orders-load-more">
+            <button
+              className="atm-button-transparent"
+              onClick={this.handleLoadMore}
+            >
+              {locale.LOAD_MORE}
+            </button>
           </div>
-          {secondStep && (<div className="box-secondPart">
-            <div className="box-images">
-              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
-            </div>
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">3 produtos</p>
-            </div>
-            <div>
-              <p className="title-secondPart">Valor total</p>
-              <p className="txt-secondPart">R$ 2.050,30</p>
-            </div>
-          </div>)}
-        </div>
-        <div className="box-detailsOrder inTransport">
-          <div className="box-firstPart">
-            <div>
-              <p>483093</p>
-            </div>
-            <div>
-              <p>30/08/2016</p>
-            </div>
-            <div className="flagOrder">
-              <p>Em transporte</p>
-            </div>
-            <div className="box-icons">
-              <div className="icons">
-                <Link to="#" className="btn-icons">
-                  <Receipt />
-                </Link>
-                <Link to="#" className="btn-icons">
-                  <RepurchaseIcon />
-                </Link>
-              </div>
-              <Link to="#" className="icons align-text" onClick={this.showDetails}>Ver detalhes</Link>
-            </div>
-          </div>
-          {secondStep && (<div className="box-secondPart">
-            <div className="box-images">
-              <img src={require('assets/media/images/imgteste-produto.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto2.jpg')} alt="Produto" />
-              <img src={require('assets/media/images/imgteste-produto3.jpg')} alt="Produto" />
-            </div>
-            <div>
-              <p className="title-secondPart">Itens do pedido</p>
-              <p className="txt-secondPart">3 produtos</p>
-            </div>
-            <div>
-              <p className="title-secondPart">Valor total</p>
-              <p className="txt-secondPart">R$ 2.050,30</p>
-            </div>
-          </div>)}
-        </div>
+        }
       </div>
     );
   }
 
-  render() {
-    const { screenSize } = this.props;
+  renderItems() {
+    const { orders, screenSize, locale } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    if (!orders.isLoaded && orders.isRunning) {
+      return <Loading />;
+    }
+
+    if (orders.list.length <= 0) {
+      return (
+        <div>
+          {locale.NO_ORDERS}
+        </div>
+      );
+    }
+
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
+  }
+
+  render() {
+    const { locale } = this.props;
+
+    return (
+      <div>
+        <h3 className="atm-myorder-title">{locale.TITLE}</h3>
+        <span className="atm-myorder-subtitle">{locale.SUB_TITLE}</span>
+        {this.renderItems()}
+        <Helmet>
+          <title>{locale.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.seo.META_DESCRIPTION} />
+        </Helmet>
+      </div>
+    );
   }
 }
 
-export default OrderList;
+function mapStateToProps(state) {
+  return {
+    screenSize: state.app.screenSize,
+    orders: state.account.orders,
+    locale: state.locale.translate.account.my_orders,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderList);

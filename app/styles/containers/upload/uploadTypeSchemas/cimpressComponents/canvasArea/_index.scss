@@ -1,9 +1,8 @@
 .upload__canvasSchema__canvasArea {
   display: flex;
   width: 100%;
-  min-height: 42rem;
-  max-height: 62rem;
-  padding: 4rem 0 0 0;
+  height: 55rem;
+  padding: 0 0 0 0;
   overflow: auto;
   .dcl-canvas {
     border: none;
@@ -89,7 +88,8 @@
         &--right,
         &--bottom,
         &--left {
-          background-color: $color-pastel-red-light;
+          background-color: $color-pastel-tomato;
+          opacity: 0.5;
         }
         &--inner {
           border-style: solid;

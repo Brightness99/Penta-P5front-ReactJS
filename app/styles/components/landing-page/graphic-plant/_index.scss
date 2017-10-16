@@ -1,0 +1,76 @@
+.container-graphicPlant{
+  margin: 0 0 4rem;
+
+  .container-graphicPlant-block{
+    display: flex;
+    flex-direction: column-reverse;
+
+    @include lg {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .box-graphicPlant{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+
+      @include lg {
+        width: calc(50% - 1.5rem);
+      }
+
+      .slick-slider {
+
+        margin: 0 -1.5rem 3.6rem;
+
+        @include lg {
+          border-radius: 0.4rem;
+          margin: 0;
+        }
+
+        .atm-carousel-arrow {
+          &--prev {
+            left: 0;
+          }
+
+          &--next {
+            right: 0;
+          }
+        }
+      }
+
+      .atm-graphic-plant-image {
+        margin: 0 -1.5rem 2rem;
+        max-width: initial;
+        width: calc(100% + 3rem);
+      }
+
+      .graphicPlant-subtitle{
+        color: $color-almostBlack;
+        font-family: $font-family-nunito-regular;
+        font-size: 2.1rem;
+        font-weight: lighter;
+        line-height: 1.48;
+        padding-bottom: 2rem;
+
+        @include lg {
+          font-size: $font-size-xl;
+        }
+      }
+      .fnt-text,
+      .list-item {
+        color: $color-lightGray;
+        font-family: $font-family-open-sans-light;
+        font-size: $font-size-sm;
+        font-weight: 300;
+        line-height: 1.88;
+
+        @include lg {
+          font-size: $font-size-base;
+          margin-bottom: inherit;
+        }
+      }
+    }
+  }
+}

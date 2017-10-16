@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { TextButton } from 'atoms/Buttons';
 import { InputAction } from 'atoms/Inputs';
 import { PageTitle } from 'atoms/Titles';
 import { TagIcon, TicketIcon, TimesCircleIcon } from 'components/Icons';
@@ -94,11 +93,13 @@ export default class CartVoucher extends React.Component {
   renderActiveVoucher() {
     const { locale, voucher } = this.props;
     return (
-      <div className={cx(
-        'org-cart-ticket',
-        voucher.voucher_name && 'org-cart-ticket--valid',
-        voucher.error.status && 'org-cart-ticket--invalid'
-      )}>
+      <div
+        className={cx(
+          'org-cart-ticket',
+          voucher.voucher_name && 'org-cart-ticket--valid',
+          voucher.error.status && 'org-cart-ticket--invalid'
+        )}
+      >
         <TicketIcon />
         <div className="mol-cart-voucher-ticket-body">
           <div className="mol-cart-voucher-ticket-text">
