@@ -8,6 +8,7 @@ import moment from 'moment';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { FileIcon } from 'components/Icons';
+import config from 'config';
 
 type Props = {
   screenSize: string,
@@ -70,6 +71,8 @@ export class Cloud extends React.Component {
         title: 'Cloud',
       },
     ];
+    const csvLink = (startDate && endDate) ? config.apiUrl + '/v2/cloud/order-list?date_end=' + endDate.format('YYYY-MM-DD') + '&date_start=' + startDate.format('YYYY-MM-DD') : "#";
+
     return (
       <div className="container-cloud">
         <div className={cx(isMobile(screenSize) && ('container'))}>
@@ -90,7 +93,7 @@ export class Cloud extends React.Component {
             />
           </div>
           <div className="btn-downloadCloud">
-            <Link to="#" className="btn-default btn-primary fnt-sbold btn-sm"><i><FileIcon /></i>Download</Link>
+            <a href={csvLink} className="btn-default btn-primary fnt-sbold btn-sm"><i><FileIcon /></i>Download</a>
           </div>
         </div>
       </div>
