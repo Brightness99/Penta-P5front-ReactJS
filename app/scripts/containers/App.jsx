@@ -16,6 +16,7 @@ import Products from 'containers/Products';
 import Authentication from 'containers/Authentication';
 import Cart from 'containers/Cart';
 import MyAccount from 'containers/MyAccount';
+import ArtProposal from 'containers/ArtProposal';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
 import Upload from 'containers/Upload';
@@ -27,6 +28,14 @@ import FileMount from 'containers/FileMount';
 import PrintGuide from 'containers/PrintGuide';
 import PrintiPress from 'containers/PrintiPress';
 import AboutPrinti from 'containers/AboutPrinti';
+import HelpCenterPage from 'containers/HelpCenterPage';
+import TermsOfUse from 'containers/TermsOfUse';
+import PrivacyPolicy from 'containers/PrivacyPolicy';
+import Sitemap from 'containers/Sitemap';
+import Search from 'components/Search';
+import Gabaritos from 'containers/Gabaritos';
+import Templateslp from 'containers/Templateslp';
+import Referral from 'containers/Referral';
 
 type Props = {
   app: AppStoreType,
@@ -34,6 +43,8 @@ type Props = {
   dispatch: () => {},
   router: RouterStore,
   locale: {},
+  isAuthorized: boolean,
+  headerConfig: {}
 };
 
 export class App extends React.Component {
@@ -59,7 +70,7 @@ export class App extends React.Component {
   };
 
   render() {
-    const { app, dispatch, router, cart } = this.props;
+    const { app, dispatch, router, cart, isAuthorized, headerConfig } = this.props;
 
     let html = (<div className="loader">Loading</div>);
 
@@ -72,7 +83,10 @@ export class App extends React.Component {
               path="/"
               render={() => (
                 <div key="app" className="app">
-                  <Header screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count} />
+                  <Header
+                    screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count}
+                    isAuthorized={isAuthorized} config={headerConfig}
+                  />
                   <main className="app__main">
                     <Switch>
                       <Route exact path="/" component={Home} />
@@ -82,16 +96,25 @@ export class App extends React.Component {
                       <Route path="/minha-conta" component={MyAccount} />
                       <Route path="/montagem-de-arquivos" component={FileMount} />
                       <Route path="/guia-de-impressao" component={PrintGuide} />
+                      <Route path="/central-de-ajuda" component={HelpCenterPage} />
+                      <Route path="/politica-de-privacidade" component={PrivacyPolicy} />
+                      <Route path="/mapa-do-site" component={Sitemap} />
+                      <Route path="/termos-de-servico-e-uso-do-site" component={TermsOfUse} />
                       <Route path="/glossario" component={Glossary} />
-                      <Route path="/success" component={Success} />
-                      <Route path="/imprensa" component={PrintiPress} />
-                      <Route path="/sobre-a-printi" component={AboutPrinti} />
+                      <Route path="/success/:orderNumber" component={Success} />
+                      <Route path="/buscar" component={Search} />
+                      <Route path="/printi-na-imprensa" component={PrintiPress} />
+                      <Route path="/sobre-printi" component={AboutPrinti} />
+                      <Route path="/cloud" component={CloudCompany} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route path="/:slug/upload/:itemId" component={Upload} />
+                      <Route path="/indicacoes" component={Referral} />
                       <Route exact path="/404" component={Error404} />
-                      <Route path="/cloud" component={CloudCompany} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
+                      <Route exact path="/proposta-de-arte" component={ArtProposal} />
+                      <Route exact path="/gabaritos" component={Gabaritos} />
+                      <Route exact path="/modelos" component={Templateslp} />
                       <Route component={Error404} />
                     </Switch>
                   </main>
@@ -115,6 +138,8 @@ function mapStateToProps(state) {
     cart: state.cart,
     router: state.router,
     locale: state.locale,
+    isAuthorized: state.user.isAuthorized,
+    headerConfig: state.header,
   };
 }
 

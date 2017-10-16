@@ -1,0 +1,15 @@
+.icon-left-button {
+    padding: 1.0rem 5.8rem;
+    position: relative;
+    line-height: 2rem;
+    border-radius: 2px;
+    background: transparent;
+    white-space: nowrap;
+    svg {
+        position: absolute;
+        width: 1.6rem;
+        height: 2.0rem;
+        left: 2.8rem;
+        top: 1.0rem;
+    }
+}

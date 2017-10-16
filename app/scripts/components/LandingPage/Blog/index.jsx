@@ -17,6 +17,7 @@ import { BlockTitle } from 'atoms/Titles';
 type Props = {
   screenSize: string,
   blog: {},
+  locale: {},
   dispatch: () => {},
 };
 
@@ -24,13 +25,6 @@ const missingBlogAttributes = {
   reading_time: 2,
   post_category: 'Biblioteca',
   post_creation: '2017-09-15',
-};
-
-const missingBlogLocale = {
-  TITLE: 'Últimas do Blog',
-  TO_READ: 'para ler',
-  TIME_MEASURE: 'min',
-  DATE_FORMAT: 'D MMM',
 };
 
 export class BlogBlock extends React.Component {
@@ -43,7 +37,7 @@ export class BlogBlock extends React.Component {
   props: Props;
 
   renderPost() {
-    const { blog: { blog } } = this.props;
+    const { blog: { blog }, locale } = this.props;
 
     return blog.map((item) => (
       <div className="blogCard" key={`blogCard-${item.title}`}>
@@ -57,11 +51,11 @@ export class BlogBlock extends React.Component {
           <div className="blogCard-footer">
             <div className="blogCard-footer-date">
               <CalendarIcon />
-              <span>{moment(missingBlogAttributes.post_creation).format(missingBlogLocale.DATE_FORMAT)}</span>
+              <span>{moment(missingBlogAttributes.post_creation).format(locale.DATE_FORMAT)}</span>
             </div>
             <div className="blogCard-footer-time">
               <HourglassIcon />
-              <span>{`${missingBlogAttributes.reading_time}${missingBlogLocale.TIME_MEASURE} ${missingBlogLocale.TO_READ}`}</span>
+              <span>{`${missingBlogAttributes.reading_time}${locale.TIME_MEASURE} ${locale.TO_READ}`}</span>
             </div>
           </div>
         </NavLink>
@@ -70,10 +64,12 @@ export class BlogBlock extends React.Component {
   }
 
   renderDesktop() {
+    const { locale } = this.props;
+
     return (
       <section className="container-blog">
         <div className="container">
-          <BlockTitle>{missingBlogLocale.TITLE}</BlockTitle>
+          <BlockTitle>{locale.TITLE}</BlockTitle>
           <div className="box-blogCards">
             {this.renderPost()}
           </div>
@@ -83,9 +79,11 @@ export class BlogBlock extends React.Component {
   }
 
   renderMobile() {
+    const { locale } = this.props;
+
     return (
       <section className="container-blog">
-        <BlockTitle>{missingBlogLocale.TITLE}</BlockTitle>
+        <BlockTitle>{locale.TITLE}</BlockTitle>
         <Slider
           className="box-blogCards carousel-display-overflow"
           arrows={false}
@@ -114,6 +112,7 @@ function mapStateToProps(state) {
   return {
     blog: state.blog,
     screenSize: state.app.screenSize,
+    locale: state.locale.translate.page.home.blog,
   };
 }
 

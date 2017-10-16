@@ -65,6 +65,7 @@ export EyeIcon from './Eye';
 export CloudIcon from './CloudIcon';
 export RepurchaseIcon from './RepurchaseIcon';
 export WatchIcon from './WatchIcon';
+export EyeEmptyIcon from './EyeEmptyIcon';
 export BarCodeFileIcon from './BarCodeFile';
 export ImageFileIcon from './ImageFile';
 export ReceiptFileIcon from './ReceiptFile';
@@ -72,6 +73,11 @@ export ReceiptFileIcon from './ReceiptFile';
 // Temporary
 export AngleRightIcon from './AngleRight';
 export AngleLeftIcon from './AngleLeft';
+export OneFileIcon from './OneFileIcon';
+export MultipleFilesIcon from './MultipleFilesIcon';
+export AccordionMinusIcon from './AccordionMinus';
+export AccordionPlusIcon from './AccordionPlus';
+export NFIcon from './NF';
 
 // new definitive icons
 export AngleDownIcon from './_AngleDown';
@@ -91,3 +97,18 @@ export ArrowsCloud from './ArrowsCloud';
 export InvoiceIcon from './InvoiceIcon';
 export SpecialProjectsIcon from './SpecialProjectsIcon';
 export AccountManagerIcon from './AccountManagerIcon';
+export ChatIcon from './ChatIcon';
+export PhoneIcon from './PhoneIcon';
+export PaperAirplaneFlying from './PaperAirplaneFlying';
+export MoneySignIcon from './MoneySignIcon';
+export UserIcon from './UserIcon';
+export UserPlusIcon from './UserPlusIcon';
+export ArchiveIcon from './ArchiveIcon';
+export TasksIcon from './TasksIcon';
+export DownloadIcon from './DownloadIcon';
+export PictureIcon from './PictureIcon';
+export GlassZoomIcon from './GlassZoomIcon';
+export ReferralIcon from './ReferralIcon';
+export LinkIcon from './LinkIcon';
+export GmailIcon from './GmailIcon';
+export FacebookIcon from './FacebookIcon';

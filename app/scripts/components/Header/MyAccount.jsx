@@ -12,6 +12,8 @@ type Props = {
   screenSize: string,
   isHidden: string,
   handleClose: () => {},
+  handleLogOut: () => {},
+  isAuthorized: boolean,
 };
 
 export default class MyAccount extends React.Component {
@@ -27,15 +29,25 @@ export default class MyAccount extends React.Component {
     }
   };
 
+  handleLogOut=() => {
+    const { handleLogOut } = this.props;
+
+    if (typeof handleLogOut === 'function') {
+      handleLogOut();
+    }
+
+    this.handleClick();
+  };
+
   renderLoggedOut() {
     return [
       <li key="login">
-        <NavLink onClick={this.handleClick} to="/login">
+        <NavLink onClick={this.handleClick} to="/login-cadastro">
           <AngleDownIcon style={{ transform: 'rotate(270deg)' }} /> Entrar
         </NavLink>
       </li>,
       <li key="register">
-        <NavLink onClick={this.handleClick} to="/cadastro">
+        <NavLink onClick={this.handleClick} to="/login-cadastro">
           <AngleDownIcon /> Cadastrar
         </NavLink>
       </li>,
@@ -70,11 +82,20 @@ export default class MyAccount extends React.Component {
         </NavLink>
       </li>,
       <li key="logout">
-        <NavLink onClick={this.handleClick} to="#">
+        <NavLink onClick={this.handleLogOut} to="#">
           <OutIcon /> Sair
         </NavLink>
       </li>,
     ];
+  }
+
+  renderMenu=() => {
+    const { isAuthorized } = this.props;
+
+    if (isAuthorized) {
+      return this.renderLoggedIn();
+    }
+    return this.renderLoggedOut();
   }
 
   renderMobileHeader() {
@@ -100,12 +121,12 @@ export default class MyAccount extends React.Component {
               <div className="mol-header-account-expand-header">
                 <MyAccountIcon />
                 {this.renderMobileHeader()}
-                <button className="atm-header-menu-close" onClick={this.handleCloseMenu}>
+                <button className="atm-header-menu-close" onClick={this.handleClick}>
                   <TimesIcon />
                 </button>
               </div>
               <ul className="mol-header-account-list">
-                {this.renderLoggedIn()}
+                {this.renderMenu()}
               </ul>
             </div>
           </SlideToggle>,
@@ -117,7 +138,7 @@ export default class MyAccount extends React.Component {
   renderDesktop() {
     return (
       <ul className="mol-header-account">
-        {this.renderLoggedIn()}
+        {this.renderMenu()}
       </ul>
     );
   }

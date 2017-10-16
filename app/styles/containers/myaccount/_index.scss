@@ -4,12 +4,25 @@
 @import "changepayment";
 @import "briefing";
 @import "mydata";
+@import "referral";
+
+@import 'order-list';
+
+.title-myaccount {
+  font-family: $font-family-open-sans-bold;
+  font-size: $font-size-lg;
+  font-weight: 700;
+  letter-spacing: 0.18rem;
+  margin-bottom: 3.2rem;
+  text-transform: uppercase;
+}
 
 .container-myaccount {
   @include lg {
     display: flex;
     flex-direction: row;
   }
+
   .container-sidebarAccount {
     flex: 1;
     //height: 100%;
@@ -55,14 +68,14 @@
             flex: 2;
             margin-left: 1.0rem;
           }
-          svg {
-            //width: 14%;
-          }
           .cloudIcon {
             width: 17%;
           }
           .printClubIcon {
             width: 82%;
+          }
+          .referralIcon {
+            width: 14%;
           }
           &.is-active {
             color: $color-printi-blue;
@@ -78,6 +91,45 @@
     }
   }
 
+  &-content {
+    padding: 3rem 0 4rem;
+
+    @include lg {
+      background-color: $color-white;
+      flex: 5;
+      padding: 2rem 6rem 3rem 6rem;
+    }
+
+    .app__breadcrumb {
+      margin-bottom: 2.4rem;
+      padding: 0;
+    }
+
+    .atm__page-title {
+      margin-bottom: 4rem;
+      padding: 0;
+
+      @include lg {
+        margin-bottom: 5rem;
+      }
+    }
+
+    .atm-myorder-title {
+      color: $color-almostBlack;
+      font-family: $font-family-nunito-light;
+      font-size: 2.1rem;
+      letter-spacing: normal;
+      line-height: 1;
+      margin-left: -0.2rem;
+      padding: 0;
+      text-transform: none;
+
+      @include lg {
+        font-size: 2.7rem;
+      }
+    }
+  }
+
   .container-myorder {
     @include lg {
       background-color: $color-white;
@@ -88,11 +140,8 @@
     .container {
       width: auto;
     }
-    .app__breadcrumb {
-      margin-bottom: 2.4rem;
-    }
     .title-myorder {
-      padding: 2rem 0 0.5rem 0;      
+      padding: 2rem 0 0.5rem 0;
     }
     .subtitle-myorder {
       font-family: $font-family-nunito-light;
@@ -147,7 +196,7 @@
       box-sizing: border-box;
       border-radius: 3px;
       margin-bottom: 1rem;
-      background-color: $color-white; 
+      background-color: $color-white;
       @include lg {
         padding: 1rem 1.4rem;
         border: 1px solid $color-hrLightGray;
@@ -163,7 +212,7 @@
             border-radius: 7.5px;
           }
         }
-      } 
+      }
       &.delivered {
         border-top: 10px solid $color-green;
         @include lg {
@@ -228,11 +277,11 @@
         flex-direction: column;
         padding: 1rem 1.4rem 2rem 1.4rem;
         @include lg {
-          padding: 1.2rem 1.4rem;          
+          padding: 1.2rem 1.4rem;
           align-items: center;
           flex-direction: row;
         }
-        >div {
+        div {
           flex: 1;
           font-family: $font-family-open-sans;
           font-size: $font-size-base;
@@ -278,8 +327,12 @@
               border-radius: 2px;
               margin-right: 1rem;
               float: left;
-              width: 57px;
               height: 30px;
+              font-size: 12px;
+              line-height: 18px;
+              text-align: center;
+              width: 150px;
+              margin-top: 3px;
               svg {
                 //width: 25px;
                 //height: 20px;
@@ -398,7 +451,6 @@
             text-align: center;
             color: $color-white;
             margin-bottom: 0;
-          }
           .txt-secondPart {
             font-size: $font-size-base;
             line-height: 1.25;
@@ -463,9 +515,9 @@
       display: flex;
       align-items: center;
       height: 30px;
-      max-width: 200px;
       border: 1px solid $color-lightGray;
       color: $color-lightGray;
+      margin-top: 1rem;
       i {
         margin-right: 1rem;
         display: flex;
@@ -480,14 +532,16 @@
         }
       }
       &:first-of-type {
-        margin-bottom: 1rem;
+        margin-top: 0rem;
       }
       @include lg {
         border: 1px solid $color-printi-blue;
         color: $color-printi-blue;
+        margin-left: 2rem;
+        margin-top: 0;
         &:first-of-type {
-          margin-right: 2rem;
-          margin-bottom: 0;
+          margin-left: 0;
+          margin-top: 0;
         }
       }
     }
@@ -1115,9 +1169,6 @@
   .container {
     width: auto;
   }
-  .app__breadcrumb {
-    margin-bottom: 2.4rem;
-  }
   .title-myAddresses {
     margin-top:2.8rem;
     @include lg {
@@ -1160,38 +1211,29 @@
   >div { 
     margin-bottom: 3rem;
     .btn-addresses--mobile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      margin-top: 2rem;  
-      a {
-        justify-content: center;
-        display: flex;
+      @include center-child-flex;
+      background: transparent;
+      margin-top: 2rem;
+
+      button {
         align-items: center;
-        flex: 1;
+        border: 0.1rem solid $color-lightGray;
+        color: $color-lightGray;
         font-size: 1rem;
-        height: 40px;
-        max-width: 200px;
-        border: 1px solid $color-lightGray;;
-        color: $color-lightGray;;
-        i {
-          margin-right: 8px;
-          svg {
-            path {
-              fill: $color-lightGray;
-            }
-          }
+        height: 4rem;
+        margin: 0;
+        max-width: 20rem;
+
+        svg {
+          fill: currentColor;
         }
       }
     }
   }
   .box-addressDelivery {
     display: flex;
-    flex-direction: row;
     flex-direction: column;
     flex-wrap:nowrap;
-    //overflow-x: auto;
     margin-bottom: 0;
     @include lg {
       flex-wrap: wrap;
@@ -1199,7 +1241,8 @@
       flex-direction: row;
       margin: 1rem 0 3.7rem 0;
     }
-    > div {
+    > div,
+    > button {
       border: 1px solid #dbdddf;
       border-radius: 2px;
       min-width: 270px;
@@ -1241,35 +1284,25 @@
             margin-bottom: 0;
           }
           &.text-edit, &.text-delete {
+            color: $color-printi-blue;
             font-family: $font-family-open-sans;
             font-size: $font-size-sm;
-            line-height: 2.14;
-          }
-          &.text-edit {
-            a {
-              color: $color-printi-blue;
-              i {
-                margin-right: 5px;
-                svg {
-                  fill: $color-printi-blue;
-                  width: 13px;
-                  height: 12px;
-                }
-              }
+            line-height: 1;
+
+            button {
+              background: transparent;
+              border: 0 transparent;
+              color: currentColor;
+            }
+            svg {
+              fill: currentColor;
+              height: 1.2rem;
+              margin-right: 0.8rem;
+              width: 1.3rem;
             }
           }
           &.text-delete {
-            a {
-              color: $color-melon;
-              i {
-                margin-right: 5px;
-                svg {
-                  fill: $color-melon;
-                  width: 13px;
-                  height: 12px;
-                }
-              }
-            }
+            color: $color-melon;
           }
         }
       }
@@ -1291,14 +1324,14 @@
           }
         }
       }
+
       &.box-addNewAddress {
-        max-width: 49.5%;
-        align-items: center;
-        justify-content: center;
-        display: flex;
+        @include center-child-flex
         background-color: $color-lightBlue;
-        border: 2px dotted $color-printi-blue;
+        border: 0.2rem dotted $color-printi-blue;
         cursor: pointer;
+        max-width: 49.5%;
+
         svg {
           fill: $color-printi-blue;
         }
@@ -1445,18 +1478,19 @@
 }
 
 
-.org-input-research {
-  .mol-input-text, .mol-select-research {
-    height: 5rem;
-    background-color: $color-white;
-    border: 1px solid #dbdddf;
-    box-sizing: border-box;
-    padding: 0.9rem 1.0rem;
-    cursor: pointer;
-  }
-  .mol-select-research {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  .org-input-research {
+    .mol-input-text, .mol-select-research {
+      height: 5rem;
+      background-color: $color-white;
+      border: 1px solid #dbdddf;
+      box-sizing: border-box;
+      padding: 0.9rem 1.0rem;
+      cursor: pointer;
+    }
+    .mol-select-research {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
   }
 }

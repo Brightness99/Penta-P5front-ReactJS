@@ -3,12 +3,14 @@
 import React from 'react';
 import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { Helmet } from 'react-helmet';
+import { shouldComponentUpdate } from 'utils/helpers';
 
 import { BannersBlock, HighlightsBlock, BlogBlock, CustomersRelyBlock, CategoriesCarouselBlock } from 'components/LandingPage';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
+  locale: SEOLocaleType,
 };
 
 const bannerImages = [
@@ -59,40 +61,28 @@ export class Home extends React.Component {
 
   static props: Props;
 
-  renderMobile() {
-    return (
-      <div className="container-homePage">
-        <BannersBlock images={bannerImages} />
-        <CategoriesCarouselBlock />
-        <HighlightsBlock />
-        <CustomersRelyBlock />
-        <BlogBlock />
-      </div>
-    );
-  }
-
-  renderDesktop() {
-    return (
-      <div className="container-homePage">
-        <BannersBlock images={bannerImages} />
-        <CategoriesCarouselBlock />
-        <HighlightsBlock />
-        <CustomersRelyBlock />
-        <BlogBlock />
-      </div>
-    );
-  }
-
   render() {
-    const { screenSize } = this.props;
+    const { locale } = this.props;
 
-    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
+    return (
+      <div className="container-homePage">
+        <Helmet>
+          <title>{locale.PAGE_TITLE}</title>
+          <meta name="description" content={locale.META_DESCRIPTION} />
+        </Helmet>
+        <BannersBlock images={bannerImages} />
+        <CategoriesCarouselBlock />
+        <HighlightsBlock />
+        <CustomersRelyBlock />
+        <BlogBlock />
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    screenSize: state.app.screenSize,
+    locale: state.locale.translate.page.home,
   };
 }
 

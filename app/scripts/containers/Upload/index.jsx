@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
 import { PageTitle } from 'atoms/Titles';
-import Alert from 'components/Alert';
+import FlashMessage from 'components/FlashMessage';
 import AdditionalOption from './AdditionalOption';
 import AvailableStrategy from './AvailableStrategy';
 import NormalSchema from './UploadTypeSchemas/Normal';
@@ -23,39 +23,32 @@ type Props = {
 export class Upload extends React.Component {
   static props: Props;
 
-  renderAlerts = () => {
-    const alerts = [
+  renderFlashMessages = () => {
+    const messages = [
       {
         type: 'error',
         title: 'Desculpe!',
-        content: 'Ocorreu um erro interno impossibilitando seu upload.'
+        message: 'Ocorreu um erro interno impossibilitando seu upload.',
       },
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada.'
+        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 1',
       },
       {
         type: 'warning',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após dsadsse período a previsão de entrega será alterada.'
+        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 2',
       },
       {
         type: 'error',
         title: 'Atenção!',
-        content: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse perfgdgfíodo a previsão de entrega será alterada.'
-      }
+        message: 'A arte deve ser enviada até 23/08/17 às 20:00 . Após esse período a previsão de entrega será alterada. 3',
+      },
     ];
 
-    return alerts.map(
-      (alert) => (
-        <Alert
-          key={`${new Date()}-${alert.content}`}
-          type={alert.type}
-          title={alert.title}
-          content={alert.content}
-        />
-      )
+    return messages.map(
+      (message, index) => <FlashMessage {...message} key={`${String(index)}_${Date()}`} />
     );
   };
 
@@ -75,7 +68,7 @@ export class Upload extends React.Component {
             value: false,
             price: 30,
           },
-        ]
+        ],
       },
       {
         title: 'Checagem do arquivo',
@@ -91,7 +84,7 @@ export class Upload extends React.Component {
             value: false,
             price: 25,
           },
-        ]
+        ],
       },
     ];
 
@@ -108,7 +101,7 @@ export class Upload extends React.Component {
   };
 
   renderAvailableStrategies = () => {
-    const availableStrategies = [1, 4];
+    const availableStrategies = [1, 2, 3, 4, 5]; // 1 to 5
 
     return availableStrategies.map(
       (strategy) => (
@@ -123,7 +116,7 @@ export class Upload extends React.Component {
 
   renderUploadTypeSchema = () => {
     const globalFlags = {
-      upload_type: 'canvas',
+      upload_type: 'canvas', // can be "canvas", "scene" or "normal"
       from_my_account: false,
     };
 
@@ -139,24 +132,7 @@ export class Upload extends React.Component {
     }
   };
 
-  render() {
-    const { dispatch } = this.props;
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Marca página',
-        url: '/configuracao-marca-pagina',
-      },
-      {
-        title: 'Enviar arte',
-        url: '',
-      },
-    ];
-
+  renderWarningExtraInfo = () => {
     const templates = {
       options: {
         vertical: ['illustrator', 'photoshop', 'photoshop'],
@@ -175,16 +151,37 @@ export class Upload extends React.Component {
       selectedOrientation: 'vertical',
     };
 
+    const { dispatch } = this.props;
+
     const product = {
       title: 'Cartão de Visita',
     };
+
+    return <Warning templates={templates} dispatch={dispatch} product={product} />;
+  };
+
+  render() {
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Marca página',
+        url: '/configuracao-marca-pagina',
+      },
+      {
+        title: 'Enviar arte',
+        url: '',
+      },
+    ];
 
     return (
       <div className="page-upload">
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
-          <div className="alert-container">{this.renderAlerts()}</div>
+          <div className="alert-container">{this.renderFlashMessages()}</div>
           <div className="upload-container">
             <div className="upload-container-centralized">
               {this.renderAdditionalOptions()}
@@ -195,12 +192,10 @@ export class Upload extends React.Component {
               {this.renderAvailableStrategies()}
             </div>
           </div>
-          <div className="upload-container">
-            {this.renderUploadTypeSchema()}
-            {/*<div className="upload-container-centralized">
-              <Warning templates={templates} dispatch={dispatch} product={product} />
-            </div>*/}
-          </div>
+          {this.renderUploadTypeSchema()}
+          {/* <div className="upload-container-centralized">
+            {this.renderWarningExtraInfo()}
+          </div> */}
         </div>
       </div>
     );

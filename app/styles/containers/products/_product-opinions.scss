@@ -1,0 +1,218 @@
+.opinions-percentual-stars{
+  align-items: center;
+  display: flex;
+  padding-bottom: 0.8rem;
+
+  .opinions-star-number {
+    color: $color-almostBlack;
+    margin: 0;
+    text-align: right;
+    width: 3rem;
+  }
+}
+
+.opinion-stars {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+
+  &-item {
+    display: inline-flex;
+    list-style: none;
+    width: 1.8rem;
+    margin: 0 0.2rem;
+    svg{
+      width: 100%;
+      height: 100%;
+      path{
+        fill: $color-printi;
+      }
+    }
+    svg path:first-child {
+      fill: transparent;
+    }
+    &-filled svg path:first-child {
+      fill:$color-printi;
+    }
+  }
+}
+
+.loader{
+  width: 23rem;
+  height: 0.8rem;
+  border-radius: 0.4rem;
+  margin: 0 0.8rem;
+  background-color: #d2d2d2;
+
+  .linePercentual{
+    height: 100%;
+    border-radius: 0.4rem;
+    background-color: $color-printi-blue;
+  }
+}
+
+.container-opinions{
+  margin: 0 0 4rem;
+  .opinions-title {
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-h5;
+    letter-spacing: 0.1rem;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    @include lg {
+      font-size: $font-size-base;
+    }
+  }
+  .opnions-subtitle{
+    font-weight: 500;
+    font-size: $font-size-h4;
+    color: $color-almostBlack;
+    font-family: $font-family-nunito-regular;
+    @include lg {
+      font-size: $font-size-xl;
+    }
+  }
+  .container-boxOpinions{
+    display: flex;
+    flex-direction: column;
+
+    .atm-button-transparent{
+      margin: 0;
+      min-height: 4rem;
+      max-height: 4rem;
+      width: 100%;
+    }
+
+    .box-opinions{
+      flex: 1;
+      &:first-of-type {
+        border-bottom: 1px solid $color-hrLightGray;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+      }
+
+      &--mobile{
+        display: flex;
+        line-height: 1;
+
+        .box-opinions-total {
+          color: $color-almostBlack;
+          font-family: $font-family-nunito-regular;
+          font-size: 4.8rem;
+          font-weight: 300;
+        }
+
+        .box-opinions-stars {
+          align-items: center;
+          color: #6a6f7a;
+          display: inline-flex;
+          flex-direction: column;
+          font-size: $font-size-xs;
+          justify-content: space-evenly;
+          padding-left: 2rem;
+        }
+
+        .opinion-titleNumber {
+          color: #6a6f7a;
+          font-size: $font-size-xs;
+          line-height: 2.31;
+
+          span {
+            color: $color-almostBlack;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .box-formOpinions{
+
+        form{
+          display: flex;
+          .input-text{
+            flex:12;
+            border: none;
+            box-sizing: border-box;
+            padding: 0.6rem;
+            font-family: $font-family-open-sans-light;
+            font-size: $font-size-base;
+          }
+          .input-submit{
+            flex: 1;
+            &.btn-lg{
+              font-size: $font-size-xs;
+              padding: 1.25rem 1.25rem;
+            }
+          }
+        }
+        @include lg{
+          margin-top: 0;
+        }
+      }
+      .opinion-titleNumber{
+        color: $color-almostBlack;
+        span{
+          font-weight: 600;
+          font-size: $font-size-xl;
+        }
+      }
+      .opinion-textEvaluation {
+        align-items: center;
+        color: $color-lightGray;
+        display: inline-flex;
+        font-size: $font-size-xs;
+        padding-bottom: 0.8rem;
+
+        .opinion-stars {
+          margin: 0 0.4rem;
+        }
+      }
+      .opinion-boxText{
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid $color-hrLightGray;
+        .opinion-text {
+          font-family: $font-family-open-sans-light;
+          font-size: $font-size-base;
+          color: $color-almostBlack;
+        }
+        .opinion-title{
+          font-size: $font-size-base;
+          font-family: $font-family-open-sans-bold;
+        }
+        sub{
+          font-family: $font-family-open-sans;
+          font-size: $font-size-xs;
+          font-style: italic;
+          color: $color-lightGray;
+        }
+        @include lg{
+          margin: 2rem 0;
+          padding-bottom: 0rem;
+          border-bottom: 0px solid transparent;
+        }
+      }
+      .container-boxOpinions{
+        height: 39rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        margin-top: 2rem
+      }
+      @include lg{
+        &:first-of-type{
+          border-bottom: 1px solid transparent;
+          margin-bottom: 0rem;
+          padding-bottom: 0rem;
+        }
+        &:last-of-type {
+          flex: 2;
+          padding-left: 10rem;
+          box-sizing: border-box;
+        }
+      }
+    }
+    @include lg{
+      flex-direction: row;
+    }
+  }
+}
