@@ -139,6 +139,8 @@ const missingLocale = {
       },
       authentication: {
         TITLE_BETWEEN_BLOCKS: 'OU',
+        TITLE_MOBILE_SIGN_UP: 'Cadastrar',
+        TITLE_MOBILE_SIGN_IN: 'Entrar',
         attention_modal: {
           TITLE: 'Atenção',
           CONTENT: 'Para acessar com o seu Facebook. Informar o Seu e-mail.',
@@ -159,6 +161,8 @@ const missingLocale = {
         },
         social_block: {
           TITLE: 'Acesse com',
+          FACEBOOK_TITLE: 'Entrar com Facebook',
+          GOOGLE_TITLE: 'Entrar com Google',
         },
         signup_social_block: {
           TITLE: 'Sou novo cliente',
