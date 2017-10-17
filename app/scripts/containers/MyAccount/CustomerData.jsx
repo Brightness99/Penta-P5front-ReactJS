@@ -41,15 +41,6 @@ export class CustomerData extends React.Component {
     this.handleBreadcrumbs();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { account } = nextProps;
-    if (account) {
-      this.setState({
-        ...nextProps.account,
-      });
-    }
-  }
-
   static props: Props;
   static state: State;
 
@@ -75,24 +66,17 @@ export class CustomerData extends React.Component {
 
   handleClick = () => {
     const { dispatch } = this.props;
-    const { id, first_name, last_name, cpf, phone, gender, cloud_manager, cnpj, company_name, employee_number, state_registration, current_password, new_password, new_password_repeat } = this.state;
+    const { current_password, new_password, new_password_repeat } = this.state;
     this.setState({
       error: null,
     });
 
-    const dataToUpdate = {
-      id,
-      first_name,
-      last_name,
-      cpf,
-      phone,
-      gender,
-      cloud_manager,
-      cnpj,
-      company_name,
-      employee_number,
-      state_registration,
-    };
+    let dataToUpdate = this.state;
+    delete dataToUpdate.current_password;
+    delete dataToUpdate.new_password;
+    delete dataToUpdate.new_password_repeat;
+    delete dataToUpdate.activeForm;
+    delete dataToUpdate.error;
 
     if (current_password !== '' && new_password !== '' && new_password_repeat !== '') {
       dataToUpdate.change_password = {
