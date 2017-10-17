@@ -26,7 +26,7 @@ type Props = {
   isLoading: boolean,
   uploadInfo: {},
   uploadInfoFetch: (slug, itemId) => void,
-  uploadFile: (file) => void,
+  uploadFile: (file: {}) => void,
   dispatch: () => void,
 };
 
@@ -67,7 +67,11 @@ export class Upload extends React.Component {
   };
 
   handleUploadFile = (file: {}) => {
-    this.props.uploadFile(file);
+    const { uploadFile } = this.props;
+
+    if (uploadFile && typeof uploadFile === 'function') {
+      uploadFile(file);
+    }
   };
 
   renderUploadTypeSchema = () => {
@@ -143,11 +147,12 @@ export class Upload extends React.Component {
   renderAdditionalParameters() {
     const { currentStep } = this.state;
     const additionalOptions = mock.additionalOptions;
-    const step = 1;
+    const stepNumber = 1;
+    const isComplete = currentStep >= stepNumber;
     return (
       <FunnelBlock
-        order={step}
-        isComplete={currentStep >= step}
+        order={stepNumber}
+        isComplete={isComplete}
         header={[
           <span key="source-block-title">Configurações adicionais</span>,
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
@@ -155,7 +160,7 @@ export class Upload extends React.Component {
       >
         <AdditionalUploadOptions
           items={additionalOptions}
-          handleOptionsChanged={(options) => this.handleStepFinished(options, step)}
+          handleOptionsChanged={(options) => this.handleStepFinished(options, stepNumber)}
         />
       </FunnelBlock>
     );
@@ -163,43 +168,44 @@ export class Upload extends React.Component {
 
   renderUploadTypeSchemes() {
     const { currentStep } = this.state;
-    const { uploadInfo } = this.props;
-    const availableStrategies = uploadInfo.availableStrategies;
-    const step = 2;
+    const { uploadInfo: { availableStrategies } } = this.props;
+    const stepNumber = 2;
+    const isComplete = currentStep >= stepNumber;
+    const showStep = currentStep >= (stepNumber - 1);
     return (
+      showStep &&
       <FunnelBlock
-        order={step}
-        isComplete={currentStep >= step}
+        order={stepNumber}
+        isComplete={isComplete}
         header={[
           <span key="source-block-title">Como você quer enviar sua arte?</span>,
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
         ]}
       >
-        {
-          currentStep >= 1 &&
-          <AvailableUploadStrategies
-            availableStrategies={availableStrategies}
-            handleSelectedStrategy={(options) => this.handleStepFinished(options, step)}
-          />
-        }
+        <AvailableUploadStrategies
+          availableStrategies={availableStrategies}
+          handleSelectedStrategy={(options) => this.handleStepFinished(options, stepNumber)}
+        />
       </FunnelBlock>
     );
   }
 
   renderFileUploadBlock() {
-    const { currentStep } = this.state;
-    const step = 3;
+    const { currentStep, selectedStrategy } = this.state;
+    const stepNumber = 3;
+    const isComplete = currentStep >= stepNumber;
+    const showStep = currentStep >= (stepNumber - 1) && selectedStrategy > 1;
     return (
+      showStep &&
       <FunnelBlock
-        order={step}
-        isComplete={currentStep >= step}
+        order={stepNumber}
+        isComplete={isComplete}
         header={[
           <span key="source-block-title">Enviar arquivo da arte</span>,
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
         ]}
       >
         {
-          currentStep >= 2 &&
           this.renderUploadTypeSchema()
         }
       </FunnelBlock>
