@@ -4,6 +4,10 @@
     font-family: $font-family-open-sans-bold;
     font-size: $font-size-lg;
     text-transform: uppercase;
+    margin-top: 2rem;
+    @include lg {
+      margin-top: 0;
+    }
   }
   //text about printi
   .org-about-printi-text {
@@ -63,6 +67,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
+    @include lg {
+      margin-top: 0;
+    }
     .title-printi-mentions {
       font-family: $font-family-open-sans-bold;
       font-size: $font-size-xs;
@@ -133,12 +141,16 @@
         align-items: center;
         justify-content: center;
         position: absolute;
-        top: 0;
-        left: 50%;
+        top: 10px;
+        left: 50.2%;
         height: 100%;
         width: 0.1rem;
         background: $body-bg;
         margin-left: -2px;
+        @include lg {
+          top: 0;
+          left: 50%;
+        }
         &:before {
           content: '';
           border-radius: 50%;
