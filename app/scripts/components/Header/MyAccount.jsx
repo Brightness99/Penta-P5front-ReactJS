@@ -4,7 +4,16 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
-import { AngleDownIcon, OrdersIcon, AddressIcon, CardsIcon, ModelsIcon, OutIcon, MyAccountIcon, TimesIcon } from 'components/Icons';
+import {
+  OrdersIcon,
+  AddressIcon,
+  CardsIcon,
+  ModelsIcon,
+  OutIcon,
+  MyAccountIcon,
+  TimesIcon,
+  AngleRightIcon
+} from 'components/Icons';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
 
@@ -29,7 +38,7 @@ export default class MyAccount extends React.Component {
     }
   };
 
-  handleLogOut=() => {
+  handleLogOut = () => {
     const { handleLogOut } = this.props;
 
     if (typeof handleLogOut === 'function') {
@@ -43,12 +52,12 @@ export default class MyAccount extends React.Component {
     return [
       <li key="login">
         <NavLink onClick={this.handleClick} to="/login-cadastro">
-          <AngleDownIcon style={{ transform: 'rotate(270deg)' }} /> Entrar
+          <AngleRightIcon /> Entrar
         </NavLink>
       </li>,
       <li key="register">
         <NavLink onClick={this.handleClick} to="/login-cadastro">
-          <AngleDownIcon /> Cadastrar
+          <AngleRightIcon /> Cadastrar
         </NavLink>
       </li>,
     ];
@@ -89,7 +98,7 @@ export default class MyAccount extends React.Component {
     ];
   }
 
-  renderMenu=() => {
+  renderMenu = () => {
     const { isAuthorized } = this.props;
 
     if (isAuthorized) {
