@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
 import Helmet from 'react-helmet';
+import moment from 'moment';
+import cx from 'classnames';
 import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
-import { DateRangePicker } from 'react-dates';
+import { DateRangePicker, isInclusivelyBeforeDay } from 'react-dates';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION } from 'react-dates/constants';
 import { FileIcon } from 'components/Icons';
 import config from 'config';
@@ -83,10 +85,11 @@ export class Cloud extends React.Component {
             withFullScreenPortal={isMobile(screenSize)}
             startDatePlaceholderText={locale.cloud_orders.STARTS_AT}
             endDatePlaceholderText={locale.cloud_orders.FINISHES_AT}
+            isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
           />
         </div>
         <div className="btn-downloadCloud">
-          <a href={csvLink} className="btn-default btn-primary fnt-sbold btn-sm"><i><FileIcon /></i>{locale.cloud_orders.DOWNLOAD_LINK}</a>
+          <a href={csvLink} className={cx('btn-default', 'btn-primary', 'fnt-sbold', 'btn-sm', (!startDate || !endDate) ? 'disabled' : '')}><i><FileIcon /></i>{locale.cloud_orders.DOWNLOAD_LINK}</a>
         </div>
         <Helmet>
           <title>{'Minha Conta - Cloud | Printi'}</title>
