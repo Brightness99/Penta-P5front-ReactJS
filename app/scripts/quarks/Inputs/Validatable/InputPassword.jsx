@@ -8,6 +8,15 @@ type Props = {
   name: string,
   placeholder: string,
   showLabel: boolean,
+  showPassword: boolean,
+  isOldRulesForPassword: boolean, /*
+  Information about it provided @liayonekura
+  Old rules only for old users.
+  Old rule: didn't have any
+  New rule:
+   For new registers:
+   · A minimum password length of at least seven characters
+   · Contain both numeric and alphabetic characters */
   required: boolean,
   equalsTo: any,
   onClick?: () => {},
@@ -19,7 +28,6 @@ type Props = {
 
 export default class InputPassword extends React.Component {
   static props: Props;
-  static state: State;
 
   handleClick = (ev) => {
     const { onClick } = this.props;
@@ -61,11 +69,19 @@ export default class InputPassword extends React.Component {
     }
   };
 
+  getInputType = () => {
+    const { showPassword } = this.props;
+
+    if (showPassword) return 'text';
+    return 'password';
+  };
+
   render() {
-    const pattern = /^([a-zA-Z0-9_-]){6,99}$/;
+    const { isOldRulesForPassword } = this.props;
+    const pattern = !isOldRulesForPassword && /^([a-zA-Z0-9_-]){7,99}$/;
     const elementProps = {
       ...this.props,
-      type: 'password',
+      type: this.getInputType(),
       pattern,
     };
 

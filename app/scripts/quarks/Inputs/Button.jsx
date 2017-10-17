@@ -11,6 +11,7 @@ type Props = {
   name: string,
   onClick?: () => {},
   type: string,
+  isLoading: boolean,
 };
 
 const Button = (props: Props) => {
@@ -22,6 +23,7 @@ const Button = (props: Props) => {
     name,
     onClick,
     type,
+    isLoading,
   } = props;
 
   const handleClick = (ev) => {
@@ -29,6 +31,7 @@ const Button = (props: Props) => {
       onClick(ev);
     }
   };
+  const content = isLoading ? 'Loading...' : children;
 
   return (
     <button
@@ -37,12 +40,12 @@ const Button = (props: Props) => {
         'app__qrk__button',
         (kind !== undefined && kind.length > 0) ? kind : ''
       )}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       name={name}
       onClick={handleClick}
       type={type}
     >
-      {children}
+      {content}
     </button>
   );
 };
