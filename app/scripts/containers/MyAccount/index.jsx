@@ -94,7 +94,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/meus-dados"
-          render={(props) => <CustomerData {...props} screenSize={screenSize} />}
+          render={(props) => <CustomerData {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/modelos-salvos"
