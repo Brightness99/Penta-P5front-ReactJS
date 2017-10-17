@@ -62,7 +62,7 @@ export class Sidebar extends React.Component {
             </NavLink>
           </li>
           <li>
-            <NavLink exact={true} activeClassName="is-active" to="#">
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/programa-de-fidelidade">
               <i className="printClubIcon"><PrintiClub /></i>
             </NavLink>
           </li>

@@ -1,30 +1,42 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import Breadcrumbs from 'components/Breadcrumbs';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckIcon, PrintiClub, CloseIcon } from 'components/Icons';
 import Loading from 'components/Loading';
 import { ErrorText } from 'atoms/Texts';
-import cx from 'classnames';
 
 type Props = {
   screenSize: string,
   account: {},
+  locale: {},
+  setBreadcrumbs: () => void,
 };
 
 export class Loyalty extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
-  static defaultProps = {
-    screenSize: 'xs',
-  };
+  componentDidMount() {
+    this.handleBreadcrumbs();
+  }
 
   static props: Props;
 
-  renderPage() {
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs } = this.props;
 
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: 'Printi Club',
+        },
+      ]);
+    }
+  };
+
+  renderPage() {
     const { screenSize, account: { loyalty } } = this.props;
 
     if (loyalty.error) {
@@ -38,11 +50,9 @@ export class Loyalty extends React.Component {
           <li className="active-underline"><Link to="#">Seu club</Link></li>
           <li><Link to="#">Histórico de compras</Link></li>
         </ul>
-
         <div className="box-clubGold">
           <h3 className="title-clubGold">{loyalty.loyalty_tier_name}</h3>
           <p className="subtitle-clubGold">Seu saldo nos últimos 12 meses:</p>
-         
           {isMobile(screenSize) && <div className="boxes-gold">
             <div className="box-gold first-box-gold">
               <p className="first-title-gold">Gold</p>
@@ -131,65 +141,36 @@ export class Loyalty extends React.Component {
               <span className="line-score line-become-total" />
               <p className="total-club">17 compras</p>
             </div>
-
           </div>
         </div>
       </div>
     );
   }
 
-  renderMobile() {
-    const { account: { loyalty } } = this.props;
-    return (
-      <div className="container-loyalty">
-        <div className="container">
-          <h2 className="title-loyalty">Minha conta</h2>
-          <i className="logo-printiClub"><PrintiClub /></i>
-          <p className="subtitle-loyalty">Acompanhe seu histórico de compras e tudo que você tem com o Printi Club</p>
-          {!loyalty.isLoaded || loyalty.isRunning ? <Loading /> : this.renderPage()}
-        </div>
-      </div>
-    );
-  }
-
-  renderDesktop() {
-    const { account: { loyalty } } = this.props;
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Printi Club',
-      },
-    ];
-
-    return (
-      <div className="container-loyalty">
-        <Breadcrumbs links={breadcrumb} />
-        <h2 className="title-loyalty">Minha conta</h2>
-        <i className="logo-printiClub"><PrintiClub /></i>
-        <p className="subtitle-loyalty">Acompanhe seu histórico de compras e tudo que você tem com o Printi Club</p>
-        {!loyalty.isLoaded || loyalty.isRunning ? <Loading /> : this.renderPage()}
-      </div>
-    );
+  renderItems() {
+    return this.renderPage();
   }
 
   render() {
-    const { screenSize, account: { loyalty } } = this.props;
+    const { account: { loyalty } } = this.props;
 
-    return isMobile(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return (
+      <div className="container-loyalty">
+        <h3 className="atm-myorder-title"><i className="logo-printiClub"><PrintiClub /></i></h3>
+        <span className="atm-myorder-subtitle">{'Acompanhe seu histórico de compras e tudo que você tem com o Printi Club'}</span>
+        {!loyalty.isLoaded || loyalty.isRunning ? <Loading /> : this.renderPage()}
+        <Helmet>
+          <title>{'Minha Conta - Printi Club | Printi'}</title>
+          <meta name="description" content={'Minha Conta - Printi Club - Printi'} />
+        </Helmet>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
+    screenSize: state.app.screenSize,
     account: state.account,
   };
 }

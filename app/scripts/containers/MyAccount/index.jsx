@@ -110,7 +110,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/programa-de-fidelidade"
-          render={(props) => <Loyalty {...props} screenSize={screenSize} />}
+          render={(props) => <Loyalty {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/indicacoes"
