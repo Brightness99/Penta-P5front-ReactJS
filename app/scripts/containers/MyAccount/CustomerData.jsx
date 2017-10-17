@@ -37,6 +37,15 @@ export class CustomerData extends React.Component {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
+  componentWillReceiveProps(nextProps) {
+    const { account } = nextProps;
+    if (account !== this.props.account) {
+      this.setState({
+        ...nextProps.account,
+      });
+    }
+  }
+
   componentDidMount() {
     this.handleBreadcrumbs();
   }
@@ -72,11 +81,6 @@ export class CustomerData extends React.Component {
     });
 
     let dataToUpdate = this.state;
-    delete dataToUpdate.current_password;
-    delete dataToUpdate.new_password;
-    delete dataToUpdate.new_password_repeat;
-    delete dataToUpdate.activeForm;
-    delete dataToUpdate.error;
 
     if (current_password !== '' && new_password !== '' && new_password_repeat !== '') {
       dataToUpdate.change_password = {
@@ -104,7 +108,6 @@ export class CustomerData extends React.Component {
 
   renderPersonalData() {
     const { first_name, last_name, cpf, phone, gender, cloud_manager } = this.state;
-
     return (
       <form className="org-checkout-content-data">
         <Input
@@ -160,7 +163,6 @@ export class CustomerData extends React.Component {
 
   renderEnterpriseData() {
     const { first_name, last_name, cnpj, company_name, phone, employee_number, state_registration } = this.state;
-
     return (
       <form className="org-checkout-content-data">
         <Input
@@ -240,7 +242,7 @@ export class CustomerData extends React.Component {
     if (account.error || error) {
       errorMessage = (
         <div className="mol-checkout-pane-footer">
-          <ErrorText>{account.error ? account.error.message : error}</ErrorText>
+          <ErrorText>{account.error ? (account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message) : error}</ErrorText>
         </div>
       );
     }
