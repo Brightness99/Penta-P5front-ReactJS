@@ -4,6 +4,7 @@ import React from 'react';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
+import TermsAndPolicyBlock from './TermsAndPolicyBlock';
 
 type FormType = {
   email: { valid: boolean, value: string },
@@ -14,6 +15,7 @@ type Props = {
   name: string,
   onSubmit: (data: FormType) => void,
   isLoading: boolean,
+  isMobile: boolean,
   locale: {
     TITLE: string,
     EMAIL_PLACEHOLDER: string,
@@ -85,6 +87,7 @@ export default class SocialSignUpForm extends React.PureComponent {
         CONFIRM_EMAIL_PLACEHOLDER,
         BUTTON_TITLE,
       },
+      isMobile,
     } = this.props;
     return (
       <div className="authentication__block">
@@ -112,6 +115,7 @@ export default class SocialSignUpForm extends React.PureComponent {
             {BUTTON_TITLE}
           </Button>
         </form>
+        { !isMobile && <TermsAndPolicyBlock />}
       </div>
     );
   }

@@ -10,7 +10,7 @@ import {
   userSocialSignIn,
   userSocialSignUp
 } from 'actions';
-import { SignInForm, SignUpForm, SocialBlock, SocialSignUpForm } from 'components/Authorization';
+import { SignInForm, SignUpForm, SocialBlock, SocialSignUpForm, TermsAndPolicyBlock } from 'components/Authorization';
 import { isMobile } from 'utils';
 import Modal from 'components/Modal';
 
@@ -154,15 +154,18 @@ export class Authentication extends React.Component {
       facebookSocialInfo,
     } = this.state;
     const {
-      signUpErrorMessage, signUpProgress, socialSignUpProgress,
+      screenSize, signUpErrorMessage, signUpProgress, socialSignUpProgress,
       locale: { signup_block, signup_social_block },
     } = this.props;
+
+    const isMobileLayout = isMobile(screenSize);
 
     if (facebookEmailNotFound) {
       return (
         <SocialSignUpForm
           locale={signup_social_block}
           name={facebookSocialInfo.first_name}
+          isMobile={isMobileLayout}
           isLoading={socialSignUpProgress}
           onSubmit={this.facebookSignUp}
         />);
@@ -173,6 +176,7 @@ export class Authentication extends React.Component {
         locale={signup_block}
         onSubmit={this.signUp}
         isLoading={signUpProgress}
+        isMobile={isMobileLayout}
         isFingerprintLoaded={isFingerprintLoaded}
         errorMessage={signUpErrorMessage}
       />);
@@ -190,6 +194,8 @@ export class Authentication extends React.Component {
   };
 
   renderSignIn = () => {
+    const { screenSize } = this.props;
+    const isMobileLayout = isMobile(screenSize);
     const { signInErrorMessage, locale: { signin_block }, signInProgress } = this.props;
     const { isFingerprintLoaded } = this.state;
 
@@ -243,22 +249,26 @@ export class Authentication extends React.Component {
     const { locale: { TITLE_MOBILE_SIGN_UP, TITLE_MOBILE_SIGN_IN } } = this.props;
     const { currentMobileTab } = this.state;
     return (
-      <Tabs defaultTab={currentMobileTab}>
-        <TabHeader>
-          <TabNav key="sign-in">{TITLE_MOBILE_SIGN_IN}</TabNav>
-          <TabNav key="sign-up">{TITLE_MOBILE_SIGN_UP}</TabNav>
-        </TabHeader>
-        <TabBody>
-          <section>
-            {this.renderSocialBlock()}
-            {this.renderTitleBetweenBlocks()}
-            {this.renderSignIn()}
-          </section>
-          <section>
-            {this.renderSignUpForm()}
-          </section>
-        </TabBody>
-      </Tabs>);
+      <section>
+        <Tabs defaultTab={currentMobileTab}>
+          <TabHeader>
+            <TabNav key="sign-in">{TITLE_MOBILE_SIGN_IN}</TabNav>
+            <TabNav key="sign-up">{TITLE_MOBILE_SIGN_UP}</TabNav>
+          </TabHeader>
+          <TabBody>
+            <section>
+              {this.renderSocialBlock()}
+              {this.renderTitleBetweenBlocks()}
+              {this.renderSignIn()}
+            </section>
+            <section>
+              {this.renderSignUpForm()}
+            </section>
+          </TabBody>
+        </Tabs>
+        <TermsAndPolicyBlock />
+      </section>
+      );
   };
 
   renderContent = () => {
