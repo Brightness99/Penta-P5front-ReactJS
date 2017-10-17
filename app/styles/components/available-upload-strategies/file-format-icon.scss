@@ -6,14 +6,34 @@
   span {
     color       : #1271e0;
     font-family : $font-family-open-sans;
-    font-size   : 0.8rem;
+    font-size   : 1.2rem;
     font-weight : bold;
     position    : absolute;
   }
   & > svg {
     background-color : transparent;
     fill             : #1271e0;
-    width            : 3rem;
+    width            : 4rem;
     transform        : scale(1, -1)
+  }
+  &:first-child, &:last-child {
+    width : 2rem;
+    span {
+      font-size : 0.6rem;
+      color     : #b6bbc3;
+    }
+    svg {
+      fill : #b6bbc3;
+    }
+  }
+  &:nth-child(2), &:nth-child(4) {
+    width : 3rem;
+    span {
+      font-size : 0.7rem;
+      color     : #b6bbc3;
+    }
+    svg {
+      fill : #b6bbc3;
+    }
   }
 }
