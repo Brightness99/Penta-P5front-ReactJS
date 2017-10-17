@@ -38,8 +38,7 @@ export class RxPlupload {
     document.body.appendChild(fakeContainer);
     this.uploader = new plupload.Uploader({
       headers: {
-        'Application-Source': 'react',
-        'api-key': settings.apiKey,
+        Authorization: 'Basic cHJpbnRpOjIwMTZhbHBoYXByb3RlY3Q=',
       },
       url: 'http://dev-cms.printi.com.br/v2/upload',
       runtimes: 'html5,html4',
