@@ -37,6 +37,10 @@ export class CustomerData extends React.Component {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
+  componentDidMount() {
+    this.handleBreadcrumbs();
+  }
+
   componentWillReceiveProps(nextProps) {
     const { account } = nextProps;
     if (account) {
