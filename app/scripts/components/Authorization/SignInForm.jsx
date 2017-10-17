@@ -17,6 +17,7 @@ type Props = {
   onSubmit: (email: string, password: string) => void,
   isFingerprintLoaded: boolean,
   errorMessage: string,
+  isLoading: boolean,
   locale: {
     TITLE: string,
     EMAIL_PLACEHOLDER: string,
@@ -62,9 +63,8 @@ export default class SignInForm extends React.PureComponent {
       onSubmit({
         email: form.email.value,
         password: form.password.value,
-        stay_connected: true,
+        stay_connected: stayConnected,
         fingerprint,
-        stayConnected,
       });
     }
   };
@@ -97,7 +97,7 @@ export default class SignInForm extends React.PureComponent {
 
   render() {
     const { canSubmit, stayConnected } = this.state;
-    const { errorMessage, locale: { TITLE, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, BUTTON_TITLE } } = this.props;
+    const { errorMessage, isLoading, locale: { TITLE, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, BUTTON_TITLE } } = this.props;
     return (
       <div className="authentication__block">
         <BlockTitle>{TITLE}</BlockTitle>
@@ -113,12 +113,14 @@ export default class SignInForm extends React.PureComponent {
             name="password"
             placeholder={PASSWORD_PLACEHOLDER}
             showLabel={true}
+            isOldRulesForPassword={true}
             onValidate={this.handleValidatedInput}
           />
           <ErrorField message={errorMessage} />
           <Button
             type="submit"
             kind="success"
+            isLoading={isLoading}
             disabled={!canSubmit}
           >
             {BUTTON_TITLE}

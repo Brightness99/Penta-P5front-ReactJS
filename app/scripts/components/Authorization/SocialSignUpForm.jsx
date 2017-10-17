@@ -13,6 +13,7 @@ type FormType = {
 type Props = {
   name: string,
   onSubmit: (data: FormType) => void,
+  isLoading: boolean,
   locale: {
     TITLE: string,
     EMAIL_PLACEHOLDER: string,
@@ -77,12 +78,14 @@ export default class SocialSignUpForm extends React.PureComponent {
 
   render() {
     const { canSubmit, form } = this.state;
-    const { name, locale: {
-      TITLE,
-      EMAIL_PLACEHOLDER,
-      CONFIRM_EMAIL_PLACEHOLDER,
-      BUTTON_TITLE,
-    } } = this.props;
+    const {
+      name, isLoading, locale: {
+        TITLE,
+        EMAIL_PLACEHOLDER,
+        CONFIRM_EMAIL_PLACEHOLDER,
+        BUTTON_TITLE,
+      },
+    } = this.props;
     return (
       <div className="authentication__block">
         <BlockTitle>{`${TITLE},${name}`}</BlockTitle>
@@ -103,6 +106,7 @@ export default class SocialSignUpForm extends React.PureComponent {
             type="submit"
             name="sign_in"
             kind="success"
+            isLoading={isLoading}
             disabled={!canSubmit}
           >
             {BUTTON_TITLE}

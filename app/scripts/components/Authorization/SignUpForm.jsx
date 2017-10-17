@@ -22,6 +22,7 @@ type Props = {
   onSubmit: (data: FormType) => void,
   isFingerprintLoaded: boolean,
   errorMessage: string,
+  isLoading: boolean,
   locale: {
     TITLE: string,
     FULL_NAME_PLACEHOLDER: string,
@@ -79,7 +80,7 @@ export default class SignUpForm extends React.PureComponent {
         email: form.email.value,
         email_confirmation: form.email_confirmation.value,
         password: form.password.value,
-        hubspotSubscribe,
+        hubspot_subscribe: hubspotSubscribe,
         fingerprint,
         socialType: '',
         socialData: {
@@ -126,7 +127,7 @@ export default class SignUpForm extends React.PureComponent {
   render() {
     const { canSubmit, form, hubspotSubscribe, showPassword } = this.state;
     const {
-      errorMessage, locale: {
+      errorMessage, isLoading, locale: {
         TITLE,
         FULL_NAME_PLACEHOLDER,
         EMAIL_PLACEHOLDER,
@@ -180,6 +181,7 @@ export default class SignUpForm extends React.PureComponent {
             type="submit"
             name="sign_in"
             kind="success"
+            isLoading={isLoading}
             disabled={!canSubmit}
           >
             {BUTTON_TITLE}
