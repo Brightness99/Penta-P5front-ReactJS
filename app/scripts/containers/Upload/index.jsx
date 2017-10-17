@@ -74,7 +74,7 @@ export class Upload extends React.Component {
     const { uploadInfo } = this.props;
     const globalFlags = uploadInfo.globalFlags;
 
-     switch (globalFlags.upload_type) {
+    switch (globalFlags.upload_type) {
       case 'canvas':
         return <CanvasSchema />;
       case 'sku_scene':

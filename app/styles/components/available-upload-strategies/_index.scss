@@ -10,7 +10,10 @@
   flex-direction : column;
   .strategies {
     display         : flex;
-    flex-direction  : row;
+    flex-direction  : column;
     justify-content : space-between;
+    @include lg{
+      flex-direction : row;
+    }
   }
 }

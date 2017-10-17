@@ -2,15 +2,21 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  width: 6.5rem;
+  width: 2.5rem;
+  @include lg {
+    width: 6.5rem;
+  }
   span {
     color: $color-lightGray;
     font-family: $font-family-open-sans;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     font-style: oblique;
     font-weight: 700;
     margin-top: 0.5rem;
     position: absolute;
+    @include lg {
+      font-size: 0.9rem;
+    }
   }
 }
 
