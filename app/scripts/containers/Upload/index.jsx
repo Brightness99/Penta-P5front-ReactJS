@@ -72,6 +72,7 @@ export class Upload extends React.Component {
 
   renderUploadTypeSchema = () => {
     const { uploadInfo } = this.props;
+    const { selectedStrategy } = this.state;
     const globalFlags = uploadInfo.globalFlags;
 
     switch (globalFlags.upload_type) {
@@ -80,7 +81,12 @@ export class Upload extends React.Component {
       case 'sku_scene':
         return <SkuSceneSchema />;
       default:
-        return <NormalUploadType handleUploadFile={this.handleUploadFile} />;
+        return (
+          <NormalUploadType
+            uploadTwoFiles={selectedStrategy === 4}
+            multipleFiles={selectedStrategy === 5}
+            handleUploadFile={this.handleUploadFile}
+          />);
     }
   };
 

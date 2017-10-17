@@ -37,7 +37,6 @@ export default class UploadFile extends React.Component {
 
   render() {
     return (
-      <section>
         <Dropzone className="upload-file-container" onDrop={this.onDrop}>
           <section className="icons">
             <FileFormatIcon title="AI" />
@@ -49,7 +48,6 @@ export default class UploadFile extends React.Component {
           <p>Arraste um arquivo até aqui para enviar ou</p>
           <button>Procurar aquivo</button>
         </Dropzone>
-      </section>
     );
   }
 }
