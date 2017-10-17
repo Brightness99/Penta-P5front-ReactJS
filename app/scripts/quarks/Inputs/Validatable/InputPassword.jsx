@@ -9,6 +9,14 @@ type Props = {
   placeholder: string,
   showLabel: boolean,
   showPassword: boolean,
+  isOldRulesForPassword: boolean, /*
+  Information about it provided @liayonekura
+  Old rules only for old users.
+  Old rule: didn't have any
+  New rule:
+   For new registers:
+   · A minimum password length of at least seven characters
+   · Contain both numeric and alphabetic characters */
   required: boolean,
   equalsTo: any,
   onClick?: () => {},
@@ -69,7 +77,8 @@ export default class InputPassword extends React.Component {
   };
 
   render() {
-    const pattern = /^([a-zA-Z0-9_-]){6,99}$/;
+    const { isOldRulesForPassword } = this.props;
+    const pattern = !isOldRulesForPassword && /^([a-zA-Z0-9_-]){7,99}$/;
     const elementProps = {
       ...this.props,
       type: this.getInputType(),

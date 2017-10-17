@@ -15,6 +15,9 @@ import { isMobile } from 'utils';
 import Modal from 'components/Modal';
 
 type Props = {
+  signInProgress: boolean,
+  signUpProgress: boolean,
+  socialSignUpProgress: boolean,
   submitSignIn: (data) => void,
   submitSignUp: (data: any) => void,
   socialSignIn: (data) => void,
@@ -146,13 +149,17 @@ export class Authentication extends React.Component {
       facebookEmailNotFound,
       facebookSocialInfo,
     } = this.state;
-    const { signUpErrorMessage, locale: { signup_block, signup_social_block } } = this.props;
+    const {
+      signUpErrorMessage, signUpProgress, socialSignUpProgress,
+      locale: { signup_block, signup_social_block },
+    } = this.props;
 
     if (facebookEmailNotFound) {
       return (
         <SocialSignUpForm
           locale={signup_social_block}
           name={facebookSocialInfo.first_name}
+          isLoading={socialSignUpProgress}
           onSubmit={this.facebookSignUp}
         />);
     }
@@ -161,6 +168,7 @@ export class Authentication extends React.Component {
       <SignUpForm
         locale={signup_block}
         onSubmit={this.signUp}
+        isLoading={signUpProgress}
         isFingerprintLoaded={isFingerprintLoaded}
         errorMessage={signUpErrorMessage}
       />);
@@ -178,12 +186,13 @@ export class Authentication extends React.Component {
   };
 
   renderSignIn = () => {
-    const { signInErrorMessage, locale: { signin_block } } = this.props;
+    const { signInErrorMessage, locale: { signin_block }, signInProgress } = this.props;
     const { isFingerprintLoaded } = this.state;
 
     return (<SignInForm
       locale={signin_block}
       onSubmit={this.signIn}
+      isLoading={signInProgress}
       isFingerprintLoaded={isFingerprintLoaded}
       errorMessage={signInErrorMessage}
     />);
@@ -274,6 +283,9 @@ export class Authentication extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  signInProgress: state.user.authentication.isRunning,
+  signUpProgress: state.user.registration.isRunning,
+  socialSignUpProgress: state.user.socialRegistration.isRunning,
   socialLoginSettings: state.socialLoginSettings,
   isSocialUserNotFound: state.user.socialAuthentication.userNotFound,
   signInErrorMessage: state.user.authentication.message,
