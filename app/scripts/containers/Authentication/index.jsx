@@ -194,8 +194,6 @@ export class Authentication extends React.Component {
   };
 
   renderSignIn = () => {
-    const { screenSize } = this.props;
-    const isMobileLayout = isMobile(screenSize);
     const { signInErrorMessage, locale: { signin_block }, signInProgress } = this.props;
     const { isFingerprintLoaded } = this.state;
 
@@ -262,6 +260,8 @@ export class Authentication extends React.Component {
               {this.renderSignIn()}
             </section>
             <section>
+              {this.renderSocialBlock()}
+              {this.renderTitleBetweenBlocks()}
               {this.renderSignUpForm()}
             </section>
           </TabBody>
