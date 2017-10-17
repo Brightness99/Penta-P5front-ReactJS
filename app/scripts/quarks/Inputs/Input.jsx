@@ -36,6 +36,15 @@ export default class Input extends React.Component {
 
   static state: State;
 
+  componentWillReceiveProps(nextProps) {
+    const { value } = nextProps;
+    if (value !== this.props.value) {
+      this.setState({
+        value,
+      });
+    }
+  }
+
   handleClick = (ev) => {
     const { onClick } = this.props;
 
