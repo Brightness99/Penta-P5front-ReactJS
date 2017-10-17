@@ -1,0 +1,172 @@
+.qrk-title-benefits-cloud {
+  font-family: $font-family-nunito-light;
+  font-size: $font-size-xl;
+  font-weight: 300;
+  text-align: center;
+}
+.org-benefits-cloud {
+  background-color: $color-white;
+  padding: 2rem 0;
+  @include lg {
+    padding: 4rem 0;
+  }
+  .mol-tables-benefits-cloud{
+    display: flex;
+    margin-top: 4rem;
+    .atm-table-benefits-cloud {
+      flex: 1;
+      &.table-benefits {
+        border: 0.1rem solid $color-hrLightGray;
+        border-radius: 0.3rem;
+        flex: 2;
+      }
+      .qrk-title-table-benefits {
+        background-color: #f9f9f9;
+        margin-bottom: 0;
+        padding: 3rem 0;
+        text-align: center;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.qrk-title-tradicional {
+          font-family: $font-family-open-sans-semibold;
+          font-size: $font-size-base;
+          text-align: center;
+        }
+        &.qrk-title-icons {
+          background-color: $color-white;
+          svg {
+            width: 3.7rem;
+          }
+        }
+      }
+      .qrk-list-benefits {
+        color: $color-lightGray;
+        font-family: $font-family-open-sans-light;
+        font-size: $font-size-base;
+        margin-bottom: 0;
+        &.list-tradicional {
+          li {
+            svg {
+              fill: $color-red;
+            }
+          }
+        }
+        &.list-cloud {
+          li {
+            svg {
+              fill: $color-green;
+            }
+          }
+        }
+        &.list-icons-benefits {
+          li {
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            svg {
+              height: 4rem;
+              margin: 0;
+              width: 5.9rem;
+            }
+            &:nth-of-type(2n) {
+              background-color: $color-white;
+            }
+            .qrk-legend-icons {
+              color: $color-almostBlack;
+              font-family: $font-family-open-sans-regular;
+              font-size: $font-size-xs;
+              font-weight: 400;
+              margin-top: 1rem;
+              text-transform: uppercase;
+              flex: none;
+              margin-bottom: 0;
+            }
+          }
+        }
+        li {
+          display: flex;
+          justify-content: space-between;
+          padding: 2rem;
+          //height: 130px;
+          height: 100px;
+          &:nth-of-type(2n) {
+            background-color: #f9f9f9;
+          }
+          svg {
+            margin: 0.8rem 1rem 0 0;
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+          p {
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.org-benefits-cloud-mobile {
+  background-color: $color-white;
+  padding: 2rem 0;
+  .mol-list-tab {
+    align-items: center;
+    color: $color-lightGray;
+    display: inline-flex;
+    font-size: $font-size-xs;
+    justify-content: space-around;
+    margin-top: 2rem;
+    width: 100%;
+  }
+  .mol-cloud-mobile {
+    .atm-cloud-mobile {
+      .qrk-cloud-mobile {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem 1rem;
+        svg {
+          height: 1.2rem;
+          width: 1.2rem;
+        }
+        .qrk-atm-icon-text {
+          align-items: center;
+          display: flex;
+          text-transform: uppercase;
+          svg {
+            height: 4rem;
+            margin-right: 1rem;
+            width: 4rem;
+          }
+        }
+        .qrk-atm-text {
+          align-items: flex-start;
+          display: flex;
+          justify-content: center;
+          margin-top: 2rem;
+          svg {
+            height: 3rem;
+            margin-right: 1rem;
+            width: 3rem;
+          }
+          p {
+            color: $color-gunmetal;
+            font-family: $font-family-open-sans-light;
+            margin-bottom: 0;
+          }
+          &.check {
+            svg {
+              fill: $color-green;
+            }
+          }
+        }
+        &:nth-of-type(2n) {
+          background-color: $color-light-grey;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+.org-content-alphabet-list {
+  margin: 1rem 0;
+  .title-content-list {
+    color: $color-printi-blue;
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-xxxl;
+    margin-bottom: 0;
+  }
+  .mol-content-list {
+    border-top: 0.1rem solid $color-hrLightGray;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .atm-list-link {
+      font-family: $font-family-open-sans-light;
+      font-size: $font-size-base;
+      width: 100%;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+        margin: 1rem 0;
+      }
+      &:first-of-type {
+        margin-top: 1rem;
+      }
+      li {
+        @include lg {
+          width: calc(100%/4);
+        }
+        &:before {
+          border-bottom: 0.5rem solid transparent;
+          border-left: 0.5rem solid $color-black;
+          border-top: 0.5rem solid transparent;
+          content: "";
+          display: inline-block;
+          height: 0;
+          margin-right: 1rem;
+          vertical-align: middle;
+          width: 0;
+        }
+        a {
+          color: $color-black;
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Newsletter from 'components/Newsletter';
 import Logo from './Logo';
 import Social from './Social';
@@ -11,24 +11,24 @@ import Disclaimer from './Disclaimer';
 import Badges from './Badges';
 import Infos from './Infos';
 
-export class Footer extends React.Component {
-  static defaultProps = {
-    screenSize: 'xs',
-  };
+type Props = {
+  locale: LocaleFooter,
+  screenSize: string,
+};
 
-  props: {
-    locale: LocaleFooter,
-    screenSize: string,
-  };
+export class Footer extends React.Component {
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  static props: Props;
 
   renderMobile = () => {
-    const { locale: { RIGHTS_RESERVED, INFOS, SEE_ALL_LINKS, links }, screenSize } = this.props;
+    const { locale: { RIGHTS_RESERVED, INFOS, VIEW_ALL_LINKS, links }, locale, screenSize } = this.props;
 
     return (
       <footer className="app__footer">
         <Newsletter parent={'footer'} />
-        <Social />
-        <Links links={links} screenSize={screenSize} locale={{ SEE_ALL_LINKS }} />
+        <Social locale={locale} />
+        <Links links={links} screenSize={screenSize} locale={{ VIEW_ALL_LINKS }} />
         <Logo className="app__footer__logo" />
         <Disclaimer locale={{ RIGHTS_RESERVED }} />
         <Infos locale={{ INFOS }} />
@@ -41,11 +41,9 @@ export class Footer extends React.Component {
       locale: {
         RIGHTS_RESERVED,
         INFOS,
-        certificates,
-        support,
-        payment_methods,
         links,
       },
+      locale,
       screenSize,
     } = this.props;
     return (
@@ -55,13 +53,13 @@ export class Footer extends React.Component {
         <div className="app__footer__data container">
           <div className="app__footer__data-left">
             <Logo className="app__footer__logo" />
-            <Social minified />
+            <Social minified locale={locale} />
             <Disclaimer locale={{ RIGHTS_RESERVED }} />
           </div>
           <Links links={links} screenSize={screenSize} />
         </div>
         <hr />
-        <Badges locale={{ certificates, payment_methods, support }} />
+        <Badges locale={locale} />
         <Infos locale={{ INFOS }} />
       </footer>
     );
@@ -69,15 +67,14 @@ export class Footer extends React.Component {
 
   render() {
     const { screenSize } = this.props;
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 
-function mapStateToProps(state, ownProps: {} = {}): {} {
+function mapStateToProps(state: {}): {} {
   return {
-    ...ownProps,
+    screenSize: state.app.screenSize,
     locale: state.locale.translate.footer,
   };
 }

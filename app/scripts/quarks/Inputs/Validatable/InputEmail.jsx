@@ -6,9 +6,11 @@ import { InputRegex } from 'quarks/Inputs/Validatable';
 type Props = {
   id: string,
   name: string,
+  className: string,
   placeholder: string,
   showLabel: boolean,
   required: boolean,
+  value: string,
   equalsTo: any,
   onClick?: () => {},
   onChange?: () => {},

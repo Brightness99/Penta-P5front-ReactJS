@@ -1,0 +1,77 @@
+.container-productInformation {
+  margin-bottom: 4rem;
+
+  .atm-tab-active {
+    background-color: $color-white;
+  }
+
+  @include lg {
+    .atm-tab-active {
+      padding: 3rem 6rem;
+    }
+  }
+
+  .atm-carousel-dots {
+    bottom: 1.6rem;
+
+    @include lg {
+      bottom: -2rem;
+    }
+  }
+
+  .card-productInformation {
+    display: flex;
+    flex-direction: column;
+
+    @include lg {
+      flex-direction: row;
+    }
+
+    &-image {
+      //align-self: center;
+      display: flex;
+      flex: 0 0 auto;
+
+      img {
+        height: auto;
+        width: 100%;
+
+        @include lg {
+          width: auto;
+        }
+      }
+    }
+
+    &-text {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      @include lg {
+        padding: 0 0 0 3rem;
+      }
+      .card-productInformation-title {
+        color: $color-almostBlack;
+        font-family: $font-family-nunito-regular;
+        font-size: 2.1rem;
+        line-height: 1.43;
+
+        @include lg {
+          font-family: $font-family-nunito-light;
+          font-weight: 300;
+          font-size: $font-size-xxll;
+        }
+      }
+
+      > p {
+        color: $color-lightGray;
+        font-size: $font-size-sm;
+        line-height: 2.14;
+
+        @include lg {
+          font-family: $font-family-open-sans-light;
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+}

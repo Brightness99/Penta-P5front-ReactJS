@@ -61,8 +61,6 @@ export default class UpsellingDateModal extends React.Component {
   renderContent() {
     const { locale, isUpsellSelected, upselling } = this.props;
 
-    console.log(upselling);
-
     return [
       <div key="header" className="mol-up-sell-header">
         {locale.TITLE}

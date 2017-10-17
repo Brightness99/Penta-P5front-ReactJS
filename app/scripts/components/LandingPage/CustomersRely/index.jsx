@@ -21,9 +21,9 @@ export class CustomersRelyBlock extends React.Component {
   renderTestimonials() {
     const { locale: { testimonials } } = this.props;
 
-    return testimonials.map((item, index) => (
+    return testimonials.map((item) => (
       <div className="box-commentClient" key={`commentClient-${item.NAME}`}>
-        <p className="commentClient-text">"{index === 0 ? `${item.TEXT} ${item.TEXT}` : item.TEXT}}"</p>
+        <p className="commentClient-text">"{item.TEXT}"</p>
         <div className="commentClient-img">
           <img src={`https://d2ofpir5gh0cbr.cloudfront.net/assets${item.IMAGE}`} alt={item.name} />
           <p className="commentClient-name">{item.NAME}</p>

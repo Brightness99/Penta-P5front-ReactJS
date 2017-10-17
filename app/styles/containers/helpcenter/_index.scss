@@ -1,0 +1,266 @@
+.tpl-help-center {
+  .org-search-central {
+    margin: 2rem 0;
+    .title-search-central {
+      font-family: $font-family-nunito-light;
+      font-size: $font-size-xxl;
+      font-weight: 300;
+      letter-spacing: -0.08rem;
+      margin-bottom: 0;
+      text-transform: none;
+    }
+    .subtitle-search-central {
+      font-family: $font-family-open-sans-light;
+    }
+    .mol-links-central {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      @include lg  {
+        flex-direction: row;
+      }
+      .btn-default {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 1rem;
+        height: 5rem;
+        @include lg {
+          &:nth-of-type(2n) {
+            margin: 0 4rem;
+          }
+        }
+      }
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: $color-printi-blue;
+        margin-right: 0.5rem;
+      }
+    }
+    .mol-search-central {
+      display: flex;
+      margin: 2.2rem 0;
+      .app__qrk__input-container  {
+        flex: 2;
+        @include lg {
+          flex: 4;
+        }
+      }
+      .app__qrk__button  {
+        flex: 1;
+        height: 5rem;
+        background-color: $color-printi-blue;
+      }
+    }
+  }
+
+  .org-itens-helpcenter {
+    background-color: $color-white;
+    border: 0.1rem solid $color-silver;
+    border-radius: 0.3rem;
+    display: flex;
+    font-family: $font-family-open-sans-bold;
+    margin: 4rem 0;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    //tabnavigation
+    .org-tabs {
+      display: flex;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      .mol-tabs-header {
+        flex: 1;
+        margin: 0;
+        .atm-tab-nav {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          &.atm-tab-nav--active {
+            border: transparent;
+          }
+        }
+      }
+      .atm-tab-active {
+        flex: 2;
+      }
+    }
+    .mol-sidebar-helpcenter {
+      // flex: 1;
+      @include lg {
+        padding-right: 2rem;
+      }
+      .atm-list-itens {
+        li {
+          padding: 2rem;
+          border-bottom: 0.1rem solid $color-silver;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: left;
+          @include lg {
+            &:last-of-type {
+              padding-bottom: 1rem;
+              border-bottom: 0 transparent;
+            }
+          }
+          svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            fill: $color-printi-blue;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+    .mol-content-helpcenter {
+      color: $color-black;
+      // flex: 2;
+      padding: 2rem;
+      .atm-content-item {
+        .title-item {
+          font-size: $font-size-lg;
+          text-transform: uppercase;
+        }
+        .org-accordion {
+          font-family: $font-family-open-sans;
+          font-size: $font-size-sm;
+          .mol-accordion-item{
+            .atm-accordion-title{
+              display: flex;
+              font-weight: 300;
+              flex-direction: row-reverse;
+              margin-bottom: 1rem;
+              margin-bottom: 0;
+              text-align: start;
+            } 
+          }
+        }
+      }
+    }
+  }
+
+  .org-relationship-central {
+    margin: 4rem 0;
+    .title-relationship-central {
+      color: $color-black;
+      font-family: $font-family-open-sans-bold;
+      font-size: $font-size-lg;
+      font-weight: 300;
+      text-transform: uppercase;
+      padding-bottom: 2rem;
+      &:last-of-type {
+        margin-top: 4rem;
+      }
+    }
+    .mol-relationship-central {
+      .atm-link-central {
+        display: flex;
+        flex-direction: column;
+        @include lg {
+          flex-direction: row;
+        }
+        .qrk-link-central {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 2rem;
+          @include lg {
+            margin-bottom: 0;
+            &:nth-of-type(2n) {
+              margin: 0 2rem;
+            }
+          }
+          &.service-corporate {
+            flex: inherit;
+          }
+          .bsn-links-tel {
+            display: flex;
+            flex-direction: column;
+            @include lg {
+              flex-direction: row;
+            }
+            .btn-default {
+              &:first-of-type {
+                margin-right: 2rem;
+                margin-bottom: 1rem;
+                @include lg {
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+          .bsn-icon-title {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            margin-bottom: 1rem;
+            p {
+              font-size: $font-size-h4;
+              margin-bottom: 0;
+            }
+            svg {
+              width: 3.5rem;
+              height: 2.5rem;
+              fill: $color-printi-blue;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .org-videos-printi {
+    margin: 4rem 0;
+    .mol-titles-videos-printi {
+      display: flex;
+      .title-our-videos {
+        flex: 2;
+      }
+      .subtitle-our-videos {
+        flex: 1;
+      }
+      .title-our-videos, .subtitle-our-videos {
+        font-family: $font-family-open-sans-bold;
+        font-size: $font-size-lg;
+        text-transform: uppercase;
+      }
+    }
+    .mol-videos-printi {
+      display: flex;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+      .atm-video {
+        flex: 1;
+        iframe {
+          width: 100%;
+        }
+        &:first-of-type {
+          flex: 2;
+          @include lg {
+            margin-right: 2rem;
+          }
+        }
+        &:last-of-type {
+          background: $color-white;
+          border-radius: 0.3rem;
+          height: 315px;
+          padding: 2rem 2rem;
+          overflow: auto;
+        }
+        .qrk-videos {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+}

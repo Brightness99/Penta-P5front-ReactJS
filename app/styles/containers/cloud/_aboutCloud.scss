@@ -1,0 +1,95 @@
+.org-about-cloud {
+  .org-about-cloud-mobile { 
+    margin: 2rem 0;
+    .mol-texts-about-cloud {
+      flex-direction: column-reverse;
+      @include lg {
+        flex-direction: row;
+      }
+      .atm-text-cloud {
+        margin-left: 0;
+        .qrk-title-about-cloud {
+          margin-top: 2rem;
+        }
+        &.img-note-cloud {
+          img {
+            height: auto;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .mol-texts-about-cloud {
+    display: flex;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .atm-text-cloud {
+      flex: 1;
+      margin-left: 9rem;
+      @include lg {
+        margin-left: 6rem;
+      }
+      @include xl {
+        margin-left: 8rem;
+      }
+      @include xxl {
+        margin-left: 10rem;
+      }
+      @include xxxl {
+        margin-left: 25rem;
+      }
+      &:first-of-type {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+      }
+      &:last-of-type {
+        display: flex;
+        flex: 2;
+        justify-content: flex-end;
+        margin-left: 0;
+        align-items: center;
+      }
+      &.img-note-cloud {
+        img {
+          height: 84%;
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+.qrk-title-about-cloud {
+  font-family: $font-family-nunito-light;
+  font-size: $font-size-h2;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  @include lg {
+    font-size: $font-size-xxx;
+  }
+}
+.qrk-subtitle-about-cloud {
+  font-family: $font-family-nunito-regular;
+  font-size: $font-size-lg;
+  font-weight: 400;
+  margin-top: 2rem;
+  text-align: center;
+  @include lg {
+    margin-top: 3rem;
+    text-align: left;
+  }
+}
+.qrk-p-about-cloud {
+  color: $color-lightGray;
+  font-family: $font-family-open-sans-light;
+  font-size: $font-size-xs;
+  @include lg {
+    font-size: $font-size-base;
+  }
+}

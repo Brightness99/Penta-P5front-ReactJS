@@ -1,0 +1,13 @@
+.additionalInformation-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  .additionalInformation-halfContainer {
+    display: flex;
+    width: 49%;
+    .additionalInformation-iconBox {
+
+    }
+  }
+}

@@ -1,5 +1,9 @@
 .container-customersRely {
-  margin: 0 0 5rem;
+  margin: 4rem 0 6.5rem;
+
+  @include lg {
+    margin: 4rem 0;
+  }
 
   .box-images-logo {
     border-radius: 6px;
@@ -67,9 +71,14 @@
         }
 
         .commentClient-name{
+          font-family: $font-family-open-sans-semibold;
+          font-size: $font-size-sm;
+          font-weight: 600;
           padding-top: 1.6rem;
         }
         .commentClient-profession{
+          color: $color-almostBlack;
+          font-family: $font-family-open-sans-regular;
           font-size: $font-size-xs;
           padding-top: 0.4rem;
         }

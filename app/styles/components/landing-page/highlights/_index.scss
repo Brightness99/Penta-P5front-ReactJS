@@ -1,5 +1,5 @@
 .container-highlight {
-  margin-bottom: 7.5rem;
+  margin-bottom: 6.5rem;
 
   .boxes-highlight {
     margin: 0 -1rem;
@@ -25,7 +25,7 @@
         flex-direction: column;
         height: 100%;
         justify-content: flex-end;
-        padding: 1rem;
+        padding: 2rem;
         position: absolute;
         transition: 0.3s ease;
         width: calc(100% - 2rem);
@@ -39,8 +39,10 @@
           font-size: $font-size-il;
           font-weight: 400;
           line-height: 3rem;
-          margin-bottom: 0;
-          text-transform: uppercase;
+          margin-bottom: 1.8rem;
+          @include lg {
+            width: 80%;
+          }
         }
 
         p {
@@ -52,5 +54,13 @@
         }
       }
     }
+  }
+
+  .atm-carousel-arrow--prev {
+    left: -5rem;
+  }
+
+  .atm-carousel-arrow--next {
+    right: -5rem;
   }
 }
