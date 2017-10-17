@@ -106,7 +106,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/cloud"
-          render={(props) => <Cloud {...props} screenSize={screenSize} />}
+          render={(props) => <Cloud {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/programa-de-fidelidade"
