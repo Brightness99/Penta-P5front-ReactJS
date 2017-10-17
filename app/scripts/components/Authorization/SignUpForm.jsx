@@ -10,6 +10,7 @@ import IconToggleButton from 'components/IconToggleButton';
 import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
 import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
+import TermsAndPolicyBlock from './TermsAndPolicyBlock';
 
 type FormType = {
   first_name: { valid: boolean, value: string },
@@ -23,6 +24,7 @@ type Props = {
   isFingerprintLoaded: boolean,
   errorMessage: string,
   isLoading: boolean,
+  isMobile: boolean,
   locale: {
     TITLE: string,
     FULL_NAME_PLACEHOLDER: string,
@@ -135,6 +137,7 @@ export default class SignUpForm extends React.PureComponent {
         PASSWORD_PLACEHOLDER,
         BUTTON_TITLE,
       },
+      isMobile,
     } = this.props;
 
     return (
@@ -196,6 +199,7 @@ export default class SignUpForm extends React.PureComponent {
             </label>
           </section>
         </form>
+        { !isMobile && <TermsAndPolicyBlock />}
       </div>
     );
   }
