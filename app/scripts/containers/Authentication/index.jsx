@@ -37,6 +37,7 @@ type States = {
   facebookSocialInfo: {},
   googleSocialInfo: {},
   isFingerprintLoaded: boolean,
+  currentMobileTab: number,
 }
 
 export class Authentication extends React.Component {
@@ -49,6 +50,7 @@ export class Authentication extends React.Component {
       facebookEmailNotFound: false,
       facebookSocialInfo: null,
       isFingerprintLoaded: false,
+      currentMobileTab: 0,
     };
   }
 
@@ -90,7 +92,9 @@ export class Authentication extends React.Component {
 
   socialUserNotFound = () => {
     const { facebookSocialInfo, googleSocialInfo } = this.state;
-
+    this.setState({
+      currentMobileTab: 1,
+    });
     if (facebookSocialInfo) {
       this.facebookSignUpConfiguration(facebookSocialInfo);
     }
@@ -235,34 +239,33 @@ export class Authentication extends React.Component {
     </section>
   );
 
-  renderMobile = (signIn, signUp) => (
-    <Tabs>
-      <TabHeader>
-        <TabNav key="sign-in">{signIn}</TabNav>
-        <TabNav key="sign-up">{signUp}</TabNav>
-      </TabHeader>
-      <TabBody>
-        <section>
-          {this.renderSocialBlock()}
-          {this.renderTitleBetweenBlocks()}
-          {this.renderSignIn()}
-        </section>
-        <section>
-          {this.renderSignUpForm()}
-        </section>
-      </TabBody>
-    </Tabs>);
+  renderMobile = () => {
+    const { locale: { TITLE_MOBILE_SIGN_UP, TITLE_MOBILE_SIGN_IN } } = this.props;
+    const { currentMobileTab } = this.state;
+    return (
+      <Tabs defaultTab={currentMobileTab}>
+        <TabHeader>
+          <TabNav key="sign-in">{TITLE_MOBILE_SIGN_IN}</TabNav>
+          <TabNav key="sign-up">{TITLE_MOBILE_SIGN_UP}</TabNav>
+        </TabHeader>
+        <TabBody>
+          <section>
+            {this.renderSocialBlock()}
+            {this.renderTitleBetweenBlocks()}
+            {this.renderSignIn()}
+          </section>
+          <section>
+            {this.renderSignUpForm()}
+          </section>
+        </TabBody>
+      </Tabs>);
+  };
 
   renderContent = () => {
-    const {
-      screenSize, locale: {
-        TITLE_MOBILE_SIGN_UP,
-        TITLE_MOBILE_SIGN_IN,
-      },
-    } = this.props;
+    const { screenSize } = this.props;
     const isMobileLayout = isMobile(screenSize);
 
-    if (isMobileLayout) return this.renderMobile(TITLE_MOBILE_SIGN_IN, TITLE_MOBILE_SIGN_UP);
+    if (isMobileLayout) return this.renderMobile();
     return this.renderDesktop();
   };
 
