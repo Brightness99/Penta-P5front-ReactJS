@@ -1,0 +1,19 @@
+.upload__normalSchema_uploaderBox {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  .uploaderBox-title {
+    font-family: $font-family-nunito-regular;
+    font-size: 1.8rem;
+    letter-spacing: -0.04rem;
+    text-align: left;
+    color: $color-black;
+  }
+  .uploaderBox-box {
+    display: flex;
+    width: 100%;
+    height: 19rem;
+    border-radius: 0.3rem;
+    border: dashed 0.1rem $color-gray;
+  }
+}

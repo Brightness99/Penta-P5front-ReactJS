@@ -267,7 +267,21 @@
       },
       "product_landing_page": {
         "common": {
-          "CONFIGURE_PRODUCT": "CONFIGURE AQUI"
+          "GET_STARTED": "Veja mais",
+          "CONFIGURE_PRODUCT": "CONFIGURE AQUI",
+          "UNAVAILABLE_PRODUCT": "Produto indisponível",
+          "UNAVAILABLE_TITLE": "Avise-me quando o produto estiver disponível",
+          "EMAIl": "Digite seu e-mail",
+          "SEND": "Enviar"
+        },
+        "description": {
+          "STARTING_FROM": "A partir de",
+          "NEXT_PAGE": "Na próxima tela você pode configurar as especificações do seu produto e conferir o preço"
+        },
+        "informations": {
+          "TITLE": "Informações do produto",
+          "HINTS": "Dicas",
+          "HOW_TO_USE": "Como utilizar"
         },
         "advantages": {
           "TITLE": "VANTAGENS",
@@ -300,6 +314,11 @@
         "print": {
           "TITLE": "Imprima já o seu %s pelo melhor preço",
           "QUESTIONS": "Ainda tem dúvidas? Ligue já (11) 4130-3799"
+        },
+        "reviews": {
+          "TITLE": "PRODUCT REVIEWS",
+          "SUB_TITLE": "Média de <span itemprop=\"ratingValue\">%s</span> estrelas num total de <span itemprop=\"reviewCount\">%s</span> opiniões",
+          "SUBMIT_REVIEW": "Submit review"
         }
       },
       "product_settings": {

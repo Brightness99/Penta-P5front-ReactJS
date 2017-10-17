@@ -1,4 +1,7 @@
 .container-homePage {
+  @include lg {
+    margin-top: 3rem;
+  }
   .carousel {
     margin-top: 3rem;
     overflow: visible;
@@ -19,7 +22,7 @@
     button {
       fill: $color-lightGray;
       &:hover {
-        fill: white;
+        fill: $color-white;
       }
     }
   }
@@ -276,42 +279,6 @@
   }
 }
 
-/*#tabs {
-  list-style-type: none;
-  margin: 30px 0 0 0;
-  padding: 0 0 0.3em 0;
-  li {
-    display: inline;
-    a {
-      color: #42454a;
-      background-color: #dedbde;
-      border: 1px solid #c9c3ba;
-      border-bottom: none;
-      padding: 0.3em;
-      text-decoration: none;
-      &:hover{
-         background-color: #f1f0ee;
-      }
-      &.selected {
-        color: #000;
-        background-color: #f1f0ee;
-        font-weight: bold;
-        padding: 0.7em 0.3em 0.38em 0.3em;
-      }
-    }
-  }
-}*/
-
-
-/*.tabContent {
-  border: 1px solid #c9c3ba;
-  padding: 0.5em;
-  background-color: #f1f0ee;
-  &.hide {
-    display: none;
-  }
-}*/
-
 .tabNavigation {
   margin: 3rem 0;
   .list-item {
@@ -341,5 +308,25 @@
     @include lg {
       max-width: calc(100% / 3);
     }
+  }
+}
+
+.org-search-page {
+  margin-top: 3rem;
+  @include lg  {
+    margin-top: 2rem;
+  }
+  .gsc-input-box {
+    height: 34px;
+  }
+  .cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2 {
+    width: initial!important;
+    height: initial!important;
+    padding: 9px 34px;
+    margin-top: 3px;
+  }
+  .gsc-control-cse {
+    //border-color: transparent;
+    //background-color: transparent;
   }
 }

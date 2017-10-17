@@ -1,0 +1,22 @@
+$font-size: 26px;
+$line-height: 1.4;
+$lines-to-show: 3;
+
+.tpl-printi-press {
+  margin: 2rem 0;
+  @include lg {
+    margin: 0;
+  }
+  .title-printi-press {
+    color: $color-almostBlack;
+    font-family: $font-family-open-sans-bold;
+    font-size: $font-size-lg;
+    text-transform: uppercase;
+  }
+  .org-container-btn {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+}

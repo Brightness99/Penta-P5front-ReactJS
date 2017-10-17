@@ -1,6 +1,7 @@
 // Stores
-declare type AppStore = {
+declare type AppStoreType = {
   rehydrated: boolean,
+  screenSize: string,
 };
 
 declare type RouterStore = {

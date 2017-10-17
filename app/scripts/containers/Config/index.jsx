@@ -20,9 +20,9 @@ import MatrixBlock from './Matrix';
 import Warning from './Warning';
 
 type Props = {
-  app: AppStore,
+  app: AppStoreType,
   dispatch: () => {},
-  locale: {},
+  locale: ProductSettingsLocaleType,
   products: ProductStore,
   productSettings: SettingsStore,
   router: RouterStore,
@@ -134,39 +134,6 @@ export class Config extends React.Component {
     }));
   };
 
-  renderSourceBlock() {
-    const {
-      app: {
-        screenSize,
-      },
-      productSettings: {
-        source,
-        finalProduct: {
-          id,
-        },
-        config: {
-          isFulfilled,
-        },
-      },
-      locale,
-      dispatch,
-    } = this.props;
-
-    const configLocale = locale.translate.page.product_settings;
-
-    return (
-      <SourcesBlock
-        locale={configLocale.creation}
-        screenSize={screenSize}
-        order="1"
-        isComplete={isFulfilled.source}
-        finalProductId={id}
-        dispatch={dispatch}
-        source={source}
-      />
-    );
-  }
-
   renderOptionsBlock() {
     const {
       app: {
@@ -275,6 +242,10 @@ export class Config extends React.Component {
         screenSize,
       },
       productSettings: {
+        source,
+        finalProduct: {
+          id,
+        },
         product,
         config: {
           showSteps,
@@ -288,8 +259,6 @@ export class Config extends React.Component {
       dispatch,
       locale,
     } = this.props;
-
-    const configLocale = locale.translate.page.product_settings;
 
     const breadcrumb = [
       {
@@ -306,40 +275,32 @@ export class Config extends React.Component {
     ];
 
     return (
-      <div className="app__config container">
+      <div className="app__config">
         <Breadcrumbs links={breadcrumb} />
-        <PageTitle>{`${configLocale.TITLE}: ${product.title}`}</PageTitle>
-        <div className="app__config__content">
-          <main>
-            {showSteps.source && this.renderSourceBlock()}
-            {showSteps.options && isFulfilled.source && this.renderOptionsBlock()}
-            {showSteps.matrix && isFulfilled.options && this.renderMatrixBlock()}
-            <Warning templates={templates} dispatch={dispatch} product={product} />
-            <div className="app__config__submit-button">
-              <RoundedConfirmationButton>
-                CONTINUAR
-              </RoundedConfirmationButton>
-            </div>
-          </main>
-          <SideBar
-            screenSize={screenSize}
-            selection={selection}
-            optionSectionInfo={optionSectionInfo}
-            calculator={calculator}
-          >
-            {this.renderSummary()}
-            {!isMobile(screenSize) && <div className="app__config__submit-button">
-              <RoundedConfirmationButton>
-                CONTINUAR
-              </RoundedConfirmationButton>
-            </div>}
-          </SideBar>
+        <div className="container">
+          <PageTitle>{`${locale.TITLE}: ${product.title}`}</PageTitle>
+          <div className="app__config__content">
+            <main>
+              {showSteps.source &&
+                <SourcesBlock
+                  locale={locale.source}
+                  screenSize={screenSize}
+                  order="1"
+                  isComplete={isFulfilled.source}
+                  finalProductId={id}
+                  dispatch={dispatch}
+                  source={source}
+                />
+              }
+            </main>
+          </div>
         </div>
       </div>
     );
   }
 
   render() {
+    console.log('settings props', this.props);
     const { productSettings: { isRunning, isLoaded } } = this.props;
 
     if (isRunning || !isLoaded) {
@@ -352,7 +313,10 @@ export class Config extends React.Component {
 
 /* istanbul ignore next */
 function mapStateToProps(state) {
-  return settingsSelector(state);
+  return {
+    ...settingsSelector(state),
+    locale: state.locale.translate.page.product_settings,
+  };
 }
 
 /* istanbul ignore next */

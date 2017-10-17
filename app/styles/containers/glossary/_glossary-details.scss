@@ -1,0 +1,29 @@
+.org-content-text {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 4rem 0;
+  color: $color-lightGray;
+  font-family: $font-family-open-sans-light;
+  font-size: $font-size-sm;
+  @include lg {
+    margin: 2rem 0 4rem 0rem;
+    padding: 0 14rem;
+    font-size: $font-size-lg;
+  }
+  .title-texts {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-h2;
+    font-weight: 300;
+    text-transform: none;
+    @include lg {
+      font-size: $font-size-xxx;
+    }
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 3rem;
+  }
+}

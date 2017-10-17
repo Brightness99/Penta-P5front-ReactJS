@@ -125,7 +125,7 @@ export function isMobile(screenSize: string): boolean {
 
 /**
  * Simple object check.
- * @param item
+ * @param {Object} item
  * @returns {boolean}
  */
 export function isObject(item) {
@@ -134,8 +134,9 @@ export function isObject(item) {
 
 /**
  * Deep merge two objects.
- * @param target
- * @param sources
+ * @param {Object} target
+ * @param {Object} sources
+ * @returns {Object}
  */
 export function mergeDeep(target, ...sources) {
   if (!sources.length) return target;

@@ -14,6 +14,7 @@ type Props = {
   name: string,
   placeholder: string,
   required: boolean,
+  value: string,
   onClick?: () => {},
   onChange?: () => {},
   onFocus?: () => {},
@@ -31,7 +32,7 @@ export default class Select extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: props.value || '',
       valid: false,
       dirty: false,
       isFocused: false,

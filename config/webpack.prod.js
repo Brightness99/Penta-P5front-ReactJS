@@ -1,19 +1,19 @@
 /*eslint-disable no-var, func-names, prefer-arrow-callback, object-shorthand, no-console, prefer-template, vars-on-top */
 /*eslint-disable no-var, func-names, prefer-arrow-callback, object-shorthand, no-console, prefer-template, vars-on-top */
-var path = require('path');
-var webpack = require('webpack');
-var merge = require('webpack-merge');
-var ExtractText = require('extract-text-webpack-plugin');
-var CleanPlugin = require('clean-webpack-plugin');
-var HtmlPlugin = require('html-webpack-plugin');
-var CopyPlugin = require('copy-webpack-plugin');
-var OfflinePlugin = require('offline-plugin');
-var autoprefixer = require('autoprefixer');
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const ExtractText = require('extract-text-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
+const autoprefixer = require('autoprefixer');
 
-var webpackConfig = require('./webpack.config');
-var NPMPackage = require('./../package');
+const webpackConfig = require('./webpack.config');
+const NPMPackage = require('./../package');
 
-var config = merge.smart(webpackConfig, {
+const config = merge.smart(webpackConfig, {
   entry: {
     'scripts/app': './scripts/index.jsx',
     'scripts/modernizr': './scripts/vendor/modernizr-custom.js',
@@ -27,7 +27,7 @@ var config = merge.smart(webpackConfig, {
     rules: [
       {
         test: /\.scss$/,
-        loader: ExtractText.extract('css?sourceMap&-autoprefixer!postcss?pack=custom!sass?sourceMap'),
+        use: ExtractText.extract('css?sourceMap&-autoprefixer!postcss?pack=custom!sass?sourceMap'),
       },
     ],
   },

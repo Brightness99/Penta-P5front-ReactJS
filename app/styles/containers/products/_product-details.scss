@@ -1,0 +1,27 @@
+.container-detailsProduct{
+  margin: 0 0 4rem;
+
+  .atm__block-title {
+    padding: 0;
+  }
+
+  .detailsProduct-subtitle{
+    font-weight: lighter;
+    font-size: $font-size-il;
+    font-family: $font-family-nunito-regular;
+    margin: 0;
+    padding-bottom: 1.2rem;
+    @include lg {
+      font-size: $font-size-xl;
+    }
+  }
+  .box-detailsProduct{
+    margin: 4rem 0 0;
+    .fnt-text{
+      font-family: $font-family-open-sans;
+      font-size: $font-size-base;
+      font-weight: 400;
+      color: $color-lightGray;
+    }
+  }
+}

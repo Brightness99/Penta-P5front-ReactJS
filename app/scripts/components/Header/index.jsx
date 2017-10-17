@@ -5,6 +5,7 @@ import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
+import { userLogOut } from 'actions';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
@@ -19,6 +20,8 @@ type Props = {
   links: {},
   dispatch: () => {},
   totalCartItems: number,
+  isAuthorized: boolean,
+  config: {}
 };
 
 type State = {
@@ -103,8 +106,12 @@ export class Header extends React.Component {
     });
   };
 
+  handleLogOut=() => {
+    this.props.dispatch(userLogOut());
+  };
+
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
     const { activePane } = this.state;
 
     return (
@@ -127,11 +134,14 @@ export class Header extends React.Component {
         <Menu
           screenSize={screenSize}
           isHidden={activePane !== 'menu'}
+          categories={config.productCategories.categories}
           handleClose={this.handlePaneHide}
         />
         <MyAccount
           isHidden={activePane !== 'account'}
           handleClose={this.handlePaneHide}
+          handleLogOut={this.handleLogOut}
+          isAuthorized={isAuthorized}
           screenSize={screenSize}
         />
       </header>
@@ -139,7 +149,7 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -181,7 +191,11 @@ export class Header extends React.Component {
               <button className="atm-header-icon-button">
                 <MyAccountIcon />
               </button>
-              <MyAccount screenSize={screenSize} />
+              <MyAccount
+                screenSize={screenSize}
+                isAuthorized={isAuthorized}
+                handleLogOut={this.handleLogOut}
+              />
             </div>
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           </div>
@@ -194,6 +208,7 @@ export class Header extends React.Component {
         <Products
           screenSize={screenSize}
           isHidden={activePane !== 'products'}
+          categories={config.productCategories.categories}
           handleClose={this.handlePaneHide}
         />
       </header>

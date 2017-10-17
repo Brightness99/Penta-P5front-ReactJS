@@ -1,0 +1,11 @@
+.error-field{
+  min-height: 30px;
+  padding: 0;
+  margin-left: 0;
+  font-size: 1.3rem;
+  color: #e74c3c;
+}
+
+.error-field.hidden{
+  display: none;
+}
