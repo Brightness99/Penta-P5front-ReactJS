@@ -31,7 +31,7 @@ class CloudTools extends React.Component<Props> {
                 >
                   Solicitar Atendimento
                 </button>
-                <Link to="#">Ler mais sobre a cloud</Link>
+                <Link to="/cloud">Ler mais sobre a cloud</Link>
               </div>
             </div>
             <div className="box-cloudTools">
