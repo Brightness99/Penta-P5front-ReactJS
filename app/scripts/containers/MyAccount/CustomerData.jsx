@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { Input } from 'quarks/Inputs';
-import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
+import { InputPassword } from 'quarks/Inputs/Validatable';
 import { BoxRadio, Select } from 'atoms/Inputs';
 import { ErrorText } from 'atoms/Texts';
-import { CheckBox } from 'components/Input';
 import Loading from 'components/Loading';
 import { accountUpdate } from 'actions';
 
@@ -37,6 +36,10 @@ export class CustomerData extends React.Component {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
+  componentDidMount() {
+    this.handleBreadcrumbs();
+  }
+
   componentWillReceiveProps(nextProps) {
     const { account } = nextProps;
     if (account !== this.props.account) {
@@ -44,10 +47,6 @@ export class CustomerData extends React.Component {
         ...nextProps.account,
       });
     }
-  }
-
-  componentDidMount() {
-    this.handleBreadcrumbs();
   }
 
   static props: Props;
@@ -116,6 +115,7 @@ export class CustomerData extends React.Component {
           placeholder="Nome Completo"
           value={`${first_name} ${last_name}`}
           onChange={this.handleChangeName}
+          onEnterKeyPress={this.handleClick}
         />
         <Input
           showLabel={true}
@@ -123,6 +123,7 @@ export class CustomerData extends React.Component {
           placeholder="CPF"
           value={cpf}
           onChange={(e) => { this.setState({ cpf: e.target.value }); }}
+          onEnterKeyPress={this.handleClick}
         />
         <Input
           showLabel={true}
@@ -130,6 +131,7 @@ export class CustomerData extends React.Component {
           placeholder="Telefone"
           value={phone}
           onChange={(e) => { this.setState({ phone: e.target.value }); }}
+          onEnterKeyPress={this.handleClick}
         />
         <Select
           className="atm-checkout-input atm-checkout-input-one"
@@ -171,6 +173,7 @@ export class CustomerData extends React.Component {
           placeholder="Nome Completo"
           value={`${first_name} ${last_name}`}
           onChange={this.handleChangeName}
+          onEnterKeyPress={this.handleClick}
         />
         <Input
           showLabel={true}
@@ -178,6 +181,7 @@ export class CustomerData extends React.Component {
           placeholder="CNPJ"
           value={cnpj}
           onChange={(e) => { this.setState({ cnpj: e.target.value }); }}
+          onEnterKeyPress={this.handleClick}
         />
         <Input
           showLabel={true}
@@ -185,6 +189,7 @@ export class CustomerData extends React.Component {
           placeholder="Razão Social"
           value={company_name}
           onChange={(e) => { this.setState({ company_name: e.target.value }); }}
+          onEnterKeyPress={this.handleClick}
         />
         <Input
           showLabel={true}
@@ -192,6 +197,7 @@ export class CustomerData extends React.Component {
           placeholder="Telefone/Celular"
           value={phone}
           onChange={(e) => { this.setState({ phone: e.target.value }); }}
+          onEnterKeyPress={this.handleClick}
         />
         <Select
           className="atm-checkout-input atm-checkout-input-one"
@@ -278,6 +284,7 @@ export class CustomerData extends React.Component {
             onValidate={this.handleValidatedInput}
             value={this.state.current_password}
             onChange={(e) => { this.setState({ current_password: e.target.value }); }}
+            onEnterKeyPress={this.handleClick}
           />
           <InputPassword
             showLabel={true}
@@ -287,6 +294,7 @@ export class CustomerData extends React.Component {
             onValidate={this.handleValidatedInput}
             value={this.state.new_password}
             onChange={(e) => { this.setState({ new_password: e.target.value }); }}
+            onEnterKeyPress={this.handleClick}
           />
           <InputPassword
             showLabel={true}
@@ -296,6 +304,7 @@ export class CustomerData extends React.Component {
             onValidate={this.handleValidatedInput}
             value={this.state.new_password_repeat}
             onChange={(e) => { this.setState({ new_password_repeat: e.target.value }); }}
+            onEnterKeyPress={this.handleClick}
           />
         </form>
         {errorMessage}
