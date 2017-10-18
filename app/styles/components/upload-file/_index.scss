@@ -1,14 +1,29 @@
 .upload-file-container {
-  display         : flex;
-  flex-direction  : column;
-  justify-content : center;
-  align-items     : center;
-  border          : 1px dashed #c7c9cb;
-  margin          : 1rem;
-  border-radius   : 3px;
-  width           : 100%;
-  height          : 20rem;
-  cursor          : pointer;
+  border        : 1px dashed #c7c9cb;
+  margin        : 1rem;
+  border-radius : 3px;
+  width         : 100%;
+  height        : 20rem;
+  cursor        : pointer;
+  input[type=file] {
+    width           : 1px;
+    height          : 1px;
+    opacity         : 0;
+    overflow        : hidden;
+    position        : absolute;
+    z-index         : -1;
+  }
+  label {
+    display         : flex;
+    flex-direction  : column;
+    justify-content : center;
+    align-items     : center;
+    width  : 100%;
+    height : 100%;
+    & > * {
+      pointer-events: none;
+    }
+  }
   .icons {
     display        : flex;
     flex-direction : row;
