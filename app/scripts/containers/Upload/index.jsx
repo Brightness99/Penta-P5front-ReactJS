@@ -144,10 +144,9 @@ export class Upload extends React.Component {
     }
   }
 
-  renderAdditionalParameters() {
+  renderAdditionalParameters(stepNumber: number) {
     const { currentStep } = this.state;
     const additionalOptions = mock.additionalOptions;
-    const stepNumber = 1;
     const isComplete = currentStep >= stepNumber;
     return (
       <FunnelBlock
@@ -166,10 +165,9 @@ export class Upload extends React.Component {
     );
   }
 
-  renderUploadTypeSchemes() {
+  renderUploadTypeSchemes(stepNumber: number) {
     const { currentStep } = this.state;
     const { uploadInfo: { availableStrategies } } = this.props;
-    const stepNumber = 2;
     const isComplete = currentStep >= stepNumber;
     const showStep = currentStep >= (stepNumber - 1);
     return (
@@ -190,9 +188,8 @@ export class Upload extends React.Component {
     );
   }
 
-  renderFileUploadBlock() {
+  renderFileUploadBlock(stepNumber: number) {
     const { currentStep, selectedStrategy } = this.state;
-    const stepNumber = 3;
     const isComplete = currentStep >= stepNumber;
     const showStep = currentStep >= (stepNumber - 1) && selectedStrategy > 1;
     return (
@@ -232,22 +229,22 @@ export class Upload extends React.Component {
     if (isLoading) return <Loading />;
 
     return (
-      <div className="page-upload">
+      <section className="page-upload">
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
           <div className="alert-container">{this.renderFlashMessages()}</div>
           {
-            this.renderAdditionalParameters()
+            this.renderAdditionalParameters(1)
           }
           {
-            this.renderUploadTypeSchemes()
+            this.renderUploadTypeSchemes(2)
           }
           {
-            this.renderFileUploadBlock()
+            this.renderFileUploadBlock(3)
           }
         </div>
-      </div>
+      </section>
     );
   }
 }
