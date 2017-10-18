@@ -4,9 +4,8 @@
   width: 100%;
 
   .contact__form-subtitle {
-    font-family: 'Nunito Light', serif;
+    font-family: $font-family-nunito-light;
     font-size: 1.4rem;
-    font-weight: lighter;
     margin: 0 0 1vh;
   }
 
@@ -28,11 +27,11 @@
 
   .app__qrk__button.success {
     align-self: flex-end;
-    background: #2cac57;
+    background: $color-success;
     border: 0;
     border-radius: 0.4rem;
-    color: #fff;
-    font-family: 'Open Sans Bold', serif;
+    color: $color-white;
+    font-family: $font-family-open-sans-bold;
     font-size: 1.4rem;
     height: 3.4rem;
     margin-left: calc(50% + 2vw);
@@ -44,7 +43,10 @@
   .is-half__form-line {
     margin-left: 1vw;
     margin-right: 1vw;
-    width: calc(50% - 2vw);
+    width: 100%;
+    @include lg {
+      width: calc(50% - 2vw);
+    }
   }
 
   .is-full__form-line {
