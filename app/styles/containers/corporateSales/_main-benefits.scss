@@ -21,7 +21,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    height: 360px;
+    height: auto;
     border: 0.1rem solid $color-lightGray2;
     border-radius: 0.3rem;
     box-sizing: border-box;
@@ -29,6 +29,7 @@
     padding: 2rem;
     @include lg {
       margin-right: 2rem;
+      height: 360px;
     }
     &:last-of-type {
       margin-right: 0;
@@ -46,7 +47,8 @@
       text-align: center;
     }
     svg {
-      width: 58px;
+      width: 5.8rem;
+      height: 5.8rem;
     }
   }
 }
