@@ -15,8 +15,11 @@
 .title-requestSample {
   color: $color-white;
   font-family: $font-family-nunito-light;
-  font-size: $font-size-xxll;
+  font-size: $font-size-h2;
   font-weight: 300;
+  @include lg {
+    font-size: $font-size-xxll;
+  }
 }
 
 .subtitle-requestSample {
