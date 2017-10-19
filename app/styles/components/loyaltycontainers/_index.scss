@@ -19,13 +19,20 @@
         background-color: $color-white;
         box-sizing: border-box;
         border-radius: 30px;
-        color: #8261f8;
+        color: $color-deep-purple;
         font-size: $font-size-sm;
         margin-right: 2rem;
         text-transform: uppercase;
         text-align: center;
         padding: 0rem 0.9rem;
       }
+      svg {
+        width: 1rem;
+        height: 1rem;
+        fill: $color-white;
+      }
+    }
+    a {
       svg {
         width: 1rem;
         height: 1rem;
@@ -47,7 +54,7 @@
     margin-bottom: 0;
   }
   .mol-logo-loyalty {
-    background-color: #8261f8;
+    background-color: $color-deep-purple;
     border-radius: 30px;
     color: $color-white;
     padding: 0 1rem;
@@ -81,7 +88,7 @@
         background-color: $color-white;
         box-sizing: border-box;
         border-radius: 30px;
-        color: #8261f8;
+        color: $color-deep-purple;
         font-size: $font-size-base;
         margin-right: 2rem;
         text-transform: uppercase;
