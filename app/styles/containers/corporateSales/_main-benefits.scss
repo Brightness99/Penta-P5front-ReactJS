@@ -3,6 +3,9 @@
   padding: 1rem;
   @include lg {
     padding: 3rem;
+    .container {
+      padding: 0;
+    }
   }
 }
 
@@ -13,6 +16,9 @@
   justify-content: center;
   padding: 2rem 0;
   flex-direction: column;
+  @include md {
+    display: flex;
+  }
   @include lg {
     flex-direction: row;
   }
@@ -27,9 +33,13 @@
     box-sizing: border-box;
     margin-bottom: 2rem;
     padding: 2rem;
+    @include md {
+      max-width: 480px;
+    }
     @include lg {
       margin-right: 2rem;
       height: 360px;
+      max-width: inherit;
     }
     &:last-of-type {
       margin-right: 0;
