@@ -63,22 +63,23 @@
 }
 
 .org-loyalty-container {
-  padding: 0.6rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
   .mol-loyalty-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    max-width: 750px; 
+    border-radius: 0.4rem;
     p {
       margin: 0;
     }
     div {
-      align-items: center;
       color: $color-white;
       display: flex;
       font-family: $font-family-open-sans-bold;
       font-size: $font-size-xs;
       padding: 1rem;
-      justify-content: center;
+      justify-content: left;
       flex-direction: row;
       @include lg {
         font-size: $font-size-base;
