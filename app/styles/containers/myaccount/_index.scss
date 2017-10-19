@@ -68,8 +68,13 @@
             flex: 2;
             margin-left: 1.0rem;
           }
+          .bellIcon {
+            width: 14.3%;
+            height: 4.7rem;
+          }
           .cloudIcon {
             width: 17%;
+            height: 4.7rem;
           }
           .printClubIcon {
             width: 82%;
@@ -1326,7 +1331,7 @@
       }
 
       &.box-addNewAddress {
-        @include center-child-flex
+        @include center-child-flex;
         background-color: $color-lightBlue;
         border: 0.2rem dotted $color-printi-blue;
         cursor: pointer;

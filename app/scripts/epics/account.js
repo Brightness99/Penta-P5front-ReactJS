@@ -113,7 +113,7 @@ export function accountUpdate(action$) {
       .catch(error => ([
         {
           type: AccountConstants.ACCOUNT_UPDATE_SUBMIT_FAILURE,
-          payload: { message: error.message, status: error.status },
+          payload: { message: error.xhr.response.message || error.message, status: error.status },
           meta: { updatedAt: getUnixtime() },
         },
       ]));

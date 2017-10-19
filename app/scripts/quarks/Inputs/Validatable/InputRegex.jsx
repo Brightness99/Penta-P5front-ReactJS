@@ -25,6 +25,7 @@ type Props = {
   onFocus?: () => {},
   onBlur?: () => {},
   onValidate?: () => {},
+  onEnterKeyPress?: () => {},
 };
 
 export class InputRegex extends React.Component {
@@ -114,6 +115,16 @@ export class InputRegex extends React.Component {
     }
   };
 
+  handleEnterKeyPress = (ev) => {
+    const { onEnterKeyPress } = this.props;
+
+    if (ev.key === 'Enter') {
+      if (typeof onEnterKeyPress === 'function') {
+        onEnterKeyPress(ev);
+      }
+    }
+  };
+
   render() {
     const { id, name, type, showLabel, placeholder, className } = this.props;
     const { value, valid, dirty } = this.state;
@@ -131,6 +142,7 @@ export class InputRegex extends React.Component {
         onChange={this.handleChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
+        onEnterKeyPress={this.handleEnterKeyPress}
       />
     );
   }

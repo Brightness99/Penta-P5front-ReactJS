@@ -137,6 +137,40 @@ const missingLocale = {
           TOTAL_REVIEWS: 'de %s avaliações',
         },
       },
+      authentication: {
+        TITLE_BETWEEN_BLOCKS: 'OU',
+        TITLE_MOBILE_SIGN_UP: 'Cadastrar',
+        TITLE_MOBILE_SIGN_IN: 'Entrar',
+        attention_modal: {
+          TITLE: 'Atenção',
+          CONTENT: 'Para acessar com o seu Facebook. Informar o Seu e-mail.',
+        },
+        signup_block: {
+          TITLE: 'Sou novo cliente',
+          FULL_NAME_PLACEHOLDER: 'Nome completo',
+          EMAIL_PLACEHOLDER: 'E-mail',
+          CONFIRM_EMAIL_PLACEHOLDER: 'Repetir e-mail',
+          PASSWORD_PLACEHOLDER: 'Senha',
+          BUTTON_TITLE: 'Cadastrar',
+        },
+        signin_block: {
+          TITLE: 'Já sou cadastrado',
+          EMAIL_PLACEHOLDER: 'E-mail',
+          PASSWORD_PLACEHOLDER: 'Senha',
+          BUTTON_TITLE: 'Entrar',
+        },
+        social_block: {
+          TITLE: 'Acesse com',
+          FACEBOOK_TITLE: 'Entrar com Facebook',
+          GOOGLE_TITLE: 'Entrar com Google',
+        },
+        signup_social_block: {
+          TITLE: 'Sou novo cliente',
+          EMAIL_PLACEHOLDER: 'E-mail',
+          CONFIRM_EMAIL_PLACEHOLDER: 'Repetir e-mail',
+          BUTTON_TITLE: 'Cadastrar',
+        },
+      },
     },
   },
 };

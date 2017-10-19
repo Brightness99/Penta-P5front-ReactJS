@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import ErrorField from 'components/ErrorField';
+import { CheckBox } from 'components/Input';
 import { BlockTitle } from 'atoms/Titles';
 import { InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
@@ -9,16 +10,23 @@ import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
 
 type FormType = {
   email: { valid: boolean, value: string },
-  password: { valid: boolean, value: string },
+  password: { valid: boolean, value: string},
 };
 
 type Props = {
   onSubmit: (email: string, password: string) => void,
   isFingerprintLoaded: boolean,
   errorMessage: string,
+  isLoading: boolean,
+  locale: {
+    TITLE: string,
+    EMAIL_PLACEHOLDER: string,
+    PASSWORD_PLACEHOLDER: string,
+    BUTTON_TITLE: string
+  }
 };
 
-type State = { canSubmit: boolean, form: FormType };
+type State = { canSubmit: boolean, form: FormType, stayConnected: boolean };
 
 export default class SignInForm extends React.PureComponent {
   constructor(props) {
@@ -29,6 +37,7 @@ export default class SignInForm extends React.PureComponent {
         email: { valid: false, value: '' },
         password: { valid: false, value: '' },
       },
+      stayConnected: false,
       canSubmit: false,
     };
   }
@@ -45,7 +54,7 @@ export default class SignInForm extends React.PureComponent {
   handleSignIn = (ev) => {
     ev.preventDefault();
 
-    const { form, canSubmit } = this.state;
+    const { form, canSubmit, stayConnected } = this.state;
     const { onSubmit } = this.props;
 
     if (canSubmit === true) {
@@ -54,7 +63,7 @@ export default class SignInForm extends React.PureComponent {
       onSubmit({
         email: form.email.value,
         password: form.password.value,
-        stay_connected: true,
+        stay_connected: stayConnected,
         fingerprint,
       });
     }
@@ -80,33 +89,52 @@ export default class SignInForm extends React.PureComponent {
     this.setState({ form: newState.form, canSubmit });
   };
 
+  handleCheckedStateChanged = (event) => {
+    this.setState({
+      stayConnected: event.target.checked,
+    });
+  };
+
   render() {
-    const { canSubmit } = this.state;
-    const { errorMessage } = this.props;
+    const { canSubmit, stayConnected } = this.state;
+    const { errorMessage, isLoading, locale: { TITLE, EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, BUTTON_TITLE } } = this.props;
     return (
       <div className="authentication__block">
-        <BlockTitle>Entrar</BlockTitle>
+        <BlockTitle>{TITLE}</BlockTitle>
         <hr />
         <form className="authentication__block__form" id="signInForm" onSubmit={this.handleSignIn}>
           <InputEmail
             name="email"
-            placeholder="E-mail"
+            placeholder={EMAIL_PLACEHOLDER}
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputPassword
             name="password"
-            placeholder="Senha"
+            placeholder={PASSWORD_PLACEHOLDER}
+            showLabel={true}
+            isOldRulesForPassword={true}
             onValidate={this.handleValidatedInput}
           />
           <ErrorField message={errorMessage} />
           <Button
             type="submit"
             kind="success"
+            isLoading={isLoading}
             disabled={!canSubmit}
           >
-            Entrar
+            {BUTTON_TITLE}
           </Button>
+          <section className="authentication__block__form__footer">
+            <label>
+              <CheckBox
+                checked={stayConnected}
+                onChange={this.handleCheckedStateChanged}
+              />
+              <span>Permanecer conectado</span>
+            </label>
+            <Link to="#">Esqueci minha senha</Link>
+          </section>
         </form>
       </div>
     );
