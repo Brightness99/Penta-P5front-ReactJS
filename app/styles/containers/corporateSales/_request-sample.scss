@@ -6,6 +6,9 @@
     font-size: $font-size-xxxs;
     margin-top: 3.5rem;
     width: 82%;
+    @include md {
+      max-width: 300px;
+    }
     @include lg {
       width: inherit;
     }
