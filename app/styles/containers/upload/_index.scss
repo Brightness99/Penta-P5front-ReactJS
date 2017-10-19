@@ -3,6 +3,11 @@
 
 .page-upload {
 	.container {
+    .content{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-column-gap: 1rem;
+    }
     .upload-container-canvasCentralized {
       display: flex;
       flex-direction: column;

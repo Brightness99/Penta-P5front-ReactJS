@@ -242,19 +242,21 @@ export class Upload extends React.Component {
       <section className="page-upload">
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
-          <CartItemDefinitionsPanel options={cartItemDefinitions.parts[0].options} />
-          <section className="main-upload-container">
-            <PageTitle>envie sua arte final</PageTitle>
-            <div className="alert-container">{this.renderFlashMessages()}</div>
-            {
-              this.renderAdditionalParameters(1)
-            }
-            {
-              this.renderUploadTypeSchemes(2)
-            }
-            {
-              this.renderFileUploadBlock(3)
-            }
+          <PageTitle>envie sua arte final</PageTitle>
+          <section className="content">
+            <section className="main-upload-container">
+              <div className="alert-container">{this.renderFlashMessages()}</div>
+              {
+                this.renderAdditionalParameters(1)
+              }
+              {
+                this.renderUploadTypeSchemes(2)
+              }
+              {
+                this.renderFileUploadBlock(3)
+              }
+            </section>
+            <CartItemDefinitionsPanel options={cartItemDefinitions.parts[0].options} />
           </section>
         </div>
       </section>
