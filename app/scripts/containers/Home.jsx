@@ -7,10 +7,12 @@ import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
 
 import { BannersBlock, HighlightsBlock, BlogBlock, CustomersRelyBlock, CategoriesCarouselBlock } from 'components/LandingPage';
+import LoyaltyContainer from 'components/LoyaltyContainer';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
   locale: SEOLocaleType,
+  account: {},
 };
 
 const bannerImages = [
@@ -59,10 +61,10 @@ const bannerImages = [
 export class Home extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
-  static props: Props;
+  props: Props;
 
   render() {
-    const { locale } = this.props;
+    const { locale, account: { loyalty } } = this.props;
 
     return (
       <div className="container-homePage">
@@ -71,6 +73,7 @@ export class Home extends React.Component {
           <meta name="description" content={locale.META_DESCRIPTION} />
         </Helmet>
         <BannersBlock images={bannerImages} />
+        {loyalty && loyalty.isLoaded && !loyalty.isRunning && loyalty.carousel && <LoyaltyContainer text={loyalty.carousel} />}
         <CategoriesCarouselBlock />
         <HighlightsBlock />
         <CustomersRelyBlock />
@@ -83,6 +86,7 @@ export class Home extends React.Component {
 function mapStateToProps(state) {
   return {
     locale: state.locale.translate.page.home,
+    account: state.account,
   };
 }
 
