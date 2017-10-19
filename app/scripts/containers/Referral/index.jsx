@@ -30,13 +30,7 @@ export class Referral extends React.Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
-      modal: {
-        type: '',
-        isOpen: false,
-        itemId: '',
-      },
-    };
+    this.state = { showShareModal: false };
   }
 
   shouldComponentUpdate = shouldComponentUpdate;
@@ -44,16 +38,13 @@ export class Referral extends React.Component {
   static props: Props;
   static state: State;
 
-  renderModal() {
-    const { modal } = this.state;
-    return (
-      <div className="modal-referral">
-        <Modal handleCloseModal={this.handleModalClose}>
-          <ShareCode />
-        </Modal>
-      </div>
-    );
-  }
+  handleCloseModal = () => {
+    this.setState({ showShareModal: false });
+  };
+
+  handleShowingModal = () => {
+    this.setState({ showSharetModal: !this.state.showShareModal });
+  };
 
   render() {
     const { app: { screenSize } } = this.props;
@@ -68,6 +59,13 @@ export class Referral extends React.Component {
     ];
     return (
       <div>
+
+        <div className="modal-referral">
+          <Modal handleCloseModal={this.handleModalClose}>
+            <ShareCode />
+          </Modal>
+        </div>
+
         <section className="bg-referral">
           <div className="org-referral-page">
             <div className="container">
