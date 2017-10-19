@@ -8,6 +8,7 @@ import { UploadConstants } from 'constants/index';
 export type UploadState = {
   rehydrated: boolean,
   isRunning: boolean,
+  isLoaded: boolean,
   error: boolean,
   message: string,
   object: {},
@@ -24,6 +25,7 @@ export type UploadState = {
 export const uploadState: UploadState = {
   rehydrated: false,
   isRunning: false,
+  isLoaded: false,
   error: false,
   message: '',
   object: {},
@@ -57,6 +59,7 @@ export default {
       return {
         ...state,
         isRunning: false,
+        isLoaded: true,
         object: action.payload,
         updatedAt: action.meta.updatedAt,
       };

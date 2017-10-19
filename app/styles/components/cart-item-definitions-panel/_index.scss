@@ -1,0 +1,14 @@
+.cart-item-definitions-container {
+  width            : 27rem;
+  background-color : #ffffff;
+  box-shadow       : 0 0 10px rgba(0, 0, 0, 0.5);
+  .options, .sub-total, .additional-options, .total {
+    padding : 1rem 2rem;
+  }
+  h4 {
+    padding : 2rem;
+  }
+  hr {
+    margin : 0 1rem;
+  }
+}
