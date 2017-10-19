@@ -7,7 +7,7 @@ import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import LogoLoyalty from 'components/LogoLoyalty';
 import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
-import { userLogOut } from 'actions';
+import { userLogOut, accountLoyaltyFetch } from 'actions';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
@@ -44,7 +44,8 @@ export class Header extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
-    const { screenSize } = this.props;
+    const { screenSize, dispatch } = this.props;
+    dispatch(accountLoyaltyFetch());
 
     if (!isMobile(screenSize)) {
       window.addEventListener('scroll', this.handleScroll);
@@ -155,7 +156,7 @@ export class Header extends React.Component {
   renderDesktop() {
     const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
     const { showTopbar, activePane } = this.state;
-
+    
     return (
       <header
         className={cx(
