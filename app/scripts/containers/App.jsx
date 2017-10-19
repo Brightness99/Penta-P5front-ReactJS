@@ -112,7 +112,7 @@ export class App extends React.Component {
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
                       <Route path="/:slug/upload/:itemId" component={Upload} />
-                      <Route path="/indicacoes" component={Referral} />
+                      <Route path="/indique-a-printi" component={Referral} />
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
