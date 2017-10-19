@@ -3,8 +3,45 @@
   margin           : 0 0 auto 0;
   background-color : #ffffff;
   box-shadow       : 0 0 10px rgba(0, 0, 0, 0.5);
+  .sub-total {
+    font-weight : bold;
+    span {
+      color : #1271e0;
+    }
+  }
+  .total {
+    font-weight : bold;
+    span {
+      color     : #1271e0;
+      font-size : 2rem;
+    }
+  }
+  .delivery-info {
+    display          : flex;
+    align-items      : center;
+    padding          : 2rem;
+    background-color : #f3db3a;
+    height           : 4rem;
+    span {
+      font-size : 1.2rem;
+    }
+    span:first-of-type {
+      font-weight : bold;
+      margin      : 0 0.2rem;
+    }
+    svg {
+      width        : 2rem;
+      height       : 2rem;
+      fill         : black;
+      stroke       : black;
+      display      : inline-block;
+      stroke-width : 0;
+      transform    : scale(-1, 1);
+    }
+  }
   .options, .sub-total, .additional-options, .total {
-    padding : 1rem 2rem;
+    font-size : 1.2rem;
+    padding   : 1rem 2rem;
   }
   h4 {
     padding : 2rem;

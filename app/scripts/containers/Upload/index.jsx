@@ -218,10 +218,16 @@ export class Upload extends React.Component {
     );
   }
 
-  renderCartDefenitions() {
-    const { uploadInfo: { cartItemDefinitions: { parts } } } = this.props;
+  renderCartDefinitions() {
+    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
 
-    return <CartItemDefinitionsPanel parts={parts} />;
+    return (
+      <CartItemDefinitionsPanel
+        parts={parts}
+        totalPrice={total_price}
+        subTotal={total_price}
+        expectedDeliveryDate={expected_delivery_date}
+      />);
   }
 
   render() {
@@ -261,7 +267,7 @@ export class Upload extends React.Component {
                 this.renderFileUploadBlock(3)
               }
             </section>
-            {this.renderCartDefenitions()}
+            {this.renderCartDefinitions()}
           </section>
         </div>
       </section>
