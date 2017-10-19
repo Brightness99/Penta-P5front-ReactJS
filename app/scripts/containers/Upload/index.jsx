@@ -13,6 +13,7 @@ import MoreInfo from 'components/MoreInfo';
 import Loading from 'components/Loading';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
 import { NormalUploadType } from 'components/UploadTypes';
+import CartItemDefinitionsPanel from 'components/CartItemDefinitionsPanel';
 import CanvasSchema from './UploadTypeSchemas/Canvas';
 import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
 
@@ -218,7 +219,8 @@ export class Upload extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, uploadInfo: { cartItemDefinitions } } = this.props;
+    console.log(cartItemDefinitions);
     const breadcrumb = [
       {
         title: 'Home',
@@ -234,23 +236,26 @@ export class Upload extends React.Component {
       },
     ];
 
-    if (isLoading) return <Loading />;
+    if (!isLoading) return <Loading />;
 
     return (
       <section className="page-upload">
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
-          <PageTitle>envie sua arte final</PageTitle>
-          <div className="alert-container">{this.renderFlashMessages()}</div>
-          {
-            this.renderAdditionalParameters(1)
-          }
-          {
-            this.renderUploadTypeSchemes(2)
-          }
-          {
-            this.renderFileUploadBlock(3)
-          }
+          <CartItemDefinitionsPanel options={cartItemDefinitions.parts[0].options} />
+          <section className="main-upload-container">
+            <PageTitle>envie sua arte final</PageTitle>
+            <div className="alert-container">{this.renderFlashMessages()}</div>
+            {
+              this.renderAdditionalParameters(1)
+            }
+            {
+              this.renderUploadTypeSchemes(2)
+            }
+            {
+              this.renderFileUploadBlock(3)
+            }
+          </section>
         </div>
       </section>
     );
@@ -258,7 +263,7 @@ export class Upload extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  isLoading: state.upload.isRunning,
+  isLoading: state.upload.isLoaded,
   uploadInfo: state.upload.object,
   uploadFileProgress: state.upload.uploadFile,
 });
