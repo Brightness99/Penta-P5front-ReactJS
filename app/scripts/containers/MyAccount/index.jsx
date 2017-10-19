@@ -18,6 +18,7 @@ import Cloud from './Cloud';
 import Loyalty from './Loyalty';
 import CustomerData from './CustomerData';
 import Referral from './Referral';
+import Briefing from './Briefing';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
@@ -128,19 +129,31 @@ export class MyAccount extends React.Component {
     const { breadcrumbs } = this.state;
 
     return (
-      <div
-        className={cx(
-          'container-myaccount',
-          isMobile(screenSize) && 'container',
-        )}
-      >
-        {!isMobile(screenSize) && <Sidebar screenSize={screenSize} />}
-        <div className="container-myaccount-content">
-          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumbs} />}
-          <PageTitle>{locale.TITLE}</PageTitle>
-         {this.renderContainer()}
-        </div>
-      </div>
+      <Switch>
+        <Route
+          exact={true}
+          path="/minha-conta/pedidos/:orderNumber/:itemId/briefing"
+          render={(props) => <Briefing {...props} />}
+        />
+        <Route
+          path="/minha-conta"
+          render={() => (
+            <div
+              className={cx(
+                'container-myaccount',
+                isMobile(screenSize) && 'container',
+              )}
+            >
+              {!isMobile(screenSize) && <Sidebar screenSize={screenSize} />}
+              <div className="container-myaccount-content">
+                {!isMobile(screenSize) && <Breadcrumbs links={breadcrumbs} />}
+                <PageTitle>{locale.TITLE}</PageTitle>
+                {this.renderContainer()}
+              </div>
+            </div>
+          )}
+        />
+      </Switch>
     );
   }
 }
