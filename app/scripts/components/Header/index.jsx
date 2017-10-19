@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
+import Logo from 'components/Logo';
 import LogoLoyalty from 'components/LogoLoyalty';
 import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
 import { userLogOut, accountLoyaltyFetch } from 'actions';
@@ -73,7 +74,7 @@ export class Header extends React.Component {
   static state: State;
 
   handleScroll = () => {
-    const windowScrollPosition = document.body.scrollTop;
+    const windowScrollPosition = document.documentElement.scrollTop;
 
     if (windowScrollPosition > 60) {
       this.setState({
@@ -127,7 +128,7 @@ export class Header extends React.Component {
               <MenuIcon />
             </button>
           </div>
-          <LogoLoyalty enableLink={true} />
+          <Logo enableLink={true} />
           <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           <div className="mol-header-button">
             <button onClick={this.handleShowMyAccount} className="atm-header-icon-button">
@@ -153,10 +154,12 @@ export class Header extends React.Component {
     );
   }
 
+  // {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
+  // <LogoLoyalty small={!showTopbar} enableLink={true} />
   renderDesktop() {
     const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
     const { showTopbar, activePane } = this.state;
-    
+
     return (
       <header
         className={cx(
@@ -164,11 +167,15 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
+        {
+          loyalty.isLoaded && !loyalty.isRunning && loyalty.header && 
+          <LoyaltyTopbar handleClose={this.handleClose} />
+        }
         <Topbar handleClose={this.handlePaneHide} />
-        {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
         <div className="org-header-content">
           <div className="container">
-            <LogoLoyalty small={!showTopbar} enableLink={true} />
+            <Logo small={!showTopbar} enableLink={true} />
+            <LogoLoyalty />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu

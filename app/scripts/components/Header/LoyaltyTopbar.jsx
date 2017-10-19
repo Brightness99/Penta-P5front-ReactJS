@@ -31,7 +31,7 @@ export class LoyaltyTopbar extends React.Component {
               </div>
               <p>{loyalty.header}</p>
             </div>
-            <div><CloseIcon /></div>
+            <a href="#close"><CloseIcon /></a>
           </div>
         </div>
       </div>
