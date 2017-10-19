@@ -30,7 +30,7 @@ export class Referral extends React.Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = { showShareModal: false };
+    this.state = { showShareModal: true };
   }
 
   shouldComponentUpdate = shouldComponentUpdate;
@@ -59,13 +59,13 @@ export class Referral extends React.Component {
     ];
     return (
       <div>
-
-        <div className="modal-referral">
-          <Modal handleCloseModal={this.handleModalClose}>
-            <ShareCode />
-          </Modal>
-        </div>
-
+        { this.state.showShareModal &&
+          <div className="modal-referral">
+            <Modal handleCloseModal={this.handleCloseModal}>
+              <ShareCode />
+            </Modal>
+          </div>
+        }
         <section className="bg-referral">
           <div className="org-referral-page">
             <div className="container">
