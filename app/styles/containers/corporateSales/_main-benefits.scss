@@ -49,6 +49,9 @@
     svg {
       width: 5.8rem;
       height: 5.8rem;
+      @include lg {
+        height: inherit;
+      }
     }
   }
 }
