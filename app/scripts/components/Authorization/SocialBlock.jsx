@@ -68,6 +68,12 @@ type Props = {
   loginGoogleSuccess: (result: SocialLoginResult) => void,
   loginGoogleFailure: (result: SocialLoginResult) => void,
   isFingerprintLoaded: boolean,
+  isMobile: boolean,
+  locale: {
+    TITLE: string,
+    FACEBOOK_TITLE: string,
+    GOOGLE_TITLE: string,
+  }
 };
 
 export default class SocialBlock extends React.PureComponent {
@@ -149,18 +155,19 @@ export default class SocialBlock extends React.PureComponent {
   };
 
   renderFacebookLogin = () => {
-    const { facebook } = this.props;
+    const { facebook, isMobile, locale: { FACEBOOK_TITLE } } = this.props;
+    const title = isMobile ? FACEBOOK_TITLE : '';
+
     if (facebook.enabled) {
       return (
         <FacebookLogin
           appId={facebook.credentials.app_id}
-          autoLoad={true}
           fields="name,email,picture"
-          textButton={''}
+          textButton={title}
           callback={this.loginFBSuccess}
           onFailure={this.loginFBFailure}
           cssClass={'facebook-login-button app__qrk__button'}
-          icon={<SVG src={require('assets/media/svg/social_facebook.svg')} />}
+          icon={!isMobile && <SVG src={require('assets/media/svg/social_facebook.svg')} />}
         />
       );
     }
@@ -168,18 +175,19 @@ export default class SocialBlock extends React.PureComponent {
   };
 
   renderGoogleLogin = () => {
-    const { google } = this.props;
+    const { google, isMobile, locale: { GOOGLE_TITLE } } = this.props;
+    const title = isMobile ? GOOGLE_TITLE : '';
 
     if (google.enabled) {
       return (
         <GoogleLogin
           clientId={google.credentials.client_id}
-          buttonText={''}
+          buttonText={title}
           onSuccess={this.loginGoogleSuccess}
           onFailure={this.loginGoogleFailure}
           className={'google-login-button app__qrk__button'}
         >
-          <SVG src={require('assets/media/svg/social_googleplus.svg')} />
+          { !isMobile && <SVG src={require('assets/media/svg/social_googleplus.svg')} /> }
         </GoogleLogin>
       );
     }
@@ -187,11 +195,13 @@ export default class SocialBlock extends React.PureComponent {
   };
 
   render() {
+    const { locale: { TITLE }, isMobile } = this.props;
     return (
       <div className="authentication__social">
+        { !isMobile && <h3>{TITLE}:</h3>}
         {this.renderFacebookLogin()}
         {this.renderGoogleLogin()}
-         <form id='fakeFormForSocial' />
+        <form id="fakeFormForSocial" />
       </div>
     );
   }

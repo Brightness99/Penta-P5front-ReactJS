@@ -60,6 +60,9 @@
       button {
         font-size: $font-size-xxxs;
         margin: 2rem 0;
+        @include md {
+          max-width: 300px;
+        }
         @include lg {
           margin: 0 3rem 0 0;
         }

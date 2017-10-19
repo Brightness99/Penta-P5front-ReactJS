@@ -37,6 +37,8 @@ import Gabaritos from 'containers/Gabaritos';
 import Templateslp from 'containers/Templateslp';
 import Referral from 'containers/Referral';
 
+import CloudEditor from 'containers/CloudEditor';
+
 type Props = {
   app: AppStoreType,
   cart: {},
@@ -94,6 +96,7 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
+                      <Route path="/editor-cloud" component={CloudEditor} />
                       <Route path="/montagem-de-arquivos" component={FileMount} />
                       <Route path="/guia-de-impressao" component={PrintGuide} />
                       <Route path="/central-de-ajuda" component={HelpCenterPage} />
@@ -104,7 +107,7 @@ export class App extends React.Component {
                       <Route path="/success/:orderNumber" component={Success} />
                       <Route path="/buscar" component={Search} />
                       <Route path="/printi-na-imprensa" component={PrintiPress} />
-                      <Route path="/sobre-a-printi" component={AboutPrinti} />
+                      <Route path="/sobre-printi" component={AboutPrinti} />
                       <Route path="/cloud" component={CloudCompany} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />

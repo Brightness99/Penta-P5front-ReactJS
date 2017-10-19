@@ -6,6 +6,9 @@
     font-size: $font-size-xxxs;
     margin-top: 3.5rem;
     width: 82%;
+    @include md {
+      max-width: 300px;
+    }
     @include lg {
       width: inherit;
     }
@@ -15,8 +18,11 @@
 .title-requestSample {
   color: $color-white;
   font-family: $font-family-nunito-light;
-  font-size: $font-size-xxll;
+  font-size: $font-size-h2;
   font-weight: 300;
+  @include lg {
+    font-size: $font-size-xxll;
+  }
 }
 
 .subtitle-requestSample {
