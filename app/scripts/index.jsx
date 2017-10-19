@@ -7,7 +7,7 @@ import 'vendor/polyfills';
 import 'vendor/rxjs';
 
 // Locale
-import { localeFetch, accountFetch, userAuthValidate, productCategoriesFetch, accountLoyaltyFetch } from 'actions';
+import { localeFetch, accountFetch, userAuthValidate, productCategoriesFetch } from 'actions';
 
 // i18n
 import moment from 'moment';
@@ -36,10 +36,6 @@ function fetchInfo() {
 export function renderApp(RootComponent) {
   fetchInfo();
   store.subscribe(() => {
-
-    if (!store.getState().account.loyalty.isRunning && !store.getState().account.loyalty.isLoaded && store.getState().account.id) {
-      store.dispatch(accountLoyaltyFetch());
-    }
 
     /* istanbul ignore next */
     if (store.getState().locale.LANGUAGE) {
