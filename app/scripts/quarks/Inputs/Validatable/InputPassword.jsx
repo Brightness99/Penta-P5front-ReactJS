@@ -24,6 +24,7 @@ type Props = {
   onFocus?: () => {},
   onBlur?: () => {},
   onValidate?: () => {},
+  onEnterKeyPress?: () => {},
 };
 
 export default class InputPassword extends React.Component {
@@ -69,6 +70,16 @@ export default class InputPassword extends React.Component {
     }
   };
 
+  handleEnterKeyPress = (ev) => {
+    const { onEnterKeyPress } = this.props;
+
+    if (ev.key === 'Enter') {
+      if (typeof onEnterKeyPress === 'function') {
+        onEnterKeyPress(ev);
+      }
+    }
+  };
+
   getInputType = () => {
     const { showPassword } = this.props;
 
@@ -93,6 +104,7 @@ export default class InputPassword extends React.Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onValidate={this.handleValidation}
+        onEnterKeyPress={this.handleEnterKeyPress}
       />
     );
   }

@@ -16,6 +16,7 @@ type Props = {
   onChange?: () => {},
   onFocus?: () => {},
   onBlur?: () => {},
+  onEnterKeyPress?: () => {},
 };
 
 type State = {
@@ -89,6 +90,16 @@ export default class Input extends React.Component {
     }
   };
 
+  handleEnterKeyPress = (ev) => {
+    const { onEnterKeyPress } = this.props;
+
+    if (ev.key === 'Enter') {
+      if (typeof onEnterKeyPress === 'function') {
+        onEnterKeyPress(ev);
+      }
+    }
+  };
+
   render() {
     const { id, type, name, showLabel, placeholder, className } = this.props;
     const { value, isFocused } = this.state;
@@ -123,6 +134,7 @@ export default class Input extends React.Component {
           onChange={this.handleChange}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
+          onKeyPress={this.handleEnterKeyPress}
         />
       </div>
     );
