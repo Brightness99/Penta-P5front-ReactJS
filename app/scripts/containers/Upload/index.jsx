@@ -218,9 +218,14 @@ export class Upload extends React.Component {
     );
   }
 
+  renderCartDefenitions() {
+    const { uploadInfo: { cartItemDefinitions: { parts } } } = this.props;
+
+    return <CartItemDefinitionsPanel parts={parts} />;
+  }
+
   render() {
-    const { isLoading, uploadInfo: { cartItemDefinitions } } = this.props;
-    console.log(cartItemDefinitions);
+    const { isLoading } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -256,7 +261,7 @@ export class Upload extends React.Component {
                 this.renderFileUploadBlock(3)
               }
             </section>
-            <CartItemDefinitionsPanel options={cartItemDefinitions.parts[0].options} />
+            {this.renderCartDefenitions()}
           </section>
         </div>
       </section>
