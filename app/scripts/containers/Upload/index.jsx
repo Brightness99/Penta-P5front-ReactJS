@@ -27,6 +27,13 @@ type Props = {
   uploadInfo: {},
   uploadInfoFetch: (slug, itemId) => void,
   uploadFile: (file: {}) => void,
+  uploadFileProgress: {
+    progress: number,
+    preview: {},
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+  },
   dispatch: () => void,
 };
 
@@ -75,7 +82,7 @@ export class Upload extends React.Component {
   };
 
   renderUploadTypeSchema = () => {
-    const { uploadInfo } = this.props;
+    const { uploadInfo, uploadFileProgress } = this.props;
     const { selectedStrategy } = this.state;
     const globalFlags = uploadInfo.globalFlags;
 
@@ -87,6 +94,7 @@ export class Upload extends React.Component {
       default:
         return (
           <NormalUploadType
+            uploadFileProgress={uploadFileProgress}
             uploadTwoFiles={selectedStrategy === 4}
             multipleFiles={selectedStrategy === 5}
             handleUploadFile={this.handleUploadFile}
@@ -252,6 +260,7 @@ export class Upload extends React.Component {
 const mapStateToProps = (state) => ({
   isLoading: state.upload.isRunning,
   uploadInfo: state.upload.object,
+  uploadFileProgress: state.upload.uploadFile,
 });
 
 const mapDispatchToProps = (dispatch) => ({
