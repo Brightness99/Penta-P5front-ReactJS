@@ -8,15 +8,17 @@ type Props = {
   acceptedFormats: Array<string>,
   handleFileChanged: (file: {}) => void,
   uploadProgress: number,
+  fileFormats: Array<string>,
   isFileLoading: boolean,
-  fileName: string,
-  fileFormat: string,
+  isFileUploadError: boolean,
   preview: {}
 }
 
 type State = {
   isShowDropzone: boolean,
-  isSelected: boolean
+  isSelected: boolean,
+  fileName: string,
+  fileFormat: string,
 }
 
 export default class UploadFile extends React.Component {
@@ -29,36 +31,34 @@ export default class UploadFile extends React.Component {
   }
 
   static defaultProps = {
-    uploadProgress: 10,
-    isFileLoading: true,
-    fileName: 'asdhghgh hghghghghghg hghghghg hg.pdf',
-    fileFormat: 'pdf',
+    uploadProgress: 0,
+    isFileLoading: false,
   };
 
   props: Props;
   state: State;
 
-  _onDragEnter = (e) => {
+  onDragEnter = (e) => {
     this.setState({ isShowDropzone: true });
     e.stopPropagation();
     e.preventDefault();
     return false;
   };
 
-  _onDragOver = (e) => {
+  onDragOver = (e) => {
     e.preventDefault();
     e.stopPropagation();
     return false;
   };
 
-  _onDragLeave = (e) => {
+  onDragLeave = (e) => {
     this.setState({ isShowDropzone: false });
     e.stopPropagation();
     e.preventDefault();
     return false;
   };
 
-  _onDrop = (e) => {
+  onDrop = (e) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
     this.handleFile(files[0]);
@@ -68,9 +68,12 @@ export default class UploadFile extends React.Component {
   };
 
   handleFile = (file) => {
+    const fileName =  file.name;
+    const format = fileName.split('.').pop();
     const { handleFileChanged } = this.props;
     this.setState({
-      file,
+      fileName,
+      fileFormat: format,
       isSelected: true,
     });
 
@@ -80,9 +83,10 @@ export default class UploadFile extends React.Component {
   };
 
   renderContent = () => {
-    const { isFileLoading, fileName, fileFormat, uploadProgress } = this.props;
+    const { uploadProgress } = this.props;
+    const { isSelected, fileName, fileFormat } = this.state;
 
-    if (isFileLoading) {
+    if (isSelected) {
       return (
         <section className="loading-content">
           <FileFormatIcon title={fileFormat} />
@@ -96,10 +100,10 @@ export default class UploadFile extends React.Component {
     return (
       <label
         htmlFor="file"
-        onDragLeave={this._onDragLeave}
-        onDragEnter={this._onDragEnter}
-        onDragOver={this._onDragOver}
-        onDrop={this._onDrop}
+        onDragLeave={this.onDragLeave}
+        onDragEnter={this.onDragEnter}
+        onDragOver={this.onDragOver}
+        onDrop={this.onDrop}
       >
         <section className="icons">
           <FileFormatIcon title="AI" />
@@ -115,9 +119,8 @@ export default class UploadFile extends React.Component {
   };
 
   render() {
-    const { isShowDropzone } = this.state;
-    const { isFileLoading } = this.props;
-    const isActive = isShowDropzone || isFileLoading;
+    const { isShowDropzone, isSelected } = this.state;
+    const isActive = isShowDropzone || isSelected;
     return (
       <section className={cx('upload-file-container', isActive && 'active')}>
         <input type="file" id="file" />

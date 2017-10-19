@@ -7,7 +7,14 @@ type Props = {
   uploadTwoFiles: boolean,
   handleUploadFile: (file: {}) => void,
   isLoadStarted: boolean,
-  uploadFileProgresses: { fileName: string, progress: number }
+  fileFormats: Array<string>,
+  uploadFileProgress: {
+    progress: number,
+    preview: {},
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+  }
 }
 
 export default class NormalUploadType extends React.Component {
@@ -24,12 +31,19 @@ export default class NormalUploadType extends React.Component {
   };
 
   renderUploadFiles() {
-    const { multipleFiles, uploadTwoFiles } = this.props;
+    const { multipleFiles, uploadTwoFiles, uploadFileProgress: { progress, preview }, fileFormats } = this.props;
+    console.log(preview);
     if (uploadTwoFiles) {
-      return [<UploadFile key="arte1" />, <UploadFile key="arte2" />];
+      return [<UploadFile fileFormats={fileFormats} key="arte1" />, <UploadFile fileFormats={fileFormats} key="arte2" />];
     }
     return (
-      <UploadFile multiple={multipleFiles} handleFileChanged={this.handleUploadFile} key="arte1" />
+      <UploadFile
+        uploadProgress={progress}
+        multiple={multipleFiles}
+        fileFormats={fileFormats}
+        handleFileChanged={this.handleUploadFile}
+        key="arte1"
+      />
     );
   }
 
