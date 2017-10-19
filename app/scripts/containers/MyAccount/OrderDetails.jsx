@@ -324,18 +324,24 @@ export class OrderDetails extends React.Component {
   }
 
   renderOrder() {
-    const { screenSize, locale } = this.props;
+    const { screenSize, locale, account: { selectedOrder }  } = this.props;
 
-    return null;
+    console.log(selectedOrder);
 
-    // return [
-    //   <h3 className="atm-myorder-title">{locale.my_orders.TITLE}</h3>,
-    //   isMobile(screenSize) ? this.renderMobile() : this.renderDesktop(),
-    // ];
+    if (selectedOrder.isRunning || !selectedOrder.isLoaded) {
+      return <Loading />;
+    }
+
+    return [
+      <h3 className="atm-myorder-title">
+        {`${locale.order_details.ORDER} ${locale.order_details.ORDER_NUMBER.toLowerCase()}${selectedOrder.info.id}`}
+      </h3>,
+      isMobile(screenSize) ? this.renderMobile() : this.renderDesktop(),
+    ];
   }
 
   render() {
-    const { account: { selectedOrder }, locale } = this.props;
+    const { locale } = this.props;
 
     return (
       <div className="container-myaccount-content">
