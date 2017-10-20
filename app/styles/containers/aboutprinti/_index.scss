@@ -142,14 +142,14 @@
         justify-content: center;
         position: absolute;
         top: 10px;
-        left: 50.2%;
+        left: 50.4%;        
         height: 100%;
         width: 0.1rem;
         background: $body-bg;
         margin-left: -2px;
         @include lg {
           top: 0;
-          left: 50%;
+          left: 50.2%;
         }
         &:before {
           content: '';
@@ -169,13 +169,10 @@
           border-radius: 50%;
           width: 1rem;
           height: 1rem;
-          background-color: transparent;
           position: absolute;
           left: -0.4rem;
           bottom: 0;
-          @include lg {
-            background-color: $color-printi-blue;
-          }
+          background-color: $color-printi-blue;
         }
       }
       .atm-card-timeline {
@@ -226,8 +223,10 @@
           margin-top: 6rem;
           z-index: 2;
           @include lg  {
-            width: 46%;
+            display: flex;
+            flex-direction: column;
             margin-top: 0;
+            width: 46%;
           }
           img {
             width: 100%;

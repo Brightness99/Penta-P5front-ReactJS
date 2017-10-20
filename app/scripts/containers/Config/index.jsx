@@ -14,6 +14,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import Loading from 'components/Loading';
 import SideBar from 'organisms/SideBar';
 import { TruckIcon } from 'components/Icons';
+import LoyaltyContainer from 'components/LoyaltyContainer';
 import SourcesBlock from './Sources';
 import OptionsBlock from './Options';
 import MatrixBlock from './Matrix';
@@ -29,6 +30,7 @@ type Props = {
   match: {},
   options: {},
   user: {},
+  account: {},
 };
 
 export class Config extends React.Component {
@@ -241,6 +243,9 @@ export class Config extends React.Component {
       app: {
         screenSize,
       },
+      account: {
+        loyalty,
+      },
       productSettings: {
         source,
         finalProduct: {
@@ -279,6 +284,7 @@ export class Config extends React.Component {
         <Breadcrumbs links={breadcrumb} />
         <div className="container">
           <PageTitle>{`${locale.TITLE}: ${product.title}`}</PageTitle>
+          {loyalty && loyalty.isLoaded && !loyalty.isRunning && loyalty.matrix && <LoyaltyContainer text={loyalty.matrix} />}
           <div className="app__config__content">
             <main>
               {showSteps.source &&
@@ -316,6 +322,7 @@ function mapStateToProps(state) {
   return {
     ...settingsSelector(state),
     locale: state.locale.translate.page.product_settings,
+    account: state.account,
   };
 }
 

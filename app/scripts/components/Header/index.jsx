@@ -1,11 +1,14 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
-import { userLogOut } from 'actions';
+import LogoLoyalty from 'components/LogoLoyalty';
+import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
+import { userLogOut, accountLoyaltyFetch } from 'actions';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
@@ -21,7 +24,8 @@ type Props = {
   dispatch: () => {},
   totalCartItems: number,
   isAuthorized: boolean,
-  config: {}
+  config: {},
+  account: {},
 };
 
 type State = {
@@ -41,7 +45,8 @@ export class Header extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
-    const { screenSize } = this.props;
+    const { screenSize, dispatch } = this.props;
+    dispatch(accountLoyaltyFetch());
 
     if (!isMobile(screenSize)) {
       window.addEventListener('scroll', this.handleScroll);
@@ -69,7 +74,7 @@ export class Header extends React.Component {
   static state: State;
 
   handleScroll = () => {
-    const windowScrollPosition = document.body.scrollTop;
+    const windowScrollPosition = document.documentElement.scrollTop;
 
     if (windowScrollPosition > 60) {
       this.setState({
@@ -111,11 +116,12 @@ export class Header extends React.Component {
   };
 
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
     const { activePane } = this.state;
 
     return (
       <header className="org-header">
+        {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
         <div className="mol-mobile-header">
           <div className="mol-header-button mol-header-button--menu">
             <button onClick={this.handleShowMenu} className="atm-header-icon-button">
@@ -148,8 +154,10 @@ export class Header extends React.Component {
     );
   }
 
+  // {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
+  // <LogoLoyalty small={!showTopbar} enableLink={true} />
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -159,10 +167,15 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
+        {
+          loyalty.isLoaded && !loyalty.isRunning && loyalty.header && 
+          <LoyaltyTopbar handleClose={this.handleClose} />
+        }
         <Topbar handleClose={this.handlePaneHide} />
         <div className="org-header-content">
           <div className="container">
             <Logo small={!showTopbar} enableLink={true} />
+            <LogoLoyalty />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu
@@ -222,4 +235,11 @@ export class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+export default connect(mapStateToProps)(Header);
+

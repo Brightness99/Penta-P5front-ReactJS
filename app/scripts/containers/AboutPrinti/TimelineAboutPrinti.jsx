@@ -46,7 +46,7 @@ export class TimelineAboutPrinti extends React.Component {
             <span className="atm-line-timeline" />
             {timelinesMark}
           </div>
-          {loadMoreMark};
+          {loadMoreMark}
         </div>
       </div>
     );

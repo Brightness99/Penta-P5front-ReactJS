@@ -64,7 +64,7 @@ export class CorporateSales extends React.Component<Props, State> {
             <ContactForm onSubmit={data => submitContactForm && submitContactForm(data)} />
           </Modal>
         }
-        <BannerCloud handleModalShowing={this.handleShowingModal} />        
+        <BannerCloud handleModalShowing={this.handleShowingModal} />
         <MainBenefits />
         <CloudTools handleModalShowing={this.handleShowingModal} />
         <CustomersRelyBlock />
