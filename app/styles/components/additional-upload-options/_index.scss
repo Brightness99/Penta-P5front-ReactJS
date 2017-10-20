@@ -1,13 +1,13 @@
 .additional-options-container {
-  display               : grid;
-  grid-template-columns : 1fr;
-  width                 : 100%;
-  margin                : 2rem 0;
-
+  display         : flex;
+  flex-direction  : column;
+  justify-content : center;
+  align-items     : center;
+  width           : 100%;
+  margin          : 2rem 0;
   @include lg {
-    grid-template-columns : 1fr 1fr;
+    flex-direction : row;
   }
-
   .additional-option-container {
     display        : flex;
     width          : 80%;
@@ -15,7 +15,7 @@
     padding-bottom : 1rem;
     flex-direction : column;
     @include lg {
-      width        : 100%;
+      width        : 50%;
       padding-left : 3rem;
       &:first-of-type {
         padding-right : 3rem;
@@ -57,10 +57,15 @@
 
     .box-radio-container {
       display         : flex;
-      width           : 100%;
+      width           : 90%;
       flex-direction  : row;
       justify-content : space-between;
-      padding-right   : 2rem;
+      padding-right   : 1rem;
+      .radio-label {
+        overflow      : hidden;
+        white-space   : nowrap;
+        text-overflow : ellipsis;
+      }
       .price-title {
         font-weight : 400;
         font-family : $font-family-nunito-regular;

@@ -57,7 +57,7 @@ export default class AdditionalUploadOption extends React.Component {
           checked={activeRadio === option.label}
         >
           <section className="box-radio-container">
-            <span>{option.label}</span>
+            <span className="radio-label">{option.label}</span>
             {this.renderPriceTitle(option)}
           </section>
         </BoxRadio>
