@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import mock from 'assets/json/uploadMock.json';
-import { uploadFetch, uploadFileRequest } from 'actions';
+import { uploadFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
 import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
@@ -27,7 +27,6 @@ type Props = {
   isLoading: boolean,
   uploadInfo: {},
   uploadInfoFetch: (slug, itemId) => void,
-  uploadFile: (file: {}) => void,
   uploadFileProgress: {
     progress: number,
     preview: {},
@@ -41,7 +40,8 @@ type Props = {
 type State = {
   currentStep: number,
   selectedStrategy: number,
-  selectedAdditionalParameters: []
+  selectedAdditionalParameters: [],
+  uploadedFiles: [],
 }
 
 export class Upload extends React.Component {
@@ -75,11 +75,9 @@ export class Upload extends React.Component {
   };
 
   handleUploadFile = (file: {}) => {
-    const { uploadFile } = this.props;
-
-    if (uploadFile && typeof uploadFile === 'function') {
-      uploadFile(file);
-    }
+    this.setState({
+      uploadedFiles: [file],
+    });
   };
 
   renderUploadTypeSchema = () => {
@@ -284,7 +282,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
   uploadInfoFetch: (slug, itemId) => dispatch(uploadFetch(slug, itemId)),
-  uploadFile: (file) => dispatch(uploadFileRequest(file)),
 });
 
 

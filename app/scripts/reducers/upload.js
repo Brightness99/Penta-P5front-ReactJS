@@ -16,6 +16,7 @@ export type UploadState = {
     progress: number,
     preview: {},
     isRunning: boolean,
+    isUploaded: boolean,
     error: boolean,
     message: string,
   },
@@ -34,6 +35,7 @@ export const uploadState: UploadState = {
     progress: 0,
     preview: {},
     isRunning: false,
+    isUploaded: false,
     error: false,
     message: '',
   },
@@ -80,6 +82,7 @@ export default {
           progress: 0,
           preview: {},
           isRunning: true,
+          isUploaded: false,
           error: false,
           message: '',
         },
@@ -100,6 +103,8 @@ export default {
         uploadFile: {
           ...state.uploadFile,
           progress: 100,
+          isRunning: false,
+          isUploaded: true,
           preview: action.payload,
         },
       };
@@ -110,6 +115,7 @@ export default {
         uploadFile: {
           ...state.uploadFile,
           isRunning: false,
+          isUploaded: false,
           error: false,
           message: action.payload.message,
         },

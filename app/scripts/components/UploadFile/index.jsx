@@ -1,17 +1,21 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import cx from 'classnames';
+import { uploadFileRequest } from 'actions';
 import FileFormatIcon from 'components/FileFormatIcon';
 import ProgressBar from 'components/ProgressBar';
 
 type Props = {
   acceptedFormats: Array<string>,
   handleFileChanged: (file: {}) => void,
-  uploadProgress: number,
   fileFormats: Array<string>,
-  isFileLoading: boolean,
-  isFileUploadError: boolean,
-  preview: {}
+  preview: {},
+  isUploadRunning: boolean,
+  isUploaded: boolean,
+  progress: boolean,
+  uploadFile: (file: {}) => void,
+  uploadedFileInfo: {}
 }
 
 type State = {
@@ -21,7 +25,7 @@ type State = {
   fileFormat: string,
 }
 
-export default class UploadFile extends React.Component {
+export class UploadFile extends React.Component {
   constructor(props: Props) {
     super(props);
 
@@ -30,10 +34,15 @@ export default class UploadFile extends React.Component {
     };
   }
 
-  static defaultProps = {
-    uploadProgress: 0,
-    isFileLoading: false,
-  };
+  componentWillReceiveProps(newProps) {
+    const { isUploaded, handleFileChanged } = this.props;
+    const newIsUploaded = newProps.isUploaded;
+    const preview = newProps.preview;
+
+    if (newIsUploaded && !isUploaded && handleFileChanged && typeof handleFileChanged === 'function') {
+      handleFileChanged(preview);
+    }
+  }
 
   props: Props;
   state: State;
@@ -68,22 +77,22 @@ export default class UploadFile extends React.Component {
   };
 
   handleFile = (file) => {
-    const fileName =  file.name;
+    const fileName = file.name;
     const format = fileName.split('.').pop();
-    const { handleFileChanged } = this.props;
+    const { uploadFile } = this.props;
     this.setState({
       fileName,
       fileFormat: format,
       isSelected: true,
     });
 
-    if (typeof handleFileChanged === 'function') {
-      handleFileChanged(file);
+    if (typeof uploadFile === 'function') {
+      uploadFile(file);
     }
   };
 
   renderContent = () => {
-    const { uploadProgress } = this.props;
+    const { progress } = this.props;
     const { isSelected, fileName, fileFormat } = this.state;
 
     if (isSelected) {
@@ -91,7 +100,7 @@ export default class UploadFile extends React.Component {
         <section className="loading-content">
           <FileFormatIcon title={fileFormat} />
           <span className="file-title">{fileName}</span>
-          <ProgressBar progress={uploadProgress} />
+          <ProgressBar progress={progress} />
           <button>Cancelar</button>
         </section>
       );
@@ -129,3 +138,17 @@ export default class UploadFile extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  isUploadRunning: state.upload.uploadFile.isRunning,
+  isUploaded: state.upload.uploadFile.isUploaded,
+  progress: state.upload.uploadFile.progress,
+  preview: state.upload.uploadFile.preview,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  uploadFile: (file) => dispatch(uploadFileRequest(file)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UploadFile);
