@@ -34,25 +34,24 @@ export class LogoLoyalty extends React.Component {
       }
     };
 
-    /*if (enableLink) {
+    if (enableLink) {
       return (
         <div className="atm-printi-logo">
           <NavLink to="/" onClick={handleClick}>
-            {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={this.props.fill} />}
             {loyalty.isLoaded && !loyalty.isRunning && loyalty.color && <div className="org-logo-loyalty">
-              <p>Club</p>
+              {small ? '' : <p>Club</p> }
               {loyalty.color && <p className="mol-logo-loyalty" style={this.setBackgroundColor(loyalty.color)}>{loyalty.loyalty_tier_name}</p>}
             </div>}
           </NavLink>
         </div>
       );
-}*/
+    }
 
     return (
       <NavLink to="/" onClick={handleClick}>
-        {/*small ? <PrintiSymbolIcon /> : <PrintiIcon fill={this.props.fill} />*/}
         {loyalty.isLoaded && !loyalty.isRunning && loyalty.color && <div className="org-logo-loyalty">
-          <p>Club</p>
+          {small ? '' : <p>Club</p> }
+          {/*<p>Club</p>*/}
           {loyalty.color && <p className="mol-logo-loyalty" style={this.setBackgroundColor(loyalty.color)}>{loyalty.loyalty_tier_name}</p>}
         </div>}
       </NavLink>

@@ -175,7 +175,7 @@ export class Header extends React.Component {
         <div className="org-header-content">
           <div className="container">
             <Logo small={!showTopbar} enableLink={true} />
-            <LogoLoyalty />
+            <LogoLoyalty small={!showTopbar} enableLink={true} />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu
