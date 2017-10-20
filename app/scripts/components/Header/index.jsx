@@ -26,6 +26,7 @@ type Props = {
   isAuthorized: boolean,
   config: {},
   account: {},
+  handleCloseTopbar: () => {},
 };
 
 type State = {
@@ -68,6 +69,11 @@ export class Header extends React.Component {
       window.removeEventListener('scroll', this.handleScroll);
     }
   }
+
+  handleCloseTopbar = () => {
+    document.querySelector('.org-loyalty-topbar').classList.add('hide-topbar');
+    // this.setState({ showTopbarLoyalty: false });
+  };
 
   static props: Props;
 
@@ -121,7 +127,9 @@ export class Header extends React.Component {
 
     return (
       <header className="org-header">
-        {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
+        { loyalty.isLoaded && !loyalty.isRunning && loyalty.header &&
+          <LoyaltyTopbar handleCloseTopbar={this.handleCloseTopbar} />
+        }
         <div className="mol-mobile-header">
           <div className="mol-header-button mol-header-button--menu">
             <button onClick={this.handleShowMenu} className="atm-header-icon-button">
@@ -154,8 +162,6 @@ export class Header extends React.Component {
     );
   }
 
-  // {loyalty.isLoaded && !loyalty.isRunning && loyalty.header && <LoyaltyTopbar />}
-  // <LogoLoyalty small={!showTopbar} enableLink={true} />
   renderDesktop() {
     const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
     const { showTopbar, activePane } = this.state;
@@ -168,8 +174,8 @@ export class Header extends React.Component {
         )}
       >
         {
-          loyalty.isLoaded && !loyalty.isRunning && loyalty.header && 
-          <LoyaltyTopbar handleClose={this.handleClose} />
+          loyalty.isLoaded && !loyalty.isRunning && loyalty.header &&
+          <LoyaltyTopbar handleCloseTopbar={this.handleCloseTopbar} screenSize={screenSize} />
         }
         <Topbar handleClose={this.handlePaneHide} />
         <div className="org-header-content">
