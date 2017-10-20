@@ -5,8 +5,6 @@ import { BlockTitle } from 'atoms/Titles';
 import { Select } from 'atoms/Inputs/Select';
 import { InputEmail, InputRegex } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
-import './ContactForm.styles.scss';
-
 
 type FormType = {
   email: { valid: boolean, value: string },

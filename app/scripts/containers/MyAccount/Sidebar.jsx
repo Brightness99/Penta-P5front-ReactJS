@@ -1,7 +1,7 @@
 // flow
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub, ReferralIcon } from 'components/Icons';
+import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub, ReferralIcon, Bell } from 'components/Icons';
 
 export class Sidebar extends React.Component {
   render() {
@@ -45,7 +45,7 @@ export class Sidebar extends React.Component {
           </li>
           <li>
             <NavLink exact={true} activeClassName="is-active" to="/minha-conta/notificacoes">
-              <i><ModelsIcon /></i>
+              <i className="bellIcon"><Bell /></i>
               <span>Notificação</span>
             </NavLink>
           </li>
@@ -62,7 +62,7 @@ export class Sidebar extends React.Component {
             </NavLink>
           </li>
           <li>
-            <NavLink exact={true} activeClassName="is-active" to="#">
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/programa-de-fidelidade">
               <i className="printClubIcon"><PrintiClub /></i>
             </NavLink>
           </li>
