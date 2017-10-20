@@ -16,8 +16,4 @@ export const FileMountConstants = keyMirror({
   FILE_MOUNT_FETCH_SUCCESS: undefined,
   FILE_MOUNT_FETCH_FAILURE: undefined,
   FILE_MOUNT_FETCH_CANCEL: undefined,
-  FILE_MOUNT_ITEM_FETCH_REQUEST: undefined,
-  FILE_MOUNT_ITEM_FETCH_SUCCESS: undefined,
-  FILE_MOUNT_ITEM_FETCH_FAILURE: undefined,
-  FILE_MOUNT_ITEM_FETCH_CANCEL: undefined,
 });

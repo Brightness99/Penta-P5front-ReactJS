@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { isMobile } from 'utils/helpers';
+import { isMobile, getTitleFromSlug } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { guideFetch } from 'actions';
 
@@ -12,30 +12,50 @@ type Props = {
   app: AppStore,
   router: RouterStore,
   guide: {},
+  match: {
+    params: {
+      slug: ''
+    }
+  },
   dispatch: () => {},
 };
 
 export class PrintGuide extends React.Component {
   componentDidMount() {
+    const { match: { params: { slug } }, dispatch } = this.props;
+    const validSlug = (slug === undefined) ? '' : slug;
+    dispatch(guideFetch(validSlug));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: { params: { slug } }, dispatch } = this.props;
+    if (slug !== nextProps.match.params.slug) {
+      const validSlug = (nextProps.match.params.slug === undefined) ? '' : nextProps.match.params.slug;
+      this.setState({ slug: validSlug });
+      dispatch(guideFetch(validSlug));
+    }
+  }
+
+  static props: Props;
+  state = {
+    slug: '',
+  }
+
+  refreshPage = () => {
     const { dispatch } = this.props;
     const indexPage = '';
     dispatch(guideFetch(indexPage));
   }
 
-  static props: Props;
-  state = {
-    breadcrumbTitle: '',
-  }
-
-  selectItem = (slug) => {
+  selectItem = (str) => {
     const { dispatch } = this.props;
-    dispatch(guideFetch(slug));
-    this.setState({ breadcrumbTitle: slug });
+    dispatch(guideFetch(str));
+    this.setState({ slug: str });
   };
 
   render() {
     const { app: { screenSize } } = this.props;
-    const { breadcrumbTitle } = this.state;
+    const { slug } = this.state;
     const breadcrumb = [
       {
         title: 'Home',
@@ -43,10 +63,10 @@ export class PrintGuide extends React.Component {
       },
       {
         title: 'Guia de impressão',
-        url: '/montagem-do-arquivo',
+        url: '/guia-de-impressao',
       },
       {
-        title: breadcrumbTitle,
+        title: getTitleFromSlug(slug),
       },
     ];
     const { guide } = this.props;

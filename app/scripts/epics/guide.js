@@ -9,7 +9,7 @@ import { push } from 'modules/ReduxRouter';
 export function guideFetch(action$) {
   return action$.ofType(GuideConstants.GUIDE_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v2/guia-de-impressao/${action.payload.slug}`;
+      const endpoint = (action.payload.slug === 'guia-de-impressao' || action.payload.slug === '') ? '/v2/guia-de-impressao' : `/v2/guia-de-impressao/${action.payload.slug}`;
 
       return rxAjax({
         endpoint,
