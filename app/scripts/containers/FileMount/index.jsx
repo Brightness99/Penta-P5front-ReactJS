@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { shouldComponentUpdate, isMobile, getTitleFromSlug } from 'utils/helpers';
 import { PageTitle } from 'atoms/Titles';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { fileMountFetch, fileMountItemFetch } from 'actions';
+import { fileMountFetch } from 'actions';
 
 import Sidebar from './Sidebar';
 import ContentText from './ContentText';
@@ -13,11 +13,16 @@ type Props = {
   app: AppStore,
   router: RouterStore,
   fileMount: {},
+  match: {
+    params: {
+      slug: ''
+    }
+  },
   dispatch: () => {},
 };
 
 type State = {
-  breadcrumbTitle: string,
+  slug: string,
 };
 
 export class FileMount extends React.Component {
@@ -25,30 +30,40 @@ export class FileMount extends React.Component {
     super(props);
 
     this.state = {
-      breadcrumbTitle: '',
+      slug: '',
     };
   }
 
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fileMountFetch());
+    const { match: { params: { slug } }, dispatch } = this.props;
+    const validSlug = (slug === undefined) ? '' : slug;
+    dispatch(fileMountFetch(validSlug));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: { params: { slug } }, dispatch } = this.props;
+    if (slug !== nextProps.match.params.slug) {
+      const validSlug = (nextProps.match.params.slug === undefined) ? '' : nextProps.match.params.slug;
+      this.setState({ slug: validSlug });
+      dispatch(fileMountFetch(validSlug));
+    }
   }
 
   static props: Props;
 
   static state: State;
 
-  selectItem = (slug) => {
+  selectItem = (str) => {
     const { dispatch } = this.props;
-    dispatch(fileMountItemFetch(slug));
-    this.setState({ breadcrumbTitle: slug });
+    dispatch(fileMountFetch(str));
+    this.setState({ slug: str });
   };
 
   render() {
     const { app: { screenSize } } = this.props;
-    const { breadcrumbTitle } = this.state;
+    const { slug } = this.state;
     const breadcrumb = [
       {
         title: 'Home',
@@ -59,7 +74,7 @@ export class FileMount extends React.Component {
         url: '/montagem-do-arquivo',
       },
       {
-        title: breadcrumbTitle,
+        title: getTitleFromSlug(slug),
       },
     ];
     const { fileMount } = this.props;

@@ -8,26 +8,13 @@ import { FileMountConstants } from 'constants/index';
 
 /**
  * FileMount Fetch
- * @param null
+ * @param {string} slug
  *
  * @returns {Object}
  */
-export function fileMountFetch(): Object {
+export function fileMountFetch(slug: string): Object {
   return {
     type: FileMountConstants.FILE_MOUNT_FETCH_REQUEST,
-    payload: {},
-  };
-}
-
-/**
- * File Mount Item Fetch
- /* @param {string} slug
- *
- * @returns {Object}
- */
-export function fileMountItemFetch(slug: string): Object {
-  return {
-    type: FileMountConstants.FILE_MOUNT_ITEM_FETCH_REQUEST,
     payload: {
       slug,
     },

@@ -238,9 +238,9 @@ export class Sidebar extends React.Component {
       }
       return (
         <li key={accordionIndex.toString()}>
-          <button onClick={() => this.handleItemClick(accordionItem.slug, accordionItem.title)}>
+          <NavLink to={`/montagem-do-arquivo/${accordionItem.slug}`} onClick={() => this.handleItemClick(accordionItem.slug, accordionItem.title)}>
             {imageMark}{accordionItem.title}
-          </button>
+          </NavLink>
         </li>
       );
     });

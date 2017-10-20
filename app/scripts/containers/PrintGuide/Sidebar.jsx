@@ -93,7 +93,7 @@ export class Sidebar extends React.Component {
     const renderMark = list.map((accordionItem, accordionIndex) => {
       return (
         <li key={accordionIndex.toString()}>
-          <NavLink to="#" onClick={() => this.handleItemClick(accordionItem.slug)}>
+          <NavLink to={`/guia-de-impressao/${accordionItem.slug}`} onClick={() => this.handleItemClick(accordionItem.slug)}>
             {accordionItem.title}
           </NavLink>
         </li>
@@ -122,7 +122,7 @@ export class Sidebar extends React.Component {
 
   renderListMobile(index, list) {
     const renderMark = list.map((accordionItem, accordionIndex) => (
-      <AccordionItem key={accordionIndex.toString()} >
+      <AccordionItem key={accordionIndex.toString()}>
         <AccordionItemTitle handleClick={() => this.handleItemClick(accordionItem.slug)}>{accordionItem.title}</AccordionItemTitle>
       </AccordionItem>
     ));
