@@ -1,6 +1,7 @@
 .org-loyalty-topbar {
   background-color: #8261f8;
   padding: 0.6rem;
+  font-size: $font-size-xxxs;
   .mol-loyalty-topbar {
     align-items: center;
     display: flex;
@@ -13,29 +14,21 @@
       color: $color-white;
       display: flex;
       font-family: $font-family-open-sans-bold;
-      font-size: $font-size-xs;
       justify-content: center;
       &.qrk-type-of-loyalty {
         background-color: $color-white;
         box-sizing: border-box;
         border-radius: 30px;
-        color: $color-deep-purple;
-        font-size: $font-size-sm;
         margin-right: 2rem;
         text-transform: uppercase;
         text-align: center;
-        padding: 0rem 0.9rem;
-      }
-      svg {
-        width: 1rem;
-        height: 1rem;
-        fill: $color-white;
+        padding: 0rem 0.7rem;
       }
     }
     a {
       svg {
-        width: 1rem;
-        height: 1rem;
+        width: 1.2rem;
+        height: 1.2rem;
         fill: $color-white;
       }
     }
@@ -47,9 +40,9 @@
   box-sizing: border-box;
   color: $color-almostBlack;
   font-family: $font-family-open-sans-bold;
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
   text-align: center;
-  padding-left: 1rem;
+  max-width: 7rem;
   p {
     margin-bottom: 0;
   }
