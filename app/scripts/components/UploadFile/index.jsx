@@ -2,8 +2,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { uploadFileRequest } from 'actions';
+import config from 'config';
+import { uploadFileRequest, uploadFileCancel } from 'actions';
 import FileFormatIcon from 'components/FileFormatIcon';
+import TrashIcon from 'components/Icons/Trash';
 import ProgressBar from 'components/ProgressBar';
 
 type Props = {
@@ -15,6 +17,7 @@ type Props = {
   isUploaded: boolean,
   progress: boolean,
   uploadFile: (file: {}) => void,
+  uploadCancel: () => void,
   uploadedFileInfo: {}
 }
 
@@ -23,6 +26,13 @@ type State = {
   isSelected: boolean,
   fileName: string,
   fileFormat: string,
+  isShowPreview: boolean,
+  preview: {
+    originalName: string,
+    basename: string,
+    pages: Array<{ preview_big: string, preview_small: string }>,
+    thumbnail: string
+  }
 }
 
 export class UploadFile extends React.Component {
@@ -31,13 +41,22 @@ export class UploadFile extends React.Component {
 
     this.state = {
       isSelected: false,
+      isShowPreview: false,
     };
   }
 
   componentWillReceiveProps(newProps) {
     const { isUploaded, handleFileChanged } = this.props;
+    const { isSelected } = this.state;
     const newIsUploaded = newProps.isUploaded;
     const preview = newProps.preview;
+    if (isSelected && newIsUploaded) {
+      this.setState({
+        isSelected: false,
+        isShowPreview: true,
+        preview,
+      });
+    }
 
     if (newIsUploaded && !isUploaded && handleFileChanged && typeof handleFileChanged === 'function') {
       handleFileChanged(preview);
@@ -91,6 +110,26 @@ export class UploadFile extends React.Component {
     }
   };
 
+  handleRemoveFile = () => {
+    this.setState({
+      isSelected: false,
+      isShowPreview: false,
+      preview: {},
+    });
+  };
+
+  handleCancelUploading = () => {
+    const { uploadCancel } = this.props;
+    this.setState({
+      isSelected: false,
+      isShowPreview: false,
+      preview: {},
+    });
+    if (uploadCancel && typeof uploadCancel === 'function') {
+      uploadCancel();
+    }
+  };
+
   renderContent = () => {
     const { progress } = this.props;
     const { isSelected, fileName, fileFormat } = this.state;
@@ -101,7 +140,7 @@ export class UploadFile extends React.Component {
           <FileFormatIcon title={fileFormat} />
           <span className="file-title">{fileName}</span>
           <ProgressBar progress={progress} />
-          <button>Cancelar</button>
+          <button onClick={this.handleCancelUploading}>Cancelar</button>
         </section>
       );
     }
@@ -127,7 +166,33 @@ export class UploadFile extends React.Component {
     );
   };
 
-  render() {
+  renderPreview() {
+    const { apiUrl } = config;
+    const { preview: { originalName, pages } } = this.state;
+    const mappedPages = Object.keys(pages).map(x => pages[x]);
+    return (
+      <section className="upload-file-preview-container">
+        <section className="preview-header">
+          <h4>{originalName}</h4>
+        </section>
+        <section className="preview-content">
+          <section className="preview-images-container">
+            <section className="preview-item" key={mappedPages[0].preview_small}><img
+              src={`${apiUrl + mappedPages[0].preview_small}`} alt="preview"
+            /></section>
+            <section className="preview-item" key={mappedPages[1].preview_small}><img
+              src={`${apiUrl + mappedPages[1].preview_small}`} alt="preview"
+            /></section>
+          </section>
+          <section className="preview-footer">
+            <button className="remove-button" onClick={this.handleRemoveFile}><TrashIcon />Excluir arquivo</button>
+          </section>
+        </section>
+      </section>
+    );
+  }
+
+  renderUploadContainer() {
     const { isShowDropzone, isSelected } = this.state;
     const isActive = isShowDropzone || isSelected;
     return (
@@ -136,6 +201,11 @@ export class UploadFile extends React.Component {
         {this.renderContent()}
       </section>
     );
+  }
+
+  render() {
+    const { isShowPreview } = this.state;
+    return isShowPreview ? this.renderPreview() : this.renderUploadContainer();
   }
 }
 
@@ -148,6 +218,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   uploadFile: (file) => dispatch(uploadFileRequest(file)),
+  uploadCancel: (file) => dispatch(uploadFileCancel(file)),
 });
 
 

@@ -102,3 +102,50 @@
     border           : 1px dashed #006ee3;
   }
 }
+
+.upload-file-preview-container {
+  display         : flex;
+  flex-direction  : column;
+  justify-content : flex-start;
+  width           : 100%;
+  .preview-content {
+    border           : 0.1rem solid #c7c9cb;
+    border-radius    : 0.3rem;
+    background-color : #ffffff;
+    .preview-images-container {
+      display          : flex;
+      background-color : #eeeeee;
+      .preview-item {
+        padding         : 1.5rem 0;
+        display         : flex;
+        justify-content : center;
+        align-items     : center;
+        width           : 50%;
+      }
+      .preview-item:first-of-type {
+        border-right : 0.1rem solid #c7c9cb;
+      }
+    }
+    .preview-footer {
+      display         : flex;
+      justify-content : flex-end;
+      padding         : 1rem;
+      .remove-button {
+        display          : flex;
+        justify-content  : center;
+        align-items      : center;
+        border           : none;
+        font-size        : 1.2rem;
+        font-family      : $font-family-open-sans-bold;
+        color            : #fa656e;
+        background-color : transparent;
+        text-align       : center;
+        svg {
+          width  : 2rem;
+          height : 2rem;
+          fill   : #fa656e;
+        }
+      }
+    }
+  }
+}

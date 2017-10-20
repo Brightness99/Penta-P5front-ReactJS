@@ -23,6 +23,7 @@ export function uploadFetch(slug: string, itemId: string): Object {
     },
   };
 }
+
 /**
  * upload file request
  *
@@ -34,5 +35,18 @@ export function uploadFileRequest(file: {}): Object {
   return {
     type: UploadConstants.UPLOAD_FILE_REQUEST,
     payload: file,
+  };
+}
+
+/**
+ * upload file cancel
+ *
+ * @param {Object} file
+ *
+ * @returns {Object}
+ */
+export function uploadFileCancel(file: {}): Object {
+  return {
+    type: UploadConstants.UPLOAD_FILE_CANCEL,
   };
 }
