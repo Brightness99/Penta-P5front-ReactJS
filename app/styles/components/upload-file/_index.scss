@@ -3,6 +3,7 @@
   margin        : 1rem;
   border-radius : 3px;
   width         : 100%;
+  max-width     : 40rem;
   height        : 20rem;
   cursor        : pointer;
   input[type=file] {
@@ -108,28 +109,33 @@
   flex-direction  : column;
   justify-content : flex-start;
   width           : 100%;
+  max-width       : 40rem;
   .preview-content {
-    border           : 0.1rem solid #c7c9cb;
-    border-radius    : 0.3rem;
-    background-color : #ffffff;
     .preview-images-container {
       display          : flex;
       background-color : #eeeeee;
+      border           : 0.1rem solid #c7c9cb;
+      border-bottom    : 0;
+      border-radius    : 0.3rem 0.3rem 0 0;
       .preview-item {
         padding         : 1.5rem 0;
         display         : flex;
         justify-content : center;
         align-items     : center;
         width           : 50%;
+        height          : 15rem;
       }
       .preview-item:first-of-type {
         border-right : 0.1rem solid #c7c9cb;
       }
     }
     .preview-footer {
-      display         : flex;
-      justify-content : flex-end;
-      padding         : 1rem;
+      display          : flex;
+      justify-content  : flex-end;
+      padding          : 1rem;
+      background-color : #ffffff;
+      border           : 0.1rem solid #c7c9cb;
+      border-radius    : 0 0 0.3rem 0.3rem;
       .remove-button {
         display          : flex;
         justify-content  : center;

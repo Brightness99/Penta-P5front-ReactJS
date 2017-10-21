@@ -2,11 +2,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import config from 'config';
 import { uploadFileRequest, uploadFileCancel } from 'actions';
 import FileFormatIcon from 'components/FileFormatIcon';
-import TrashIcon from 'components/Icons/Trash';
-import ProgressBar from 'components/ProgressBar';
+import PreviewUploadedFile from './PreviewUploadedFile';
+import UploadFilePlaceholder from './UploadFilePlaceholder';
+import UploadProgress from './UploadProgress';
 
 type Props = {
   acceptedFormats: Array<string>,
@@ -23,7 +23,7 @@ type Props = {
 
 type State = {
   isShowDropzone: boolean,
-  isSelected: boolean,
+  isSelectedFileForUpload: boolean,
   fileName: string,
   fileFormat: string,
   isShowPreview: boolean,
@@ -40,26 +40,25 @@ export class UploadFile extends React.Component {
     super(props);
 
     this.state = {
-      isSelected: false,
+      isSelectedFileForUpload: false,
       isShowPreview: false,
     };
   }
 
   componentWillReceiveProps(newProps) {
-    const { isUploaded, handleFileChanged } = this.props;
-    const { isSelected } = this.state;
-    const newIsUploaded = newProps.isUploaded;
-    const preview = newProps.preview;
-    if (isSelected && newIsUploaded) {
+    const { handleFileChanged } = this.props;
+    const { isSelectedFileForUpload } = this.state;
+    const { isUploaded, preview } = newProps;
+
+    if (isSelectedFileForUpload && isUploaded) {
       this.setState({
-        isSelected: false,
+        isSelectedFileForUpload: false,
         isShowPreview: true,
         preview,
       });
-    }
-
-    if (newIsUploaded && !isUploaded && handleFileChanged && typeof handleFileChanged === 'function') {
-      handleFileChanged(preview);
+      if (handleFileChanged && typeof handleFileChanged === 'function') {
+        handleFileChanged(preview);
+      }
     }
   }
 
@@ -88,31 +87,28 @@ export class UploadFile extends React.Component {
 
   onDrop = (e) => {
     e.preventDefault();
+    const { uploadFile } = this.props;
     const files = e.dataTransfer.files;
-    this.handleFile(files[0]);
-    // Upload files
-    this.setState({ isShowDropzone: false });
-    return false;
-  };
-
-  handleFile = (file) => {
+    const file = files[0];
     const fileName = file.name;
     const format = fileName.split('.').pop();
-    const { uploadFile } = this.props;
+
     this.setState({
+      isShowDropzone: false,
       fileName,
       fileFormat: format,
-      isSelected: true,
+      isSelectedFileForUpload: true,
     });
 
     if (typeof uploadFile === 'function') {
       uploadFile(file);
     }
+    return false;
   };
 
   handleRemoveFile = () => {
     this.setState({
-      isSelected: false,
+      isSelectedFileForUpload: false,
       isShowPreview: false,
       preview: {},
     });
@@ -121,7 +117,7 @@ export class UploadFile extends React.Component {
   handleCancelUploading = () => {
     const { uploadCancel } = this.props;
     this.setState({
-      isSelected: false,
+      isSelectedFileForUpload: false,
       isShowPreview: false,
       preview: {},
     });
@@ -132,27 +128,25 @@ export class UploadFile extends React.Component {
 
   renderContent = () => {
     const { progress } = this.props;
-    const { isSelected, fileName, fileFormat } = this.state;
+    const { isSelectedFileForUpload, fileName, fileFormat } = this.state;
 
-    if (isSelected) {
-      return (
-        <section className="loading-content">
-          <FileFormatIcon title={fileFormat} />
-          <span className="file-title">{fileName}</span>
-          <ProgressBar progress={progress} />
-          <button onClick={this.handleCancelUploading}>Cancelar</button>
-        </section>
-      );
+    if (isSelectedFileForUpload) {
+      return (<UploadProgress
+        progress={progress}
+        fileName={fileName}
+        fileFormat={fileFormat}
+        handleCancelUploading={this.handleCancelUploading}
+      />);
     }
 
     return (
       <label
-        htmlFor="file"
         onDragLeave={this.onDragLeave}
         onDragEnter={this.onDragEnter}
         onDragOver={this.onDragOver}
         onDrop={this.onDrop}
       >
+        <input type="file" />
         <section className="icons">
           <FileFormatIcon title="AI" />
           <FileFormatIcon title="IND" />
@@ -166,46 +160,24 @@ export class UploadFile extends React.Component {
     );
   };
 
-  renderPreview() {
-    const { apiUrl } = config;
-    const { preview: { originalName, pages } } = this.state;
-    const mappedPages = Object.keys(pages).map(x => pages[x]);
-    return (
-      <section className="upload-file-preview-container">
-        <section className="preview-header">
-          <h4>{originalName}</h4>
-        </section>
-        <section className="preview-content">
-          <section className="preview-images-container">
-            <section className="preview-item" key={mappedPages[0].preview_small}><img
-              src={`${apiUrl + mappedPages[0].preview_small}`} alt="preview"
-            /></section>
-            <section className="preview-item" key={mappedPages[1].preview_small}><img
-              src={`${apiUrl + mappedPages[1].preview_small}`} alt="preview"
-            /></section>
-          </section>
-          <section className="preview-footer">
-            <button className="remove-button" onClick={this.handleRemoveFile}><TrashIcon />Excluir arquivo</button>
-          </section>
-        </section>
-      </section>
-    );
-  }
-
   renderUploadContainer() {
-    const { isShowDropzone, isSelected } = this.state;
-    const isActive = isShowDropzone || isSelected;
+    const { isShowDropzone, isSelectedFileForUpload } = this.state;
+    const { isUploadRunning } = this.props;
+    const isActive = isShowDropzone || isSelectedFileForUpload;
+    const showPlaceholder = !isSelectedFileForUpload && isUploadRunning;
+
     return (
       <section className={cx('upload-file-container', isActive && 'active')}>
-        <input type="file" id="file" />
-        {this.renderContent()}
+        {showPlaceholder ? <UploadFilePlaceholder /> : this.renderContent()}
       </section>
     );
   }
 
   render() {
-    const { isShowPreview } = this.state;
-    return isShowPreview ? this.renderPreview() : this.renderUploadContainer();
+    const { isShowPreview, preview } = this.state;
+    return isShowPreview ?
+      <PreviewUploadedFile preview={preview} handleRemoveFile={this.handleRemoveFile} /> :
+      this.renderUploadContainer();
   }
 }
 
@@ -220,6 +192,5 @@ const mapDispatchToProps = (dispatch) => ({
   uploadFile: (file) => dispatch(uploadFileRequest(file)),
   uploadCancel: (file) => dispatch(uploadFileCancel(file)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(UploadFile);
