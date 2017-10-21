@@ -14,7 +14,7 @@
     position : absolute;
     z-index  : -1;
   }
-  label {
+  .upload-file-block {
     display         : flex;
     flex-direction  : column;
     justify-content : center;
@@ -24,6 +24,9 @@
     & > * {
       pointer-events : none;
     }
+  }
+  .placeholder {
+    margin : auto;
   }
   .loading-content {
     display         : flex;
@@ -48,7 +51,7 @@
         font-size : 1.2rem;
       }
     }
-    button {
+    .cancel-button {
       color            : #006ee3;
       background-color : transparent;
       text-transform   : uppercase;
@@ -101,6 +104,11 @@
   &.active {
     background-color : #eef3f9;
     border           : 1px dashed #006ee3;
+  }
+
+  &.inactive {
+    pointer-events : none;
+    opacity        : 0.6;
   }
 }
 

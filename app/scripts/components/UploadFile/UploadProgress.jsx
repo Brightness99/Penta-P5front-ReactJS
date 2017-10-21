@@ -15,7 +15,7 @@ const UploadProgress = ({ fileFormat, fileName, progress, handleCancelUploading 
     <FileFormatIcon title={fileFormat} />
     <span className="file-title">{fileName}</span>
     <ProgressBar progress={progress} />
-    <button onClick={handleCancelUploading}>Cancelar</button>
+    <button className="cancel-button" onClick={handleCancelUploading}>Cancelar</button>
   </section>
   );
 
