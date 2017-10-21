@@ -5,7 +5,6 @@ import cx from 'classnames';
 import { uploadFileRequest, uploadFileCancel } from 'actions';
 import FileFormatIcon from 'components/FileFormatIcon';
 import PreviewUploadedFile from './PreviewUploadedFile';
-import UploadFilePlaceholder from './UploadFilePlaceholder';
 import UploadProgress from './UploadProgress';
 
 type Props = {
@@ -141,6 +140,7 @@ export class UploadFile extends React.Component {
 
     return (
       <label
+        className="upload-file-block"
         onDragLeave={this.onDragLeave}
         onDragEnter={this.onDragEnter}
         onDragOver={this.onDragOver}
@@ -164,11 +164,11 @@ export class UploadFile extends React.Component {
     const { isShowDropzone, isSelectedFileForUpload } = this.state;
     const { isUploadRunning } = this.props;
     const isActive = isShowDropzone || isSelectedFileForUpload;
-    const showPlaceholder = !isSelectedFileForUpload && isUploadRunning;
+    const isInactive = !isSelectedFileForUpload && isUploadRunning;
 
     return (
-      <section className={cx('upload-file-container', isActive && 'active')}>
-        {showPlaceholder ? <UploadFilePlaceholder /> : this.renderContent()}
+      <section className={cx('upload-file-container', isActive && 'active', isInactive && 'inactive')}>
+        {this.renderContent()}
       </section>
     );
   }
