@@ -1,12 +1,16 @@
 @import "preview-image-modal";
 
 .upload-file-container {
+  width : 100%;
+}
+
+.upload-file-content {
   border        : 1px dashed #c7c9cb;
-  margin        : 1rem;
+  padding       : 1rem;
   border-radius : 3px;
   width         : 100%;
   max-width     : 40rem;
-  height        : 20rem;
+  height        : 19rem;
   cursor        : pointer;
   input[type=file] {
     width    : 1px;
@@ -143,7 +147,7 @@
     .preview-footer {
       display          : flex;
       justify-content  : flex-end;
-      padding          : 1rem;
+      padding          : 0.8rem;
       background-color : #ffffff;
       border           : 0.1rem solid #c7c9cb;
       border-radius    : 0 0 0.3rem 0.3rem;

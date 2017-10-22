@@ -9,9 +9,12 @@ import UploadProgress from './UploadProgress';
 
 type Props = {
   acceptedFormats: Array<string>,
-  handleFileChanged: (file: {}) => void,
+  handleUploadFile: (file: { title: string, preview: {} }) => void,
+  handleRemoveFile: (file: { title: string, preview: {} }) => void,
   fileFormats: Array<string>,
   preview: {},
+  title: string,
+  showTitle: string,
   isUploadRunning: boolean,
   isUploaded: boolean,
   progress: boolean,
@@ -45,7 +48,7 @@ export class UploadFile extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { handleFileChanged } = this.props;
+    const { handleUploadFile, title } = this.props;
     const { isSelectedFileForUpload } = this.state;
     const { isUploaded, preview } = newProps;
 
@@ -55,8 +58,8 @@ export class UploadFile extends React.Component {
         isShowPreview: true,
         preview,
       });
-      if (handleFileChanged && typeof handleFileChanged === 'function') {
-        handleFileChanged(preview);
+      if (handleUploadFile && typeof handleUploadFile === 'function') {
+        handleUploadFile({ title, preview });
       }
     }
   }
@@ -106,11 +109,18 @@ export class UploadFile extends React.Component {
   };
 
   handleRemoveFile = () => {
+    const { preview } = this.state;
+    const { handleRemoveFile, title } = this.props;
+
     this.setState({
       isSelectedFileForUpload: false,
       isShowPreview: false,
       preview: {},
     });
+
+    if (handleRemoveFile && typeof handleRemoveFile === 'function') {
+      handleRemoveFile({ title, preview });
+    }
   };
 
   handleCancelUploading = () => {
@@ -162,13 +172,16 @@ export class UploadFile extends React.Component {
 
   renderUploadContainer() {
     const { isShowDropzone, isSelectedFileForUpload } = this.state;
-    const { isUploadRunning } = this.props;
+    const { isUploadRunning, title, showTitle } = this.props;
     const isActive = isShowDropzone || isSelectedFileForUpload;
     const isInactive = !isSelectedFileForUpload && isUploadRunning;
 
     return (
-      <section className={cx('upload-file-container', isActive && 'active', isInactive && 'inactive')}>
-        {this.renderContent()}
+      <section className="upload-file-container">
+        { showTitle && <h4>{title}</h4> }
+        <section className={cx('upload-file-content', isActive && 'active', isInactive && 'inactive')}>
+          {this.renderContent()}
+        </section>
       </section>
     );
   }
