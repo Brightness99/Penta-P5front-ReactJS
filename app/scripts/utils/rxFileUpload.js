@@ -6,7 +6,6 @@
 import { Subject } from 'rxjs/Subject';
 import keyMirror from 'fbjs/lib/keyMirror';
 import plupload from 'plupload';
-import settings from 'config';
 
 type Config = {
   chunkSize: number,
