@@ -50,6 +50,7 @@ export class Upload extends React.Component {
     this.state = {
       currentStep: 0,
       selectedAdditionalParameters: [],
+      uploadedFiles: [],
     };
   }
 
@@ -74,18 +75,25 @@ export class Upload extends React.Component {
     );
   };
 
-  handleUploadFile = (file: {}) => {
+  handleUploadFile = (file: {title: string, preview: {}}) => {
+    const { uploadedFiles } = this.state;
     this.setState({
-      uploadedFiles: [file],
+      uploadedFiles: [...uploadedFiles, file],
+    });
+  };
+
+  handleRemoveFile = (file: {title: string, preview: {}}) => {
+    const { uploadedFiles } = this.state;
+    this.setState({
+      uploadedFiles: [...uploadedFiles.filter(x => x.title !== file.title)],
     });
   };
 
   renderUploadTypeSchema = () => {
-    const { uploadInfo, uploadFileProgress } = this.props;
+    const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
     const { selectedStrategy } = this.state;
-    const globalFlags = uploadInfo.globalFlags;
 
-    switch (globalFlags.upload_type) {
+    switch (upload_type) {
       case 'canvas':
         return <CanvasSchema />;
       case 'sku_scene':
@@ -93,10 +101,10 @@ export class Upload extends React.Component {
       default:
         return (
           <NormalUploadType
-            uploadFileProgress={uploadFileProgress}
             uploadTwoFiles={selectedStrategy === 4}
             multipleFiles={selectedStrategy === 5}
             handleUploadFile={this.handleUploadFile}
+            handleRemoveFile={this.handleRemoveFile}
           />);
     }
   };
