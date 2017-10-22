@@ -1,8 +1,8 @@
 // @flow
-
 import React from 'react';
 import config from 'config';
 import TrashIcon from 'components/Icons/Trash';
+import PreviewImageModal from './PreviewImageModal';
 
 type Props = {
   preview: {
@@ -12,30 +12,77 @@ type Props = {
   handleRemoveFile: () => void
 }
 
-const PreviewUploadedFile = ({ preview: { originalName, pages }, handleRemoveFile }: Props) => {
-  const { apiUrl } = config;
-  const mappedPages = Object.keys(pages).map(x => pages[x]);
+type State = {
+  openModal: boolean,
+  imageUrl: string,
+}
 
-  return (
-    <section className="upload-file-preview-container">
-      <section className="preview-header">
-        <h4>{originalName}</h4>
-      </section>
-      <section className="preview-content">
-        <section className="preview-images-container">
-          <section className="preview-item" key={mappedPages[0].preview_small}><img
-            src={`${apiUrl + mappedPages[0].preview_small}`} alt="preview"
-          /></section>
-          <section className="preview-item" key={mappedPages[1].preview_small}><img
-            src={`${apiUrl + mappedPages[1].preview_small}`} alt="preview"
-          /></section>
-        </section>
-        <section className="preview-footer">
-          <button className="remove-button" onClick={handleRemoveFile}><TrashIcon />Excluir arquivo</button>
-        </section>
-      </section>
-    </section>
-  );
-};
+export default class PreviewUploadedFile extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default PreviewUploadedFile;
+    this.state = {
+      imageUrl: '',
+      openModal: false,
+    };
+  }
+
+  props: Props;
+
+  handleCloseModal = () => {
+    this.setState({
+      imageUrl: '',
+      openModal: false,
+    });
+  };
+
+  handleOpenModal = (url: string) => {
+    this.setState({
+      imageUrl: url,
+      openModal: true,
+    });
+  };
+
+  renderModal = () => {
+    const { openModal, imageUrl } = this.state;
+
+    return (openModal &&
+    <PreviewImageModal handleClose={this.handleCloseModal}>
+      <img src={imageUrl} alt="preview" />
+    </PreviewImageModal>);
+  };
+
+  render() {
+    const { preview: { originalName, pages }, handleRemoveFile } = this.props;
+    const { apiUrl } = config;
+    const mappedPages = Object.keys(pages).map(x => pages[x]);
+
+    return (
+      <section className="upload-file-preview-container">
+        {this.renderModal()}
+        <section className="preview-header">
+          <h4>{originalName}</h4>
+        </section>
+        <section className="preview-content">
+          <section className="preview-images-container">
+            <section className="preview-item" key={mappedPages[0].preview_small}>
+              <img
+                onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[0].preview_big}`)}
+                src={`${apiUrl + mappedPages[0].preview_small}`} alt="preview"
+              />
+            </section>
+            <section className="preview-item" key={mappedPages[1].preview_small}>
+              <img
+                onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[1].preview_big}`)}
+                src={`${apiUrl + mappedPages[1].preview_small}`} alt="preview"
+              />
+            </section>
+          </section>
+          <section className="preview-footer">
+            <button className="remove-button" onClick={handleRemoveFile}><TrashIcon />Excluir arquivo</button>
+          </section>
+        </section>
+      </section>
+    );
+  }
+}

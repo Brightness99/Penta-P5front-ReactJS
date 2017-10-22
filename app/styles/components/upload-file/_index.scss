@@ -1,3 +1,5 @@
+@import "preview-image-modal";
+
 .upload-file-container {
   border        : 1px dashed #c7c9cb;
   margin        : 1rem;
@@ -132,6 +134,7 @@
         align-items     : center;
         width           : 50%;
         height          : 15rem;
+        cursor          : zoom-in;
       }
       .preview-item:first-of-type {
         border-right : 0.1rem solid #c7c9cb;
