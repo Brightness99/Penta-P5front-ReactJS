@@ -19,4 +19,5 @@ export const UploadConstants = keyMirror({
   UPLOAD_FILE_SUCCESS: undefined,
   UPLOAD_FILE_FAILURE: undefined,
   UPLOAD_FILE_CANCEL: undefined,
+  UPLOAD_FILE_CANCEL_SUCCESS: undefined,
 });

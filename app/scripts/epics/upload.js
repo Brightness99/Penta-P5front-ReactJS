@@ -5,6 +5,7 @@
 import { getUnixtime, rxAjax, RxPlupload, PluploadConstants } from 'utils';
 import { AppConstants, UploadConstants } from 'constants/index';
 import { push } from 'modules/ReduxRouter';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/operator/do';
 
 const uploader = new RxPlupload({
@@ -68,16 +69,21 @@ export function uploadFileRequest(action$) {
           default:
             return {
               type: UploadConstants.UPLOAD_FILE_FAILURE,
-              payload: data.error,
+              payload: { message: 'Upload was abort' },
               meta: { updatedAt: getUnixtime() },
             };
         }
-      }))
-    .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
-    .defaultIfEmpty({ type: UploadConstants.UPLOAD_FETCH_CANCEL });
+      })
+    )
+    .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH));
 }
 
 export function uploadFileCancel(action$) {
   return action$.ofType(UploadConstants.UPLOAD_FILE_CANCEL)
-    .do(() => uploader.cancelUpload());
+    .switchMap(() => {
+      uploader.cancelUpload();
+      return Observable.of({
+        type: UploadConstants.UPLOAD_FILE_CANCEL_SUCCESS,
+      });
+    }).takeUntil(action$.ofType(AppConstants.CANCEL_FETCH));
 }
