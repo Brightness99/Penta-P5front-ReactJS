@@ -41,12 +41,28 @@ export function uploadFileRequest(file: {}): Object {
 /**
  * upload file cancel
  *
- * @param {Object} file
+ * @returns {Object}
+ */
+export function uploadFileCancel(): Object {
+  return {
+    type: UploadConstants.UPLOAD_FILE_CANCEL,
+  };
+}
+
+/**
+ * upload finish reuest
+ *
+ * @param {Object} data
+ * @param {string} itemId
  *
  * @returns {Object}
  */
-export function uploadFileCancel(file: {}): Object {
+export function uploadFinishRequest(data: {}, itemId: string): Object {
   return {
     type: UploadConstants.UPLOAD_FILE_CANCEL,
+    payload: {
+      data,
+      itemId
+    },
   };
 }

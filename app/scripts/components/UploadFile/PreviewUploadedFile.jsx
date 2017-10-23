@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { Link } from 'react-router-dom';
 import config from 'config';
 import TrashIcon from 'components/Icons/Trash';
 import PreviewImageModal from './PreviewImageModal';
@@ -28,6 +29,7 @@ export default class PreviewUploadedFile extends React.Component {
   }
 
   props: Props;
+  state: State;
 
   handleCloseModal = () => {
     this.setState({
@@ -66,16 +68,14 @@ export default class PreviewUploadedFile extends React.Component {
         <section className="preview-content">
           <section className="preview-images-container">
             <section className="preview-item" key={mappedPages[0].preview_small}>
-              <img
-                onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[0].preview_big}`)}
-                src={`${apiUrl + mappedPages[0].preview_small}`} alt="preview"
-              />
+              <Link to="#" onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[0].preview_big}`)}>
+                <img src={`${apiUrl + mappedPages[0].preview_small}`} alt="preview" />
+              </Link>
             </section>
             <section className="preview-item" key={mappedPages[1].preview_small}>
-              <img
-                onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[1].preview_big}`)}
-                src={`${apiUrl + mappedPages[1].preview_small}`} alt="preview"
-              />
+              <Link to="#" onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[1].preview_big}`)}>
+                <img src={`${apiUrl + mappedPages[1].preview_small}`} alt="preview" />
+              </Link>
             </section>
           </section>
           <section className="preview-footer">

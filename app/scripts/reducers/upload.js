@@ -20,6 +20,11 @@ export type UploadState = {
     error: boolean,
     message: string,
   },
+  uploadFinish: {
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+  },
   updatedAt: number,
 };
 
@@ -36,6 +41,11 @@ export const uploadState: UploadState = {
     preview: {},
     isRunning: false,
     isUploaded: false,
+    error: false,
+    message: '',
+  },
+  uploadFinish: {
+    isRunning: false,
     error: false,
     message: '',
   },
@@ -126,6 +136,45 @@ export default {
         ...state,
         uploadFile: {
           ...state.uploadFile,
+          isRunning: false,
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_FINISH_REQUEST](state) {
+      return {
+        ...state,
+        uploadFinish: {
+          isRunning: true,
+          error: false,
+          message: '',
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_FINISH_SUCCESS](state) {
+      return {
+        ...state,
+        uploadFinish: {
+          ...state.uploadFinish,
+          isRunning: false,
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_FINISH_FAILURE](state, action) {
+      return {
+        ...state,
+        uploadFinish: {
+          ...state.uploadFinish,
+          isRunning: false,
+          error: false,
+          message: action.payload.message,
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_FINISH_CANCEL](state) {
+      return {
+        ...state,
+        uploadFinish: {
+          ...state.uploadFinish,
           isRunning: false,
         },
       };

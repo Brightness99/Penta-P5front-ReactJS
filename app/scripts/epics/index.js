@@ -17,7 +17,7 @@ import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
 import { printiPressFetch } from './printi-press';
 import { glossarySlugFetch, glossaryFetch } from './glossary';
-import { uploadFetch, uploadFileRequest, uploadFileCancel } from './upload';
+import { uploadFetch, uploadFileRequest, uploadFileCancel, uploadFinishRequest } from './upload';
 import {
   settingsFetch,
   settingsOptionsFetch,
@@ -111,4 +111,5 @@ export default combineEpics(
   uploadFetch,
   uploadFileRequest,
   uploadFileCancel,
+  uploadFinishRequest,
 );
