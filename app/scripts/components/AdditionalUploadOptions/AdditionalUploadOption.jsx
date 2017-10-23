@@ -73,7 +73,7 @@ export default class AdditionalUploadOption extends React.Component {
           <h4 className="title">{title}</h4>
           <div className="media">
             <i className="media-icon"><PlayCircleIcon /></i>
-            <Link className="link" to={video}>Vídeo explicativo</Link>
+            <a className="link" href={video}>Vídeo explicativo</a>
           </div>
         </div>
         <div className="content">
