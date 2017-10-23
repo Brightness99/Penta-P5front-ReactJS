@@ -73,4 +73,9 @@ export const AccountConstants = keyMirror({
   ACCOUNT_ZIPCODE_VALIDATE_CANCEL: undefined,
 
   ACCOUNT_ADDRESS_FORM_RESET: undefined,
+
+  ACCOUNT_LOYALTY_FETCH_REQUEST: undefined,
+  ACCOUNT_LOYALTY_FETCH_SUCCESS: undefined,
+  ACCOUNT_LOYALTY_FETCH_FAILURE: undefined,
+  ACCOUNT_LOYALTY_FETCH_CANCEL: undefined,
 });

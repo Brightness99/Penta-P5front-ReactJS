@@ -191,7 +191,7 @@ class AddressFormModal extends React.Component {
         </div>
         <div className="mol-checkout-pane-footer">
           <button className="atm-button-text" onClick={this.handleCloseModal}>CANCELAR</button>
-          <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit}>SALVAR ENDEREÇO</Button>
+          <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressCreating && !addresses.isAddressCreatingCalled)}>SALVAR ENDEREÇO</Button>
         </div>
       </div>
     );

@@ -1,12 +1,9 @@
 .container-loyalty {
-  padding: 4rem 0 3rem 0;
   font-family: $font-family-open-sans;
   background-color: $color-white;
   @include lg {
     background-color: $color-white;
     flex: 5;
-    box-sizing: border-box;
-    padding: 2rem 6rem 0 6rem;
     margin-bottom: 0;
   }
   .title-loyalty {
@@ -14,8 +11,8 @@
   }
   .logo-printiClub {
     svg {
-      width: 167px;
-      height: 32px;
+      width: 16.7rem;
+      height: 3.2rem;
     }
   }
   .subtitle-loyalty {
@@ -35,8 +32,8 @@
     text-transform: uppercase;
     font-weight: 600;
     line-height: 1.6;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid $color-pale-grey;
+    letter-spacing: 0.05rem;
+    border-bottom: 0.1rem solid $color-pale-grey;
     li {
       display: inline-flex;
       margin-right: 3.2rem;
@@ -45,7 +42,7 @@
       }
       &.active-underline, &:hover {
         color: $color-printi-blue;
-        border-bottom: 1px solid $color-printi-blue;
+        border-bottom: 0.1rem solid $color-printi-blue;
         z-index: 999;
         a {
           text-decoration: none;
@@ -81,7 +78,7 @@
       flex: 1;
       box-sizing: border-box;
       padding: 2.4rem 0 1.2rem 0;
-      border: 1px solid $color-pale-grey;
+      border: 0.1rem solid $color-pale-grey;
       background-color: $color-white;
       &.first-box-gold {
         background-color: #faf2dc;
@@ -97,9 +94,9 @@
           color: $color-white;
           box-sizing: border-box;
           padding: 0.15rem;
-          border-radius: 30px;
+          border-radius: 3rem;
           text-align: center;
-          width: 126px;
+          width: 12.6rem;
         }
       }
       &:nth-of-type(2n) {
@@ -140,10 +137,10 @@
           padding: 2rem;
           margin-right: 1.6rem;
           flex: 2;
-          // max-width: 178px;
+          // max-width: 17.8rem;
         }
         &:last-of-type {
-          // max-width: 152px;          
+          // max-width: 15.2rem;
           flex: 1;
         }
       }
@@ -165,11 +162,11 @@
         flex-direction: row;
       }
       .box-advantagesClubGold {
-        border-radius: 2px;
+        border-radius: 0.2rem;
         box-sizing: border-box;
         padding: 2rem;
         flex: 1;
-        flex-basis: calc((100% / 3) - 10px);
+        flex-basis: calc((100% / 3) - 1rem);
         margin: 0.2rem 0;
         background-color: $color-white;
         color: $color-gunmetal;
@@ -177,8 +174,8 @@
         i {
           float: right;
           svg {
-            width: 16px;
-            height: 16px;
+            width: 1.6rem;
+            height: 1.6rem;
           }
         }
         p { 
@@ -263,7 +260,7 @@
               font-size: $font-size-sm;
               text-align: center;
               color: $color-white;
-              border-radius: 30px;
+              border-radius: 3rem;
               width: 5.2rem;
             }
             .bg-gold {
@@ -286,9 +283,9 @@
           }
         }
         .line-score {
-          height: 16px;
+          height: 1.6rem;
           background-color: $color-pale-grey;
-          border-radius: 20px;
+          border-radius: 2rem;
           width: 100%;
           display: flex;
           &.line-become-value {
@@ -297,8 +294,8 @@
               content: "";
               position: absolute;
               width: 50%;
-              height: 16px;
-              border-radius: 20px;
+              height: 1.6rem;
+              border-radius: 2rem;
               background-color: $color-maize;
             }
             &:after {
@@ -306,9 +303,9 @@
               position: absolute;
               right: 51%;
               top: 10%;
-              width: 10px;
-              height: 10px;
-              border-radius: 20px;
+              width: 1rem;
+              height: 1rem;
+              border-radius: 2rem;
               background-color: $color-white;
             }
           }
@@ -318,8 +315,8 @@
               content: "";
               position: absolute;
               width: 50%;
-              height: 16px;
-              border-radius: 20px;
+              height: 1.6rem;
+              border-radius: 2rem;
               background-color: $color-maize;
             }
             &:after {
@@ -327,9 +324,9 @@
               position: absolute;
               right: 51.4%;
               top: 10%;
-              width: 10px;
-              height: 10px;
-              border-radius: 20px;
+              width: 1rem;
+              height: 1rem;
+              border-radius: 2rem;
               background-color: $color-white;
               @include xxl {
                 right: 51%;

@@ -131,6 +131,18 @@ export function accountOrdersFetch(page: number): Object {
 }
 
 /**
+ * Loyalty Fetch
+ * @param {} 
+ * @returns {Object}
+ */
+export function accountLoyaltyFetch(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_LOYALTY_FETCH_REQUEST,
+    payload: {},
+  };
+}
+
+/**
  * Validate Zipcode
  * @param {string} zipcode
  *

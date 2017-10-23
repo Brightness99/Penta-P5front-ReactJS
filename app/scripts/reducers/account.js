@@ -20,6 +20,7 @@ export const accountState = {
     isRunning: false,
     isLoaded: false,
   },
+  loyalty: {},
 };
 
 export default {
@@ -97,7 +98,7 @@ export default {
         error: action.payload,
       };
     },
-    [AccountConstants.ACCOUNT_ADDRESS_CREATE_SUBMIT](state, action) {
+    [AccountConstants.ACCOUNT_ADDRESS_CREATE_SUBMIT](state) {
       return {
         ...state,
         addresses: {
@@ -132,7 +133,7 @@ export default {
         },
       };
     },
-    [AccountConstants.ACCOUNT_ADDRESS_FORM_RESET](state, action) {
+    [AccountConstants.ACCOUNT_ADDRESS_FORM_RESET](state) {
       return {
         ...state,
         addresses: {
@@ -370,10 +371,29 @@ export default {
         },
       };
     },
+    [AccountConstants.ACCOUNT_LOYALTY_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        loyalty: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
     [AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_SUCCESS](state, action) {
       return {
         ...state,
         zipcodeValid: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_LOYALTY_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        loyalty: {
           ...action.payload,
           isRunning: false,
           isLoaded: true,
@@ -387,6 +407,17 @@ export default {
           ...state.zipcodeValid,
           isRunning: false,
           isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_LOYALTY_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        loyalty: {
+          ...state.loyalty,
+          isRunning: false,
+          isLoaded: true,
+          error: action.payload,
         },
       };
     },
