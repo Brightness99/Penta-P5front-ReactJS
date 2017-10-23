@@ -426,3 +426,45 @@ export function accountOrderFetch(action$) {
       });
     });
 }
+
+export function zipcodeValidate(action$) {
+  return action$.ofType(AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_REQUEST)
+    .switchMap((action) => {
+      const endpoint = `/v2/zipcode/${action.payload.zipcode}`;
+      return rxAjax({
+        endpoint,
+        method: 'GET',
+      })
+      .map(data => {
+        if (data.status === 200) {
+          return {
+            type: AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_SUCCESS,
+            payload: {
+              list: data.response,
+              total_count: parseInt(data.xhr.getResponseHeader('x-total-count'), 10),
+            },
+            meta: { updatedAt: getUnixtime() },
+          };
+        }
+
+        return {
+          type: AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_FAILURE,
+          payload: { message: 'Algo de errado não está correto' },
+          meta: { updatedAt: getUnixtime() },
+        };
+      })
+      .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+      .defaultIfEmpty({ type: AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_CANCEL })
+      .catch(error => {
+        if (error.status === 404) {
+          push('/404');
+        }
+
+        return ([{
+          type: AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        }]);
+      });
+    });
+}

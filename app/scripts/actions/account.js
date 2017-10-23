@@ -129,3 +129,31 @@ export function accountOrdersFetch(page: number): Object {
     },
   };
 }
+
+/**
+ * Validate Zipcode
+ * @param {string} zipcode
+ *
+ * @returns {Object}
+ */
+export function zipcodeValidate(zipcode: string): Object {
+  return {
+    type: AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_REQUEST,
+    payload: {
+      zipcode,
+    },
+  };
+}
+
+/**
+ * Reset Address Form
+ * @param {string} zipcode
+ *
+ * @returns {Object}
+ */
+export function accountAddressFormReset(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_ADDRESS_FORM_RESET,
+    payload: {},
+  };
+}

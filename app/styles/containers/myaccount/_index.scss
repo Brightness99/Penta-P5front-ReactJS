@@ -1213,6 +1213,39 @@
       }
     }
   }
+  .address-form-modal-container {
+    width: 800px;
+    .address-form-modal {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .atm-checkout-input {
+        &-full {
+          width: 100%;
+        }
+        margin-top: 0.7em;
+      }
+      .atm-checkout-input-one {
+        width: calc(20% - 1rem);
+      }
+      .atm-checkout-input-two {
+        width: calc(40% - 1rem);
+      }
+      .atm-checkout-input-three {
+        width: 60%;
+      }
+      .zipcode {
+        position: relative;
+        .link {
+          position: absolute;
+          right: 5px;
+          top: 15px;
+          font-size: 13px;
+          color: #006ee3;
+        }
+      }
+    }
+  }
   >div { 
     margin-bottom: 3rem;
     .btn-addresses--mobile {

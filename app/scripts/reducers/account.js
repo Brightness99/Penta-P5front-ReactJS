@@ -13,6 +13,7 @@ export const accountState = {
   notification: {},
   addresses: {},
   selectedOrder: {},
+  zipcodeValid: {},
   orders: {
     list: [],
     total_count: 0,
@@ -100,7 +101,9 @@ export default {
       return {
         ...state,
         addresses: {
-          ...action.payload,
+          ...state.addresses,
+          isAddressCreating: true,
+          isAddressCreatingCalled: false,
           error: null,
         },
       };
@@ -112,8 +115,8 @@ export default {
         ...state,
         addresses: {
           ...state.addresses,
-          isRunning: false,
-          isLoaded: true,
+          isAddressCreating: false,
+          isAddressCreatingCalled: true,
           error: null,
         },
       };
@@ -122,9 +125,21 @@ export default {
       return {
         ...state,
         addresses: {
-          isRunning: false,
-          isLoaded: true,
+          ...state.addresses,
+          isAddressCreating: false,
+          isAddressCreatingCalled: true,
           error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ADDRESS_FORM_RESET](state, action) {
+      return {
+        ...state,
+        addresses: {
+          ...state.addresses,
+          isAddressCreating: false,
+          isAddressCreatingCalled: false,
+          error: null,
         },
       };
     },
@@ -343,6 +358,35 @@ export default {
           isRunning: false,
           isLoaded: true,
           error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_REQUEST](state) {
+      return {
+        ...state,
+        zipcodeValid: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_SUCCESS](state, action) {
+      return {
+        ...state,
+        zipcodeValid: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ZIPCODE_VALIDATE_FAILURE](state) {
+      return {
+        ...state,
+        zipcodeValid: {
+          ...state.zipcodeValid,
+          isRunning: false,
+          isLoaded: true,
         },
       };
     },
