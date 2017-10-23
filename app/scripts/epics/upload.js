@@ -46,7 +46,7 @@ export function uploadFetch(action$) {
 export function uploadFinishRequest(action$) {
   return action$.ofType(UploadConstants.UPLOAD_FINISH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v2/upload/${action.payload.itemId}`;
+      const endpoint = `/v2/upload/cart/${action.payload.itemId}`;
 
       return rxAjax({
         endpoint,

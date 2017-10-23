@@ -13,8 +13,7 @@ import Loading from 'components/Loading';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
 import UploadTypes from 'components/UploadTypes';
 import CartItemDefinitionsPanel from 'components/CartItemDefinitionsPanel';
-import CanvasSchema from '../../components/UploadTypes/Canvas';
-import SkuSceneSchema from '../../components/UploadTypes/SkuScene';
+import { Button } from 'quarks/Inputs';
 
 type FinishUpload = {
   document_reference_url: string,
@@ -22,10 +21,10 @@ type FinishUpload = {
   cimpress_sku_scene: {},
   thumbnail: string,
   upload_strategy: number,
-  IsRepurchase: boolean,
+  isRepurchase: boolean,
   additional_options: {
-    file_format: {id: string, name: string},
-    proof: {id: string, name: string}
+    file_format: { id: string, name: string },
+    proof: { id: string, name: string }
   },
   uploads: {}
 }
@@ -42,8 +41,6 @@ type Props = {
   uploadInfoFetch: (slug: string, itemId: string) => void,
   uploadFinish: (data: FinishUpload, itemId: string) => void,
   uploadFileProgress: {
-    progress: number,
-    preview: {},
     isRunning: boolean,
     error: boolean,
     message: string,
@@ -52,19 +49,22 @@ type Props = {
 };
 
 type State = {
-  currentStep: number,
   selectedStrategy: number,
+  isRepurchase: boolean,
   selectedAdditionalParameters: [],
   uploadedFiles: [],
+  canSubmit: boolean,
 }
 
 export class Upload extends React.Component {
   constructor(props: Props) {
     super(props);
     this.state = {
-      currentStep: 0,
+      selectedStrategy: 0,
       selectedAdditionalParameters: [],
       uploadedFiles: [],
+      isRepurchase: false,
+      canSubmit: false,
     };
   }
 
@@ -78,49 +78,84 @@ export class Upload extends React.Component {
   static props: Props;
   static state: State;
 
-  handleUploadFile = (file: {title: string, preview: {}}) => {
+  updateCanSubmit = () => {
+    const { selectedStrategy, uploadedFiles } = this.state;
+
+    const canSubmit = (selectedStrategy === 1 ||
+      (selectedStrategy === 4 && uploadedFiles.length === 2)
+      || uploadedFiles.length > 0);
+    this.setState({ canSubmit });
+  };
+
+  handleChoose = () => {
+    const { isRepurchase } = this.state;
+    this.setState({
+      isRepurchase: !isRepurchase,
+    });
+  };
+
+  handleUploadFile = (file: { title: string, preview: {} }) => {
     const { uploadedFiles } = this.state;
     this.setState({
       uploadedFiles: [...uploadedFiles, file],
-    });
+    }, this.updateCanSubmit);
   };
 
-  handleRemoveFile = (file: {title: string, preview: {}}) => {
+  handleRemoveFile = (file: { title: string, preview: {} }) => {
     const { uploadedFiles } = this.state;
     this.setState({
       uploadedFiles: [...uploadedFiles.filter(x => x.title !== file.title)],
-    });
+    }, this.updateCanSubmit);
   };
 
-  handleStepFinished(options: {}, step: number) {
-    const { currentStep } = this.state;
-    switch (step) {
-      case 1:
-        this.setState({
-          selectedAdditionalParameters: options,
-        });
-        break;
-      case 2:
-        this.setState({
-          selectedStrategy: options,
-        });
-        break;
-      default:
-    }
-    if (currentStep + 1 === step) {
-      this.setState({
-        currentStep: step,
-      });
-    }
-  }
+  handleAdditionalParameters = (parameters) => {
+    this.setState({
+      selectedAdditionalParameters: parameters,
+    }, this.updateCanSubmit);
+  };
 
-  renderAdditionalParameters(stepNumber: number) {
-    const { currentStep } = this.state;
+  handleSelectedStrategy = (strategy) => {
+    this.setState({
+      selectedStrategy: strategy,
+      uploadedFiles: [],
+    }, this.updateCanSubmit);
+  };
+
+  handleUploadFinish = () => {
+    const { match: { params: { itemId } }, uploadFinish } = this.props;
+    const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
+    const { uploadedFiles, isRepurchase, selectedStrategy } = this.state;
+    const uploads = {};
+    uploadedFiles.forEach((x) => {
+      uploads[x.preview.basename] = x.preview;
+    });
+    const thumbnail = uploadedFiles.length > 0 ? uploadedFiles[0].preview.thumbnail : null;
+    const result = {
+      document_reference_url: null,
+      cimpress_sku_scene: null,
+      thumbnail,
+      isRepurchase,
+      upload_type,
+      upload_strategy: selectedStrategy,
+      additional_options: {
+        file_format: { id: 'lfile', name: 'Arquivo AI, INDD, PSD, CDR, JPG (aberto)' },
+        proof: { id: 'woprf', name: 'Checagem Profissional' },
+      },
+      uploads,
+    };
+
+    if (uploadFinish && typeof uploadFinish === 'function') {
+      uploadFinish(result, itemId);
+    }
+  };
+
+  renderAdditionalParameters() {
+    const { selectedAdditionalParameters } = this.state;
     const additionalOptions = mock.additionalOptions;
-    const isComplete = currentStep >= stepNumber;
+    const isComplete = selectedAdditionalParameters.length !== 0;
     return (
       <FunnelBlock
-        order={stepNumber}
+        order="1"
         isComplete={isComplete}
         header={[
           <span key="source-block-title">Configurações adicionais</span>,
@@ -129,22 +164,21 @@ export class Upload extends React.Component {
       >
         <AdditionalUploadOptions
           items={additionalOptions}
-          handleOptionsChanged={(options) => this.handleStepFinished(options, stepNumber)}
+          handleOptionsChanged={this.handleAdditionalParameters}
         />
       </FunnelBlock>
     );
   }
 
-  renderUploadTypeSchemes(stepNumber: number) {
-    const { currentStep } = this.state;
+  renderUploadTypeSchemes() {
+    const { selectedStrategy, selectedAdditionalParameters } = this.state;
     const { uploadInfo: { availableStrategies } } = this.props;
-    const isComplete = currentStep >= stepNumber;
-    const showStep = currentStep >= (stepNumber - 1);
+    const showStep = selectedAdditionalParameters.length !== 0;
     return (
       showStep &&
       <FunnelBlock
-        order={stepNumber}
-        isComplete={isComplete}
+        order="2"
+        isComplete={selectedStrategy !== 0}
         header={[
           <span key="source-block-title">Como você quer enviar sua arte?</span>,
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
@@ -152,22 +186,21 @@ export class Upload extends React.Component {
       >
         <AvailableUploadStrategies
           availableStrategies={availableStrategies}
-          handleSelectedStrategy={(options) => this.handleStepFinished(options, stepNumber)}
+          handleSelectedStrategy={this.handleSelectedStrategy}
         />
       </FunnelBlock>
     );
   }
 
-  renderFileUploadBlock(stepNumber: number) {
-    const { currentStep, selectedStrategy } = this.state;
+  renderFileUploadBlock() {
+    const { selectedStrategy, uploadedFiles } = this.state;
     const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
-
-    const isComplete = currentStep >= stepNumber;
-    const showStep = currentStep >= (stepNumber - 1) && selectedStrategy > 1;
+    const showStep = selectedStrategy > 1;
+    const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0;
     return (
       showStep &&
       <FunnelBlock
-        order={stepNumber}
+        order="3"
         isComplete={isComplete}
         header={[
           <span key="source-block-title">Enviar arquivo da arte</span>,
@@ -196,6 +229,7 @@ export class Upload extends React.Component {
 
   render() {
     const { isLoading } = this.props;
+    const { isRepurchase, canSubmit } = this.state;
     const breadcrumb = [
       {
         title: 'Home',
@@ -221,20 +255,28 @@ export class Upload extends React.Component {
           <section className="content">
             <section className="main-upload-container">
               {
-                this.renderAdditionalParameters(1)
+                this.renderAdditionalParameters()
               }
               {
-                this.renderUploadTypeSchemes(2)
+                this.renderUploadTypeSchemes()
               }
               {
-                this.renderFileUploadBlock(3)
+                this.renderFileUploadBlock()
               }
               <section className="upload-finish-block">
                 <label>
-                  <CheckBox />
-                  Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer outro ajuste.
+                  <CheckBox
+                    checked={isRepurchase}
+                    onChange={this.handleChoose}
+                  />
+                  Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer
+                  outro ajuste.
                 </label>
-                <button>Enviar arte final</button>
+                <Button
+                  onClick={this.handleUploadFinish}
+                  kind="success"
+                  disabled={!canSubmit}
+                >Enviar arte final</Button>
               </section>
             </section>
             {this.renderCartItemDefinitions()}
