@@ -174,13 +174,28 @@ export class Upload extends React.Component {
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
         ]}
       >
-        <UploadTypes uploadType={upload_type} selectedStrategy={selectedStrategy} />
+        <UploadTypes
+          uploadType={upload_type}
+          selectedStrategy={selectedStrategy}
+          handleUploadFile={this.handleUploadFile}
+          handleRemoveFile={this.handleRemoveFile}
+        />
       </FunnelBlock>
     );
   }
 
+  renderCartItemDefinitions() {
+    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
+    return (<CartItemDefinitionsPanel
+      parts={parts}
+      totalPrice={total_price}
+      subTotal={total_price}
+      expectedDeliveryDate={expected_delivery_date}
+    />);
+  }
+
   render() {
-    const { isLoading, uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
+    const { isLoading } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -222,12 +237,7 @@ export class Upload extends React.Component {
                 <button>Enviar arte final</button>
               </section>
             </section>
-            <CartItemDefinitionsPanel
-              parts={parts}
-              totalPrice={total_price}
-              subTotal={total_price}
-              expectedDeliveryDate={expected_delivery_date}
-            />
+            {this.renderCartItemDefinitions()}
           </section>
         </div>
       </section>
