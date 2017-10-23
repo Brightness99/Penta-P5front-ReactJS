@@ -4,9 +4,11 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Collapse, { Panel } from 'rc-collapse';
 import Loading from 'components/Loading';
+import Modal from 'components/Modal';
 import { AccordionMinusIcon, AccordionPlusIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
-import { accountAddressCreate, accountAddressDelete, accountAddressFetch } from 'actions';
+import { accountAddressDelete, accountAddressFetch, accountAddressFormReset } from 'actions';
 import { connect } from 'react-redux';
+import AddressFormModal from './AddressFormModal';
 
 type Props = {
   screenSize: string,
@@ -19,6 +21,8 @@ type State = {
     shipping: false,
     billing: false,
   },
+  createAddressModal: boolean,
+  type: string,
 };
 
 export class MyAddresses extends React.Component {
@@ -27,6 +31,8 @@ export class MyAddresses extends React.Component {
 
     this.state = {
       isExpanded: false,
+      createAddressModal: false,
+      type: '',
     };
   }
 
@@ -53,28 +59,26 @@ export class MyAddresses extends React.Component {
     });
   };
 
-  handleCreateAddress = () => {
+  handleCreateAddress = (type) => {
     const { dispatch } = this.props;
 
-    const dataToCreate = {
-      type: 'billing',
-      receiver_name: 'Adam Holman',
-      zipcode: '01419-002',
-      city: 'São Paulo',
-      neighborhood: 'Cerqueira César',
-      state: 'SP',
-      street: 'Alameda Santos',
-      number: '2131',
-      additional_address: null,
-    };
+    dispatch(accountAddressFormReset());
 
-    // dispatch(accountAddressCreate(dataToCreate));
+    this.setState({
+      createAddressModal: true,
+      type,
+    });
+
   };
 
   handleDeleteAddress = (ev) => {
     const { dispatch } = this.props;
 
     dispatch(accountAddressDelete(ev.currentTarget.value));
+  };
+
+  handleCloseModal = () => {
+    this.setState({ createAddressModal: false });
   };
 
   renderAddButton(addressType) {
@@ -86,7 +90,7 @@ export class MyAddresses extends React.Component {
           <button
             className="atm-button-transparent"
             value={addressType}
-            onClick={this.handleCreateAddress}
+            onClick={() => this.handleCreateAddress(addressType)}
           >
             <AddressIcon />Novo endereço
           </button>
@@ -98,7 +102,7 @@ export class MyAddresses extends React.Component {
       <button
         className="box-addNewAddress"
         value={addressType}
-        onClick={this.handleCreateAddress}
+        onClick={() => this.handleCreateAddress(addressType)}
       >
         <i><Plus /></i>
       </button>
@@ -214,6 +218,7 @@ export class MyAddresses extends React.Component {
 
   render() {
     const { screenSize, account: { addresses } } = this.props;
+    const { createAddressModal, type } = this.state;
 
     const breadcrumb = [
       {
@@ -231,6 +236,10 @@ export class MyAddresses extends React.Component {
 
     return (
       <section className="container-myaddresses">
+        {createAddressModal &&
+        <Modal handleCloseModal={this.handleCloseModal}>
+          <AddressFormModal type={type} onCloseModal={this.handleCloseModal} />
+        </Modal>}
         {isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h2>Minha conta</h2>
         <h3 className="subtitle-myAddresses">Meus endereços</h3>

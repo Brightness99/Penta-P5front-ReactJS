@@ -56,6 +56,7 @@ import {
   accountSavedCreditCardDelete,
   accountOrderDetailFetch,
   accountOrderFetch,
+  zipcodeValidate,
 } from './account';
 
 import {
@@ -110,6 +111,7 @@ export default combineEpics(
   accountNotificationUpdate,
   accountOrderDetailFetch,
   accountOrderFetch,
+  zipcodeValidate,
   policyFetch,
   termsFetch,
   aboutFetch,
