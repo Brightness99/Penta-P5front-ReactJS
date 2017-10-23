@@ -43,6 +43,33 @@ export function uploadFetch(action$) {
     });
 }
 
+export function uploadFinishRequest(action$) {
+  return action$.ofType(UploadConstants.UPLOAD_FINISH_REQUEST)
+    .switchMap(action => {
+      const endpoint = `/v2/upload/${action.payload.itemId}`;
+
+      return rxAjax({
+        endpoint,
+        payload: action.payload.data,
+        method: 'POST',
+      })
+        .map(data => ({
+          type: UploadConstants.UPLOAD_FINISH_SUCCESS,
+          payload: data.response,
+          meta: { updatedAt: getUnixtime() },
+        }));
+    })
+    .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+    .defaultIfEmpty({ type: UploadConstants.UPLOAD_FINISH_CANCEL })
+    .catch(error => {
+      return ([{
+        type: UploadConstants.UPLOAD_FINISH_FAILURE,
+        payload: { message: error.message, status: error.status },
+        meta: { updatedAt: getUnixtime() },
+      }]);
+    });
+}
+
 export function uploadFileRequest(action$) {
   return action$.ofType(UploadConstants.UPLOAD_FILE_REQUEST)
     .switchMap(action => uploader.uploadFile(action.payload)

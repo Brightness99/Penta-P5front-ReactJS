@@ -2,22 +2,51 @@
 @import "uploadTypeSchemas/normal/index";
 
 .page-upload {
-	.container {
-    .content{
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-column-gap: 1rem;
+  margin-bottom : 5rem;
+  .container {
+    .content {
+      display               : grid;
+      grid-template-columns : 1fr auto;
+      grid-column-gap       : 1rem;
+    }
+    .upload-finish-block {
+      display         : flex;
+      flex-direction  : column;
+      justify-content : flex-end;
+      align-items     : flex-end;
+      label {
+        display         : flex;
+        flex-direction  : row;
+        justify-content : space-between;
+        align-items     : center;
+        font-size       : 1rem;
+        color           : #6a6f7a;
+        .app__input__checkbox {
+          span {
+            margin-right : 1rem;
+          }
+        }
+      }
+      button {
+        margin-top       : 1rem;
+        padding          : 0.5rem 2rem;
+        border           : none;
+        border-radius    : 3px;
+        background-color : #36c265;
+        color            : #ffffff;
+        text-transform   : uppercase;
+      }
     }
     .upload-container-canvasCentralized {
-      display: flex;
-      flex-direction: column;
-      margin: 0 0 2rem 0;
-      width: 98%;
+      display        : flex;
+      flex-direction : column;
+      margin         : 0 0 2rem 0;
+      width          : 98%;
       @include md {
-        width: 95%;
+        width : 95%;
       }
       @include lg {
       }
     }
-	}
+  }
 }

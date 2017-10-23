@@ -5,6 +5,7 @@ import mock from 'assets/json/uploadMock.json';
 import { uploadFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Warning from 'containers/Config/Warning';
+import { CheckBox } from 'components/Input';
 import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
 import { PageTitle } from 'atoms/Titles';
 import FlashMessage from 'components/FlashMessage';
@@ -272,6 +273,13 @@ export class Upload extends React.Component {
               {
                 this.renderFileUploadBlock(3)
               }
+              <section className="upload-finish-block">
+                <label>
+                  <CheckBox />
+                  Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer outro ajuste.
+                </label>
+                <button>Enviar arte final</button>
+              </section>
             </section>
             {this.renderCartDefinitions()}
           </section>
