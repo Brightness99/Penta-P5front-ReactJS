@@ -59,10 +59,10 @@ export function uploadFileCancel(): Object {
  */
 export function uploadFinishRequest(data: {}, itemId: string): Object {
   return {
-    type: UploadConstants.UPLOAD_FILE_CANCEL,
+    type: UploadConstants.UPLOAD_FINISH_REQUEST,
     payload: {
       data,
-      itemId
+      itemId,
     },
   };
 }
