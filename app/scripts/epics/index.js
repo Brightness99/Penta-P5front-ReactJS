@@ -57,6 +57,7 @@ import {
   accountOrderDetailFetch,
   accountOrderFetch,
   zipcodeValidate,
+  accountLoyaltyFetch,
 } from './account';
 
 import {
@@ -112,6 +113,7 @@ export default combineEpics(
   accountOrderDetailFetch,
   accountOrderFetch,
   zipcodeValidate,
+  accountLoyaltyFetch,
   policyFetch,
   termsFetch,
   aboutFetch,

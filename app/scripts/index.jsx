@@ -36,6 +36,7 @@ function fetchInfo() {
 export function renderApp(RootComponent) {
   fetchInfo();
   store.subscribe(() => {
+
     /* istanbul ignore next */
     if (store.getState().locale.LANGUAGE) {
       const target = document.getElementById('react');

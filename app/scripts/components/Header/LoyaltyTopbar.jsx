@@ -1,24 +1,48 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { CloseIcon } from 'components/Icons';
 
-const LoyaltyTopbar = () => {
-  return (
-    <div className="org-loyalty-topbar">
-      <div className="container">
-        <div className="mol-loyalty-topbar">
-          <div>
-            <div className="qrk-type-of-loyalty">
-              <p>Gold</p>
+export class LoyaltyTopbar extends React.Component {
+  props: Props;
+
+  setBackgroundColor = (color) => {
+    return {
+      background: color,
+    };
+  }
+
+  setColor = (color) => {
+    return {
+      color,
+    };
+  }
+
+  render() {
+    const { account: { loyalty } } = this.props;
+    return (
+      <div className="org-loyalty-topbar" style={this.setBackgroundColor(loyalty.color)}>
+        <div className="container">
+          <div className="mol-loyalty-topbar">
+            <div>
+              <div className="qrk-type-of-loyalty" style={this.setColor(loyalty.color)}>
+                <p>{loyalty.loyalty_tier_name}</p>
+              </div>
+              <p>{loyalty.header}</p>
             </div>
-            <p>Você é um membro Printi Club Gold! As etiquetas amarelas sinalizam os benefícios que você tem direito. :)</p>
+            <a href="#close"><CloseIcon /></a>
           </div>
-          <div><CloseIcon /></div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default LoyaltyTopbar;
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+export default connect(mapStateToProps)(LoyaltyTopbar);
