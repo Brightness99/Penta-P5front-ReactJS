@@ -2,21 +2,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import mock from 'assets/json/uploadMock.json';
-import { uploadFetch } from 'actions';
+import { uploadFetch, uploadFinishRequest } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
-import Warning from 'containers/Config/Warning';
 import { CheckBox } from 'components/Input';
 import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
 import { PageTitle } from 'atoms/Titles';
-import FlashMessage from 'components/FlashMessage';
 import { FunnelBlock } from 'components/Funnel';
 import MoreInfo from 'components/MoreInfo';
 import Loading from 'components/Loading';
 import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
-import { NormalUploadType } from 'components/UploadTypes';
+import UploadTypes from 'components/UploadTypes';
 import CartItemDefinitionsPanel from 'components/CartItemDefinitionsPanel';
-import CanvasSchema from './UploadTypeSchemas/Canvas';
-import SkuSceneSchema from './UploadTypeSchemas/SkuScene';
+import CanvasSchema from '../../components/UploadTypes/Canvas';
+import SkuSceneSchema from '../../components/UploadTypes/SkuScene';
+
+type FinishUpload = {
+  document_reference_url: string,
+  upload_type: string,
+  cimpress_sku_scene: {},
+  thumbnail: string,
+  upload_strategy: number,
+  IsRepurchase: boolean,
+  additional_options: {
+    file_format: {id: string, name: string},
+    proof: {id: string, name: string}
+  },
+  uploads: {}
+}
 
 type Props = {
   match: {
@@ -27,7 +39,8 @@ type Props = {
   },
   isLoading: boolean,
   uploadInfo: {},
-  uploadInfoFetch: (slug, itemId) => void,
+  uploadInfoFetch: (slug: string, itemId: string) => void,
+  uploadFinish: (data: FinishUpload, itemId: string) => void,
   uploadFileProgress: {
     progress: number,
     preview: {},
@@ -65,17 +78,6 @@ export class Upload extends React.Component {
   static props: Props;
   static state: State;
 
-  renderFlashMessages = () => {
-    const { uploadInfo } = this.props;
-    const messages = uploadInfo.flashMessages;
-
-    if (!messages) return '';
-
-    return messages.map(
-      (message, index) => <FlashMessage {...message} key={`${String(index)}`} />
-    );
-  };
-
   handleUploadFile = (file: {title: string, preview: {}}) => {
     const { uploadedFiles } = this.state;
     this.setState({
@@ -88,54 +90,6 @@ export class Upload extends React.Component {
     this.setState({
       uploadedFiles: [...uploadedFiles.filter(x => x.title !== file.title)],
     });
-  };
-
-  renderUploadTypeSchema = () => {
-    const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
-    const { selectedStrategy } = this.state;
-
-    switch (upload_type) {
-      case 'canvas':
-        return <CanvasSchema />;
-      case 'sku_scene':
-        return <SkuSceneSchema />;
-      default:
-        return (
-          <NormalUploadType
-            uploadTwoFiles={selectedStrategy === 4}
-            multipleFiles={selectedStrategy === 5}
-            handleUploadFile={this.handleUploadFile}
-            handleRemoveFile={this.handleRemoveFile}
-          />);
-    }
-  };
-
-  renderWarningExtraInfo = () => {
-    const templates = {
-      options: {
-        vertical: ['illustrator', 'photoshop', 'photoshop'],
-        horizontal: ['illustrator', 'photoshop', 'photoshop'],
-      },
-      downloadUrls: {
-        vertical: {},
-        horizontal: {},
-      },
-      parts: {
-        pbcard: {
-          guideCombinationId: 25,
-          fileCombinationId: 27,
-        },
-      },
-      selectedOrientation: 'vertical',
-    };
-
-    const { dispatch } = this.props;
-
-    const product = {
-      title: 'Cartão de Visita',
-    };
-
-    return <Warning templates={templates} dispatch={dispatch} product={product} />;
   };
 
   handleStepFinished(options: {}, step: number) {
@@ -206,6 +160,8 @@ export class Upload extends React.Component {
 
   renderFileUploadBlock(stepNumber: number) {
     const { currentStep, selectedStrategy } = this.state;
+    const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
+
     const isComplete = currentStep >= stepNumber;
     const showStep = currentStep >= (stepNumber - 1) && selectedStrategy > 1;
     return (
@@ -218,27 +174,13 @@ export class Upload extends React.Component {
           <MoreInfo key="source-block-more-info" text="Mais informações" />,
         ]}
       >
-        {
-          this.renderUploadTypeSchema()
-        }
+        <UploadTypes uploadType={upload_type} selectedStrategy={selectedStrategy} />
       </FunnelBlock>
     );
   }
 
-  renderCartDefinitions() {
-    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
-
-    return (
-      <CartItemDefinitionsPanel
-        parts={parts}
-        totalPrice={total_price}
-        subTotal={total_price}
-        expectedDeliveryDate={expected_delivery_date}
-      />);
-  }
-
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -263,7 +205,6 @@ export class Upload extends React.Component {
           <PageTitle>envie sua arte final</PageTitle>
           <section className="content">
             <section className="main-upload-container">
-              <div className="alert-container">{this.renderFlashMessages()}</div>
               {
                 this.renderAdditionalParameters(1)
               }
@@ -281,7 +222,12 @@ export class Upload extends React.Component {
                 <button>Enviar arte final</button>
               </section>
             </section>
-            {this.renderCartDefinitions()}
+            <CartItemDefinitionsPanel
+              parts={parts}
+              totalPrice={total_price}
+              subTotal={total_price}
+              expectedDeliveryDate={expected_delivery_date}
+            />
           </section>
         </div>
       </section>
@@ -298,6 +244,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
   uploadInfoFetch: (slug, itemId) => dispatch(uploadFetch(slug, itemId)),
+  uploadFinish: (data, itemId) => dispatch(uploadFinishRequest(data, itemId)),
 });
 
 
