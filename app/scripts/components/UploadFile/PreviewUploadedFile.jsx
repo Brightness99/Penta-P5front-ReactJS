@@ -57,7 +57,7 @@ export default class PreviewUploadedFile extends React.Component {
   render() {
     const { preview: { originalName, pages }, handleRemoveFile } = this.props;
     const { apiUrl } = config;
-    const mappedPages = Object.keys(pages).map(x => pages[x]);
+    const mappedPages = Object.keys(pages).map(x => pages[x]).slice(0, 2);
 
     return (
       <section className="upload-file-preview-container">
@@ -67,16 +67,14 @@ export default class PreviewUploadedFile extends React.Component {
         </section>
         <section className="preview-content">
           <section className="preview-images-container">
-            <section className="preview-item" key={mappedPages[0].preview_small}>
-              <Link to="#" onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[0].preview_big}`)}>
-                <img src={`${apiUrl + mappedPages[0].preview_small}`} alt="preview" />
-              </Link>
-            </section>
-            <section className="preview-item" key={mappedPages[1].preview_small}>
-              <Link to="#" onClick={() => this.handleOpenModal(`${apiUrl + mappedPages[1].preview_big}`)}>
-                <img src={`${apiUrl + mappedPages[1].preview_small}`} alt="preview" />
-              </Link>
-            </section>
+            {
+              mappedPages.map(x =>
+                <section className="preview-item" key={x.preview_small}>
+                  <Link to="#" onClick={() => this.handleOpenModal(`${apiUrl + x.preview_big}`)}>
+                    <img src={`${apiUrl + x.preview_small}`} alt="preview" />
+                  </Link>
+                </section>)
+            }
           </section>
           <section className="preview-footer">
             <button className="remove-button" onClick={handleRemoveFile}><TrashIcon />Excluir arquivo</button>
