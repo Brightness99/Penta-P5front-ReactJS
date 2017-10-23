@@ -7,9 +7,11 @@ import SkuSceneSchema from './SkuScene';
 type Props = {
   uploadType: string,
   selectedStrategy: number,
+  handleUploadFile: (file: {title: string, preview: {}}) => void,
+  handleRemoveFile: (file: {title: string, preview: {}}) => void,
 }
 
-const UploadTypes = ({ uploadType, selectedStrategy }: Props) => {
+const UploadTypes = ({ uploadType, selectedStrategy, handleUploadFile, handleRemoveFile }: Props) => {
   switch (uploadType) {
     case 'canvas':
       return <CanvasSchema />;
@@ -20,8 +22,8 @@ const UploadTypes = ({ uploadType, selectedStrategy }: Props) => {
         <NormalUploadType
           uploadTwoFiles={selectedStrategy === 4}
           multipleFiles={selectedStrategy === 5}
-          handleUploadFile={this.handleUploadFile}
-          handleRemoveFile={this.handleRemoveFile}
+          handleUploadFile={handleUploadFile}
+          handleRemoveFile={handleRemoveFile}
         />);
   }
 };
