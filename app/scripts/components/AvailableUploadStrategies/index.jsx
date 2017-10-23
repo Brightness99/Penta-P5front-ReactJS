@@ -16,9 +16,7 @@ type State = {
 export default class AvailableUploadStrategies extends React.Component {
   constructor(props: Props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = { selectedItem: -1 };
   }
 
   props: Props;

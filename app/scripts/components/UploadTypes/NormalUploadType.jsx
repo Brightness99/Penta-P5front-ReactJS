@@ -10,7 +10,7 @@ type Props = {
   fileFormats: Array<string>,
 }
 
-export default class NormalUploadType extends React.Component {
+export default class NormalUploadType extends React.PureComponent {
   static defaultProps = {
     multipleFiles: false,
     uploadTwoFiles: false,

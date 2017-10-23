@@ -8,12 +8,14 @@ type Props = {
 }
 
 const PreviewImageModal = ({ children, handleClose }: Props) => (
-  <section className="preview-image-modal" onClick={handleClose}>
-    <TimesIcon />
+  <section className="preview-image-modal">
+    <a href="#close" onClick={handleClose}>
+      <TimesIcon />
+    </a>
     <section className="preview-image-content">
       {children}
     </section>
   </section>
-    );
+);
 
 export default PreviewImageModal;

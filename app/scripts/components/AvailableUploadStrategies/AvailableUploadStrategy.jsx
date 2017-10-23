@@ -12,7 +12,7 @@ type Props = {
   handleOnSelect: (value: number) => void,
 }
 
-export default class AvailableUploadStrategy extends React.Component {
+export default class AvailableUploadStrategy extends React.PureComponent {
   props: Props;
 
   handleEvent = (ev) => {
