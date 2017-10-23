@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarIcon, HelpIcon, FileIcon } from 'components/Icons';
+import { CalendarIcon, HelpIcon } from 'components/Icons';
 import FileFormatIcon from 'components/FileFormatIcon';
 
 const AvailableUploadExtraInfo = () => (

@@ -13,7 +13,7 @@ type Props = {
 const UploadProgress = ({ fileFormat, fileName, progress, handleCancelUploading }: Props) => (
   <section className="loading-content">
     <FileFormatIcon title={fileFormat} />
-    <section className="file-title"><span>{fileName}</span></section>
+    <span className="file-title">{fileName}</span>
     <ProgressBar progress={progress} />
     <button className="cancel-button" onClick={handleCancelUploading}>Cancelar</button>
   </section>

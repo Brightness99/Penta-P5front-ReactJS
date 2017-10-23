@@ -122,8 +122,7 @@ export class Upload extends React.Component {
   };
 
   handleUploadFinish = () => {
-    const { match: { params: { itemId } }, uploadFinish } = this.props;
-    const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
+    const { match: { params: { itemId } }, uploadFinish, uploadInfo: { globalFlags: { upload_type } } } = this.props;
     const { uploadedFiles, isRepurchase, selectedStrategy } = this.state;
     const uploads = {};
     uploadedFiles.forEach((x) => {

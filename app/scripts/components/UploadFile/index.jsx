@@ -12,6 +12,7 @@ type Props = {
   handleUploadFile: (file: { title: string, preview: {} }) => void,
   handleRemoveFile: (file: { title: string, preview: {} }) => void,
   fileFormats: Array<string>,
+  multiple: boolean,
   preview: {},
   title: string,
   showTitle: string,
@@ -136,8 +137,8 @@ export class UploadFile extends React.Component {
   };
 
   renderContent = () => {
-    const { progress } = this.props;
-    const { isSelectedFileForUpload, fileName, fileFormat } = this.state;
+    const { progress, multiple } = this.props;
+    const { isSelectedFileForUpload, fileName, fileFormat, isShowDropzone } = this.state;
 
     if (isSelectedFileForUpload) {
       return (<UploadProgress
@@ -156,16 +157,22 @@ export class UploadFile extends React.Component {
         onDragOver={this.onDragOver}
         onDrop={this.onDrop}
       >
-        <input type="file" />
+        <input type="file" multiple={multiple} />
         <section className="icons">
-          <FileFormatIcon title="AI" />
-          <FileFormatIcon title="IND" />
+          {
+            !isShowDropzone &&
+              [<FileFormatIcon key="ai" title="AI" />,
+                <FileFormatIcon key="ind" title="IND" />]
+          }
           <FileFormatIcon title="+" />
-          <FileFormatIcon title="PSD" />
-          <FileFormatIcon title="JPG" />
+          {
+           !isShowDropzone &&
+             [<FileFormatIcon key="psd" title="PSD" />,
+               <FileFormatIcon key="jpg" title="JPG" />]
+          }
         </section>
-        <p>Arraste um arquivo até aqui para enviar ou</p>
-        <button>Procurar aquivo</button>
+        <p className="description">Arraste um arquivo até aqui para enviar ou</p>
+        <button className="select-file">Procurar aquivo</button>
       </label>
     );
   };
