@@ -46,7 +46,8 @@ class SearchBar extends React.Component {
       const queries = newSearch.split('&')
         .filter(x => x.includes('?q='))
         .map(x => x.replace('?q=', ''));
-      this.setSearchQuery(queries[0]);
+      const query = queries[0] ? queries[0] : '';
+      this.setSearchQuery(query);
     }
   }
 
@@ -72,8 +73,6 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    const { value } = this.state;
-
     return (
       <form
         className="mol-header-search"
@@ -82,7 +81,7 @@ class SearchBar extends React.Component {
         <input
           type="text"
           name="q"
-          value={value}
+          value={this.state.value}
           placeholder="Procure por produtos ou informações..."
           onChange={this.handleChange}
         />
