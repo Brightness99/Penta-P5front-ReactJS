@@ -15,8 +15,7 @@ type Props = {
       search: string,
     },
   },
-  locale: {},
-  match: {},
+  GOOGLE_SEARCH_ENGINE_ID: string,
 };
 
 
@@ -24,14 +23,21 @@ export class Search extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
-    this.handleCSE();
+    const { GOOGLE_SEARCH_ENGINE_ID } = this.props;
+    this.handleCSE(GOOGLE_SEARCH_ENGINE_ID);
   }
 
   componentWillReceiveProps(newProps) {
     const newSearch = newProps.router.location.search;
     const search = this.props.router.location.search;
+    const newCse = newProps.GOOGLE_SEARCH_ENGINE_ID;
+    const cse = this.props.GOOGLE_SEARCH_ENGINE_ID;
     if (newSearch !== search) {
       this.setSearchQuery(newSearch.replace('?q=', ''));
+    }
+    if (cse !== newCse) {
+      this.removeScript();
+      this.handleCSE(newCse);
     }
   }
 
@@ -42,15 +48,22 @@ export class Search extends React.Component {
   static props: Props;
 
   removeScript() {
-    const script = document.getElementById('gcse_printi');
-    script.remove();
+    document.getElementById('gcse_printi').remove();
+    const searchBox = document.getElementById('search-box');
+    const searchResult = document.getElementById('search-result');
+
+    /* Clear containers because CSE can't remove elements */
+    while (searchBox.firstChild) searchBox.removeChild(searchBox.firstChild);
+    while (searchResult.firstChild) searchResult.removeChild(searchResult.firstChild);
+
     /* TODO: If someone have problem with google API, please told me. @Dmitriy Boikov
      * It's dirty hack for using without reload page. Without it would be error If you leave the page and come back*/
     delete window.google;
     delete window.__gcse;
   }
 
-  handleCSE = () => {
+  handleCSE = (cseId: string) => {
+    /* It's trick from documentation */
     window.__gcse = {
       parsetags: 'explicit',
       callback: () => {
@@ -63,8 +76,7 @@ export class Search extends React.Component {
         }
       },
     };
-
-    const cx = '016989531617499423574:cwcw4nxwj10';
+    const cx = cseId.replace('searchbox_', '');
     const gcse = document.createElement('script');
     gcse.id = 'gcse_printi';
     gcse.type = 'text/javascript';
@@ -130,12 +142,10 @@ export class Search extends React.Component {
 }
 
 /* istanbul ignore next */
-function mapStateToProps(state) {
-  return {
-    app: state.app,
-    router: state.router,
-    locale: state.locale,
-  };
-}
+const mapStateToProps = (state) => ({
+  app: state.app,
+  router: state.router,
+  GOOGLE_SEARCH_ENGINE_ID: state.locale.GOOGLE_SEARCH_ENGINE_ID,
+});
 
 export default connect(mapStateToProps)(Search);
