@@ -404,9 +404,11 @@ export default {
       return {
         ...state,
         zipcodeValid: {
-          ...state.zipcodeValid,
           isRunning: false,
           isLoaded: true,
+          error: {
+            message: 'Invalid Zipcode',
+          },
         },
       };
     },
