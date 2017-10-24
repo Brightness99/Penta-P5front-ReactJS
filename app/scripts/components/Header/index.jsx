@@ -6,9 +6,8 @@ import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
-import LogoLoyalty from 'components/LogoLoyalty';
 import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
-import { userLogOut, accountLoyaltyFetch, userAuthValidate, productCategoriesFetch } from 'actions';
+import { userLogOut, accountLoyaltyFetch, userAuthValidate, productCategoriesFetch, dismissLoyaltyBar } from 'actions';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
@@ -26,7 +25,7 @@ type Props = {
   isAuthorized: boolean,
   config: {},
   account: {},
-  handleCloseTopbar: () => {},
+  isLoyaltyBarVisible: boolean,
 };
 
 type State = {
@@ -78,10 +77,6 @@ export class Header extends React.Component {
 
   static state: State;
 
-  handleCloseTopbar = () => {
-    document.querySelector('.org-loyalty-topbar').classList.add('hide-topbar');
-  };
-
   handleScroll = () => {
     const windowScrollPosition = document.documentElement.scrollTop;
 
@@ -124,22 +119,26 @@ export class Header extends React.Component {
     this.props.dispatch(userLogOut());
   };
 
+  handleLoyaltyBarDismiss = () => {
+    const { dispatch } = this.props;
+
+    dispatch(dismissLoyaltyBar());
+  };
+
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty }, isLoyaltyBarVisible } = this.props;
     const { activePane } = this.state;
 
     return (
       <header className="org-header">
-        { loyalty.isLoaded && !loyalty.isRunning && loyalty.header &&
-          <LoyaltyTopbar handleCloseTopbar={this.handleCloseTopbar} />
-        }
+        {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible && <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />}
         <div className="mol-mobile-header">
           <div className="mol-header-button mol-header-button--menu">
             <button onClick={this.handleShowMenu} className="atm-header-icon-button">
               <MenuIcon />
             </button>
           </div>
-          <Logo enableLink={true} />
+          <Logo enableLink={true} showLoyalty={true} />
           <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           <div className="mol-header-button">
             <button onClick={this.handleShowMyAccount} className="atm-header-icon-button">
@@ -166,7 +165,7 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
+    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty }, isLoyaltyBarVisible } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -176,15 +175,11 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
-        {
-          loyalty.isLoaded && !loyalty.isRunning && loyalty.header &&
-          <LoyaltyTopbar handleCloseTopbar={this.handleCloseTopbar} screenSize={screenSize} />
-        }
+        {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible && <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />}
         <Topbar handleClose={this.handlePaneHide} />
         <div className="org-header-content">
           <div className="container">
-            <Logo small={!showTopbar} enableLink={true} />
-            <LogoLoyalty small={!showTopbar} enableLink={true} />
+            <Logo enableLink={true} showLoyalty={true} short={!showTopbar} />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
                 <MenuIcon />Menu
@@ -247,8 +242,14 @@ export class Header extends React.Component {
 function mapStateToProps(state) {
   return {
     account: state.account,
+    isLoyaltyBarVisible: state.app.isLoyaltyBarVisible,
   };
 }
 
-export default connect(mapStateToProps)(Header);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

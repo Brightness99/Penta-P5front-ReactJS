@@ -3,8 +3,8 @@
 import React from 'react';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { NavLink } from 'react-router-dom';
+import cx from 'classnames';
 import { CartIcon } from 'components/Icons';
-
 import { cartBasicFetch } from 'actions';
 
 type Props = {
@@ -26,7 +26,12 @@ export default class Cart extends React.Component {
   render() {
     const { totalCartItems } = this.props;
     return (
-      <div className="mol-cart-icon">
+      <div
+        className={cx(
+          'mol-cart-icon',
+          totalCartItems <= 0 && 'mol-cart-icon--empty'
+        )}
+      >
         <NavLink to="/meu-carrinho">
           <div>
             <CartIcon />

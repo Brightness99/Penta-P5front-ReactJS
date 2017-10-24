@@ -19,7 +19,10 @@ export const accountState = {
     isRunning: false,
     isLoaded: false,
   },
-  loyalty: {},
+  loyalty: {
+    isRunning: false,
+    isLoaded: false,
+  },
 };
 
 export default {
