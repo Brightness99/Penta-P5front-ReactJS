@@ -312,9 +312,9 @@
 }
 
 .org-search-page {
-  margin-top: 3rem;
+  margin: 3rem 0;
   @include lg  {
-    margin-top: 2rem;
+    margin: 2rem 0;
   }
   .gsc-input-box {
     height: 34px;
