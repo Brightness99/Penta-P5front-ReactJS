@@ -1,10 +1,14 @@
 .mol-cart-icon {
   align-items: center;
   display: inline-flex;
-  margin-right: 0.8rem;
+  margin-right: 0.4rem;
   height: 100%;
   position: relative;
   width: auto;
+
+  &--empty {
+    margin-right: 0;
+  }
 
   a {
     align-items: center;
