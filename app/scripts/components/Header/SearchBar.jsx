@@ -1,11 +1,17 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { SearchIcon } from 'components/Icons';
 import { push } from 'modules/ReduxRouter';
 
 type Props = {
+  router: {
+    location: {
+      search: string,
+    },
+  }
 };
 
 type State = {
@@ -15,7 +21,7 @@ type State = {
   value: string,
 };
 
-export default class SearchBar extends React.Component {
+class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,14 +34,31 @@ export default class SearchBar extends React.Component {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
+  componentDidMount() {
+    const search = this.props.router.location.search;
+    this.setSearchQuery(search.replace('?q=', ''));
+  }
+
+  componentWillReceiveProps(newProps) {
+    const newSearch = newProps.router.location.search;
+    const search = this.props.router.location.search;
+    if (newSearch !== search) {
+      this.setSearchQuery(newSearch.replace('?q=', ''));
+    }
+  }
+
   static props: Props;
 
   static state: State;
 
-  handleChange = (ev) => {
+  setSearchQuery(query: string) {
     this.setState({
-      value: ev.currentTarget.value,
+      value: query,
     });
+  }
+
+  handleChange = (ev) => {
+    this.setSearchQuery(ev.currentTarget.value);
   };
 
   handleSubmit = (ev) => {
@@ -46,6 +69,8 @@ export default class SearchBar extends React.Component {
   };
 
   render() {
+    const { value } = this.state;
+
     return (
       <form
         className="mol-header-search"
@@ -54,6 +79,7 @@ export default class SearchBar extends React.Component {
         <input
           type="text"
           name="q"
+          value={value}
           placeholder="Procure por produtos ou informações..."
           onChange={this.handleChange}
         />
@@ -64,3 +90,9 @@ export default class SearchBar extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  router: state.router,
+});
+
+export default connect(mapStateToProps)(SearchBar);
