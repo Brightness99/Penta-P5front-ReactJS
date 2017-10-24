@@ -128,8 +128,14 @@ export class ProductTutorialsBlock extends React.Component {
             </div>
             <div className="box-tutorial box-tutorial-small">
               {Object.keys(tutorials.small_box).map((item) => ([
-                <h5 className="title-smallbox">{item === 'videos' ? 'Vídeos' : 'Artigos'}</h5>,
-                tutorials.small_box[item].map((link, index) => item === 'videos' ? this.renderSmallBoxVideo(link, index) : this.renderSmallBoxLink(link)),
+                <h5 className="title-smallbox" key={`title-smallbox-${item}`}>{item === 'videos' ? 'Vídeos' : 'Artigos'}</h5>,
+                tutorials.small_box[item].map((link, index) => {
+                  if (item === 'videos') {
+                    return this.renderSmallBoxVideo(link, index);
+                  }
+
+                  return this.renderSmallBoxLink(link);
+                }),
               ]))}
             </div>
           </div>

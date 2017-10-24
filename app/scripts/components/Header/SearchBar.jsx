@@ -35,7 +35,7 @@ class SearchBar extends React.Component {
         <input
           type="text"
           name="q"
-          defaultValue={decodeURI(/q=([^&]+)/.exec(search)[1])}
+          defaultValue={decodeURI(/q=([^&]+)/.exec(search) ? decodeURI(/q=([^&]+)/.exec(search)[1]) : '')}
           placeholder={`${locale.SEARCH_PLACEHOLDER}...`}
         />
         <button>
