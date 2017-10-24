@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { isMobile } from 'utils/helpers';
 import { aboutFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';

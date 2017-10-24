@@ -132,7 +132,7 @@ export function accountOrdersFetch(page: number): Object {
 
 /**
  * Loyalty Fetch
- * @param {} 
+ *
  * @returns {Object}
  */
 export function accountLoyaltyFetch(): Object {

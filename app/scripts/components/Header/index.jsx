@@ -8,7 +8,7 @@ import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'co
 import Logo from 'components/Logo';
 import LogoLoyalty from 'components/LogoLoyalty';
 import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
-import { userLogOut, accountLoyaltyFetch } from 'actions';
+import { userLogOut, accountLoyaltyFetch, userAuthValidate, productCategoriesFetch } from 'actions';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
@@ -46,6 +46,9 @@ export class Header extends React.Component {
 
   componentDidMount() {
     const { screenSize, dispatch } = this.props;
+
+    dispatch(userAuthValidate());
+    dispatch(productCategoriesFetch());
     dispatch(accountLoyaltyFetch());
 
     if (!isMobile(screenSize)) {
@@ -168,7 +171,7 @@ export class Header extends React.Component {
         )}
       >
         {
-          loyalty.isLoaded && !loyalty.isRunning && loyalty.header && 
+          loyalty.isLoaded && !loyalty.isRunning && loyalty.header &&
           <LoyaltyTopbar handleClose={this.handleClose} />
         }
         <Topbar handleClose={this.handlePaneHide} />

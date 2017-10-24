@@ -4,9 +4,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { Input } from 'quarks/Inputs';
 import { InputEmail } from 'quarks/Inputs/Validatable';
 import { Link } from 'react-router-dom';
-import { BoxRadio, Select } from 'atoms/Inputs';
-import { Accordion, AccordionItem } from 'components/Accordion';
-import { CheckIcon, PrintiClub, CloseIcon } from 'components/Icons';
+import { BoxRadio } from 'atoms/Inputs';
 
 type Props = {
   screenSize: string,

@@ -1,8 +1,6 @@
 // @flow
 
 import React from 'react';
-import cloudImage from 'assets/media/images/img-cloud.png';
-import { Link } from 'react-router-dom';
 
 type Props = {
   handleModalShowing: () => void,
