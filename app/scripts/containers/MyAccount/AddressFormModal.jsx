@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'quarks/Inputs';
 import { InputRegex } from 'quarks/Inputs/Validatable';
 import { ErrorText, SuccessText } from 'atoms/Texts';
-import { accountAddressCreate } from 'actions';
+import { accountAddressCreate, zipcodeValidate } from 'actions';
 
 type Props = {
   account: {},
@@ -36,6 +36,17 @@ class AddressFormModal extends React.Component {
 
   static props: Props;
 
+  componentWillReceiveProps(nextProps) {
+    const { account: { zipcodeValid } } = nextProps;
+    const { account } = this.props;
+
+    if (zipcodeValid !== account.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
+      if (!zipcodeValid.error) {
+        this.handleSubmit();
+      }
+    }
+  }
+
   handleCloseModal = () => {
     const { onCloseModal } = this.props;
     if (onCloseModal) {
@@ -44,6 +55,17 @@ class AddressFormModal extends React.Component {
   }
 
   handleClick = () => {
+
+    const { dispatch, type } = this.props;
+    const { form, canSubmit } = this.state;
+
+    if (canSubmit) {
+      dispatch(zipcodeValidate(form.zipcode.value));
+    }
+  }
+
+  handleSubmit = () => {
+
     const { dispatch, type } = this.props;
     const { form, canSubmit } = this.state;
 
@@ -59,9 +81,7 @@ class AddressFormModal extends React.Component {
       type,
     };
 
-    if (canSubmit) {
-      dispatch(accountAddressCreate(dataToSave));
-    }
+    dispatch(accountAddressCreate(dataToSave));
   }
 
   handleValidatedInput = (name, value, valid) => {
@@ -85,7 +105,7 @@ class AddressFormModal extends React.Component {
   }
 
   render() {
-    const { locale, account: { addresses } } = this.props;
+    const { locale, account: { addresses, zipcodeValid } } = this.props;
     const zipcodePattern = locale.COUNTRY_CODE === 'BR' ? /^([0-9]){5}[-]([0-9]){3}$/ : /(^\d{5}$)|(^\d{5}-\d{4}$)/;
     const { form, canSubmit } = this.state;
 
@@ -187,11 +207,12 @@ class AddressFormModal extends React.Component {
         </form>
         <div className="mol-checkout-pane-footer">
           {(!addresses.isAddressCreating && addresses.isAddressCreatingCalled && addresses.error) && <ErrorText>{addresses.error.message}</ErrorText>}
+          {(!zipcodeValid.isRunning && zipcodeValid.isLoaded && zipcodeValid.error) && <ErrorText>{zipcodeValid.error.message}</ErrorText>}
           {(!addresses.isAddressCreating && addresses.isAddressCreatingCalled && !addresses.error) && <SuccessText>Successfully saved.</SuccessText>}
         </div>
         <div className="mol-checkout-pane-footer">
           <button className="atm-button-text" onClick={this.handleCloseModal}>CANCELAR</button>
-          <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressCreating && !addresses.isAddressCreatingCalled)}>SALVAR ENDEREÇO</Button>
+          <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressCreating && !addresses.isAddressCreatingCalled) || (zipcodeValid.isRunning && !zipcodeValid.isLoaded)}>SALVAR ENDEREÇO</Button>
         </div>
       </div>
     );
