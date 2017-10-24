@@ -15,7 +15,6 @@ export class LoyaltyTopbar extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
-    console.log(this.props.loyalty);
     document.querySelector('body').classList.add('has-loyalty-bar');
   }
 

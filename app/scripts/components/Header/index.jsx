@@ -26,6 +26,7 @@ type Props = {
   config: {},
   account: {},
   isLoyaltyBarVisible: boolean,
+  locale: {},
 };
 
 type State = {
@@ -126,12 +127,25 @@ export class Header extends React.Component {
   };
 
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty }, isLoyaltyBarVisible } = this.props;
+    const {
+      screenSize,
+      dispatch,
+      totalCartItems,
+      isAuthorized,
+      config,
+      account: {
+        loyalty
+      },
+      isLoyaltyBarVisible,
+      locale,
+    } = this.props;
     const { activePane } = this.state;
 
     return (
       <header className="org-header">
-        {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible && <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />}
+        {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible &&
+          <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />
+        }
         <div className="mol-mobile-header">
           <div className="mol-header-button mol-header-button--menu">
             <button onClick={this.handleShowMenu} className="atm-header-icon-button">
@@ -165,7 +179,18 @@ export class Header extends React.Component {
   }
 
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty }, isLoyaltyBarVisible } = this.props;
+    const {
+      screenSize,
+      dispatch,
+      totalCartItems,
+      isAuthorized,
+      config,
+      account: {
+        loyalty
+      },
+      isLoyaltyBarVisible,
+      locale,
+    } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -176,7 +201,7 @@ export class Header extends React.Component {
         )}
       >
         {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible && <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />}
-        <Topbar handleClose={this.handlePaneHide} />
+        <Topbar handleClose={this.handlePaneHide} locale={locale} />
         <div className="org-header-content">
           <div className="container">
             <Logo enableLink={true} showLoyalty={true} short={!showTopbar} />
@@ -243,6 +268,11 @@ function mapStateToProps(state) {
   return {
     account: state.account,
     isLoyaltyBarVisible: state.app.isLoyaltyBarVisible,
+    locale: {
+      COUNTRY: state.locale.COUNTRY,
+      COUNTRY_CODE: state.locale.COUNTRY_CODE,
+      header: state.locale.translate.header,
+    }
   };
 }
 
