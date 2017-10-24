@@ -20,7 +20,7 @@ export class LogoLoyalty extends React.Component {
   });
 
   render() {
-    const { account: { loyalty } } = this.props;
+    const { account: { loyalty }, small, enableLink } = this.props;
 
     const handleClick = (ev) => {
       const { onClick } = this.props;
@@ -30,10 +30,23 @@ export class LogoLoyalty extends React.Component {
       }
     };
 
+    if (enableLink) {
+      return (
+        <div className="atm-printi-logo">
+          <NavLink to="/" onClick={handleClick}>
+            {loyalty.isLoaded && !loyalty.isRunning && loyalty.color && <div className="org-logo-loyalty">
+              {small ? '' : <p>Club</p> }
+              {loyalty.color && <p className="mol-logo-loyalty" style={this.setBackgroundColor(loyalty.color)}>{loyalty.loyalty_tier_name}</p>}
+            </div>}
+          </NavLink>
+        </div>
+      );
+    }
+
     return (
       <NavLink to="/" onClick={handleClick}>
         {loyalty.isLoaded && !loyalty.isRunning && loyalty.color && <div className="org-logo-loyalty">
-          <p>Club</p>
+          {small ? '' : <p>Club</p> }
           {loyalty.color && <p className="mol-logo-loyalty" style={this.setBackgroundColor(loyalty.color)}>{loyalty.loyalty_tier_name}</p>}
         </div>}
       </NavLink>
