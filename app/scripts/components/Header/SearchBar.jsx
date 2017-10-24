@@ -1,51 +1,32 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { SearchIcon } from 'components/Icons';
 import { push } from 'modules/ReduxRouter';
 
 type Props = {
-};
-
-type State = {
-  isFocused: boolean,
-  isValid: boolean,
-  dirty: boolean,
-  value: string,
-};
-
-export default class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFocused: false,
-      isValid: false,
-      dirty: false,
-      value: '',
-    };
+  search: string,
+  locale: {
+    SEARCH_PLACEHOLDER: string,
   }
+};
 
+class SearchBar extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
-  static state: State;
-
-  handleChange = (ev) => {
-    this.setState({
-      value: ev.currentTarget.value,
-    });
-  };
-
   handleSubmit = (ev) => {
-    const { value } = this.state;
     ev.preventDefault();
 
-    push(`./buscar?q=${value}`);
+    push(`/buscar?q=${ev.currentTarget[0].value}`);
   };
 
   render() {
+    const { search, locale } = this.props;
+
     return (
       <form
         className="mol-header-search"
@@ -54,13 +35,20 @@ export default class SearchBar extends React.Component {
         <input
           type="text"
           name="q"
-          placeholder="Procure por produtos ou informações..."
-          onChange={this.handleChange}
+          defaultValue={decodeURI(/q=([^&]+)/.exec(search)[1])}
+          placeholder={`${locale.SEARCH_PLACEHOLDER}...`}
         />
-        <button onClick={this.handleSubmit}>
+        <button>
           <SearchIcon />
         </button>
       </form>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  search: state.router.location.search,
+  locale: state.locale.translate.header,
+});
+
+export default connect(mapStateToProps)(SearchBar);
