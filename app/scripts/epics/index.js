@@ -11,7 +11,8 @@ import {
   userLogOut,
   userAuthValidate,
   userSocialSignIn,
-  userSocialSignUp } from './user';
+  userSocialSignUp
+} from './user';
 import { productsFetch } from './products';
 import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
@@ -56,15 +57,21 @@ import {
   accountSavedCreditCardDelete,
   accountOrderDetailFetch,
   accountOrderFetch,
-  accountLoyaltyFetch,
+  accountLoyaltyFetch
 } from './account';
 
 import {
-  successfulPurchaseFetch,
+  successfulPurchaseFetch
 } from './successful-purchase';
 
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
+import {
+  templatesFetch,
+  fetchTemplateById,
+  sendDownloadTemplatesRequest,
+  fetchTemplate
+} from './templates';
 import { aboutFetch } from './about';
 
 export default combineEpics(
@@ -118,4 +125,8 @@ export default combineEpics(
   productCategoriesFetch,
   successfulPurchaseFetch,
   siteMapFetch,
+  templatesFetch,
+  fetchTemplateById,
+  sendDownloadTemplatesRequest,
+  fetchTemplate,
 );
