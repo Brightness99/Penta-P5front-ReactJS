@@ -1,6 +1,6 @@
 .org-loyalty-topbar {
   font-size: $font-size-xxxs;
-  height: 40px;
+  height: 4rem;
   transition: height 0.3s ease-in-out;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@
       &.qrk-type-of-loyalty {
         background-color: $color-white;
         box-sizing: border-box;
-        border-radius: 30px;
+        border-radius: 3rem;
         margin-right: 2rem;
         text-transform: uppercase;
         text-align: center;
@@ -57,8 +57,7 @@
     margin-bottom: 0;
   }
   .mol-logo-loyalty {
-    background-color: $color-deep-purple;
-    border-radius: 30px;
+    border-radius: 30rem;
     color: $color-white;
     padding: 0 1rem;
     text-transform: uppercase;
@@ -86,13 +85,12 @@
       flex-direction: row;
       @include lg {
         font-size: $font-size-base;
-        padding: 1.6rem 10rem 1.6rem 2rem;
+        padding: 1.6rem 2rem 1.6rem 2rem;
       }
       &.qrk-type-of-loyalty {
         background-color: $color-white;
         box-sizing: border-box;
         border-radius: 30px;
-        color: $color-deep-purple;
         font-size: $font-size-xs;
         margin-right: 2rem;
         text-transform: uppercase;
