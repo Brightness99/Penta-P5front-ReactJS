@@ -77,12 +77,11 @@ export class Search extends React.Component {
         }
       },
     };
-    const cx = cseId.replace('searchbox_', '');
     const gcse = document.createElement('script');
     gcse.id = 'gcse_printi';
     gcse.type = 'text/javascript';
     gcse.async = true;
-    gcse.src = `${document.location.protocol === 'https:' ? 'https:' : 'http:'}//www.google.com/cse/cse.js?cx=${cx}`;
+    gcse.src = `${document.location.protocol === 'https:' ? 'https:' : 'http:'}//www.google.com/cse/cse.js?cx=${cseId}`;
     document.body.insertBefore(gcse, document.body.firstChild);
   };
 
