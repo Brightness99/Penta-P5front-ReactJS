@@ -56,7 +56,7 @@ class AddressFormModal extends React.Component {
 
   handleClick = () => {
 
-    const { dispatch, type } = this.props;
+    const { dispatch } = this.props;
     const { form, canSubmit } = this.state;
 
     if (canSubmit) {
@@ -67,7 +67,7 @@ class AddressFormModal extends React.Component {
   handleSubmit = () => {
 
     const { dispatch, type } = this.props;
-    const { form, canSubmit } = this.state;
+    const { form } = this.state;
 
     const dataToSave = {
       receiver_name: form.receiver_name.value,
