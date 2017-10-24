@@ -1,8 +1,6 @@
 // @flow
-
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
 
 import Breadcrumbs from 'components/Breadcrumbs';
 import ListCategory from './ListCategory';
@@ -11,30 +9,25 @@ import ListModels from './ListModels';
 type Props = {
   app: AppStore,
   router: RouterStore,
-  dispatch: () => {},
-  children: any,
 };
 
-type State = {
-};
-
-export class Templateslp extends React.Component {
+class TemplatesSEO extends React.PureComponent<Props> {
   static props: Props;
 
   renderMobile() {
     const { app: { screenSize } } = this.props;
 
     return (
-      <div className="container">
-        <h3>Modelos de cartão de visita</h3>
-        <div className="tpl-templateslp">
-          <div className="btn-default btn-secondary fnt-sbold btn-sm" onClick={this.handleShowMenu}>
-            Escolher categoria
-          </div>
+      <article className="container">
+        <h3>{'Modelos de cartão de visita'}</h3>
+        <section className="tpl-templateslp">
+          <p className="btn-default btn-secondary fnt-sbold btn-sm" onClick={this.handleShowMenu}>
+            {'Escolher categoria'}
+          </p>
           <ListModels screenSize={screenSize} />
           <ListCategory screenSize={screenSize} />
-        </div>
-      </div>
+        </section>
+      </article>
     );
   }
 
@@ -54,14 +47,14 @@ export class Templateslp extends React.Component {
       },
     ];
     return (
-      <div className="container">
+      <article className="container">
         <Breadcrumbs links={breadcrumb} />
-        <h3>Modelos de cartão de visita</h3>
-        <div className="tpl-templateslp">
-          <ListCategory />
-          <ListModels />
-        </div>
-      </div>
+        <h3>{'Modelos de cartão de visita'}</h3>
+        <section className="tpl-templateslp">
+          <ListCategory screenSize={screenSize} />
+          <ListModels screenSize={screenSize} />
+        </section>
+      </article>
     );
   }
 
@@ -74,16 +67,8 @@ export class Templateslp extends React.Component {
   }
 }
 
-/* istanbul ignore next */
-function mapStoreToProps(state) {
-  return ({
-    app: state.app,
-  });
-}
+const mapStoreToProps = (state) => ({
+  app: state.app,
+});
 
-/* istanbul ignore next */
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
-
-export default connect(mapStoreToProps, mapDispatchToProps)(Templateslp);
+export default connect(mapStoreToProps)(TemplatesSEO);

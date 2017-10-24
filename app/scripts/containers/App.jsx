@@ -33,8 +33,8 @@ import TermsOfUse from 'containers/TermsOfUse';
 import PrivacyPolicy from 'containers/PrivacyPolicy';
 import Sitemap from 'containers/Sitemap';
 import Search from 'components/Search';
-import Gabaritos from 'containers/Gabaritos';
-import Templateslp from 'containers/Templateslp';
+import Templates from 'containers/Templates';
+import TemplatesSEO from 'containers/TemplatesSEO';
 import Referral from 'containers/Referral';
 
 import CloudEditor from 'containers/CloudEditor';
@@ -116,8 +116,8 @@ export class App extends React.Component {
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
-                      <Route exact path="/gabaritos" component={Gabaritos} />
-                      <Route exact path="/modelos" component={Templateslp} />
+                      <Route path="/download-de-gabaritos" component={Templates} />
+                      <Route exact path="/modelos" component={TemplatesSEO} />
                       <Route component={Error404} />
                     </Switch>
                   </main>

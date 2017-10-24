@@ -22,6 +22,7 @@ import header from './header';
 import successfulPurchase from './successful-purchase';
 import siteMap from './site-map';
 import about from './about';
+import templates from './templates';
 
 export default {
   ...app,
@@ -43,4 +44,5 @@ export default {
   ...successfulPurchase,
   ...siteMap,
   ...about,
+  ...templates,
 };

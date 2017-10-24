@@ -71,7 +71,8 @@ export function datasetToObject(elem: Element) {
   [].forEach.call(elem.attributes, attr => {
     /* istanbul ignore else */
     if (/^data-/.test(attr.name)) {
-      const camelCaseName = attr.name.substr(5).replace(/-(.)/g, ($0, $1) => $1.toUpperCase());
+      const camelCaseName = attr.name.substr(5)
+      .replace(/-(.)/g, ($0, $1) => $1.toUpperCase());
       data[camelCaseName] = attr.value;
     }
   });
@@ -155,3 +156,5 @@ export function mergeDeep(target, ...sources) {
 
   return mergeDeep(target, ...sources);
 }
+
+export const isEmpty = o => o === undefined || o === null;

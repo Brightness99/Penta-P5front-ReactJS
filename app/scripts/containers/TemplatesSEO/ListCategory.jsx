@@ -1,5 +1,4 @@
 // @flow
-
 import React from 'react';
 import { CheckBox } from 'components/Input';
 import { NavLink } from 'react-router-dom';
@@ -7,14 +6,14 @@ import { TimesIcon } from 'components/Icons';
 
 type Props = {
   screenSize: string,
-  handleClose: () => {},
+  handleClose: () => void,
 }
 
 type State = {
   isChecked: boolean,
 }
 
-export class ListCategory extends React.Component {
+class ListCategory extends React.PureComponent<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,10 +25,10 @@ export class ListCategory extends React.Component {
     this.setState({
       isChecked: !this.state.isChecked,
     });
-  }
+  };
 
   static props: Props;
-  static props: State;
+  static state: State;
 
   handleCloseMenu = (ev) => {
     const { handleClose } = this.props;
@@ -37,7 +36,7 @@ export class ListCategory extends React.Component {
     if (typeof handleClose === 'function') {
       handleClose(ev);
     }
-  }
+  };
 
   renderMobile() {
     return (
@@ -77,7 +76,7 @@ export class ListCategory extends React.Component {
   renderDesktop() {
     return (
       <div>
-        <p className="qrk-title-category">Categorias</p>
+        <p className="qrk-title-category">{'Categorias'}</p>
         <ul className="mol-list-category">
           <li>
             <label>
@@ -85,7 +84,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-                Todos os modelos
+              {'Todos os modelos'}
             </label>
           </li>
           <li>
@@ -94,7 +93,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Advocacia
+              {'Advocacia'}
             </label>
           </li>
           <li>
@@ -103,16 +102,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Agricultura
-            </label>
-          </li>
-          <li>
-            <label>
-              <CheckBox
-                checked={this.state.isChecked}
-                onChange={this.toggleChange} 
-              />
-              Automotivo
+              {'Agricultura'}
             </label>
           </li>
           <li>
@@ -121,7 +111,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Bebidas e Alimentos
+              {'Automotivo'}
             </label>
           </li>
           <li>
@@ -130,7 +120,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              BelezaCasa e Lar
+              {'Bebidas e Alimentos'}
             </label>
           </li>
           <li>
@@ -139,16 +129,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Condicionamento Físico
-            </label>
-          </li>
-          <li>
-            <label>
-              <CheckBox
-                checked={this.state.isChecked}
-                onChange={this.toggleChange} 
-              />
-              Construção e Serviços
+              {'BelezaCasa e Lar'}
             </label>
           </li>
           <li>
@@ -157,7 +138,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Comerciais
+              {'Condicionamento Físico'}
             </label>
           </li>
           <li>
@@ -166,7 +147,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Criativo
+              {'Construção e Serviços'}
             </label>
           </li>
           <li>
@@ -175,16 +156,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Educação
-            </label>
-          </li>
-          <li>
-            <label>
-              <CheckBox
-                checked={this.state.isChecked}
-                onChange={this.toggleChange} 
-              />
-              Esportes
+              {'Comerciais'}
             </label>
           </li>
           <li>
@@ -193,7 +165,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Horticultura
+              {'Criativo'}
             </label>
           </li>
           <li>
@@ -202,7 +174,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Meio Ambiente
+              {'Educação'}
             </label>
           </li>
           <li>
@@ -211,7 +183,7 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Meios de Comunicação
+              {'Esportes'}
             </label>
           </li>
           <li>
@@ -220,13 +192,41 @@ export class ListCategory extends React.Component {
                 checked={this.state.isChecked}
                 onChange={this.toggleChange}
               />
-              Mercado Imobiliário
+              {'Horticultura'}
+            </label>
+          </li>
+          <li>
+            <label>
+              <CheckBox
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+              />
+              {'Meio Ambiente'}
+            </label>
+          </li>
+          <li>
+            <label>
+              <CheckBox
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+              />
+              {'Meios de Comunicação'}
+            </label>
+          </li>
+          <li>
+            <label>
+              <CheckBox
+                checked={this.state.isChecked}
+                onChange={this.toggleChange}
+              />
+              {'Mercado Imobiliário'}
             </label>
           </li>
         </ul>
       </div>
     );
   }
+
   render() {
     const { screenSize } = this.props;
     return (
