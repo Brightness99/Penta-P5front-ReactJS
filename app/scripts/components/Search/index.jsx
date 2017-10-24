@@ -91,6 +91,10 @@ export class Search extends React.Component {
       div: 'search-box',
       tag: 'searchbox',
       gname: 'search-site',
+      attributes: {
+        enableAutoComplete: true,
+        autoCompleteMatchType: 'any',
+      },
     }, {
       div: 'search-result',
       tag: 'searchresults',
