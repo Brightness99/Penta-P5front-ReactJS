@@ -43,7 +43,10 @@ class SearchBar extends React.Component {
     const newSearch = newProps.router.location.search;
     const search = this.props.router.location.search;
     if (newSearch !== search) {
-      this.setSearchQuery(newSearch.replace('?q=', ''));
+      const queries = newSearch.split('&')
+        .filter(x => x.includes('?q='))
+        .map(x => x.replace('?q=', ''));
+      this.setSearchQuery(queries[0]);
     }
   }
 

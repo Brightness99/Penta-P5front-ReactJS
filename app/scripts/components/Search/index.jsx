@@ -18,7 +18,6 @@ type Props = {
   GOOGLE_SEARCH_ENGINE_ID: string,
 };
 
-
 export class Search extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
@@ -48,7 +47,9 @@ export class Search extends React.Component {
   static props: Props;
 
   removeScript() {
-    document.getElementById('gcse_printi').remove();
+    const script = document.getElementById('gcse_printi');
+    if (script) script.remove();
+
     const searchBox = document.getElementById('search-box');
     const searchResult = document.getElementById('search-result');
 
