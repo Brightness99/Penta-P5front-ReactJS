@@ -201,28 +201,6 @@ export default {
         },
       };
     },
-    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_SUCCESS](state, action) {
-      return {
-        ...state,
-        notification: {
-          ...action.payload,
-          isRunning: false,
-          isLoaded: true,
-          error: null,
-        },
-      };
-    },
-    [AccountConstants.ACCOUNT_NOTIFICATION_UPDATE_SUBMIT_FAILURE](state, action) {
-      return {
-        ...state,
-        notification: {
-          ...state.notification,
-          isRunning: false,
-          isLoaded: true,
-          error: action.payload,
-        },
-      };
-    },
     [AccountConstants.ACCOUNT_NOTIFICATION_FETCH_REQUEST](state) {
       return {
         ...state,
@@ -259,6 +237,8 @@ export default {
         notification: {
           ...state.notification,
           ...action.payload,
+          isUpdating: true,
+          isUpdated: false,
           error: null,
         },
       };
@@ -267,9 +247,10 @@ export default {
       return {
         ...state,
         notification: {
+          ...state.notification,
           ...action.payload,
-          isRunning: false,
-          isLoaded: true,
+          isUpdating: false,
+          isUpdated: true,
           error: null,
         },
       };
@@ -279,8 +260,8 @@ export default {
         ...state,
         notification: {
           ...state.notification,
-          isRunning: false,
-          isLoaded: true,
+          isUpdating: false,
+          isUpdated: true,
           error: action.payload,
         },
       };

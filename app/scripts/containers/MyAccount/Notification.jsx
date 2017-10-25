@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { ErrorText, SuccessText } from 'atoms/Texts';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { RadioButton } from 'components/Input';
 import Loading from 'components/Loading';
@@ -54,6 +55,7 @@ export class Notification extends React.Component {
   };
 
   renderForm() {
+    const { account: { notification } } = this.props;
     const { sms_enabled } = this.state;
 
     return (
@@ -83,6 +85,15 @@ export class Notification extends React.Component {
               Não
             </label>
           </div>
+
+          {notification.isUpdated && !notification.isUpdating && <div className="mol-checkout-pane-footer">
+            {notification.error && <ErrorText>
+              {notification.error.message}
+            </ErrorText>}
+            {!notification.error && <SuccessText>
+              Successfully saved.
+            </SuccessText>}
+          </div>}
 
           <div className="mol-checkout-pane-footer">
             <button onClick={this.handleSave} className="atm-send-button">Salvar</button>
