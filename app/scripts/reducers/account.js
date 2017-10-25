@@ -191,6 +191,8 @@ export default {
         ...state,
         addresses: {
           ...state.addresses,
+          isDeleting: true,
+          isDeletingCalled: false,
           error: null,
         },
       };
@@ -202,8 +204,8 @@ export default {
           ...state.addresses,
           billing: state.addresses.billing.filter((item) => item.id !== action.payload.id),
           shipping: state.addresses.shipping.filter((item) => item.id !== action.payload.id),
-          isRunning: false,
-          isLoaded: true,
+          isDeleting: false,
+          isDeletingCalled: true,
           error: null,
         },
       };
@@ -212,8 +214,8 @@ export default {
       return {
         ...state,
         addresses: {
-          isRunning: false,
-          isLoaded: true,
+          isDeleting: false,
+          isDeletingCalled: true,
           error: action.payload,
         },
       };
