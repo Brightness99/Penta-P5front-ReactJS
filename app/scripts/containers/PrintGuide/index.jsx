@@ -79,8 +79,8 @@ export class PrintGuide extends React.Component {
             {!isMobile(screenSize) && <p className="subtitle-file-mount">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum</p>}
 
             <div className="org-content-file-mount">
-              <Sidebar screenSize={screenSize} selectItem={this.selectItem} />
-              <ContentText guide={guide} />
+              <Sidebar screenSize={screenSize} selectItem={this.selectItem} guide={guide} />
+              {!isMobile(screenSize) && <ContentText guide={guide} />}
             </div>
 
           </div>

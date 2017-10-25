@@ -9,6 +9,7 @@ import ContentText from './ContentText';
 type Props = {
   screenSize: string,
   selectItem: () => {},
+  guide: {}
 }
 
 const guideList = [
@@ -85,8 +86,25 @@ const guideList = [
 export class Sidebar extends React.Component {
   props: Props;
 
-  handleItemClick(slug) {
+  state = {
+    index1: -1,
+    index2: -1,
+  }
+
+  handleItemClick(slug, i1 = 0, i2 = 0) {
     this.props.selectItem(slug);
+    const { index1, index2 } = this.state;
+    if (index1 === i1 && index2 === i2) {
+      this.setState({
+        index1: -1,
+        index2: -1,
+      });
+    } else {
+      this.setState({
+        index1: i1,
+        index2: i2,
+      });
+    }
   }
 
   renderAccordionItem(list) {
@@ -121,11 +139,19 @@ export class Sidebar extends React.Component {
   }
 
   renderListMobile(index, list) {
-    const renderMark = list.map((accordionItem, accordionIndex) => (
-      <AccordionItem key={accordionIndex.toString()}>
-        <AccordionItemTitle handleClick={() => this.handleItemClick(accordionItem.slug)}>{accordionItem.title}</AccordionItemTitle>
-      </AccordionItem>
-    ));
+    const { guide } = this.props;
+    const { index1, index2 } = this.state;
+    const renderMark = list.map((accordionItem, accordionIndex) => {
+      const guideData = (index1 === index && index2 === accordionIndex) ? guide : null;
+      return (
+        <AccordionItem key={accordionIndex.toString()}>
+          <AccordionItemTitle handleClick={() => this.handleItemClick(accordionItem.slug, index, accordionIndex)}>{accordionItem.title}</AccordionItemTitle>
+          <AccordionItemBody className="atm-accordion-sub-item-body">
+            <ContentText guide={guideData} />
+          </AccordionItemBody>
+        </AccordionItem>
+      );
+    });
     return (
       <Accordion className="qrk-accordion-sidebar accordion-mobile">
         {renderMark}
@@ -134,16 +160,20 @@ export class Sidebar extends React.Component {
   }
 
   renderMobile() {
-    const renderMark = guideList.map((item, index) => (
-      <Accordion key={index.toString()} className="qrk-accordion-sidebar">
-        <AccordionItem>
-          <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
-          <AccordionItemBody>
-            {this.renderListMobile(index, item.list)}
-          </AccordionItemBody>
-        </AccordionItem>
-      </Accordion>
-    ));
+    const { index1 } = this.state;
+    const renderMark = guideList.map((item, index) => {
+      const subClass = (index === index1) ? 'atm-accordion-sub-item-body' : '';
+      return (
+        <Accordion key={index.toString()} className="qrk-accordion-sidebar">
+          <AccordionItem>
+            <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
+            <AccordionItemBody className={subClass}>
+              {this.renderListMobile(index, item.list)}
+            </AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
+      );
+    });
     return (
       <div className="atm-sidebar-file">
         {renderMark}
