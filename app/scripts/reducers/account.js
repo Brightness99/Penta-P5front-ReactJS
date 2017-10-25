@@ -103,8 +103,8 @@ export default {
         ...state,
         addresses: {
           ...state.addresses,
-          isAddressCreating: true,
-          isAddressCreatingCalled: false,
+          isAddressSaving: true,
+          isAddressSavingCalled: false,
           error: null,
         },
       };
@@ -116,8 +116,8 @@ export default {
         ...state,
         addresses: {
           ...state.addresses,
-          isAddressCreating: false,
-          isAddressCreatingCalled: true,
+          isAddressSaving: false,
+          isAddressSavingCalled: true,
           error: null,
         },
       };
@@ -127,8 +127,50 @@ export default {
         ...state,
         addresses: {
           ...state.addresses,
-          isAddressCreating: false,
-          isAddressCreatingCalled: true,
+          isAddressSaving: false,
+          isAddressSavingCalled: true,
+          error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ADDRESS_UPDATE_SUBMIT](state) {
+      return {
+        ...state,
+        addresses: {
+          ...state.addresses,
+          isAddressSaving: true,
+          isAddressSavingCalled: false,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ADDRESS_UPDATE_SUBMIT_SUCCESS](state, action) {
+      const nextAddresses = state.addresses[action.payload.type.toLowerCase()];
+      for (let i = 0; i < nextAddresses.length; i++) {
+        if (nextAddresses[i].id === action.payload.id) {
+          nextAddresses[i] = action.payload;
+          break;
+        }
+      }
+      state.addresses[action.payload.type.toLowerCase()] = nextAddresses;
+
+      return {
+        ...state,
+        addresses: {
+          ...state.addresses,
+          isAddressSaving: false,
+          isAddressSavingCalled: true,
+          error: null,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_ADDRESS_UPDATE_SUBMIT_FAILURE](state, action) {
+      return {
+        ...state,
+        addresses: {
+          ...state.addresses,
+          isAddressSaving: false,
+          isAddressSavingCalled: true,
           error: action.payload,
         },
       };
@@ -138,8 +180,8 @@ export default {
         ...state,
         addresses: {
           ...state.addresses,
-          isAddressCreating: false,
-          isAddressCreatingCalled: false,
+          isAddressSaving: false,
+          isAddressSavingCalled: false,
           error: null,
         },
       };

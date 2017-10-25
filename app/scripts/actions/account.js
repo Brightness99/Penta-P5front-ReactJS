@@ -40,6 +40,21 @@ export function accountAddressCreate(data): Object {
   };
 }
 
+
+/**
+ * Address Update
+ * @param {Object} data
+ *
+ * @returns {Object}
+ */
+
+export function accountAddressUpdate(data): Object {
+  return {
+    type: AccountConstants.ACCOUNT_ADDRESS_UPDATE_SUBMIT,
+    payload: data,
+  };
+}
+
 /**
  * Address Delete
  * @param {number} addressId

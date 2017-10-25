@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'quarks/Inputs';
 import { InputRegex } from 'quarks/Inputs/Validatable';
 import { ErrorText, SuccessText } from 'atoms/Texts';
-import { accountAddressCreate, zipcodeValidate } from 'actions';
+import { accountAddressCreate, accountAddressUpdate, zipcodeValidate } from 'actions';
 
 type Props = {
   account: {},
@@ -12,6 +12,8 @@ type Props = {
   locale: {},
   dispatch: () => {},
   type: string,
+  address: Object,
+  isNew: boolean,
 };
 
 class AddressFormModal extends React.Component {
@@ -19,22 +21,22 @@ class AddressFormModal extends React.Component {
   constructor(props) {
     super(props);
 
+    const { address, isNew } = props;
+
     this.state = {
       form: {
-        receiver_name: { valid: false, value: '' },
-        zipcode: { valid: false, value: '' },
-        city: { valid: false, value: '' },
-        neighborhood: { valid: false, value: '' },
-        state: { valid: false, value: '' },
-        street: { valid: true, value: '' },
-        number: { valid: false, value: '' },
-        additional_address: { valid: false, value: '' },
+        receiver_name: { valid: !isNew, value: (address ? address.receiver_name : '') },
+        zipcode: { valid: !isNew, value: (address ? address.zipcode : '') },
+        city: { valid: !isNew, value: (address ? address.city : '') },
+        neighborhood: { valid: !isNew, value: (address ? address.neighborhood : '') },
+        state: { valid: !isNew, value: (address ? address.state : '') },
+        street: { valid: true, value: (address ? address.street : '') },
+        number: { valid: !isNew, value: (address ? address.number : '') },
+        additional_address: { valid: !isNew, value: (address ? address.additional_address : '') },
       },
-      canSubmit: false,
+      canSubmit: !isNew,
     };
   }
-
-  static props: Props;
 
   componentWillReceiveProps(nextProps) {
     const { account: { zipcodeValid } } = nextProps;
@@ -47,6 +49,8 @@ class AddressFormModal extends React.Component {
     }
   }
 
+  static props: Props;
+
   handleCloseModal = () => {
     const { onCloseModal } = this.props;
     if (onCloseModal) {
@@ -55,7 +59,6 @@ class AddressFormModal extends React.Component {
   }
 
   handleClick = () => {
-
     const { dispatch } = this.props;
     const { form, canSubmit } = this.state;
 
@@ -65,11 +68,10 @@ class AddressFormModal extends React.Component {
   }
 
   handleSubmit = () => {
-
-    const { dispatch, type } = this.props;
+    const { dispatch, type, isNew, address } = this.props;
     const { form } = this.state;
 
-    const dataToSave = {
+    let dataToSave = {
       receiver_name: form.receiver_name.value,
       zipcode: form.zipcode.value,
       city: form.city.value,
@@ -81,7 +83,12 @@ class AddressFormModal extends React.Component {
       type,
     };
 
-    dispatch(accountAddressCreate(dataToSave));
+    if (isNew) {
+      dispatch(accountAddressCreate(dataToSave));
+    } else {
+      dataToSave.id = address.id;
+      dispatch(accountAddressUpdate(dataToSave));
+    }
   }
 
   handleValidatedInput = (name, value, valid) => {
@@ -121,6 +128,7 @@ class AddressFormModal extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-three"
             placeholder="Nome*"
+            value={form.receiver_name.value}
             onEnterKeyPress={this.handleClick}
             onValidate={this.handleValidatedInput}
             required
@@ -132,6 +140,7 @@ class AddressFormModal extends React.Component {
               type="text"
               showLabel
               placeholder="CEP*"
+              value={form.zipcode.value}
               onEnterKeyPress={this.handleClick}
               onValidate={this.handleValidatedInput}
               pattern={zipcodePattern}
@@ -146,6 +155,7 @@ class AddressFormModal extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-three"
             placeholder="Endereço*"
+            value={form.additional_address.value}
             onEnterKeyPress={this.handleClick}
             onValidate={this.handleValidatedInput}
             required
@@ -157,6 +167,7 @@ class AddressFormModal extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-one"
             placeholder="Numero*"
+            value={form.number.value}
             onEnterKeyPress={this.handleClick}
             onValidate={this.handleValidatedInput}
             required
@@ -168,6 +179,7 @@ class AddressFormModal extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-one"
             placeholder="Complemento"
+            value={form.street.value}
             onValidate={this.handleValidatedInput}
             onEnterKeyPress={this.handleClick}
           />
@@ -178,6 +190,7 @@ class AddressFormModal extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-two"
             placeholder="Bairro*"
+            value={form.neighborhood.value}
             onEnterKeyPress={this.handleClick}
             onValidate={this.handleValidatedInput}
             required
@@ -189,6 +202,7 @@ class AddressFormModal extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-two"
             placeholder="Cidade*"
+            value={form.city.value}
             onEnterKeyPress={this.handleClick}
             onValidate={this.handleValidatedInput}
             required
@@ -200,19 +214,20 @@ class AddressFormModal extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-one"
             placeholder="Estado*"
+            value={form.state.value}
             onEnterKeyPress={this.handleClick}
             onValidate={this.handleValidatedInput}
             required
           />
         </form>
         <div className="mol-checkout-pane-footer">
-          {(!addresses.isAddressCreating && addresses.isAddressCreatingCalled && addresses.error) && <ErrorText>{addresses.error.message}</ErrorText>}
+          {(!addresses.isAddressSaving && addresses.isAddressSavingCalled && addresses.error) && <ErrorText>{addresses.error.message}</ErrorText>}
           {(!zipcodeValid.isRunning && zipcodeValid.isLoaded && zipcodeValid.error) && <ErrorText>{zipcodeValid.error.message}</ErrorText>}
-          {(!addresses.isAddressCreating && addresses.isAddressCreatingCalled && !addresses.error) && <SuccessText>Successfully saved.</SuccessText>}
+          {(!addresses.isAddressSaving && addresses.isAddressSavingCalled && !addresses.error) && <SuccessText>Successfully saved.</SuccessText>}
         </div>
         <div className="mol-checkout-pane-footer">
           <button className="atm-button-text" onClick={this.handleCloseModal}>CANCELAR</button>
-          <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressCreating && !addresses.isAddressCreatingCalled) || (zipcodeValid.isRunning && !zipcodeValid.isLoaded)}>SALVAR ENDEREÇO</Button>
+          <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressSaving && !addresses.isAddressSavingCalled) || (zipcodeValid.isRunning && !zipcodeValid.isLoaded)}>SALVAR ENDEREÇO</Button>
         </div>
       </div>
     );
