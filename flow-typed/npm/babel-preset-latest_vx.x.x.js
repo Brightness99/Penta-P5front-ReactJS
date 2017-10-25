@@ -27,6 +27,6 @@ declare module 'babel-preset-latest/lib/index' {
 }
 
 // Filename aliases
-declare module 'babel-preset-latest/lib/index.js' {
+declare module 'babel-preset-latest/lib/index.jsx' {
   declare module.exports: $Exports<'babel-preset-latest/lib/index'>;
 }

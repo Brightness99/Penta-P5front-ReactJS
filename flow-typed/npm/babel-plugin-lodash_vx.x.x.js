@@ -69,7 +69,7 @@ declare module 'babel-plugin-lodash/lib/config.js' {
 declare module 'babel-plugin-lodash/lib/importModule.js' {
   declare module.exports: $Exports<'babel-plugin-lodash/lib/importModule'>;
 }
-declare module 'babel-plugin-lodash/lib/index.js' {
+declare module 'babel-plugin-lodash/lib/index.jsx' {
   declare module.exports: $Exports<'babel-plugin-lodash/lib/index'>;
 }
 declare module 'babel-plugin-lodash/lib/Map.js' {

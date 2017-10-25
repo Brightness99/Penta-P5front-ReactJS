@@ -3,6 +3,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { HeartIcon, HelpCircleIcon, AngleDownIcon } from 'components/Icons';
+import FlagIcon from 'components/Flags';
 import Locales from './Locales';
 import Models from './Models';
 
@@ -27,21 +28,21 @@ const Topbar = (props: Props) => {
       <div className="container">
         <div className="mol-topbar-locales">
           <button onMouseOver={handleAction} className="atm-topbar-link">
-            {locale.COUNTRY}
+            <FlagIcon countryCode={locale.COUNTRY_CODE} /> {locale.COUNTRY}
           </button>
           <Locales currentCountry={locale.COUNTRY_CODE} />
         </div>
         <NavLink className="atm-topbar-link atm-topbar-referral" to="/indique-a-printi">
-          Indique a Printi <HeartIcon />
+          {locale.REFERRAL} <HeartIcon />
         </NavLink>
         <div className="mol-topbar-models">
           <button onMouseOver={handleAction} className="atm-topbar-link">
-            Modelos <AngleDownIcon />
+            {locale.TEMPLATES} <AngleDownIcon />
           </button>
           <Models />
         </div>
         <NavLink to="central-de-ajuda?action=search&value=meu-pedido" className="atm-topbar-link ">
-          Central de ajuda <HelpCircleIcon />
+          {locale.HELP_CENTER} <HelpCircleIcon />
         </NavLink>
       </div>
     </div>

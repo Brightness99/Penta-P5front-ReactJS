@@ -38,13 +38,13 @@ declare module 'modernizr-loader/test/test' {
 declare module 'modernizr-loader/index' {
   declare module.exports: $Exports<'modernizr-loader'>;
 }
-declare module 'modernizr-loader/index.js' {
+declare module 'modernizr-loader/index.jsx' {
   declare module.exports: $Exports<'modernizr-loader'>;
 }
 declare module 'modernizr-loader/test/fixtures/index-json.js' {
   declare module.exports: $Exports<'modernizr-loader/test/fixtures/index-json'>;
 }
-declare module 'modernizr-loader/test/fixtures/index.js' {
+declare module 'modernizr-loader/test/fixtures/index.jsx' {
   declare module.exports: $Exports<'modernizr-loader/test/fixtures/index'>;
 }
 declare module 'modernizr-loader/test/test.js' {
