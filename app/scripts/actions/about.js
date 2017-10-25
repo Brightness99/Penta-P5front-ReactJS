@@ -8,7 +8,6 @@ import { AboutConstants } from 'constants/about';
 
 /**
  * About Fetch
- * @param null
  *
  * @returns {Object}
  */

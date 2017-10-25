@@ -51,7 +51,7 @@ export function glossarySlugFetch(action$) {
         }))
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
         .defaultIfEmpty({ type: GlossaryConstants.GLOSSARY_SLUG_FETCH_CANCEL })
-        .catch(error =>  {
+        .catch(error => {
           if (error.status === 404) {
             push('/404');
           }

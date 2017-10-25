@@ -2,16 +2,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
-
 import { Arrow } from 'components/Icons';
-
 import Timeline from './Timeline';
 import ProductsTemplates from './ProductsTemplates';
-import ChooseSettings from './ChooseSettings';
-import DownloadTemplate from './DownloadTemplate';
 
 type Props = {
   app: AppStore,
@@ -20,7 +16,6 @@ type Props = {
 export class Gabaritos extends React.Component {
 
   static props: Props;
-
 
   renderBackLink() {
     return (

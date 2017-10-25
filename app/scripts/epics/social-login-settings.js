@@ -5,8 +5,6 @@
 import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, SocialLoginSettingsConstants } from 'constants/index';
 
-import { Observable } from 'rxjs/Observable';
-
 export function socialLoginSettingsFetch(action$) {
   return action$.ofType(SocialLoginSettingsConstants.SOCIAL_LOGIN_SETTINGS_REQUEST)
     .switchMap(() => {

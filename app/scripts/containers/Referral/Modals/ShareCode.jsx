@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Input } from 'quarks/Inputs';
 
 import { LinkIcon, GmailIcon, FacebookIcon } from 'components/Icons';

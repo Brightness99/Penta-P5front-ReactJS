@@ -2,8 +2,15 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
+import { isMobile } from 'utils/helpers';
 import { CloseIcon } from 'components/Icons';
 
+type Props = {
+  screenSize: string,
+  handleCloseTopbar: () => {},
+  account: {};
+}
 export class LoyaltyTopbar extends React.Component {
   props: Props;
 
@@ -19,11 +26,26 @@ export class LoyaltyTopbar extends React.Component {
     };
   }
 
+  closeTopbar = () => {
+    const { handleCloseTopbar } = this.props;
+
+    /* istanbul ignore else */
+    if (typeof handleCloseTopbar === 'function') {
+      handleCloseTopbar();
+    }
+  };
+
+  handleClickClose = (ev) => {
+    ev.preventDefault();
+
+    this.closeTopbar();
+  };
+
   render() {
-    const { account: { loyalty } } = this.props;
+    const { screenSize, account: { loyalty } } = this.props;
     return (
       <div className="org-loyalty-topbar" style={this.setBackgroundColor(loyalty.color)}>
-        <div className="container">
+        <div className={cx(!isMobile(screenSize) ? 'container' : 'container-mobile')}>
           <div className="mol-loyalty-topbar">
             <div>
               <div className="qrk-type-of-loyalty" style={this.setColor(loyalty.color)}>
@@ -31,7 +53,7 @@ export class LoyaltyTopbar extends React.Component {
               </div>
               <p>{loyalty.header}</p>
             </div>
-            <a href="#close"><CloseIcon /></a>
+            <a href="#close" onClick={this.handleClickClose}><CloseIcon /></a>
           </div>
         </div>
       </div>

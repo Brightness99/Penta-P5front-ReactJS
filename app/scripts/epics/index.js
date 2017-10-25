@@ -61,7 +61,7 @@ import {
 } from './account';
 
 import {
-  successfulPurchaseFetch,
+  successfulPurchaseFetch
 } from './successful-purchase';
 
 import { policyFetch } from './policy';
