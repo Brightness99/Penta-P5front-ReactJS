@@ -5,10 +5,10 @@ import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { Input } from 'quarks/Inputs';
 import { InputPassword } from 'quarks/Inputs/Validatable';
-import { BoxRadio, Select } from 'atoms/Inputs';
-import { ErrorText } from 'atoms/Texts';
+import { Select } from 'atoms/Inputs';
+import { ErrorText, SuccessText } from 'atoms/Texts';
 import Loading from 'components/Loading';
-import { accountUpdate } from 'actions';
+import { accountUpdate, accountFetch } from 'actions';
 
 type Props = {
   account: {},
@@ -37,6 +37,9 @@ export class CustomerData extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountFetch());
     this.handleBreadcrumbs();
   }
 
@@ -79,7 +82,9 @@ export class CustomerData extends React.Component {
       error: null,
     });
 
-    let dataToUpdate = this.state;
+    const dataToUpdate = this.state;
+
+    delete dataToUpdate.change_password;
 
     if (current_password !== '' && new_password !== '' && new_password_repeat !== '') {
       dataToUpdate.change_password = {
@@ -99,9 +104,9 @@ export class CustomerData extends React.Component {
     dispatch(accountUpdate(dataToUpdate));
   }
 
-  handleSelection = (ev) => {
+  handleSelection = () => {
     this.setState({
-      activeForm: ev.currentTarget.value,
+      activeForm: (this.state.activeForm === 'person' ? 'enterprise' : 'person'),
     });
   }
 
@@ -164,7 +169,7 @@ export class CustomerData extends React.Component {
   }
 
   renderEnterpriseData() {
-    const { first_name, last_name, cnpj, company_name, phone, employee_number, state_registration } = this.state;
+    const { first_name, last_name, cnpj, company_name, phone, employee_number, state_registration, id_state_registration } = this.state;
     return (
       <form className="org-checkout-content-data">
         <Input
@@ -233,9 +238,18 @@ export class CustomerData extends React.Component {
           onChange={(e) => { this.setState({ state_registration: e.target.value }); }}
           required={true}
         >
+          <option value={'Isento'}>Isento</option>
           <option value={'sp'}>SP</option>
           <option value={'rj'}>RJ</option>
         </Select>
+        {state_registration !== 'Isento' && <Input
+          showLabel={true}
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="Número Inscrição"
+          value={id_state_registration}
+          onChange={(e) => { this.setState({ id_state_registration: e.target.value }); }}
+          onEnterKeyPress={this.handleClick}
+        />}
       </form>
     );
   }
@@ -243,38 +257,30 @@ export class CustomerData extends React.Component {
   renderForm() {
     const { activeForm, error } = this.state;
     const { account } = this.props;
-
     let errorMessage;
+    if (account.error) {
+      errorMessage = (account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message);
+    } else {
+      errorMessage = error;
+    }
+
+    let errorMessageElement;
     if (account.error || error) {
-      errorMessage = (
+      errorMessageElement = (
         <div className="mol-checkout-pane-footer">
-          <ErrorText>{account.error ? (account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message) : error}</ErrorText>
+          <ErrorText>{errorMessage}</ErrorText>
         </div>
       );
     }
 
     return (
       <div>
-        <div className="mol-data-pane-choser">
-          <BoxRadio
-            value="person"
-            onChange={this.handleSelection}
-            name="pane-type"
-            checked={activeForm === 'person'}
-          >
-            Pessoa Física
-          </BoxRadio>
-          <BoxRadio
-            value="enterprise"
-            onChange={this.handleSelection}
-            name="pane-type"
-            checked={activeForm === 'enterprise'}
-          >
-            Pessoa Jurídica
-          </BoxRadio>
+        <div className="mol-account-data-pane-choser">
+          Se quiser trocar para uma conta com dados de {activeForm === 'person' ? 'pessoa jurídica' : 'pessoa física'},
+          <a onClick={this.handleSelection}>clique aqui.</a>
         </div>
         {activeForm === 'person' ? this.renderPersonalData() : this.renderEnterpriseData()}
-        <h3 className="atm-myorder-title">Meus dados</h3>
+        <h3 className="atm-myorder-title mar-top-20">Alterar senha</h3>
         <form className="org-checkout-content-data">
           <InputPassword
             showLabel={true}
@@ -307,8 +313,11 @@ export class CustomerData extends React.Component {
             onEnterKeyPress={this.handleClick}
           />
         </form>
-        {errorMessage}
-        <div className="mol-checkout-pane-footer">
+        {errorMessageElement}
+        {!account.isUpdating && account.isUpdated && !account.error && !error && <div className="mol-checkout-pane-footer">
+          <SuccessText>Successfully saved.</SuccessText>
+        </div>}
+        <div className="mol-checkout-pane-footer mol-account-pane-footer">
           <button value={2} onClick={this.handleClick} className="atm-send-button">SALVAR ALTERAÇÕES</button>
         </div>
       </div>
