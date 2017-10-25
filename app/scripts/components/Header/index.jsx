@@ -174,6 +174,7 @@ export class Header extends React.Component {
           handleLogOut={this.handleLogOut}
           isAuthorized={isAuthorized}
           screenSize={screenSize}
+          locale={locale}
         />
       </header>
     );
@@ -238,6 +239,7 @@ export class Header extends React.Component {
                 screenSize={screenSize}
                 isAuthorized={isAuthorized}
                 handleLogOut={this.handleLogOut}
+                locale={locale}
               />
             </div>
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
