@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { isMobile } from 'utils/helpers';
 
 import { Select } from 'atoms/Inputs/Select';
 import { Arrow } from 'components/Icons';

@@ -86,8 +86,11 @@ export class App extends React.Component {
               render={() => (
                 <div key="app" className="app">
                   <Header
-                    screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count}
-                    isAuthorized={isAuthorized} config={headerConfig}
+                    screenSize={app.screenSize}
+                    dispatch={dispatch}
+                    totalCartItems={cart.count}
+                    isAuthorized={isAuthorized}
+                    config={headerConfig}
                   />
                   <main className="app__main">
                     <Switch>
@@ -116,7 +119,7 @@ export class App extends React.Component {
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
-                      <Route exact path="/gabaritos" component={Gabaritos} />
+                      <Route exact path="/download-de-gabaritos" component={Gabaritos} />
                       <Route exact path="/modelos" component={Templateslp} />
                       <Route component={Error404} />
                     </Switch>

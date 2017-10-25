@@ -14,6 +14,7 @@ type Props = {
 
 const Logo = (props: Props) => {
   const { enableLink, small } = props;
+  // console.log(small);
 
   const handleClick = (ev) => {
     const { onClick } = props;

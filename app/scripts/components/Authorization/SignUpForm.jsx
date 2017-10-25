@@ -59,14 +59,15 @@ export default class SignUpForm extends React.PureComponent {
     };
   }
 
-  props: Props;
-  state: State;
-
   componentWillReceiveProps = (newProps: Props) => {
     if (this.props.isFingerprintLoaded !== newProps.isFingerprintLoaded) {
       addFingerprint('signUpForm');
     }
   };
+
+  static props: Props;
+
+  static state: State;
 
   handleSubmit = (ev) => {
     ev.preventDefault();

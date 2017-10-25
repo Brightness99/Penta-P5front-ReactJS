@@ -2,27 +2,25 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
-
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 import ListCategory from './ListCategory';
 import ListModels from './ListModels';
 
 type Props = {
-  app: AppStore,
+  screenSize: AppStoreType.screenSize,
   router: RouterStore,
   dispatch: () => {},
   children: any,
 };
 
-type State = {
-};
-
 export class Templateslp extends React.Component {
+  shouldComponentUpdate = shouldComponentUpdate;
+
   static props: Props;
 
   renderMobile() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
 
     return (
       <div className="container">
@@ -39,7 +37,6 @@ export class Templateslp extends React.Component {
   }
 
   renderDesktop() {
-    const { app: { screenSize } } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -66,18 +63,16 @@ export class Templateslp extends React.Component {
   }
 
   render() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 
 /* istanbul ignore next */
-function mapStoreToProps(state) {
+function mapStateToProps(state) {
   return ({
-    app: state.app,
+    screenSize: state.app.screenSize,
   });
 }
 
@@ -86,4 +81,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStoreToProps, mapDispatchToProps)(Templateslp);
+export default connect(mapStateToProps, mapDispatchToProps)(Templateslp);

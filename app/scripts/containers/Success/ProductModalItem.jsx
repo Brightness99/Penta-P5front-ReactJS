@@ -1,4 +1,4 @@
-// @flow 
+// @flow
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -7,11 +7,10 @@ type Props = {
   item: Object,
 };
 
-class ProductModalItem extends React.Component {
+export class ProductModalItem extends React.Component {
   static props: Props;
 
   render() {
-
     const { item } = this.props;
 
     return (
@@ -32,7 +31,6 @@ class ProductModalItem extends React.Component {
     );
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return { dispatch };

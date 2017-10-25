@@ -26,7 +26,7 @@ export class ListCategory extends React.Component {
     this.setState({
       isChecked: !this.state.isChecked,
     });
-  }
+  };
 
   static props: Props;
   static props: State;
@@ -110,7 +110,7 @@ export class ListCategory extends React.Component {
             <label>
               <CheckBox
                 checked={this.state.isChecked}
-                onChange={this.toggleChange} 
+                onChange={this.toggleChange}
               />
               Automotivo
             </label>
@@ -146,7 +146,7 @@ export class ListCategory extends React.Component {
             <label>
               <CheckBox
                 checked={this.state.isChecked}
-                onChange={this.toggleChange} 
+                onChange={this.toggleChange}
               />
               Construção e Serviços
             </label>
@@ -182,7 +182,7 @@ export class ListCategory extends React.Component {
             <label>
               <CheckBox
                 checked={this.state.isChecked}
-                onChange={this.toggleChange} 
+                onChange={this.toggleChange}
               />
               Esportes
             </label>

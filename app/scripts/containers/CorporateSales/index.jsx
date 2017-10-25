@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { submitContactForm as submitAction } from 'actions';
 import corporateSalesSelector from 'selectors/products';
 import type { ContactFormState } from 'reducers/contact-form';
-import { Link } from 'react-router-dom';
 
 import { CustomersRelyBlock } from 'components/LandingPage';
 import Modal from 'components/Modal';
