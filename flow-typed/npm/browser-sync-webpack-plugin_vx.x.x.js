@@ -28,6 +28,6 @@ declare module 'browser-sync-webpack-plugin' {
 declare module 'browser-sync-webpack-plugin/index' {
   declare module.exports: $Exports<'browser-sync-webpack-plugin'>;
 }
-declare module 'browser-sync-webpack-plugin/index.js' {
+declare module 'browser-sync-webpack-plugin/index.jsx' {
   declare module.exports: $Exports<'browser-sync-webpack-plugin'>;
 }

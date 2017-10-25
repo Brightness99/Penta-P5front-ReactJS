@@ -34,7 +34,7 @@ export class LogoLoyalty extends React.Component {
 
   render() {
     const { loyalty, short, size } = this.props;
-    console.log(size);
+
     if (!loyalty.color) {
       return null;
     }

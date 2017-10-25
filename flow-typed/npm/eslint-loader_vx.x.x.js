@@ -28,6 +28,6 @@ declare module 'eslint-loader' {
 declare module 'eslint-loader/index' {
   declare module.exports: $Exports<'eslint-loader'>;
 }
-declare module 'eslint-loader/index.js' {
+declare module 'eslint-loader/index.jsx' {
   declare module.exports: $Exports<'eslint-loader'>;
 }

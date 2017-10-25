@@ -21,6 +21,10 @@ const missingLocale = {
       SUCCESS: 'E-mail cadastrado com sucesso',
       FAILURE: 'Houve um problema ao cadastrar seu e-mail',
     },
+    header: {
+      REFERRAL: 'Indique a Printi',
+      TEMPLATES: 'Modelos',
+    },
     footer: {
       links: [
         {

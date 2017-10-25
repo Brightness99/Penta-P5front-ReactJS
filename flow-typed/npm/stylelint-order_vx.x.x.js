@@ -86,7 +86,7 @@ declare module 'stylelint-order/utils/renamedRuleWarning' {
 declare module 'stylelint-order/index' {
   declare module.exports: $Exports<'stylelint-order'>;
 }
-declare module 'stylelint-order/index.js' {
+declare module 'stylelint-order/index.jsx' {
   declare module.exports: $Exports<'stylelint-order'>;
 }
 declare module 'stylelint-order/rules/checkAlphabeticalOrder.js' {
@@ -98,19 +98,19 @@ declare module 'stylelint-order/rules/deprecated/declaration-block-properties-sp
 declare module 'stylelint-order/rules/deprecated/declaration-block-property-groups-structure.js' {
   declare module.exports: $Exports<'stylelint-order/rules/deprecated/declaration-block-property-groups-structure'>;
 }
-declare module 'stylelint-order/rules/index.js' {
+declare module 'stylelint-order/rules/index.jsx' {
   declare module.exports: $Exports<'stylelint-order/rules/index'>;
 }
-declare module 'stylelint-order/rules/order/index.js' {
+declare module 'stylelint-order/rules/order/index.jsx' {
   declare module.exports: $Exports<'stylelint-order/rules/order/index'>;
 }
-declare module 'stylelint-order/rules/properties-alphabetical-order/index.js' {
+declare module 'stylelint-order/rules/properties-alphabetical-order/index.jsx' {
   declare module.exports: $Exports<'stylelint-order/rules/properties-alphabetical-order/index'>;
 }
-declare module 'stylelint-order/rules/properties-order/index.js' {
+declare module 'stylelint-order/rules/properties-order/index.jsx' {
   declare module.exports: $Exports<'stylelint-order/rules/properties-order/index'>;
 }
-declare module 'stylelint-order/utils/index.js' {
+declare module 'stylelint-order/utils/index.jsx' {
   declare module.exports: $Exports<'stylelint-order/utils/index'>;
 }
 declare module 'stylelint-order/utils/isAtVariable.js' {

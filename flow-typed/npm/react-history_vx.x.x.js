@@ -81,7 +81,7 @@ declare module 'react-history/HashHistory.js' {
 declare module 'react-history/index' {
   declare module.exports: $Exports<'react-history'>;
 }
-declare module 'react-history/index.js' {
+declare module 'react-history/index.jsx' {
   declare module.exports: $Exports<'react-history'>;
 }
 declare module 'react-history/MemoryHistory.js' {

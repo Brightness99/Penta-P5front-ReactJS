@@ -271,7 +271,7 @@ function mapStateToProps(state) {
     locale: {
       COUNTRY: state.locale.COUNTRY,
       COUNTRY_CODE: state.locale.COUNTRY_CODE,
-      header: state.locale.translate.header,
+      ...state.locale.translate.header,
     }
   };
 }
