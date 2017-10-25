@@ -199,11 +199,12 @@
         height: auto;
         left: -1.6rem;
         max-height: 30rem;
+        max-width: 30rem;
         position: absolute;
         top: 2.5rem;
         overflow: hidden;
         overflow-y: auto;
-        width: 30rem;
+        width: auto;
         z-index: 1;
 
         li {
@@ -213,6 +214,7 @@
           max-height: 3rem;
           min-height: 3rem;
           padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+          white-space: nowrap;
           width: 100%;
 
           a {

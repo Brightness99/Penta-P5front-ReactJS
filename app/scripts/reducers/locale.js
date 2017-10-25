@@ -23,7 +23,12 @@ const missingLocale = {
     },
     header: {
       REFERRAL: 'Indique a Printi',
-      TEMPLATES: 'Modelos',
+      MODELS: 'Modelos',
+      exclusive_service: {
+        TITLE: 'Venda Corporativa',
+      },
+      BLOG: 'Blog',
+      TEMPLATES: 'Gabaritos',
     },
     footer: {
       links: [
