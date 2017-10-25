@@ -10,6 +10,7 @@ type Props = {
   children: string,
   key: string,
   active: boolean,
+  className: ''
 };
 
 type State = {
@@ -42,12 +43,12 @@ export default class AccordionItemBody extends React.Component {
   static state: State;
 
   render() {
-    const { children, key } = this.props;
+    const { children, key, className } = this.props;
     const { height } = this.state;
 
     return (
       <div
-        className={cx('atm-accordion-item-body')}
+        className={cx('atm-accordion-item-body', className)}
         key={key}
         ref={(body) => this.body = body} // eslint-disable-line no-return-assign
         style={{
