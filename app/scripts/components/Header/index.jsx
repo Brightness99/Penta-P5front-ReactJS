@@ -166,6 +166,7 @@ export class Header extends React.Component {
           isHidden={activePane !== 'menu'}
           categories={config.productCategories.categories}
           handleClose={this.handlePaneHide}
+          locale={locale}
         />
         <MyAccount
           isHidden={activePane !== 'account'}
@@ -207,7 +208,7 @@ export class Header extends React.Component {
             <Logo enableLink={true} showLoyalty={true} short={!showTopbar} />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
-                <MenuIcon />Menu
+                <MenuIcon />{locale.MENU}
               </button>
             </div>
             <div className="mol-header-button mol-header-button--no-position">
@@ -219,13 +220,13 @@ export class Header extends React.Component {
                   activePane === 'products' && 'atm-header-button-products--active',
                 )}
               >
-                <AngleDownIcon />Produtos
+                <AngleDownIcon />{locale.PRODUCTS}
               </button>
             </div>
             <SearchBar dispatch={dispatch} />
             <div className="mol-header-button">
               <div onMouseOver={this.handlePaneHide} className="atm-header-button">
-                <ExclusiveServiceIcon />Venda Corporativa
+                <ExclusiveServiceIcon />{locale.exclusive_service.TITLE}
               </div>
               <ExclusiveService />
             </div>
@@ -246,6 +247,7 @@ export class Header extends React.Component {
           screenSize={screenSize}
           isHidden={activePane !== 'menu'}
           handleClose={this.handlePaneHide}
+          locale={locale}
         />
         <Products
           screenSize={screenSize}

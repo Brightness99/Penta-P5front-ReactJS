@@ -37,7 +37,7 @@ const Topbar = (props: Props) => {
         </NavLink>
         <div className="mol-topbar-models">
           <button onMouseOver={handleAction} className="atm-topbar-link">
-            {locale.TEMPLATES} <AngleDownIcon />
+            {locale.MODELS} <AngleDownIcon />
           </button>
           <Models />
         </div>

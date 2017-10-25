@@ -18,7 +18,8 @@ type Props = {
   screenSize: string,
   isHidden: boolean,
   handleClose: () => {},
-  categories: [];
+  categories: [],
+  locale: {},
 };
 
 export default class Menu extends React.Component {
@@ -27,7 +28,7 @@ export default class Menu extends React.Component {
   static props: Props;
 
   renderMobile() {
-    const { screenSize, categories } = this.props;
+    const { screenSize, categories, locale } = this.props;
     return (
       <div className="mol-header-menu-content">
         <NavLink
@@ -36,7 +37,7 @@ export default class Menu extends React.Component {
           activeClassName="selected"
           onClick={this.handleCloseMenu}
         >
-          Venda Corporativa
+          {locale.exclusive_service.TITLE}
         </NavLink>
         <NavLink
           className="atm-header-menu-title"
@@ -44,7 +45,7 @@ export default class Menu extends React.Component {
           activeClassName="selected"
           onClick={this.handleCloseMenu}
         >
-          Central de Ajuda
+          {locale.HELP_CENTER}
         </NavLink>
         <span className="atm-header-menu-title">Produtos</span>
         <Products
@@ -70,6 +71,7 @@ export default class Menu extends React.Component {
   };
 
   renderDesktop() {
+    const { locale } = this.props;
     return (
       <div className="mol-header-menu-content">
         <ul>
@@ -80,7 +82,7 @@ export default class Menu extends React.Component {
               activeClassName="selected"
               onClick={this.handleCloseMenu}
             >
-              Central de Ajuda
+              {locale.HELP_CENTER}
             </NavLink>
           </li>
           <li>
@@ -89,7 +91,7 @@ export default class Menu extends React.Component {
               activeClassName="selected"
               onClick={this.handleCloseMenu}
             >
-              Blog
+              {locale.BLOG}
             </NavLink>
           </li>
           <li>
@@ -98,7 +100,7 @@ export default class Menu extends React.Component {
               activeClassName="selected"
               onClick={this.handleCloseMenu}
             >
-              Venda Corporativa
+              {locale.exclusive_service.TITLE}
             </NavLink>
           </li>
         </ul>
@@ -110,7 +112,7 @@ export default class Menu extends React.Component {
               activeClassName="selected"
               onClick={this.handleCloseMenu}
             >
-              Gabaritos
+              {locale.TEMPLATES}
             </NavLink>
           </li>
           <li>
