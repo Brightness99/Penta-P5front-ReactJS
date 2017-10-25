@@ -71,7 +71,7 @@ class AddressFormModal extends React.Component {
     const { dispatch, type, isNew, address } = this.props;
     const { form } = this.state;
 
-    let dataToSave = {
+    const dataToSave = {
       receiver_name: form.receiver_name.value,
       zipcode: form.zipcode.value,
       city: form.city.value,
