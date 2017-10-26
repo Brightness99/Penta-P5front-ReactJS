@@ -4,11 +4,20 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { Input } from 'quarks/Inputs';
-import { InputPassword } from 'quarks/Inputs/Validatable';
+import { InputPassword, InputRegex } from 'quarks/Inputs/Validatable';
 import { Select } from 'atoms/Inputs';
 import { ErrorText, SuccessText } from 'atoms/Texts';
 import Loading from 'components/Loading';
 import { accountUpdate, accountFetch } from 'actions';
+
+type FormType = {
+  phone: { valid: boolean, value: string },
+  cnpj: { valid: boolean, value: string },
+  cpf: { valid: boolean, value: string },
+  current_password: { valid: boolean, value: string },
+  new_password: { valid: boolean, value: string },
+  new_password_repeat: { valid: boolean, value: string },
+};
 
 type Props = {
   account: {},
@@ -19,6 +28,8 @@ type Props = {
 
 type State = {
   activeForm: string,
+  canSubmit: boolean,
+  form: FormType,
 };
 
 export class CustomerData extends React.Component {
@@ -27,9 +38,6 @@ export class CustomerData extends React.Component {
 
     this.state = {
       ...props.account,
-      current_password: '',
-      new_password: '',
-      new_password_repeat: '',
       activeForm: 'person',
     };
   }
@@ -48,6 +56,15 @@ export class CustomerData extends React.Component {
     if (account !== this.props.account) {
       this.setState({
         ...nextProps.account,
+        form: {
+          phone: { valid: true, value: account.phone },
+          cnpj: { valid: true, value: account.cnpj },
+          cpf: { valid: true, value: account.cpf },
+          current_password: { valid: true, value: '' },
+          new_password: { valid: true, value: '' },
+          new_password_repeat: { valid: true, value: '' },
+        },
+        canSubmit: true,
       });
     }
   }
@@ -75,33 +92,60 @@ export class CustomerData extends React.Component {
     });
   }
 
-  handleClick = () => {
-    const { dispatch } = this.props;
-    const { current_password, new_password, new_password_repeat } = this.state;
-    this.setState({
-      error: null,
-    });
+  handleValidatedInput = (name, value, valid) => {
+    const { form } = this.state;
+    const newState = { form };
+    const target = name.target;
+    const key = target ? target.id : name;
 
-    const dataToUpdate = this.state;
+    let canSubmit = true;
+    newState.form[key].valid = target ? !!target.value : valid;
+    newState.form[key].value = target ? target.value : value;
 
-    delete dataToUpdate.change_password;
-
-    if (current_password !== '' && new_password !== '' && new_password_repeat !== '') {
-      dataToUpdate.change_password = {
-        current_password,
-        new_password,
-        new_password_repeat,
-      };
-
-      if (new_password !== new_password_repeat) {
-        this.setState({
-          error: 'Password does not match!',
-        });
-        return;
-      }
+    const updateState = {};
+    updateState[key] = newState.form[key].value;
+    this.setState(updateState);
+    if (canSubmit === true) {
+      Object.keys(newState.form)
+      .forEach((index) => {
+        if (newState.form[index].valid !== true) {
+          canSubmit = false;
+        }
+      });
     }
 
-    dispatch(accountUpdate(dataToUpdate));
+    this.setState({ form: newState.form, canSubmit });
+  }
+
+  handleSubmit = () => {
+    if (this.state.canSubmit) {
+      const { dispatch } = this.props;
+      const { form } = this.state;
+      this.setState({
+        error: null,
+      });
+
+      const dataToUpdate = this.state;
+
+      delete dataToUpdate.change_password;
+
+      if (form.current_password.value !== '' && form.new_password.value !== '' && form.new_password_repeat.value !== '') {
+        dataToUpdate.change_password = {
+          current_password: form.current_password.value,
+          new_password: form.new_password.value,
+          new_password_repeat: form.new_password_repeat.value,
+        };
+
+        if (form.new_password.value !== form.new_password_repeat.value) {
+          this.setState({
+            error: 'Password does not match!',
+          });
+          return;
+        }
+      }
+
+      dispatch(accountUpdate(dataToUpdate));
+    }
   }
 
   handleSelection = () => {
@@ -111,7 +155,7 @@ export class CustomerData extends React.Component {
   }
 
   renderPersonalData() {
-    const { first_name, last_name, cpf, phone, gender, cloud_manager } = this.state;
+    const { first_name, last_name, gender, cloud_manager, form } = this.state;
     return (
       <form className="org-checkout-content-data">
         <Input
@@ -120,23 +164,33 @@ export class CustomerData extends React.Component {
           placeholder="Nome Completo"
           value={`${first_name} ${last_name}`}
           onChange={this.handleChangeName}
-          onEnterKeyPress={this.handleClick}
+          onEnterKeyPress={this.handleSubmit}
         />
-        <Input
-          showLabel={true}
+        <InputRegex
+          id="cpf"
+          name="cpf"
+          type="text"
+          placeholder={'CPF'}
+          pattern={/^([0-9]){3}[.]([0-9]){3}[.]([0-9]){3}[-]([0-9]){2}$/}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="CPF"
-          value={cpf}
-          onChange={(e) => { this.setState({ cpf: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.cpf.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
-        <Input
-          showLabel={true}
+        <InputRegex
+          id="phone"
+          name="phone"
+          type="text"
+          placeholder={'Telefone'}
+          pattern={/^[(]([0-9]){2}[)][ ]([0-9]){5}[-]([0-9]){4}$/}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="Telefone"
-          value={phone}
-          onChange={(e) => { this.setState({ phone: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.phone.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
         <Select
           className="atm-checkout-input atm-checkout-input-one"
@@ -169,7 +223,7 @@ export class CustomerData extends React.Component {
   }
 
   renderEnterpriseData() {
-    const { first_name, last_name, cnpj, company_name, phone, employee_number, state_registration, id_state_registration } = this.state;
+    const { first_name, last_name, company_name, employee_number, state_registration, id_state_registration, form } = this.state;
     return (
       <form className="org-checkout-content-data">
         <Input
@@ -178,15 +232,20 @@ export class CustomerData extends React.Component {
           placeholder="Nome Completo"
           value={`${first_name} ${last_name}`}
           onChange={this.handleChangeName}
-          onEnterKeyPress={this.handleClick}
+          onEnterKeyPress={this.handleSubmit}
         />
-        <Input
-          showLabel={true}
+        <InputRegex
+          id="cnpj"
+          name="cnpj"
+          type="text"
+          placeholder={'CNPJ'}
+          pattern={/^([0-9]){3}[.]([0-9]){3}[.]([0-9]){3}[-]([0-9]){2}$/}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="CNPJ"
-          value={cnpj}
-          onChange={(e) => { this.setState({ cnpj: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.cnpj.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
         <Input
           showLabel={true}
@@ -194,15 +253,20 @@ export class CustomerData extends React.Component {
           placeholder="Razão Social"
           value={company_name}
           onChange={(e) => { this.setState({ company_name: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          onEnterKeyPress={this.handleSubmit}
         />
-        <Input
-          showLabel={true}
+        <InputRegex
+          id="phone"
+          name="phone"
+          type="text"
+          placeholder={'Telefone'}
+          pattern={/^[(]([0-9]){2}[)][ ]([0-9]){5}[-]([0-9]){4}$/}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="Telefone/Celular"
-          value={phone}
-          onChange={(e) => { this.setState({ phone: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.phone.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
         <Select
           className="atm-checkout-input atm-checkout-input-one"
@@ -248,7 +312,7 @@ export class CustomerData extends React.Component {
           placeholder="Número Inscrição"
           value={id_state_registration}
           onChange={(e) => { this.setState({ id_state_registration: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          onEnterKeyPress={this.handleSubmit}
         />}
       </form>
     );
@@ -267,7 +331,7 @@ export class CustomerData extends React.Component {
     let errorMessageElement;
     if (account.error || error) {
       errorMessageElement = (
-        <div className="mol-checkout-pane-footer">
+        <div className="mol-checkout-pane-footer mol-account-pane-footer">
           <ErrorText>{errorMessage}</ErrorText>
         </div>
       );
@@ -283,42 +347,45 @@ export class CustomerData extends React.Component {
         <h3 className="atm-myorder-title mar-top-20">Alterar senha</h3>
         <form className="org-checkout-content-data">
           <InputPassword
-            showLabel={true}
+            id="current_password"
+            name="current_password"
+            showLabel
             className="atm-checkout-input atm-checkout-input-one"
-            name="password"
             placeholder="Senha atual"
             onValidate={this.handleValidatedInput}
             value={this.state.current_password}
             onChange={(e) => { this.setState({ current_password: e.target.value }); }}
-            onEnterKeyPress={this.handleClick}
+            onEnterKeyPress={this.handleSubmit}
           />
           <InputPassword
-            showLabel={true}
+            id="new_password"
+            name="new_password"
+            showLabel
             className="atm-checkout-input atm-checkout-input-one"
-            name="password"
             placeholder="Nova senha"
             onValidate={this.handleValidatedInput}
             value={this.state.new_password}
             onChange={(e) => { this.setState({ new_password: e.target.value }); }}
-            onEnterKeyPress={this.handleClick}
+            onEnterKeyPress={this.handleSubmit}
           />
           <InputPassword
-            showLabel={true}
+            id="new_password_repeat"
+            name="new_password_repeat"
+            showLabel
             className="atm-checkout-input atm-checkout-input-one"
-            name="password"
             placeholder="Confirme sua nova senha"
             onValidate={this.handleValidatedInput}
             value={this.state.new_password_repeat}
             onChange={(e) => { this.setState({ new_password_repeat: e.target.value }); }}
-            onEnterKeyPress={this.handleClick}
+            onEnterKeyPress={this.handleSubmit}
           />
         </form>
         {errorMessageElement}
-        {!account.isUpdating && account.isUpdated && !account.error && !error && <div className="mol-checkout-pane-footer">
+        {!account.isUpdating && account.isUpdated && !account.error && !error && <div className="mol-checkout-pane-footer mol-account-pane-footer">
           <SuccessText>Successfully saved.</SuccessText>
         </div>}
         <div className="mol-checkout-pane-footer mol-account-pane-footer">
-          <button value={2} onClick={this.handleClick} className="atm-send-button">SALVAR ALTERAÇÕES</button>
+          <button onClick={this.handleSubmit} className="atm-send-button">SALVAR ALTERAÇÕES</button>
         </div>
       </div>
     );
