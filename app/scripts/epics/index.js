@@ -49,6 +49,7 @@ import {
   accountUpdate,
   accountAddressFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
@@ -56,7 +57,8 @@ import {
   accountSavedCreditCardDelete,
   accountOrderDetailFetch,
   accountOrderFetch,
-  accountLoyaltyFetch
+  zipcodeValidate,
+  accountLoyaltyFetch,
 } from './account';
 
 import {
@@ -104,6 +106,7 @@ export default combineEpics(
   accountUpdate,
   socialLoginSettingsFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountSavedCreditCardFetch,
   accountSavedCreditCardDelete,
@@ -111,6 +114,7 @@ export default combineEpics(
   accountNotificationUpdate,
   accountOrderDetailFetch,
   accountOrderFetch,
+  zipcodeValidate,
   accountLoyaltyFetch,
   policyFetch,
   termsFetch,
