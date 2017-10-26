@@ -1,133 +1,133 @@
 .org-header-products-menu {
-  z-index : 1;
+  z-index: 1;
 
   .app__overlay {
-    position : fixed;
-    z-index  : 1;
+    position: fixed;
+    z-index: 1;
   }
 }
 
 .org-products-menu {
-  z-index : 2;
+  z-index: 2;
   &--desktop {
-    background    : #eee;
-    border-radius : 0 0 $bsn-border-radius $bsn-border-radius;
-    display       : flex;
-    height        : 33rem;
-    left          : 0;
-    margin        : 0 $grid-gutter-width / 2;
-    position      : absolute;
-    top           : 100%;
-    width         : calc(100% - 3rem);
+    background: #eee;
+    border-radius: 0 0 $bsn-border-radius $bsn-border-radius;
+    display: flex;
+    height: 33rem;
+    left: 0;
+    margin: 0 $grid-gutter-width / 2;
+    position: absolute;
+    top: 100%;
+    width: calc(100% - 3rem);
   }
 
   .mol-products-menu-menu {
-    border-right   : 0.1rem solid $color-silver;
-    display        : inline-flex;
-    flex-direction : column;
-    height         : 100%;
-    margin         : 0;
-    padding        : 3rem 2rem 3rem 3rem;
-    width          : 20.5rem;
+    border-right: 0.1rem solid $color-silver;
+    display: inline-flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    padding: 3rem 2rem 3rem 3rem;
+    width: 20.5rem;
 
     .atm-products-menu-item {
-      align-items     : center;
-      color           : #151617;
-      cursor          : default;
-      display         : flex;
-      font-size       : $font-size-sm;
-      font-weight     : bold;
-      justify-content : space-between;
-      line-height     : 3rem;
-      transition      : 0.3s ease;
-      width           : 100%;
+      align-items: center;
+      color: #151617;
+      cursor: default;
+      display: flex;
+      font-size: $font-size-sm;
+      font-weight: bold;
+      justify-content: space-between;
+      line-height: 3rem;
+      transition: 0.3s ease;
+      width: 100%;
 
       span {
-        display : inline-flex;
-        width   : auto;
+        display: inline-flex;
+        width: auto;
       }
 
       svg {
-        display   : inline-flex;
-        fill      : #878b94;
-        height    : 1.6rem;
-        transform : rotate(270deg);
-        width     : 1.6rem;
+        display: inline-flex;
+        fill: #878b94;
+        height: 1.6rem;
+        transform: rotate(270deg);
+        width: 1.6rem;
       }
 
       &--active {
-        color : $color-printi-blue;
+        color: $color-printi-blue;
 
         svg {
-          fill : $color-printi-blue;
+          fill: $color-printi-blue;
         }
       }
     }
   }
 
   .mol-products-menu-content {
-    display : inline-flex;
+    display: inline-flex;
     justify-content: space-between;
-    padding : 2rem;
-    width   : calc(100% - 20.5rem);
+    padding: 2rem;
+    width: calc(100% - 20.5rem);
 
     .mol-products-menu-links {
-      display        : inline-flex;
-      flex-direction : column;
-      padding        : 0 2rem 0 0;
+      display: inline-flex;
+      flex-direction: column;
+      padding: 0 2rem 0 0;
 
       > h3 {
-        color          : $color-printi-blue;
-        font-family    : $font-family-nunito-regular;
-        font-size      : 2.1rem;
-        letter-spacing : 0;
-        padding        : 0 0 1.2rem 0;
-        text-transform : none;
+        color: $color-printi-blue;
+        font-family: $font-family-nunito-regular;
+        font-size: 2.1rem;
+        letter-spacing: 0;
+        padding: 0 0 1.2rem 0;
+        text-transform: none;
       }
 
       ul {
-        display        : flex;
-        flex-direction : column;
-        flex-wrap      : wrap;
-        margin         : 0;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin: 0;
 
         li {
-          display         : inline-flex;
-          justify-content : flex-start;
-          margin-right    : 1rem;
+          display: inline-flex;
+          justify-content: flex-start;
+          margin-right: 1rem;
           a {
-            align-items : center;
-            color       : #6a6f7a;
-            display     : flex;
-            font-size   : $font-size-sm;
-            line-height : 3rem;
-            transition  : 0.3s ease;
+            align-items: center;
+            color: #6a6f7a;
+            display: flex;
+            font-size: $font-size-sm;
+            line-height: 3rem;
+            transition: 0.3s ease;
 
             &:hover,
             &.link-active {
-              color           : $color-printi-blue;
-              text-decoration : none;
+              color: $color-printi-blue;
+              text-decoration: none;
             }
           }
           svg {
-            fill         : $color-printi-blue;
-            height       : 1.2rem;
-            padding-left : 0.8rem;
-            width        : auto;
+            fill: $color-printi-blue;
+            height: 1.2rem;
+            padding-left: 0.8rem;
+            width: auto;
           }
         }
       }
     }
 
     .atm-products-menu-image {
-      border-radius : $bsn-border-radius;
-      height        : 100%;
-      width         : auto;
+      border-radius: $bsn-border-radius;
+      height: 100%;
+      width: auto;
 
       img {
-        height    : 100%;
-        width     : auto;
-        max-width : max-content;
+        height: 100%;
+        width: auto;
+        max-width: max-content;
       }
     }
   }
