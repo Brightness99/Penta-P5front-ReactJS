@@ -1,8 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { isMobile } from 'utils/helpers';
+import { shouldComponentUpdate, isMobile, getTitleFromSlug } from 'utils/helpers';
+import { PageTitle } from 'atoms/Titles';
 import Breadcrumbs from 'components/Breadcrumbs';
+import { fileMountFetch } from 'actions';
 
 import Sidebar from './Sidebar';
 import ContentText from './ContentText';
@@ -10,17 +12,58 @@ import ContentText from './ContentText';
 type Props = {
   app: AppStore,
   router: RouterStore,
-  locale: {},
+  fileMount: {},
+  match: {
+    params: {
+      slug: ''
+    }
+  },
   dispatch: () => {},
 };
 
+type State = {
+  slug: string,
+};
+
 export class FileMount extends React.Component {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      slug: '',
+    };
+  }
+
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  componentDidMount() {
+    const { match: { params: { slug } }, dispatch } = this.props;
+    const validSlug = (slug === undefined) ? '' : slug;
+    dispatch(fileMountFetch(validSlug));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: { params: { slug } }, dispatch } = this.props;
+    if (slug !== nextProps.match.params.slug) {
+      const validSlug = (nextProps.match.params.slug === undefined) ? '' : nextProps.match.params.slug;
+      this.setState({ slug: validSlug });
+      dispatch(fileMountFetch(validSlug));
+    }
+  }
 
   static props: Props;
 
+  static state: State;
+
+  selectItem = (str) => {
+    const { dispatch } = this.props;
+    dispatch(fileMountFetch(str));
+    this.setState({ slug: str });
+  };
+
   render() {
     const { app: { screenSize } } = this.props;
-
+    const { slug } = this.state;
     const breadcrumb = [
       {
         title: 'Home',
@@ -31,23 +74,20 @@ export class FileMount extends React.Component {
         url: '/montagem-do-arquivo',
       },
       {
-        title: 'Como criar seu arquivo para impressão no illustrator',
+        title: getTitleFromSlug(slug),
       },
     ];
-
+    const { fileMount } = this.props;
     return (
       <section>
         <div className="container">
           <div className="template-file-mount">
             {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-            <h2 className="title-file-mount">Montagem do arquivo</h2>
-            {!isMobile(screenSize) && <p className="subtitle-file-mount">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum</p>}
-
+            <PageTitle>Montagem do arquivo</PageTitle>
             <div className="org-content-file-mount">
-              <Sidebar screenSize={screenSize} />
-              {!isMobile(screenSize) && <ContentText />}
+              <Sidebar screenSize={screenSize} selectItem={this.selectItem} />
+              <ContentText fileMount={fileMount} />
             </div>
-
           </div>
         </div>
       </section>
@@ -56,7 +96,10 @@ export class FileMount extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { app: state.app };
+  return {
+    app: state.app,
+    fileMount: state.fileMount,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

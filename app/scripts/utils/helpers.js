@@ -157,4 +157,14 @@ export function mergeDeep(target, ...sources) {
   return mergeDeep(target, ...sources);
 }
 
+/**
+ * Simple object check.
+ * @param {string} slug
+ * @returns {string}
+ */
+export function getTitleFromSlug(slug) {
+  const slugStr = slug.replace(/-/g, ' ');
+  return slugStr.charAt(0).toUpperCase() + slugStr.slice(1);
+}
+
 export const isEmpty = o => o === undefined || o === null;

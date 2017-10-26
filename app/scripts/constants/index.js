@@ -24,4 +24,5 @@ export * from './successful-purchase';
 export * from './site-map';
 export * from './templates';
 export * from './about';
-
+export * from './file-mount';
+export * from './guide';
