@@ -6,6 +6,7 @@
     z-index: 1;
   }
 }
+
 .org-products-menu {
   z-index: 2;
   &--desktop {
@@ -66,13 +67,13 @@
 
   .mol-products-menu-content {
     display: inline-flex;
+    justify-content: space-between;
     padding: 2rem;
     width: calc(100% - 20.5rem);
 
     .mol-products-menu-links {
       display: inline-flex;
       flex-direction: column;
-      flex-grow: 2;
       padding: 0 2rem 0 0;
 
       > h3 {
@@ -93,7 +94,7 @@
         li {
           display: inline-flex;
           justify-content: flex-start;
-
+          margin-right: 1rem;
           a {
             align-items: center;
             color: #6a6f7a;
@@ -103,17 +104,12 @@
             transition: 0.3s ease;
 
             &:hover,
-            &.link-active{
+            &.link-active {
               color: $color-printi-blue;
               text-decoration: none;
             }
           }
-
-          span {
-            display: inline-flex;
-          }
           svg {
-            display: inline-flex;
             fill: $color-printi-blue;
             height: 1.2rem;
             padding-left: 0.8rem;
