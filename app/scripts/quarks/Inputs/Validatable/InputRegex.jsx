@@ -40,9 +40,16 @@ export class InputRegex extends React.Component {
 
   componentWillReceiveProps(nextProps: Props) {
     const { equalsTo } = this.props;
+    const { value } = nextProps;
 
     if (equalsTo && equalsTo !== nextProps.equalsTo) {
       this.setState(this.handleValidation(this.state.value, nextProps.equalsTo));
+    }
+
+    if (value !== this.props.value) {
+      this.setState({
+        value,
+      });
     }
   }
 
