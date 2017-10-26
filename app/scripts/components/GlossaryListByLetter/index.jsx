@@ -25,10 +25,11 @@ export class GlossaryListByLetter extends React.PureComponent {
             {
               items.map(x =>
                 <li key={x.slug}>
-                  <NavLink to={'/glossario/' + x.slug}>
+                  <NavLink to={`/glossario/${x.slug}`}>
                     {x.title}
                   </NavLink>
-                </li>)
+                </li>
+              )
             }
           </ul>
         </div>

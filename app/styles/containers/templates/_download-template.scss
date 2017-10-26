@@ -196,14 +196,29 @@
   width: 40%;
 }
 
+.mobile-download-template-form {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  width: calc(100% - 3rem);
+}
+
 .download-template-container {
   background-color: #fff;
+}
+
+.mobile-download-template-container {
+  margin: 0 1.5rem;
 }
 
 .download-template-title {
   font-family: 'Open Sans', serif;
   font-size: 3.2rem;
   margin: 2rem 0;
+}
+
+.mobile-download-template-title {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .download-template__button {

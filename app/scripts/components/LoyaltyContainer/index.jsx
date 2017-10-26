@@ -11,17 +11,13 @@ type Props = {
 export class LoyaltyContainer extends React.Component {
   props: Props;
 
-  setBackgroundColor = (color) => {
-    return {
-      background: color,
-    };
-  }
+  setBackgroundColor = (color) => ({
+    background: color,
+  });
 
-  setColor = (color) => {
-    return {
-      color,
-    };
-  }
+  setColor = (color) => ({
+    color,
+  });
 
   render() {
     const { account: { loyalty }, text } = this.props;

@@ -86,8 +86,11 @@ export class App extends React.Component {
               render={() => (
                 <div key="app" className="app">
                   <Header
-                    screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count}
-                    isAuthorized={isAuthorized} config={headerConfig}
+                    screenSize={app.screenSize}
+                    dispatch={dispatch}
+                    totalCartItems={cart.count}
+                    isAuthorized={isAuthorized}
+                    config={headerConfig}
                   />
                   <main className="app__main">
                     <Switch>
