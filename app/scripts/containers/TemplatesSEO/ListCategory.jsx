@@ -13,7 +13,7 @@ type State = {
   isChecked: boolean,
 }
 
-class ListCategory extends React.PureComponent<Props, State> {
+export class ListCategory extends React.PureComponent<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
