@@ -21,6 +21,7 @@ export function glossaryFetch(): Object {
 
 /**
  * Fetch Glossary slug
+ * @param {string} slug
  *
  * @returns {Object}
  */
@@ -33,6 +34,7 @@ export function glossarySlugFetch(slug: string): Object {
 
 /**
  * Fetch Glossary slug
+ * @param {string} query
  *
  * @returns {Object}
  */

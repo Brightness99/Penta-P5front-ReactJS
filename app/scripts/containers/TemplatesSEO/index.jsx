@@ -1,21 +1,23 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 import ListCategory from './ListCategory';
 import ListModels from './ListModels';
 
 type Props = {
-  app: AppStore,
+  screenSize: AppStoreType.screenSize,
   router: RouterStore,
 };
 
 class TemplatesSEO extends React.PureComponent<Props> {
+  shouldComponentUpdate = shouldComponentUpdate;
+
   static props: Props;
 
   renderMobile() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
 
     return (
       <article className="container">
@@ -32,7 +34,7 @@ class TemplatesSEO extends React.PureComponent<Props> {
   }
 
   renderDesktop() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -59,11 +61,9 @@ class TemplatesSEO extends React.PureComponent<Props> {
   }
 
   render() {
-    const { app: { screenSize } } = this.props;
+    const { screenSize } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 

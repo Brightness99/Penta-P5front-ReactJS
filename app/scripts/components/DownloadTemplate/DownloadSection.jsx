@@ -4,6 +4,7 @@ import cx from 'classnames';
 import Select from 'atoms/Inputs/Select/Simple';
 import DownloadOptions from 'components/DownloadOptions';
 import { Input, Button } from 'quarks/Inputs';
+import { isMobile, getScreenSize } from 'utils/helpers';
 
 type Props = {
   form: {
@@ -48,7 +49,9 @@ const DownloadSection = ({ downloadData, form, canSubmit, handleChange, requestD
   return (
     <section className={'download-template-main'}>
       <form className="container">
-        <h2 className={'download-template-title'}>{productName}</h2>
+        <h2 className={cx('download-template-title', isMobile(getScreenSize()) && 'mobile-download-template-title')}>
+          {productName}
+        </h2>
         {
           optionKeys.length > 1 &&
           partValues.map(part => {
@@ -56,7 +59,7 @@ const DownloadSection = ({ downloadData, form, canSubmit, handleChange, requestD
             return (
               <article
                 key={part.key}
-                className="download-template-form"
+                className={cx('download-template-form', isMobile(getScreenSize()) && 'mobile-download-template-form')}
               >
                 <p>{'Orientação'}</p>
                 <section className="">
@@ -83,7 +86,9 @@ const DownloadSection = ({ downloadData, form, canSubmit, handleChange, requestD
         }
         {
           canShowDownloadOptions &&
-          <section className={cx('container', 'download-template-container')}>
+          <section
+            className={cx('container', 'download-template-container', isMobile(getScreenSize()) && 'mobile-download-template-container')}
+          >
             <section className="org-download-template">
               <DownloadOptions
                 options={optionData}
