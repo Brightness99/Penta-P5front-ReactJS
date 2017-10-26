@@ -68,6 +68,11 @@ import {
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
 import { aboutFetch } from './about';
+import {
+  fileMountFetch,
+  fileMountItemFetch
+} from './file-mount';
+import { guideFetch } from './guide';
 
 export default combineEpics(
   userNewsletter,
@@ -122,4 +127,6 @@ export default combineEpics(
   productCategoriesFetch,
   successfulPurchaseFetch,
   siteMapFetch,
+  fileMountFetch,
+  guideFetch
 );
