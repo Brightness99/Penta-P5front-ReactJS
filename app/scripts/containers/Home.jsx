@@ -5,14 +5,11 @@ import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
-
 import { BannersBlock, HighlightsBlock, BlogBlock, CustomersRelyBlock, CategoriesCarouselBlock } from 'components/LandingPage';
-import LoyaltyContainer from 'components/LoyaltyContainer';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
   locale: SEOLocaleType,
-  account: {},
 };
 
 const bannerImages = [
@@ -64,7 +61,7 @@ export class Home extends React.Component {
   props: Props;
 
   render() {
-    const { locale, account: { loyalty } } = this.props;
+    const { locale } = this.props;
 
     return (
       <div className="container-homePage">
@@ -73,7 +70,6 @@ export class Home extends React.Component {
           <meta name="description" content={locale.META_DESCRIPTION} />
         </Helmet>
         <BannersBlock images={bannerImages} />
-        {loyalty && loyalty.isLoaded && !loyalty.isRunning && loyalty.carousel && <LoyaltyContainer text={loyalty.carousel} />}
         <CategoriesCarouselBlock />
         <HighlightsBlock />
         <CustomersRelyBlock />
@@ -86,7 +82,6 @@ export class Home extends React.Component {
 function mapStateToProps(state) {
   return {
     locale: state.locale.translate.page.home,
-    account: state.account,
   };
 }
 
