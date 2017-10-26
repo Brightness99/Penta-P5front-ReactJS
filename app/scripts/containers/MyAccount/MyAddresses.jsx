@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import swal from 'sweetalert2';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Collapse, { Panel } from 'rc-collapse';
@@ -35,6 +36,7 @@ export class MyAddresses extends React.Component {
       openAddressModal: false,
       type: '',
       selectedAddress: null,
+      id: null,
     };
   }
 
@@ -87,8 +89,22 @@ export class MyAddresses extends React.Component {
 
   handleDeleteAddress = (ev) => {
     const { dispatch } = this.props;
+    this.setState({
+      id: ev.currentTarget.value,
+    });
 
-    dispatch(accountAddressDelete(ev.currentTarget.value));
+    swal({
+      title: 'Você tem certeza?',
+      text: 'Ao remover este produto ele não estará mais disponível no carrinho!',
+      type: 'warning',
+      confirmButtonColor: '#2cac57',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+      showCancelButton: true,
+      reverseButtons: true,
+    }).then(() => {
+      dispatch(accountAddressDelete(this.state.id));
+    });
   };
 
   handleCloseModal = () => {
