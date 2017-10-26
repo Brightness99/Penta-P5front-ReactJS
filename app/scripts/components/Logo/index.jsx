@@ -30,7 +30,7 @@ const Logo = (props: Props) => {
       <div className="atm-printi-logo">
         <NavLink to="/" onClick={handleClick}>
           {short ? <PrintiSymbolIcon key="PrintiSymbolIcon" /> : <PrintiIcon fill={props.fill} key="PrintiIcon" />}
-          {showLoyalty && <LogoLoyalty short={short} invert={invertLoyalty} onClick={handleClick} key="LogoLoyalty" />}
+          {showLoyalty && <LogoLoyalty short={true} invert={invertLoyalty} onClick={handleClick} key="LogoLoyalty" />}
         </NavLink>
       </div>
     );
@@ -39,7 +39,7 @@ const Logo = (props: Props) => {
   return (
     <div className="atm-printi-logo">
       {short ? <PrintiSymbolIcon key="PrintiSymbolIcon" /> : <PrintiIcon fill={props.fill} key="PrintiIcon" />}
-      {showLoyalty && <LogoLoyalty short={short} invert={invertLoyalty} onClick={handleClick} key="LogoLoyalty" />}
+      {showLoyalty && <LogoLoyalty short={true} invert={invertLoyalty} onClick={handleClick} key="LogoLoyalty" />}
     </div>
   );
 };
