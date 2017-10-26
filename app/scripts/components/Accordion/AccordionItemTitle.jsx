@@ -18,7 +18,6 @@ const AccordionItemTitle = (props: Props) => {
 
   const onClick = (ev) => {
     const { handleClick } = props;
-
     if (typeof handleClick === 'function') {
       handleClick(parseInt(ev.currentTarget.value, 10));
     }
