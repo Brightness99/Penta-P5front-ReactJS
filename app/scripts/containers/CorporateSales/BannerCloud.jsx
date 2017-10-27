@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import cx from 'classnames';
 
 type Props = {
   handleModalShowing: () => void,
@@ -10,7 +9,7 @@ type Props = {
 const BannerCloud = ({ handleModalShowing }: Props) => (
   <section>
     <section className="banner-corporate-sales">
-      <article className={cx('container', 'banner-corporate-sales__section')}>
+      <article className="container banner-corporate-sales__section">
         <section className="text-banner">
           <h2 className="title-banner">{'Atendimento exclusivo'}</h2>
           <p className="desc-list-banner">
@@ -30,7 +29,7 @@ const BannerCloud = ({ handleModalShowing }: Props) => (
         </section>
       </article>
       <button
-        className={cx('btn-default', 'btn-secondary', 'btn-lg', 'corporate-sales__modal-button')}
+        className="btn-default btn-secondary btn-lg corporate-sales__modal-button"
         onClick={handleModalShowing}
       >
         {'Solicitar Atendimento'}

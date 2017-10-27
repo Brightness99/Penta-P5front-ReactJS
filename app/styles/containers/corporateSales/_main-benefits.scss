@@ -18,10 +18,6 @@
   justify-content: center;
   padding: 2rem 0;
 
-  @include md {
-    display: flex;
-  }
-
   @include lg {
     flex-direction: row;
   }
@@ -47,12 +43,8 @@
     margin-bottom: 2rem;
     padding: 2rem;
 
-    @include md {
-      max-width: 480px;
-    }
-
     @include lg {
-      height: 360px;
+      height: 36rem;
       margin-right: 2rem;
       max-width: inherit;
     }

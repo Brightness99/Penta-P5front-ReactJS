@@ -3,7 +3,6 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { InvoiceIcon, SpecialProjectsIcon, AccountManagerIcon } from 'components/Icons';
-import { getScreenSize } from '../../utils/helpers';
 
 const benefits = [
   {
@@ -29,7 +28,13 @@ const benefits = [
   },
 ];
 
-export class MainBenefits extends React.PureComponent {
+type Props = {
+  screenSize: string,
+};
+
+export class MainBenefits extends React.PureComponent<Props> {
+  static props: Props;
+
   renderDesktop = () => (
     <section className="boxes-our-benefits">
       {
@@ -81,12 +86,12 @@ export class MainBenefits extends React.PureComponent {
 
 
   render() {
-    const hasSlider = ['xs', 'is', 'sm', 'ix'].includes(getScreenSize());
+    const { screenSize } = this.props;
     return (
       <section className="container-main-benefits">
         <section className="container">
-          <h4 className="title-corporate-sales">Principais Benefícios</h4>
-          {hasSlider ? this.renderMobile() : this.renderDesktop()}
+          <h4 className="title-corporate-sales">{'Principais Benefícios'}</h4>
+          {['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize) ? this.renderMobile() : this.renderDesktop()}
         </section>
       </section>
     );
