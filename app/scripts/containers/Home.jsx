@@ -66,14 +66,14 @@ export class Home extends React.Component {
     return (
       <div className="container-homePage">
         <Helmet>
-          <title>{locale.PAGE_TITLE}</title>
-          <meta name="description" content={locale.META_DESCRIPTION} />
+          <title>{locale.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.seo.META_DESCRIPTION} />
         </Helmet>
         <BannersBlock images={bannerImages} />
         <CategoriesCarouselBlock />
-        <HighlightsBlock />
+        {locale.COUNTRY_CODE === 'BR' && <HighlightsBlock />}
         <CustomersRelyBlock />
-        <BlogBlock />
+        {locale.COUNTRY_CODE === 'BR' && <BlogBlock />}
       </div>
     );
   }
