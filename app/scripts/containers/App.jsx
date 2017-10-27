@@ -1,5 +1,7 @@
 // @flow
 
+// TODO: Check why container has a different size when loading
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
