@@ -24,6 +24,7 @@ type Props = {
   dispatch: () => {},
   contactForm: ContactFormState,
   submitContactForm?: (data: DataType) => void,
+  screenSize: string,
 };
 
 type State = {
@@ -62,6 +63,7 @@ export class CorporateSales extends React.Component<Props, State> {
   };
 
   render() {
+    const { screenSize } = this.props;
     return (
       <section>
         {
@@ -71,7 +73,7 @@ export class CorporateSales extends React.Component<Props, State> {
           </Modal>
         }
         <BannerCloud handleModalShowing={this.handleShowingModal} />
-        <MainBenefits />
+        <MainBenefits screenSize={screenSize} />
         <CloudTools handleModalShowing={this.handleShowingModal} />
         <CustomersRelyBlock />
         <RequestSample handleModalShowing={this.handleShowingModal} />
@@ -80,16 +82,14 @@ export class CorporateSales extends React.Component<Props, State> {
   }
 }
 
-function mapStateToProps(state) {
-  return Object.assign({}, corporateSalesSelector(state), {
+const mapStateToProps = (state) =>
+  Object.assign({}, corporateSalesSelector(state), {
     contactForm: state.contactForm,
+    screenSize: state.app.screenSize,
   });
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    submitContactForm: data => dispatch(submitAction(data)),
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  submitContactForm: data => dispatch(submitAction(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CorporateSales);
