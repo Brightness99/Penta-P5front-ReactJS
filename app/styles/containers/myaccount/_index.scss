@@ -96,6 +96,14 @@
     }
   }
 
+  &.container-art-proposal {
+    .container-myaccount-content {
+      @include lg {
+        background-color: $color-almostWhite;
+      }
+    }
+  }
+
   &-content {
     padding: 3rem 0 4rem;
 
