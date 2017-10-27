@@ -37,16 +37,5 @@
         text-transform   : uppercase;
       }
     }
-    .upload-container-canvasCentralized {
-      display        : flex;
-      flex-direction : column;
-      margin         : 0 0 2rem 0;
-      width          : 98%;
-      @include md {
-        width : 95%;
-      }
-      @include lg {
-      }
-    }
   }
 }
