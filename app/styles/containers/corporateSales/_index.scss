@@ -16,6 +16,10 @@
     margin: 4rem 0;
   }
 
+  @include md {
+    margin: 4rem 0;
+  }
+
   .container {
     padding-left: 0;
     padding-right: 0;
@@ -25,36 +29,111 @@
       padding-right: inherit;
     }
 
+    @include md {
+      padding-left: inherit;
+      padding-right: inherit;
+    }
+
     img {
       width: 100%;
     }
   }
 
+  .banner-corporate-sales__section {
+    background: url('../../assets/media/images/corporate-sales.png') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    height: 20rem;
+    justify-content: center;
+    width: 100%;
+
+    @include lg {
+      height: 100%;
+      justify-content: flex-start;
+      width: inherit;
+    }
+
+    @include md {
+      height: 100%;
+      justify-content: flex-start;
+      width: inherit;
+    }
+  }
+
   .text-banner {
     color: $color-white;
-    display: none;
+    display: flex;
+    flex-direction: column;
     font-family: $font-family-nunito-light;
-    left: 6.4rem;
-    position: absolute;
-    top: 5.8rem;
+    justify-content: space-between;
+    padding: 3rem 1rem;
+    width: 100%;
 
     @include lg {
       display: block;
+      padding-left: 6.4rem;
+      padding-top: 5.8rem;
+      width: 80%;
+    }
+
+    @include md {
+      display: block;
+      padding-left: 6.4rem;
+      padding-top: 5.8rem;
+      width: 80%;
     }
 
     .title-banner {
       color: $color-white;
       font-family: $font-family-nunito-light;
-      font-size: $font-size-xxx;
+      font-size: $font-size-xl;
+
+      @include lg {
+        font-size: $font-size-xxx;
+      }
+
+      @include md {
+        font-size: $font-size-xxx;
+      }
     }
 
     .desc-list-banner {
+      display: none;
       width: 65%;
+
+      @include lg {
+        display: block;
+      }
+
+      @include md {
+        display: block;
+      }
+    }
+
+    .btn-default {
+      display: none;
+
+      @include lg {
+        display: block;
+      }
+
+      @include md {
+        display: block;
+      }
     }
 
     .list-banner {
+      display: none;
       margin-bottom: 4rem;
       padding: 0 2.2rem;
+
+      @include lg {
+        display: block;
+      }
+
+      @include md {
+        display: block;
+      }
 
       li {
         list-style: disc;
@@ -63,6 +142,22 @@
           color: $color-warning;
         }
       }
+    }
+  }
+
+  .corporate-sales__modal-button {
+    display: block;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    width: calc(100% - 4rem);
+
+    @include lg {
+      display: none;
+    }
+
+    @include md {
+      display: none;
     }
   }
 }
