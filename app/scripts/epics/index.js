@@ -76,8 +76,7 @@ import {
 } from './templates';
 import { aboutFetch } from './about';
 import {
-  fileMountFetch,
-  fileMountItemFetch
+  fileMountFetch
 } from './file-mount';
 import { guideFetch } from './guide';
 
@@ -135,7 +134,6 @@ export default combineEpics(
   successfulPurchaseFetch,
   siteMapFetch,
   fileMountFetch,
-  fileMountItemFetch,
   guideFetch,
   templatesFetch,
   fetchTemplateById,
