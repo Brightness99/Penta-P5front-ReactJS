@@ -148,34 +148,28 @@ export class Sidebar extends React.Component {
   }
 
   renderAccordionItem(list) {
-    const renderMark = list.map((accordionItem, accordionIndex) => {
-      return (
-        <li key={accordionIndex.toString()}>
-          <NavLink to={`/guia-de-impressao/${accordionItem.slug}`} onClick={() => this.handleItemClick(accordionItem.slug)}>
-            {accordionItem.title}
-          </NavLink>
-        </li>
-      );
-    });
-    return renderMark;
+    return list.map((accordionItem, accordionIndex) => (
+      <li key={accordionIndex.toString()}>
+        <NavLink to={`/guia-de-impressao/${accordionItem.slug}`} onClick={() => this.handleItemClick(accordionItem.slug)}>
+          {accordionItem.title}
+        </NavLink>
+      </li>
+    ));
   }
 
   renderList() {
-    const renderMark = guideList.map((item, index) => {
-      return (
-        <Accordion key={index.toString()} className="qrk-accordion-sidebar">
-          <AccordionItem>
-            <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
-            <AccordionItemBody>
-              <ul>
-                {this.renderAccordionItem(item.list)}
-              </ul>
-            </AccordionItemBody>
-          </AccordionItem>
-        </Accordion>
-      );
-    });
-    return renderMark;
+    return guideList.map((item, index) => (
+      <Accordion key={index.toString()} className="qrk-accordion-sidebar">
+        <AccordionItem>
+          <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
+          <AccordionItemBody>
+            <ul>
+              {this.renderAccordionItem(item.list)}
+            </ul>
+          </AccordionItemBody>
+        </AccordionItem>
+      </Accordion>
+    ));
   }
 
   renderListMobile(index, list) {

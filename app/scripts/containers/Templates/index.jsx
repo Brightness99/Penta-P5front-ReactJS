@@ -12,10 +12,15 @@ import ChooseSettings from 'components/ChooseSettings/index';
 import DownloadTemplate from 'components/DownloadTemplate/index';
 
 import {
-  sendDownloadRequest, templatesFetch, requestDownloadTemplate,
-  fetchTemplateDetailsById as fetchTemplateById, setActiveFinalId,
-  startTemplateDownload, finishTemplateDownload,
+  sendDownloadRequest,
+  templatesFetch,
+  requestDownloadTemplate,
+  fetchTemplateDetailsById as fetchTemplateById,
+  setActiveFinalId,
+  startTemplateDownload,
+  finishTemplateDownload
 } from 'actions/index';
+
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 
 type Props = {
@@ -34,7 +39,7 @@ type Props = {
     isLoaded: boolean,
     isRunning: boolean,
   },
-}
+};
 
 type State = {
   activeStep: 1 | 2 | 3,

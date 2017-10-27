@@ -142,7 +142,6 @@ export class MyAccount extends React.Component {
   render() {
     const { screenSize, locale, router: { location: { pathname } } } = this.props;
     const { breadcrumbs } = this.state;
-    
     const pathStrings = pathname.split('/');
     const isProposalArtPage = (pathStrings[pathStrings.length - 1] === 'proposta-de-arte');
     const breadcrumbsMark = (isProposalArtPage) ?
