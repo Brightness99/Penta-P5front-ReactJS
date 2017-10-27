@@ -302,21 +302,18 @@ export class Sidebar extends React.Component {
   }
 
   renderList() {
-    const renderMark = fileMountList.map((item, index) => {
-      return (
-        <Accordion key={index.toString()} className="qrk-accordion-sidebar">
-          <AccordionItem>
-            <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
-            <AccordionItemBody>
-              <ul>
-                {this.renderAccordionItem(item.list)}
-              </ul>
-            </AccordionItemBody>
-          </AccordionItem>
-        </Accordion>
-      );
-    });
-    return renderMark;
+    return fileMountList.map((item, index) => (
+      <Accordion key={index.toString()} className="qrk-accordion-sidebar">
+        <AccordionItem>
+          <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
+          <AccordionItemBody>
+            <ul>
+              {this.renderAccordionItem(item.list)}
+            </ul>
+          </AccordionItemBody>
+        </AccordionItem>
+      </Accordion>
+    ));
   }
 
   renderListMobile(index, list) {

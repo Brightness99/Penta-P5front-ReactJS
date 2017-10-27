@@ -79,7 +79,7 @@ export class CustomerData extends React.Component {
       error: null,
     });
 
-    let dataToUpdate = this.state;
+    const dataToUpdate = this.state;
 
     if (current_password !== '' && new_password !== '' && new_password_repeat !== '') {
       dataToUpdate.change_password = {
@@ -245,10 +245,16 @@ export class CustomerData extends React.Component {
     const { account } = this.props;
 
     let errorMessage;
-    if (account.error || error) {
+    if (account.error) {
       errorMessage = (
         <div className="mol-checkout-pane-footer">
-          <ErrorText>{account.error ? (account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message) : error}</ErrorText>
+          <ErrorText>{account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message}</ErrorText>
+        </div>
+      );
+    } else if (error) {
+      errorMessage = (
+        <div className="mol-checkout-pane-footer">
+          <ErrorText>{error}</ErrorText>
         </div>
       );
     }

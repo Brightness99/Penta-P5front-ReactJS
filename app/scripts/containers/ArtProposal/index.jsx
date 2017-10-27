@@ -3,7 +3,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import Breadcrumbs from 'components/Breadcrumbs';
 import Sidebar from './Sidebar';
 import ArtProposalContent from './ArtProposalContent';
 
@@ -41,8 +40,8 @@ export class ArtProposal extends React.Component {
         },
       ]);
     }
-  };
-  
+  }
+
   renderMobile() {
     return (
       <div className="container">

@@ -135,6 +135,7 @@ export default combineEpics(
   successfulPurchaseFetch,
   siteMapFetch,
   fileMountFetch,
+  fileMountItemFetch,
   guideFetch,
   templatesFetch,
   fetchTemplateById,
