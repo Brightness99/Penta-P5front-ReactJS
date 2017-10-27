@@ -165,3 +165,104 @@ export function getTitleFromSlug(slug) {
   const slugStr = slug.replace(/-/g, ' ');
   return slugStr.charAt(0).toUpperCase() + slugStr.slice(1);
 }
+
+/**
+ * validate CPF.
+ * @param {string} cpf
+ * @returns {boolean}
+ */
+export function validateCpf(cpf) {
+  let add;
+  let i;
+  let rev;
+  const cleanValue  = cpf.replace(/[^\d]+/g, '');
+  const invalidList = ['00000000000', '11111111111', '22222222222', '33333333333', '44444444444', '55555555555', '66666666666', '77777777777', '88888888888', '99999999999'];
+
+  if (cleanValue === '' || cleanValue.length !== 11 || invalidList.indexOf(cleanValue) !== -1) {
+    return false;
+  }
+  // Elimina CPFs invalidos conhecidos
+  // Valida 1o digito
+  add = 0;
+  for (i = 0; i < 9; i++) {
+    add += parseInt(cleanValue.charAt(i), 10) * (10 - i);
+  }
+  rev = 11 - (add % 11);
+  if (rev === 10 || rev === 11) {
+    rev = 0;
+  }
+  if (rev !== parseInt(cleanValue.charAt(9), 10)) {
+    return false;
+  }
+  // Valida 2o digito
+  add = 0;
+  for (i = 0; i < 10; i++) {
+    add += parseInt(cleanValue.charAt(i), 10) * (11 - i);
+  }
+  rev = 11 - (add % 11);
+  if (rev === 10 || rev === 11) {
+    rev = 0;
+  }
+  if (rev !== parseInt(cleanValue.charAt(10), 10)) {
+    return false;
+  }
+  return true;
+}
+
+/**
+ * validate CNPJ.
+ * @param {string} cnpj
+ * @returns {boolean}
+ */
+export function validateCnpj(cnpj) {
+  const cleanValue = cnpj.replace(/[^\d]+/g, '');
+  if (cleanValue.length < 14 && cleanValue.length < 15) {
+    return false;
+  }
+  let i;
+  let digitos_iguais = 1;
+
+  for (i = 0; i < cleanValue.length - 1; i++) {
+    if (cleanValue.charAt(i) !== cleanValue.charAt(i + 1)) {
+      digitos_iguais = 0;
+      break;
+    }
+  }
+  if (digitos_iguais) {
+    return false;
+  }
+  let tamanho = cleanValue.length - 2;
+  let numeros = cleanValue.substring(0, tamanho);
+  const digitos = cleanValue.substring(tamanho);
+  let soma = 0;
+  let pos = tamanho - 7;
+  for (i = tamanho; i >= 1; i--) {
+    soma += numeros.charAt(tamanho - i) * pos--;
+    if (pos < 2) {
+      pos = 9;
+    }
+  }
+  /**
+   * @todo not sure if here we shouldn't have some ( )
+   * @type {number}
+   */
+  let resultado = (soma % 11 < 2) ? 0 : 11 - (soma % 11);
+  if (resultado !== parseInt(digitos.charAt(0), 10)) {
+    return false;
+  }
+  tamanho++;
+  numeros = cleanValue.substring(0, tamanho);
+  soma = 0;
+  pos = tamanho - 7;
+  for (i = tamanho; i >= 1; i--) {
+    soma += numeros.charAt(tamanho - i) * pos--;
+    if (pos < 2) {
+      pos = 9;
+    }
+  }
+  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+  if (resultado !== parseInt(digitos.charAt(1), 10)) {
+    return false;
+  }
+  return true;
+}
