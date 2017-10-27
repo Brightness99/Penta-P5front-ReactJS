@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
@@ -24,9 +25,10 @@ type Props = {
   handleLogOut: () => {},
   isAuthorized: boolean,
   locale: {},
+  user: {},
 };
 
-export default class MyAccount extends React.Component {
+export class MyAccount extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
@@ -67,9 +69,8 @@ export default class MyAccount extends React.Component {
   }
 
   renderLoggedIn() {
-    const { locale } = this.props;
-
-    return [
+    const { locale, user } = this.props;
+    const loggedInItems = [
       <li key="pedidos">
         <NavLink onClick={this.handleClick} to="/minha-conta/pedidos">
           <OrdersIcon /> Meus Pedidos
@@ -90,17 +91,27 @@ export default class MyAccount extends React.Component {
           <ModelsIcon /> Modelos salvos
         </NavLink>
       </li>,
-      <li key="cloud">
-        <NavLink onClick={this.handleClick} to="/minha-conta/cloud">
-          <ModelsIcon /> Cloud
-        </NavLink>
-      </li>,
+    ];
+
+    if (user.customerInfo && user.customerInfo.cloud_manager === 1) {
+      loggedInItems.push(
+        <li key="cloud">
+          <NavLink onClick={this.handleClick} to="/minha-conta/cloud">
+            <ModelsIcon /> Cloud
+          </NavLink>
+        </li>
+      );
+    }
+
+    loggedInItems.push(
       <li key="logout">
         <NavLink onClick={this.handleLogOut} to="#">
           <OutIcon /> {locale.LOGOUT}
         </NavLink>
       </li>,
-    ];
+    );
+
+    return loggedInItems;
   }
 
   renderMenu = () => {
@@ -110,7 +121,7 @@ export default class MyAccount extends React.Component {
       return this.renderLoggedIn();
     }
     return this.renderLoggedOut();
-  }
+  };
 
   renderMobileHeader() {
     const { locale } = this.props;
@@ -165,3 +176,11 @@ export default class MyAccount extends React.Component {
     return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+export default connect(mapStateToProps)(MyAccount);

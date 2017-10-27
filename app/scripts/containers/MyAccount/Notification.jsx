@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import swal from 'sweetalert2';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { RadioButton } from 'components/Input';
@@ -31,8 +32,28 @@ export class Notification extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { account: { notification } } = this.props;
     const { account } = nextProps;
-    if (account && account.notification) {
+    if (notification !== account.notifiation) {
+      if (!account.notification.isUpdating && account.notification.isUpdated) {
+        if (account.notification.error) {
+          swal({
+            title: account.notification.error.message,
+            type: 'error',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        } else {
+          swal({
+            title: 'Successfully saved.',
+            type: 'success',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        }
+      }
       this.setState({
         sms_enabled: account.notification.sms_enabled,
       });
