@@ -93,7 +93,6 @@ export default class Menu extends React.Component {
 
   renderDesktop() {
     const { locale } = this.props;
-    console.log(locale);
 
     if (locale.COUNTRY_CODE === 'US') {
       return (
