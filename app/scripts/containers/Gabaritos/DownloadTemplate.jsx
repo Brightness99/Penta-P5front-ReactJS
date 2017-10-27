@@ -38,7 +38,7 @@ class DownloadTemplate extends React.Component {
             <li>
               <img src={require('assets/media/images/photoshop-icon.png')} alt="Photoshop" />
               <Link to="#" className="btn-default btn-sm fnt-sbold">Photoshop</Link>
-              </li>
+            </li>
             <li>
               <img src={require('assets/media/images/indesign-icon.png')} alt="Indesign" />
               <Link to="#" className="btn-default btn-sm fnt-sbold">Indesign</Link>
@@ -88,9 +88,9 @@ class DownloadTemplate extends React.Component {
               showLabel={true}
             />
             <Button
-            type="submit"
-            kind="success"
-            className="btn-default"
+              type="submit"
+              kind="success"
+              className="btn-default"
             >
             Enviar
           </Button>
@@ -101,7 +101,6 @@ class DownloadTemplate extends React.Component {
   }
 
   renderMobile() {
-    const { screenSize } = this.props;
     return (
       <section>
         <div className="container">

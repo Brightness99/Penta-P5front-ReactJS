@@ -28,23 +28,25 @@ type State = {
 };
 
 export class Success extends React.Component {
-  shouldComponentUpdate = shouldComponentUpdate;
-
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       showDetailModal: false,
       selectedItem: null,
     };
   }
 
-  static props: Props;
+  shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
-    const { dispatch, match: { params: { orderNumber } }  } = this.props;
+    const { dispatch, match: { params: { orderNumber } } } = this.props;
 
     dispatch(successfulPurchaseFetch(orderNumber));
   }
+
+  static props: Props;
+
+  static state: State;
 
   handleShowingModal = (item) => {
     this.setState({
@@ -58,7 +60,6 @@ export class Success extends React.Component {
   };
 
   renderSubTotalMobile() {
-
     const { successfulPurchase } = this.props;
 
     return (
@@ -70,27 +71,22 @@ export class Success extends React.Component {
   }
 
   renderSubTotalDesktop() {
-
     const { successfulPurchase } = this.props;
 
     return (
       <div className="sub-total">
-
         <div className="sub-total-row">
           <div className="key">Sub-total</div>
           <div className="value">R$ {successfulPurchase.order.info.total_price}</div>
         </div>
-
         <div className="sub-total-row">
           <div className="key">Cupom</div>
           <div className="value">R$ {successfulPurchase.order.info.total_discount_price}</div>
         </div>
-
         <div className="sub-total-row">
           <div className="key">Total</div>
           <div className="value total-value">R$ {successfulPurchase.order.info.total_price}</div>
         </div>
-
       </div>
     );
   }
@@ -116,104 +112,83 @@ export class Success extends React.Component {
   }
 
   render() {
-
     const { app: { screenSize }, locale, successfulPurchase, match: { params: { orderNumber } } } = this.props;
     const { selectedItem } = this.state;
 
-    const shippingAddressInfo = (successfulPurchase.isLoaded && !successfulPurchase.isRunning) ? successfulPurchase.order.info.addresses.filter((address) => address.type === 'SHIPPING') : {};
+    const shippingAddressInfo = (successfulPurchase.isLoaded && !successfulPurchase.isRunning)
+      ? successfulPurchase.order.info.addresses.filter((address) => address.type === 'SHIPPING')
+      : {};
 
     return (
       <section>
         <div className="container">
-
           {this.state.showDetailModal &&
           <Modal handleCloseModal={this.handleCloseModal}>
             <ProductModalItem item={selectedItem} />
           </Modal>}
-
           {(!successfulPurchase.isLoaded || successfulPurchase.isRunning) && <Loading />}
           {successfulPurchase.isLoaded && !successfulPurchase.isRunning && <div className="template-success">
-
             <div className="success-message atm-success-text">
               <CheckCircleIcon />
               <span>Pedido nº{successfulPurchase.order.info.id} efetuado com sucesso!</span>
             </div>
-
             <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
-
-            {successfulPurchase.order.messages[0] && <div>
-              <WarningMessage message={successfulPurchase.order.messages[0].message} />
-            </div>}
-
+            {successfulPurchase.order.messages[0] &&
+              <div>
+                <WarningMessage message={successfulPurchase.order.messages[0].message} />
+              </div>
+            }
             <div className="method-container">
               {this.renderActions(successfulPurchase.order.actions)}
             </div>
-
             <div className="main-container">
-
               <div className="product-container">
-
                 <h3>RESUMO DO SEU PEDIDO</h3>
-
                 <div className="product-item-row product-item-header">
                   <div className="product-item-col product-item-col-product">
                     <h4>PRODUTO</h4>
                   </div>
-
                   <div className="product-item-col product-item-col-delivery">
                     <h4>ENTREGA</h4>
                   </div>
-
                   <div className="product-item-col product-item-col-amount">
                     <h4>QUANTIDADE</h4>
                   </div>
-
                   <div className="product-item-col product-item-col-value">
                     <h4>VALOR</h4>
                   </div>
                 </div>
-
                 <div className="product-item-body">
                   {this.renderProductItems(successfulPurchase.order.info.items)}
                 </div>
-
                 <div className="product-sub-total">
                   {isMobile(screenSize) ? this.renderSubTotalMobile() : this.renderSubTotalDesktop()}
                 </div>
-
               </div>
-
               <div className="stay-tuned-container">
                 <h3>{locale.translate.page.successful_purchase.sidebar.TITLE}</h3>
-
                 <div>
                   {this.renderStayTunedItems()}
                 </div>
-
                 <div className="my-account">
-                  <Link to={'/minha-conta/pedidos/' + orderNumber}>
+                  <Link to={`/minha-conta/pedidos/${orderNumber}`}>
                     <MyAccountIcon />
                     <div>MINHA CONTA</div>
                   </Link>
                 </div>
-
                 <h3>{locale.translate.page.successful_purchase.sidebar.DELIVERY_ADDRESS}</h3>
-
                 <div className="address">
-                  {shippingAddressInfo[0].street}, {shippingAddressInfo[0].number}
-                  {shippingAddressInfo[0].additional_address && ' - ' + shippingAddressInfo[0].additional_address}
-                  {shippingAddressInfo[0].neighborhood && shippingAddressInfo[0].neighborhood + ', '} {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
+                  {`${shippingAddressInfo[0].street}, ${shippingAddressInfo[0].number}`}
+                  {shippingAddressInfo[0].additional_address && ` - ${shippingAddressInfo[0].additional_address}`}
+                  {shippingAddressInfo[0].neighborhood && `${shippingAddressInfo[0].neighborhood}, `}
+                  {`${shippingAddressInfo[0].state} - ${shippingAddressInfo[0].zipcode}`}
                 </div>
-
-                <Link to={'/minha-conta/pedidos/' + orderNumber} className="delivery-address">
+                <Link to={`/minha-conta/pedidos/${orderNumber}`} className="delivery-address">
                   <RefreshIcon />
                   <div>Alterar endereço de entrega</div>
                 </Link>
-
               </div>
-
             </div>
-
           </div>}
         </div>
       </section>

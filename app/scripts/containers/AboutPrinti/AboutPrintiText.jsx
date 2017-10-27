@@ -1,4 +1,4 @@
-// @flow 
+// @flow
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -27,6 +27,7 @@ export class AboutPrintiText extends React.Component {
       </div>
     );
   }
+
   renderPrintiMentioned() {
     return (
       <div className="org-about-printi-mentions">

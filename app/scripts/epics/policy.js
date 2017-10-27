@@ -16,7 +16,6 @@ export function policyFetch(action$) {
         method: 'GET',
       })
         .map(data => {
-          console.log('data ===>', data);
           if (data.status === 200 && data.response) {
             return {
               type: PolicyConstants.POLICY_FETCH_SUCCESS,

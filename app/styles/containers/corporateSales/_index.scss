@@ -1,53 +1,64 @@
-@import "main-benefits";
-@import "cloud-tools";
-@import "request-sample";
+@import 'main-benefits';
+@import 'cloud-tools';
+@import 'request-sample';
 
-.title-corporateSales {
+.title-corporate-sales {
   font-family: $font-family-open-sans-bold;
   font-size: $font-size-lg;
   text-transform: uppercase;
 }
 
 .banner-corporate-sales {
+  margin: 2rem 0;
   position: relative;
-  margin-bottom: 2rem;
+
   @include lg {
     margin: 4rem 0;
   }
+
   .container {
-    padding-right: 0;
     padding-left: 0;
+    padding-right: 0;
+
     @include lg {
-      padding-right: inherit;
       padding-left: inherit;
+      padding-right: inherit;
     }
+
     img {
       width: 100%;
     }
   }
+
   .text-banner {
+    color: $color-white;
     display: none;
+    font-family: $font-family-nunito-light;
+    left: 6.4rem;
     position: absolute;
     top: 5.8rem;
-    left: 6.4rem;
-    color: $color-white;
-    font-family: $font-family-nunito-light;
+
     @include lg {
       display: block;
     }
+
     .title-banner {
       color: $color-white;
       font-family: $font-family-nunito-light;
       font-size: $font-size-xxx;
     }
+
     .desc-list-banner {
       width: 65%;
     }
+
     .list-banner {
-      padding: 0 2.2rem;
       margin-bottom: 4rem;
+      padding: 0 2.2rem;
+
       li {
         list-style: disc;
+
         span {
           color: $color-warning;
         }
