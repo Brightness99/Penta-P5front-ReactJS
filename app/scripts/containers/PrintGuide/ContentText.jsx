@@ -12,12 +12,18 @@ export class ContentText extends React.Component {
 
   render() {
     const { guide } = this.props;
+    const pageTitle = (guide && guide.isLoaded) ? guide.guideData.pageTitle : '';
     const renderMark = (guide && guide.isLoaded) ?
-      (<div className="atm-content-file" dangerouslySetInnerHTML={{ __html: guide.guideData.content }} />) :
+      (<div dangerouslySetInnerHTML={{ __html: guide.guideData.content }} />) :
       null;
     return (
       <div className="atm-content-file">
-        {renderMark}
+        <div className="guide-title">
+          <h1>{pageTitle}</h1>
+        </div>
+        <div className="guide-body">
+          {renderMark}
+        </div>
       </div>
     );
   }
