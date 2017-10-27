@@ -69,7 +69,7 @@
             margin-left: 1.0rem;
           }
           .bellIcon {
-            width: 14.3%;
+            width: 12.5%;
             height: 4.7rem;
           }
           .cloudIcon {
@@ -92,6 +92,14 @@
         &:last-of-type {
           margin-top: 5rem;
         }
+      }
+    }
+  }
+
+  &.container-art-proposal {
+    .container-myaccount-content {
+      @include lg {
+        background-color: $color-almostWhite;
       }
     }
   }
@@ -1164,7 +1172,7 @@
     background-color: $color-white;
     flex: 5;
     box-sizing: border-box;
-    padding: 2rem 6rem 0 6rem;
+    padding: 2rem 0 0;
     margin-bottom: 0;
   }
   .container {
@@ -1206,6 +1214,39 @@
       margin-bottom: 0;
       @include lg {
         // margin: 3.2rem 0 2.7rem 0;
+      }
+    }
+  }
+  .address-form-modal-container {
+    width: 800px;
+    .address-form-modal {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .atm-checkout-input {
+        &-full {
+          width: 100%;
+        }
+        margin-top: 0.7em;
+      }
+      .atm-checkout-input-one {
+        width: calc(20% - 1rem);
+      }
+      .atm-checkout-input-two {
+        width: calc(40% - 1rem);
+      }
+      .atm-checkout-input-three {
+        width: 60%;
+      }
+      .zipcode {
+        position: relative;
+        .link {
+          position: absolute;
+          right: 5px;
+          top: 15px;
+          font-size: 13px;
+          color: #006ee3;
+        }
       }
     }
   }

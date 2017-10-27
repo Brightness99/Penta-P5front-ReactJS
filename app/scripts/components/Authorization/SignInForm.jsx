@@ -28,7 +28,7 @@ type Props = {
 
 type State = { canSubmit: boolean, form: FormType, stayConnected: boolean };
 
-export default class SignInForm extends React.PureComponent {
+export default class SignInForm extends React.Component {
   constructor(props) {
     super(props);
 

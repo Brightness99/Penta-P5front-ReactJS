@@ -11,7 +11,8 @@ import {
   userLogOut,
   userAuthValidate,
   userSocialSignIn,
-  userSocialSignUp } from './user';
+  userSocialSignUp
+} from './user';
 import { productsFetch } from './products';
 import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
@@ -49,6 +50,7 @@ import {
   accountUpdate,
   accountAddressFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
@@ -56,6 +58,7 @@ import {
   accountSavedCreditCardDelete,
   accountOrderDetailFetch,
   accountOrderFetch,
+  zipcodeValidate,
   accountLoyaltyFetch
 } from './account';
 
@@ -65,7 +68,18 @@ import {
 
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
+import {
+  templatesFetch,
+  fetchTemplateById,
+  sendDownloadTemplatesRequest,
+  fetchTemplate
+} from './templates';
 import { aboutFetch } from './about';
+import {
+  fileMountFetch,
+  fileMountItemFetch
+} from './file-mount';
+import { guideFetch } from './guide';
 
 export default combineEpics(
   userNewsletter,
@@ -104,6 +118,7 @@ export default combineEpics(
   accountUpdate,
   socialLoginSettingsFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountSavedCreditCardFetch,
   accountSavedCreditCardDelete,
@@ -111,6 +126,7 @@ export default combineEpics(
   accountNotificationUpdate,
   accountOrderDetailFetch,
   accountOrderFetch,
+  zipcodeValidate,
   accountLoyaltyFetch,
   policyFetch,
   termsFetch,
@@ -118,4 +134,10 @@ export default combineEpics(
   productCategoriesFetch,
   successfulPurchaseFetch,
   siteMapFetch,
+  fileMountFetch,
+  guideFetch,
+  templatesFetch,
+  fetchTemplateById,
+  sendDownloadTemplatesRequest,
+  fetchTemplate,
 );
