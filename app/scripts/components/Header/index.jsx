@@ -127,6 +127,19 @@ export class Header extends React.Component {
     dispatch(dismissLoyaltyBar());
   };
 
+  renderExclusiveService = () => {
+    const { locale } = this.props;
+
+    return (
+      <div className="mol-header-button">
+        <div onMouseOver={this.handlePaneHide} className="atm-header-button">
+          <ExclusiveServiceIcon />{locale.exclusive_service.TITLE}
+        </div>
+        <ExclusiveService />
+      </div>
+    );
+  };
+
   renderMobile() {
     const {
       screenSize,
@@ -231,12 +244,7 @@ export class Header extends React.Component {
               </button>
             </div>
             <SearchBar dispatch={dispatch} />
-            <div className="mol-header-button">
-              <div onMouseOver={this.handlePaneHide} className="atm-header-button">
-                <ExclusiveServiceIcon />{locale.exclusive_service.TITLE}
-              </div>
-              <ExclusiveService />
-            </div>
+            {locale.COUNTRY_CODE === 'BR' && this.renderExclusiveService()}
             <div className="mol-header-button">
               <button className="atm-header-icon-button">
                 <MyAccountIcon />

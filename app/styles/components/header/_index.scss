@@ -67,6 +67,14 @@
           fill: #006ee3;
         }
       }
+
+      .atm-topbar-us-phone{
+        margin-left: 0;
+
+        &~ .mol-topbar-locales {
+          margin-left: 1.8rem;
+        }
+      }
     }
 
     .mol-topbar-models {
