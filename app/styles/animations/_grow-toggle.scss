@@ -1,0 +1,19 @@
+.anm-grow-toggle {
+  &-enter {
+    height: 0;
+    transition: height 0.2s ease-in;
+
+    &-active {
+      height: inherit;
+    }
+  }
+
+  &-exit {
+    height: inherit;
+    transition: height 0.1s ease-out;
+
+    &-active {
+      height: 0!important;
+    }
+  }
+}

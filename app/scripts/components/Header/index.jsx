@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
+import { GrowToggle } from 'animations';
+import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
 import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
@@ -134,7 +135,7 @@ export class Header extends React.Component {
       isAuthorized,
       config,
       account: {
-        loyalty
+        loyalty,
       },
       isLoyaltyBarVisible,
       locale,
@@ -188,7 +189,7 @@ export class Header extends React.Component {
       isAuthorized,
       config,
       account: {
-        loyalty
+        loyalty,
       },
       isLoyaltyBarVisible,
       locale,
@@ -202,7 +203,12 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
-        {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible && <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />}
+        <GrowToggle in={!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible}>
+          <LoyaltyTopbar
+            onClose={this.handleLoyaltyBarDismiss}
+            key="loyalty-bar"
+          />
+        </GrowToggle>
         <Topbar handleClose={this.handlePaneHide} locale={locale} />
         <div className="org-header-content">
           <div className="container">
@@ -276,7 +282,7 @@ function mapStateToProps(state) {
       COUNTRY: state.locale.COUNTRY,
       COUNTRY_CODE: state.locale.COUNTRY_CODE,
       ...state.locale.translate.header,
-    }
+    },
   };
 }
 
