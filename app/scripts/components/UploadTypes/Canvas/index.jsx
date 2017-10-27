@@ -16,7 +16,6 @@ type Props = {
 
 type State = {
   isReady: boolean,
-  isToogleOn: boolean,
 };
 
 export default class Canvas extends React.Component {
@@ -24,7 +23,6 @@ export default class Canvas extends React.Component {
     super(props);
     this.state = {
       isReady: false,
-      isToogleOn: true,
     };
   }
 
@@ -404,11 +402,7 @@ export default class Canvas extends React.Component {
     if (isReady && isReady !== prevState.isReady) {
       global.designer.start(cimpressDesignerSettings)
       .then(
-        () => {
-          this.setState({
-            isToogleOn: false,
-          });
-        }
+        () => {  }
       );
     }
   }
@@ -428,10 +422,9 @@ export default class Canvas extends React.Component {
   };
 
   render() {
-    const { isReady, isToogleOn } = this.state;
+    const { isReady } = this.state;
 
     return (
-      <div className={`upload-container ${(isToogleOn) ? 'toogleOn' : 'toogleOff'}`}>
         <div className="upload-container-canvasCentralized">
           <div className="upload__canvasSchema">
             {
@@ -454,7 +447,6 @@ export default class Canvas extends React.Component {
             }
           </div>
         </div>
-      </div>
     );
   }
 }
