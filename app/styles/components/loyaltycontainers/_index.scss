@@ -3,6 +3,17 @@
   position: relative;
   z-index: 3;
 
+  &.anm-grow-toggle {
+    &-enter {
+      height: 0 !important;
+      transition: height 2000ms ease-in;
+
+      &-active {
+        height: 4rem !important;
+      }
+    }
+  }
+
   .mol-loyalty-topbar {
     align-items: center;
     display: flex;
