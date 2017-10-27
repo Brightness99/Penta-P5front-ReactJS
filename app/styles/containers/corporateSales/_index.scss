@@ -16,20 +16,11 @@
     margin: 4rem 0;
   }
 
-  @include md {
-    margin: 4rem 0;
-  }
-
   .container {
     padding-left: 0;
     padding-right: 0;
 
     @include lg {
-      padding-left: inherit;
-      padding-right: inherit;
-    }
-
-    @include md {
       padding-left: inherit;
       padding-right: inherit;
     }
@@ -52,12 +43,6 @@
       justify-content: flex-start;
       width: inherit;
     }
-
-    @include md {
-      height: 100%;
-      justify-content: flex-start;
-      width: inherit;
-    }
   }
 
   .text-banner {
@@ -76,23 +61,12 @@
       width: 80%;
     }
 
-    @include md {
-      display: block;
-      padding-left: 6.4rem;
-      padding-top: 5.8rem;
-      width: 80%;
-    }
-
     .title-banner {
       color: $color-white;
       font-family: $font-family-nunito-light;
       font-size: $font-size-xl;
 
       @include lg {
-        font-size: $font-size-xxx;
-      }
-
-      @include md {
         font-size: $font-size-xxx;
       }
     }
@@ -104,20 +78,12 @@
       @include lg {
         display: block;
       }
-
-      @include md {
-        display: block;
-      }
     }
 
     .btn-default {
       display: none;
 
       @include lg {
-        display: block;
-      }
-
-      @include md {
         display: block;
       }
     }
@@ -128,10 +94,6 @@
       padding: 0 2.2rem;
 
       @include lg {
-        display: block;
-      }
-
-      @include md {
         display: block;
       }
 
@@ -153,10 +115,6 @@
     width: calc(100% - 4rem);
 
     @include lg {
-      display: none;
-    }
-
-    @include md {
       display: none;
     }
   }
