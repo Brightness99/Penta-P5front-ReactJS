@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import ie from 'inscricaoestadual';
 import cx from 'classnames';
-
 import { Input } from 'quarks/Inputs';
+import { validateCpf, validateCnpj } from 'utils/helpers';
 
 type Props = {
   app: AppStoreType,
@@ -18,6 +19,9 @@ type Props = {
   placeholder: string,
   showLabel: boolean,
   required: boolean,
+  cpf: boolean,
+  cnpj: boolean,
+  state_registration: string,
   equalsTo: any,
   value: string,
   onClick?: () => {},
@@ -54,7 +58,7 @@ export class InputRegex extends React.Component {
   }
 
   handleValidation(value, equalsTo) {
-    const { onValidate, pattern, required, name } = this.props;
+    const { onValidate, pattern, required, name, cpf, cnpj, state_registration } = this.props;
 
     let valid = true;
 
@@ -72,6 +76,20 @@ export class InputRegex extends React.Component {
 
     if (valid === true && equalsTo) {
       valid = (value === equalsTo);
+    }
+
+    if (valid === true && cpf) {
+      valid = validateCpf(value);
+    }
+
+    if (valid === true && cnpj) {
+      valid = validateCnpj(value);
+    }
+
+    if (valid === true && state_registration) {
+      if (state_registration.toUpperCase() !== 'ISENTO') {
+        valid = ie(value, state_registration);
+      }
     }
 
     if (typeof onValidate === 'function') {

@@ -39,6 +39,15 @@ export class CustomerData extends React.Component {
     this.state = {
       ...props.account,
       activeForm: 'person',
+      form: {
+        phone: { valid: false, value: '' },
+        cnpj: { valid: false, value: '' },
+        cpf: { valid: false, value: '' },
+        current_password: { valid: false, value: '' },
+        new_password: { valid: false, value: '' },
+        new_password_repeat: { valid: false, value: '' },
+      },
+      canSubmit: false,
     };
   }
 
@@ -159,7 +168,7 @@ export class CustomerData extends React.Component {
     return (
       <form className="org-checkout-content-data">
         <Input
-          showLabel={true}
+          showLabel
           className="atm-checkout-input atm-checkout-input-two"
           placeholder="Nome Completo"
           value={`${first_name} ${last_name}`}
@@ -174,6 +183,7 @@ export class CustomerData extends React.Component {
           pattern={/^([0-9]){3}[.]([0-9]){3}[.]([0-9]){3}[-]([0-9]){2}$/}
           className="atm-checkout-input atm-checkout-input-one"
           showLabel
+          cpf
           value={form.cpf.value}
           onValidate={this.handleValidatedInput}
           onEnterKeyPress={this.handleSubmit}
@@ -239,9 +249,10 @@ export class CustomerData extends React.Component {
           name="cnpj"
           type="text"
           placeholder={'CNPJ'}
-          pattern={/^([0-9]){3}[.]([0-9]){3}[.]([0-9]){3}[-]([0-9]){2}$/}
+          pattern={/^([0-9]){2}[.]([0-9]){3}[.]([0-9]){3}[/]([0-9]){4}[-]([0-9]){2}$/}
           className="atm-checkout-input atm-checkout-input-one"
           showLabel
+          cnpj
           value={form.cnpj.value}
           onValidate={this.handleValidatedInput}
           onEnterKeyPress={this.handleSubmit}
@@ -271,7 +282,7 @@ export class CustomerData extends React.Component {
         <Select
           className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-area"
-          showLabel={true}
+          showLabel
           id="data-pane-area"
           placeholder="Área de Atuação"
           required={true}
@@ -282,7 +293,7 @@ export class CustomerData extends React.Component {
         <Select
           className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-collaborators"
-          showLabel={true}
+          showLabel
           id="data-pane-collaborators"
           placeholder="Número de funcionários"
           value={employee_number}
@@ -295,7 +306,7 @@ export class CustomerData extends React.Component {
         <Select
           className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-state"
-          showLabel={true}
+          showLabel
           id="data-pane-state"
           placeholder="Inscrição Estadual"
           value={state_registration}
@@ -306,12 +317,12 @@ export class CustomerData extends React.Component {
           <option value={'sp'}>SP</option>
           <option value={'rj'}>RJ</option>
         </Select>
-        {state_registration !== 'Isento' && <Input
-          showLabel={true}
+        {state_registration !== 'Isento' && <InputRegex
+          showLabel
           className="atm-checkout-input atm-checkout-input-one"
           placeholder="Número Inscrição"
           value={id_state_registration}
-          onChange={(e) => { this.setState({ id_state_registration: e.target.value }); }}
+          state_registration={state_registration}
           onEnterKeyPress={this.handleSubmit}
         />}
       </form>
