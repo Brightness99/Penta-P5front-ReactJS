@@ -85,8 +85,8 @@ export class FileMount extends React.Component {
             {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
             <PageTitle>Montagem do arquivo</PageTitle>
             <div className="org-content-file-mount">
-              <Sidebar screenSize={screenSize} selectItem={this.selectItem} />
-              <ContentText fileMount={fileMount} />
+              <Sidebar screenSize={screenSize} selectItem={this.selectItem} fileMount={fileMount} />
+              {!isMobile(screenSize) && <ContentText fileMount={fileMount} />}
             </div>
           </div>
         </div>

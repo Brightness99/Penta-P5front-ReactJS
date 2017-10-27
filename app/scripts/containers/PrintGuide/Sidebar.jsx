@@ -9,7 +9,11 @@ import ContentText from './ContentText';
 type Props = {
   screenSize: string,
   selectItem: () => {},
-  guide: {}
+  guide: {
+    guideData: {
+      content: ''
+    }
+  }
 }
 
 const guideList = [
@@ -89,11 +93,15 @@ export class Sidebar extends React.Component {
   state = {
     index1: -1,
     index2: -1,
+    activeIndex: -1,
   }
 
   handleItemClick(slug, i1 = 0, i2 = 0) {
-    this.props.selectItem(slug);
+    const { selectItem } = this.props;
     const { index1, index2 } = this.state;
+    if (typeof selectItem === 'function') {
+      selectItem(slug);
+    }
     if (index1 === i1 && index2 === i2) {
       this.setState({
         index1: -1,
@@ -104,6 +112,38 @@ export class Sidebar extends React.Component {
         index1: i1,
         index2: i2,
       });
+    }
+  }
+
+  handleMobileHeaderItemClick(active, index) {
+    if (active) {
+      this.setState({
+        activeIndex: index,
+      });
+    } else {
+      this.setState({
+        activeIndex: -1,
+      });
+    }
+  }
+
+  handleMobileSubHeaderItemClick(active, slug, i1 = 0, i2 = 0) {
+    const { selectItem } = this.props;
+    const { index1, index2 } = this.state;
+
+    if (index1 === i1 && index2 === i2) {
+      this.setState({
+        index1: -1,
+        index2: -1,
+      });
+    } else {
+      this.setState({
+        index1: i1,
+        index2: i2,
+      });
+      if (typeof selectItem === 'function' && active) {
+        selectItem(slug);
+      }
     }
   }
 
@@ -145,8 +185,8 @@ export class Sidebar extends React.Component {
       const guideData = (index1 === index && index2 === accordionIndex) ? guide : null;
       return (
         <AccordionItem key={accordionIndex.toString()}>
-          <AccordionItemTitle handleClick={() => this.handleItemClick(accordionItem.slug, index, accordionIndex)}>{accordionItem.title}</AccordionItemTitle>
-          <AccordionItemBody className="atm-accordion-sub-item-body">
+          <AccordionItemTitle handleActive={(active) => this.handleMobileSubHeaderItemClick(active, accordionItem.slug, index, accordionIndex)}>{accordionItem.title}</AccordionItemTitle>
+          <AccordionItemBody className={(index1 === -1 && index2 === -1) ? '' : 'atm-accordion-sub-item-body'}>
             <ContentText guide={guideData} />
           </AccordionItemBody>
         </AccordionItem>
@@ -160,23 +200,23 @@ export class Sidebar extends React.Component {
   }
 
   renderMobile() {
-    const { index1 } = this.state;
+    const { activeIndex } = this.state;
     const renderMark = guideList.map((item, index) => {
-      const subClass = (index === index1) ? 'atm-accordion-sub-item-body' : '';
+      const subClass = (index === activeIndex) ? 'atm-accordion-sub-item-body' : 'atm-accordion-sub-item-body-close';
       return (
-        <Accordion key={index.toString()} className="qrk-accordion-sidebar">
-          <AccordionItem>
-            <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
-            <AccordionItemBody className={subClass}>
-              {this.renderListMobile(index, item.list)}
-            </AccordionItemBody>
-          </AccordionItem>
-        </Accordion>
+        <AccordionItem key={index.toString()}>
+          <AccordionItemTitle handleActive={(active) => this.handleMobileHeaderItemClick(active, index)}><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
+          <AccordionItemBody className={subClass}>
+            {this.renderListMobile(index, item.list)}
+          </AccordionItemBody>
+        </AccordionItem>
       );
     });
     return (
       <div className="atm-sidebar-file">
-        {renderMark}
+        <Accordion className="qrk-accordion-sidebar">
+          {renderMark}
+        </Accordion>
       </div>
     );
   }

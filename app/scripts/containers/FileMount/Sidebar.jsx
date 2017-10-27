@@ -9,6 +9,11 @@ import ContentText from './ContentText';
 type Props = {
   screenSize: string,
   selectItem: () => {},
+  fileMount: {
+    mountData: {
+      content: ''
+    }
+  }
 }
 
 const fileMountList = [
@@ -209,11 +214,60 @@ const fileMountList = [
 export class Sidebar extends React.Component {
   props: Props;
 
-  handleItemClick(slug) {
-    const { selectItem } = this.props;
+  state = {
+    index1: -1,
+    index2: -1,
+    activeIndex: -1,
+  }
 
+  handleItemClick(slug, i1 = 0, i2 = 0) {
+    const { selectItem } = this.props;
+    const { index1, index2 } = this.state;
     if (typeof selectItem === 'function') {
       selectItem(slug);
+    }
+    if (index1 === i1 && index2 === i2) {
+      this.setState({
+        index1: -1,
+        index2: -1,
+      });
+    } else {
+      this.setState({
+        index1: i1,
+        index2: i2,
+      });
+    }
+  }
+
+  handleMobileHeaderItemClick(active, index) {
+    if (active) {
+      this.setState({
+        activeIndex: index,
+      });
+    } else {
+      this.setState({
+        activeIndex: -1,
+      });
+    }
+  }
+
+  handleMobileSubHeaderItemClick(active, slug, i1 = 0, i2 = 0) {
+    const { selectItem } = this.props;
+    const { index1, index2 } = this.state;
+
+    if (index1 === i1 && index2 === i2) {
+      this.setState({
+        index1: -1,
+        index2: -1,
+      });
+    } else {
+      this.setState({
+        index1: i1,
+        index2: i2,
+      });
+      if (typeof selectItem === 'function' && active) {
+        selectItem(slug);
+      }
     }
   }
 
@@ -238,7 +292,7 @@ export class Sidebar extends React.Component {
       }
       return (
         <li key={accordionIndex.toString()}>
-          <NavLink to={`/montagem-do-arquivo/${accordionItem.slug}`} onClick={() => this.handleItemClick(accordionItem.slug, accordionItem.title)}>
+          <NavLink to={`/montagem-do-arquivo/${accordionItem.slug}`} onClick={() => this.handleItemClick(accordionItem.slug)}>
             {imageMark}{accordionItem.title}
           </NavLink>
         </li>
@@ -259,14 +313,17 @@ export class Sidebar extends React.Component {
               </ul>
             </AccordionItemBody>
           </AccordionItem>
-      </Accordion>
+        </Accordion>
       );
     });
     return renderMark;
   }
 
   renderListMobile(index, list) {
+    const { fileMount } = this.props;
+    const { index1, index2 } = this.state;
     const renderMark = list.map((accordionItem, accordionIndex) => {
+      const fileMountData = (index1 === index && index2 === accordionIndex) ? fileMount : null;
       let imageMark = null;
       switch (accordionItem.title) {
         case 'Illustrator':
@@ -286,9 +343,12 @@ export class Sidebar extends React.Component {
       }
       return (
         <AccordionItem key={accordionIndex.toString()} >
-          <AccordionItemTitle handleClick={() => this.handleItemClick(accordionItem.slug)}>
+          <AccordionItemTitle handleActive={(active) => this.handleMobileSubHeaderItemClick(active, accordionItem.slug, index, accordionIndex)}>
             {imageMark}{accordionItem.title}
           </AccordionItemTitle>
+          <AccordionItemBody className={(index1 === -1 && index2 === -1) ? '' : 'atm-accordion-sub-item-body'} >
+            <ContentText fileMount={fileMountData} />
+          </AccordionItemBody>
         </AccordionItem>
       );
     });
@@ -299,71 +359,27 @@ export class Sidebar extends React.Component {
     );
   }
 
-  // renderListMobile() {
-  //   return (
-  //     <Accordion className="qrk-accordion-sidebar accordion-mobile">
-  //       <AccordionItem key="1">
-  //         <AccordionItemTitle>Illustrator</AccordionItemTitle>
-  //         <AccordionItemBody>
-  //           <ContentText />
-  //         </AccordionItemBody>
-  //       </AccordionItem>
-  //       <AccordionItem key="2">
-  //         <AccordionItemTitle>Illustrator</AccordionItemTitle>
-  //         <AccordionItemBody>
-  //           <ContentText />
-  //         </AccordionItemBody>
-  //       </AccordionItem>
-  //       <AccordionItem key="3">
-  //         <AccordionItemTitle>Illustrator</AccordionItemTitle>
-  //         <AccordionItemBody>
-  //           <ContentText />
-  //         </AccordionItemBody>
-  //       </AccordionItem>
-  //     </Accordion>
-  //   );
-  // }
-
   renderMobile() {
-    const renderMark = fileMountList.map((item, index) => (
-      <Accordion key={index.toString()} className="qrk-accordion-sidebar">
-        <AccordionItem>
-          <AccordionItemTitle><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
-          <AccordionItemBody>
+    const { activeIndex } = this.state;
+    const renderMark = fileMountList.map((item, index) => {
+      const subClass = (index === activeIndex) ? 'atm-accordion-sub-item-body' : 'atm-accordion-sub-item-body-close';
+      return (
+        <AccordionItem key={index.toString()}>
+          <AccordionItemTitle handleActive={(active) => this.handleMobileHeaderItemClick(active, index)}><span className="circle-number">{index + 1}</span>{item.title}</AccordionItemTitle>
+          <AccordionItemBody className={subClass}>
             {this.renderListMobile(index, item.list)}
           </AccordionItemBody>
         </AccordionItem>
-      </Accordion>
-    ));
+      );
+    });
     return (
       <div className="atm-sidebar-file">
-        {renderMark}
+        <Accordion className="qrk-accordion-sidebar">
+          {renderMark}
+        </Accordion>
       </div>
     );
   }
-
-  // renderMobile() {
-  //   return (
-  //     <div className="atm-sidebar-file">
-  //       <Accordion className="qrk-accordion-sidebar">
-  //         <AccordionItem>
-  //           <AccordionItemTitle>Criar Arquivo</AccordionItemTitle>
-  //           <AccordionItemBody>
-  //             {this.renderListMobile()}
-  //           </AccordionItemBody>
-  //         </AccordionItem>
-  //       </Accordion>
-  //       <Accordion className="qrk-accordion-sidebar">
-  //         <AccordionItem>
-  //           <AccordionItemTitle>Criar Arquivo</AccordionItemTitle>
-  //           <AccordionItemBody>
-  //             {this.renderListMobile()}
-  //           </AccordionItemBody>
-  //         </AccordionItem>
-  //       </Accordion>
-  //     </div>
-  //   );
-  // }
 
   renderDesktop() {
     return (

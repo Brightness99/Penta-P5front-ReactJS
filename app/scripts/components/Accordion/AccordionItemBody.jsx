@@ -10,7 +10,8 @@ type Props = {
   children: string,
   key: string,
   active: boolean,
-  className: ''
+  className: '',
+  update: number,
 };
 
 type State = {
@@ -29,9 +30,9 @@ export default class AccordionItemBody extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentWillReceiveProps(nextProps) {
-    const { active } = this.props;
+    const { active, update } = this.props;
 
-    if (nextProps.active !== active) {
+    if (nextProps.active !== active || nextProps.update !== update) {
       this.setState({
         height: nextProps.active ? this.body.scrollHeight : 0,
       });
