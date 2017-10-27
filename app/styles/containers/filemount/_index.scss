@@ -16,16 +16,35 @@
       margin-bottom: 0.4rem;
     }
   }
-  .subtitle-file-mount {
-    color: $color-lightGray;
-    font-family: $font-family-open-sans-light;
-    font-size: $font-size-base;
-  }
 }
 
 .org-content-file-mount {
-  display: flex;
+  display: block;
   @include lg {
     margin-top: 2rem;
+    display: flex;
+  }
+
+  .atm-content-file {
+    h1 {
+      line-height: 1.25;
+      padding-bottom: 2rem;
+    }
+
+    ul {
+      h1 {
+        padding-top: 2rem;
+      }
+
+      li {
+        font-size: $font-size-base;
+        line-height: 1.875;
+        padding: 1rem 0;
+
+        > .align-center {
+          padding: 1rem 0;
+        }
+      }
+    }
   }
 }

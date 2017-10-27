@@ -49,6 +49,7 @@ import {
   accountUpdate,
   accountAddressFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
@@ -56,7 +57,8 @@ import {
   accountSavedCreditCardDelete,
   accountOrderDetailFetch,
   accountOrderFetch,
-  accountLoyaltyFetch
+  zipcodeValidate,
+  accountLoyaltyFetch,
 } from './account';
 
 import {
@@ -66,6 +68,11 @@ import {
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
 import { aboutFetch } from './about';
+import {
+  fileMountFetch,
+  fileMountItemFetch
+} from './file-mount';
+import { guideFetch } from './guide';
 
 export default combineEpics(
   userNewsletter,
@@ -104,6 +111,7 @@ export default combineEpics(
   accountUpdate,
   socialLoginSettingsFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountSavedCreditCardFetch,
   accountSavedCreditCardDelete,
@@ -111,6 +119,7 @@ export default combineEpics(
   accountNotificationUpdate,
   accountOrderDetailFetch,
   accountOrderFetch,
+  zipcodeValidate,
   accountLoyaltyFetch,
   policyFetch,
   termsFetch,
@@ -118,4 +127,6 @@ export default combineEpics(
   productCategoriesFetch,
   successfulPurchaseFetch,
   siteMapFetch,
+  fileMountFetch,
+  guideFetch
 );
