@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { submitContactForm as submitAction } from 'actions';
 import corporateSalesSelector from 'selectors/products';
 import type { ContactFormState } from 'reducers/contact-form';
-import { Link } from 'react-router-dom';
 
 import { CustomersRelyBlock } from 'components/LandingPage';
 import Modal from 'components/Modal';
@@ -54,14 +53,21 @@ export class CorporateSales extends React.Component<Props, State> {
     this.setState({ showContactModal: false });
   };
 
-  render() {
+  handleSubmit = (data) => {
     const { submitContactForm } = this.props;
+    this.handleCloseModal();
+    if (typeof susubmitContactForm === 'function') {
+      submitContactForm(data);
+    }
+  };
+
+  render() {
     return (
       <section>
         {
           this.state.showContactModal &&
           <Modal handleCloseModal={this.handleCloseModal}>
-            <ContactForm onSubmit={data => submitContactForm && submitContactForm(data)} />
+            <ContactForm onSubmit={data => this.handleSubmit(data)} />
           </Modal>
         }
         <BannerCloud handleModalShowing={this.handleShowingModal} />

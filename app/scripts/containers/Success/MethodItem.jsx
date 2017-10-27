@@ -1,30 +1,26 @@
-// @flow 
+// @flow
 
 import React from 'react';
 
-class MethodItem extends React.Component {
-  props: Props;
+type Props = {
+  buttonText: any,
+  linkText: any,
+};
 
-  render() {
+const MethodItem = (props: Props) => {
+  const { buttonText, linkText } = props;
 
-    const { buttonText, linkText } = this.props;
-
-    return (
-      <div className="method-item">
-
-        <img src={require('assets/media/images/boleto.png')} alt="{buttonText}" />
-
-        <div className="link-1">
-          <a>{buttonText}</a>
-        </div>
-
-        <div className="link-2">
-          <a>{linkText}</a>
-        </div>
-
+  return (
+    <div className="method-item">
+      <img src={require('assets/media/images/boleto.png')} alt="{buttonText}" />
+      <div className="link-1">
+        <a>{buttonText}</a>
       </div>
-    );
-  }
-}
+      <div className="link-2">
+        <a>{linkText}</a>
+      </div>
+    </div>
+  );
+};
 
 export default MethodItem;

@@ -1,76 +1,91 @@
-.container-cloudTools {
+.container-cloud-tools {
   background-color: $color-white;
   padding: 4rem 1rem;
+
   @include lg {
     padding: 3rem;
   }
-  .title-corporateSales {
-    line-height: 3rem;    
+
+  .title-corporate-sales {
+    line-height: 3rem;
   }
 }
 
-.subtitle-cloudTools {
+.subtitle-cloud-tools {
   font-family: $font-family-nunito-light;
   font-size: $font-size-h2;
+
   @include lg {
     font-size: $font-size-xxx;
   }
 }
 
-.text-cloudTools {
-  font-size: $font-family-open-sans-light;
+.text-cloud-tools {
+  font-family: $font-family-open-sans-light;
   font-size: $font-size-base;
   line-height: 3rem;
 }
 
-.boxes-cloudTools {
+.boxes-cloud-tools {
   display: inline-flex;
-  margin-top: 3rem;
   flex-direction: column;
+  margin-top: 3rem;
+
   @include lg {
-    margin-top: 5rem;
     flex-direction: row;
+    margin-top: 5rem;
   }
-  .box-cloudTools {
+
+  .box-cloud-tools {
     flex: 1;
     margin-bottom: 2rem;
+
     &:first-of-type {
       @include lg {
         box-sizing: border-box;
         padding: 0 15rem 0 0;
       }
     }
-    .link-aboutCloud {
+
+    .link-about-cloud {
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xs;
       margin-left: 0;
       text-align: center;
       text-decoration: underline;
+
       @include lg {
         margin-left: 3rem;
       }
     }
+
     .btns-cloud {
       align-items: center;
       display: flex;
       flex-direction: column;
-      @include lg  {
+
+      @include lg {
         flex-direction: row;
       }
+
       button {
         font-size: $font-size-xxxs;
         margin: 2rem 0;
+
         @include md {
           max-width: 300px;
         }
+
         @include lg {
           margin: 0 3rem 0 0;
         }
       }
+
       a {
         font-size: $font-size-xs;
-        text-decoration: underline;
         margin-bottom: 2rem;
+        text-decoration: underline;
+
         @include lg {
           margin-bottom: 0;
         }

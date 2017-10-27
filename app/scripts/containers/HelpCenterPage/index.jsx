@@ -3,9 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'utils/helpers';
 import Breadcrumbs from 'components/Breadcrumbs';
-
-import LoyaltyContainer from 'components/LoyaltyContainer';
-
 import SearchCentralRelationship from './SearchCentralRelationship';
 import ItensHelpcenter from './ItensHelpcenter';
 import RelationshipCentral from './RelationshipCentral';

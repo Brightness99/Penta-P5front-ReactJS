@@ -13,13 +13,13 @@ class CloudTools extends React.Component<Props> {
 
   render() {
     return (
-      <section className="container-cloudTools">
+      <section className="container-cloud-tools">
         <div className="container">
-          <h4 className="title-corporateSales">Conheça a cloud, uma ferramenta exclusiva da printi</h4>
-          <div className="boxes-cloudTools">
-            <div className="box-cloudTools">
-              <p className="subtitle-cloudTools">Agilidade para seus materiais gráficos</p>
-              <p className="text-cloudTools">
+          <h4 className="title-corporate-sales">Conheça a cloud, uma ferramenta exclusiva da printi</h4>
+          <div className="boxes-cloud-tools">
+            <div className="box-cloud-tools">
+              <p className="subtitle-cloud-tools">Agilidade para seus materiais gráficos</p>
+              <p className="text-cloud-tools">
                 Personalize arquivos de diferentes funcionários, unidades ou franquias e acompanhe
                 a impressão e distribuição dos materiais. Tudo com total controle das quantidades e o uso correto da
                 marca.
@@ -34,7 +34,7 @@ class CloudTools extends React.Component<Props> {
                 <Link to="/cloud">Ler mais sobre a cloud</Link>
               </div>
             </div>
-            <div className="box-cloudTools">
+            <div className="box-cloud-tools">
               <img src={cloudImage} alt="Menu" />
             </div>
           </div>

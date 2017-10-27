@@ -1,31 +1,35 @@
-.container-requestSample {
+.container-request-sample {
   margin: 4rem 0 6rem;
   padding: 6rem 0;
   text-align: center;
+
   .btn-default {
     font-size: $font-size-xxxs;
     margin-top: 3.5rem;
     width: 82%;
+
     @include md {
       max-width: 300px;
     }
+
     @include lg {
       width: inherit;
     }
   }
 }
 
-.title-requestSample {
+.title-request-sample {
   color: $color-white;
   font-family: $font-family-nunito-light;
   font-size: $font-size-h2;
   font-weight: 300;
+
   @include lg {
     font-size: $font-size-xxll;
   }
 }
 
-.subtitle-requestSample {
+.subtitle-request-sample {
   color: $color-white;
   font-family: $font-family-open-sans-regular;
   font-size: $font-size-base;

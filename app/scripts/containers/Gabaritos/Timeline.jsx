@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Input, Button } from 'quarks/Inputs';
+import { Input } from 'quarks/Inputs';
 import { SearchIcon } from 'components/Icons';
 import { push } from 'modules/ReduxRouter';
 
