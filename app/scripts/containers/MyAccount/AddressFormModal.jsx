@@ -119,7 +119,7 @@ class AddressFormModal extends React.Component {
     return (
       <div className="address-form-modal-container">
         <h2>Adicionar endereço</h2>
-        <div>* Campos Obrigatorios</div>
+        <div>* Campos Obrigatórios</div>
         <form className="address-form-modal">
           <InputRegex
             id="receiver_name"
@@ -146,7 +146,7 @@ class AddressFormModal extends React.Component {
               pattern={zipcodePattern}
               required
             />
-            <a className="link" href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm">Nao sei meu CEP*</a>
+            <a target="_blank" className="link" href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm">Nao sei meu CEP*</a>
           </div>
           <InputRegex
             id="additional_address"
@@ -225,7 +225,7 @@ class AddressFormModal extends React.Component {
           {(!zipcodeValid.isRunning && zipcodeValid.isLoaded && zipcodeValid.error) && <ErrorText>{zipcodeValid.error.message}</ErrorText>}
           {(!addresses.isAddressSaving && addresses.isAddressSavingCalled && !addresses.error) && <SuccessText>Successfully saved.</SuccessText>}
         </div>
-        <div className="mol-checkout-pane-footer">
+        <div className="mol-checkout-pane-footer mol-address-pane-footer">
           <button className="atm-button-text" onClick={this.handleCloseModal}>CANCELAR</button>
           <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressSaving && !addresses.isAddressSavingCalled) || (zipcodeValid.isRunning && !zipcodeValid.isLoaded)}>SALVAR ENDEREÇO</Button>
         </div>
