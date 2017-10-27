@@ -42,7 +42,7 @@ type State = {
   showPassword: boolean
 };
 
-export default class SignUpForm extends React.PureComponent {
+export default class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
 
