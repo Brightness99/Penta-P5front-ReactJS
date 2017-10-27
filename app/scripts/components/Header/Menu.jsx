@@ -27,8 +27,37 @@ export default class Menu extends React.Component {
 
   static props: Props;
 
+  handleCloseMenu = (ev) => {
+    const { handleClose } = this.props;
+
+    if (typeof handleClose === 'function') {
+      handleClose(ev);
+    }
+  };
+
   renderMobile() {
     const { screenSize, categories, locale } = this.props;
+
+    if (locale.COUNTRY_CODE === 'US') {
+      return (
+        <div className="mol-header-menu-content">
+          <NavLink
+            className="atm-header-menu-title"
+            to="/central-de-ajuda?action=search&value=meu-pedido"
+            activeClassName="selected"
+            onClick={this.handleCloseMenu}
+          >
+            Help Center
+          </NavLink>
+          <span className="atm-header-menu-title">Products</span>
+          <Products
+            screenSize={screenSize}
+            categories={categories}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="mol-header-menu-content">
         <NavLink
@@ -62,16 +91,46 @@ export default class Menu extends React.Component {
     );
   }
 
-  handleCloseMenu = (ev) => {
-    const { handleClose } = this.props;
-
-    if (typeof handleClose === 'function') {
-      handleClose(ev);
-    }
-  };
-
   renderDesktop() {
     const { locale } = this.props;
+
+    if (locale.COUNTRY_CODE === 'US') {
+      return (
+        <div className="mol-header-menu-content">
+          <ul>
+            <span className="atm-header-menu-title">Menu</span>
+            <li>
+              <NavLink
+                to="/contact?action=search&value=meu-pedido"
+                activeClassName="selected"
+                onClick={this.handleCloseMenu}
+              >
+                Contact
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/terms-of-use"
+                activeClassName="selected"
+                onClick={this.handleCloseMenu}
+              >
+                Terms of Use
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/privacy-policy"
+                activeClassName="selected"
+                onClick={this.handleCloseMenu}
+              >
+                Privacy Policy
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      );
+    }
+
     return (
       <div className="mol-header-menu-content">
         <ul>

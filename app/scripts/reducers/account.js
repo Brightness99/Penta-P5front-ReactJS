@@ -442,9 +442,8 @@ export default {
       return {
         ...state,
         loyalty: {
-          ...state.loyalty,
           isRunning: false,
-          isLoaded: true,
+          isLoaded: false,
           error: action.payload,
         },
       };
