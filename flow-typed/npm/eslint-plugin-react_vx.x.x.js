@@ -294,7 +294,7 @@ declare module 'eslint-plugin-react/lib/util/version' {
 declare module 'eslint-plugin-react/index' {
   declare module.exports: $Exports<'eslint-plugin-react'>;
 }
-declare module 'eslint-plugin-react/index.js' {
+declare module 'eslint-plugin-react/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-react'>;
 }
 declare module 'eslint-plugin-react/lib/rules/display-name.js' {

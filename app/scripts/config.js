@@ -7,7 +7,10 @@
 
 import NPMPackage from '../../package.json';
 
-const apiUrl = 'http://dev-cms.printi.com.br';
+const apiUrl = window.location.hostname.includes('react.printi.com')
+  ? `http://${window.location.hostname.replace('react', 'dev-cms')}`
+  : 'http://dev-cms.printi.com';
+
 const basePath = 'http://dev-cms.printi.com.br/';
 
 const config = {

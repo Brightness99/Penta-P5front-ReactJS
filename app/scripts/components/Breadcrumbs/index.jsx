@@ -10,7 +10,9 @@ type Props = {
 const Breadcrumbs = (props: Props) => (
   <div className="app__breadcrumb">
     {props.links.map((link, index) => {
-      if (index + 1 === props.links.length) {
+      if (index + 2 === props.links.length && props.links[index + 1].title === '') {
+        return <span key={`${link.url}-span`}>{link.title}</span>;
+      } else if (index + 1 === props.links.length) {
         return <span key={`${link.url}-span`}>{link.title}</span>;
       }
 

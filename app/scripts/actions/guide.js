@@ -8,7 +8,7 @@ import { GuideConstants } from 'constants/index';
 
 /**
  * File Mount Item Fetch
- /* @param {string} slug
+ * @param {string} slug
  *
  * @returns {Object}
  */

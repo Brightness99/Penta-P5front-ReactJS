@@ -2,59 +2,46 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import cx from 'classnames';
-import { isMobile } from 'utils/helpers';
+import { shouldComponentUpdate } from 'utils/helpers';
 import { CloseIcon } from 'components/Icons';
+import LogoLoyalty from 'components/LogoLoyalty';
 
 type Props = {
-  screenSize: string,
-  handleCloseTopbar: () => {},
-  account: {};
-}
+  loyalty: {},
+  onClose: () => {},
+};
+
 export class LoyaltyTopbar extends React.Component {
-  props: Props;
+  shouldComponentUpdate = shouldComponentUpdate;
 
-  setBackgroundColor = (color) => {
-    return {
-      background: color,
-    };
+  componentDidMount() {
+    document.querySelector('body').classList.add('has-loyalty-bar');
   }
 
-  setColor = (color) => {
-    return {
-      color,
-    };
+  componentWillUnmount() {
+    document.querySelector('body').classList.remove('has-loyalty-bar');
   }
 
-  closeTopbar = () => {
-    const { handleCloseTopbar } = this.props;
+  static props: Props;
+
+  handleClose = () => {
+    const { onClose } = this.props;
 
     /* istanbul ignore else */
-    if (typeof handleCloseTopbar === 'function') {
-      handleCloseTopbar();
+    if (typeof onClose === 'function') {
+      onClose();
     }
   };
 
-  handleClickClose = (ev) => {
-    ev.preventDefault();
-
-    this.closeTopbar();
-  };
-
   render() {
-    const { screenSize, account: { loyalty } } = this.props;
+    const { loyalty } = this.props;
+
     return (
-      <div className="org-loyalty-topbar" style={this.setBackgroundColor(loyalty.color)}>
-        <div className={cx(!isMobile(screenSize) ? 'container' : 'container-mobile')}>
-          <div className="mol-loyalty-topbar">
-            <div>
-              <div className="qrk-type-of-loyalty" style={this.setColor(loyalty.color)}>
-                <p>{loyalty.loyalty_tier_name}</p>
-              </div>
-              <p>{loyalty.header}</p>
-            </div>
-            <a href="#close" onClick={this.handleClickClose}><CloseIcon /></a>
-          </div>
+      <div className="org-loyalty-topbar" style={{ backgroundColor: loyalty.color }}>
+        <div className="mol-loyalty-topbar container">
+          <LogoLoyalty short={true} invert={true} />
+          <div className="atm-loyalty-text">{loyalty.header}</div>
+          <button className="atm-icon-button" onClick={this.handleClose}><CloseIcon /></button>
         </div>
       </div>
     );
@@ -63,7 +50,7 @@ export class LoyaltyTopbar extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    account: state.account,
+    loyalty: state.account.loyalty,
   };
 }
 

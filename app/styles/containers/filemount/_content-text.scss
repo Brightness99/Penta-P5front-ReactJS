@@ -5,6 +5,16 @@
   flex-direction: column;
   background-color: $color-white;
   padding: 3rem 2rem;
+  .guide-title {
+    width: 100%;
+    h1 {
+      line-height: 1.25;
+      text-align: left;
+    }
+  }
+  .guide-body div:first-child {
+    padding-top: 1.5rem;
+  }
   .title-content-file {
     font-family: $font-family-nunito-light;
     font-size: $font-size-il;
@@ -24,4 +34,9 @@
       font-size: $font-size-base;
     }
   }
+}
+
+.org-content-file-mount .atm-content-file .guide-title h1 {
+  padding-bottom: 0rem;
+  margin-block-end: 0rem;
 }

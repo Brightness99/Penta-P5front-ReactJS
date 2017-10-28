@@ -33,10 +33,6 @@ export default class Input extends React.Component {
     };
   }
 
-  static props: Props;
-
-  static state: State;
-
   componentWillReceiveProps(nextProps) {
     const { value } = nextProps;
     if (value !== this.props.value) {
@@ -45,6 +41,10 @@ export default class Input extends React.Component {
       });
     }
   }
+
+  static props: Props;
+
+  static state: State;
 
   handleClick = (ev) => {
     const { onClick } = this.props;

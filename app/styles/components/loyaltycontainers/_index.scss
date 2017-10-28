@@ -1,66 +1,71 @@
 .org-loyalty-topbar {
-  font-size: $font-size-xxxs;
   height: 4rem;
-  transition: height 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  &.hide-topbar {
-    height: 0;
-    overflow: hidden; 
+  position: relative;
+  z-index: 3;
+
+  &.anm-grow-toggle {
+    &-enter {
+      height: 0 !important;
+      transition: height 2000ms ease-in;
+
+      &-active {
+        height: 4rem !important;
+      }
+    }
   }
-  .container-mobile {
-    width:  100%;
-    margin: 0 1rem;
-  }
+
   .mol-loyalty-topbar {
     align-items: center;
     display: flex;
-    justify-content: space-between;
-    p {
-      margin: 0;
-    }
-    div {
-      align-items: center;
-      color: $color-white;
-      display: flex;
-      font-family: $font-family-open-sans-bold;
-      justify-content: center;
-      &.qrk-type-of-loyalty {
-        background-color: $color-white;
-        box-sizing: border-box;
-        border-radius: 3rem;
-        margin-right: 2rem;
-        text-transform: uppercase;
-        text-align: center;
-        padding: 0rem 0.7rem;
-      }
-    }
-    a {
-      svg {
-        width: 1.2rem;
-        height: 1.2rem;
-        fill: $color-white;
-      }
-    }
+    height: 100%;
+  }
+
+  .atm-loyalty-text {
+    color: $color-white;
+    display: flex;
+    flex: 2;
+    font-size: $font-size-xxxs;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0 1.2rem;
+    text-align: left;
+  }
+
+  .atm-icon-button {
+    background-color: transparent;
+    border: 0 transparent;
+    color: rgba($color-almostBlack, 0.5);
+    height: 1.6rem;
+    width: 1.6rem;
   }
 }
 
-.org-logo-loyalty {
-  background-color: $color-white;
-  box-sizing: border-box;
-  color: $color-almostBlack;
+.mol-logo-loyalty {
   font-family: $font-family-open-sans-bold;
-  font-size: $font-size-xs;
-  text-align: center;
-  max-width: 7rem;
-  p {
-    margin-bottom: 0;
+  line-height: 1;
+
+  > span {
+    color: $color-almostBlack;
+    display: block;
+    font-size: $font-size-xxs;
+    line-height: 1;
+    margin-bottom: 0.1rem;
+    padding-left: 0.6rem;
   }
-  .mol-logo-loyalty {
-    border-radius: 30rem;
-    color: $color-white;
-    padding: 0 1rem;
+
+  > div {
+    @include center-child-flex;
+    border-radius: 1.6rem;
+    font-size: $font-size-xxxs;
+    height: 1.6rem;
+    line-height: 1;
+    padding: 0 0.6rem;
     text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &--sm {
+    transform: scale(0.9);
   }
 }
 
@@ -70,7 +75,7 @@
   justify-content: center;
   .mol-loyalty-container {
     width: 100%;
-    max-width: 750px; 
+    max-width: 750px;
     border-radius: 0.4rem;
     p {
       margin: 0;

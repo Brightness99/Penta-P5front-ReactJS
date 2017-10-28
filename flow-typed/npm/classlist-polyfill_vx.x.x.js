@@ -35,7 +35,7 @@ declare module 'classlist-polyfill/tests/tests' {
 }
 
 // Filename aliases
-declare module 'classlist-polyfill/src/index.js' {
+declare module 'classlist-polyfill/src/index.jsx' {
   declare module.exports: $Exports<'classlist-polyfill/src/index'>;
 }
 declare module 'classlist-polyfill/tests/remove.js' {

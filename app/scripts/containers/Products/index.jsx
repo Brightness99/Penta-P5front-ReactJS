@@ -35,7 +35,7 @@ export class Products extends React.Component {
 
   componentDidMount() {
     const { match: { params: { slug } }, dispatch } = this.props;
-    console.log('this.props ========>', this.props);
+
     dispatch(productFetch(slug));
   }
 

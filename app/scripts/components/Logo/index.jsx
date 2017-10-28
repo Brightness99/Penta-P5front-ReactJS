@@ -2,19 +2,20 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { PrintiIcon, PrintiSymbolIcon } from 'components/Icons';
+import LogoLoyalty from 'components/LogoLoyalty';
 
 type Props = {
   enableLink: boolean,
-  small: boolean,
+  short: boolean,
+  showLoyalty: boolean,
+  invertLoyalty: boolean,
   fill: string,
   onClick: () => {},
 };
 
 const Logo = (props: Props) => {
-  const { enableLink, small } = props;
-  // console.log(small);
+  const { enableLink, short, showLoyalty, invertLoyalty } = props;
 
   const handleClick = (ev) => {
     const { onClick } = props;
@@ -28,7 +29,8 @@ const Logo = (props: Props) => {
     return (
       <div className="atm-printi-logo">
         <NavLink to="/" onClick={handleClick}>
-          {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
+          {short ? <PrintiSymbolIcon key="PrintiSymbolIcon" /> : <PrintiIcon fill={props.fill} key="PrintiIcon" />}
+          {showLoyalty && <LogoLoyalty short={true} invert={invertLoyalty} onClick={handleClick} key="LogoLoyalty" />}
         </NavLink>
       </div>
     );
@@ -36,9 +38,17 @@ const Logo = (props: Props) => {
 
   return (
     <div className="atm-printi-logo">
-      {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
+      {short ? <PrintiSymbolIcon key="PrintiSymbolIcon" /> : <PrintiIcon fill={props.fill} key="PrintiIcon" />}
+      {showLoyalty && <LogoLoyalty short={true} invert={invertLoyalty} onClick={handleClick} key="LogoLoyalty" />}
     </div>
   );
+};
+
+Logo.defaultProps = {
+  showLoyalty: false,
+  enableLink: true,
+  short: false,
+  invertLoyalty: false,
 };
 
 export default Logo;

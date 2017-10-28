@@ -1,7 +1,40 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+
+const highlightsList = [
+  {
+    slug: '/printi-na-imprensa',
+    image: require('assets/media/images/forbes-logo.png'),
+    name: 'Forbes',
+  },
+  {
+    slug: '/printi-na-imprensa',
+    image: require('assets/media/images/valor-economico.png'),
+    name: 'Valor Econômico',
+  },
+  {
+    slug: '/printi-na-imprensa',
+    image: require('assets/media/images/info-exame.png'),
+    name: 'Exame',
+  },
+  {
+    slug: '/printi-na-imprensa',
+    image: require('assets/media/images/uol-logo.png'),
+    name: 'Uol',
+  },
+  {
+    slug: '/printi-na-imprensa',
+    image: require('assets/media/images/tech-crunch.png'),
+    name: 'Tech Crunch',
+  },
+  {
+    slug: '/printi-na-imprensa',
+    image: require('assets/media/images/inc-logo.png'),
+    name: 'INC',
+  },
+];
 
 export class AboutPrintiText extends React.Component {
   renderAbout() {
@@ -29,40 +62,23 @@ export class AboutPrintiText extends React.Component {
   }
 
   renderPrintiMentioned() {
+    const renderMark = highlightsList.map((item, index) => (
+      <div key={`highlight-${index.toString()}`} className="atm-icon-mentions">
+        <div className="qrk-icon">
+          <NavLink
+            to={item.slug}
+            className="atm-button-image"
+          >
+            <img src={item.image} alt={item.name} />
+          </NavLink>
+        </div>
+      </div>
+    ));
     return (
       <div className="org-about-printi-mentions">
         <h4 className="title-printi-mentions">fomos destacados aqui:</h4>
         <div className="mol-about-mentions">
-          <div className="atm-icon-mentions">
-            <div className="qrk-icon">
-              <img src={require('assets/media/images/forbes-logo.png')} alt="Forbes" />
-            </div>
-          </div>
-          <div className="atm-icon-mentions">
-            <div className="qrk-icon">
-              <img src={require('assets/media/images/valor-economico.png')} alt="Valor Econômico" />
-            </div>
-          </div>
-          <div className="atm-icon-mentions">
-            <div className="qrk-icon">
-              <img src={require('assets/media/images/info-exame.png')} alt="Exame" />
-            </div>
-          </div>
-          <div className="atm-icon-mentions">
-            <div className="qrk-icon">
-              <img src={require('assets/media/images/uol-logo.png')} alt="Uol" />
-            </div>
-          </div>
-          <div className="atm-icon-mentions">
-            <div className="qrk-icon">
-              <img src={require('assets/media/images/tech-crunch.png')} alt="Tech Crunch" />
-            </div>
-          </div>
-          <div className="atm-icon-mentions">
-            <div className="qrk-icon">
-              <img src={require('assets/media/images/inc-logo.png')} alt="INC" />
-            </div>
-          </div>
+          {renderMark}
         </div>
       </div>
     );

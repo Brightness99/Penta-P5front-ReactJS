@@ -198,7 +198,7 @@ declare module 'eslint-plugin-flowtype/dist/utilities/spacingFixers' {
 declare module 'eslint-plugin-flowtype/bin/readmeAssertions.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/bin/readmeAssertions'>;
 }
-declare module 'eslint-plugin-flowtype/dist/index.js' {
+declare module 'eslint-plugin-flowtype/dist/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/index'>;
 }
 declare module 'eslint-plugin-flowtype/dist/rules/booleanStyle.js' {
@@ -273,7 +273,7 @@ declare module 'eslint-plugin-flowtype/dist/rules/typeColonSpacing/evaluateTypeC
 declare module 'eslint-plugin-flowtype/dist/rules/typeColonSpacing/evaluateTypical.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/typeColonSpacing/evaluateTypical'>;
 }
-declare module 'eslint-plugin-flowtype/dist/rules/typeColonSpacing/index.js' {
+declare module 'eslint-plugin-flowtype/dist/rules/typeColonSpacing/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/typeColonSpacing/index'>;
 }
 declare module 'eslint-plugin-flowtype/dist/rules/typeColonSpacing/reporter.js' {
@@ -306,7 +306,7 @@ declare module 'eslint-plugin-flowtype/dist/utilities/getTokenAfterParens.js' {
 declare module 'eslint-plugin-flowtype/dist/utilities/getTokenBeforeParens.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/utilities/getTokenBeforeParens'>;
 }
-declare module 'eslint-plugin-flowtype/dist/utilities/index.js' {
+declare module 'eslint-plugin-flowtype/dist/utilities/index.jsx' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/utilities/index'>;
 }
 declare module 'eslint-plugin-flowtype/dist/utilities/isFlowFile.js' {

@@ -1,18 +1,21 @@
-@import "choose-settings";
-@import "download-template";
-@import "products-template";
+@import 'choose-settings';
+@import 'download-template';
+@import 'products-template';
 
 .title-timeline {
   font-family: $font-family-open-sans-bold;
   font-size: $font-size-sm;
+
   @include lg {
     font-size: $font-size-lg;
   }
 }
+
 .subtitle-timeline {
   color: $color-lightGray;
   font-family: $font-family-open-sans-light;
   font-size: $font-size-xs;
+
   @include lg {
     font-size: $font-size-base;
   }
@@ -23,10 +26,12 @@
   flex-direction: column;
   justify-content: center;
   margin: 2rem 0;
+
   @include lg {
     flex-direction: row;
     margin: 3rem 0;
   }
+
   .list-timeline {
     align-items: center;
     border: 0.1rem solid transparent;
@@ -34,45 +39,55 @@
     display: inline-flex;
     font-family: $font-family-open-sans-regular;
     font-size: $font-size-xs;
+    font-weight: 400;
     justify-content: center;
-    padding: 0.5rem 0.9rem;
     overflow: hidden;
+    padding: 0.5rem 0.9rem;
+
     @include lg {
       align-items: center;
       border: 0.1rem solid $color-silver;
       justify-content: center;
     }
+
     .item-list-timeline {
       align-items: center;
       color: $color-lightGray3;
       display: flex;
       flex-direction: column;
+      font-family: $font-family-open-sans-regular;
       justify-content: center;
-      margin-right: 1rem;
-      text-transform: uppercase;
-      width: 110px;
+      margin-right: 2rem;
       text-align: center;
+      text-transform: capitalize;
+      width: 110px;
+
       @include lg {
         flex-direction: row;
         width: auto;
       }
+
       &:last-of-type {
         margin-right: 0;
       }
+
       span {
         background-color: $color-lightGray3;
         border-radius: 1.5rem;
         color: $color-white;
+        font-family: $font-family-nunito-regular;
         height: 2rem;
         margin-right: 0;
         padding: 0.1rem 0.6rem;
+        position: relative;
         text-align: center;
         width: 2rem;
-        position: relative;
+
         @include lg {
-          padding: 0.1rem 0.7rem;
           margin-right: 0.5rem;
+          padding: 0.1rem 0.7rem;
         }
+
         &.after {
           &:after {
             background-color: $color-hrLightGray;
@@ -82,11 +97,13 @@
             position: absolute;
             top: 50%;
             width: 600px;
-            @include lg  {
+
+            @include lg {
               background-color: transparent;
             }
           }
         }
+
         &.after-before {
           &:after {
             background-color: $color-hrLightGray;
@@ -96,10 +113,12 @@
             position: absolute;
             top: 50%;
             width: 600px;
+
             @include lg {
               background-color: transparent;
             }
-          }          
+          }
+
           &:before {
             background-color: $color-hrLightGray;
             content: '';
@@ -108,11 +127,13 @@
             right: 100%;
             top: 50%;
             width: 600px;
+
             @include lg {
               background-color: transparent;
             }
           }
         }
+
         &.before {
           &:before {
             background-color: $color-hrLightGray;
@@ -122,37 +143,67 @@
             right: 100%;
             top: 50%;
             width: 600px;
+
             @include lg {
               background-color: transparent;
             }
           }
         }
       }
+
       &.is-active {
-        color: $color-printi-blue;
+        color: $color-almostBlack;
+
         span {
+          align-items: center;
           background-color: $color-printi-blue;
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+      &.submitted {
+        color: $color-almostBlack;
+
+        span {
+          align-items: center;
+          background-color: $color-green-light;
+          display: flex;
+          justify-content: center;
+
+          svg {
+            fill: $color-white;
+            height: 1.5rem;
+            position: absolute;
+            width: 1.5rem;
+          }
         }
       }
     }
   }
+
   .mol-action-button {
     border: 0.1rem solid $color-hrLightGray;
     border-radius: 0.3rem;
     display: flex;
+
     @include lg {
       margin-top: 2rem;
     }
+
     .app__qrk__input-container--labeled {
-      flex:6;
+      flex: 6;
+
       input {
         background-color: #eee;
         border: 0.1rem solid transparent;
       }
     }
+
     .btn-default {
-      flex: 1;
       background-color: #eee;
+      flex: 1;
+
       svg {
         fill: $color-silver;
         height: 2rem;
