@@ -7,14 +7,15 @@ import SkuSceneSchema from './SkuScene';
 type Props = {
   uploadType: string,
   selectedStrategy: number,
+  handleCanvasFinalize: (docRef: string) => void,
   handleUploadFile: (file: {title: string, preview: {}}) => void,
   handleRemoveFile: (file: {title: string, preview: {}}) => void,
 }
 
-const UploadTypes = ({ uploadType, selectedStrategy, handleUploadFile, handleRemoveFile }: Props) => {
+const UploadTypes = ({ uploadType, selectedStrategy, handleUploadFile, handleRemoveFile, handleCanvasFinalize }: Props) => {
   switch (uploadType) {
     case 'canvas':
-      return <CanvasSchema />;
+      return <CanvasSchema handleCanvasFinalize={handleCanvasFinalize} />;
     case 'sku_scene':
       return <SkuSceneSchema />;
     default:

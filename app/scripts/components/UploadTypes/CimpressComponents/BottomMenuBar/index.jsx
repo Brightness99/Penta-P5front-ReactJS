@@ -3,7 +3,11 @@
 import React from 'react';
 import { EyeEmptyIcon } from 'components/Icons';
 
-const BottomMenuBar = () => {
+type Props = {
+  handleSave: (data) => void
+}
+
+const BottomMenuBar = ({ handleSave }: Props) => {
   const saveTemplate = () => {
     global.designer.preview.getPreview({
       size: {
@@ -18,6 +22,7 @@ const BottomMenuBar = () => {
           (templateResponse) => {
             console.log('### document_reference_url: ###');
             console.log(templateResponse.documentReferenceUrl);
+            handleSave(templateResponse.documentReferenceUrl);
           },
           console.error
         );

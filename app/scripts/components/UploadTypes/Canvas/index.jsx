@@ -12,6 +12,7 @@ import Indicator from '../CimpressComponents/Indicator';
 import BottomMenuBar from '../CimpressComponents/BottomMenuBar';
 
 type Props = {
+  handleCanvasFinalize: (docRef) => void
 };
 
 type State = {
@@ -402,7 +403,7 @@ export default class Canvas extends React.Component {
     if (isReady && isReady !== prevState.isReady) {
       global.designer.start(cimpressDesignerSettings)
       .then(
-        () => {  }
+        () => { }
       );
     }
   }
@@ -410,6 +411,14 @@ export default class Canvas extends React.Component {
   static props: Props;
 
   static state: State;
+
+  handleOnSave = (docRef) => {
+    const { handleCanvasFinalize } = this.props;
+
+    if (handleCanvasFinalize && typeof handleCanvasFinalize === 'function') {
+      handleCanvasFinalize(docRef);
+    }
+  };
 
   handleError = (oError) => {
     throw new URIError(`The script ${oError.target.src} is not accessible.`);
@@ -425,9 +434,9 @@ export default class Canvas extends React.Component {
     const { isReady } = this.state;
 
     return (
-        <div className="upload-container-canvasCentralized">
-          <div className="upload__canvasSchema">
-            {
+      <div className="upload-container-canvasCentralized">
+        <div className="upload__canvasSchema">
+          {
               !isReady
                 ? <Loading />
                 : [
@@ -442,11 +451,11 @@ export default class Canvas extends React.Component {
                       <CanvasArea />
                     </div>
                   </div>,
-                  <BottomMenuBar key="bottom-menu-bar" />,
+                  <BottomMenuBar key="bottom-menu-bar" handleSave={this.handleOnSave} />,
                 ]
             }
-          </div>
         </div>
+      </div>
     );
   }
 }

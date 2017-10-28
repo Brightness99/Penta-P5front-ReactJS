@@ -54,6 +54,7 @@ type State = {
   selectedAdditionalParameters: [],
   uploadedFiles: [],
   canSubmit: boolean,
+  documentReferenceId: string,
 }
 
 export class Upload extends React.Component {
@@ -79,11 +80,21 @@ export class Upload extends React.Component {
   static state: State;
 
   updateCanSubmit = () => {
-    const { selectedStrategy, uploadedFiles } = this.state;
-
-    const canSubmit = (selectedStrategy === 1 ||
-      (selectedStrategy === 4 && uploadedFiles.length === 2)
-      || uploadedFiles.length > 0);
+    const { selectedStrategy, uploadedFiles, documentReferenceId } = this.state;
+    const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
+    let canSubmit;
+    switch (upload_type) {
+      case 'canvas':
+        canSubmit = !!documentReferenceId;
+        break;
+      case 'sku_scene':
+        canSubmit = !!documentReferenceId;
+        break;
+      default:
+        canSubmit = (selectedStrategy === 1 ||
+        (selectedStrategy === 4 && uploadedFiles.length === 2)
+        || uploadedFiles.length > 0);
+    }
     this.setState({ canSubmit });
   };
 
@@ -92,6 +103,12 @@ export class Upload extends React.Component {
     this.setState({
       isRepurchase: !isRepurchase,
     });
+  };
+
+  handleCanvasFinalize = (documentRef: string) => {
+    this.setState({
+      documentReferenceId: documentRef,
+    }, this.updateCanSubmit);
   };
 
   handleUploadFile = (file: { title: string, preview: {} }) => {
@@ -123,14 +140,14 @@ export class Upload extends React.Component {
 
   handleUploadFinish = () => {
     const { match: { params: { itemId } }, uploadFinish, uploadInfo: { globalFlags: { upload_type } } } = this.props;
-    const { uploadedFiles, isRepurchase, selectedStrategy } = this.state;
+    const { uploadedFiles, isRepurchase, selectedStrategy, documentReferenceId } = this.state;
     const uploads = {};
     uploadedFiles.forEach((x) => {
       uploads[x.preview.basename] = x.preview;
     });
     const thumbnail = uploadedFiles.length > 0 ? uploadedFiles[0].preview.thumbnail : null;
     const result = {
-      document_reference_url: null,
+      document_reference_url: documentReferenceId,
       cimpress_sku_scene: null,
       thumbnail,
       isRepurchase,
@@ -209,6 +226,7 @@ export class Upload extends React.Component {
         <UploadTypes
           uploadType={upload_type}
           selectedStrategy={selectedStrategy}
+          handleCanvasFinalize={this.handleCanvasFinalize}
           handleUploadFile={this.handleUploadFile}
           handleRemoveFile={this.handleRemoveFile}
         />
