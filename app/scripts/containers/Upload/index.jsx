@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import mock from 'assets/json/uploadMock.json';
 import { uploadFetch, uploadFinishRequest } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { CheckBox } from 'components/Input';
