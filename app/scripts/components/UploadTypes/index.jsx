@@ -2,22 +2,29 @@
 import React from 'react';
 import NormalUploadType from './NormalUploadType';
 import CanvasSchema from './Canvas';
-import SkuSceneSchema from './SkuScene';
 
 type Props = {
   uploadType: string,
   selectedStrategy: number,
   handleCanvasFinalize: (docRef: string) => void,
-  handleUploadFile: (file: {title: string, preview: {}}) => void,
-  handleRemoveFile: (file: {title: string, preview: {}}) => void,
+  cimpressInfo: {},
+  handleUploadFile: (file: { title: string, preview: {} }) => void,
+  handleRemoveFile: (file: { title: string, preview: {} }) => void,
 }
 
-const UploadTypes = ({ uploadType, selectedStrategy, handleUploadFile, handleRemoveFile, handleCanvasFinalize }: Props) => {
+const UploadTypes = ({ uploadType, selectedStrategy, handleUploadFile, handleRemoveFile, handleCanvasFinalize, cimpressInfo }: Props) => {
   switch (uploadType) {
     case 'canvas':
-      return <CanvasSchema handleCanvasFinalize={handleCanvasFinalize} />;
+      return (<CanvasSchema
+        handleCanvasFinalize={handleCanvasFinalize}
+        cimpressInfo={cimpressInfo}
+      />);
     case 'sku_scene':
-      return <SkuSceneSchema />;
+      return (<CanvasSchema
+        isSku={true}
+        handleCanvasFinalize={handleCanvasFinalize}
+        cimpressInfo={cimpressInfo}
+      />);
     default:
       return (
         <NormalUploadType
