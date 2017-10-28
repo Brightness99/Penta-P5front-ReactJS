@@ -161,17 +161,6 @@ export class CustomerData extends React.Component {
           new_password: form.new_password.value,
           new_password_repeat: form.new_password_repeat.value,
         };
-
-        if (form.new_password.value !== form.new_password_repeat.value) {
-          swal({
-            title: 'Password does not match!',
-            type: 'error',
-            confirmButtonColor: '#2cac57',
-            confirmButtonText: 'OK',
-            showCancelButton: false,
-          });
-          return;
-        }
       }
 
       dispatch(accountUpdate(dataToUpdate));
@@ -384,6 +373,7 @@ export class CustomerData extends React.Component {
             showLabel
             className="atm-checkout-input atm-checkout-input-one"
             placeholder="Confirme sua nova senha"
+            equalsTo={this.state.new_password}
             onValidate={this.handleValidatedInput}
             value={this.state.new_password_repeat}
             onChange={(e) => { this.setState({ new_password_repeat: e.target.value }); }}
