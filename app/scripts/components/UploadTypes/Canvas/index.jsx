@@ -12,6 +12,8 @@ import Indicator from '../CimpressComponents/Indicator';
 import BottomMenuBar from '../CimpressComponents/BottomMenuBar';
 
 type Props = {
+  cimpressInfo: {},
+  isSku: boolean,
   handleCanvasFinalize: (docRef) => void
 };
 
@@ -44,6 +46,7 @@ export default class Canvas extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { isReady } = this.state;
+    const { cimpressInfo: { specifications, cimpress_sku_scene }, isSku } = this.props;
 
     const cimpressDesignerSettings = {
       configuration: {
@@ -380,25 +383,14 @@ export default class Canvas extends React.Component {
           },
         },
       },
-      surfaceSpecifications: {
-        surfaces: [
-          {
-            name: 'UNIQUE1',
-            widthInMm: 186,
-            heightInMm: 56,
-            processType: 'Print',
-            trim: 3,
-          },
-          {
-            name: 'UNIQUE2',
-            widthInMm: 186,
-            heightInMm: 56,
-            processType: 'Print',
-            trim: 3,
-          },
-        ],
-      },
+      surfaceSpecifications: specifications,
     };
+
+    if (isSku) {
+      cimpressDesignerSettings.mcpSku = cimpress_sku_scene;
+    } else {
+      cimpressDesignerSettings.surfaceSpecifications = specifications;
+    }
 
     if (isReady && isReady !== prevState.isReady) {
       global.designer.start(cimpressDesignerSettings)
@@ -432,6 +424,7 @@ export default class Canvas extends React.Component {
 
   render() {
     const { isReady } = this.state;
+    const { cimpressInfo: { settings: { css } } } = this.props;
 
     return (
       <div className="upload-container-canvasCentralized">
@@ -454,6 +447,7 @@ export default class Canvas extends React.Component {
                   <BottomMenuBar key="bottom-menu-bar" handleSave={this.handleOnSave} />,
                 ]
             }
+          <style>{css}</style>
         </div>
       </div>
     );

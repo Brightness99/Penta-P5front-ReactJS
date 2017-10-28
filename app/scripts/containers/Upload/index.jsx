@@ -210,7 +210,7 @@ export class Upload extends React.Component {
 
   renderFileUploadBlock() {
     const { selectedStrategy, uploadedFiles } = this.state;
-    const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
+    const { uploadInfo: { globalFlags: { upload_type }, cimpressInfo } } = this.props;
     const showStep = selectedStrategy > 1;
     const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0;
     return (
@@ -225,6 +225,7 @@ export class Upload extends React.Component {
       >
         <UploadTypes
           uploadType={upload_type}
+          cimpressInfo={cimpressInfo}
           selectedStrategy={selectedStrategy}
           handleCanvasFinalize={this.handleCanvasFinalize}
           handleUploadFile={this.handleUploadFile}
