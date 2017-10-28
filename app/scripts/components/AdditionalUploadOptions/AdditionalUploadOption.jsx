@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { PlayCircleIcon } from 'components/Icons';
 import { BoxRadio } from 'atoms/Inputs';
 
@@ -9,7 +8,8 @@ type Props = {
   title: string,
   video: string,
   options: [],
-  handleOptionSelected: () => Object
+  defaultValue: string,
+  handleOptionSelected: (value) => Object
 };
 
 type State= {
@@ -20,18 +20,25 @@ export default class AdditionalUploadOption extends React.Component {
   constructor(props: Props) {
     super(props);
     this.state = {
-      activeRadio: '',
+      activeRadio: props.defaultValue,
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { defaultValue } = nextProps;
+    if (defaultValue !== this.props.defaultValue) {
+      this.handleSelection(defaultValue);
+    }
+  }
+
   props: Props;
   state: State;
 
-  handleSelection = (ev) => {
+  handleSelection = (id) => {
     const { handleOptionSelected, options } = this.props;
-    const label = ev.currentTarget.value;
-    const option = options.find(x => x.label === label);
+    const option = options.find(x => x.id === id);
     this.setState({
-      activeRadio: label,
+      activeRadio: id,
     });
 
     if (typeof handleOptionSelected === 'function' && option) {
@@ -40,7 +47,7 @@ export default class AdditionalUploadOption extends React.Component {
   };
 
   renderPriceTitle = (option) => {
-    if (option.value) return <span className="gratis-title">GRATIS</span>;
+    if (option.price === 0) return <span className="gratis-title">GRATIS</span>;
     return <span className="price-title">{`+R$${option.price}`}</span>;
   };
 
@@ -50,14 +57,14 @@ export default class AdditionalUploadOption extends React.Component {
     return options.map(
       (option) => (
         <BoxRadio
-          key={option.label}
-          value={option.label}
-          onChange={this.handleSelection}
+          key={option.id}
+          value={option.id}
+          onChange={() => this.handleSelection(option.id)}
           name="box-radio"
-          checked={activeRadio === option.label}
+          checked={activeRadio === option.id}
         >
           <section className="box-radio-container">
-            <span className="radio-label">{option.label}</span>
+            <span className="radio-label">{option.name}</span>
             {this.renderPriceTitle(option)}
           </section>
         </BoxRadio>

@@ -51,7 +51,7 @@ type Props = {
 type State = {
   selectedStrategy: number,
   isRepurchase: boolean,
-  selectedAdditionalParameters: [],
+  selectedAdditionalParameters: {proof: string, file_format: string},
   uploadedFiles: [],
   canSubmit: boolean,
   documentReferenceId: string,
@@ -62,7 +62,7 @@ export class Upload extends React.Component {
     super(props);
     this.state = {
       selectedStrategy: 0,
-      selectedAdditionalParameters: [],
+      selectedAdditionalParameters: null,
       uploadedFiles: [],
       isRepurchase: false,
       canSubmit: false,
@@ -167,8 +167,8 @@ export class Upload extends React.Component {
 
   renderAdditionalParameters() {
     const { selectedAdditionalParameters } = this.state;
-    const additionalOptions = mock.additionalOptions;
-    const isComplete = selectedAdditionalParameters.length !== 0;
+    const { uploadInfo: { additionalOptions: { availableAdditionalOptionList, selectedAdditionalOptions } } } = this.props;
+    const isComplete = !!selectedAdditionalParameters;
     return (
       <FunnelBlock
         order="1"
@@ -179,7 +179,8 @@ export class Upload extends React.Component {
         ]}
       >
         <AdditionalUploadOptions
-          items={additionalOptions}
+          options={availableAdditionalOptionList}
+          defaultValues={selectedAdditionalOptions}
           handleOptionsChanged={this.handleAdditionalParameters}
         />
       </FunnelBlock>
@@ -189,7 +190,7 @@ export class Upload extends React.Component {
   renderUploadTypeSchemes() {
     const { selectedStrategy, selectedAdditionalParameters } = this.state;
     const { uploadInfo: { availableStrategies } } = this.props;
-    const showStep = selectedAdditionalParameters.length !== 0;
+    const showStep = !!selectedAdditionalParameters;
     return (
       showStep &&
       <FunnelBlock
