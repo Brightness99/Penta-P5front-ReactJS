@@ -70,7 +70,7 @@ declare module 'copy-webpack-plugin/dist/writeFileToAssets' {
 declare module 'copy-webpack-plugin/backup.js' {
   declare module.exports: $Exports<'copy-webpack-plugin/backup'>;
 }
-declare module 'copy-webpack-plugin/dist/index.js' {
+declare module 'copy-webpack-plugin/dist/index.jsx' {
   declare module.exports: $Exports<'copy-webpack-plugin/dist/index'>;
 }
 declare module 'copy-webpack-plugin/dist/indexOld.js' {

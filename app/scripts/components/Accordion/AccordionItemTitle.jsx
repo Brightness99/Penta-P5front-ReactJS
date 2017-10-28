@@ -10,42 +10,61 @@ type Props = {
   value: number,
   children: any,
   icon: string,
+  handleActive: () => {},
   handleClick: () => {},
 };
 
-const AccordionItemTitle = (props: Props) => {
-  const { active, icon, children, value, className } = props;
+class AccordionItemTitle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.isClick = false;
+  }
 
-  const onClick = (ev) => {
-    const { handleClick } = props;
+  componentWillReceiveProps(newProps) {
+    const { active, handleActive } = this.props;
+    if (active !== newProps.active && this.isClick) {
+      if (typeof handleActive === 'function') {
+        handleActive(newProps.active);
+      }
+      this.isClick = false;
+    }
+  }
+
+  props: Props;
+
+  onClick = (ev) => {
+    const { handleClick } = this.props;
     if (typeof handleClick === 'function') {
+      this.isClick = true;
       handleClick(parseInt(ev.currentTarget.value, 10));
     }
   };
 
-  if (icon === 'square') {
-    return (
-      <button
-        className={cx('atm-accordion-title', className)}
-        onClick={onClick}
-        value={value}
-        key={value}
-      >
-        {active ? <MinusSquareOIcon /> : <PlusSquareOIcon />}{children}
-      </button>
-    );
+  render() {
+    const { active, icon, children, value, className } = this.props;
+    const renderMark = (icon === 'square') ?
+      (
+        <button
+          className={cx('atm-accordion-title', className)}
+          onClick={this.onClick}
+          value={value}
+          key={value}
+        >
+          {active ? <MinusSquareOIcon /> : <PlusSquareOIcon />}{children}
+        </button>
+      ) :
+      (
+        <button
+          className={cx('atm-accordion-title', className)}
+          onClick={this.onClick}
+          value={value}
+          key={value}
+        >
+          {children}{active ? <AngleDownIcon /> : <AngleRightIcon />}
+        </button>
+      );
+    return renderMark;
   }
-
-  return (
-    <button
-      className={cx('atm-accordion-title', className)}
-      onClick={onClick}
-      value={value}
-      key={value}
-    >
-      {children}{active ? <AngleDownIcon /> : <AngleRightIcon />}
-    </button>
-  );
-};
+}
 
 export default AccordionItemTitle;

@@ -31,7 +31,7 @@ declare module 'react-credit-cards/src/index' {
 }
 
 // Filename aliases
-declare module 'react-credit-cards/lib/index.js' {
+declare module 'react-credit-cards/lib/index.jsx' {
   declare module.exports: $Exports<'react-credit-cards/lib/index'>;
 }
 declare module 'react-credit-cards/src/index.jsx' {
