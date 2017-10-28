@@ -27,6 +27,6 @@ declare module 'babel-preset-stage-1/lib/index' {
 }
 
 // Filename aliases
-declare module 'babel-preset-stage-1/lib/index.js' {
+declare module 'babel-preset-stage-1/lib/index.jsx' {
   declare module.exports: $Exports<'babel-preset-stage-1/lib/index'>;
 }

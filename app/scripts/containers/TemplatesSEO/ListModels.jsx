@@ -1,5 +1,4 @@
 // @flow
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { GlassZoomIcon } from 'components/Icons';
@@ -9,37 +8,37 @@ type Props = {
   screenSize: string;
 }
 
-export class ListModels extends React.Component {
-  props: Props;
+class ListModels extends React.PureComponent<Props> {
+  static props: Props;
 
-  renderBtns() {
+  renderButtons() {
     return (
-      <div className="qrk-btns-model">
-        <Link to="#" className="btn-default btn-primary btn-sm fnt-sbold">Personalizar modelo</Link>
-        <Link to="#" className="btn-default btn-sm fnt-sbolf btn-details"><GlassZoomIcon />Ver Detalhes</Link>
-      </div>
+      <nav className="qrk-btns-model">
+        <Link to="#" className="btn-default btn-primary btn-sm fnt-sbold">{'Personalizar modelo'}</Link>
+        <Link to="#" className="btn-default btn-sm fnt-sbolf btn-details"><GlassZoomIcon />{'Ver Detalhes'}</Link>
+      </nav>
     );
   }
   renderMobile() {
     return (
-      <div>
-        <div className="mol-list-models">
-          <div className="atm-model">
+      <section>
+        <section className="mol-list-models">
+          <figure className="atm-model">
             <img src={require('assets/media/svg-wannabe/drop-file.png')} alt="Drop" />
-            <p className="qrk-fnt-send-art">Enviar minha arte final</p>
-          </div>
-          <div className="atm-model">
+            <figcaption className="qrk-fnt-send-art">{'Enviar minha arte final'}</figcaption>
+          </figure>
+          <figure className="atm-model">
             <img src={require('assets/media/images/img-modelstemplate.jpg')} alt="Modelo" />
-            {this.renderBtns()}
-          </div>
-        </div>
-      </div>
+            {this.renderButtons()}
+          </figure>
+        </section>
+      </section>
     );
   }
   renderDesktop() {
     return (
-      <div>
-        <div className="mol-search-models-page">
+      <section>
+        <section className="mol-search-models-page">
           <form
             className="atm-search-page"
             onSubmit={this.handleSubmit}
@@ -58,42 +57,42 @@ export class ListModels extends React.Component {
               id=""
               placeholder="Modelos por página"
             >
-              <option value="">Mostrar 12 modelos por página</option>
-              <option value="">Mostrar N modelos por página</option>
+              <option value="">{'Mostrar 12 modelos por página'}</option>
+              <option value="">{'Mostrar N modelos por página'}</option>
             </Select>
           </form>
-        </div>
-        <div className="mol-list-models">
-          <div className="atm-model">
+        </section>
+        <section className="mol-list-models">
+          <figure className="atm-model">
             <img src={require('assets/media/svg-wannabe/drop-file.png')} alt="Drop" />
-            <p className="qrk-fnt-send-art">Enviar minha arte final</p>
-          </div>
-          <div className="atm-model">
+            <figcaption className="qrk-fnt-send-art">{'Enviar minha arte final'}</figcaption>
+          </figure>
+          <figure className="atm-model">
             <img src={require('assets/media/images/img-modelstemplate.jpg')} alt="Modelo" />
-            {this.renderBtns()}
-          </div>
-          <div className="atm-model">
+            {this.renderButtons()}
+          </figure>
+          <figure className="atm-model">
             <img src={require('assets/media/images/img-modelstemplate.jpg')} alt="Modelo" />
-            {this.renderBtns()}
-          </div>
-          <div className="atm-model">
+            {this.renderButtons()}
+          </figure>
+          <figure className="atm-model">
             <img src={require('assets/media/images/img-modelstemplate.jpg')} alt="Modelo" />
-            {this.renderBtns()}
-          </div>
-          <div className="atm-model">
+            {this.renderButtons()}
+          </figure>
+          <figure className="atm-model">
             <img src={require('assets/media/images/img-modelstemplate.jpg')} alt="Modelo" />
-            {this.renderBtns()}
-          </div>
-          <div className="atm-model">
+            {this.renderButtons()}
+          </figure>
+          <figure className="atm-model">
             <img src={require('assets/media/images/img-modelstemplate.jpg')} alt="Modelo" />
-            {this.renderBtns()}
-          </div>
-          <div className="atm-model">
+            {this.renderButtons()}
+          </figure>
+          <figure className="atm-model">
             <img src={require('assets/media/images/img-modelstemplate.jpg')} alt="Modelo" />
-            {this.renderBtns()}
-          </div>
-        </div>
-      </div>
+            {this.renderButtons()}
+          </figure>
+        </section>
+      </section>
     );
   }
   render() {

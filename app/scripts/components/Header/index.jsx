@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import cx from 'classnames';
+import { GrowToggle } from 'animations';
+import { isMobile, shouldComponentUpdate } from 'utils/helpers';
 import { ExclusiveServiceIcon, MenuIcon, AngleDownIcon, MyAccountIcon } from 'components/Icons';
 import Logo from 'components/Logo';
-import LogoLoyalty from 'components/LogoLoyalty';
 import LoyaltyTopbar from 'components/Header/LoyaltyTopbar';
-import { userLogOut, accountLoyaltyFetch, userAuthValidate, productCategoriesFetch } from 'actions';
+import { userLogOut, accountLoyaltyFetch, userAuthValidate, productCategoriesFetch, dismissLoyaltyBar } from 'actions';
 
 import Cart from './Cart';
 import ExclusiveService from './ExclusiveService';
@@ -26,7 +26,8 @@ type Props = {
   isAuthorized: boolean,
   config: {},
   account: {},
-  handleCloseTopbar: () => {},
+  isLoyaltyBarVisible: boolean,
+  locale: {},
 };
 
 type State = {
@@ -78,10 +79,6 @@ export class Header extends React.Component {
 
   static state: State;
 
-  handleCloseTopbar = () => {
-    document.querySelector('.org-loyalty-topbar').classList.add('hide-topbar');
-  };
-
   handleScroll = () => {
     const windowScrollPosition = document.documentElement.scrollTop;
 
@@ -124,14 +121,44 @@ export class Header extends React.Component {
     this.props.dispatch(userLogOut());
   };
 
+  handleLoyaltyBarDismiss = () => {
+    const { dispatch } = this.props;
+
+    dispatch(dismissLoyaltyBar());
+  };
+
+  renderExclusiveService = () => {
+    const { locale } = this.props;
+
+    return (
+      <div className="mol-header-button">
+        <div onMouseOver={this.handlePaneHide} className="atm-header-button">
+          <ExclusiveServiceIcon />{locale.exclusive_service.TITLE}
+        </div>
+        <ExclusiveService />
+      </div>
+    );
+  };
+
   renderMobile() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
+    const {
+      screenSize,
+      dispatch,
+      totalCartItems,
+      isAuthorized,
+      config,
+      account: {
+        loyalty,
+      },
+      isLoyaltyBarVisible,
+      locale,
+    } = this.props;
     const { activePane } = this.state;
 
     return (
       <header className="org-header">
-        { loyalty.isLoaded && !loyalty.isRunning && loyalty.header &&
-          <LoyaltyTopbar handleCloseTopbar={this.handleCloseTopbar} />
+        {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible &&
+          <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />
         }
         <div className="mol-mobile-header">
           <div className="mol-header-button mol-header-button--menu">
@@ -139,7 +166,7 @@ export class Header extends React.Component {
               <MenuIcon />
             </button>
           </div>
-          <Logo enableLink={true} />
+          <Logo enableLink={true} showLoyalty={true} />
           <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
           <div className="mol-header-button">
             <button onClick={this.handleShowMyAccount} className="atm-header-icon-button">
@@ -153,6 +180,7 @@ export class Header extends React.Component {
           isHidden={activePane !== 'menu'}
           categories={config.productCategories.categories}
           handleClose={this.handlePaneHide}
+          locale={locale}
         />
         <MyAccount
           isHidden={activePane !== 'account'}
@@ -160,13 +188,25 @@ export class Header extends React.Component {
           handleLogOut={this.handleLogOut}
           isAuthorized={isAuthorized}
           screenSize={screenSize}
+          locale={locale}
         />
       </header>
     );
   }
 
   renderDesktop() {
-    const { screenSize, dispatch, totalCartItems, isAuthorized, config, account: { loyalty } } = this.props;
+    const {
+      screenSize,
+      dispatch,
+      totalCartItems,
+      isAuthorized,
+      config,
+      account: {
+        loyalty,
+      },
+      isLoyaltyBarVisible,
+      locale,
+    } = this.props;
     const { showTopbar, activePane } = this.state;
 
     return (
@@ -176,18 +216,19 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
-        {
-          loyalty.isLoaded && !loyalty.isRunning && loyalty.header &&
-          <LoyaltyTopbar handleCloseTopbar={this.handleCloseTopbar} screenSize={screenSize} />
-        }
-        <Topbar handleClose={this.handlePaneHide} />
+        <GrowToggle in={!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible}>
+          <LoyaltyTopbar
+            onClose={this.handleLoyaltyBarDismiss}
+            key="loyalty-bar"
+          />
+        </GrowToggle>
+        <Topbar handleClose={this.handlePaneHide} locale={locale} />
         <div className="org-header-content">
           <div className="container">
-            <Logo small={!showTopbar} enableLink={true} />
-            <LogoLoyalty small={!showTopbar} enableLink={true} />
+            <Logo enableLink={true} showLoyalty={true} short={!showTopbar} />
             <div className="mol-header-button">
               <button onClick={this.handleShowMenu} className="atm-header-button">
-                <MenuIcon />Menu
+                <MenuIcon />{locale.MENU}
               </button>
             </div>
             <div className="mol-header-button mol-header-button--no-position">
@@ -199,16 +240,11 @@ export class Header extends React.Component {
                   activePane === 'products' && 'atm-header-button-products--active',
                 )}
               >
-                <AngleDownIcon />Produtos
+                <AngleDownIcon />{locale.PRODUCTS}
               </button>
             </div>
             <SearchBar dispatch={dispatch} />
-            <div className="mol-header-button">
-              <div onMouseOver={this.handlePaneHide} className="atm-header-button">
-                <ExclusiveServiceIcon />Venda Corporativa
-              </div>
-              <ExclusiveService />
-            </div>
+            {locale.COUNTRY_CODE === 'BR' && this.renderExclusiveService()}
             <div className="mol-header-button">
               <button className="atm-header-icon-button">
                 <MyAccountIcon />
@@ -217,6 +253,7 @@ export class Header extends React.Component {
                 screenSize={screenSize}
                 isAuthorized={isAuthorized}
                 handleLogOut={this.handleLogOut}
+                locale={locale}
               />
             </div>
             <Cart dispatch={dispatch} totalCartItems={totalCartItems} />
@@ -226,6 +263,7 @@ export class Header extends React.Component {
           screenSize={screenSize}
           isHidden={activePane !== 'menu'}
           handleClose={this.handlePaneHide}
+          locale={locale}
         />
         <Products
           screenSize={screenSize}
@@ -247,8 +285,19 @@ export class Header extends React.Component {
 function mapStateToProps(state) {
   return {
     account: state.account,
+    isLoyaltyBarVisible: state.app.isLoyaltyBarVisible,
+    locale: {
+      COUNTRY: state.locale.COUNTRY,
+      COUNTRY_CODE: state.locale.COUNTRY_CODE,
+      ...state.locale.translate.header,
+    },
   };
 }
 
-export default connect(mapStateToProps)(Header);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

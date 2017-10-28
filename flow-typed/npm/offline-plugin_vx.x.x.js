@@ -82,13 +82,13 @@ declare module 'offline-plugin/tpls/runtime-template' {
 declare module 'offline-plugin/lib/app-cache.js' {
   declare module.exports: $Exports<'offline-plugin/lib/app-cache'>;
 }
-declare module 'offline-plugin/lib/index.js' {
+declare module 'offline-plugin/lib/index.jsx' {
   declare module.exports: $Exports<'offline-plugin/lib/index'>;
 }
 declare module 'offline-plugin/lib/loaders/fonts-css.js' {
   declare module.exports: $Exports<'offline-plugin/lib/loaders/fonts-css'>;
 }
-declare module 'offline-plugin/lib/loaders/index.js' {
+declare module 'offline-plugin/lib/loaders/index.jsx' {
   declare module.exports: $Exports<'offline-plugin/lib/loaders/index'>;
 }
 declare module 'offline-plugin/lib/misc/async-waituntil.js' {

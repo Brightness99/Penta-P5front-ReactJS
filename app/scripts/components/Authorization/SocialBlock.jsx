@@ -158,7 +158,7 @@ export default class SocialBlock extends React.PureComponent {
     const { facebook, isMobile, locale: { FACEBOOK_TITLE } } = this.props;
     const title = isMobile ? FACEBOOK_TITLE : '';
 
-    if (facebook.enabled) {
+    if (facebook && facebook.enabled) {
       return (
         <FacebookLogin
           appId={facebook.credentials.app_id}
@@ -178,7 +178,7 @@ export default class SocialBlock extends React.PureComponent {
     const { google, isMobile, locale: { GOOGLE_TITLE } } = this.props;
     const title = isMobile ? GOOGLE_TITLE : '';
 
-    if (google.enabled) {
+    if (google && google.enabled) {
       return (
         <GoogleLogin
           clientId={google.credentials.client_id}

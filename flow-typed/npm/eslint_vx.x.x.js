@@ -2225,7 +2225,7 @@ declare module 'eslint/lib/token-store/forward-token-comment-cursor.js' {
 declare module 'eslint/lib/token-store/forward-token-cursor.js' {
   declare module.exports: $Exports<'eslint/lib/token-store/forward-token-cursor'>;
 }
-declare module 'eslint/lib/token-store/index.js' {
+declare module 'eslint/lib/token-store/index.jsx' {
   declare module.exports: $Exports<'eslint/lib/token-store/index'>;
 }
 declare module 'eslint/lib/token-store/limit-cursor.js' {

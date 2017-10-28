@@ -45,6 +45,20 @@
       }
     }
     .atm-accordion-item-body {
+      &.atm-accordion-sub-item-body {
+        height: auto !important;
+        .atm-content-file {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+      &.atm-accordion-sub-item-body-close {
+        height: 0 !important;
+        .atm-content-file {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
       background-color: $color-light-grey;
       ul {
         margin-top: 1.5rem;

@@ -2,11 +2,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import swal from 'sweetalert2';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { Input } from 'quarks/Inputs';
 import { InputPassword, InputRegex, InputCpf, InputCnpj, InputStateRegistration } from 'quarks/Inputs/Validatable';
 import { Select } from 'atoms/Inputs';
-import { ErrorText, SuccessText } from 'atoms/Texts';
 import Loading from 'components/Loading';
 import { accountUpdate, accountFetch } from 'actions';
 
@@ -63,6 +63,26 @@ export class CustomerData extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { account } = nextProps;
     if (account !== this.props.account) {
+      if (!account.isUpdating && account.isUpdated) {
+        if (account.error) {
+          swal({
+            title: account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message,
+            type: 'error',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        } else {
+          swal({
+            title: 'Successfully saved.',
+            type: 'success',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        }
+      }
+
       this.setState({
         ...nextProps.account,
         form: {
@@ -130,9 +150,6 @@ export class CustomerData extends React.Component {
     if (this.state.canSubmit) {
       const { dispatch } = this.props;
       const { form } = this.state;
-      this.setState({
-        error: null,
-      });
 
       const dataToUpdate = this.state;
 
@@ -146,8 +163,12 @@ export class CustomerData extends React.Component {
         };
 
         if (form.new_password.value !== form.new_password_repeat.value) {
-          this.setState({
-            error: 'Password does not match!',
+          swal({
+            title: 'Password does not match!',
+            type: 'error',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
           });
           return;
         }
@@ -324,23 +345,7 @@ export class CustomerData extends React.Component {
   }
 
   renderForm() {
-    const { activeForm, error } = this.state;
-    const { account } = this.props;
-    let errorMessage;
-    if (account.error) {
-      errorMessage = (account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message);
-    } else {
-      errorMessage = error;
-    }
-
-    let errorMessageElement;
-    if (account.error || error) {
-      errorMessageElement = (
-        <div className="mol-checkout-pane-footer mol-account-pane-footer">
-          <ErrorText>{errorMessage}</ErrorText>
-        </div>
-      );
-    }
+    const { activeForm } = this.state;
 
     return (
       <div>
@@ -385,10 +390,6 @@ export class CustomerData extends React.Component {
             onEnterKeyPress={this.handleSubmit}
           />
         </form>
-        {errorMessageElement}
-        {!account.isUpdating && account.isUpdated && !account.error && !error && <div className="mol-checkout-pane-footer mol-account-pane-footer">
-          <SuccessText>Successfully saved.</SuccessText>
-        </div>}
         <div className="mol-checkout-pane-footer mol-account-pane-footer">
           <button onClick={this.handleSubmit} className="atm-send-button">SALVAR ALTERAÇÕES</button>
         </div>
