@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { Input } from 'quarks/Inputs';
-import { InputPassword, InputRegex } from 'quarks/Inputs/Validatable';
+import { InputPassword, InputRegex, InputCpf, InputCnpj, InputStateRegistration } from 'quarks/Inputs/Validatable';
 import { Select } from 'atoms/Inputs';
 import { ErrorText, SuccessText } from 'atoms/Texts';
 import Loading from 'components/Loading';
@@ -175,15 +175,12 @@ export class CustomerData extends React.Component {
           onChange={this.handleChangeName}
           onEnterKeyPress={this.handleSubmit}
         />
-        <InputRegex
+        <InputCpf
           id="cpf"
           name="cpf"
-          type="text"
           placeholder={'CPF'}
-          pattern={/^([0-9]){3}[.]([0-9]){3}[.]([0-9]){3}[-]([0-9]){2}$/}
           className="atm-checkout-input atm-checkout-input-one"
           showLabel
-          cpf
           value={form.cpf.value}
           onValidate={this.handleValidatedInput}
           onEnterKeyPress={this.handleSubmit}
@@ -244,15 +241,12 @@ export class CustomerData extends React.Component {
           onChange={this.handleChangeName}
           onEnterKeyPress={this.handleSubmit}
         />
-        <InputRegex
+        <InputCnpj
           id="cnpj"
           name="cnpj"
-          type="text"
           placeholder={'CNPJ'}
-          pattern={/^([0-9]){2}[.]([0-9]){3}[.]([0-9]){3}[/]([0-9]){4}[-]([0-9]){2}$/}
           className="atm-checkout-input atm-checkout-input-one"
           showLabel
-          cnpj
           value={form.cnpj.value}
           onValidate={this.handleValidatedInput}
           onEnterKeyPress={this.handleSubmit}
@@ -317,7 +311,7 @@ export class CustomerData extends React.Component {
           <option value={'sp'}>SP</option>
           <option value={'rj'}>RJ</option>
         </Select>
-        {state_registration !== 'Isento' && <InputRegex
+        {state_registration !== 'Isento' && <InputStateRegistration
           showLabel
           className="atm-checkout-input atm-checkout-input-one"
           placeholder="Número Inscrição"
