@@ -3,7 +3,7 @@
 import React from 'react';
 
 const PrintiSymbolIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 48">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 40">
     <defs>
       <linearGradient id="printi-logo-fill" x1="0%" y1="0%" y2="50%">
         <stop offset="0%" stopColor="#66B0FF" />

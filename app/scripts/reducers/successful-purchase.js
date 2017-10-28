@@ -34,7 +34,7 @@ export default {
         isLoaded: true,
       };
     },
-    [SuccessfulPurchaseConstants.SUCCESSFUL_PURCHASE_FETCH_FAILURE](state, action) {
+    [SuccessfulPurchaseConstants.SUCCESSFUL_PURCHASE_FETCH_FAILURE](state) {
       return {
         ...state,
         isRunning: false,

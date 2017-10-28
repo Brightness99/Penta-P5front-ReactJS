@@ -11,8 +11,27 @@
 }
 
 .boxes-our-benefits {
+  align-items: center;
   box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 2rem 0;
+
+  @include lg {
+    flex-direction: row;
+  }
+
+  .slick-initialized {
+    margin-top: 2rem;
+  }
+
+  &.mobile {
+    align-items: initial;
+    display: initial;
+    flex-direction: initial;
+    justify-content: initial;
+  }
 
   .box-our-benefits {
     align-items: center;
@@ -25,7 +44,8 @@
     padding: 2rem;
 
     @include lg {
-      height: 30rem;
+      height: 36rem;
+      margin-right: 2rem;
       max-width: inherit;
     }
 

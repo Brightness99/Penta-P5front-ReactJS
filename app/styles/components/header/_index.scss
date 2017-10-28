@@ -51,9 +51,28 @@
         width: 1.2rem;
       }
 
+      .atm-flag-icon {
+        display: inline-flex;
+        height: auto;
+        margin-right: 0.6rem;
+
+        svg {
+          margin: 0;
+          width: auto;
+        }
+      }
+
       .atm-topbar-referral {
         svg {
           fill: #006ee3;
+        }
+      }
+
+      .atm-topbar-us-phone{
+        margin-left: 0;
+
+        &~ .mol-topbar-locales {
+          margin-left: 1.8rem;
         }
       }
     }
@@ -109,6 +128,124 @@
         }
 
         .mol-topbar-modelList {
+          display: block;
+        }
+      }
+    }
+
+    .mol-topbar-models {
+      position: relative;
+
+      .atm-topbar-link {
+        height: 2.5rem;
+      }
+
+      .mol-topbar-modelList {
+        background-color: $color-white;
+        border-radius: 0 0 $bsn-border-radius $bsn-border-radius;
+        box-shadow: 0.8rem 0.8rem 1rem 0 rgba(83, 117, 153, 0.5);
+        display: none;
+        flex-direction: column;
+        height: 30rem;
+        left: 50%;
+        position: absolute;
+        top: 2.5rem;
+        transform: translateX(-50%);
+        overflow: hidden;
+        overflow-y: auto;
+        width: 30rem;
+        z-index: 1;
+
+        li {
+          align-items: center;
+          display: inline-flex;
+          height: 3rem;
+          max-height: 3rem;
+          min-height: 3rem;
+          padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+          width: 100%;
+
+          a {
+            color: $color-almostBlack;
+            text-decoration: none;
+            transition: 0.3s ease;
+
+            &:hover {
+              color: $color-printi-blue;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .atm-topbar-link {
+          color: $color-printi-blue;
+        }
+
+        .mol-topbar-modelList {
+          display: block;
+        }
+      }
+    }
+
+    .mol-topbar-locales {
+      @include center-child-flex;
+      position: relative;
+
+      .atm-topbar-link {
+        height: 2.5rem;
+        margin-left: 0;
+      }
+
+      .mol-topbar-localeList {
+        background-color: $color-white;
+        border-radius: 0 0 $bsn-border-radius $bsn-border-radius;
+        box-shadow: 0.8rem 0.8rem 1rem 0 rgba(83, 117, 153, 0.5);
+        display: none;
+        flex-direction: column;
+        height: auto;
+        left: -1.6rem;
+        max-height: 30rem;
+        max-width: 30rem;
+        position: absolute;
+        top: 2.5rem;
+        overflow: hidden;
+        overflow-y: auto;
+        width: auto;
+        z-index: 1;
+
+        li {
+          align-items: center;
+          display: inline-flex;
+          height: 3rem;
+          max-height: 3rem;
+          min-height: 3rem;
+          padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+          white-space: nowrap;
+          width: 100%;
+
+          a {
+            align-items: center;
+            color: $color-almostBlack;
+            display: inline-flex;
+            text-decoration: none;
+            transition: 0.3s ease;
+
+            &:hover {
+              color: $color-printi-blue;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .atm-topbar-link {
+          color: $color-printi-blue;
+        }
+
+        .mol-topbar-localeList {
           display: block;
         }
       }

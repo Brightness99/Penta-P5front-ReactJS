@@ -31,9 +31,9 @@ declare module 'redux-diff-logger/src/index' {
 }
 
 // Filename aliases
-declare module 'redux-diff-logger/lib/index.js' {
+declare module 'redux-diff-logger/lib/index.jsx' {
   declare module.exports: $Exports<'redux-diff-logger/lib/index'>;
 }
-declare module 'redux-diff-logger/src/index.js' {
+declare module 'redux-diff-logger/src/index.jsx' {
   declare module.exports: $Exports<'redux-diff-logger/src/index'>;
 }

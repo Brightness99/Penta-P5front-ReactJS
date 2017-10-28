@@ -268,7 +268,7 @@ export class Authentication extends React.Component {
         </Tabs>
         <TermsAndPolicyBlock />
       </section>
-      );
+    );
   };
 
   renderContent = () => {

@@ -25,6 +25,7 @@ type Props = {
   handleClose: () => {},
   handleLogOut: () => {},
   isAuthorized: boolean,
+  locale: {},
   user: {},
 };
 
@@ -52,22 +53,24 @@ export class MyAccount extends React.Component {
   };
 
   renderLoggedOut() {
+    const { locale } = this.props;
+
     return [
       <li key="login">
         <NavLink onClick={this.handleClick} to="/login-cadastro">
-          <AngleRightIcon /> Entrar
+          <AngleRightIcon /> {locale.SIGN_IN}
         </NavLink>
       </li>,
       <li key="register">
         <NavLink onClick={this.handleClick} to="/login-cadastro">
-          <AngleRightIcon /> Cadastrar
+          <AngleRightIcon /> {locale.SIGN_UP}
         </NavLink>
       </li>,
     ];
   }
 
   renderLoggedIn() {
-    const { user } = this.props;
+    const { locale, user } = this.props;
     const loggedInItems = [
       <li key="pedidos">
         <NavLink onClick={this.handleClick} to="/minha-conta/pedidos">
@@ -109,7 +112,7 @@ export class MyAccount extends React.Component {
     loggedInItems.push(
       <li key="logout">
         <NavLink onClick={this.handleLogOut} to="#">
-          <OutIcon /> Sair
+          <OutIcon /> {locale.LOGOUT}
         </NavLink>
       </li>,
     );
@@ -124,13 +127,15 @@ export class MyAccount extends React.Component {
       return this.renderLoggedIn();
     }
     return this.renderLoggedOut();
-  }
+  };
 
   renderMobileHeader() {
+    const { locale } = this.props;
+
     return (
       <div>
-        <span key="hello">Olá!</span>
-        <span key="register">Entrar ou Cadastrar</span>
+        <span key="hello">{locale.GREETING}</span>
+        <span key="register">{locale.MY_ACCOUNT}</span>
       </div>
     );
   }

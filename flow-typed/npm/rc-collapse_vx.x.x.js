@@ -66,7 +66,7 @@ declare module 'rc-collapse/lib/PanelContent' {
 declare module 'rc-collapse/es/Collapse.js' {
   declare module.exports: $Exports<'rc-collapse/es/Collapse'>;
 }
-declare module 'rc-collapse/es/index.js' {
+declare module 'rc-collapse/es/index.jsx' {
   declare module.exports: $Exports<'rc-collapse/es/index'>;
 }
 declare module 'rc-collapse/es/openAnimationFactory.js' {
@@ -81,7 +81,7 @@ declare module 'rc-collapse/es/PanelContent.js' {
 declare module 'rc-collapse/lib/Collapse.js' {
   declare module.exports: $Exports<'rc-collapse/lib/Collapse'>;
 }
-declare module 'rc-collapse/lib/index.js' {
+declare module 'rc-collapse/lib/index.jsx' {
   declare module.exports: $Exports<'rc-collapse/lib/index'>;
 }
 declare module 'rc-collapse/lib/openAnimationFactory.js' {

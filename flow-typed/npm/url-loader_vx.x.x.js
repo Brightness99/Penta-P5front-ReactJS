@@ -28,6 +28,6 @@ declare module 'url-loader' {
 declare module 'url-loader/index' {
   declare module.exports: $Exports<'url-loader'>;
 }
-declare module 'url-loader/index.js' {
+declare module 'url-loader/index.jsx' {
   declare module.exports: $Exports<'url-loader'>;
 }

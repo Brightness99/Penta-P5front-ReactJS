@@ -53,11 +53,12 @@ export class OrderListDetails extends React.Component {
     ));
   }
 
-  renderItemActionButtons = (item) => (
-    Object.keys(item.actions).map((key) => (
-      item.actions[key].enabled && <Link key={key} className="btn-default btn-quarter fnt-sbold btn-lg" to="#"><i><Archive /></i>{item.actions[key].label}</Link>
-    ))
-  );
+  renderItemActionButtons = (item) => {
+    const { match: { params: { orderNumber } } } = this.props;
+    return Object.keys(item.actions).map((key) => (
+      item.actions[key].enabled && <Link key={key} className="btn-default btn-quarter fnt-sbold btn-lg" to={`/minha-conta/pedidos/${orderNumber}/proposta-de-arte`}><i><Archive /></i>{item.actions[key].label}</Link>
+    ));
+  }
 
   renderSummary() {
     const { account: { selectedOrder } } = this.props;

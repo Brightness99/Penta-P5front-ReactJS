@@ -50,7 +50,7 @@ declare module 'babel-loader/lib/utils/relative' {
 declare module 'babel-loader/lib/fs-cache.js' {
   declare module.exports: $Exports<'babel-loader/lib/fs-cache'>;
 }
-declare module 'babel-loader/lib/index.js' {
+declare module 'babel-loader/lib/index.jsx' {
   declare module.exports: $Exports<'babel-loader/lib/index'>;
 }
 declare module 'babel-loader/lib/resolve-rc.js' {

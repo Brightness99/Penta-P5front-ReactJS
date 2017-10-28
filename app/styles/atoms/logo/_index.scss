@@ -1,8 +1,17 @@
 .atm-printi-logo {
   transition: 0.3s ease-in-out;
 
+  &:focus *,
+  &:active * {
+    text-decoration: none;
+  }
+
   svg {
     height: 100%;
     width: auto;
+  }
+
+  .mol-logo-loyalty {
+    margin-left: 0.8rem;
   }
 }

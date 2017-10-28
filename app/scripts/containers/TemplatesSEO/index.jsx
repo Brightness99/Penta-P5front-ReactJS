@@ -1,5 +1,4 @@
 // @flow
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
@@ -10,11 +9,9 @@ import ListModels from './ListModels';
 type Props = {
   screenSize: AppStoreType.screenSize,
   router: RouterStore,
-  dispatch: () => {},
-  children: any,
 };
 
-export class Templateslp extends React.Component {
+class TemplatesSEO extends React.PureComponent<Props> {
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
@@ -23,20 +20,21 @@ export class Templateslp extends React.Component {
     const { screenSize } = this.props;
 
     return (
-      <div className="container">
-        <h3>Modelos de cartão de visita</h3>
-        <div className="tpl-templateslp">
-          <div className="btn-default btn-secondary fnt-sbold btn-sm" onClick={this.handleShowMenu}>
-            Escolher categoria
-          </div>
+      <article className="container">
+        <h3>{'Modelos de cartão de visita'}</h3>
+        <section className="tpl-templateslp">
+          <p className="btn-default btn-secondary fnt-sbold btn-sm" onClick={this.handleShowMenu}>
+            {'Escolher categoria'}
+          </p>
           <ListModels screenSize={screenSize} />
           <ListCategory screenSize={screenSize} />
-        </div>
-      </div>
+        </section>
+      </article>
     );
   }
 
   renderDesktop() {
+    const { screenSize } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -51,14 +49,14 @@ export class Templateslp extends React.Component {
       },
     ];
     return (
-      <div className="container">
+      <article className="container">
         <Breadcrumbs links={breadcrumb} />
-        <h3>Modelos de cartão de visita</h3>
-        <div className="tpl-templateslp">
-          <ListCategory />
-          <ListModels />
-        </div>
-      </div>
+        <h3>{'Modelos de cartão de visita'}</h3>
+        <section className="tpl-templateslp">
+          <ListCategory screenSize={screenSize} />
+          <ListModels screenSize={screenSize} />
+        </section>
+      </article>
     );
   }
 
@@ -69,16 +67,8 @@ export class Templateslp extends React.Component {
   }
 }
 
-/* istanbul ignore next */
-function mapStateToProps(state) {
-  return ({
-    screenSize: state.app.screenSize,
-  });
-}
+const mapStoreToProps = (state) => ({
+  app: state.app,
+});
 
-/* istanbul ignore next */
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Templateslp);
+export default connect(mapStoreToProps)(TemplatesSEO);
