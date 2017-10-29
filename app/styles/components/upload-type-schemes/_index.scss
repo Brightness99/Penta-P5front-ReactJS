@@ -1,10 +1,17 @@
 .upload-type-schemes-container{
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-
   &>*:nth-of-type(2){
-    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+  @include lg {
+    flex-direction: row;
+    justify-content: space-around;
+    &>*:nth-of-type(2){
+      margin-top: 0;
+      margin-left: 1rem;
+    }
   }
 }

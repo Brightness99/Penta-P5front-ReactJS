@@ -5,9 +5,11 @@
 .available-upload-strategies-container {
   width          : 100%;
   margin         : 2rem 0;
-  padding        : 0 3rem;
   display        : flex;
   flex-direction : column;
+  @include lg{
+    padding        : 0 3rem;
+  }
   .strategies {
     display         : flex;
     flex-direction  : column;
