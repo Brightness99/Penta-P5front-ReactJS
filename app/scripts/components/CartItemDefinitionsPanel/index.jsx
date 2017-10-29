@@ -35,9 +35,15 @@ export default class CartItemDefinitionsPanel extends React.Component {
   state: State;
 
   handleToggle = () => {
+    const isOpen = !this.state.isOpen;
     this.setState({
       isOpen: !this.state.isOpen,
     });
+    if (isOpen) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
   };
 
   renderParts() {
@@ -58,7 +64,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
 
     return (<section className="side-panel-container">
       {!isOpen && <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>}
-      <TransitionGroup className={isOpen ? 'side-panel-full-content' : ''}>
+      <TransitionGroup>
         {isOpen && [
           <FadeToggle key="fade-toggle-header">
             <Overlay onClick={this.handleToggle} />
