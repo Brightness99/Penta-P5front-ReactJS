@@ -1,6 +1,10 @@
 // @flow
 import React from 'react';
+import { TransitionGroup } from 'react-transition-group';
+import { FadeToggle, SlideToggle } from 'animations';
+import Overlay from 'components/Overlay';
 import TruckIcon from 'components/Icons/Truck';
+import BulletListIcon from 'components/Icons/BulletList';
 
 type Props = {
   expectedDeliveryDate: string,
@@ -10,11 +14,31 @@ type Props = {
   parts: Array<{
     name: string,
     options: Array<{ field: string, value: string }>
-  }>
+  }>,
+  isMobile: boolean,
 };
 
+type State = {
+  isOpen: boolean,
+}
+
 export default class CartItemDefinitionsPanel extends React.Component {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      isOpen: false,
+    };
+  }
+
   props: Props;
+  state: State;
+
+  handleToggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
 
   renderParts() {
     const { parts } = this.props;
@@ -29,7 +53,30 @@ export default class CartItemDefinitionsPanel extends React.Component {
       </section>));
   }
 
-  render() {
+  renderMobile() {
+    const { isOpen } = this.state;
+
+    return (<section className="side-panel-container">
+      {!isOpen && <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>}
+      <TransitionGroup className={isOpen ? 'side-panel-full-content' : ''}>
+        {isOpen && [
+          <FadeToggle key="fade-toggle-header">
+            <Overlay onClick={this.handleToggle} />
+          </FadeToggle>,
+          <SlideToggle key="slide-toggle-header" direction="rtl">
+            <section className="side-panel-block">
+              <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>
+              <section className="side-panel-content">
+                {this.renderDesktop()}
+              </section>
+            </section>
+          </SlideToggle>,
+        ]}
+      </TransitionGroup>
+    </section>);
+  }
+
+  renderDesktop() {
     const { expectedDeliveryDate, totalPrice, subTotal } = this.props;
 
     return (
@@ -51,5 +98,11 @@ export default class CartItemDefinitionsPanel extends React.Component {
         </section>
       </aside>
     );
+  }
+
+  render() {
+    const { isMobile } = this.props;
+
+    return isMobile ? this.renderMobile() : this.renderDesktop();
   }
 }
