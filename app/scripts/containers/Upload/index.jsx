@@ -13,6 +13,7 @@ import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
 import UploadTypes from 'components/UploadTypes';
 import CartItemDefinitionsPanel from 'components/CartItemDefinitionsPanel';
 import { Button } from 'quarks/Inputs';
+import { isMobile } from 'utils/helpers';
 
 type FinishUpload = {
   document_reference_url: string,
@@ -29,6 +30,7 @@ type FinishUpload = {
 }
 
 type Props = {
+  screenSize: string,
   match: {
     params: {
       slug: string,
@@ -236,17 +238,18 @@ export class Upload extends React.Component {
   }
 
   renderCartItemDefinitions() {
-    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
+    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } }, screenSize } = this.props;
     return (<CartItemDefinitionsPanel
       parts={parts}
       totalPrice={total_price}
       subTotal={total_price}
       expectedDeliveryDate={expected_delivery_date}
+      isMobile={isMobile(screenSize)}
     />);
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, screenSize } = this.props;
     const { isRepurchase, canSubmit } = this.state;
     const breadcrumb = [
       {
@@ -270,6 +273,7 @@ export class Upload extends React.Component {
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
+          { isMobile(screenSize) && <p>Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p> }
           <section className="content">
             <section className="main-upload-container">
               {
@@ -297,7 +301,7 @@ export class Upload extends React.Component {
                 >Enviar arte final</Button>
               </section>
             </section>
-            {this.renderCartItemDefinitions()}
+            { this.renderCartItemDefinitions()}
           </section>
         </div>
       </section>
@@ -306,6 +310,7 @@ export class Upload extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  screenSize: state.app.screenSize,
   isLoading: state.upload.isLoaded,
   uploadInfo: state.upload.object,
   uploadFileProgress: state.upload.uploadFile,
