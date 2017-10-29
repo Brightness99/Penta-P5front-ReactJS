@@ -26,17 +26,18 @@ export default class AvailableUploadStrategy extends React.PureComponent {
 
   render() {
     const { title, description, index, selectedItem } = this.props;
+    const checked = selectedItem === index;
     return (
       <section className="available-upload-strategy-container">
         <label className="main-content">
-          <section className="icon-block">
+          <section className={`icon-block ${checked ? 'active' : ''}`}>
             <AvailableUploadIcon iconIndex={index} />
           </section>
           <BoxRadio
             value={index}
             onChange={this.handleEvent}
             name="strategy-radio"
-            checked={selectedItem === index}
+            checked={checked}
           >
             <span>{title}</span>
           </BoxRadio>

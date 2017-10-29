@@ -1,6 +1,4 @@
-
 .side-panel-container{
-  z-index: 10;
   & > .side-panel-button{
     position: fixed;
     right: 0;
@@ -12,6 +10,7 @@
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: 10;
   }
   .side-panel-block {
     display: flex;
@@ -25,7 +24,7 @@
     top: 0;
     overflow-y: scroll;
     pointer-events: none;
-    z-index: 1;
+    z-index: 10;
   }
   .side-panel-button {
     background-color: $color-white;

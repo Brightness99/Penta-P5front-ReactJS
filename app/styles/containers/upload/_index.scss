@@ -4,9 +4,11 @@
   margin-bottom : 5rem;
   .container {
     .content {
-      display               : grid;
-      grid-template-columns : 1fr auto;
-      grid-column-gap       : 1rem;
+      @include lg{
+        display               : grid;
+        grid-template-columns : 1fr auto;
+        grid-column-gap       : 1rem;
+      }
     }
     .upload-finish-block {
       display         : flex;

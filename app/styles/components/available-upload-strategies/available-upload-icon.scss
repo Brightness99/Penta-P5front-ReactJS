@@ -23,4 +23,11 @@
 .available-upload-double-icon{
   display: flex;
   flex-direction: row;
+  padding: 0 0.2rem;
+  .available-upload-icon:first-of-type{
+    margin-bottom: 0.8rem;
+  }
+  .available-upload-icon:last-child{
+    margin-top: 0.8rem;
+  }
 }
