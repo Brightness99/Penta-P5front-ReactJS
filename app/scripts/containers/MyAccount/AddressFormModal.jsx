@@ -41,14 +41,38 @@ class AddressFormModal extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { account: { zipcodeValid } } = nextProps;
     const { account } = this.props;
+    const { form } = this.state;
 
     if (zipcodeValid !== account.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
       if (!zipcodeValid.error) {
-        this.handleSubmit();
+        if (zipcodeValid.list) {
+          const newState = {
+            ...form,
+            city: {
+              value: zipcodeValid.list.city || '',
+              valid: !!zipcodeValid.list.city,
+            },
+            neighborhood: {
+              value: zipcodeValid.list.neighborhood || '',
+              valid: !!zipcodeValid.list.neighborhood,
+            },
+            state: {
+              value: zipcodeValid.list.state || '',
+              valid: !!zipcodeValid.list.state,
+            },
+            street: {
+              value: zipcodeValid.list.street || '',
+              valid: !!zipcodeValid.list.street,
+            },
+          };
+          this.setState({
+            form: newState,
+          });
+        }
       }
     }
 
-    if (!account.addresses.isAddressSaving && account.notification.isAddressSavingCalled) {
+    if (!account.addresses.isAddressSaving && account.addresses.isAddressSavingCalled) {
       if (account.addresses.error) {
         swal({
           title: account.addresses.error.message,
@@ -79,41 +103,34 @@ class AddressFormModal extends React.Component {
   }
 
   handleClick = () => {
-    const { dispatch } = this.props;
+    const { dispatch, type, isNew, address } = this.props;
     const { form, canSubmit } = this.state;
 
     if (canSubmit) {
-      dispatch(zipcodeValidate(form.zipcode.value));
-    }
-  }
+      const dataToSave = {
+        receiver_name: form.receiver_name.value,
+        zipcode: form.zipcode.value,
+        city: form.city.value,
+        neighborhood: form.neighborhood.value,
+        state: form.state.value,
+        street: form.street.value,
+        number: form.number.value,
+        additional_address: form.additional_address.value,
+        type,
+      };
 
-  handleSubmit = () => {
-    const { dispatch, type, isNew, address } = this.props;
-    const { form } = this.state;
-
-    const dataToSave = {
-      receiver_name: form.receiver_name.value,
-      zipcode: form.zipcode.value,
-      city: form.city.value,
-      neighborhood: form.neighborhood.value,
-      state: form.state.value,
-      street: form.street.value,
-      number: form.number.value,
-      additional_address: form.additional_address.value,
-      type,
-    };
-
-    if (isNew) {
-      dispatch(accountAddressCreate(dataToSave));
-    } else {
-      dataToSave.id = address.id;
-      dispatch(accountAddressUpdate(dataToSave));
+      if (isNew) {
+        dispatch(accountAddressCreate(dataToSave));
+      } else {
+        dataToSave.id = address.id;
+        dispatch(accountAddressUpdate(dataToSave));
+      }
     }
   }
 
   handleValidatedInput = (name, value, valid) => {
     const { form } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, locale } = this.props;
     const newState = { form };
     const target = name.target;
     const key = target ? target.id : name;
@@ -131,7 +148,7 @@ class AddressFormModal extends React.Component {
     }
     this.setState({ form: newState.form, canSubmit });
 
-    if (key === 'zipcode' && newState.form[key].valid) {
+    if (key === 'zipcode' && locale.COUNTRY_CODE === 'BR' && newState.form[key].valid) {
       dispatch(zipcodeValidate(newState.form[key].value));
     }
   }
