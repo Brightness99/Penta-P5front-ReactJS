@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import swal from 'sweetalert2';
 import { Button } from 'quarks/Inputs';
 import { InputRegex } from 'quarks/Inputs/Validatable';
-import { ErrorText, SuccessText } from 'atoms/Texts';
 import { accountAddressCreate, accountAddressUpdate, zipcodeValidate } from 'actions';
 
 type Props = {
@@ -45,6 +45,26 @@ class AddressFormModal extends React.Component {
     if (zipcodeValid !== account.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
       if (!zipcodeValid.error) {
         this.handleSubmit();
+      }
+    }
+
+    if (!account.addresses.isAddressSaving && account.notification.isAddressSavingCalled) {
+      if (account.addresses.error) {
+        swal({
+          title: account.addresses.error.message,
+          type: 'error',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        });
+      } else {
+        swal({
+          title: 'Successfully saved.',
+          type: 'success',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        });
       }
     }
   }
@@ -93,6 +113,7 @@ class AddressFormModal extends React.Component {
 
   handleValidatedInput = (name, value, valid) => {
     const { form } = this.state;
+    const { dispatch } = this.props;
     const newState = { form };
     const target = name.target;
     const key = target ? target.id : name;
@@ -109,6 +130,10 @@ class AddressFormModal extends React.Component {
       });
     }
     this.setState({ form: newState.form, canSubmit });
+
+    if (key === 'zipcode' && newState.form[key].valid) {
+      dispatch(zipcodeValidate(newState.form[key].value));
+    }
   }
 
   render() {
@@ -220,11 +245,6 @@ class AddressFormModal extends React.Component {
             required
           />
         </form>
-        <div className="mol-checkout-pane-footer">
-          {(!addresses.isAddressSaving && addresses.isAddressSavingCalled && addresses.error) && <ErrorText>{addresses.error.message}</ErrorText>}
-          {(!zipcodeValid.isRunning && zipcodeValid.isLoaded && zipcodeValid.error) && <ErrorText>{zipcodeValid.error.message}</ErrorText>}
-          {(!addresses.isAddressSaving && addresses.isAddressSavingCalled && !addresses.error) && <SuccessText>Successfully saved.</SuccessText>}
-        </div>
         <div className="mol-checkout-pane-footer mol-address-pane-footer">
           <button className="atm-button-text" onClick={this.handleCloseModal}>CANCELAR</button>
           <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressSaving && !addresses.isAddressSavingCalled) || (zipcodeValid.isRunning && !zipcodeValid.isLoaded)}>SALVAR ENDEREÇO</Button>
