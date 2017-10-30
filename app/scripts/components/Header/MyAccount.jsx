@@ -13,7 +13,8 @@ import {
   OutIcon,
   MyAccountIcon,
   TimesIcon,
-  AngleRightIcon
+  AngleRightIcon,
+  MyDataIcon
 } from 'components/Icons';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
@@ -79,6 +80,11 @@ export class MyAccount extends React.Component {
       <li key="enderecos">
         <NavLink onClick={this.handleClick} to="/minha-conta/enderecos">
           <AddressIcon /> Meus endereços
+        </NavLink>
+      </li>,
+      <li key="dados">
+        <NavLink onClick={this.handleClick} to="/minha-conta/meus-dados">
+          <MyDataIcon /> Meus dados
         </NavLink>
       </li>,
       <li key="cartoes-salvos">
