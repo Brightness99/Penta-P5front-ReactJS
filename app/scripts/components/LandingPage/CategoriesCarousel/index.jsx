@@ -758,7 +758,7 @@ export class CategoriesCarouselBlock extends React.Component {
         autoplay={false}
         key={category.id}
         infinite={false}
-      >S
+      >
         {category.pages.map((products) => (
           products.products.map((product) => (
             <div key={product.slug}>
