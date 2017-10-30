@@ -2,13 +2,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import swal from 'sweetalert2';
 import { shouldComponentUpdate } from 'utils/helpers';
 import { Input } from 'quarks/Inputs';
-import { InputPassword } from 'quarks/Inputs/Validatable';
-import { BoxRadio, Select } from 'atoms/Inputs';
-import { ErrorText } from 'atoms/Texts';
+import { InputPassword, InputRegex, InputCpf, InputCnpj, InputStateRegistration } from 'quarks/Inputs/Validatable';
+import { Select } from 'atoms/Inputs';
 import Loading from 'components/Loading';
-import { accountUpdate } from 'actions';
+import { accountUpdate, accountFetch } from 'actions';
+
+type FormType = {
+  phone: { valid: boolean, value: string },
+  cnpj: { valid: boolean, value: string },
+  cpf: { valid: boolean, value: string },
+  current_password: { valid: boolean, value: string },
+  new_password: { valid: boolean, value: string },
+  new_password_repeat: { valid: boolean, value: string },
+};
 
 type Props = {
   account: {},
@@ -19,6 +28,8 @@ type Props = {
 
 type State = {
   activeForm: string,
+  canSubmit: boolean,
+  form: FormType,
 };
 
 export class CustomerData extends React.Component {
@@ -27,24 +38,62 @@ export class CustomerData extends React.Component {
 
     this.state = {
       ...props.account,
-      current_password: '',
-      new_password: '',
-      new_password_repeat: '',
       activeForm: 'person',
+      form: {
+        phone: { valid: false, value: '' },
+        cnpj: { valid: false, value: '' },
+        cpf: { valid: false, value: '' },
+        current_password: { valid: false, value: '' },
+        new_password: { valid: false, value: '' },
+        new_password_repeat: { valid: false, value: '' },
+      },
+      canSubmit: false,
     };
   }
 
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(accountFetch());
     this.handleBreadcrumbs();
   }
 
   componentWillReceiveProps(nextProps) {
     const { account } = nextProps;
     if (account !== this.props.account) {
+      if (!account.isUpdating && account.isUpdated) {
+        if (account.error) {
+          swal({
+            title: account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message,
+            type: 'error',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        } else {
+          swal({
+            title: 'Successfully saved.',
+            type: 'success',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        }
+      }
+
       this.setState({
         ...nextProps.account,
+        form: {
+          phone: { valid: true, value: account.phone },
+          cnpj: { valid: true, value: account.cnpj },
+          cpf: { valid: true, value: account.cpf },
+          current_password: { valid: true, value: '' },
+          new_password: { valid: true, value: '' },
+          new_password_repeat: { valid: true, value: '' },
+        },
+        canSubmit: true,
       });
     }
   }
@@ -72,66 +121,93 @@ export class CustomerData extends React.Component {
     });
   }
 
-  handleClick = () => {
-    const { dispatch } = this.props;
-    const { current_password, new_password, new_password_repeat } = this.state;
-    this.setState({
-      error: null,
-    });
+  handleValidatedInput = (name, value, valid) => {
+    const { form } = this.state;
+    const newState = { form };
+    const target = name.target;
+    const key = target ? target.id : name;
 
-    const dataToUpdate = this.state;
+    let canSubmit = true;
+    newState.form[key].valid = target ? !!target.value : valid;
+    newState.form[key].value = target ? target.value : value;
 
-    if (current_password !== '' && new_password !== '' && new_password_repeat !== '') {
-      dataToUpdate.change_password = {
-        current_password,
-        new_password,
-        new_password_repeat,
-      };
-
-      if (new_password !== new_password_repeat) {
-        this.setState({
-          error: 'Password does not match!',
-        });
-        return;
-      }
+    const updateState = {};
+    updateState[key] = newState.form[key].value;
+    this.setState(updateState);
+    if (canSubmit === true) {
+      Object.keys(newState.form)
+      .forEach((index) => {
+        if (newState.form[index].valid !== true) {
+          canSubmit = false;
+        }
+      });
     }
 
-    dispatch(accountUpdate(dataToUpdate));
+    this.setState({ form: newState.form, canSubmit });
   }
 
-  handleSelection = (ev) => {
+  handleSubmit = () => {
+    if (this.state.canSubmit) {
+      const { dispatch } = this.props;
+      const { form } = this.state;
+
+      const dataToUpdate = this.state;
+
+      delete dataToUpdate.change_password;
+
+      if (form.current_password.value !== '' && form.new_password.value !== '' && form.new_password_repeat.value !== '') {
+        dataToUpdate.change_password = {
+          current_password: form.current_password.value,
+          new_password: form.new_password.value,
+          new_password_repeat: form.new_password_repeat.value,
+        };
+      }
+
+      dispatch(accountUpdate(dataToUpdate));
+    }
+  }
+
+  handleSelection = () => {
     this.setState({
-      activeForm: ev.currentTarget.value,
+      activeForm: (this.state.activeForm === 'person' ? 'enterprise' : 'person'),
     });
   }
 
   renderPersonalData() {
-    const { first_name, last_name, cpf, phone, gender, cloud_manager } = this.state;
+    const { first_name, last_name, gender, cloud_manager, form } = this.state;
     return (
       <form className="org-checkout-content-data">
         <Input
-          showLabel={true}
+          showLabel
           className="atm-checkout-input atm-checkout-input-two"
           placeholder="Nome Completo"
           value={`${first_name} ${last_name}`}
           onChange={this.handleChangeName}
-          onEnterKeyPress={this.handleClick}
+          onEnterKeyPress={this.handleSubmit}
         />
-        <Input
-          showLabel={true}
+        <InputCpf
+          id="cpf"
+          name="cpf"
+          placeholder={'CPF'}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="CPF"
-          value={cpf}
-          onChange={(e) => { this.setState({ cpf: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.cpf.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
-        <Input
-          showLabel={true}
+        <InputRegex
+          id="phone"
+          name="phone"
+          type="text"
+          placeholder={'Telefone'}
+          pattern={/^[(]([0-9]){2}[)][ ]([0-9]){5}[-]([0-9]){4}$/}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="Telefone"
-          value={phone}
-          onChange={(e) => { this.setState({ phone: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.phone.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
         <Select
           className="atm-checkout-input atm-checkout-input-one"
@@ -164,7 +240,7 @@ export class CustomerData extends React.Component {
   }
 
   renderEnterpriseData() {
-    const { first_name, last_name, cnpj, company_name, phone, employee_number, state_registration } = this.state;
+    const { first_name, last_name, company_name, employee_number, state_registration, id_state_registration, form } = this.state;
     return (
       <form className="org-checkout-content-data">
         <Input
@@ -173,15 +249,18 @@ export class CustomerData extends React.Component {
           placeholder="Nome Completo"
           value={`${first_name} ${last_name}`}
           onChange={this.handleChangeName}
-          onEnterKeyPress={this.handleClick}
+          onEnterKeyPress={this.handleSubmit}
         />
-        <Input
-          showLabel={true}
+        <InputCnpj
+          id="cnpj"
+          name="cnpj"
+          placeholder={'CNPJ'}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="CNPJ"
-          value={cnpj}
-          onChange={(e) => { this.setState({ cnpj: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.cnpj.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
         <Input
           showLabel={true}
@@ -189,20 +268,25 @@ export class CustomerData extends React.Component {
           placeholder="Razão Social"
           value={company_name}
           onChange={(e) => { this.setState({ company_name: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          onEnterKeyPress={this.handleSubmit}
         />
-        <Input
-          showLabel={true}
+        <InputRegex
+          id="phone"
+          name="phone"
+          type="text"
+          placeholder={'Telefone'}
+          pattern={/^[(]([0-9]){2}[)][ ]([0-9]){5}[-]([0-9]){4}$/}
           className="atm-checkout-input atm-checkout-input-one"
-          placeholder="Telefone/Celular"
-          value={phone}
-          onChange={(e) => { this.setState({ phone: e.target.value }); }}
-          onEnterKeyPress={this.handleClick}
+          showLabel
+          value={form.phone.value}
+          onValidate={this.handleValidatedInput}
+          onEnterKeyPress={this.handleSubmit}
+          required
         />
         <Select
           className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-area"
-          showLabel={true}
+          showLabel
           id="data-pane-area"
           placeholder="Área de Atuação"
           required={true}
@@ -213,7 +297,7 @@ export class CustomerData extends React.Component {
         <Select
           className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-collaborators"
-          showLabel={true}
+          showLabel
           id="data-pane-collaborators"
           placeholder="Número de funcionários"
           value={employee_number}
@@ -226,96 +310,78 @@ export class CustomerData extends React.Component {
         <Select
           className="atm-checkout-input atm-checkout-input-one"
           name="data-pane-state"
-          showLabel={true}
+          showLabel
           id="data-pane-state"
           placeholder="Inscrição Estadual"
           value={state_registration}
           onChange={(e) => { this.setState({ state_registration: e.target.value }); }}
           required={true}
         >
+          <option value={'Isento'}>Isento</option>
           <option value={'sp'}>SP</option>
           <option value={'rj'}>RJ</option>
         </Select>
+        {state_registration !== 'Isento' && <InputStateRegistration
+          showLabel
+          className="atm-checkout-input atm-checkout-input-one"
+          placeholder="Número Inscrição"
+          value={id_state_registration}
+          state_registration={state_registration}
+          onEnterKeyPress={this.handleSubmit}
+        />}
       </form>
     );
   }
 
   renderForm() {
-    const { activeForm, error } = this.state;
-    const { account } = this.props;
-
-    let errorMessage;
-    if (account.error) {
-      errorMessage = (
-        <div className="mol-checkout-pane-footer">
-          <ErrorText>{account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message}</ErrorText>
-        </div>
-      );
-    } else if (error) {
-      errorMessage = (
-        <div className="mol-checkout-pane-footer">
-          <ErrorText>{error}</ErrorText>
-        </div>
-      );
-    }
+    const { activeForm } = this.state;
 
     return (
       <div>
-        <div className="mol-data-pane-choser">
-          <BoxRadio
-            value="person"
-            onChange={this.handleSelection}
-            name="pane-type"
-            checked={activeForm === 'person'}
-          >
-            Pessoa Física
-          </BoxRadio>
-          <BoxRadio
-            value="enterprise"
-            onChange={this.handleSelection}
-            name="pane-type"
-            checked={activeForm === 'enterprise'}
-          >
-            Pessoa Jurídica
-          </BoxRadio>
+        <div className="mol-account-data-pane-choser">
+          Se quiser trocar para uma conta com dados de {activeForm === 'person' ? 'pessoa jurídica' : 'pessoa física'},
+          <a onClick={this.handleSelection}>clique aqui.</a>
         </div>
         {activeForm === 'person' ? this.renderPersonalData() : this.renderEnterpriseData()}
-        <h3 className="atm-myorder-title">Meus dados</h3>
+        <h3 className="atm-myorder-title mar-top-20">Alterar senha</h3>
         <form className="org-checkout-content-data">
           <InputPassword
-            showLabel={true}
+            id="current_password"
+            name="current_password"
+            showLabel
             className="atm-checkout-input atm-checkout-input-one"
-            name="password"
             placeholder="Senha atual"
             onValidate={this.handleValidatedInput}
             value={this.state.current_password}
             onChange={(e) => { this.setState({ current_password: e.target.value }); }}
-            onEnterKeyPress={this.handleClick}
+            onEnterKeyPress={this.handleSubmit}
           />
           <InputPassword
-            showLabel={true}
+            id="new_password"
+            name="new_password"
+            showLabel
             className="atm-checkout-input atm-checkout-input-one"
-            name="password"
             placeholder="Nova senha"
             onValidate={this.handleValidatedInput}
             value={this.state.new_password}
             onChange={(e) => { this.setState({ new_password: e.target.value }); }}
-            onEnterKeyPress={this.handleClick}
+            onEnterKeyPress={this.handleSubmit}
           />
           <InputPassword
-            showLabel={true}
+            id="new_password_repeat"
+            name="new_password_repeat"
+            showLabel
             className="atm-checkout-input atm-checkout-input-one"
-            name="password"
             placeholder="Confirme sua nova senha"
+            equalsTo={this.state.new_password}
             onValidate={this.handleValidatedInput}
             value={this.state.new_password_repeat}
             onChange={(e) => { this.setState({ new_password_repeat: e.target.value }); }}
-            onEnterKeyPress={this.handleClick}
+            onEnterKeyPress={this.handleSubmit}
           />
         </form>
-        {errorMessage}
-        <div className="mol-checkout-pane-footer">
-          <button value={2} onClick={this.handleClick} className="atm-send-button">SALVAR ALTERAÇÕES</button>
+        <div className="mol-checkout-pane-footer mol-account-pane-footer">
+          <button onClick={this.handleSubmit} className="atm-send-button">SALVAR ALTERAÇÕES</button>
         </div>
       </div>
     );
