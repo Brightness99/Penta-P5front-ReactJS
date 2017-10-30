@@ -8,7 +8,7 @@ import { Input } from 'quarks/Inputs';
 import { InputPassword, InputRegex, InputCpf, InputCnpj, InputStateRegistration } from 'quarks/Inputs/Validatable';
 import { Select } from 'atoms/Inputs';
 import Loading from 'components/Loading';
-import { accountUpdate, accountFetch } from 'actions';
+import { accountUpdate, accountFetch, accountFormReset } from 'actions';
 
 type FormType = {
   phone: { valid: boolean, value: string },
@@ -62,8 +62,11 @@ export class CustomerData extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { account } = nextProps;
+    const { dispatch } = this.props;
+
     if (account !== this.props.account) {
       if (!account.isUpdating && account.isUpdated) {
+        dispatch(accountFormReset());
         if (account.error) {
           swal({
             title: account.error.message === 'page.customer.error.password_change.CURRENT_PASSWORD_MISMATCH' ? 'Current password is not correct!' : account.error.message,

@@ -47,9 +47,7 @@ export class InputRegex extends React.Component {
     }
 
     if (value !== this.props.value) {
-      this.setState({
-        value,
-      });
+      this.setState(this.handleValidation(value));
     }
   }
 
