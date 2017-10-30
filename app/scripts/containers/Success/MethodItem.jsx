@@ -1,17 +1,19 @@
 // @flow
 
 import React from 'react';
+import cx from 'classnames';
 
 type Props = {
   buttonText: any,
   linkText: any,
+  className: string,
 };
 
 const MethodItem = (props: Props) => {
-  const { buttonText, linkText } = props;
+  const { buttonText, linkText, className } = props;
 
   return (
-    <div className="method-item">
+    <div className={cx('method-item', className)}>
       <img src={require('assets/media/images/boleto.png')} alt="{buttonText}" />
       <div className="link-1">
         <a>{buttonText}</a>
