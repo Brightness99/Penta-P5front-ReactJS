@@ -26,7 +26,7 @@ export class Footer extends React.Component {
 
     return (
       <footer className="app__footer">
-        <Newsletter parent={'footer'} />
+        {locale.COUNTRY_CODE === 'BR' && <Newsletter parent={'footer'} />}
         <Social locale={locale} />
         <Links links={links} screenSize={screenSize} locale={{ VIEW_ALL_LINKS }} />
         <Logo className="app__footer__logo" />
@@ -36,6 +36,7 @@ export class Footer extends React.Component {
     );
   };
 
+  // TODO: Remove HR
   renderDesktop = () => {
     const {
       locale: {
@@ -48,8 +49,8 @@ export class Footer extends React.Component {
     } = this.props;
     return (
       <footer className="app__footer">
-        <Newsletter parent={'footer'} />
-        <hr />
+        {locale.COUNTRY_CODE === 'BR' && <Newsletter parent={'footer'} />}
+        {locale.COUNTRY_CODE === 'BR' && <hr />}
         <div className="app__footer__data container">
           <div className="app__footer__data-left">
             <Logo className="app__footer__logo" />
@@ -75,7 +76,10 @@ export class Footer extends React.Component {
 function mapStateToProps(state: {}): {} {
   return {
     screenSize: state.app.screenSize,
-    locale: state.locale.translate.footer,
+    locale: {
+      ...state.locale.translate.footer,
+      COUNTRY_CODE: state.locale.COUNTRY_CODE,
+    },
   };
 }
 
