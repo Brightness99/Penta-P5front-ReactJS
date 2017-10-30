@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import swal from 'sweetalert2';
 import { Button } from 'quarks/Inputs';
 import { InputRegex } from 'quarks/Inputs/Validatable';
-import { ErrorText, SuccessText } from 'atoms/Texts';
-import { accountAddressCreate, accountAddressUpdate, zipcodeValidate } from 'actions';
+import { accountAddressCreate, accountAddressUpdate, zipcodeValidate, accountAddressFormReset } from 'actions';
 
 type Props = {
   account: {},
@@ -39,12 +39,57 @@ class AddressFormModal extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { account: { zipcodeValid } } = nextProps;
-    const { account } = this.props;
+    const { account: { zipcodeValid }, account } = nextProps;
+    const { account: prevAccount, dispatch } = this.props;
+    const { form } = this.state;
 
-    if (zipcodeValid !== account.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
+    if (zipcodeValid !== prevAccount.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
       if (!zipcodeValid.error) {
-        this.handleSubmit();
+        if (zipcodeValid.list) {
+          const newState = {
+            ...form,
+            city: {
+              value: zipcodeValid.list.city || '',
+              valid: !!zipcodeValid.list.city,
+            },
+            neighborhood: {
+              value: zipcodeValid.list.neighborhood || '',
+              valid: !!zipcodeValid.list.neighborhood,
+            },
+            state: {
+              value: zipcodeValid.list.state || '',
+              valid: !!zipcodeValid.list.state,
+            },
+            street: {
+              value: zipcodeValid.list.street || '',
+              valid: !!zipcodeValid.list.street,
+            },
+          };
+          this.setState({
+            form: newState,
+          });
+        }
+      }
+    }
+
+    if (!account.addresses.isAddressSaving && account.addresses.isAddressSavingCalled) {
+      dispatch(accountAddressFormReset());
+      if (account.addresses.error) {
+        swal({
+          title: account.addresses.error.message,
+          type: 'error',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        });
+      } else {
+        swal({
+          title: 'Successfully saved.',
+          type: 'success',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        });
       }
     }
   }
@@ -59,40 +104,34 @@ class AddressFormModal extends React.Component {
   }
 
   handleClick = () => {
-    const { dispatch } = this.props;
+    const { dispatch, type, isNew, address } = this.props;
     const { form, canSubmit } = this.state;
 
     if (canSubmit) {
-      dispatch(zipcodeValidate(form.zipcode.value));
-    }
-  }
+      const dataToSave = {
+        receiver_name: form.receiver_name.value,
+        zipcode: form.zipcode.value,
+        city: form.city.value,
+        neighborhood: form.neighborhood.value,
+        state: form.state.value,
+        street: form.street.value,
+        number: form.number.value,
+        additional_address: form.additional_address.value,
+        type,
+      };
 
-  handleSubmit = () => {
-    const { dispatch, type, isNew, address } = this.props;
-    const { form } = this.state;
-
-    const dataToSave = {
-      receiver_name: form.receiver_name.value,
-      zipcode: form.zipcode.value,
-      city: form.city.value,
-      neighborhood: form.neighborhood.value,
-      state: form.state.value,
-      street: form.street.value,
-      number: form.number.value,
-      additional_address: form.additional_address.value,
-      type,
-    };
-
-    if (isNew) {
-      dispatch(accountAddressCreate(dataToSave));
-    } else {
-      dataToSave.id = address.id;
-      dispatch(accountAddressUpdate(dataToSave));
+      if (isNew) {
+        dispatch(accountAddressCreate(dataToSave));
+      } else {
+        dataToSave.id = address.id;
+        dispatch(accountAddressUpdate(dataToSave));
+      }
     }
   }
 
   handleValidatedInput = (name, value, valid) => {
     const { form } = this.state;
+    const { dispatch, locale } = this.props;
     const newState = { form };
     const target = name.target;
     const key = target ? target.id : name;
@@ -109,6 +148,10 @@ class AddressFormModal extends React.Component {
       });
     }
     this.setState({ form: newState.form, canSubmit });
+
+    if (key === 'zipcode' && locale.COUNTRY_CODE === 'BR' && newState.form[key].valid) {
+      dispatch(zipcodeValidate(newState.form[key].value));
+    }
   }
 
   render() {
@@ -119,7 +162,7 @@ class AddressFormModal extends React.Component {
     return (
       <div className="address-form-modal-container">
         <h2>Adicionar endereço</h2>
-        <div>* Campos Obrigatorios</div>
+        <div>* Campos Obrigatórios</div>
         <form className="address-form-modal">
           <InputRegex
             id="receiver_name"
@@ -146,7 +189,7 @@ class AddressFormModal extends React.Component {
               pattern={zipcodePattern}
               required
             />
-            <a className="link" href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm">Nao sei meu CEP*</a>
+            <a target="_blank" className="link" href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm">Nao sei meu CEP*</a>
           </div>
           <InputRegex
             id="additional_address"
@@ -220,12 +263,7 @@ class AddressFormModal extends React.Component {
             required
           />
         </form>
-        <div className="mol-checkout-pane-footer">
-          {(!addresses.isAddressSaving && addresses.isAddressSavingCalled && addresses.error) && <ErrorText>{addresses.error.message}</ErrorText>}
-          {(!zipcodeValid.isRunning && zipcodeValid.isLoaded && zipcodeValid.error) && <ErrorText>{zipcodeValid.error.message}</ErrorText>}
-          {(!addresses.isAddressSaving && addresses.isAddressSavingCalled && !addresses.error) && <SuccessText>Successfully saved.</SuccessText>}
-        </div>
-        <div className="mol-checkout-pane-footer">
+        <div className="mol-checkout-pane-footer mol-address-pane-footer">
           <button className="atm-button-text" onClick={this.handleCloseModal}>CANCELAR</button>
           <Button type="submit" className="atm-send-button" onClick={this.handleClick} disabled={!canSubmit || (addresses.isAddressSaving && !addresses.isAddressSavingCalled) || (zipcodeValid.isRunning && !zipcodeValid.isLoaded)}>SALVAR ENDEREÇO</Button>
         </div>

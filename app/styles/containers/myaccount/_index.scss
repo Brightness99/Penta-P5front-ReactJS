@@ -1238,7 +1238,9 @@
     }
   }
   .address-form-modal-container {
-    width: 800px;
+    @include lg {
+      width: 800px;
+    }
     .address-form-modal {
       display: flex;
       justify-content: space-between;
@@ -1250,13 +1252,22 @@
         margin-top: 0.7em;
       }
       .atm-checkout-input-one {
-        width: calc(20% - 1rem);
+        width: 100%;
+        @include lg {
+          width: calc(20% - 1rem);
+        }
       }
       .atm-checkout-input-two {
-        width: calc(40% - 1rem);
+        width: 100%;
+        @include lg {
+          width: calc(40% - 1rem);
+        }
       }
       .atm-checkout-input-three {
-        width: 60%;
+        width: 100%;
+        @include lg {
+          width: 60%;
+        }
       }
       .zipcode {
         position: relative;
@@ -1555,4 +1566,8 @@
       appearance: none;
     }
   }
+}
+
+.mol-address-pane-footer {
+  justify-content: flex-end !important;
 }
