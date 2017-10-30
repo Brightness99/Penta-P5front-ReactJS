@@ -82,23 +82,33 @@ export default {
       return {
         ...state,
         ...action.payload,
+        isUpdating: true,
+        isUpdated: false,
         error: null,
       };
     },
     [AccountConstants.ACCOUNT_UPDATE_SUBMIT_SUCCESS](state) {
       return {
         ...state,
-        isRunning: false,
-        isLoaded: true,
+        isUpdating: false,
+        isUpdated: true,
         error: null,
       };
     },
     [AccountConstants.ACCOUNT_UPDATE_SUBMIT_FAILURE](state, action) {
       return {
         ...state,
-        isRunning: false,
-        isLoaded: true,
+        isUpdating: false,
+        isUpdated: true,
         error: action.payload,
+      };
+    },
+    [AccountConstants.ACCOUNT_FORM_RESET](state, action) {
+      return {
+        ...state,
+        isUpdating: false,
+        isUpdated: false,
+        error: null,
       };
     },
     [AccountConstants.ACCOUNT_ADDRESS_CREATE_SUBMIT](state) {

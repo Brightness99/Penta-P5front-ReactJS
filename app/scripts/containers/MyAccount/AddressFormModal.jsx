@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import swal from 'sweetalert2';
 import { Button } from 'quarks/Inputs';
 import { InputRegex } from 'quarks/Inputs/Validatable';
-import { accountAddressCreate, accountAddressUpdate, zipcodeValidate } from 'actions';
+import { accountAddressCreate, accountAddressUpdate, zipcodeValidate, accountAddressFormReset } from 'actions';
 
 type Props = {
   account: {},
@@ -39,11 +39,11 @@ class AddressFormModal extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { account: { zipcodeValid } } = nextProps;
-    const { account } = this.props;
+    const { account: { zipcodeValid }, account } = nextProps;
+    const { account: prevAccount, dispatch } = this.props;
     const { form } = this.state;
 
-    if (zipcodeValid !== account.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
+    if (zipcodeValid !== prevAccount.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
       if (!zipcodeValid.error) {
         if (zipcodeValid.list) {
           const newState = {
@@ -73,6 +73,7 @@ class AddressFormModal extends React.Component {
     }
 
     if (!account.addresses.isAddressSaving && account.addresses.isAddressSavingCalled) {
+      dispatch(accountAddressFormReset());
       if (account.addresses.error) {
         swal({
           title: account.addresses.error.message,
