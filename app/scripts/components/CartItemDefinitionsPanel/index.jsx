@@ -3,7 +3,8 @@ import React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
-import TruckIcon from 'components/Icons/Truck';
+import { TruckIcon, WarningFilled, AngleRight } from 'components/Icons';
+import FileFormatIcon from 'components/FileFormatIcon';
 import BulletListIcon from 'components/Icons/BulletList';
 
 type Props = {
@@ -61,6 +62,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
 
   renderMobile() {
     const { isOpen } = this.state;
+    const { expectedDeliveryDate, totalPrice } = this.props;
 
     return (<section className="side-panel-container">
       {!isOpen && <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>}
@@ -73,7 +75,35 @@ export default class CartItemDefinitionsPanel extends React.Component {
             <section className="side-panel-block">
               <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>
               <section className="side-panel-content">
-                {this.renderDesktop()}
+                <aside className="cart-item-definitions-container">
+                  <h4>Resumo do produto</h4>
+                  <section className="options">
+                    {this.renderParts()}
+                  </section>
+                  <section className="delivery-info-mobile">
+                    <section>
+                      <WarningFilled />
+                      <span>Previsão de entrega:</span>
+                      <span>{`${expectedDeliveryDate}`}</span>
+                    </section>
+                  </section>
+                  <section className="total-mobile"><span>{`R$${totalPrice}`}</span></section>
+                  <hr />
+                  <section className="instruction-container">
+                    <h4>Instruções do produto</h4>
+                    <ul>
+                      <li>
+                        <span><AngleRight /> Baixar gabarito deste produto:</span>
+                        <section className="icon-list">
+                          <FileFormatIcon title="AI" />
+                          <FileFormatIcon title="EPS" />
+                          <FileFormatIcon title="PSD" />
+                        </section></li>
+                      <li><AngleRight /> Como finalizar a arte frente e verso</li>
+                      <li><AngleRight /> Como preparar o arquivo de verniz</li>
+                    </ul>
+                  </section>
+                </aside>
               </section>
             </section>
           </SlideToggle>,

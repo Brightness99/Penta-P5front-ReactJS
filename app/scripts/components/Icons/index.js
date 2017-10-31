@@ -112,3 +112,5 @@ export ReferralIcon from './ReferralIcon';
 export LinkIcon from './LinkIcon';
 export GmailIcon from './GmailIcon';
 export FacebookIcon from './FacebookIcon';
+export WarningFilled from './WarningFilled';
+export AngleRight from './AngleRight';
