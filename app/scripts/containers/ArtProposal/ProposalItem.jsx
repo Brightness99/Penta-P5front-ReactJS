@@ -4,7 +4,7 @@ import config from 'config';
 import Slider from 'react-slick';
 import { RoundedTransparentButton } from 'atoms/Buttons';
 import { DownloadIcon } from 'components/Icons';
-import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
+import { PrevArrow, NextArrow } from 'components/Carousel';
 
 const docs = [
   {

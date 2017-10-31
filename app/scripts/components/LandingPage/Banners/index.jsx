@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import { NavLink } from 'react-router-dom';
 import { isMobile } from 'utils/helpers';
-import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
+import { PrevArrow, NextArrow } from 'components/Carousel';
 
 type Props = {
   images: BannerImageType[],
