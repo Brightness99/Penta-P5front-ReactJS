@@ -238,6 +238,7 @@ export class Upload extends React.Component {
   }
 
   renderCartItemDefinitions() {
+    const { selectedAdditionalParameters } = this.state;
     const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } }, screenSize } = this.props;
     return (<CartItemDefinitionsPanel
       parts={parts}
@@ -245,6 +246,7 @@ export class Upload extends React.Component {
       subTotal={total_price}
       expectedDeliveryDate={expected_delivery_date}
       isMobile={isMobile(screenSize)}
+      additionalOptions={selectedAdditionalParameters}
     />);
   }
 
@@ -273,7 +275,9 @@ export class Upload extends React.Component {
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>envie sua arte final</PageTitle>
-          { isMobile(screenSize) && <p>Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p> }
+          { isMobile(screenSize) &&
+            <p className="description">Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>
+          }
           <section className="content">
             <section className="main-upload-container">
               {
@@ -294,11 +298,17 @@ export class Upload extends React.Component {
                   Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer
                   outro ajuste.
                 </label>
-                <Button
-                  onClick={this.handleUploadFinish}
-                  kind="success"
-                  disabled={!canSubmit}
-                >Enviar arte final</Button>
+                <section className={`buttons-block ${isMobile(screenSize) ? 'mobile' : ''}`} >
+                  <Button
+                    onClick={this.handleUploadFinish}
+                    kind="cancel"
+                  >ENVIAR MAIS TARDE</Button>
+                  <Button
+                    onClick={this.handleUploadFinish}
+                    kind="success"
+                    disabled={!canSubmit}
+                  >Enviar arte final</Button>
+                </section>
               </section>
             </section>
             { this.renderCartItemDefinitions()}

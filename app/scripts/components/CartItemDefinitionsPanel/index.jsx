@@ -11,7 +11,10 @@ type Props = {
   expectedDeliveryDate: string,
   totalPrice: number,
   subTotal: number,
-  additionalOptions: [],
+  additionalOptions: {
+    file_format: {},
+    proof: {}
+  },
   parts: Array<{
     name: string,
     options: Array<{ field: string, value: string }>
@@ -60,9 +63,15 @@ export default class CartItemDefinitionsPanel extends React.Component {
       </section>));
   }
 
+  renderOption = (option) => {
+    const title = option.name.split('(')[0];
+    const price = option.price === 0 ? <span className="free">GRATIS</span> : <span className="cost">{`+R$${option.price}`}</span>;
+    return <span className="price-title">{title}: {price}</span>;
+  };
+
   renderMobile() {
     const { isOpen } = this.state;
-    const { expectedDeliveryDate, totalPrice } = this.props;
+    const { expectedDeliveryDate, totalPrice, additionalOptions } = this.props;
 
     return (<section className="side-panel-container">
       {!isOpen && <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>}
@@ -80,6 +89,15 @@ export default class CartItemDefinitionsPanel extends React.Component {
                   <section className="options">
                     {this.renderParts()}
                   </section>
+                  <hr />
+                  {
+                    additionalOptions &&
+                    <section className="additional-options">
+                      <section>{this.renderOption(additionalOptions.file_format)}</section>
+                      <section>{this.renderOption(additionalOptions.proof)}</section>
+                    </section>
+                  }
+                  <hr />
                   <section className="delivery-info-mobile">
                     <section>
                       <WarningFilled />
@@ -113,7 +131,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
   }
 
   renderDesktop() {
-    const { expectedDeliveryDate, totalPrice, subTotal } = this.props;
+    const { expectedDeliveryDate, totalPrice, subTotal, additionalOptions } = this.props;
 
     return (
       <aside className="cart-item-definitions-container">
@@ -124,7 +142,13 @@ export default class CartItemDefinitionsPanel extends React.Component {
         <hr />
         <section className="sub-total">Sub-total: <span>{`R$${subTotal}`}</span>(R$0,18un)</section>
         <hr />
-        <section className="additional-options">additional-options</section>
+        {
+          additionalOptions &&
+          <section className="additional-options">
+            <section>{this.renderOption(additionalOptions.file_format)}</section>
+            <section>{this.renderOption(additionalOptions.proof)}</section>
+          </section>
+        }
         <hr />
         <section className="total">Total: <span>{`R$${totalPrice}`}</span></section>
         <section className="delivery-info">
