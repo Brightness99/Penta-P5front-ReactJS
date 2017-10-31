@@ -22,7 +22,7 @@ export class ProductItem extends React.Component {
     return (
       <div className="product-item-row">
         <div className="product-item-col-product">
-          <img src={item.info.thumbnail} alt="Product" />
+          <img src={(item.info.thumbnail === '' || !item.info.thumbnail) ? require('assets/media/images/blue-logo.png') : item.info.thumbnail} alt="Product" />
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
