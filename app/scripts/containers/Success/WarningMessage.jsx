@@ -4,11 +4,11 @@ import React from 'react';
 import { CalendarIcon, TimesIcon } from 'components/Icons';
 
 type Props = {
-  message: string,
+  children: Node,
 };
 
 const WarningMessage = (props: Props) => {
-  const { message } = props;
+  const { children } = props;
 
   return (
     <div className="warning-message">
@@ -17,7 +17,7 @@ const WarningMessage = (props: Props) => {
       </div>
       <CalendarIcon />
       <span>
-        {message}
+        {children}
       </span>
     </div>
   );
