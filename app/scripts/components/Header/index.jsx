@@ -157,9 +157,12 @@ export class Header extends React.Component {
 
     return (
       <header className="org-header">
-        {!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible &&
-          <LoyaltyTopbar onClose={this.handleLoyaltyBarDismiss} key="loyalty-bar" />
-        }
+        <GrowToggle in={!loyalty.isRunning && loyalty.isLoaded && loyalty.loyalty_tier_id > 0 && isLoyaltyBarVisible}>
+          <LoyaltyTopbar
+            onClose={this.handleLoyaltyBarDismiss}
+            key="loyalty-bar"
+          />
+        </GrowToggle>
         <div className="mol-mobile-header">
           <div className="mol-header-button mol-header-button--menu">
             <button onClick={this.handleShowMenu} className="atm-header-icon-button">
@@ -216,7 +219,7 @@ export class Header extends React.Component {
           !showTopbar && 'org-header--scrolled'
         )}
       >
-        <GrowToggle in={!loyalty.isRunning && loyalty.isLoaded && isLoyaltyBarVisible}>
+        <GrowToggle in={!loyalty.isRunning && loyalty.isLoaded && loyalty.loyalty_tier_id > 0 && isLoyaltyBarVisible}>
           <LoyaltyTopbar
             onClose={this.handleLoyaltyBarDismiss}
             key="loyalty-bar"

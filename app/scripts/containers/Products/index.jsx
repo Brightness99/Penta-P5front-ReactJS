@@ -53,6 +53,7 @@ export class Products extends React.Component {
         isRunning,
         isLoaded,
       },
+      locale,
     } = this.props;
 
     const breadcrumb = [
@@ -73,13 +74,13 @@ export class Products extends React.Component {
       <div>
         {!isMobile(screenSize) && <BreadcrumbsBlock links={breadcrumb} />}
         <ProductHighlightsBlock />
-        <ProductInformationBlock />
-        <ProductTutorialsBlock />
-        <ProductWarrantyBlock />
+        {locale.COUNTRY_CODE === 'BR' && <ProductInformationBlock />}
+        {locale.COUNTRY_CODE === 'BR' && <ProductTutorialsBlock />}
+        {locale.COUNTRY_CODE === 'BR' && <ProductWarrantyBlock />}
         <BenefitsBlock />
         <GraphicPlantBlock />
         <CustomersRelyBlock />
-        <BlogBlock />
+        {locale.COUNTRY_CODE === 'BR' && <BlogBlock />}
         <ProductOpinionsBlock />
         <ProductDetailsBlock />
         <ProductBannerBlock />
@@ -91,7 +92,9 @@ export class Products extends React.Component {
 function mapStateToProps(state) {
   return {
     app: state.app,
-    locale: state.locale.translate.page.product_landing_page,
+    locale: {
+      COUNTRY_CODE: state.locale.COUNTRY_CODE,
+    },
     router: state.router,
     products: state.products,
   };
