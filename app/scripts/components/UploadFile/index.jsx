@@ -90,9 +90,20 @@ export class UploadFile extends React.Component {
 
   onDrop = (e) => {
     e.preventDefault();
-    const { uploadFile } = this.props;
     const files = e.dataTransfer.files;
-    const file = files[0];
+    this.uploadFile(files[0]);
+    return false;
+  };
+
+  onChangeInput = (e) => {
+    e.preventDefault();
+    const files = e.target.files;
+    this.uploadFile(files[0]);
+    return false;
+  };
+
+  uploadFile(file) {
+    const { uploadFile } = this.props;
     const fileName = file.name;
     const format = fileName.split('.').pop();
 
@@ -106,8 +117,7 @@ export class UploadFile extends React.Component {
     if (typeof uploadFile === 'function') {
       uploadFile(file);
     }
-    return false;
-  };
+  }
 
   handleRemoveFile = () => {
     const { preview } = this.state;
@@ -157,7 +167,7 @@ export class UploadFile extends React.Component {
         onDragOver={this.onDragOver}
         onDrop={this.onDrop}
       >
-        <input type="file" multiple={multiple} />
+        <input type="file" multiple={multiple} onChange={this.onChangeInput} />
         <section className="icons">
           {
             !isShowDropzone &&
