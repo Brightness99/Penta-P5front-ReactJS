@@ -22,7 +22,7 @@ export class ProductItem extends React.Component {
     return (
       <div className="product-item-row">
         <div className="product-item-col-product">
-          <img src={require('assets/media/images/img.png')} alt="Product" />
+          <img src={item.info.thumbnail} alt="Product" />
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
@@ -75,7 +75,7 @@ export class ProductItem extends React.Component {
             <div>{item.info.quantity}</div>
           </div>
           <div className="product-item-col product-item-col-value">
-            <div>{parseFloat(item.info.price)}</div>
+            <div><IntlMoney>{parseFloat(item.info.price)}</IntlMoney></div>
           </div>
         </div>
       </div>

@@ -94,9 +94,9 @@ export class Success extends React.Component {
     );
   }
 
-  renderActions(actions, actionCount) {
+  renderActions(actions, actionCount, createdDate) {
     return Object.keys(actions).map((key) => (
-      !actions[key].enabled && <MethodItem className={actionCount === 1 ? 'full-method-item' : ''} buttonText={actions[key].label} key={key} linkText="Copiar código do boleto" />
+      actions[key].enabled && <MethodItem action={actions[key]} createdDate={createdDate} className={actionCount === 1 ? 'full-method-item' : ''} type={key} key={key} />
     ));
   }
 
@@ -124,7 +124,7 @@ export class Success extends React.Component {
     let actionCount = 0;
     if (successfulPurchase.isLoaded && !successfulPurchase.isRunning) {
       Object.keys(successfulPurchase.order.actions).forEach((key) => {
-        if (!successfulPurchase.order.actions[key].enabled) {
+        if (successfulPurchase.order.actions[key].enabled) {
           actionCount++;
         }
       });
@@ -147,11 +147,11 @@ export class Success extends React.Component {
               <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
               <div>
                 <WarningMessage>
-                  <b>Prazo de entrega: </b> a arte deve ser envlada ate as <b>{moment(successfulPurchase.order.info.created_at).format('hh:mm')}</b> do dia <b>{moment(successfulPurchase.order.info.created_at).format('DD/MM/YYYY')}</b>. Apos esse perlodo a data para e previsao de entrega sera alterada.
+                  <b>Prazo de entrega: </b> a arte deve ser enviada até às <b>{moment(successfulPurchase.order.info.created_at).format('hh:mm')}</b> do dia <b>{moment(successfulPurchase.order.info.created_at).format('DD/MM/YYYY')}</b>. Após esse período, a data para a previsão de entrega será alterada.
                 </WarningMessage>
               </div>
               <div className="method-container">
-                {this.renderActions(successfulPurchase.order.actions, actionCount)}
+                {this.renderActions(successfulPurchase.order.actions, actionCount, successfulPurchase.order.info.created_at)}
               </div>
             </span>}
             <div className="main-container">
