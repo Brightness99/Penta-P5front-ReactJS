@@ -8,11 +8,18 @@ type Props = {
   selectedStrategy: number,
   handleCanvasFinalize: (docRef: string) => void,
   cimpressInfo: {},
+  fileFormats: [],
   handleUploadFile: (file: { title: string, preview: {} }) => void,
   handleRemoveFile: (file: { title: string, preview: {} }) => void,
 }
 
-const UploadTypes = ({ uploadType, selectedStrategy, handleUploadFile, handleRemoveFile, handleCanvasFinalize, cimpressInfo }: Props) => {
+const UploadTypes = ({ uploadType,
+                       selectedStrategy,
+                       handleUploadFile,
+                       handleRemoveFile,
+                       handleCanvasFinalize,
+                       cimpressInfo,
+                       fileFormats }: Props) => {
   switch (uploadType) {
     case 'canvas':
       return (<CanvasSchema
@@ -28,6 +35,7 @@ const UploadTypes = ({ uploadType, selectedStrategy, handleUploadFile, handleRem
     default:
       return (
         <NormalUploadType
+          fileFormats={fileFormats}
           uploadTwoFiles={selectedStrategy === 4}
           multipleFiles={selectedStrategy === 5}
           handleUploadFile={handleUploadFile}

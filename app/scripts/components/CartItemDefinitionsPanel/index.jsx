@@ -9,8 +9,8 @@ import BulletListIcon from 'components/Icons/BulletList';
 
 type Props = {
   expectedDeliveryDate: string,
-  totalPrice: number,
   subTotal: number,
+  commission: number,
   additionalOptions: {
     file_format: {},
     proof: {}
@@ -71,7 +71,11 @@ export default class CartItemDefinitionsPanel extends React.Component {
 
   renderMobile() {
     const { isOpen } = this.state;
-    const { expectedDeliveryDate, totalPrice, additionalOptions } = this.props;
+    const { expectedDeliveryDate, subTotal, additionalOptions } = this.props;
+    let total = subTotal;
+    if (additionalOptions) {
+      total += additionalOptions.file_format.price + additionalOptions.proof.price;
+    }
 
     return (<section className="side-panel-container">
       {!isOpen && <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>}
@@ -105,7 +109,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
                       <span>{`${expectedDeliveryDate}`}</span>
                     </section>
                   </section>
-                  <section className="total-mobile"><span>{`R$${totalPrice}`}</span></section>
+                  <section className="total-mobile"><span>{`R$${total}`}</span></section>
                   <hr />
                   <section className="instruction-container">
                     <h4>Instruções do produto</h4>
@@ -131,8 +135,11 @@ export default class CartItemDefinitionsPanel extends React.Component {
   }
 
   renderDesktop() {
-    const { expectedDeliveryDate, totalPrice, subTotal, additionalOptions } = this.props;
-
+    const { expectedDeliveryDate, subTotal, additionalOptions, commission } = this.props;
+    let total = subTotal;
+    if (additionalOptions) {
+      total += additionalOptions.file_format.price + additionalOptions.proof.price;
+    }
     return (
       <aside className="cart-item-definitions-container">
         <h4>Resumo do produto</h4>
@@ -140,7 +147,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
           {this.renderParts()}
         </section>
         <hr />
-        <section className="sub-total">Sub-total: <span>{`R$${subTotal}`}</span>(R$0,18un)</section>
+        <section className="sub-total">Sub-total: <span>{`R$${subTotal}`}</span>{`(R$${commission}un)`}</section>
         <hr />
         {
           additionalOptions &&
@@ -150,7 +157,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
           </section>
         }
         <hr />
-        <section className="total">Total: <span>{`R$${totalPrice}`}</span></section>
+        <section className="total">Total: <span>{`R$${total.toFixed(2)}`}</span></section>
         <section className="delivery-info">
           <TruckIcon />
           <span>Previsão de entrega:</span>

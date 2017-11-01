@@ -147,7 +147,7 @@ export class UploadFile extends React.Component {
   };
 
   renderContent = () => {
-    const { progress, multiple } = this.props;
+    const { progress, multiple, fileFormats } = this.props;
     const { isSelectedFileForUpload, fileName, fileFormat, isShowDropzone } = this.state;
 
     if (isSelectedFileForUpload) {
@@ -167,7 +167,7 @@ export class UploadFile extends React.Component {
         onDragOver={this.onDragOver}
         onDrop={this.onDrop}
       >
-        <input type="file" multiple={multiple} onChange={this.onChangeInput} />
+        <input type="file" multiple={multiple} accept={fileFormats.join()} onChange={this.onChangeInput} />
         <section className="icons">
           {
             !isShowDropzone &&
