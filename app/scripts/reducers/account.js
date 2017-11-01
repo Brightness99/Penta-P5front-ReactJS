@@ -103,6 +103,14 @@ export default {
         error: action.payload,
       };
     },
+    [AccountConstants.ACCOUNT_FORM_RESET](state, action) {
+      return {
+        ...state,
+        isUpdating: false,
+        isUpdated: false,
+        error: null,
+      };
+    },
     [AccountConstants.ACCOUNT_ADDRESS_CREATE_SUBMIT](state) {
       return {
         ...state,

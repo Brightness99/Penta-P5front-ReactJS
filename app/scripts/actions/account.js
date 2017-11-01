@@ -33,6 +33,18 @@ export function accountUpdate(data): Object {
   };
 }
 
+/**
+ * Reset Account Form
+ *
+ * @returns {Object}
+ */
+export function accountFormReset(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_FORM_RESET,
+    payload: {},
+  };
+}
+
 export function accountAddressCreate(data): Object {
   return {
     type: AccountConstants.ACCOUNT_ADDRESS_CREATE_SUBMIT,
@@ -174,7 +186,6 @@ export function zipcodeValidate(zipcode: string): Object {
 
 /**
  * Reset Address Form
- * @param {string} zipcode
  *
  * @returns {Object}
  */

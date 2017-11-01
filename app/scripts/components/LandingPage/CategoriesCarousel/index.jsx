@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { Tabs, TabHeader, TabNav, TabBody } from 'components/Tabs';
 import { ProductCard } from 'molecules/Products';
-import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
+import { PrevArrow, NextArrow } from 'components/Carousel';
 
 type Props = {
   screenSize: string,
@@ -758,7 +758,7 @@ export class CategoriesCarouselBlock extends React.Component {
         autoplay={false}
         key={category.id}
         infinite={false}
-      >S
+      >
         {category.pages.map((products) => (
           products.products.map((product) => (
             <div key={product.slug}>
