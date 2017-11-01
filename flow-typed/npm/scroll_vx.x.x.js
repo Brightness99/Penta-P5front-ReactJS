@@ -30,9 +30,9 @@ declare module 'scroll/test/index' {
 declare module 'scroll/index' {
   declare module.exports: $Exports<'scroll'>;
 }
-declare module 'scroll/index.js' {
+declare module 'scroll/index.jsx' {
   declare module.exports: $Exports<'scroll'>;
 }
-declare module 'scroll/test/index.js' {
+declare module 'scroll/test/index.jsx' {
   declare module.exports: $Exports<'scroll/test/index'>;
 }

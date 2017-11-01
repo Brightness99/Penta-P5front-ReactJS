@@ -10,6 +10,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import Sidebar from './Sidebar';
 import OrderList from './OrderList';
 import OrderDetails from './OrderDetails';
+import ArtProposal from '../ArtProposal';
 import MyAddresses from './MyAddresses';
 import CardsAccount from './CardsAccount';
 import TemplateModels from './TemplateModels';
@@ -18,6 +19,7 @@ import Cloud from './Cloud';
 import Loyalty from './Loyalty';
 import CustomerData from './CustomerData';
 import Referral from './Referral';
+import Briefing from './Briefing';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
@@ -76,7 +78,21 @@ export class MyAccount extends React.Component {
             <Switch>
               <Route
                 path="/minha-conta/pedidos/:orderNumber"
-                render={(props) => <OrderDetails {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
+                render={() => (
+                  <Switch>
+                    <Route
+                      path="/minha-conta/pedidos/:orderNumber/proposta-de-arte"
+                      render={(props) => <ArtProposal {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
+                    />
+                    <Route
+                      render={(props) => <OrderDetails {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
+                    />
+                  </Switch>
+                )}
+              />
+              <Route
+                path="/minha-conta/pedidos/:orderNumber/proposta-de-arte"
+                render={(props) => <ArtProposal {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
               />
               <Route
                 render={(props) => <OrderList {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
@@ -94,7 +110,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/meus-dados"
-          render={(props) => <CustomerData {...props} screenSize={screenSize} />}
+          render={(props) => <CustomerData {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/modelos-salvos"
@@ -106,11 +122,11 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/cloud"
-          render={(props) => <Cloud {...props} screenSize={screenSize} />}
+          render={(props) => <Cloud {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/programa-de-fidelidade"
-          render={(props) => <Loyalty {...props} screenSize={screenSize} />}
+          render={(props) => <Loyalty {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/indicacoes"
@@ -124,23 +140,46 @@ export class MyAccount extends React.Component {
   }
 
   render() {
-    const { screenSize, locale } = this.props;
+    const { screenSize, locale, router: { location: { pathname } } } = this.props;
     const { breadcrumbs } = this.state;
-
-    return (
-      <div
-        className={cx(
-          'container-myaccount',
-          isMobile(screenSize) && 'container',
-        )}
-      >
-        {!isMobile(screenSize) && <Sidebar screenSize={screenSize} />}
-        <div className="container-myaccount-content">
-          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumbs} />}
-          <PageTitle>{locale.TITLE}</PageTitle>
-         {this.renderContainer()}
+    const pathStrings = pathname.split('/');
+    const isProposalArtPage = (pathStrings[pathStrings.length - 1] === 'proposta-de-arte');
+    const breadcrumbsMark = (isProposalArtPage) ?
+      (
+        <div className="container">
+          <Breadcrumbs links={breadcrumbs} />
         </div>
-      </div>
+      ) :
+      (
+        <Breadcrumbs links={breadcrumbs} />
+      );
+    return (
+      <Switch>
+        <Route
+          exact={true}
+          path="/minha-conta/pedidos/:orderNumber/:itemId/briefing"
+          render={(props) => <Briefing {...props} />}
+        />
+        <Route
+          path="/minha-conta"
+          render={() => (
+            <div
+              className={cx(
+                'container-myaccount',
+                isProposalArtPage && 'container-art-proposal',
+                isMobile(screenSize) && 'container',
+              )}
+            >
+              {!isMobile(screenSize) && !isProposalArtPage && <Sidebar screenSize={screenSize} />}
+              <div className="container-myaccount-content">
+                {!isMobile(screenSize) && breadcrumbsMark}
+                {!isProposalArtPage && <PageTitle>{locale.TITLE}</PageTitle>}
+                {this.renderContainer()}
+              </div>
+            </div>
+          )}
+        />
+      </Switch>
     );
   }
 }
@@ -150,6 +189,7 @@ function mapStoreToProps(state) {
   return ({
     screenSize: state.app.screenSize,
     locale: state.locale.translate.account,
+    router: state.router,
   });
 }
 

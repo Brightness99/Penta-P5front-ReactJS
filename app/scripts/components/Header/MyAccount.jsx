@@ -1,10 +1,21 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
 import { isMobile, shouldComponentUpdate } from 'utils/helpers';
-import { AngleDownIcon, OrdersIcon, AddressIcon, CardsIcon, ModelsIcon, OutIcon, MyAccountIcon, TimesIcon } from 'components/Icons';
+import {
+  OrdersIcon,
+  AddressIcon,
+  CardsIcon,
+  ModelsIcon,
+  OutIcon,
+  MyAccountIcon,
+  TimesIcon,
+  AngleRightIcon,
+  MyDataIcon
+} from 'components/Icons';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
 
@@ -14,9 +25,11 @@ type Props = {
   handleClose: () => {},
   handleLogOut: () => {},
   isAuthorized: boolean,
+  locale: {},
+  user: {},
 };
 
-export default class MyAccount extends React.Component {
+export class MyAccount extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
@@ -29,7 +42,7 @@ export default class MyAccount extends React.Component {
     }
   };
 
-  handleLogOut=() => {
+  handleLogOut = () => {
     const { handleLogOut } = this.props;
 
     if (typeof handleLogOut === 'function') {
@@ -40,22 +53,25 @@ export default class MyAccount extends React.Component {
   };
 
   renderLoggedOut() {
+    const { locale } = this.props;
+
     return [
       <li key="login">
         <NavLink onClick={this.handleClick} to="/login-cadastro">
-          <AngleDownIcon style={{ transform: 'rotate(270deg)' }} /> Entrar
+          <AngleRightIcon /> {locale.SIGN_IN}
         </NavLink>
       </li>,
       <li key="register">
         <NavLink onClick={this.handleClick} to="/login-cadastro">
-          <AngleDownIcon /> Cadastrar
+          <AngleRightIcon /> {locale.SIGN_UP}
         </NavLink>
       </li>,
     ];
   }
 
   renderLoggedIn() {
-    return [
+    const { locale, user } = this.props;
+    const loggedInItems = [
       <li key="pedidos">
         <NavLink onClick={this.handleClick} to="/minha-conta/pedidos">
           <OrdersIcon /> Meus Pedidos
@@ -64,6 +80,11 @@ export default class MyAccount extends React.Component {
       <li key="enderecos">
         <NavLink onClick={this.handleClick} to="/minha-conta/enderecos">
           <AddressIcon /> Meus endereços
+        </NavLink>
+      </li>,
+      <li key="dados">
+        <NavLink onClick={this.handleClick} to="/minha-conta/meus-dados">
+          <MyDataIcon /> Meus dados
         </NavLink>
       </li>,
       <li key="cartoes-salvos">
@@ -76,33 +97,45 @@ export default class MyAccount extends React.Component {
           <ModelsIcon /> Modelos salvos
         </NavLink>
       </li>,
-      <li key="cloud">
-        <NavLink onClick={this.handleClick} to="/minha-conta/cloud">
-          <ModelsIcon /> Cloud
-        </NavLink>
-      </li>,
+    ];
+
+    if (user.customerInfo && user.customerInfo.cloud_manager === 1) {
+      loggedInItems.push(
+        <li key="cloud">
+          <NavLink onClick={this.handleClick} to="/minha-conta/cloud">
+            <ModelsIcon /> Cloud
+          </NavLink>
+        </li>
+      );
+    }
+
+    loggedInItems.push(
       <li key="logout">
         <NavLink onClick={this.handleLogOut} to="#">
-          <OutIcon /> Sair
+          <OutIcon /> {locale.LOGOUT}
         </NavLink>
       </li>,
-    ];
+    );
+
+    return loggedInItems;
   }
 
-  renderMenu=() => {
+  renderMenu = () => {
     const { isAuthorized } = this.props;
 
     if (isAuthorized) {
       return this.renderLoggedIn();
     }
     return this.renderLoggedOut();
-  }
+  };
 
   renderMobileHeader() {
+    const { locale } = this.props;
+
     return (
       <div>
-        <span key="hello">Olá!</span>
-        <span key="register">Entrar ou Cadastrar</span>
+        <span key="hello">{locale.GREETING}</span>
+        <span key="register">{locale.MY_ACCOUNT}</span>
       </div>
     );
   }
@@ -149,3 +182,11 @@ export default class MyAccount extends React.Component {
     return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+export default connect(mapStateToProps)(MyAccount);

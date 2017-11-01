@@ -1,47 +1,62 @@
 // @flow
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-import { PrintiIcon, PrintiSymbolIcon } from 'components/Icons';
+import { connect } from 'react-redux';
+import cx from 'classnames';
+import { shouldComponentUpdate } from 'utils/helpers';
 
 type Props = {
-  enableLink: boolean,
-  small: boolean,
-  fill: string,
-  onClick: () => {},
+  short: boolean,
+  invert: boolean,
+  loyalty: {},
+  size: 'sm' | 'md' | 'lg',
 };
 
-const LogoLoyalty = (props: Props) => {
-  const { enableLink, small } = props;
-
-  const handleClick = (ev) => {
-    const { onClick } = props;
-
-    if (typeof onClick === 'function') {
-      onClick(ev);
-    }
+export class LogoLoyalty extends React.Component {
+  static defaultProps = {
+    short: false,
+    invert: false,
+    size: 'md',
   };
 
-  if (enableLink) {
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  static props: Props;
+
+  handleColors = () => {
+    const { loyalty, invert } = this.props;
+
+    return ({
+      backgroundColor: invert ? '#fff' : loyalty.color,
+      color: invert ? loyalty.color : '#fff',
+    });
+  };
+
+  render() {
+    const { loyalty, short, size } = this.props;
+
+    if (!loyalty.color) {
+      return null;
+    }
+
     return (
-      <div className="atm-printi-logo">
-        <NavLink to="/" onClick={handleClick}>
-          {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
-          <div className="org-logo-loyalty">
-            <p>Club</p>
-            <p className="mol-logo-loyalty">Gold</p>
-          </div>
-        </NavLink>
+      <div
+        className={cx(
+          'mol-logo-loyalty',
+          !!size && `mol-logo-loyalty--${size}`
+        )}
+      >
+        {!short && <span>Club</span>}
+        {loyalty.color && <div style={this.handleColors()}>{loyalty.loyalty_tier_name}</div>}
       </div>
     );
   }
+}
 
-  return (
-    <div className="atm-printi-logo">
-      {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={props.fill} />}
-    </div>
-  );
-};
+function mapStateToProps(state) {
+  return {
+    loyalty: state.account.loyalty,
+  };
+}
 
-export default LogoLoyalty;
+export default connect(mapStateToProps)(LogoLoyalty);

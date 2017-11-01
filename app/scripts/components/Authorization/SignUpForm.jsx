@@ -2,10 +2,15 @@
 import React from 'react';
 
 import ErrorField from 'components/ErrorField';
+import { CheckBox } from 'components/Input';
 import { BlockTitle } from 'atoms/Titles';
+import EyeIcon from 'components/Icons/Eye';
+import EyeSlashIcon from 'components/Icons/EyeSlash';
+import IconToggleButton from 'components/IconToggleButton';
 import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
 import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
+import TermsAndPolicyBlock from './TermsAndPolicyBlock';
 
 type FormType = {
   first_name: { valid: boolean, value: string },
@@ -18,11 +23,26 @@ type Props = {
   onSubmit: (data: FormType) => void,
   isFingerprintLoaded: boolean,
   errorMessage: string,
+  isLoading: boolean,
+  isMobile: boolean,
+  locale: {
+    TITLE: string,
+    FULL_NAME_PLACEHOLDER: string,
+    EMAIL_PLACEHOLDER: string,
+    CONFIRM_EMAIL_PLACEHOLDER: string,
+    PASSWORD_PLACEHOLDER: string,
+    BUTTON_TITLE: string
+  }
 };
 
-type State = { canSubmit: boolean, form: FormType };
+type State = {
+  canSubmit: boolean,
+  form: FormType,
+  hubspotSubscribe: boolean,
+  showPassword: boolean
+};
 
-export default class SignUpForm extends React.PureComponent {
+export default class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -34,11 +54,10 @@ export default class SignUpForm extends React.PureComponent {
         password: { valid: false, value: '' },
       },
       canSubmit: false,
+      hubspotSubscribe: false,
+      showPassword: false,
     };
   }
-
-  props: Props;
-  state: State;
 
   componentWillReceiveProps = (newProps: Props) => {
     if (this.props.isFingerprintLoaded !== newProps.isFingerprintLoaded) {
@@ -46,10 +65,14 @@ export default class SignUpForm extends React.PureComponent {
     }
   };
 
+  static props: Props;
+
+  static state: State;
+
   handleSubmit = (ev) => {
     ev.preventDefault();
 
-    const { form, canSubmit } = this.state;
+    const { form, canSubmit, hubspotSubscribe } = this.state;
     const { onSubmit } = this.props;
 
     if (canSubmit === true) {
@@ -60,9 +83,9 @@ export default class SignUpForm extends React.PureComponent {
         email: form.email.value,
         email_confirmation: form.email_confirmation.value,
         password: form.password.value,
+        hubspot_subscribe: hubspotSubscribe,
         fingerprint,
         socialType: '',
-        hubspot_subscribe: true,
         socialData: {
           socialId: '',
           socialToken: '',
@@ -92,46 +115,92 @@ export default class SignUpForm extends React.PureComponent {
     this.setState({ form: newState.form, canSubmit });
   };
 
+  handleCheckedStateChanged = (event) => {
+    this.setState({
+      hubspotSubscribe: event.target.checked,
+    });
+  };
+
+  handleToggleChanged = (value) => {
+    this.setState({
+      showPassword: value,
+    });
+  };
+
   render() {
-    const { canSubmit, form } = this.state;
-    const { errorMessage } = this.props;
+    const { canSubmit, form, hubspotSubscribe, showPassword } = this.state;
+    const {
+      errorMessage, isLoading, locale: {
+        TITLE,
+        FULL_NAME_PLACEHOLDER,
+        EMAIL_PLACEHOLDER,
+        CONFIRM_EMAIL_PLACEHOLDER,
+        PASSWORD_PLACEHOLDER,
+        BUTTON_TITLE,
+      },
+      isMobile,
+    } = this.props;
 
     return (
       <div className="authentication__block">
-        <BlockTitle>Cadastrar</BlockTitle>
+        <BlockTitle>{TITLE}</BlockTitle>
         <hr />
         <form className="authentication__block__form" id="signUpForm" onSubmit={this.handleSubmit}>
           <InputFullName
             name="first_name"
-            placeholder="Nome completo"
+            placeholder={FULL_NAME_PLACEHOLDER}
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email"
-            placeholder="E-mail"
+            placeholder={EMAIL_PLACEHOLDER}
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputEmail
             name="email_confirmation"
-            placeholder="Repetir e-mail"
+            placeholder={CONFIRM_EMAIL_PLACEHOLDER}
             equalsTo={form.email.value}
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
           <InputPassword
             name="password"
-            placeholder="Senha"
+            showPassword={showPassword}
+            placeholder={PASSWORD_PLACEHOLDER}
+            showLabel={true}
             onValidate={this.handleValidatedInput}
           />
+          <section className="show-password-block">
+            <IconToggleButton
+              onChange={this.handleToggleChanged}
+              title="Esconder senha"
+              iconChecked={<EyeSlashIcon />}
+              iconUnchecked={<EyeIcon />}
+            />
+          </section>
           <ErrorField message={errorMessage} />
           <Button
             type="submit"
             name="sign_in"
             kind="success"
+            isLoading={isLoading}
             disabled={!canSubmit}
           >
-            Cadastrar
+            {BUTTON_TITLE}
           </Button>
+          <section className="authentication__block__form__footer">
+            <label>
+              <CheckBox
+                checked={hubspotSubscribe}
+                onChange={this.handleCheckedStateChanged}
+              />
+              <span>Quero receber ofertas exclusivas e novidades por e-mail</span>
+            </label>
+          </section>
         </form>
+        { !isMobile && <TermsAndPolicyBlock />}
       </div>
     );
   }

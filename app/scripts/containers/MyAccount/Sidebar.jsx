@@ -1,10 +1,19 @@
-// flow
+// @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub, ReferralIcon } from 'components/Icons';
+import { OrdersIcon, AddressIcon, MyDataIcon, CardsIcon, ModelsIcon, OutIcon, CloudIcon, PrintiClub, ReferralIcon, Bell } from 'components/Icons';
+
+type Props = {
+  user: Object,
+};
 
 export class Sidebar extends React.Component {
+  static props: Props;
+
   render() {
+    const { user } = this.props;
+
     return (
       <div className="container-sidebarAccount">
         <div className="box-client">
@@ -45,16 +54,16 @@ export class Sidebar extends React.Component {
           </li>
           <li>
             <NavLink exact={true} activeClassName="is-active" to="/minha-conta/notificacoes">
-              <i><ModelsIcon /></i>
+              <i className="bellIcon"><Bell /></i>
               <span>Notificação</span>
             </NavLink>
           </li>
-          <li>
+          {user.customerInfo && user.customerInfo.cloud_manager === 1 && <li>
             <NavLink exact={true} activeClassName="is-active" to="/minha-conta/cloud">
               <i className="cloudIcon"><CloudIcon /></i>
               <span>Cloud</span>
             </NavLink>
-          </li>
+          </li>}
           <li>
             <NavLink exact={true} activeClassName="is-active" to="/minha-conta/indicacoes">
               <i className="referralIcon"><ReferralIcon /></i>
@@ -62,7 +71,7 @@ export class Sidebar extends React.Component {
             </NavLink>
           </li>
           <li>
-            <NavLink exact={true} activeClassName="is-active" to="#">
+            <NavLink exact={true} activeClassName="is-active" to="/minha-conta/programa-de-fidelidade">
               <i className="printClubIcon"><PrintiClub /></i>
             </NavLink>
           </li>
@@ -77,4 +86,12 @@ export class Sidebar extends React.Component {
     );
   }
 }
-export default Sidebar;
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+export default connect(mapStateToProps)(Sidebar);
+

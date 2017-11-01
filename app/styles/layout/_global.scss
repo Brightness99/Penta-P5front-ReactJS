@@ -61,6 +61,16 @@ a {
   }
 }
 
+.has-loyalty-bar {
+  .app__main {
+    padding-top: $header-height-mobile + $loyalty-height;
+
+    @include lg {
+      padding-top: $desktop-height-mobile + $loyalty-height;
+    }
+  }
+}
+
 label {
   margin: 0;
 }

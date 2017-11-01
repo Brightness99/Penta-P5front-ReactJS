@@ -8,7 +8,7 @@ import config from 'config';
 import Slider from 'react-slick';
 import { RoundedTransparentButton } from 'atoms/Buttons';
 import { DownloadIcon } from 'components/Icons';
-import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
+import { PrevArrow, NextArrow } from 'components/Carousel';
 
 type Props = {
   proposal: {},
@@ -88,10 +88,15 @@ export class ProposalItem extends React.Component {
           <div className="avatar-wrapper">
             <image src="" />
           </div>
+
           <div className="name-wrapper">
             <p className="name">Enviado por</p>
             <p className="position">{name}</p>
           </div>
+          {/* <div className="note">
+            IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material.
+
+          </div> */}
         </div>
         <div className="item-body">
           <p className="proposal-text"><div dangerouslySetInnerHTML={{ __html: message }} /></p>

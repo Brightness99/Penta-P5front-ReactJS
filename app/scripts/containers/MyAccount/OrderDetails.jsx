@@ -1,26 +1,22 @@
 // @flow
 import React from 'react';
-import Helmet from 'react-helmet';
-import Breadcrumbs from 'components/Breadcrumbs';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import { CodeBar, CheckIcon, Receipt, ExclamationMark, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel } from 'components/Icons';
+import { CheckIcon, CloseIcon, Warning, Change, Archive, CalendarIcon, ArrowCarousel } from 'components/Icons';
 import { accountOrderDetailFetch } from 'actions';
 import Loading from 'components/Loading';
-import { PageTitle } from 'atoms/Titles';
 
 type Props = {
   screenSize: string,
   account: {},
   match: {},
-  locale: {},
   dispatch: () => {},
-  setBreadcrumbs: () => {},
+  setBreadcrumbs: () => void,
 };
 
-export class OrderDetails extends React.Component {
+export class OrderListDetails extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentDidMount() {
@@ -34,16 +30,16 @@ export class OrderDetails extends React.Component {
   static props: Props;
 
   handleBreadcrumbs = () => {
-    const { setBreadcrumbs, locale, account: { selectedOrder }, match: { params: { orderNumber } } } = this.props;
-    console.log('CY');
+    const { setBreadcrumbs, match: { params: { orderNumber } } } = this.props;
+
     if (typeof setBreadcrumbs === 'function') {
       setBreadcrumbs([
         {
-          title: locale.TITLE,
-          url: '/minha-conta/pedidos',
+          title: 'Meus pedidos',
+          url: '/minha-conta/meus-pedidos',
         },
         {
-          title: `${locale.order_details.ORDER} ${locale.order_details.ORDER_NUMBER.toLowerCase()}${orderNumber}`,
+          title: `Pedido nº' ${orderNumber}`,
         },
       ]);
     }
@@ -57,10 +53,10 @@ export class OrderDetails extends React.Component {
     ));
   }
 
-  renderItemActionButtons(item) {
-
+  renderItemActionButtons = (item) => {
+    const { match: { params: { orderNumber } } } = this.props;
     return Object.keys(item.actions).map((key) => (
-      item.actions[key].enabled && <Link key={key} className="btn-default btn-quarter fnt-sbold btn-lg" to="#"><i><Archive /></i>{item.actions[key].label}</Link>
+      item.actions[key].enabled && <Link key={key} className="btn-default btn-quarter fnt-sbold btn-lg" to={`/minha-conta/pedidos/${orderNumber}/proposta-de-arte`}><i><Archive /></i>{item.actions[key].label}</Link>
     ));
   }
 
@@ -76,7 +72,6 @@ export class OrderDetails extends React.Component {
   }
 
   renderWarningMessage() {
-
     const { account: { selectedOrder } } = this.props;
 
     return (
@@ -98,7 +93,7 @@ export class OrderDetails extends React.Component {
     const { screenSize, account: { selectedOrder } } = this.props;
     const billingAddressInfo = selectedOrder.info.addresses.filter((address) => address.type === 'BILLING');
     const shippingAddressInfo = selectedOrder.info.addresses.filter((address) => address.type === 'SHIPPING');
-    
+
     return (
       <div className="box-paymentDetails-dataDelivery">
         <div className="box-paymentDetails">
@@ -115,8 +110,9 @@ export class OrderDetails extends React.Component {
               <p className="firstDetail">Endereço</p>
               <p className="secondDetail">
                 {billingAddressInfo[0].street}, {billingAddressInfo[0].number}
-                {billingAddressInfo[0].additional_address && ' - ' + billingAddressInfo[0].additional_address}
-                {billingAddressInfo[0].neighborhood && billingAddressInfo[0].neighborhood + ', '} {billingAddressInfo[0].state} - {billingAddressInfo[0].zipcode}
+                {billingAddressInfo[0].additional_address && ` - ${billingAddressInfo[0].additional_address}`}
+                {billingAddressInfo[0].neighborhood && ` - ${billingAddressInfo[0].neighborhood}, `}
+                {billingAddressInfo[0].state} - {billingAddressInfo[0].zipcode}
               </p>
             </div>
             <div className="details">
@@ -145,8 +141,9 @@ export class OrderDetails extends React.Component {
               <p className="firstDetail">Endereço</p>
               <p className="secondDetail">
                 {shippingAddressInfo[0].street}, {shippingAddressInfo[0].number}
-                {shippingAddressInfo[0].additional_address && ' - ' + shippingAddressInfo[0].additional_address}
-                {shippingAddressInfo[0].neighborhood && shippingAddressInfo[0].neighborhood + ', '} {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
+                {shippingAddressInfo[0].additional_address && ` - ${shippingAddressInfo[0].additional_address}`}
+                {shippingAddressInfo[0].neighborhood && ` - ${shippingAddressInfo[0].neighborhood}, `}
+                {shippingAddressInfo[0].state} - {shippingAddressInfo[0].zipcode}
               </p>
             </div>
             <div className="details">
@@ -282,7 +279,6 @@ export class OrderDetails extends React.Component {
   }
 
   renderMobile() {
-
     const { account: { selectedOrder } } = this.props;
 
     return (
@@ -305,7 +301,6 @@ export class OrderDetails extends React.Component {
   }
 
   renderDesktop() {
-
     const { account: { selectedOrder } } = this.props;
 
     return (
@@ -323,28 +318,22 @@ export class OrderDetails extends React.Component {
     );
   }
 
-  renderOrder() {
-    const { screenSize, locale } = this.props;
+  renderItems() {
+    const { screenSize, account: { selectedOrder } } = this.props;
 
-    return null;
+    if (!selectedOrder.isLoaded || selectedOrder.isRunning) {
+      return <Loading />;
+    }
 
-    // return [
-    //   <h3 className="atm-myorder-title">{locale.my_orders.TITLE}</h3>,
-    //   isMobile(screenSize) ? this.renderMobile() : this.renderDesktop(),
-    // ];
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 
-  render() {
-    const { account: { selectedOrder }, locale } = this.props;
 
+  render() {
     return (
-      <div className="container-myaccount-content">
-        <Helmet>
-          <title>{locale.order_details.seo.PAGE_TITLE}</title>
-          <meta name="description" content={locale.order_details.seo.META_DESCRIPTION} />
-        </Helmet>
-        {this.renderOrder()}
-      </div>
+      <section className="container-myaccountdetails">
+        {this.renderItems()}
+      </section>
     );
   }
 }
@@ -353,7 +342,6 @@ function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
     account: state.account,
-    locale: state.locale.translate.account.my_orders,
   };
 }
 
@@ -361,4 +349,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderListDetails);

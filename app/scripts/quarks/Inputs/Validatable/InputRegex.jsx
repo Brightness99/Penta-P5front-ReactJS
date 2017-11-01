@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-
 import { Input } from 'quarks/Inputs';
 
 type Props = {
@@ -25,6 +24,8 @@ type Props = {
   onFocus?: () => {},
   onBlur?: () => {},
   onValidate?: () => {},
+  onEnterKeyPress?: () => {},
+  checkValidation?: () => {},
 };
 
 export class InputRegex extends React.Component {
@@ -39,14 +40,19 @@ export class InputRegex extends React.Component {
 
   componentWillReceiveProps(nextProps: Props) {
     const { equalsTo } = this.props;
+    const { value } = nextProps;
 
     if (equalsTo && equalsTo !== nextProps.equalsTo) {
       this.setState(this.handleValidation(this.state.value, nextProps.equalsTo));
     }
+
+    if (value !== this.props.value) {
+      this.setState(this.handleValidation(value));
+    }
   }
 
   handleValidation(value, equalsTo) {
-    const { onValidate, pattern, required, name } = this.props;
+    const { onValidate, pattern, required, name, checkValidation } = this.props;
 
     let valid = true;
 
@@ -64,6 +70,10 @@ export class InputRegex extends React.Component {
 
     if (valid === true && equalsTo) {
       valid = (value === equalsTo);
+    }
+
+    if (valid === true && (typeof checkValidation === 'function')) {
+      valid = checkValidation(value);
     }
 
     if (typeof onValidate === 'function') {
@@ -114,6 +124,16 @@ export class InputRegex extends React.Component {
     }
   };
 
+  handleEnterKeyPress = (ev) => {
+    const { onEnterKeyPress } = this.props;
+
+    if (ev.key === 'Enter') {
+      if (typeof onEnterKeyPress === 'function') {
+        onEnterKeyPress(ev);
+      }
+    }
+  };
+
   render() {
     const { id, name, type, showLabel, placeholder, className } = this.props;
     const { value, valid, dirty } = this.state;
@@ -131,6 +151,7 @@ export class InputRegex extends React.Component {
         onChange={this.handleChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
+        onEnterKeyPress={this.handleEnterKeyPress}
       />
     );
   }

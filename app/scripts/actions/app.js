@@ -87,3 +87,15 @@ export function setViewType(viewType: string): Object { // TODO: migrate this to
     },
   };
 }
+
+/**
+ * Dismiss loyalty container.
+ *
+ * @returns {Object}
+ */
+export function dismissLoyaltyBar(): Object {
+  return {
+    type: AppConstants.DISMISS_LOYALTY_BAR,
+    payload: {},
+  };
+}

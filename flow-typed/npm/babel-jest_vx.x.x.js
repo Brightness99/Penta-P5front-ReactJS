@@ -27,6 +27,6 @@ declare module 'babel-jest/build/index' {
 }
 
 // Filename aliases
-declare module 'babel-jest/build/index.js' {
+declare module 'babel-jest/build/index.jsx' {
   declare module.exports: $Exports<'babel-jest/build/index'>;
 }

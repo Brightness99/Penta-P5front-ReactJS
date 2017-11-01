@@ -121,7 +121,7 @@ declare module 'history/es/createTransitionManager.js' {
 declare module 'history/es/DOMUtils.js' {
   declare module.exports: $Exports<'history/es/DOMUtils'>;
 }
-declare module 'history/es/index.js' {
+declare module 'history/es/index.jsx' {
   declare module.exports: $Exports<'history/es/index'>;
 }
 declare module 'history/es/LocationUtils.js' {
@@ -133,7 +133,7 @@ declare module 'history/es/PathUtils.js' {
 declare module 'history/index' {
   declare module.exports: $Exports<'history'>;
 }
-declare module 'history/index.js' {
+declare module 'history/index.jsx' {
   declare module.exports: $Exports<'history'>;
 }
 declare module 'history/LocationUtils.js' {

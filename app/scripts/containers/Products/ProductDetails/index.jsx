@@ -15,6 +15,10 @@ export class ProductDetailsBlock extends React.Component {
   render() {
     const { product, locale } = this.props;
 
+    if (product.template_title1 === '' && product.template_title2 !== '') {
+      return null;
+    }
+
     return (
       <section className="container-detailsProduct">
         <div className="container">
