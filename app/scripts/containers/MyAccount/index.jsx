@@ -106,7 +106,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/cartoes-salvos"
-          render={(props) => <CardsAccount {...props} screenSize={screenSize} />}
+          render={(props) => <CardsAccount {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/meus-dados"
