@@ -1,9 +1,7 @@
 .bg-referral {
-  background-image: url('../../assets/media/images/img-referral.png');
-  background-position: bottom;
-  background-repeat: no-repeat;
+  background: url('../../assets/media/images/img-referral.png') no-repeat bottom;
   background-size: cover;
-  height: 720px;
+  height: 72rem;
 }
 
 .modal-referral {
@@ -17,6 +15,7 @@
 .org-referral-page {
   height: 100%;
   position: relative;
+
   .title-referral {
     font-family: $font-family-open-sans-bold;
     font-size: $font-size-lg;
@@ -24,68 +23,87 @@
     letter-spacing: 0.18rem;
     margin: 2.2rem 0;
     text-transform: uppercase;
+
     @include lg {
       margin: 0 0 2.2rem;
     }
   }
+
   .mol-texts-referral {
     display: flex;
     flex-direction: column;
     text-align: center;
+
     @include lg {
       margin: 0 16rem;
     }
+
     .qrk-title {
       font-family: $font-family-nunito-light;
       font-size: $font-size-h4;
       font-weight: 300;
       text-transform: none;
+
       @include lg {
         font-size: $font-size-xxx;
       }
     }
+
     .qrk-text {
       color: $color-lightGray;
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xs;
+
       @include lg {
         font-size: $font-size-base;
       }
     }
   }
+
   .mol-content-share {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: 4rem;
+
     @include lg {
       padding: 0 28rem;
     }
+
     .qrk-text-share {
       color: $color-lightGray;
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xs;
       text-align: center;
     }
+
     .mol-share {
       background: transparent;
       padding: 0;
+
       .btn-default {
-        padding: 1.1rem 2.922rem;
         flex: 1;
+        padding: 1.1rem 2.922rem;
+      }
+
+      .mol-tooltip {
+        position: static;
       }
     }
   }
+
   .mol-infos-referral {
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     bottom: 0;
     display: flex;
     padding: 1rem;
     position: absolute;
     width: 100%;
+
     @include lg {
       padding: 2rem;
     }
+
     .atm-infos {
       align-items: center;
       color: $color-hrLightGray;
@@ -95,17 +113,21 @@
       font-size: $font-size-xs;
       justify-content: space-between;
       text-align: center;
+
       @include lg {
         flex-direction: row;
         font-size: $font-size-base;
         text-align: left;
       }
+
       p {
         margin-bottom: 0;
+
         &:first-of-type {
           margin-bottom: 1rem;
         }
       }
+
       a {
         color: $color-hrLightGray;
         text-decoration: underline;
@@ -114,76 +136,115 @@
   }
 }
 
-
 .org-modal-share {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 26rem;
+
   .title-modal-share {
     font-family: $font-family-nunito-light;
     font-size: $font-size-xl;
     font-weight: 300;
     text-align: center;
   }
+
+  .mol-tooltip {
+    position: static;
+  }
+
   .subtitle-modal-share {
     font-family: $font-family-open-sans-light;
     font-size: $font-size-base;
     text-align: center;
   }
+
   .mol-texts-modal-share {
     display: flex;
     flex-direction: column;
+
     @include lg {
       flex-direction: row;
     }
+
     .atm-text-modal-share {
+      align-items: center;
+      background: none;
       border: 0.1rem solid $color-hrLightGray;
       border-radius: 0.3rem;
-      flex: 1;
-      padding: 1.5rem;
       display: flex;
-      align-items: center;
+      flex: 1;
       justify-content: center;
       margin-bottom: 1rem;
+      padding: 1.5rem;
+
       @include lg {
         margin-bottom: 0;
+
         &:nth-of-type(2n) {
           margin: 0 2rem;
         }
       }
+
+      &.selected-section {
+        background-color: $color-lightBlue;
+        border: 0.1rem solid $color-printi-blue;
+      }
+
+      &:hover {
+        border: 0.1rem solid $color-printi-blue;
+      }
+
       p {
         font-family: $font-family-open-sans-regular;
         font-size: $font-size-sm;
         margin-bottom: 0;
       }
+
       svg {
         height: 2.4rem;
         margin-right: 1rem;
         width: 2.4rem;
       }
+
       &.link-icon {
         fill: $color-printi-blue;
       }
+
       &.facebook-icon {
         fill: #473f98;
       }
     }
   }
-  .mol-share-email {
+
+  .mol-share-link {
+    margin: auto;
+    width: 100%;
+  }
+
+  .mol-share-form {
     background-color: $body-bg;
     margin-top: 2rem;
     padding: 2rem 4rem;
+    width: 100%;
+
     .mol-share {
       padding: 0;
+
       .btn-default {
-        padding: 1.1rem 2.922rem;
         flex: 1;
+        padding: 1.1rem 2.922rem;
       }
     }
+
     .atm-text-emails {
       color: $color-lightGray;
       font-family: $font-family-open-sans-light;
       font-size: $font-size-base;
       text-align: center;
     }
-    .atm-lengend-emails {
+
+    .atm-legend-emails {
       color: $color-lightGray;
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xxxs;
