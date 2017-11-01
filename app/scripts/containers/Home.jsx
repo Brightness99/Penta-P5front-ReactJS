@@ -5,7 +5,6 @@ import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
-
 import { BannersBlock, HighlightsBlock, BlogBlock, CustomersRelyBlock, CategoriesCarouselBlock } from 'components/LandingPage';
 
 type Props = {
@@ -59,7 +58,7 @@ const bannerImages = [
 export class Home extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
-  static props: Props;
+  props: Props;
 
   render() {
     const { locale } = this.props;
@@ -67,14 +66,14 @@ export class Home extends React.Component {
     return (
       <div className="container-homePage">
         <Helmet>
-          <title>{locale.PAGE_TITLE}</title>
-          <meta name="description" content={locale.META_DESCRIPTION} />
+          <title>{locale.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.seo.META_DESCRIPTION} />
         </Helmet>
         <BannersBlock images={bannerImages} />
         <CategoriesCarouselBlock />
-        <HighlightsBlock />
+        {locale.COUNTRY_CODE === 'BR' && <HighlightsBlock />}
         <CustomersRelyBlock />
-        <BlogBlock />
+        {locale.COUNTRY_CODE === 'BR' && <BlogBlock />}
       </div>
     );
   }
@@ -82,7 +81,10 @@ export class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    locale: state.locale.translate.page.home,
+    locale: {
+      ...state.locale.translate.page.home,
+      COUNTRY_CODE: state.locale.COUNTRY_CODE,
+    },
   };
 }
 

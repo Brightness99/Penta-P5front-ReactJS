@@ -1,54 +1,121 @@
-@import "main-benefits";
-@import "cloud-tools";
-@import "request-sample";
+@import 'main-benefits';
+@import 'cloud-tools';
+@import 'request-sample';
 
-.title-corporateSales {
+.title-corporate-sales {
   font-family: $font-family-open-sans-bold;
   font-size: $font-size-lg;
   text-transform: uppercase;
 }
 
 .banner-corporate-sales {
+  margin: 2rem 0;
   position: relative;
-  margin-bottom: 2rem;
+
   @include lg {
     margin: 4rem 0;
   }
+
   .container {
-    padding-right: 0;
     padding-left: 0;
+    padding-right: 0;
+
     @include lg {
-      padding-right: inherit;
       padding-left: inherit;
+      padding-right: inherit;
+    }
+
+    img {
+      width: 100%;
     }
   }
+
+  .banner-corporate-sales__section {
+    background: url('../../assets/media/images/corporate-sales.png') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    height: 20rem;
+    justify-content: center;
+    width: 100%;
+
+    @include lg {
+      height: 100%;
+      justify-content: flex-start;
+      width: inherit;
+    }
+  }
+
   .text-banner {
-    display: none;
-    position: absolute;
-    top: 4.8rem;
-    left: 6.4rem;
     color: $color-white;
+    display: flex;
+    flex-direction: column;
     font-family: $font-family-nunito-light;
+    justify-content: space-between;
+    padding: 3rem 1rem;
+    width: 100%;
+
     @include lg {
       display: block;
+      padding-left: 6.4rem;
+      padding-top: 5.8rem;
+      width: 80%;
     }
+
     .title-banner {
       color: $color-white;
       font-family: $font-family-nunito-light;
-      font-size: $font-size-xxx;
+      font-size: $font-size-xl;
+
+      @include lg {
+        font-size: $font-size-xxx;
+      }
     }
+
     .desc-list-banner {
+      display: none;
       width: 65%;
+
+      @include lg {
+        display: block;
+      }
     }
+
+    .btn-default {
+      display: none;
+
+      @include lg {
+        display: block;
+      }
+    }
+
     .list-banner {
-      padding: 0 2.2rem;
+      display: none;
       margin-bottom: 4rem;
+      padding: 0 2.2rem;
+
+      @include lg {
+        display: block;
+      }
+
       li {
         list-style: disc;
+
         span {
           color: $color-warning;
         }
       }
+    }
+  }
+
+  .corporate-sales__modal-button {
+    display: block;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    width: calc(100% - 4rem);
+
+    @include lg {
+      display: none;
     }
   }
 }

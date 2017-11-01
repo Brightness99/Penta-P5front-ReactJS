@@ -11,7 +11,9 @@ import ArtProposalContent from './ArtProposalContent';
 type Props = {
   app: AppStoreType,
   router: RouterStore,
+  match: {},
   dispatch: () => {},
+  setBreadcrumbs: () => void,
   children: any,
   artCreation: any,
 };
@@ -24,6 +26,7 @@ type State = {
 //const order_item_id = '801901';
 const order_item_id = '801904';
 export class ArtProposal extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -34,12 +37,34 @@ export class ArtProposal extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    this.handleBreadcrumbs();
     dispatch(proposalsFetch(order_item_id));
   }
 
   static props: Props;
 
   static state: State;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs, match: { params: { orderNumber } } } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: 'Meus pedidos',
+          url: '/minha-conta/meus-pedidos',
+        },
+        {
+          title: `Pedido nº' ${orderNumber}`,
+          url: `/minha-conta/pedidos/${orderNumber}`,
+        },
+        {
+          title: 'Proposta de art',
+        },
+      ]);
+    }
+  }
+
 
   renderMobile() {
     return (
@@ -64,32 +89,9 @@ export class ArtProposal extends React.Component {
     let sideBar = null;
     console.log('artCreation in the index ======>', artCreation);
 
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Meus pedidos',
-        url: '/meus-pedidos',
-      },
-      {
-        title: 'Pedido nº483.093',
-        url: '/Pedido',
-      },
-      {
-        title: 'Proposta de art',
-      },
-    ];
-
     return (
       <div className="container">
         <div className="header-artproposal">
-          <Breadcrumbs links={breadcrumb} />
           <p className="title">PROPOSTA DE ARTE</p>
           <p className="destitle">Acompanhe a criação da sua arte</p>
         </div>

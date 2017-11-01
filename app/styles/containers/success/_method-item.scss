@@ -30,10 +30,50 @@
 	}
 	
 	.link-2 {
+		font-size: 13px;
+		position: relative;
+		input {
+			display: none;
+		}
 		a {
 			text-decoration: underline;
 		}
+		.clipboard-tooltip {
+			align-items: center;
+			background-color: #6a6f7a;
+			border-radius: 0.3rem;
+			color: #dbdddf;
+			font-family: $font-family-open-sans;
+			font-size: $font-size-xs;
+			height: 3rem;
+			position: absolute;
+			transform: translateX(-50%);
+			top: -4px;
+			right: -10px;
+
+			> span {
+				padding: 5px 10px;
+				display: block;
+				white-space: nowrap;
+			}
+
+			&::before {
+				content:"";
+				position: absolute;
+				right: 100%;
+				top: 10px;
+				width: 0;
+				height: 0;
+				border-top: 5px solid transparent;
+				border-right: 10px solid #6a6f7a;
+				border-bottom: 5px solid transparent;
+			}
+		}
+		.hidden {
+			display: none;
+		}
 	}
+	
 	&:last-child {
 		margin-right: 0px !important;
 	}
@@ -41,4 +81,7 @@
 		width: 100%;
 		margin: 10px 0px 0px;
 	}
+}
+.full-method-item {
+	width: 100% !important;
 }

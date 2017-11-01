@@ -68,8 +68,13 @@
             flex: 2;
             margin-left: 1.0rem;
           }
+          .bellIcon {
+            width: 12.5%;
+            height: 4.7rem;
+          }
           .cloudIcon {
             width: 17%;
+            height: 4.7rem;
           }
           .printClubIcon {
             width: 82%;
@@ -87,6 +92,14 @@
         &:last-of-type {
           margin-top: 5rem;
         }
+      }
+    }
+  }
+
+  &.container-art-proposal {
+    .container-myaccount-content {
+      @include lg {
+        background-color: $color-almostWhite;
       }
     }
   }
@@ -127,6 +140,26 @@
       @include lg {
         font-size: 2.7rem;
       }
+    }
+
+    .mol-account-data-pane-choser {
+      background-color: #eeeeee;
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      a {
+        color: #006ee3;
+        margin-left: 2px;
+        cursor: pointer;
+      }
+    }
+
+    .mar-top-20 {
+      margin-top: 20px;
+    }
+
+    .mol-account-pane-footer {
+      justify-content: flex-end !important;
     }
   }
 
@@ -493,13 +526,9 @@
 
 // details about the order
 .container-myaccountdetails {
-  margin: 2.8rem 0 3rem 0;
   @include lg {
     background-color: $color-white;
     flex: 5;
-    box-sizing: border-box;
-    padding: 2rem 6rem 0 6rem;
-    margin: 0;
   }
   .btns-details {
     display: flex;
@@ -1163,7 +1192,7 @@
     background-color: $color-white;
     flex: 5;
     box-sizing: border-box;
-    padding: 2rem 6rem 0 6rem;
+    padding: 2rem 0 0;
     margin-bottom: 0;
   }
   .container {
@@ -1205,6 +1234,50 @@
       margin-bottom: 0;
       @include lg {
         // margin: 3.2rem 0 2.7rem 0;
+      }
+    }
+  }
+  .address-form-modal-container {
+    @include lg {
+      width: 800px;
+    }
+    .address-form-modal {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .atm-checkout-input {
+        &-full {
+          width: 100%;
+        }
+        margin-top: 0.7em;
+      }
+      .atm-checkout-input-one {
+        width: 100%;
+        @include lg {
+          width: calc(20% - 1rem);
+        }
+      }
+      .atm-checkout-input-two {
+        width: 100%;
+        @include lg {
+          width: calc(40% - 1rem);
+        }
+      }
+      .atm-checkout-input-three {
+        width: 100%;
+        @include lg {
+          width: 60%;
+        }
+      }
+      .zipcode {
+        position: relative;
+        .link {
+          position: absolute;
+          right: 5px;
+          top: 15px;
+          font-size: 13px;
+          color: #006ee3;
+        }
       }
     }
   }
@@ -1326,7 +1399,7 @@
       }
 
       &.box-addNewAddress {
-        @include center-child-flex
+        @include center-child-flex;
         background-color: $color-lightBlue;
         border: 0.2rem dotted $color-printi-blue;
         cursor: pointer;
@@ -1493,4 +1566,8 @@
       appearance: none;
     }
   }
+}
+
+.mol-address-pane-footer {
+  justify-content: flex-end !important;
 }

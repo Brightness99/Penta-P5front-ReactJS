@@ -1,8 +1,8 @@
 // *** Vendor
 @import '~sass-mediaqueries/media-queries';
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
-@import '~react-credit-cards/lib/styles.scss';
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+@import '~react-credit-cards/lib/styles';
 @import '~react-dates/lib/css/_datepicker.css';
 
 // *** Vendor customization
@@ -42,6 +42,7 @@
 @import 'containers/myaccount/index';
 @import 'containers/upload/index';
 @import 'containers/home/index';
+@import 'containers/cloud-editor/index';
 @import 'containers/glossary/index';
 @import 'containers/cloud/index';
 @import 'containers/success/index';
@@ -54,9 +55,10 @@
 @import 'containers/terms-use-privacy-policy/index';
 @import 'containers/artproposal/index';
 @import 'containers/sitemap/index';
-@import 'containers/gabaritos/index';
+@import 'containers/templates/index';
 @import 'containers/templateslp/index';
 @import 'containers/referral/index';
+@import 'containers/forgot-password/index';
 
 // *** Components
 @import 'components/back-to-top/index';
@@ -78,8 +80,8 @@
 @import 'components/loyaltycontainers/index';
 @import 'components/printi-press-item/index';
 @import 'components/alphabet-list/index';
-//@import 'components/glossary-list-by-letter/index';
-@import 'components/site-map-category/index';
+@import 'components/icon-toogle-button/index';
+@import 'components/contact-form/index';
 
 // *** Bosons
 @import 'bosons/index';

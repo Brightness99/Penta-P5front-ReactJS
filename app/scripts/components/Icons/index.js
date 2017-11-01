@@ -113,3 +113,4 @@ export LinkIcon from './LinkIcon';
 export GmailIcon from './GmailIcon';
 export FacebookIcon from './FacebookIcon';
 export StatusIcon from './StatusIcon';
+export Bell from './Bell';

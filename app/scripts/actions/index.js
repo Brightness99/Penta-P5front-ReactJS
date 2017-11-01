@@ -23,3 +23,7 @@ export * from './header';
 export * from './art-creation';
 export * from './successful-purchase';
 export * from './site-map';
+export * from './about';
+export * from './file-mount';
+export * from './guide.js';
+export * from './templates';

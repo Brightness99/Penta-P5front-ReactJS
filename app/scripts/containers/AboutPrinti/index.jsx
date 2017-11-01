@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { isMobile } from 'utils/helpers';
+import { aboutFetch } from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 
 import AboutPrintiText from './AboutPrintiText';
@@ -12,34 +12,44 @@ import TimelineAboutPrinti from './TimelineAboutPrinti';
 type Props = {
   app: AppStore,
   router: RouterStore,
-  locale: {},
+  about: {},
   dispatch: () => {},
 };
 
 export class AboutPrinti extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(aboutFetch());
+  }
+
   static props: Props;
 
   render() {
-    const { app: { screenSize } } = this.props;
+    const { app: { screenSize }, about } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
         url: '/',
       },
       {
-        title: 'Printi na imprensa',
+        title: 'Sobre a Printi',
       },
     ];
-
     return (
       <section>
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
+        <div className="container">
+          {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
+        </div>
         <div className="tpl-about-printi">
           <div className="container">
             <h2 className="title-about-printi">Sobre a printi</h2>
           </div>
           <AboutPrintiText />
-          <TimelineAboutPrinti />
+          {
+            (about.isLoaded) ?
+              <TimelineAboutPrinti timelines={about.about} /> :
+              null
+          }
         </div>
       </section>
     );
@@ -47,7 +57,10 @@ export class AboutPrinti extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { app: state.app };
+  return {
+    app: state.app,
+    about: state.about,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
