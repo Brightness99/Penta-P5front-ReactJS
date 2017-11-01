@@ -56,7 +56,15 @@ export class Referral extends React.PureComponent<Props, State> {
   };
 
   handleShowingModal = () => {
-    this.setState({ showShareModal: !this.state.showShareModal });
+    this.setState({
+      showShareModal: !this.state.showShareModal,
+      showCopiedTooltip: false,
+    });
+  };
+
+  handleSubmit = (e: Event) => {
+    e.preventDefault();
+    this.handleShowingModal();
   };
 
   handleCopyLink = () => {
@@ -142,7 +150,11 @@ export class Referral extends React.PureComponent<Props, State> {
             </div>
             <div className="mol-content-share">
               <p className="qrk-text-share">Compartilhe seu código promocional:</p>
-              <section className="mol-share">
+              <form
+                className="mol-share"
+                onSubmit={this.handleSubmit}
+                onBlur={this.handleShowingTooltip}
+              >
                 <section className="atm-input-link">
                   <Input
                     id={'voucher_code'}
@@ -157,10 +169,13 @@ export class Referral extends React.PureComponent<Props, State> {
                     text={'Voucher copiado'}
                   />
                 </section>
-                <button className="btn-default btn-secondary fnt-sbold btn-sm" onClick={this.handleShowingModal}>
+                <button
+                  type="submit"
+                  className="btn-default btn-secondary fnt-sbold btn-sm"
+                >
                   {'Compartilhar'}
                 </button>
-              </section>
+              </form>
             </div>
           </div>
           <div className="org-table-referral">
