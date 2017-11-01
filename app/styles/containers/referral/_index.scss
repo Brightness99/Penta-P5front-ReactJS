@@ -89,6 +89,10 @@
       .mol-tooltip {
         position: static;
       }
+
+      .atm-tooltip {
+        display: flex;
+      }
     }
   }
 
@@ -151,6 +155,10 @@
 
   .mol-tooltip {
     position: static;
+  }
+
+  .atm-tooltip {
+    display: flex;
   }
 
   .subtitle-modal-share {

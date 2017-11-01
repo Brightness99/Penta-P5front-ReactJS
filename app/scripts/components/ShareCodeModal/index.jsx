@@ -167,12 +167,20 @@ export default class ShareCode extends React.PureComponent<Props, State> {
         );
       case 'link': {
         const EnhancedCopyButton = TooltipEnhancer(showCopiedTooltip)(() =>
-          <button type="button" className="atm-link-copy" onClick={this.handleCopyLink}>
+          <button
+            type="button"
+            className="atm-link-copy"
+            onClick={this.handleCopyLink}
+          >
             {'copiar'}
           </button>
         );
         return (
-          <form className="mol-share mol-share-form mol-share-link" onSubmit={this.handleSubmit}>
+          <form
+            className="mol-share mol-share-form mol-share-link"
+            onSubmit={this.handleSubmit}
+            onBlur={this.handleShowingTooltip}
+          >
             <section className="atm-input-link">
               <Input
                 id="promo_code_link"
