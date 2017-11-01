@@ -221,8 +221,8 @@ export class Upload extends React.Component {
         <AvailableUploadStrategies
           availableStrategies={availableStrategies}
           handleSelectedStrategy={this.handleSelectedStrategy}
-          showMessage={!(isMobile(screenSize) || selectedStrategy > 1)}
-          message={flashMessages[0].content}
+          showMessage={!(isMobile(screenSize) || selectedStrategy > 1) && flashMessages[0]}
+          message={flashMessages[0] && flashMessages[0].content}
         />
       </FunnelBlock>
     );
@@ -251,8 +251,8 @@ export class Upload extends React.Component {
           handleCanvasFinalize={this.handleCanvasFinalize}
           handleUploadFile={this.handleUploadFile}
           handleRemoveFile={this.handleRemoveFile}
-          showMessage={!(isMobile(screenSize) || isComplete)}
-          message={flashMessages[0].content}
+          showMessage={!(isMobile(screenSize) || isComplete) && flashMessages[0]}
+          message={flashMessages[0] && flashMessages[0].content}
         />
       </FunnelBlock>
     );
