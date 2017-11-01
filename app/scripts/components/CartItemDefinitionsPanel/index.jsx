@@ -109,7 +109,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
                       <span>{`${expectedDeliveryDate}`}</span>
                     </section>
                   </section>
-                  <section className="total-mobile"><span>{`R$${total}`}</span></section>
+                  <section className="total-mobile"><span>{`R$${total.toFixed(2)}`}</span></section>
                   <hr />
                   <section className="instruction-container">
                     <h4>Instruções do produto</h4>
