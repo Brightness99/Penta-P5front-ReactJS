@@ -5,8 +5,10 @@
 
 .template-success {
 	margin: 2em 0px;
-	& > div {
-		margin-bottom: 18px !important;
+	& > span {
+		& > div {
+			margin-bottom: 18px !important;
+		}
 	}
 	.success-message {
 		font-size: 36px !important;

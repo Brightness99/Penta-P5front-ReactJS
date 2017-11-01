@@ -70,11 +70,8 @@ declare type ProductLandingPageLocaleType = {
 };
 
 declare type ProductSettingsLocaleType = {
-  TITLE: string
-  seo: {
-    PAGE_TITLE: string,
-    META_DESCRIPTION: string,
-  },
+  TITLE: string,
+  seo: SEOLocaleType,
   BREADCRUMB_TITLE: string,
   ADD_TO_CART: string,
   options: {
@@ -132,10 +129,120 @@ declare type PageLocaleType = {
   product_settings: ProductSettingsLocaleType,
 };
 
+/* Account Locale Types */
+
+declare type AccountOrderDetailsLocaleType = {
+  seo: SEOLocaleType,
+  ORDER: string,
+  ORDER_NOT_FOUND: string,
+  ORDER_NUMBER: string,
+  ORDER_ITEMS: string,
+  PRODUCT: string,
+  PRODUCTS: string,
+  ORDER_TOTAL: string,
+  ORDER_DATE: string,
+  ORDER_STATUS: string,
+  DISCOUNT: string,
+  actions: {
+    TITLE: string,
+    PRINT_BOLETO: string,
+    GENERATE_NEW_BOLETO: string,
+    CHECK_INVOICE: string,
+    CHANGE_DELIVERY_ADDRESS: string,
+    REPURCHASE_ORDER: string,
+    CANCEL_ORDER: string,
+    CANCEL_ORDER_ITEM: string,
+  },
+  payment_data: {
+    TITLE: string,
+    PAYMENT_METHOD: string,
+    PAYMENT_METHOD_CHANGE: string,
+    ORDER_PAID: string,
+  },
+  delivery_data: {
+    TITLE: string,
+  },
+  item_details: {
+    headers: {
+      FILE: string,
+      DESCRIPTION: string,
+      DATES: string,
+      ACTIONS: string,
+    },
+    UNIT: string,
+    ITEM_NUMBER: string,
+    ITEM_STATUS: string,
+    ESTIMATED_DELIVERY: string,
+    AFTER_ART_APPROVAL: string,
+    UPLOAD_DUE_DATE: string,
+    SEND_FILE: string,
+    CHANGE_FILE: string,
+    REPURCHASE_ITEM: string,
+    CANCEL_ORDER: string,
+    CANCEL_ORDER_ITEM: string,
+    ALREADY_IN_PRODUCTION: string,
+    TRACKING: string,
+    ADDITIONAL_COST: string,
+    FILE_CREATED_BY_DESIGNER: string,
+    SEND_BRIEFING: string,
+    VIEW_BRIEFING: string,
+    VIEW_ART_CREATION_PROPOSALS: string,
+    upload: {
+      title: {
+        SUCCEED: string,
+        WARNING: string,
+      },
+      message: {
+        cimpress: {
+          FINISHED: string,
+          MISSING: string,
+          PROCESSING: string,
+        },
+        classic: {
+          FINISHED: string,
+          NOT_FINISHED: string,
+          NO_FILES: string,
+        },
+      },
+    }
+  },
+  warning: {
+    WAITING_UPLOAD: string,
+    WAITING_PAYMENT: string,
+  },
+  msg: {
+    GO_BACK: string,
+  },
+};
+
+declare type AccountMyOrdersLocaleType = {
+  seo: SEOLocaleType,
+  SUB_TITLE: string,
+  NO_ORDERS: string,
+  LOAD_MORE: string,
+  ticket: {
+    ORDER: string,
+    ORDER_NUMBER: string,
+    ORDER_ITEMS: string,
+    PRODUCT: string,
+    PRODUCTS: string,
+    ORDER_TOTAL: string,
+    ORDER_DATE: string,
+    ORDER_STATUS: string,
+    VIEW_DETAILS: string,
+  },
+  order_details: AccountOrderDetailsLocaleType,
+};
+
+declare type AccountLocaleType = {
+  my_orders: AccountMyOrdersLocaleType,
+};
+
 declare type TranslateLocaleType = {
   common: CommonLocaleType,
   header: HeaderLocaleType,
   page: PageLocaleType,
+  account: AccountLocaleType,
 };
 
 declare type LocaleType = {

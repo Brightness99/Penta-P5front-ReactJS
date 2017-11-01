@@ -1,97 +1,97 @@
-// @flow 
+// @flow
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { IntlMoney, IntlDate } from 'components/Intl';
 
-class ProductItem extends React.Component {
-  props: Props;
+type Props = {
+  screenSize: AppStoreType.screenSize,
+  item: Object,
+  handleShowingModal: () => void,
+};
+
+export class ProductItem extends React.Component {
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  static props: Props;
 
   renderDesktop() {
+    const { item, handleShowingModal } = this.props;
     return (
       <div className="product-item-row">
-        <div className="product-item-col product-item-col-product">
-          <img src={require('assets/media/images/img.png')} alt="Product" />
+        <div className="product-item-col-product">
+          <img src={(item.info.thumbnail === '' || !item.info.thumbnail) ? require('assets/media/images/blue-logo.png') : item.info.thumbnail} alt="Product" />
           <div>
-            <div>Arte 1</div>
-            <div>Cartao de visita</div>
-            <div>90x50mm</div>
-            <div>4x4 cores - couche brilho 250g</div>
-            <div><a>Ver mais...</a></div>
+            <div>{item.info.alias}</div>
+            <div>{item.info.type_alias}</div>
+            <div>{item.info.parts[0].format}</div>
+            <div>{item.info.parts[0].color} - {item.info.parts[0].stock}</div>
+            <div><a onClick={() => handleShowingModal(item)}>Ver mais...</a></div>
           </div>
         </div>
-
         <div className="product-item-col product-item-col-delivery">
-          <div>12/12/2015</div>
-          <div>CEP: 07130-000</div>
+          <div><IntlDate>{item.info.expected_delivery_date}</IntlDate></div>
+          <div>{item.delivery_zipcode.label}: {item.delivery_zipcode.value}</div>
         </div>
-
         <div className="product-item-col product-item-col-amount">
-          <div>1.000</div>
+          <div>{item.info.quantity}</div>
         </div>
-
         <div className="product-item-col product-item-col-value">
-          <div>R$75,00</div>
+          <div><IntlMoney>{parseFloat(item.info.price)}</IntlMoney></div>
         </div>
       </div>
     );
   }
 
   renderMobile() {
+    const { item, handleShowingModal } = this.props;
     return (
       <div className="product-item-row">
         <div className="product-item-col product-item-col-product">
           <img src={require('assets/media/images/img.png')} alt="Product" />
           <div>
-            <div>Arte 1</div>
-            <div>Cartao de visita</div>
-            <div>90x50mm</div>
-            <div>4x4 cores - couche brilho 250g</div>
-            <div><a>Ver mais...</a></div>
+            <div>{item.info.alias}</div>
+            <div>{item.info.type_alias}</div>
+            <div>{item.info.parts[0].format}</div>
+            <div>{item.info.parts[0].color} - {item.info.parts[0].stock}</div>
+            <div><a onClick={() => handleShowingModal(item)}>Ver mais...</a></div>
           </div>
         </div>
-
         <div className="field">
           <div>ENTREGA</div>
         </div>
-
         <div className="product-item-col product-item-col-delivery">
-          <div>12/12/2015</div>
-          <div>CEP: 07130-000</div>
+          <div><IntlDate>{item.info.expected_delivery_date}</IntlDate></div>
+          <div>{item.delivery_zipcode.label}: {item.delivery_zipcode.value}</div>
         </div>
-
         <div className="space-between field">
           <div>QUANTIDADE</div>
           <div>VALOR</div>
         </div>
-
         <div className="space-between">
           <div className="product-item-col product-item-col-amount">
-            <div>1.000</div>
+            <div>{item.info.quantity}</div>
           </div>
-
           <div className="product-item-col product-item-col-value">
-            <div>R$75,00</div>
+            <div><IntlMoney>{parseFloat(item.info.price)}</IntlMoney></div>
           </div>
         </div>
       </div>
     );
   }
-  render() {
 
-    const { app: { screenSize } } = this.props;
-    return ['xs', 'is', 'sm', 'ix'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+  render() {
+    const { screenSize } = this.props;
+
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 
-
 function mapStateToProps(state) {
-  return { app: state.app };
+  return {
+    screenSize: state.app.screenSize,
+  };
 }
 
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);
+export default connect(mapStateToProps)(ProductItem);

@@ -1,22 +1,46 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 
-const LoyaltyContainer = () => {
-
-  return (
-    <div className="org-loyalty-container">
-      <div className="mol-loyalty-container">
-        <div>
-          <div className="qrk-type-of-loyalty">
-            <p>Gold</p>
-          </div>
-          <p>As opções já estão com descontos de até 30% para você!</p>
-        </div>
-      </div>
-    </div>
-  );
+type Props = {
+  text: String,
+  account: {},
 };
 
-export default LoyaltyContainer;
+export class LoyaltyContainer extends React.Component {
+  props: Props;
+
+  setBackgroundColor = (color) => ({
+    background: color,
+  });
+
+  setColor = (color) => ({
+    color,
+  });
+
+  render() {
+    const { account: { loyalty }, text } = this.props;
+    return (
+      <div className="org-loyalty-container">
+        <div className="mol-loyalty-container" style={this.setBackgroundColor(loyalty.color)}>
+          <div>
+            <div className="qrk-type-of-loyalty" style={this.setColor(loyalty.color)}>
+              <p>{loyalty.loyalty_tier_name}</p>
+            </div>
+            <p>{text}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    account: state.account,
+  };
+}
+
+export default connect(mapStateToProps)(LoyaltyContainer);
 

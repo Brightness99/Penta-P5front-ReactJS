@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { submitContactForm as submitAction } from 'actions';
 import corporateSalesSelector from 'selectors/products';
 import type { ContactFormState } from 'reducers/contact-form';
-import { Link } from 'react-router-dom';
 
 import { CustomersRelyBlock } from 'components/LandingPage';
 import Modal from 'components/Modal';
@@ -25,6 +24,7 @@ type Props = {
   dispatch: () => {},
   contactForm: ContactFormState,
   submitContactForm?: (data: DataType) => void,
+  screenSize: string,
 };
 
 type State = {
@@ -54,18 +54,26 @@ export class CorporateSales extends React.Component<Props, State> {
     this.setState({ showContactModal: false });
   };
 
-  render() {
+  handleSubmit = (data) => {
     const { submitContactForm } = this.props;
+    this.handleCloseModal();
+    if (typeof susubmitContactForm === 'function') {
+      submitContactForm(data);
+    }
+  };
+
+  render() {
+    const { screenSize } = this.props;
     return (
       <section>
         {
           this.state.showContactModal &&
           <Modal handleCloseModal={this.handleCloseModal}>
-            <ContactForm onSubmit={data => submitContactForm && submitContactForm(data)} />
+            <ContactForm onSubmit={data => this.handleSubmit(data)} />
           </Modal>
         }
-        <BannerCloud handleModalShowing={this.handleShowingModal} />        
-        <MainBenefits />
+        <BannerCloud handleModalShowing={this.handleShowingModal} />
+        <MainBenefits screenSize={screenSize} />
         <CloudTools handleModalShowing={this.handleShowingModal} />
         <CustomersRelyBlock />
         <RequestSample handleModalShowing={this.handleShowingModal} />
@@ -74,16 +82,14 @@ export class CorporateSales extends React.Component<Props, State> {
   }
 }
 
-function mapStateToProps(state) {
-  return Object.assign({}, corporateSalesSelector(state), {
+const mapStateToProps = (state) =>
+  Object.assign({}, corporateSalesSelector(state), {
     contactForm: state.contactForm,
+    screenSize: state.app.screenSize,
   });
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    submitContactForm: data => dispatch(submitAction(data)),
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  submitContactForm: data => dispatch(submitAction(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CorporateSales);

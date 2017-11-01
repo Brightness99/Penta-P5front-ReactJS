@@ -1,12 +1,15 @@
 // @flow
 import React from 'react';
+import swal from 'sweetalert2';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Collapse, { Panel } from 'rc-collapse';
 import Loading from 'components/Loading';
+import Modal from 'components/Modal';
 import { AccordionMinusIcon, AccordionPlusIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
-import { accountAddressCreate, accountAddressDelete, accountAddressFetch } from 'actions';
+import { accountAddressDelete, accountAddressFetch } from 'actions';
 import { connect } from 'react-redux';
+import AddressFormModal from './AddressFormModal';
 
 type Props = {
   screenSize: string,
@@ -19,6 +22,9 @@ type State = {
     shipping: false,
     billing: false,
   },
+  openAddressModal: boolean,
+  type: string,
+  selectedAddress: Object,
 };
 
 export class MyAddresses extends React.Component {
@@ -27,6 +33,10 @@ export class MyAddresses extends React.Component {
 
     this.state = {
       isExpanded: false,
+      openAddressModal: false,
+      type: '',
+      selectedAddress: null,
+      id: null,
     };
   }
 
@@ -53,28 +63,44 @@ export class MyAddresses extends React.Component {
     });
   };
 
-  handleCreateAddress = () => {
-    const { dispatch } = this.props;
+  handleCreateAddress = (type) => {
+    this.setState({
+      openAddressModal: true,
+      selectedAddress: null,
+      type,
+    });
+  };
 
-    const dataToCreate = {
-      type: 'billing',
-      receiver_name: 'Adam Holman',
-      zipcode: '01419-002',
-      city: 'São Paulo',
-      neighborhood: 'Cerqueira César',
-      state: 'SP',
-      street: 'Alameda Santos',
-      number: '2131',
-      additional_address: null,
-    };
-
-    // dispatch(accountAddressCreate(dataToCreate));
+  handleEditAddress = (type, selectedAddress) => {
+    this.setState({
+      openAddressModal: true,
+      selectedAddress,
+      type,
+    });
   };
 
   handleDeleteAddress = (ev) => {
     const { dispatch } = this.props;
+    this.setState({
+      id: ev.currentTarget.value,
+    });
 
-    dispatch(accountAddressDelete(ev.currentTarget.value));
+    swal({
+      title: 'Você tem certeza?',
+      text: 'Ao remover este produto ele não estará mais disponível no carrinho!',
+      type: 'warning',
+      confirmButtonColor: '#2cac57',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+      showCancelButton: true,
+      reverseButtons: true,
+    }).then(() => {
+      dispatch(accountAddressDelete(this.state.id));
+    });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ openAddressModal: false });
   };
 
   renderAddButton(addressType) {
@@ -86,7 +112,7 @@ export class MyAddresses extends React.Component {
           <button
             className="atm-button-transparent"
             value={addressType}
-            onClick={this.handleCreateAddress}
+            onClick={() => this.handleCreateAddress(addressType)}
           >
             <AddressIcon />Novo endereço
           </button>
@@ -98,7 +124,7 @@ export class MyAddresses extends React.Component {
       <button
         className="box-addNewAddress"
         value={addressType}
-        onClick={this.handleCreateAddress}
+        onClick={() => this.handleCreateAddress(addressType)}
       >
         <i><Plus /></i>
       </button>
@@ -121,6 +147,7 @@ export class MyAddresses extends React.Component {
           <div className="text-edit">
             <button
               value={item.id}
+              onClick={() => { this.handleEditAddress(item.type, item); }}
             >
               <PencilIcon />
               {!isMobile(screenSize) && 'Editar'}
@@ -214,6 +241,7 @@ export class MyAddresses extends React.Component {
 
   render() {
     const { screenSize, account: { addresses } } = this.props;
+    const { openAddressModal, type, selectedAddress } = this.state;
 
     const breadcrumb = [
       {
@@ -231,8 +259,11 @@ export class MyAddresses extends React.Component {
 
     return (
       <section className="container-myaddresses">
+        {openAddressModal &&
+        <Modal handleCloseModal={this.handleCloseModal}>
+          <AddressFormModal type={type} onCloseModal={this.handleCloseModal} address={selectedAddress} isNew={!selectedAddress} />
+        </Modal>}
         {isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <h2>Minha conta</h2>
         <h3 className="subtitle-myAddresses">Meus endereços</h3>
         {!addresses.isLoaded || addresses.isLoading ? <Loading /> : this.renderPage()}
       </section>

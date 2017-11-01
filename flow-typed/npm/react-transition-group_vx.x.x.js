@@ -59,7 +59,7 @@ declare module 'react-transition-group/dist/react-transition-group.js' {
 declare module 'react-transition-group/index' {
   declare module.exports: $Exports<'react-transition-group'>;
 }
-declare module 'react-transition-group/index.js' {
+declare module 'react-transition-group/index.jsx' {
   declare module.exports: $Exports<'react-transition-group'>;
 }
 declare module 'react-transition-group/TransitionGroup.js' {

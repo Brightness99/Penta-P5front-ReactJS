@@ -97,7 +97,7 @@ declare module 'webpack-dev-server/bin/webpack-dev-server.js' {
 declare module 'webpack-dev-server/client/index.bundle.js' {
   declare module.exports: $Exports<'webpack-dev-server/client/index.bundle'>;
 }
-declare module 'webpack-dev-server/client/index.js' {
+declare module 'webpack-dev-server/client/index.jsx' {
   declare module.exports: $Exports<'webpack-dev-server/client/index'>;
 }
 declare module 'webpack-dev-server/client/live.bundle.js' {
@@ -118,7 +118,7 @@ declare module 'webpack-dev-server/client/sockjs.bundle.js' {
 declare module 'webpack-dev-server/client/sockjs.js' {
   declare module.exports: $Exports<'webpack-dev-server/client/sockjs'>;
 }
-declare module 'webpack-dev-server/client/web_modules/jquery/index.js' {
+declare module 'webpack-dev-server/client/web_modules/jquery/index.jsx' {
   declare module.exports: $Exports<'webpack-dev-server/client/web_modules/jquery/index'>;
 }
 declare module 'webpack-dev-server/client/web_modules/jquery/jquery-1.8.1.js' {

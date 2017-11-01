@@ -28,6 +28,6 @@ declare module 'expose-loader' {
 declare module 'expose-loader/index' {
   declare module.exports: $Exports<'expose-loader'>;
 }
-declare module 'expose-loader/index.js' {
+declare module 'expose-loader/index.jsx' {
   declare module.exports: $Exports<'expose-loader'>;
 }

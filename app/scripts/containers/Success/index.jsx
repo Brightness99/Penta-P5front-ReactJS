@@ -1,154 +1,209 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckCircleIcon, MyAccountIcon, RefreshIcon } from 'components/Icons';
+import { successfulPurchaseFetch } from 'actions';
+import Loading from 'components/Loading';
+import Modal from 'components/Modal';
+import { IntlMoney, IntlDate } from 'components/Intl';
+
 import WarningMessage from './WarningMessage';
 import MethodItem from './MethodItem';
 import ProductItem from './ProductItem';
 import StayTunedItem from './StayTunedItem';
+import ProductModalItem from './ProductModalItem';
 
 type Props = {
   app: AppStore,
   router: RouterStore,
   locale: {},
+  successfulPurchase: {},
   dispatch: () => {},
+  match: {},
+};
+
+type State = {
+  showDetailModal: boolean,
+  selectedItem: Object,
 };
 
 export class Success extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDetailModal: false,
+      selectedItem: null,
+    };
+  }
+
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  componentDidMount() {
+    const { dispatch, match: { params: { orderNumber } } } = this.props;
+
+    dispatch(successfulPurchaseFetch(orderNumber));
+  }
 
   static props: Props;
 
+  static state: State;
+
+  handleShowingModal = (item) => {
+    this.setState({
+      showDetailModal: !this.state.showDetailModal,
+      selectedItem: item,
+    });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showDetailModal: false });
+  };
+
   renderSubTotalMobile() {
+    const { successfulPurchase } = this.props;
 
     return (
       <div className="sub-total">
         <div className="mb-total-label">TOTAL</div>
-        <div className="mb-total-value">R$ 150,00</div>
+        <div className="mb-total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
       </div>
     );
   }
 
   renderSubTotalDesktop() {
+    const { successfulPurchase } = this.props;
 
     return (
       <div className="sub-total">
-
         <div className="sub-total-row">
           <div className="key">Sub-total</div>
-          <div className="value">R$150,00</div>
+          <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
         </div>
-
-        <div className="sub-total-row">
+        {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
           <div className="key">Cupom</div>
-          <div className="value">--</div>
-        </div>
-
+          <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_discount_price)}</IntlMoney></div>
+        </div>}
         <div className="sub-total-row">
           <div className="key">Total</div>
-          <div className="value total-value">R$135,00</div>
+          <div className="value total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
         </div>
-
       </div>
     );
   }
 
-  render() {
+  renderActions(actions, actionCount, createdDate) {
+    return Object.keys(actions).map((key) => (
+      actions[key].enabled && <MethodItem action={actions[key]} createdDate={createdDate} className={actionCount === 1 ? 'full-method-item' : ''} type={key} key={key} />
+    ));
+  }
 
-    const { app: { screenSize } } = this.props;
-    const subTotal = ['xs', 'is', 'sm', 'ix'].includes(screenSize)
-      ? this.renderSubTotalMobile()
-      : this.renderSubTotalDesktop();
+  renderProductItems(items) {
+    return items.map((item) => (
+      <ProductItem item={item} key={item.info.id} handleShowingModal={this.handleShowingModal} />
+    ));
+  }
+
+  renderStayTunedItems() {
+    const { locale } = this.props;
+
+    return locale.translate.page.successful_purchase.sidebar.ITEMS.map((item) => (
+      <StayTunedItem text={item} key={item} />
+    ));
+  }
+
+  render() {
+    const { app: { screenSize }, locale, successfulPurchase, match: { params: { orderNumber } } } = this.props;
+    const { selectedItem } = this.state;
+
+    const shippingAddressInfo = (successfulPurchase.isLoaded && !successfulPurchase.isRunning)
+      ? successfulPurchase.order.info.addresses.filter((address) => address.type === 'SHIPPING')
+      : {};
+    let actionCount = 0;
+    if (successfulPurchase.isLoaded && !successfulPurchase.isRunning) {
+      Object.keys(successfulPurchase.order.actions).forEach((key) => {
+        if (successfulPurchase.order.actions[key].enabled) {
+          actionCount++;
+        }
+      });
+    }
 
     return (
       <section>
         <div className="container">
-          <div className="template-success">
-
+          {this.state.showDetailModal &&
+          <Modal handleCloseModal={this.handleCloseModal}>
+            <ProductModalItem item={selectedItem} />
+          </Modal>}
+          {(!successfulPurchase.isLoaded || successfulPurchase.isRunning) && <Loading />}
+          {successfulPurchase.isLoaded && !successfulPurchase.isRunning && <div className="template-success">
             <div className="success-message atm-success-text">
               <CheckCircleIcon />
-              <span>Pedido nº485343 efetuado com sucesso!</span>
+              <span>Pedido nº{successfulPurchase.order.info.id} efetuado com sucesso!</span>
             </div>
-
-            <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
-
-            <div>
-              <WarningMessage />
-            </div>
-
-            <div className="method-container">
-              <MethodItem buttonText="Ver boleto" linkText="Copiar código do boleto" />
-              <MethodItem buttonText="Enviar comprovante" linkText="Envie para agilizar o pedido" />
-              <MethodItem buttonText="Enviar arte final" linkText="Envie até as 14:00 do dia 20/11/2016" />
-            </div>
-
+            {actionCount > 0 && <span>
+              <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
+              <div>
+                <WarningMessage>
+                  <b>Prazo de entrega: </b> a arte deve ser enviada até às <b>{moment(successfulPurchase.order.info.created_at).format('hh:mm')}</b> do dia 
+                  <b><IntlDate>{successfulPurchase.order.info.created_at}</IntlDate></b>. Após esse período, a data para a previsão de entrega será alterada.
+                </WarningMessage>
+              </div>
+              <div className="method-container">
+                {this.renderActions(successfulPurchase.order.actions, actionCount, successfulPurchase.order.info.created_at)}
+              </div>
+            </span>}
             <div className="main-container">
-
               <div className="product-container">
-
                 <h3>RESUMO DO SEU PEDIDO</h3>
-
                 <div className="product-item-row product-item-header">
                   <div className="product-item-col product-item-col-product">
                     <h4>PRODUTO</h4>
                   </div>
-
                   <div className="product-item-col product-item-col-delivery">
                     <h4>ENTREGA</h4>
                   </div>
-
                   <div className="product-item-col product-item-col-amount">
                     <h4>QUANTIDADE</h4>
                   </div>
-
                   <div className="product-item-col product-item-col-value">
                     <h4>VALOR</h4>
                   </div>
                 </div>
-
                 <div className="product-item-body">
-                  <ProductItem />
-                  <ProductItem />
+                  {this.renderProductItems(successfulPurchase.order.info.items)}
                 </div>
-
                 <div className="product-sub-total">
-                  { subTotal }
+                  {isMobile(screenSize) ? this.renderSubTotalMobile() : this.renderSubTotalDesktop()}
                 </div>
-
               </div>
-
               <div className="stay-tuned-container">
-                <h3>FIQUE ATENTO</h3>
-
+                <h3>{locale.translate.page.successful_purchase.sidebar.TITLE}</h3>
                 <div>
-                  <StayTunedItem text='O prazo de entrega é válido somente após a confirmação do pagamento do boleto' />
-                  <StayTunedItem text='É possível alterar a arte envia até o momento que antecede a ida do seu material para a produção' />
-                  <StayTunedItem text='É possível alterar o endereço de entrega até o momento que antecede a postagem do seu pedido*' />
-                  <StayTunedItem text='Acompanhe o status do seu pedido através dos emails' />
-                  <StayTunedItem text='A nota fiscal será enviada por email após a postagem do seu pedido' />
-                  <StayTunedItem text='Você pode acompanhar seus pedidos através do menu “Minha conta”. Acesse:' />
+                  {this.renderStayTunedItems()}
                 </div>
-
                 <div className="my-account">
-                  <a>
+                  <Link to={`/minha-conta/pedidos/${orderNumber}`}>
                     <MyAccountIcon />
                     <div>MINHA CONTA</div>
-                  </a>
+                  </Link>
                 </div>
-
-                <h3>endereço de entrega</h3>
-
-                <div className="address">Av. Brigadeiro Faria Lima, 1451 - Apt 102 Guarulhos, SP - 07133-000</div>
-
-                <div className="delivery-address">
+                <h3>{locale.translate.page.successful_purchase.sidebar.DELIVERY_ADDRESS}</h3>
+                <div className="address">
+                  {`${shippingAddressInfo[0].street}, ${shippingAddressInfo[0].number}`}
+                  {shippingAddressInfo[0].additional_address && ` - ${shippingAddressInfo[0].additional_address}`}
+                  {shippingAddressInfo[0].neighborhood && `${shippingAddressInfo[0].neighborhood}, `}
+                  {`${shippingAddressInfo[0].state} - ${shippingAddressInfo[0].zipcode}`}
+                </div>
+                <Link to={`/minha-conta/pedidos/${orderNumber}`} className="delivery-address">
                   <RefreshIcon />
                   <div>Alterar endereço de entrega</div>
-                </div>
-
+                </Link>
               </div>
-
             </div>
-
-          </div>
+          </div>}
         </div>
       </section>
     );
@@ -156,7 +211,11 @@ export class Success extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { app: state.app };
+  return {
+    app: state.app,
+    locale: state.locale,
+    successfulPurchase: state.successfulPurchase,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
