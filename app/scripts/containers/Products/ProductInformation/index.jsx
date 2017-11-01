@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { Tabs, TabHeader, TabNav, TabBody } from 'components/Tabs';
-import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
+import { NextArrow, PrevArrow } from 'components/Carousel';
 
 type Props = {
   screenSize: string,

@@ -7,7 +7,7 @@ import Collapse, { Panel } from 'rc-collapse';
 import Loading from 'components/Loading';
 import Modal from 'components/Modal';
 import { AccordionMinusIcon, AccordionPlusIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
-import { accountAddressDelete, accountAddressFetch, accountAddressFormReset } from 'actions';
+import { accountAddressDelete, accountAddressFetch } from 'actions';
 import { connect } from 'react-redux';
 import AddressFormModal from './AddressFormModal';
 
@@ -64,10 +64,6 @@ export class MyAddresses extends React.Component {
   };
 
   handleCreateAddress = (type) => {
-    const { dispatch } = this.props;
-
-    dispatch(accountAddressFormReset());
-
     this.setState({
       openAddressModal: true,
       selectedAddress: null,
@@ -76,10 +72,6 @@ export class MyAddresses extends React.Component {
   };
 
   handleEditAddress = (type, selectedAddress) => {
-    const { dispatch } = this.props;
-
-    dispatch(accountAddressFormReset());
-
     this.setState({
       openAddressModal: true,
       selectedAddress,

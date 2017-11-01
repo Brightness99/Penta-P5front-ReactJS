@@ -27,6 +27,8 @@ export const AccountConstants = keyMirror({
   ACCOUNT_UPDATE_SUBMIT_FAILURE: undefined,
   ACCOUNT_UPDATE_SUBMIT_CANCEL: undefined,
 
+  ACCOUNT_FORM_RESET: undefined,
+
   ACCOUNT_ADDRESS_CREATE_SUBMIT: undefined,
   ACCOUNT_ADDRESS_CREATE_SUBMIT_SUCCESS: undefined,
   ACCOUNT_ADDRESS_CREATE_SUBMIT_FAILURE: undefined,
