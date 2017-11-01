@@ -199,6 +199,7 @@ export default class ShareCode extends React.PureComponent<Props, State> {
   render() {
     const { activeSection } = this.state;
     const { facebook, language, screenSize, voucher } = this.props;
+    const credentials = (facebook || {}).credentials || {};
     return (
       <section className="org-modal-share">
         <h4 className="title-modal-share">{'Compartilhar código'}</h4>
@@ -223,12 +224,12 @@ export default class ShareCode extends React.PureComponent<Props, State> {
             <p>{'Copiar link promocional'}</p>
           </button>
           <FacebookProvider
-            appId={facebook.credentials.app_id.toString()}
+            appId={(credentials.app_id || 0).toString()}
             version={'v2.10'}
             language={language}
           >
             <Share
-              appId={facebook.credentials.app_id.toString()}
+              appId={(credentials.app_id || 0).toString()}
               href="https://www.facebook.com/"
               mobileIframe={isMobile(screenSize)}
               quote={message(voucher.voucher_name || voucher.voucher_id)}
