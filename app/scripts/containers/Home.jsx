@@ -81,7 +81,10 @@ export class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    locale: state.locale.translate.page.home,
+    locale: {
+      ...state.locale.translate.page.home,
+      COUNTRY_CODE: state.locale.COUNTRY_CODE,
+    },
   };
 }
 
