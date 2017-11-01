@@ -1,4 +1,5 @@
 .available-upload-extra-info {
+  margin-top            : 1rem;
   padding               : 1rem;
   display               : grid;
   grid-template-columns : 1fr;
@@ -10,16 +11,21 @@
   .delivery-information, .template-information-container {
     display        : flex;
     flex-direction : row;
+    .icon {
+      flex-shrink  : 0;
+      width        : 3rem;
+      height       : 3rem;
+      margin-right : 1rem;
+    }
     .content {
       display        : flex;
       flex-direction : column;
-      margin-top     : 1rem;
+      margin-top     : 0.5rem;
       .title {
         color       : #000000;
         font-size   : 16px;
         font-weight : bold;
         font-style  : oblique;
-        line-height : 12px;
       }
       .description {
         margin-top  : 1rem;
@@ -32,19 +38,6 @@
         display        : flex;
         flex-direction : row;
       }
-    }
-  }
-  .delivery-information {
-    & > svg {
-      width        : 10rem;
-      margin-right : 2rem;
-    }
-  }
-  .template-information-container {
-    & > svg {
-      width        : 5rem;
-      height       : 5rem;
-      margin-right : 2rem;
     }
   }
 }

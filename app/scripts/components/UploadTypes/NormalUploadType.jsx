@@ -62,7 +62,7 @@ export default class NormalUploadType extends React.PureComponent {
 
   render() {
     return (
-      <section className="upload-type-schemes-container">
+      <section className="upload-normal-type-container">
         {
           this.renderUploadFiles()
         }
