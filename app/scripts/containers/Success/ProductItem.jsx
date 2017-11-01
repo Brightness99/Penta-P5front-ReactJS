@@ -3,8 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import moment from 'moment';
-import { IntlMoney } from 'components/Intl';
+import { IntlMoney, IntlDate } from 'components/Intl';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
@@ -32,7 +31,7 @@ export class ProductItem extends React.Component {
           </div>
         </div>
         <div className="product-item-col product-item-col-delivery">
-          <div>{(moment(new Date(item.info.expected_delivery_date))).format('DD/MM/YYYY')}</div>
+          <div><IntlDate>{item.info.expected_delivery_date}</IntlDate></div>
           <div>{item.delivery_zipcode.label}: {item.delivery_zipcode.value}</div>
         </div>
         <div className="product-item-col product-item-col-amount">
@@ -63,7 +62,7 @@ export class ProductItem extends React.Component {
           <div>ENTREGA</div>
         </div>
         <div className="product-item-col product-item-col-delivery">
-          <div>{(moment(new Date(item.info.expected_delivery_date))).format('DD/MM/YYYY')}</div>
+          <div><IntlDate>{item.info.expected_delivery_date}</IntlDate></div>
           <div>{item.delivery_zipcode.label}: {item.delivery_zipcode.value}</div>
         </div>
         <div className="space-between field">
