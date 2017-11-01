@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Stores
 declare type AppStoreType = {
   rehydrated: boolean,
@@ -100,7 +101,7 @@ declare type SettingsStore = {
   },
 };
 
-decare type BannerImageType = {
+declare type BannerImageType = {
   link: {
     url?: string,
     target: string,
