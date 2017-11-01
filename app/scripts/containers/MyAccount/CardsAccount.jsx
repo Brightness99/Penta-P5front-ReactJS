@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import Cards from 'react-credit-cards';
+import swal from 'sweetalert2';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import Breadcrumbs from 'components/Breadcrumbs';
 import { TrashIcon } from 'components/Icons';
 import Loading from 'components/Loading';
 import { accountSavedCreditCardDelete, accountSavedCreditCardFetch } from 'actions';
@@ -12,6 +13,8 @@ type Props = {
   screenSize: string,
   account: {},
   dispatch: () => {},
+  setBreadcrumbs: () => void,
+  locale: {},
 };
 
 export class CardsAccount extends React.Component {
@@ -21,14 +24,38 @@ export class CardsAccount extends React.Component {
     const { dispatch } = this.props;
 
     dispatch(accountSavedCreditCardFetch());
+    this.handleBreadcrumbs();
   }
 
   static props: Props;
 
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: 'Cartões salvos',
+        },
+      ]);
+    }
+  };
+
   handleDeleteCard = (id) => {
     const { dispatch } = this.props;
 
-    dispatch(accountSavedCreditCardDelete(id));
+    swal({
+      title: 'Tem certeza que deseja deletar o cartão de crédito salvo?',
+      text: 'Ao remover este produto ele não estará mais disponível no carrinho!',
+      type: 'warning',
+      confirmButtonColor: '#2cac57',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+      showCancelButton: true,
+      reverseButtons: true,
+    }).then(() => {
+      dispatch(accountSavedCreditCardDelete(id));
+    });
   };
 
   renderItems() {
@@ -40,26 +67,13 @@ export class CardsAccount extends React.Component {
 
     return savedCreditCards.cards.map((item) => (
       <div className="card-saved" key={item.id}>
-        <div className="card-save-info">
-          <div>
-            {item.brand === 'mastercard'
-              ? <img src={require('assets/media/images/mastercard.png')} alt="{item.brand}" />
-              : <img src={require('assets/media/images/visa-card.png')} alt="{item.brand}" />
-            }
-          </div>
-          <div className="cxnumber-card">
-            <p>{item.label}</p>
-          </div>
-          <div
-            className={cx('card-valid', {
-              invalid: item.expired === true,
-            })}
-          >
-            <p>{item.expiration_date}</p>
-          </div>
-          <div className="qrk-trash-icon" onClick={() => this.handleDeleteCard(item.id)}>
-            <TrashIcon />
-          </div>
+        <Cards
+          number={item.label}
+          name={item.brand}
+          expiry={item.expiration_date}
+        />
+        <div className="qrk-trash-icon" onClick={() => this.handleDeleteCard(item.id)}>
+          <TrashIcon />
         </div>
       </div>
     ));
@@ -68,25 +82,9 @@ export class CardsAccount extends React.Component {
   render() {
     const { screenSize, account: { savedCreditCards } } = this.props;
 
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Meus cartões',
-      },
-    ];
-
     return (
       <div className="container-creditCard">
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <div className={cx(isMobile(screenSize) && ('container'))}>
-          <h2 className="titl-creditCard">Minha conta</h2>
           <h3 className="subtitle-creditCard">Cartões salvos</h3>
           <div className="container-card">
             {!savedCreditCards.isLoaded || savedCreditCards.isRunning ? <Loading /> : this.renderItems()}
