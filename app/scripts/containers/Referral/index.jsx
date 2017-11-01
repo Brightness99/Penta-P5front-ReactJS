@@ -58,7 +58,10 @@ export class Referral extends React.Component<Props, State> {
   static state: State;
 
   handleShowingModal = () => {
-    this.setState({ showShareModal: !this.state.showShareModal });
+    this.setState({
+      showShareModal: !this.state.showShareModal,
+      showCopiedTooltip: false,
+    });
   };
 
   handleShowingTooltip = () => {
@@ -149,7 +152,11 @@ export class Referral extends React.Component<Props, State> {
                 </p>
                 {
                   isLoggedIn ?
-                    <form className="mol-share" onSubmit={this.handleSubmit}>
+                    <form
+                      className="mol-share"
+                      onSubmit={this.handleSubmit}
+                      onBlur={this.handleShowingTooltip}
+                    >
                       <section className="atm-input-link">
                         <Input
                           id="promo_code"
