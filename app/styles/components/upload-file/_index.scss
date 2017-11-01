@@ -6,6 +6,28 @@
   justify-content : center;
   align-items     : center;
   width           : 100%;
+  .upload-file-warning-dialog{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      margin: 1.5rem 0;
+    }
+    svg{
+      width: 8rem;
+      height: 8rem;
+      fill: #f7ba8a;
+      margin: 1.5rem 0;
+    }
+    p{
+      text-align: center;
+    }
+    .app__qrk__button{
+      margin-top: 2rem;
+      padding: 0.5rem 2rem;
+    }
+  }
 }
 
 .upload-file-content {

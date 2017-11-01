@@ -3,6 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import { uploadFileRequest, uploadFileCancel } from 'actions';
+import { Button } from 'quarks/Inputs';
+import Modal from 'components/Modal';
+import { WarningFilled } from 'components/Icons';
 import FileFormatIcon from 'components/FileFormatIcon';
 import PreviewUploadedFile from './PreviewUploadedFile';
 import UploadProgress from './UploadProgress';
@@ -26,6 +29,7 @@ type Props = {
 
 type State = {
   isShowDropzone: boolean,
+  isShowErrorDialog: boolean,
   isSelectedFileForUpload: boolean,
   fileName: string,
   fileFormat: string,
@@ -103,10 +107,13 @@ export class UploadFile extends React.Component {
   };
 
   uploadFile(file) {
-    const { uploadFile } = this.props;
+    const { uploadFile, fileFormats } = this.props;
     const fileName = file.name;
     const format = fileName.split('.').pop();
-
+    if (!fileFormats.includes(`.${format}`)) {
+      this.handleDialogOpen();
+      return;
+    }
     this.setState({
       isShowDropzone: false,
       fileName,
@@ -144,6 +151,36 @@ export class UploadFile extends React.Component {
     if (uploadCancel && typeof uploadCancel === 'function') {
       uploadCancel();
     }
+  };
+
+  handleDialogOpen = () => {
+    this.setState({
+      isShowDropzone: false,
+      isShowErrorDialog: true,
+    });
+  };
+
+  handleDialogClose = () => {
+    this.setState({
+      isShowErrorDialog: false,
+    });
+  };
+
+  renderModalDialog = () => {
+    const { isShowErrorDialog } = this.state;
+    return (isShowErrorDialog &&
+      <Modal handleCloseModal={this.handleDialogClose}>
+        <section className="upload-file-warning-dialog">
+          <WarningFilled />
+          <h3>Formato de arquivo inválido</h3>
+          <p>Você optou por enviar arquivo fechado. Por favor envie arquivo no formato PDF ou retorne para página de
+            Configurações e opte por Arquivo aberto.</p>
+          <Button
+            onClick={this.handleDialogClose}
+            kind="success"
+          >Ok, entendi!</Button>
+        </section>
+      </Modal>);
   };
 
   renderContent = () => {
@@ -197,6 +234,7 @@ export class UploadFile extends React.Component {
       <section className="upload-file-container">
         { showTitle && <h4>{title}</h4> }
         <section className={cx('upload-file-content', isActive && 'active', isInactive && 'inactive')}>
+          {this.renderModalDialog()}
           {this.renderContent()}
         </section>
       </section>
