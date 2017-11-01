@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import Overlay from 'components/Overlay';
 import TimesIcon from 'components/Icons/Times';
 
 type Props = {
@@ -8,12 +9,15 @@ type Props = {
 }
 
 const PreviewImageModal = ({ children, handleClose }: Props) => (
-  <section className="preview-image-modal">
-    <a href="#close" onClick={handleClose}>
+  <section className="preview-image-modal-container">
+    <Overlay onClick={handleClose} />
+    <a href="#close" className="close-button" onClick={handleClose}>
       <TimesIcon />
     </a>
-    <section className="preview-image-content">
-      {children}
+    <section className="preview-image-modal">
+      <section className="preview-image-content">
+        {children}
+      </section>
     </section>
   </section>
 );
