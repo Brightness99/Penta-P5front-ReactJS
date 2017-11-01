@@ -52,7 +52,8 @@ type Props = {
 type State = {
   selectedStrategy: number,
   isRepurchase: boolean,
-  selectedAdditionalParameters: {proof: string, file_format: string},
+  selectedAdditionalParameters: {proof: {}, file_format: {}},
+  fileFormats: [],
   uploadedFiles: [],
   canSubmit: boolean,
   documentReferenceId: string,
@@ -65,6 +66,7 @@ export class Upload extends React.Component {
       selectedStrategy: 0,
       selectedAdditionalParameters: null,
       uploadedFiles: [],
+      fileFormats: [],
       isRepurchase: false,
       canSubmit: false,
     };
@@ -127,9 +129,17 @@ export class Upload extends React.Component {
   };
 
   handleAdditionalParameters = (parameters) => {
+    let fileFormats;
+    if (parameters.file_format.id === 'ppdf') {
+      fileFormats = ['.pdf'];
+    } else {
+      fileFormats = ['.ai', '.indd', '.psd', '.cdr', '.jpg', '.jpeg'];
+    }
     this.setState({
       selectedAdditionalParameters: parameters,
+      fileFormats,
     }, this.updateCanSubmit);
+
   };
 
   handleSelectedStrategy = (strategy) => {
@@ -141,7 +151,7 @@ export class Upload extends React.Component {
 
   handleUploadFinish = () => {
     const { match: { params: { itemId } }, uploadFinish, uploadInfo: { globalFlags: { upload_type } } } = this.props;
-    const { uploadedFiles, isRepurchase, selectedStrategy, documentReferenceId } = this.state;
+    const { uploadedFiles, isRepurchase, selectedStrategy, documentReferenceId, selectedAdditionalParameters } = this.state;
     const uploads = {};
     uploadedFiles.forEach((x) => {
       uploads[x.preview.basename] = x.preview;
@@ -154,10 +164,7 @@ export class Upload extends React.Component {
       isRepurchase,
       upload_type,
       upload_strategy: selectedStrategy,
-      additional_options: {
-        file_format: { id: 'lfile', name: 'Arquivo AI, INDD, PSD, CDR, JPG (aberto)' },
-        proof: { id: 'woprf', name: 'Checagem Profissional' },
-      },
+      additional_options: selectedAdditionalParameters,
       uploads,
     };
 
@@ -211,7 +218,7 @@ export class Upload extends React.Component {
   }
 
   renderFileUploadBlock() {
-    const { selectedStrategy, uploadedFiles } = this.state;
+    const { selectedStrategy, uploadedFiles, fileFormats } = this.state;
     const { uploadInfo: { globalFlags: { upload_type }, cimpressInfo } } = this.props;
     const showStep = selectedStrategy > 1;
     const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0;
@@ -229,6 +236,7 @@ export class Upload extends React.Component {
           uploadType={upload_type}
           cimpressInfo={cimpressInfo}
           selectedStrategy={selectedStrategy}
+          fileFormats={fileFormats}
           handleCanvasFinalize={this.handleCanvasFinalize}
           handleUploadFile={this.handleUploadFile}
           handleRemoveFile={this.handleRemoveFile}
@@ -242,8 +250,8 @@ export class Upload extends React.Component {
     const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } }, screenSize } = this.props;
     return (<CartItemDefinitionsPanel
       parts={parts}
-      totalPrice={total_price}
       subTotal={total_price}
+      commission={0.18}
       expectedDeliveryDate={expected_delivery_date}
       isMobile={isMobile(screenSize)}
       additionalOptions={selectedAdditionalParameters}
