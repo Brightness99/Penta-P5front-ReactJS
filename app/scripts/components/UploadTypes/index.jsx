@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import UploadExtraInformationPanel from 'components/UploadExtraInformationPanel';
 import NormalUploadType from './NormalUploadType';
 import CanvasSchema from './Canvas';
 
@@ -11,6 +12,8 @@ type Props = {
   fileFormats: [],
   handleUploadFile: (file: { title: string, preview: {} }) => void,
   handleRemoveFile: (file: { title: string, preview: {} }) => void,
+  message: string,
+  showMessage: boolean,
 }
 
 const UploadTypes = ({ uploadType,
@@ -19,29 +22,43 @@ const UploadTypes = ({ uploadType,
                        handleRemoveFile,
                        handleCanvasFinalize,
                        cimpressInfo,
-                       fileFormats }: Props) => {
-  switch (uploadType) {
-    case 'canvas':
-      return (<CanvasSchema
-        handleCanvasFinalize={handleCanvasFinalize}
-        cimpressInfo={cimpressInfo}
-      />);
-    case 'sku_scene':
-      return (<CanvasSchema
-        isSku={true}
-        handleCanvasFinalize={handleCanvasFinalize}
-        cimpressInfo={cimpressInfo}
-      />);
-    default:
-      return (
-        <NormalUploadType
-          fileFormats={fileFormats}
-          uploadTwoFiles={selectedStrategy === 4}
-          multipleFiles={selectedStrategy === 5}
-          handleUploadFile={handleUploadFile}
-          handleRemoveFile={handleRemoveFile}
+                       fileFormats,
+                       message,
+                       showMessage,
+                     }: Props) => {
+  const renderType = () => {
+    switch (uploadType) {
+      case 'canvas':
+        return (<CanvasSchema
+          handleCanvasFinalize={handleCanvasFinalize}
+          cimpressInfo={cimpressInfo}
         />);
-  }
+      case 'sku_scene':
+        return (<CanvasSchema
+          isSku={true}
+          handleCanvasFinalize={handleCanvasFinalize}
+          cimpressInfo={cimpressInfo}
+        />);
+      default:
+        return (
+          <NormalUploadType
+            fileFormats={fileFormats}
+            uploadTwoFiles={selectedStrategy === 4}
+            multipleFiles={selectedStrategy === 5}
+            handleUploadFile={handleUploadFile}
+            handleRemoveFile={handleRemoveFile}
+          />);
+    }
+  };
+
+  return (<section className="upload-type-schemes-container">
+    {
+      renderType()
+    }
+    {
+      showMessage && <UploadExtraInformationPanel description={message} />
+    }
+  </section>);
 };
 
 export default UploadTypes;

@@ -1,12 +1,14 @@
 // @flow
 import React from 'react';
+import UploadExtraInformationPanel from 'components/UploadExtraInformationPanel';
 import AvailableUploadStrategy from './AvailableUploadStrategy';
-import AvailableUploadExtraInfo from './AvailableUploadExtraInfo';
 import strategiesInfo from './availableUploadStrategies';
 
 type Props = {
   availableStrategies: Array<number>,
-  handleSelectedStrategy: (strategyIndex: number) => void
+  handleSelectedStrategy: (strategyIndex: number) => void,
+  message: string,
+  showMessage: boolean,
 }
 
 type State = {
@@ -34,9 +36,8 @@ export default class AvailableUploadStrategies extends React.Component {
   };
 
   render() {
-    const { availableStrategies } = this.props;
+    const { availableStrategies, message, showMessage } = this.props;
     const { selectedItem } = this.state;
-
     return (
       <section className="available-upload-strategies-container">
         <section className="strategies">
@@ -54,7 +55,7 @@ export default class AvailableUploadStrategies extends React.Component {
           }
         </section>
         {
-          <AvailableUploadExtraInfo />
+          showMessage && <UploadExtraInformationPanel description={message} />
         }
       </section>
     );
