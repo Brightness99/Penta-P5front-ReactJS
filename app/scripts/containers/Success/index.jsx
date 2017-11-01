@@ -2,11 +2,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckCircleIcon, MyAccountIcon, RefreshIcon } from 'components/Icons';
 import { successfulPurchaseFetch } from 'actions';
 import Loading from 'components/Loading';
 import Modal from 'components/Modal';
+import { IntlMoney } from 'components/Intl';
+
 import WarningMessage from './WarningMessage';
 import MethodItem from './MethodItem';
 import ProductItem from './ProductItem';
@@ -65,7 +68,7 @@ export class Success extends React.Component {
     return (
       <div className="sub-total">
         <div className="mb-total-label">TOTAL</div>
-        <div className="mb-total-value">R$ {successfulPurchase.order.info.total_price}</div>
+        <div className="mb-total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
       </div>
     );
   }
@@ -77,23 +80,23 @@ export class Success extends React.Component {
       <div className="sub-total">
         <div className="sub-total-row">
           <div className="key">Sub-total</div>
-          <div className="value">R$ {successfulPurchase.order.info.total_price}</div>
+          <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
         </div>
-        <div className="sub-total-row">
+        {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
           <div className="key">Cupom</div>
-          <div className="value">R$ {successfulPurchase.order.info.total_discount_price}</div>
-        </div>
+          <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_discount_price)}</IntlMoney></div>
+        </div>}
         <div className="sub-total-row">
           <div className="key">Total</div>
-          <div className="value total-value">R$ {successfulPurchase.order.info.total_price}</div>
+          <div className="value total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
         </div>
       </div>
     );
   }
 
-  renderActions(actions) {
+  renderActions(actions, actionCount, createdDate) {
     return Object.keys(actions).map((key) => (
-      actions[key].enabled && <MethodItem buttonText={actions[key].label} key={key} linkText="Copiar código do boleto" />
+      actions[key].enabled && <MethodItem action={actions[key]} createdDate={createdDate} className={actionCount === 1 ? 'full-method-item' : ''} type={key} key={key} />
     ));
   }
 
@@ -118,6 +121,14 @@ export class Success extends React.Component {
     const shippingAddressInfo = (successfulPurchase.isLoaded && !successfulPurchase.isRunning)
       ? successfulPurchase.order.info.addresses.filter((address) => address.type === 'SHIPPING')
       : {};
+    let actionCount = 0;
+    if (successfulPurchase.isLoaded && !successfulPurchase.isRunning) {
+      Object.keys(successfulPurchase.order.actions).forEach((key) => {
+        if (successfulPurchase.order.actions[key].enabled) {
+          actionCount++;
+        }
+      });
+    }
 
     return (
       <section>
@@ -132,15 +143,17 @@ export class Success extends React.Component {
               <CheckCircleIcon />
               <span>Pedido nº{successfulPurchase.order.info.id} efetuado com sucesso!</span>
             </div>
-            <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
-            {successfulPurchase.order.messages[0] &&
+            {actionCount > 0 && <span>
+              <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
               <div>
-                <WarningMessage message={successfulPurchase.order.messages[0].message} />
+                <WarningMessage>
+                  <b>Prazo de entrega: </b> a arte deve ser enviada até às <b>{moment(successfulPurchase.order.info.created_at).format('hh:mm')}</b> do dia <b>{moment(successfulPurchase.order.info.created_at).format('DD/MM/YYYY')}</b>. Após esse período, a data para a previsão de entrega será alterada.
+                </WarningMessage>
               </div>
-            }
-            <div className="method-container">
-              {this.renderActions(successfulPurchase.order.actions)}
-            </div>
+              <div className="method-container">
+                {this.renderActions(successfulPurchase.order.actions, actionCount, successfulPurchase.order.info.created_at)}
+              </div>
+            </span>}
             <div className="main-container">
               <div className="product-container">
                 <h3>RESUMO DO SEU PEDIDO</h3>
