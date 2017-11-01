@@ -8,7 +8,7 @@ import { CheckCircleIcon, MyAccountIcon, RefreshIcon } from 'components/Icons';
 import { successfulPurchaseFetch } from 'actions';
 import Loading from 'components/Loading';
 import Modal from 'components/Modal';
-import { IntlMoney } from 'components/Intl';
+import { IntlMoney, IntlDate } from 'components/Intl';
 
 import WarningMessage from './WarningMessage';
 import MethodItem from './MethodItem';
@@ -147,7 +147,8 @@ export class Success extends React.Component {
               <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
               <div>
                 <WarningMessage>
-                  <b>Prazo de entrega: </b> a arte deve ser enviada até às <b>{moment(successfulPurchase.order.info.created_at).format('hh:mm')}</b> do dia <b>{moment(successfulPurchase.order.info.created_at).format('DD/MM/YYYY')}</b>. Após esse período, a data para a previsão de entrega será alterada.
+                  <b>Prazo de entrega: </b> a arte deve ser enviada até às <b>{moment(successfulPurchase.order.info.created_at).format('hh:mm')}</b> do dia 
+                  <b><IntlDate>{successfulPurchase.order.info.created_at}</IntlDate></b>. Após esse período, a data para a previsão de entrega será alterada.
                 </WarningMessage>
               </div>
               <div className="method-container">
