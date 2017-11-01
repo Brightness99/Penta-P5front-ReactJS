@@ -26,6 +26,13 @@ export class ChangePaymentMethod extends React.Component {
     };
   }
 
+
+  static defaultProps = {
+    screenSize: 'xs',
+  };
+
+  static props: Props;
+
   handleInputFocus = (e) => {
     const target = e.target;
 
@@ -43,12 +50,6 @@ export class ChangePaymentMethod extends React.Component {
       [ev.currentTarget.name]: ev.currentTarget.value,
     });
   };
-
-  static defaultProps = {
-    screenSize: 'xs',
-  };
-
-  static props: Props;
 
   render() {
     const { screenSize } = this.props;

@@ -84,3 +84,18 @@
     Object.defineProperty(Element.prototype, 'dataset', descriptor);
   }
 }());
+
+
+/**
+ * Intl Polyfill
+ */
+/* istanbul ignore next */
+(function() {
+  if (!global.Intl) {
+    require.ensure([
+      'intl',
+    ], (require) => {
+      global.Intl = require('intl'); // eslint-disable-line no-return-assign
+    });
+  }
+}());

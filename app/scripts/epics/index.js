@@ -11,13 +11,15 @@ import {
   userLogOut,
   userAuthValidate,
   userSocialSignIn,
-  userSocialSignUp } from './user';
+  userSocialSignUp
+} from './user';
 import { productsFetch } from './products';
 import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
 import { printiPressFetch } from './printi-press';
 import { glossarySlugFetch, glossaryFetch } from './glossary';
 import { uploadFetch, uploadFileRequest, uploadFileCancel, uploadFinishRequest } from './upload';
+import { siteMapFetch } from './site-map';
 import {
   settingsFetch,
   settingsOptionsFetch,
@@ -49,17 +51,35 @@ import {
   accountUpdate,
   accountAddressFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountNotificationFetch,
   accountNotificationUpdate,
   accountSavedCreditCardFetch,
   accountSavedCreditCardDelete,
   accountOrderDetailFetch,
-  accountOrderFetch
+  accountOrderFetch,
+  zipcodeValidate,
+  accountLoyaltyFetch
 } from './account';
+
+import {
+  successfulPurchaseFetch
+} from './successful-purchase';
 
 import { policyFetch } from './policy';
 import { termsFetch } from './terms';
+import {
+  templatesFetch,
+  fetchTemplateById,
+  sendDownloadTemplatesRequest,
+  fetchTemplate
+} from './templates';
+import { aboutFetch } from './about';
+import {
+  fileMountFetch
+} from './file-mount';
+import { guideFetch } from './guide';
 
 export default combineEpics(
   userNewsletter,
@@ -98,6 +118,7 @@ export default combineEpics(
   accountUpdate,
   socialLoginSettingsFetch,
   accountAddressCreate,
+  accountAddressUpdate,
   accountAddressDelete,
   accountSavedCreditCardFetch,
   accountSavedCreditCardDelete,
@@ -105,6 +126,8 @@ export default combineEpics(
   accountNotificationUpdate,
   accountOrderDetailFetch,
   accountOrderFetch,
+  zipcodeValidate,
+  accountLoyaltyFetch,
   policyFetch,
   termsFetch,
   productCategoriesFetch,
@@ -112,4 +135,14 @@ export default combineEpics(
   uploadFileRequest,
   uploadFileCancel,
   uploadFinishRequest,
+  aboutFetch,
+  productCategoriesFetch,
+  successfulPurchaseFetch,
+  siteMapFetch,
+  fileMountFetch,
+  guideFetch,
+  templatesFetch,
+  fetchTemplateById,
+  sendDownloadTemplatesRequest,
+  fetchTemplate,
 );

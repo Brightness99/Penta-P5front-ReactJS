@@ -14,6 +14,7 @@ export const appState = {
   config: {
     viewType: 'photos',
   },
+  isLoyaltyBarVisible: true,
   rehydrated: false,
 };
 
@@ -37,6 +38,12 @@ export default {
           ...state.config,
           ...action.payload,
         },
+      };
+    },
+    [AppConstants.DISMISS_LOYALTY_BAR](state) {
+      return {
+        ...state,
+        isLoyaltyBarVisible: false,
       };
     },
   }),

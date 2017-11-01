@@ -4,7 +4,7 @@
  */
 import { getUnixtime, rxAjax } from 'utils';
 import { AppConstants, UserConstants } from 'constants/index';
-import { push } from 'modules/ReduxRouter';
+import { push, goBack } from 'modules/ReduxRouter';
 
 import 'rxjs/add/operator/do';
 
@@ -91,7 +91,7 @@ export function userSocialSignIn(action$) {
         method: 'POST',
       })
         .do((data) => {
-          if (data.status === 200) { push('/'); }
+          if (data.status === 200) { goBack(); }
         })
         .map(data => ({
           type: UserConstants.USER_AUTH_SIGN_IN_SOCIAL_SUCCESS,

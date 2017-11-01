@@ -1,0 +1,227 @@
+.org-download-template {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+
+  @include lg {
+    flex-direction: row;
+  }
+
+  .title-atm-preview {
+    font-family: $font-family-nunito-light;
+    font-size: $font-size-xxx;
+  }
+
+  .title-atm-sidebar {
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-il;
+  }
+
+  .mol-sidebar-download-template {
+    background-color: $color-white;
+    border-radius: 0.3rem;
+    flex: 1;
+    margin-right: 2rem;
+    padding: 3rem 1.8rem;
+
+    .atm-sidebar-download-template {
+      .qrk-list-sidebar {
+        color: $color-lightGray;
+        font-family: $font-family-open-sans-light;
+        font-size: $font-size-base;
+        margin: 1.5rem 0;
+      }
+    }
+
+    .atm-sidebar-choose-download {
+      .qrk-list-download {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        &.mobile-download-template {
+          grid-template-columns: 1fr;
+        }
+
+        li {
+          align-items: center;
+          align-self: center;
+          display: flex;
+          flex-wrap: nowrap;
+          justify-self: center;
+          margin: 1.5rem 0;
+
+          .btn-default {
+            border: 0.1rem solid;
+            margin-left: 1.7rem;
+            padding: 0.5rem 2.922rem;
+            width: 150px;
+          }
+        }
+      }
+    }
+  }
+
+  .mol-sidebar-preview {
+    background-color: $color-white;
+    border-radius: 0.3rem;
+    flex: 3;
+    padding: 3rem 3rem 1.7rem;
+
+    .atm-image-preview {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin: 3rem 0;
+
+      @include lg {
+        flex-direction: row;
+        margin: 5rem 0;
+      }
+
+      .qrk-image-preview {
+        margin-bottom: 2rem;
+
+        @include lg {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .atm-list-sidebar-preview {
+      border-top: 0.1rem solid #eee;
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-xs;
+
+      li {
+        align-items: center;
+        display: flex;
+        margin: 1rem 0;
+
+        @include lg {
+          display: inline-flex;
+          margin: 1.1rem 0 0 1rem;
+        }
+
+        &:before {
+          content: '';
+          height: 2rem;
+          margin-right: 1rem;
+          width: 2rem;
+
+          @include lg {
+            border-radius: 1.5rem;
+          }
+        }
+
+        &.final-format {
+          &:before {
+            background-color: $color-sky-blue;
+          }
+        }
+
+        &.safety-margin {
+          &:before {
+            background-color: $color-yellow;
+          }
+        }
+
+        &.bleed {
+          &:before {
+            background-color: $color-barbie-pink;
+          }
+        }
+
+        &.creases {
+          &:before {
+            background: repeating-linear-gradient(
+                to right,
+                #fff,
+                #dcdcdc 4px,
+                #fff 4px,
+                #dcdcdc 4px,
+                #fff 4px,
+                #dcdcdc 5px
+            );
+          }
+        }
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .atm-legend-preview {
+      color: $color-lightGray;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      font-style: italic;
+    }
+  }
+
+  .mol-footer-preview {
+    background-color: $color-lightGreenWarranty;
+    margin: auto auto 4rem;
+    padding: 2rem 0;
+
+    .text-footer-preview {
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .btn-default {
+      margin-top: 2rem;
+    }
+  }
+}
+
+.download-template-main > .container {
+  padding: 0;
+}
+
+.download-template-form {
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+  height: 12rem;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+  padding: 1rem;
+  width: 40%;
+}
+
+.mobile-download-template-form {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  width: calc(100% - 3rem);
+}
+
+.download-template-container {
+  background-color: #fff;
+}
+
+.mobile-download-template-container {
+  margin: 0 1.5rem;
+}
+
+.download-template-title {
+  font-family: 'Open Sans', serif;
+  font-size: 3.2rem;
+  margin: 2rem 0;
+}
+
+.mobile-download-template-title {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.download-template__button {
+  background: none;
+  border: 0;
+}

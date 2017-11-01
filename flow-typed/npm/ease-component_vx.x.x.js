@@ -28,6 +28,6 @@ declare module 'ease-component' {
 declare module 'ease-component/index' {
   declare module.exports: $Exports<'ease-component'>;
 }
-declare module 'ease-component/index.js' {
+declare module 'ease-component/index.jsx' {
   declare module.exports: $Exports<'ease-component'>;
 }
