@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PrintiClub } from 'components/Icons';
+import { PrintiClub, CloseIcon, CheckIcon } from 'components/Icons';
 
 export class LoyaltyLp extends React.Component {
   render() {
@@ -41,20 +41,26 @@ export class LoyaltyLp extends React.Component {
           </div>
 
           <div className="container">
+            
+            {/* final container tipos de programa de fidelidade*/}
             <div className="mol-premium-members">
               <h3 className="title-loyalty">Membros premium</h3>
               <p className="subtitle-loyalty">Silver, Gold e Black: mais compras, mais benefícios.</p>
               <div className="atm-type-premium">
                 <div className="qrk-premium">
                   <div className="list-benefits-premium">
-                    <span>Club</span>
-                    <ul>
-                      <li>Promoções exclusivas</li>
-                      <li>Descontos especiais</li>
-                      <li>Amostras grátis</li>
-                      <li>Revisão de arquivos grátis</li>
-                      <li>Atendimento exclusivo</li>
-                      <li>Entrega rápida com desconto</li>
+                    <div className="logo-title-loyalty">
+                      <div className="logo-loyalty bg-club">
+                        <span className="title-logo-loyalty">Club</span>
+                      </div>
+                    </div>
+                    <ul className="color-club">
+                      <li className="li-active-color">Promoções exclusivas<span className="checkIcon"><CheckIcon /></span></li>
+                      <li>Descontos especiais<span className="closeIcon"><CloseIcon /></span></li>
+                      <li>Amostras grátis<span className="closeIcon"><CloseIcon /></span></li>
+                      <li>Revisão de arquivos grátis<span className="closeIcon"><CloseIcon /></span></li>
+                      <li>Atendimento exclusivo<span className="closeIcon"><CloseIcon /></span></li>
+                      <li>Entrega rápida com desconto<span className="closeIcon"><CloseIcon /></span></li>
                     </ul>
                   </div>
                   <div className="amount-money">
@@ -64,14 +70,18 @@ export class LoyaltyLp extends React.Component {
                 </div>
                 <div className="qrk-premium">
                   <div className="list-benefits-premium">
-                    <span>Silver</span>
-                    <ul>
-                      <li>Promoções exclusivas</li>
-                      <li>Descontos especiais</li>
-                      <li>Amostras grátis</li>
-                      <li>Revisão de arquivos grátis</li>
-                      <li>Atendimento exclusivo</li>
-                      <li>Entrega rápida com desconto</li>
+                    <div className="logo-title-loyalty">
+                      <div className="logo-loyalty bg-silver">
+                        <span className="title-logo-loyalty">Silver</span>
+                      </div>
+                    </div>
+                    <ul className="color-silver">
+                      <li className="li-active-color">Promoções exclusivas<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Descontos especiais<span className="checkIcon"><CheckIcon /></span></li>
+                      <li>Amostras grátis<span className="closeIcon"><CloseIcon /></span></li>
+                      <li>Revisão de arquivos grátis<span className="closeIcon"><CloseIcon /></span></li>
+                      <li>Atendimento exclusivo<span className="closeIcon"><CloseIcon /></span></li>
+                      <li>Entrega rápida com desconto<span className="closeIcon"><CloseIcon /></span></li>
                     </ul>
                   </div>
                   <div className="amount-money">
@@ -81,14 +91,18 @@ export class LoyaltyLp extends React.Component {
                 </div>
                 <div className="qrk-premium">
                   <div className="list-benefits-premium">
-                    <span>Gold</span>
-                    <ul>
-                      <li>Promoções exclusivas</li>
-                      <li>Descontos especiais</li>
-                      <li>Amostras grátis</li>
-                      <li>Revisão de arquivos grátis</li>
-                      <li>Atendimento exclusivo</li>
-                      <li>Entrega rápida com desconto</li>
+                    <div className="logo-title-loyalty">
+                      <div className="logo-loyalty bg-gold">
+                        <span className="title-logo-loyalty">Gold</span>
+                      </div>
+                    </div>
+                    <ul className="color-gold">
+                      <li className="li-active-color">Promoções exclusivas<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Descontos especiais<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Amostras grátis<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Revisão de arquivos grátis<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Atendimento exclusivo<span className="checkIcon"><CheckIcon /></span></li>
+                      <li>Entrega rápida com desconto<span className="closeIcon"><CloseIcon /></span></li>
                     </ul>
                   </div>
                   <div className="amount-money">
@@ -98,14 +112,18 @@ export class LoyaltyLp extends React.Component {
                 </div>
                 <div className="qrk-premium">
                   <div className="list-benefits-premium">
-                    <span>Black</span>
-                    <ul>
-                      <li>Promoções exclusivas</li>
-                      <li>Descontos especiais</li>
-                      <li>Amostras grátis</li>
-                      <li>Revisão de arquivos grátis</li>
-                      <li>Atendimento exclusivo</li>
-                      <li>Entrega rápida com desconto</li>
+                    <div className="logo-title-loyalty">
+                      <div className="logo-loyalty bg-black">
+                        <span className="title-logo-loyalty">Black</span>
+                      </div>
+                    </div>
+                    <ul className="color-black">
+                      <li className="li-active-color">Promoções exclusivas<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Descontos especiais<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Amostras grátis<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Revisão de arquivos grátis<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Atendimento exclusivo<span className="checkIcon"><CheckIcon /></span></li>
+                      <li className="li-active-color">Entrega rápida com desconto<span className="checkIcon"><CheckIcon /></span></li>
                     </ul>
                   </div>
                   <div className="amount-money">
@@ -115,7 +133,9 @@ export class LoyaltyLp extends React.Component {
                 </div>
               </div>
             </div>
+            {/* final container tipos de programa de fidelidade*/}
 
+            {/* começo container o que está perdendo */}
             <div className="mol-what-lost">
               <h3 className="title-loyalty">Quer saber o que você está perdendo?</h3>
               <p className="subtitle-loyalty">Separamos alguns benefícios em destaque:</p>
@@ -132,18 +152,22 @@ export class LoyaltyLp extends React.Component {
                 </div>
               </div>
             </div>
+            {/* final container o que está perdendo */}
 
+            {/* começo container ser premium */}
             <div className="mol-start-premium">
               <div className="qrk-start-premium">
                 <div className="text-start-premium">
-                  <p>R$ 500 em compras</p>
-                  <p>e você já começa a aproveitar</p>
+                  <p className="first-text-start-premium">R$ 500 em compras</p>
+                  <p className="second-text-start-premium">e você já começa a aproveitar</p>
                 </div>
-                <div className="text-start-premium">
+                <div>
                   <button className="btn-default btn-primary btn-lg">Comprar agora</button>
                 </div>
               </div>
             </div>
+            {/* final container ser premium */}
+
           </div>
 
         </div>
