@@ -11,13 +11,18 @@ export class MemberLoyalty extends React.Component {
           <p className="subtitle-loyalty">Muito fácil, como tudo por aqui:</p>
           <div className="qrk-be-member">
             <div className="qrk-">
-              left
+              <div>
+                <img src={require('assets/media/images/member-loyalty1.png')} alt="Membro" />
+              </div>
+              <div>
+                <p>texto</p>
+              </div>
             </div>
-            <div className="qrk-">
+            <div className="line-dashed">
               line
             </div>
             <div className="qrk-">
-              right
+              <img src={require('assets/media/images/member-loyalty2.png')} alt="Membro" />
             </div>
           </div>
         </div>
