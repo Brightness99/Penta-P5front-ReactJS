@@ -61,7 +61,7 @@
     .mol-premium-members {
       display: flex;
       flex-direction: column;
-      margin: 6rem 0px;
+      margin: 9rem 0px;
       .atm-type-premium {
         display: flex;
         margin-top: 4rem;
@@ -76,13 +76,13 @@
             margin-right: 0;
           }
           &:first-of-type {
-            background-color: rgba(130,97,248,0.3);
+            background-color: rgba($color-deep-purple-light, 0.3);
           }
           &:nth-of-type(3n-1) {
             background: linear-gradient(117deg, rgba(213,217,222,0.3) 0%, rgba(163,174,191,0.3) 100%);
           }
           &:nth-of-type(3n) {
-            background-color: rgba(240,198,84,0.3);
+            background-color: rgba($color-maize-light, 0.8);
           }
           &:nth-of-type(4n) {
             background: linear-gradient(117deg, rgba(163,174,191,0.3) 0%, rgba(10,29,51, 0.3) 100%);
@@ -90,7 +90,114 @@
           .list-benefits-premium {
             font-size: $font-size-xs;
             font-family: $font-family-open-sans-regular;
-            padding: 2rem;
+            padding: 2.8rem;
+            .logo-title-loyalty {
+              display: flex;
+              align-items: center;
+              .logo-loyalty {
+                @include center-child-flex;
+                border-radius: 3rem;
+                font-family: $font-family-open-sans-bold;
+                line-height: 1;
+                margin: auto;
+                padding: 0.6rem 1.28em;
+                .title-logo-loyalty {
+                  color: $color-white;
+                  font-size: $font-size-lg;
+                  text-transform: uppercase;
+                }
+                &.bg-club {
+                  background-color: $color-deep-purple;
+                }
+                &.bg-silver {
+                  background: linear-gradient(117deg, #d5d9de 0%, #a3aebf 100%);
+                }
+                &.bg-gold {
+                  background-color: $color-maize;
+                }
+                &.bg-black {
+                  background: linear-gradient(117deg, #a3aebf 0%, #0a1d33 100%);
+                }
+              }
+            }
+            ul {
+              display: flex;
+              flex-direction: column;
+              margin: 1rem 0;
+              li {
+                align-items: center;
+                color: $color-opacity-silver;
+                display: flex;
+                justify-content: space-between;
+                line-height: 2.2rem;
+                .checkIcon {
+                  svg {
+                    width: 1.6rem;
+                    height: 1.6rem;
+                  }
+                }
+                .closeIcon {
+                  svg {
+                    width: 1.2rem;
+                    height: 1.2rem;
+                  }
+                }
+                &.li-active-color {
+                  color: $color-dark;
+                }
+              }
+              &.color-club{
+                li {
+                  .checkIcon {
+                    svg {
+                      fill: $color-deep-purple; 
+                    }
+                  }
+                  .closeIcon {
+                    svg {
+                      fill: $color-deep-purple-light;
+                    }
+                  }
+                }
+              }
+              &.color-silver {
+                li {
+                  .checkIcon {
+                    svg {
+                      fill: $color-bluey-grey; 
+                    }
+                  }
+                  .closeIcon {
+                    svg {
+                      fill: $color-silver;
+                    }
+                  }
+                }
+              }
+              &.color-gold {
+                li {
+                  .checkIcon {
+                    svg {
+                      fill: $color-maize;
+                    }
+                  }
+                  .closeIcon {
+                    svg {
+                      fill: $color-maize-medium;
+                    }
+                  }
+                }
+              }
+              &.color-black {
+                li {
+                  .checkIcon {
+                    svg {
+                      fill: $color-dark;
+                    }
+                  }
+                }
+              }
+            }
           }
           .amount-money {
             background-color: $color-white;
@@ -112,7 +219,7 @@
     .mol-what-lost {
       display: flex;
       flex-direction: column;
-      margin: 6rem 0;
+      margin: 9rem 0;
       .qrk-what-lost {
         display: flex;
         margin-top: 4rem;
@@ -145,19 +252,43 @@
       align-items: center;
       justify-content: center;
       margin: 10rem 0;
+      font-family: $font-family-open-sans-regular;
       .qrk-start-premium {
+        align-items: center;
         display: flex;
-        margin: auto;
-        width: 70%;
+        justify-content: space-around;
+        width: 100%;
+        flex-direction: column;
+        @include lg {
+          flex-direction: row;
+        }
         .text-start-premium {
-          //display: flex;
-          //flex-direction: column;
-          width: calc((100%/2) - 1.5rem);
-          &:last-of-type {
-            justify-content: center;
+          text-align: center;
+          p {
+            margin-bottom: 0;
+          }
+          .first-text-start-premium {
+            font-size: $font-size-xli;
+            @include lg {
+              font-size: $font-size-xxx;
+            }
+          }
+          .second-text-start-premium {
+            font-size: $font-size-sm;
+            margin-bottom: 1.2rem;
+            @include lg {
+              font-size: $font-size-il;
+              margin-bottom: 0;
+            }
+          }
+        }
+        &:last-child {
+          .btn-default {
+            padding: 1.25rem 6.5rem;
           }
         }
       }
     }
+
   }
 }
