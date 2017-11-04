@@ -270,7 +270,13 @@ function mapStoreToProps(state) {
   return ({
     app: state.app,
     cart: state.cart,
-    locale: state.locale.translate.page.cart,
+    locale: {
+      ...state.locale.translate.page.cart,
+      common: state.locale.translate.common,
+      UNITS: state.locale.UNITS,
+      UNIT: state.locale.UNIT,
+      UNIT_SHORT: state.locale.UNIT_SHORT,
+    },
   });
 }
 

@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 import config from 'config';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { IntlMoney } from 'components/Intl/index';
-import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
+import { NextArrow, PrevArrow } from 'components/Carousel';
 
 type Props = {
   screenSize: string,

@@ -4,7 +4,7 @@
     background-color: $color-white;
     box-sizing: border-box;
     flex: 5;
-    padding: 2rem 6rem;
+    padding: 0rem;
   }
   .container {
     width: auto;
@@ -33,65 +33,22 @@
     display: block;
     .card-saved {
       width: 100%;
-      display: inline-flex;
+      display: inline-block;
       margin-bottom: 2rem;
       @include lg {
         width: 50%;
       }
-      .card-save-info {
-        align-items: center;
-        background-color: $color-white;
-        border-radius: 0.3rem;
-        display: flex;
-        font-size: $font-size-ix;
-        padding: 1rem;
-        width: 100%;
+      .qrk-trash-icon {
+        width: 2rem;
+        height: 2rem;
+        fill: $color-tomato-error-dark;
+        max-width: 2rem;
+        cursor: pointer;
+        margin: auto;
+        text-align: center;
+        margin-top: 3px;
         @include lg {
-          background-color: $body-bg;
-          &:nth-of-type(2n-1) {
-            margin-right: 2rem;
-          }
-        }
-        div {
-          flex: 1;
-          &:first-of-type {
-            max-width: 7rem;
-            img {
-              height: 3.5rem;
-              width: 70%;
-            }
-            @include lg {
-              img {
-                width: 100%;
-                height: auto;
-              }
-            }
-          }
-          p {
-            margin-bottom: 0;
-          }
-          &.number-card {
-            font-weight: bold;
-            @include lg {
-              text-align: center
-            }
-          }
-          &.card-valid {
-            text-align: center;
-            max-width: 7rem;
-            &.invalid { 
-              color: $color-tomato-error-dark;
-            }
-          }
-          &.qrk-trash-icon {
-            width: 2rem;
-            height: 2rem;
-            fill: $color-tomato-error-dark;
-            max-width: 2rem;
-          }
-          img {
-            height: 66px;
-          }
+          margin-left: 137px;
         }
       }
     }

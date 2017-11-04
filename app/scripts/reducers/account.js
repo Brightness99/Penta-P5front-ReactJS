@@ -49,6 +49,14 @@ export default {
         isLoaded: true,
       };
     },
+    [AccountConstants.ACCOUNT_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        error: action.payload,
+        isRunning: false,
+        isLoaded: false,
+      };
+    },
     [AccountConstants.ACCOUNT_ADDRESS_FETCH_REQUEST](state) {
       return {
         ...state,
@@ -74,7 +82,7 @@ export default {
         addresses: {
           ...state.addresses,
           isRunning: false,
-          isLoaded: true,
+          isLoaded: false,
         },
       };
     },
@@ -103,7 +111,7 @@ export default {
         error: action.payload,
       };
     },
-    [AccountConstants.ACCOUNT_FORM_RESET](state, action) {
+    [AccountConstants.ACCOUNT_FORM_RESET](state) {
       return {
         ...state,
         isUpdating: false,

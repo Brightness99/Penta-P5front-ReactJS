@@ -220,20 +220,20 @@ export default class CartItens extends React.Component {
               <div className="mol-cart-item-quantity">
                 <div className="atm-cart-item-quantity">{items[item].quantity}</div>
                 <div className="atm-cart-item-quantity-unit">
-                  {items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}
+                  {items[item].quantity > 1 ? locale.UNITS : locale.UNIT}
                 </div>
               </div>
               <div className="mol-cart-item-price">
                 <div className="atm-cart-item-price">
                   <IntlMoney>{items[item].prices.total}</IntlMoney>
-                  <span><IntlMoney>{items[item].prices.total / items[item].quantity}</IntlMoney>/{locale.units.UNIT_SHORT}</span>
+                  <span><IntlMoney>{items[item].prices.total / items[item].quantity}</IntlMoney>/{locale.UNIT_SHORT}</span>
                 </div>
                 <Actions
                   screenSize={screenSize}
                   actions={items[item].actions}
                   itemId={item}
                   dispatch={dispatch}
-                  locale={locale.actions}
+                  locale={locale.product_list.actions}
                 />
               </div>
             </li>
@@ -277,7 +277,7 @@ export default class CartItens extends React.Component {
                   </div>
                   <div>
                     <div className="atm-cart-item-info-title">{locale.product_list.QUANTITY}</div>
-                    <div className="atm-cart-item-info-text">{`${items[item].quantity} ${items[item].quantity > 1 ? locale.units.UNITS : locale.units.UNIT}`}</div>
+                    <div className="atm-cart-item-info-text">{`${items[item].quantity} ${items[item].quantity > 1 ? locale.UNITS : locale.UNIT}`}</div>
                   </div>
                   <div>
                     <div className="atm-cart-item-info-title">{locale.product_list.PRICE}</div>

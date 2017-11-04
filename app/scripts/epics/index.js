@@ -80,6 +80,10 @@ import {
 } from './file-mount';
 import { guideFetch } from './guide';
 
+import {
+  referralSendRequest
+} from './referral';
+
 export default combineEpics(
   userNewsletter,
   productsFetch,
@@ -139,4 +143,5 @@ export default combineEpics(
   fetchTemplateById,
   sendDownloadTemplatesRequest,
   fetchTemplate,
+  referralSendRequest,
 );
