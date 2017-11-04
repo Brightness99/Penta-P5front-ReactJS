@@ -84,7 +84,7 @@ class AddressFormModal extends React.Component {
         });
       } else {
         swal({
-          title: 'Successfully saved.',
+          title: 'Alterações salvas com sucesso!',
           type: 'success',
           confirmButtonColor: '#2cac57',
           confirmButtonText: 'OK',
