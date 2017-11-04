@@ -109,6 +109,7 @@ export class BenefitsBlock extends React.Component {
 
     return (
       <div className="container">
+        <BlockTitle>{advantages.TITLE}</BlockTitle>
         <div className="container-benefitsCard">
           {this.renderAdvantagesTable()}
         </div>
@@ -119,6 +120,7 @@ export class BenefitsBlock extends React.Component {
 
   render() {
     const { screenSize } = this.props;
+
     return (
       <section className="container-benefits">
         {isMobile(screenSize) ? this.renderMobile() : this.renderDesktop()}

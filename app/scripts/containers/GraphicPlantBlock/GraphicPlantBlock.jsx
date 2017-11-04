@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
-import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
+import { NextArrow, PrevArrow } from 'components/Carousel';
 
 type Props = {
   app: AppStore,

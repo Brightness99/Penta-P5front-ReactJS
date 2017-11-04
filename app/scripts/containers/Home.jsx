@@ -5,11 +5,26 @@ import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
-import { BannersBlock, HighlightsBlock, BlogBlock, CustomersRelyBlock, CategoriesCarouselBlock } from 'components/LandingPage';
+import { accountFetch } from 'actions/account';
+
+import {
+  BannersBlock,
+  HighlightsBlock,
+  BlogBlock,
+  CustomersRelyBlock,
+  CategoriesCarouselBlock
+} from 'components/LandingPage';
+import Loading from 'components/Loading/index';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
   locale: SEOLocaleType,
+  account: {},
+  accountFetch: () => void,
+  accountEffects: {
+    isRunning: boolean,
+    isLoaded: boolean,
+  },
 };
 
 const bannerImages = [
@@ -58,10 +73,19 @@ const bannerImages = [
 export class Home extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
-  props: Props;
+  componentDidMount() {
+    this.props.accountFetch();
+  }
+
+  static props: Props;
 
   render() {
-    const { locale } = this.props;
+    const { locale, accountEffects } = this.props;
+    const { isRunning } = accountEffects;
+
+    if (isRunning) {
+      return <Loading />;
+    }
 
     return (
       <div className="container-homePage">
@@ -79,15 +103,22 @@ export class Home extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    locale: state.locale.translate.page.home,
-  };
-}
+const mapStateToProps = (state) => {
+  const { account, locale } = state;
+  const { isRunning, isLoaded } = account;
+  return ({
+    locale: {
+      ...locale.translate.page.home,
+      COUNTRY_CODE: locale.COUNTRY_CODE,
+    },
+    account,
+    accountEffects: { isRunning, isLoaded },
+  });
+};
 
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
+const mapDispatchToProps = (dispatch) => ({
+  accountFetch: () => dispatch(accountFetch()),
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
