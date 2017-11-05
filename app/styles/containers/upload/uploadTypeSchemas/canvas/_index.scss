@@ -5,25 +5,25 @@
 @import "../cimpressComponents/canvasArea/index";
 @import "../cimpressComponents/bottomMenuBar/index";
 
-.upload-container-canvasCentralized {
+.upload-container-canvas-centralized {
   display        : flex;
   flex-direction : column;
   margin         : 0 0 2rem 0;
   width          : 100%;
-  .upload__canvasSchema {
+  .upload__canvas-schema {
     margin-top     : 2rem;
     display        : flex;
     flex-direction : column;
     width          : 100%;
-    .upload__canvasSchema_mainAreaContainer {
+    .upload__canvas-schema_main-area-container {
       display        : flex;
       width          : 100%;
       flex-direction : row;
-      .upload__canvasSchema_mainAreaContainer_canvases {
+      .upload__canvas-schema_main-area-container_canvases {
         display : flex;
         width   : 100%;
       }
-      .upload__canvasSchema_sidebarContainer {
+      .upload__canvas-schema_sidebar-container {
         display        : flex;
         width          : 27.5%;
         flex-direction : column;
@@ -32,7 +32,7 @@
         border         : 1px solid #dbdddf;
         border-radius  : 3px;
       }
-      .upload__canvasSchema_canvasContainer {
+      .upload__canvas-schema_canvas-container {
         display        : flex;
         flex-direction : column;
         width          : 68%;

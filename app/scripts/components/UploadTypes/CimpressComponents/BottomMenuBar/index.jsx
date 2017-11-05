@@ -32,13 +32,13 @@ const BottomMenuBar = ({ handleSave }: Props) => {
   };
 
   return (
-    <div className="upload__canvasSchema__bottomMenuBar">
+    <div className="upload__canvas-schema__bottom-menu-bar">
       <button className="dcl-widget-preview-document">
         <i className="eye_icon">
           <EyeEmptyIcon />
         </i>
       </button>
-      <button className="bottomMenuBar_btn bottomMenuBar_btn-finish" onClick={saveTemplate}>
+      <button className="bottom-menu-bar_btn bottom-menu-bar_btn-finish" onClick={saveTemplate}>
         Finalizar arte
       </button>
     </div>

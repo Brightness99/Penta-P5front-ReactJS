@@ -1,4 +1,4 @@
-.upload__canvasSchema__topMenuBar {
+.upload__canvas-schema__top-menu-bar {
   display: flex;
   width: 100%;
   border-style: solid;
@@ -8,7 +8,7 @@
   &-left {
     display: flex;
     width: 50%;
-    .topMenuBar_btn {
+    .top-menu-bar_btn {
       border-left: none !important;
     }
   }
@@ -16,11 +16,11 @@
     display: flex;
     width: 50%;
     justify-content: flex-end;
-    .topMenuBar_btn {
+    .top-menu-bar_btn {
       border-right: none !important;
     }
   }
-  .topMenuBar_btn {
+  .top-menu-bar_btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +48,7 @@
       height: 2.5rem;
       margin-bottom: 0.2rem;
     }
-    &.topMenuBar_btn-info {
+    &.top-menu-bar_btn-info {
       span {
         color: $color-printi-blue;
       }
