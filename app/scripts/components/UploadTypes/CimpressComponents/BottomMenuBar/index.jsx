@@ -18,11 +18,7 @@ const BottomMenuBar = ({ handleSave, handleSaveError }: Props) => {
 
   return (
     <div className="upload__canvas-schema__bottom-menu-bar">
-      <button className="dcl-widget-preview-document">
-        <i className="eye_icon">
-          <EyeEmptyIcon />
-        </i>
-      </button>
+      <section className="dcl-widget-preview-document" />
       <button className="bottom-menu-bar_btn bottom-menu-bar_btn-finish" onClick={saveTemplate}>
         Finalizar arte
       </button>
