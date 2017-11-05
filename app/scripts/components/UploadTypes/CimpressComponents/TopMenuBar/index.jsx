@@ -20,8 +20,6 @@ const TopMenuBar = () => (
       </button>
     </div>
     <div className="upload__canvas-schema__top-menu-bar-right">
-      {/* <button className="dcl-canvas-history-container topMenuBar_canvas" />
-      <button className="dcl-zoom-container topMenuBar_canvas" /> */}
       <button className="top-menu-bar_btn top-menu-bar_btn-info">
         <i>
           <HelpIcon />

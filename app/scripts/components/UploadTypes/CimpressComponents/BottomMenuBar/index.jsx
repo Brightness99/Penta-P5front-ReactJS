@@ -4,18 +4,15 @@ import React from 'react';
 import { EyeEmptyIcon } from 'components/Icons';
 
 type Props = {
-  handleSave: (data) => void
+  handleSave: (data) => void,
+  handleSaveError: (data) => void,
 }
 
-const BottomMenuBar = ({ handleSave }: Props) => {
+const BottomMenuBar = ({ handleSave, handleSaveError }: Props) => {
   const saveTemplate = () => {
     global.designer.saveDocumentToUds().then(
-      (templateResponse) => {
-        console.log('### document_reference_url: ###');
-        console.log(templateResponse.documentReferenceUrl);
-        handleSave(templateResponse.documentReferenceUrl);
-      },
-      console.error
+      (templateResponse) => handleSave(templateResponse.documentReferenceUrl),
+      handleSaveError
     );
   };
 
