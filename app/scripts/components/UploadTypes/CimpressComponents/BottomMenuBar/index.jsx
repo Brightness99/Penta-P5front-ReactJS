@@ -9,23 +9,11 @@ type Props = {
 
 const BottomMenuBar = ({ handleSave }: Props) => {
   const saveTemplate = () => {
-    global.designer.preview.getPreview({
-      size: {
-        width: 300,
-        height: 300,
-      },
-    }).then(
-      (thumbResponse) => {
-        console.log('### thumbnail: ###');
-        console.log(thumbResponse);
-        global.designer.saveDocumentToUds().then(
-          (templateResponse) => {
-            console.log('### document_reference_url: ###');
-            console.log(templateResponse.documentReferenceUrl);
-            handleSave(templateResponse.documentReferenceUrl);
-          },
-          console.error
-        );
+    global.designer.saveDocumentToUds().then(
+      (templateResponse) => {
+        console.log('### document_reference_url: ###');
+        console.log(templateResponse.documentReferenceUrl);
+        handleSave(templateResponse.documentReferenceUrl);
       },
       console.error
     );
