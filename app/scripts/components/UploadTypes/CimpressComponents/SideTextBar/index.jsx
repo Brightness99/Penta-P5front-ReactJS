@@ -3,7 +3,7 @@
 import React from 'react';
 
 const SideTextBar = () => (
-  <div className="upload__canvasSchema__sideTextBar">
+  <div className="upload__canvas-schema__side-text-bar">
     texts
   </div>
 );

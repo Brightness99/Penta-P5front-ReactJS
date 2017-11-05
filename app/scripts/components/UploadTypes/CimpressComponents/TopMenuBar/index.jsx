@@ -4,25 +4,25 @@ import React from 'react';
 import { AddFileIcon, AddTextIcon, HelpIcon } from 'components/Icons';
 
 const TopMenuBar = () => (
-  <div className="upload__canvasSchema__topMenuBar">
-    <div className="upload__canvasSchema__topMenuBar-left">
-      <button className="topMenuBar_btn topMenuBar_btn-image">
-        <i className="filesIcon">
+  <div className="upload__canvas-schema__top-menu-bar">
+    <div className="upload__canvas-schema__top-menu-bar-left">
+      <button className="top-menu-bar_btn top-menu-bar_btn-image">
+        <i className="files-icon">
           <AddFileIcon />
         </i>
         <span>Arquivos</span>
       </button>
-      <button className="topMenuBar_btn topMenuBar_btn-text">
+      <button className="top-menu-bar_btn top-menu-bar_btn-text">
         <i>
           <AddTextIcon />
         </i>
         <span>Textos</span>
       </button>
     </div>
-    <div className="upload__canvasSchema__topMenuBar-right">
+    <div className="upload__canvas-schema__top-menu-bar-right">
       {/* <button className="dcl-canvas-history-container topMenuBar_canvas" />
       <button className="dcl-zoom-container topMenuBar_canvas" /> */}
-      <button className="topMenuBar_btn topMenuBar_btn-info">
+      <button className="top-menu-bar_btn top-menu-bar_btn-info">
         <i>
           <HelpIcon />
         </i>

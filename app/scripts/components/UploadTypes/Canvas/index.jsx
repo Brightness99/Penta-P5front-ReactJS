@@ -335,15 +335,15 @@ export default class Canvas extends React.Component {
             },
             uploadButton: {
               enabled: true,
-              containerElement: '.sideImageBar__buttonContainer',
+              containerElement: '.side-image-bar__button-container',
               template: () => {
                 const button = document.createElement('button');
                 const icon = document.createElement('i');
                 const span = document.createElement('span');
 
-                button.setAttribute('class', 'sideImageBar__buttonContainer_button');
+                button.setAttribute('class', 'side-image-bar__button-container_button');
 
-                icon.setAttribute('class', 'filesIcon');
+                icon.setAttribute('class', 'files-icon');
                 icon.innerHTML = '+';
                 button.appendChild(icon);
 
@@ -427,19 +427,19 @@ export default class Canvas extends React.Component {
     const { cimpressInfo: { settings: { css } } } = this.props;
 
     return (
-      <div className="upload-container-canvasCentralized">
-        <div className="upload__canvasSchema">
+      <div className="upload-container-canvas-centralized">
+        <div className="upload__canvas-schema">
           {
               !isReady
                 ? <Loading />
                 : [
                   <TopMenuBar key="top-menu-bar" />,
-                  <div className="upload__canvasSchema_mainAreaContainer" key="upload__canvasSchema_mainAreaContainer">
-                    <div className="upload__canvasSchema_sidebarContainer">
+                  <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_mainAreaContainer">
+                    <div className="upload__canvas-schema_sidebar-container">
                       <SideImageBar />
                       <SideTextBar />
                     </div>
-                    <div className="upload__canvasSchema_canvasContainer">
+                    <div className="upload__canvas-schema_canvas-container">
                       <CanvasToolBar />
                       <CanvasArea />
                     </div>

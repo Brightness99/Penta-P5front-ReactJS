@@ -3,14 +3,14 @@
 import React from 'react';
 
 const CanvasToolBar = () => (
-  <div className="upload__canvasSchema__canvasToolBar">
-    <div className="canvasArea_orientationContainer">
+  <div className="upload__canvas-schema__canvas-tool-bar">
+    <div className="canvas-area_orientation-container">
       <label>Orientação</label>
-      <div className="canvasArea_orientationContainer_buttons">
-        <button className="verticalButton activated">
+      <div className="canvas-area_orientation-container_buttons">
+        <button className="vertical-button activated">
           <div />
         </button>
-        <button className="horizontalButton">
+        <button className="horizontal-button">
           <div />
         </button>
       </div>
