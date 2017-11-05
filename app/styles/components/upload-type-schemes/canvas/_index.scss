@@ -1,9 +1,9 @@
-@import "../cimpressComponents/topMenuBar/index";
-@import "../cimpressComponents/sideTextBar/index";
-@import "../cimpressComponents/sideImageBar/index";
-@import "../cimpressComponents/canvasToolBar/index";
-@import "../cimpressComponents/canvasArea/index";
-@import "../cimpressComponents/bottomMenuBar/index";
+@import "cimpress-components/top-menu-bar/index";
+@import "cimpress-components/side-text-bar/index";
+@import "cimpress-components/side-image-bar/index";
+@import "cimpress-components/canvas-tool-bar/index";
+@import "cimpress-components/canvas-area/index";
+@import "cimpress-components/bottom-menu-bar/index";
 
 .upload-container-canvas-centralized {
   display        : flex;

@@ -92,16 +92,12 @@
           opacity: 0.5;
         }
         &--inner {
-          border-style: solid;
-          border-width: 0.1rem;
-          border-color: $color-hrLightGray;
+          border : 0.1rem solid $color-hrLightGray;
         }
       }
       .dcl-canvas__safety-margin {
         &--inner {
-          border-style: dashed;
-          border-width: 0.1rem;
-          border-color: $color-sky-blue;
+          border : 0.1rem dashed $color-sky-blue;
         }
       }
     }
