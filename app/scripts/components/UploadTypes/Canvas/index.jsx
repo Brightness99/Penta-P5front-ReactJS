@@ -76,28 +76,26 @@ export default class Canvas extends React.Component {
     const { cimpressInfo: { settings: { css } } } = this.props;
 
     return (
-      <div className="upload-container-canvas-centralized">
-        <div className="upload__canvas-schema">
-          {
-              !isReady
-                ? <Loading />
-                : [
-                  <TopMenuBar key="top-menu-bar" />,
-                  <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_mainAreaContainer">
-                    <div className="upload__canvas-schema_sidebar-container">
-                      <SideImageBar />
-                      <SideTextBar />
-                    </div>
-                    <div className="upload__canvas-schema_canvas-container">
-                      <CanvasToolBar />
-                      <CanvasArea />
-                    </div>
-                  </div>,
-                  <BottomMenuBar key="bottom-menu-bar" handleSave={this.handleOnSave} />,
-                ]
-            }
-          <style>{css}</style>
-        </div>
+      <div className="upload__canvas-schema">
+        {
+          !isReady
+            ? <Loading />
+            : [
+              <TopMenuBar key="top-menu-bar" />,
+              <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_main-area-container">
+                <div className="upload__canvas-schema_sidebar-container">
+                  <SideImageBar />
+                  <SideTextBar />
+                </div>
+                <div className="upload__canvas-schema_canvas-container">
+                  <CanvasToolBar />
+                  <CanvasArea />
+                </div>
+              </div>,
+              <BottomMenuBar key="bottom-menu-bar" handleSave={this.handleOnSave} />,
+            ]
+        }
+        <style>{css}</style>
       </div>
     );
   }
