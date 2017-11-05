@@ -284,6 +284,10 @@ const cimpressConfigBuilder = (config, isSku) => {
             enabled: true,
             containerElement: '.dcl-zoom-container',
           },
+          previewDocument: {
+            enabled: true,
+            containerElement: '.dcl-widget-preview-document',
+          },
           addText: {
             enabled: true,
             containerElement: '.add-text-container',
