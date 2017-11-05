@@ -19,22 +19,18 @@
       height: 3rem;
       margin: 0.5rem 0 0 0;
       button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 4rem;
-        height: 3rem;
-        background-color: $color-white;
-        border-style: solid;
-        border-color: $color-hrLightGray;
-        border-width: 0.1rem;
-        transition: 0.3s;
+        display          : flex;
+        align-items      : center;
+        justify-content  : center;
+        width            : 4rem;
+        height           : 3rem;
+        background-color : $color-white;
+        border           : 0.1rem solid $color-hrLightGray;
+        transition       : 0.3s;
         div {
-          display: flex;
-          border-width: 1px;
-          border-style: solid;
-          border-color: transparent;
-          background-color: $color-hrLightGray;
+          display          : flex;
+          border           : 1px solid transparent;
+          background-color : $color-hrLightGray;
         }
         &:hover,
         &.activated {
