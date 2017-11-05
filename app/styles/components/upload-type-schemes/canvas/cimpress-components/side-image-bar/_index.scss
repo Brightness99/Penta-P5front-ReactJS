@@ -14,30 +14,23 @@
       height: 8rem;
       align-items: center;
       justify-content: center;
-      button {
+      .side-bar-add-image-button {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         width: 87%;
         height: 4rem;
+        padding: 0 0.5rem;
         background-color: $color-printi;
         border: none;
         border-radius: 3px;
         transition: 0.3s;
-        .files-icon {
-          display: flex;
+        svg {
           width: 1.5rem;
           height: 1.5rem;
           margin-right: 0.5rem;
-          color: $color-white;
-          line-height: 0.9;
-          svg {
-            fill: $color-white;
-            .add-file-icon-fill {
-              fill: $color-printi !important;
-            }
-          }
+          fill: $color-white;
         }
         &:hover {
           background-color: $color-darkBlue;
