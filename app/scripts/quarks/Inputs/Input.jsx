@@ -17,6 +17,7 @@ type Props = {
   onFocus?: () => {},
   onBlur?: () => {},
   onEnterKeyPress?: () => {},
+  readOnly: boolean,
 };
 
 type State = {
@@ -33,6 +34,10 @@ export default class Input extends React.Component {
     };
   }
 
+  static defaultProps = {
+    readOnly: false,
+  };
+
   componentWillReceiveProps(nextProps) {
     const { value } = nextProps;
     if (value !== this.props.value) {
@@ -43,7 +48,6 @@ export default class Input extends React.Component {
   }
 
   static props: Props;
-
   static state: State;
 
   handleClick = (ev) => {
@@ -101,7 +105,7 @@ export default class Input extends React.Component {
   };
 
   render() {
-    const { id, type, name, showLabel, placeholder, className } = this.props;
+    const { id, type, name, showLabel, placeholder, className, readOnly } = this.props;
     const { value, isFocused } = this.state;
 
     return (
@@ -135,6 +139,7 @@ export default class Input extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onKeyPress={this.handleEnterKeyPress}
+          readOnly={readOnly}
         />
       </div>
     );

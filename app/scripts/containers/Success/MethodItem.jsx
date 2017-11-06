@@ -18,7 +18,7 @@ export class MethodItem extends React.Component {
   constructor(props) {
     super(props);
 
-    const { action } = this.props;
+    const { action } = props;
     this.state = {
       barcode: action.boleto && action.boleto.barcode,
       copied: false,
