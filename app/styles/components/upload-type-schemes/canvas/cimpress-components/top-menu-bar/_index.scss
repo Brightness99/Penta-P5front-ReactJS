@@ -3,67 +3,37 @@
   width         : 100%;
   border        : 1px solid $color-hrLightGray;
   border-radius : 3px;
-  &-left {
-    display: flex;
-    width: 50%;
-    .top-menu-bar_btn {
-      border-left: none !important;
-    }
-  }
-  &-right {
-    display: flex;
-    width: 50%;
-    justify-content: flex-end;
-    .top-menu-bar_btn {
-      border-right: none !important;
-    }
-  }
   .top-menu-bar_btn {
-    display            : flex;
-    flex-direction     : column;
-    align-items        : center;
-    justify-content    : center;
-    width              : 8rem;
-    height             : 6rem;
-    background-color   : transparent;
-    box-sizing         : border-box;
-    border             : 1px none $color-hrLightGray;
-    border-right-style : solid;
-    border-left-style  : solid;
-    transition         : 0.3s;
+    display          : flex;
+    flex-direction   : column;
+    align-items      : center;
+    justify-content  : center;
+    width            : 8rem;
+    height           : 6rem;
+    background-color : transparent;
+    box-sizing       : border-box;
+    transition       : 0.3s;
+    border           : none;
+    border-right : 0.1rem solid $color-hrLightGray;
+    svg {
+      width         : 2rem;
+      height        : 2.5rem;
+      margin-bottom : 0.2rem;
+    }
     span {
-      display: flex;
-      font-family: $font-family-open-sans-regular;
-      font-size: 1rem;
-      color: $color-lightGray;
-      margin-top: 0.5rem;
+      display     : flex;
+      font-family : $font-family-open-sans-regular;
+      font-size   : 1rem;
+      color       : $color-lightGray;
+      margin-top  : 0.5rem;
     }
-    i {
-      display: flex;
-      width: 2rem;
-      height: 2.5rem;
-      margin-bottom: 0.2rem;
-    }
-    &.top-menu-bar_btn-info {
+    &.active, &:hover {
+      background-color : $color-sky-blue-light;
       span {
-        color: $color-printi-blue;
+        color : $color-printi-blue;
       }
-      i {
-        width: 2.5rem;
-        svg {
-          fill: $color-printi-blue;
-        }
-      }
-    }
-    &:hover {
-      background-color: $color-sky-blue-light;
-      span {
-        color: $color-printi-blue;
-      }
-      i {
-        svg {
-          fill: $color-printi-blue;
-        }
+      svg {
+        fill : $color-printi-blue;
       }
     }
   }

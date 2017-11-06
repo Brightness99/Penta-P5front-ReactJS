@@ -290,11 +290,11 @@ const cimpressConfigBuilder = (config, isSku) => {
           },
           addText: {
             enabled: true,
-            containerElement: '.add-text-container',
+            containerElement: '.add-text-button',
           },
           editText: {
             enabled: true,
-            containerElement: '.edit-text-container',
+            containerElement: '.side-bar__text-container',
           },
           uploadButton: {
             enabled: true,

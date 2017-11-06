@@ -1,7 +1,5 @@
 // @flow
-
 import React from 'react';
-import { EyeEmptyIcon } from 'components/Icons';
 
 type Props = {
   handleSave: (data) => void,

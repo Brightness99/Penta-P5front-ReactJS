@@ -1,33 +1,54 @@
 // @flow
 
 import React from 'react';
-import { AddFileIcon, AddTextIcon, HelpIcon } from 'components/Icons';
+import { AddFileIcon, AddTextIcon } from 'components/Icons';
 
-const TopMenuBar = () => (
-  <div className="upload__canvas-schema__top-menu-bar">
-    <div className="upload__canvas-schema__top-menu-bar-left">
-      <button className="top-menu-bar_btn top-menu-bar_btn-image">
-        <i className="files-icon">
+type Props = {
+  handleSelectTab: (value: number) => void
+}
+
+type State = {
+  activeTab: number,
+}
+
+export default class TopMenuBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeTab: 1,
+    };
+  }
+
+  props: Props;
+  state: State;
+
+  handleSelectTab(value: number) {
+    this.setState({
+      activeTab: value,
+    });
+    this.props.handleSelectTab(value);
+  }
+
+  render() {
+    const { activeTab } = this.state;
+
+    return (
+      <div className="upload__canvas-schema__top-menu-bar">
+        <button
+          className={`top-menu-bar_btn ${activeTab === 1 ? 'active' : ''}`}
+          onClick={() => this.handleSelectTab(1)}
+        >
           <AddFileIcon />
-        </i>
-        <span>Arquivos</span>
-      </button>
-      <button className="top-menu-bar_btn top-menu-bar_btn-text">
-        <i>
+          <span>Arquivos</span>
+        </button>
+        <button
+          className={`top-menu-bar_btn ${activeTab === 2 ? 'active' : ''}`}
+          onClick={() => this.handleSelectTab(2)}
+        >
           <AddTextIcon />
-        </i>
-        <span>Textos</span>
-      </button>
-    </div>
-    <div className="upload__canvas-schema__top-menu-bar-right">
-      <button className="top-menu-bar_btn top-menu-bar_btn-info">
-        <i>
-          <HelpIcon />
-        </i>
-        <span>Ajuda</span>
-      </button>
-    </div>
-  </div>
-);
-
-export default TopMenuBar;
+          <span>Textos</span>
+        </button>
+      </div>
+    );
+  }
+}
