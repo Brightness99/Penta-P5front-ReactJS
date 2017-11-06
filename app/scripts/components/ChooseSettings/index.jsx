@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import { push } from 'modules/ReduxRouter';
 import Button from 'quarks/Inputs/Button';
-import { Arrow } from 'components/Icons';
+import { ChevronLeftIcon } from 'components/Icons';
 import Loading from 'components/Loading';
 
 import Settings from './Settings';
@@ -116,7 +116,8 @@ class ChooseSettings extends React.PureComponent<Props, State> {
     return formValues;
   };
 
-  handleRemove = (partName: string) => {
+  handleRemove = (e: Event, partName: string) => {
+    e.preventDefault();
     const { productPartsKeys, form, canSubmit } = this.state;
     const newForm = Object.assign({}, form);
     const newCanSubmit = Object.assign({}, canSubmit);
@@ -168,12 +169,13 @@ class ChooseSettings extends React.PureComponent<Props, State> {
                   >
                     {productPart.data.name}
                   </h5>
-                  <span
+                  <Link
+                    to={'#'}
                     className={'setting-remove-control'}
-                    onClick={() => this.handleRemove(productPart.key)}
+                    onClick={(e: Event) => this.handleRemove(e, productPart.key)}
                   >
                     {'Remover'}
-                  </span>
+                  </Link>
                 </section>
               }
               <Settings
@@ -190,7 +192,7 @@ class ChooseSettings extends React.PureComponent<Props, State> {
             to={'/download-de-gabaritos'}
             className="atm-link"
           >
-            <Arrow />{'Voltar para escolher outro produto'}
+            <ChevronLeftIcon />{'Voltar para escolher outro produto'}
           </NavLink>
           <Button
             type="submit"
