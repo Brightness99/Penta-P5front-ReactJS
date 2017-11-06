@@ -54,9 +54,11 @@
       .atm-member-loyalty {
         background-color: $color-white;
         box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
-        margin-top: -12.2rem;
         padding: 6rem 0;
         width: 100%;
+        @include lg {
+          margin-top: -12.2rem;
+        }
         .qrk-be-member {
           display: flex;
           flex-direction: row;
