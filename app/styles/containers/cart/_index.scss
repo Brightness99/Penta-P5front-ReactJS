@@ -447,7 +447,7 @@
       justify-content: flex-end;
     }
 
-    > span:last-child {
+    > span:last-child:not(:first-child) {
       color: #6a6f7a;
       font-size: $font-size-xs;
       font-weight: normal;
