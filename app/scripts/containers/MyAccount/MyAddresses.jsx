@@ -15,6 +15,8 @@ type Props = {
   screenSize: string,
   dispatch: () => {},
   account: {},
+  locale: {},
+  setBreadcrumbs: () => void,
 };
 
 type State = {
@@ -46,6 +48,7 @@ export class MyAddresses extends React.Component {
     const { dispatch } = this.props;
 
     dispatch(accountAddressFetch());
+    this.handleBreadcrumbs();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,7 +67,7 @@ export class MyAddresses extends React.Component {
         });
       } else {
         swal({
-          title: 'Successfully deleted.',
+          title: 'Removido com sucesso.',
           type: 'success',
           confirmButtonColor: '#2cac57',
           confirmButtonText: 'OK',
@@ -77,6 +80,18 @@ export class MyAddresses extends React.Component {
   static props: Props;
 
   static state: State;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: 'Meus Endereços',
+        },
+      ]);
+    }
+  };
 
   handleExpand = (pane) => {
     const { isExpanded } = this.state;
@@ -300,6 +315,8 @@ export class MyAddresses extends React.Component {
 function mapStateToProps(state) {
   return {
     account: state.account,
+    locale: state.locale.translate.account.my_register_data,
+    screenSize: state.app.screenSize,
   };
 }
 

@@ -65,7 +65,7 @@ export class InputZipcode extends React.Component {
     const { locale } = this.props;
 
     if (locale.COUNTRY_CODE === 'BR' && value.length === 5) {
-      value += '-';
+      return `${value}-`;
     }
 
     return value;
