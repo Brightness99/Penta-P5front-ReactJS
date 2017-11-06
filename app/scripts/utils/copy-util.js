@@ -1,3 +1,5 @@
+// @flow
+
 const deselect = () => {
   if (document.selection) {
     document.selection.empty();
@@ -7,7 +9,7 @@ const deselect = () => {
   }
 };
 
-export const copyElementContentToClipboard = (id) => {
+export const copyElementContentToClipboard = (id: string) => {
   try {
     const voucherCodeElement = document.getElementById(id);
     if (!voucherCodeElement) {
@@ -17,6 +19,8 @@ export const copyElementContentToClipboard = (id) => {
     document.execCommand('copy');
     deselect();
   } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('Unable to copy');
     return false;
   }
   return true;
