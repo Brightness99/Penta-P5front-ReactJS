@@ -77,15 +77,16 @@ export class InputRegex extends React.Component {
       valid = checkValidation(value);
     }
 
+    let newValue = value;
     if (typeof autoComplete === 'function') {
-      value = autoComplete(value);
+      newValue = autoComplete(value);
     }
 
     if (typeof onValidate === 'function') {
-      onValidate(name, value, valid);
+      onValidate(name, newValue, valid);
     }
 
-    return { value, valid };
+    return { newValue, valid };
   }
 
   static props: Props;
