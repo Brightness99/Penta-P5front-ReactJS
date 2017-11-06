@@ -3,8 +3,7 @@
 import React from 'react';
 import Loading from 'components/Loading';
 import TopMenuBar from '../CimpressComponents/TopMenuBar';
-import SideImageBar from '../CimpressComponents/SideImageBar';
-import SideTextBar from '../CimpressComponents/SideTextBar';
+import SideBarPanel from '../CimpressComponents/SideBarPanel';
 import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
 import CanvasArea from '../CimpressComponents/CanvasArea';
 import BottomMenuBar from '../CimpressComponents/BottomMenuBar';
@@ -18,6 +17,7 @@ type Props = {
 
 type State = {
   isReady: boolean,
+  activeTab: number,
 };
 
 export default class Canvas extends React.Component {
@@ -25,6 +25,7 @@ export default class Canvas extends React.Component {
     super(props);
     this.state = {
       isReady: false,
+      activeTab: 1,
     };
   }
 
@@ -71,8 +72,14 @@ export default class Canvas extends React.Component {
     });
   };
 
+  handleSelectTab = (value) => {
+    this.setState({
+      activeTab: value,
+    });
+  };
+
   render() {
-    const { isReady } = this.state;
+    const { isReady, activeTab } = this.state;
     const { cimpressInfo: { settings: { css } } } = this.props;
 
     return (
@@ -81,12 +88,9 @@ export default class Canvas extends React.Component {
           !isReady
             ? <Loading />
             : [
-              <TopMenuBar key="top-menu-bar" />,
+              <TopMenuBar key="top-menu-bar" handleSelectTab={this.handleSelectTab} />,
               <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_main-area-container">
-                <div className="upload__canvas-schema_sidebar-container">
-                  <SideImageBar />
-                  <SideTextBar />
-                </div>
+                <SideBarPanel activeTab={activeTab} />
                 <div className="upload__canvas-schema_canvas-container">
                   <CanvasToolBar />
                   <CanvasArea />
