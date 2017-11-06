@@ -124,7 +124,7 @@ export class App extends React.Component {
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
-                      <Route exact path="/programa-de-fidelidade" component={LoyaltyLp} />
+                      <Route path="/programa-de-fidelidade" component={LoyaltyLp} />
                       <Route path="/esqueci-minha-senha" component={ForgotMyPassword} />
                       <Route path="/download-de-gabaritos" component={Templates} />
                       <Route exact path="/modelos" component={TemplatesSEO} />
