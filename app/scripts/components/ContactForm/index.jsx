@@ -18,7 +18,10 @@ type FormType = {
   website: { valid: boolean, value: string },
   spending: { valid: boolean, value: string },
 };
-type Props = { onSubmit: (data: DataType) => void }
+type Props = {
+  onSubmit: (data: DataType) => void,
+  handleCloseModal: () => void,
+}
 type State = { canSubmit: boolean, form: FormType };
 
 class ContactForm extends React.PureComponent<Props, State> {
@@ -76,7 +79,8 @@ class ContactForm extends React.PureComponent<Props, State> {
           confirmButtonColor: '#2cac57',
           confirmButtonText: 'OK',
           showCancelButton: false,
-        });
+        })
+        .then(() => this.props.handleCloseModal());
       }
     }
   }
