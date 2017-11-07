@@ -93,12 +93,15 @@
 		}
 		img {
 			max-width: 130px;
-			max-height: 130px;
 			margin-right: 15px;
+			align-self: start;
 			@include is-only {
 				max-width: 85px;
-				max-height: 85px;
 			}
+		}
+		.preview {
+			box-shadow: 0 0.1rem 3rem 0 #ccc;
+			border: 1px solid #ccc;
 		}
 		div {
 			> div:nth-child(1) {

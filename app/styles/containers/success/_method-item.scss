@@ -33,18 +33,19 @@
 		font-size: 13px;
 		position: relative;
 		input {
-      height: 150px;
-      width: 150px;
-      position: absolute;
-      background-color: transparent;
-      border: transparent;
-      color: transparent;
-      outline: none;
-      top: -100vh;
-      left: -100vw;
+			height: 150px;
+			width: 150px;
+			position: absolute;
+			background-color: transparent;
+			border: transparent;
+			color: transparent;
+			outline: none;
+			top: -100vh;
+			left: -100vw;
 		}
 		a {
 			text-decoration: underline;
+			position: relative;
 		}
 		.clipboard-tooltip {
 			align-items: center;
@@ -57,7 +58,7 @@
 			position: absolute;
 			transform: translateX(-50%);
 			top: -4px;
-			right: -10px;
+			left: 200px;
 
 			> span {
 				padding: 5px 10px;

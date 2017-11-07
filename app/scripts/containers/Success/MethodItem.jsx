@@ -61,11 +61,13 @@ export class MethodItem extends React.Component {
         </div>
         <div className="link-2">
           {type === 'payment' && <div>
-            <a onClick={this.copyToClipboard}>{description}</a>
+            <a onClick={this.copyToClipboard}>
+              {description}
+              <div className={cx('clipboard-tooltip', !copied && 'hidden')}>
+                <span>Copiado!</span>
+              </div>
+            </a>
             <input type="text" id="boleto-barcode" value={this.state.barcode} onChange={(e) => { this.setState({ barcode: e.target.value }); }} />
-            <div className={cx('clipboard-tooltip', !copied && 'hidden')}>
-              <span>Copiado!</span>
-            </div>
           </div>}
           {type !== 'payment' && <div>{description}</div>}
         </div>
