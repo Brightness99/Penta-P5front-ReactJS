@@ -115,3 +115,4 @@ export FacebookIcon from './FacebookIcon';
 export WarningFilled from './WarningFilled';
 export AngleRight from './AngleRight';
 export Bell from './Bell';
+export AlertCircle from './AlertCircle';
