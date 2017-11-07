@@ -37,12 +37,6 @@ export class CorporateSales extends React.Component<Props, State> {
     this.state = { showContactModal: false };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.contactForm.isLoaded) {
-      this.handleShowingModal();
-    }
-  }
-
   static props: Props;
   static state: State;
 
@@ -57,7 +51,7 @@ export class CorporateSales extends React.Component<Props, State> {
   handleSubmit = (data) => {
     const { submitContactForm } = this.props;
     this.handleCloseModal();
-    if (typeof susubmitContactForm === 'function') {
+    if (typeof submitContactForm === 'function') {
       submitContactForm(data);
     }
   };
@@ -69,7 +63,7 @@ export class CorporateSales extends React.Component<Props, State> {
         {
           this.state.showContactModal &&
           <Modal handleCloseModal={this.handleCloseModal}>
-            <ContactForm onSubmit={data => this.handleSubmit(data)} />
+            <ContactForm onSubmit={data => this.handleSubmit(data)} handleCloseModal={this.handleCloseModal} />
           </Modal>
         }
         <BannerCloud handleModalShowing={this.handleShowingModal} />
