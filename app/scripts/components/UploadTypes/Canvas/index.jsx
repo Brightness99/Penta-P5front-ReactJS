@@ -7,6 +7,7 @@ import SideBarPanel from '../CimpressComponents/SideBarPanel';
 import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
 import CanvasArea from '../CimpressComponents/CanvasArea';
 import BottomMenuBar from '../CimpressComponents/BottomMenuBar';
+import CanvasCutPreview from './CanvasCutPreview';
 import cimpressConfigBuilder from './cimpressConfigBuilder';
 
 type Props = {
@@ -20,6 +21,7 @@ type State = {
   activeTab: number,
   isVertical: number,
   showCutPreview: boolean,
+  previewUrls: Array<string>,
 };
 
 export default class Canvas extends React.Component {
@@ -29,6 +31,7 @@ export default class Canvas extends React.Component {
       isReady: false,
       activeTab: 1,
       showCutPreview: false,
+      previewUrls: [],
     };
   }
 
@@ -85,20 +88,27 @@ export default class Canvas extends React.Component {
     console.log(isVertical);
   };
 
-  showPreview = () => {
+  showPreview = (urls) => {
     this.setState({
       showCutPreview: true,
+      previewUrls: urls,
     });
   };
 
-  render() {
-    const { isReady, activeTab } = this.state;
+  hidePreview = () => {
+    this.setState({
+      showCutPreview: false,
+    });
+  };
+
+  renderCanvas() {
+    const { activeTab, showCutPreview } = this.state;
     const { cimpressInfo: { settings: { css, has_cut_view }, orientation }, isSku } = this.props;
 
-    if (!isReady) return <Loading />;
-
     return (
-      <div className="upload__canvas-schema">
+      <div
+        className={`upload__canvas-schema ${!showCutPreview ? 'show' : ''}`}
+      >
         <TopMenuBar key="top-menu-bar" handleSelectTab={this.handleSelectTab} />
         <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_main-area-container">
           <SideBarPanel activeTab={activeTab} />
@@ -118,6 +128,28 @@ export default class Canvas extends React.Component {
         />
         <style>{css}</style>
       </div>
+    );
+  }
+
+  renderPreview() {
+    const { showCutPreview, previewUrls } = this.state;
+
+    return (
+      <section className={`upload__canvas-schema ${showCutPreview ? 'show' : ''}`}>
+        <CanvasCutPreview previewUrls={previewUrls} />
+      </section>
+    );
+  }
+
+  render() {
+    const { isReady } = this.state;
+
+    if (!isReady) return <Loading />;
+    return (
+      <section>
+        {this.renderCanvas()}
+        {this.renderPreview()}
+      </section>
     );
   }
 }

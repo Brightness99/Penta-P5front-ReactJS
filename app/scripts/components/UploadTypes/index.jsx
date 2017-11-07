@@ -57,7 +57,8 @@ const UploadTypes = ({ uploadType,
       renderType()
     }
     {
-      showMessage && <UploadExtraInformationPanel description={message} />
+      showMessage && uploadType === 'normal'
+      && <UploadExtraInformationPanel description={message} />
     }
   </section>);
 };
