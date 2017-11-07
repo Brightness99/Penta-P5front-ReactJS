@@ -40,6 +40,9 @@
             background-color: $color-white;
           }
         }
+        &.activated{
+          pointer-events: none;
+        }
         &.vertical-button {
           div {
             width: 1.2rem;
