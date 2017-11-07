@@ -1,96 +1,96 @@
 .method-item {
-	width: 32%;
-	margin-right: 2%;
-	border: 1px dashed #CCC;
-	height: 300px;
-	text-align: center;
-	img {
-		width: 65px;
-		height: 80px;
-		margin: 65px 0px 28px;
-	}
+  width: 32%;
+  margin-right: 2%;
+  border: 1px dashed #CCC;
+  height: 300px;
+  text-align: center;
+  img {
+    width: 65px;
+    height: 80px;
+    margin: 65px 0px 28px;
+  }
 
-	a {
-		font-size: 13px;
-		display: inline-block;
-		cursor: pointer;
-		color: #006EE3 !important;
-		cursor: pointer;
-	}
+  a {
+    font-size: 13px;
+    display: inline-block;
+    cursor: pointer;
+    color: #006EE3 !important;
+    cursor: pointer;
+  }
 
-	.link-1 {
-		margin-bottom: 8px;
-		a {
-			width: 180px;
-			border: 1px solid #006EE3;
-			border-radius: 3px;
-			padding: 7px 0px;
-			text-transform: uppercase;
-		}
-	}
-	
-	.link-2 {
-		font-size: 13px;
-		position: relative;
-		input {
-			height: 150px;
-			width: 150px;
-			position: absolute;
-			background-color: transparent;
-			border: transparent;
-			color: transparent;
-			outline: none;
-			top: -100vh;
-			left: -100vw;
-		}
-		a {
-			text-decoration: underline;
-			position: relative;
-		}
-		.clipboard-tooltip {
-			align-items: center;
-			background-color: #6a6f7a;
-			border-radius: 0.3rem;
-			color: #dbdddf;
-			font-family: $font-family-open-sans;
-			font-size: $font-size-xs;
-			height: 3rem;
-			position: absolute;
-			transform: translateX(-50%);
-			top: -4px;
-			left: 200px;
+  .link-1 {
+    margin-bottom: 8px;
+    a {
+      width: 180px;
+      border: 1px solid #006EE3;
+      border-radius: 3px;
+      padding: 7px 0px;
+      text-transform: uppercase;
+    }
+  }
+  
+  .link-2 {
+    font-size: 13px;
+    position: relative;
+    input {
+      height: 150px;
+      width: 150px;
+      position: absolute;
+      background-color: transparent;
+      border: transparent;
+      color: transparent;
+      outline: none;
+      top: -100vh;
+      left: -100vw;
+    }
+    a {
+      text-decoration: underline;
+      position: relative;
+    }
+    .clipboard-tooltip {
+      align-items: center;
+      background-color: #6a6f7a;
+      border-radius: 0.3rem;
+      color: #dbdddf;
+      font-family: $font-family-open-sans;
+      font-size: $font-size-xs;
+      height: 3rem;
+      position: absolute;
+      transform: translateX(-50%);
+      top: -4px;
+      left: 200px;
 
-			> span {
-				padding: 5px 10px;
-				display: block;
-				white-space: nowrap;
-			}
+      > span {
+        padding: 5px 10px;
+        display: block;
+        white-space: nowrap;
+      }
 
-			&::before {
-				content:"";
-				position: absolute;
-				right: 100%;
-				top: 10px;
-				width: 0;
-				height: 0;
-				border-top: 5px solid transparent;
-				border-right: 10px solid #6a6f7a;
-				border-bottom: 5px solid transparent;
-			}
-		}
-		.hidden {
-			display: none;
-		}
-	}
-	
-	&:last-child {
-		margin-right: 0px !important;
-	}
-	@include is-only {
-		width: 100%;
-		margin: 10px 0px 0px;
-	}
+      &::before {
+        content:"";
+        position: absolute;
+        right: 100%;
+        top: 10px;
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-right: 10px solid #6a6f7a;
+        border-bottom: 5px solid transparent;
+      }
+    }
+    .hidden {
+      display: none;
+    }
+  }
+  
+  &:last-child {
+    margin-right: 0px !important;
+  }
+  @include is-only {
+    width: 100%;
+    margin: 10px 0px 0px;
+  }
 }
 .full-method-item {
-	width: 100% !important;
+  width: 100% !important;
 }
