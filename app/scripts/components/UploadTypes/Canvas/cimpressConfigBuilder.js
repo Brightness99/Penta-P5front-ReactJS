@@ -4,6 +4,7 @@ import Indicator from '../CimpressComponents/Indicator';
 import UploadButtonCimpress from './UploadButtonCimpress';
 
 const cimpressConfigBuilder = (config, isSku) => {
+  const { settings: { has_preview, has_zoom } } = config;
   const cimpressDesignerSettings = {
     configuration: {
       services: {
@@ -281,11 +282,11 @@ const cimpressConfigBuilder = (config, isSku) => {
             buttons: [],
           },
           zoom: {
-            enabled: true,
+            enabled: has_zoom === '1',
             containerElement: '.dcl-zoom-container',
           },
           previewDocument: {
-            enabled: true,
+            enabled: isSku && has_preview === '1',
             containerElement: '.dcl-widget-preview-document',
           },
           addText: {
@@ -304,7 +305,7 @@ const cimpressConfigBuilder = (config, isSku) => {
           },
         },
         zoomStrategy: {
-          resizeEnabled: false,
+          resizeEnabled: true,
           initialHeight: 3,
           initialZoom: 1,
           maxZoom: 10,

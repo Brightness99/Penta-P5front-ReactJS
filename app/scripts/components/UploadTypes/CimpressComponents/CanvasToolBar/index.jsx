@@ -26,6 +26,7 @@ const CanvasToolBar = ({ handleOrientation, isVertical }: Props) => (
         </button>
       </div>
     </div>
+    <div className="dcl-zoom-container" />
   </div>
 );
 
