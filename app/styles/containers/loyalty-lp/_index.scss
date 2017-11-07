@@ -9,13 +9,25 @@
       text-transform: inherit;
       font-weight: 400;
       letter-spacing: normal;
+      padding: 0 0 1rem 0;
       @include lg {
+        padding-bottom: 2rem;
         font-size: $font-size-xxl;
       }
     }
     .subtitle-loyalty {
       font-size: $font-size-h6;
       color: $color-opacity-silver;
+    }
+
+    .icon-arrow {
+      display: flex;
+      justify-content: center;
+      svg {
+        fill: $color-printi-blue;
+        width: 1.2rem;
+        height: 7rem;
+      }
     }
 
     .mol-banner-member-loyalty{
@@ -61,18 +73,43 @@
         }
         .qrk-be-member {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           justify-content: space-evenly;
           max-width: 86%;
           margin: auto;
-          margin-top: 6rem;
+          position: relative;
+          @include lg {
+            flex-direction: row;
+            margin-top: 6rem;
+          }
           .img-desc-be-member {
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            .img-be-member {
+              order: 2;
+              @include lg {
+                order: inherit;
+              }
+              &:last-of-type {
+                padding-bottom: 5rem;
+                @include lg {
+                  padding-bottom: 0;
+                }
+              }
+            }
             .text-be-member {
               font-family: $font-family-open-sans-regular;
-              height: 192px;
               display: flex;
               flex-direction: column;
               justify-content: center;
+              order: 1;
+              margin: 5rem 0 5rem 7rem;
+              @include lg {
+                height: 192px;
+                order: inherit;
+                margin: 5rem 0;
+              }
               .first-text-be-member {
                 font-size: $font-size-il;
               }
@@ -82,18 +119,28 @@
               }
             }
             > div {
-              margin: 5rem 0;
               max-width: 312px;
-              &:nth-of-type(2n) {
-                margin-bottom: 19rem;
+              @include lg {
+                margin: 5rem 0;
+                &:nth-of-type(2n) {
+                  margin-bottom: 19rem;
+                }
               }
             }
           }
           .line-dashed {
-            position: relative;
             border-left: 2px dashed $color-bluey-grey;
             width: 0.4rem;
             margin-top: 6rem;
+            position: absolute;
+            top: 0;
+            left: 4%;
+            height: 100%;
+            @include lg {
+              position: relative;
+              height: auto;
+              left: 0;
+            }
             .icon-into-line {
               position: absolute;
               background: $color-white;
@@ -112,7 +159,9 @@
                 padding: 0.1rem 0.5rem;
               }
               &:first-of-type {
-                top: 10%;
+                @include lg {
+                  top: 10%;
+                }
                 span {
                   background-color: $color-silver;
                 }
@@ -137,11 +186,15 @@
           }
         }
         .qrk-link-scroll-be-member {
-          align-items: center;
+          align-items: left;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          margin-top: 4rem;
+          margin-left: 10rem;
+          @include lg {
+            align-items: center;
+            margin: 4rem 0;
+          }
           .first-text-scroll-be-member {
             font-family: $font-family-open-sans-regular;
             font-size: $font-size-il;
@@ -154,13 +207,6 @@
             font-family: $font-family-open-sans-regular;
             font-size: $font-size-base;
           } 
-          a {
-            svg {
-              fill: $color-printi-blue;
-              width: 1.2rem;
-              height: 7rem;
-            }
-          }
         }
       }
 
@@ -174,9 +220,11 @@
         display: flex;
         margin-top: 4rem;
         .qrk-premium {
-          width: calc((100%/4) - 3rem);
-          //float: left;
           margin: 0 2rem;
+          max-width: 320px;
+          @include lg {
+            width: calc((100%/4) - 3rem);
+          }
           &:first-of-type {
             margin-left: 0;
           }
@@ -342,7 +390,7 @@
             margin: 0 1.5rem;
           }
           &:first-of-type {
-            margin-bottom: 1.5rem;
+            //margin-bottom: 1.5rem;
             margin-left: 0;
             @include lg {
               margin-bottom: 0;

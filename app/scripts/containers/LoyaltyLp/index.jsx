@@ -27,7 +27,7 @@ export class LoyaltyLp extends React.Component {
             <BannerLoyalty screenSize={screenSize} />
             <MemberLoyalty screenSize={screenSize} />
           </div>
-          <BenefitsMembers />
+          <BenefitsMembers screenSize={screenSize} />
           <WhatLost />
           <StartPremium />
         </div>
