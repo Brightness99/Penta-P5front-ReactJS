@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import swal from 'sweetalert2';
 import { Button } from 'quarks/Inputs';
-import { InputRegex } from 'quarks/Inputs/Validatable';
+import { InputRegex, InputZipcode } from 'quarks/Inputs/Validatable';
 import { accountAddressCreate, accountAddressUpdate, zipcodeValidate, accountAddressFormReset } from 'actions';
 
 type Props = {
@@ -84,7 +84,7 @@ class AddressFormModal extends React.Component {
         });
       } else {
         swal({
-          title: 'Successfully saved.',
+          title: 'Alterações salvas com sucesso!',
           type: 'success',
           confirmButtonColor: '#2cac57',
           confirmButtonText: 'OK',
@@ -155,8 +155,7 @@ class AddressFormModal extends React.Component {
   }
 
   render() {
-    const { locale, account: { addresses, zipcodeValid } } = this.props;
-    const zipcodePattern = locale.COUNTRY_CODE === 'BR' ? /^([0-9]){5}[-]([0-9]){3}$/ : /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+    const { account: { addresses, zipcodeValid } } = this.props;
     const { form, canSubmit } = this.state;
 
     return (
@@ -177,16 +176,14 @@ class AddressFormModal extends React.Component {
             required
           />
           <div className="atm-checkout-input atm-checkout-input-two zipcode">
-            <InputRegex
+            <InputZipcode
               id="zipcode"
               name="zipcode"
-              type="text"
               showLabel
               placeholder="CEP*"
               value={form.zipcode.value}
               onEnterKeyPress={this.handleClick}
               onValidate={this.handleValidatedInput}
-              pattern={zipcodePattern}
               required
             />
             <a target="_blank" className="link" href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm">Nao sei meu CEP*</a>
