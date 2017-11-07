@@ -7,7 +7,7 @@ import Collapse, { Panel } from 'rc-collapse';
 import Loading from 'components/Loading';
 import Modal from 'components/Modal';
 import { AccordionMinusIcon, AccordionPlusIcon, Plus, PencilIcon, TrashIcon, AddressIcon } from 'components/Icons';
-import { accountAddressDelete, accountAddressFetch } from 'actions';
+import { accountAddressDelete, accountAddressFetch, accountAddressFormReset } from 'actions';
 import { connect } from 'react-redux';
 import AddressFormModal from './AddressFormModal';
 
@@ -15,6 +15,8 @@ type Props = {
   screenSize: string,
   dispatch: () => {},
   account: {},
+  locale: {},
+  setBreadcrumbs: () => void,
 };
 
 type State = {
@@ -46,11 +48,50 @@ export class MyAddresses extends React.Component {
     const { dispatch } = this.props;
 
     dispatch(accountAddressFetch());
+    this.handleBreadcrumbs();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { account } = nextProps;
+    const { dispatch } = this.props;
+
+    if (!account.addresses.isAddressDeleting && account.addresses.isAddressDeletingCalled) {
+      dispatch(accountAddressFormReset());
+      if (account.addresses.error) {
+        swal({
+          title: account.addresses.error.message,
+          type: 'error',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        });
+      } else {
+        swal({
+          title: 'Removido com sucesso.',
+          type: 'success',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        });
+      }
+    }
   }
 
   static props: Props;
 
   static state: State;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: 'Meus Endereços',
+        },
+      ]);
+    }
+  };
 
   handleExpand = (pane) => {
     const { isExpanded } = this.state;
@@ -87,7 +128,7 @@ export class MyAddresses extends React.Component {
 
     swal({
       title: 'Você tem certeza?',
-      text: 'Ao remover este produto ele não estará mais disponível no carrinho!',
+      text: 'A remoção do endereço não afeta pedidos em aberto',
       type: 'warning',
       confirmButtonColor: '#2cac57',
       confirmButtonText: 'Sim',
@@ -274,6 +315,8 @@ export class MyAddresses extends React.Component {
 function mapStateToProps(state) {
   return {
     account: state.account,
+    locale: state.locale.translate.account.my_register_data,
+    screenSize: state.app.screenSize,
   };
 }
 
