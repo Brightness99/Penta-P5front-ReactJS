@@ -30,6 +30,7 @@ const UploadTypes = ({ uploadType,
     switch (uploadType) {
       case 'canvas':
         return (<CanvasSchema
+          isSku={false}
           handleCanvasFinalize={handleCanvasFinalize}
           cimpressInfo={cimpressInfo}
         />);

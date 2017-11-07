@@ -3,6 +3,18 @@
   flex-direction: row;
   width: 100%;
   height: 8rem;
+  .dcl-zoom-container {
+    .dcl-action-btn {
+      display: inline-flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+      padding: 0.1rem 1rem 0.5rem 1rem;
+      .dcl-action-btn__description {
+        margin-bottom: 0.6rem;
+      }
+    }
+  }
   .canvas-area_orientation-container {
     display: flex;
     flex-direction: column;
