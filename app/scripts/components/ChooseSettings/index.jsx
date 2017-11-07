@@ -116,8 +116,7 @@ class ChooseSettings extends React.PureComponent<Props, State> {
     return formValues;
   };
 
-  handleRemove = (e: Event, partName: string) => {
-    e.preventDefault();
+  handleRemove = (partName: string) => {
     const { productPartsKeys, form, canSubmit } = this.state;
     const newForm = Object.assign({}, form);
     const newCanSubmit = Object.assign({}, canSubmit);
