@@ -18,6 +18,7 @@ type Props = {
 type State = {
   isReady: boolean,
   activeTab: number,
+  isVertical: number
 };
 
 export default class Canvas extends React.Component {
@@ -78,9 +79,13 @@ export default class Canvas extends React.Component {
     });
   };
 
+  handleOrientationChanged = (isVertical) => {
+    console.log(isVertical);
+  };
+
   render() {
     const { isReady, activeTab } = this.state;
-    const { cimpressInfo: { settings: { css } } } = this.props;
+    const { cimpressInfo: { settings: { css }, orientation } } = this.props;
 
     return (
       <div className="upload__canvas-schema">
@@ -92,7 +97,10 @@ export default class Canvas extends React.Component {
               <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_main-area-container">
                 <SideBarPanel activeTab={activeTab} />
                 <div className="upload__canvas-schema_canvas-container">
-                  <CanvasToolBar />
+                  <CanvasToolBar
+                    isVertical={orientation === 'vertical'}
+                    handleOrientation={this.handleOrientationChanged}
+                  />
                   <CanvasArea />
                 </div>
               </div>,
