@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { push } from 'modules/ReduxRouter';
 import Button from 'quarks/Inputs/Button';
@@ -169,13 +169,12 @@ class ChooseSettings extends React.PureComponent<Props, State> {
                   >
                     {productPart.data.name}
                   </h5>
-                  <Link
-                    to={'#'}
+                  <button
                     className={'setting-remove-control'}
-                    onClick={(e: Event) => this.handleRemove(e, productPart.key)}
+                    onClick={() => this.handleRemove(productPart.key)}
                   >
                     {'Remover'}
-                  </Link>
+                  </button>
                 </section>
               }
               <Settings
