@@ -1,31 +1,31 @@
 .warning-message {
-	background-color: #F4DD1D;
-	width: 100%;
-	padding: 10px 20px;
-	border-radius: 3px;
-	color: #6A6F7a;
-	.pull-right {
-		float: right;
-		svg {
-			width: 20px !important;
-			height: 20px !important;
-			vertical-align: middle;
-			fill: #6A6F7a;
-		}
-	}
-	svg {
-		width: 26px;
-		height: 26px;
-		vertical-align: middle;
-	}
-	span {
-		margin: 0px 10px;
-		font-size: 13px;
-		b {
-			color: #151617;
-		}
-	}
-	@include is-only {
-		display: none;
-	}
+  background-color: #F4DD1D;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 3px;
+  color: #6A6F7a;
+  .pull-right {
+    float: right;
+    svg {
+      width: 20px !important;
+      height: 20px !important;
+      vertical-align: middle;
+      fill: #6A6F7a;
+    }
+  }
+  svg {
+    width: 26px;
+    height: 26px;
+    vertical-align: middle;
+  }
+  span {
+    margin: 0px 10px;
+    font-size: 13px;
+    b {
+      color: #151617;
+    }
+  }
+  @include is-only {
+    display: none;
+  }
 }
