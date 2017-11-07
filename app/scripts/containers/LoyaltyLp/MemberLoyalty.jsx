@@ -2,10 +2,17 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { isMobile } from 'utils/helpers';
 import { ChevronDownIcon } from 'components/Icons';
 
+type Props = {
+  screenSize: string,
+};
 export class MemberLoyalty extends React.Component {
+  static props: Props;
+
   render() {
+    const { screenSize } = this.props;
     return (
       <div className="container">
         <div className="atm-member-loyalty">
@@ -14,13 +21,19 @@ export class MemberLoyalty extends React.Component {
 
           <div className="qrk-be-member">
             <div className="img-desc-be-member">
-              <div>
+              <div className="img-be-member">
                 <img src={require('assets/media/images/member-loyalty1.png')} alt="Membro" />
               </div>
-              <div className="text-be-member">
-                <p className="first-text-be-member">Pronto, você já é um membro! \o/</p>
-                <p className="second-text-be-member">Aí é só aproveitar todas as promoções exclusivas que reservamos para nossos clientes de carteirinha.</p>
-              </div>
+              {!isMobile(screenSize) ?
+                (<div className="text-be-member">
+                  <p className="first-text-be-member">Pronto, você já é um membro! \o/</p>
+                  <p className="second-text-be-member">Aí é só aproveitar todas as promoções exclusivas que reservamos para nossos clientes de carteirinha.</p>
+                </div>) :
+                (<div className="text-be-member">
+                  <p className="first-text-be-member">R$500 em compras</p>
+                  <p className="second-text-be-member">Pode ser em quantas compras quiser, o importante é que seja dentro do intervalo de um ano.</p>
+                </div>)
+              }
             </div>
 
             <div className="line-dashed">
@@ -38,11 +51,17 @@ export class MemberLoyalty extends React.Component {
             </div>
 
             <div className="img-desc-be-member">
-              <div className="text-be-member">
-                <p className="first-text-be-member">R$500 em compras</p>
-                <p className="second-text-be-member">Pode ser em quantas compras quiser, o importante é que seja dentro do intervalo de um ano.</p>
-              </div>
-              <div>
+              {isMobile(screenSize) ?
+                (<div className="text-be-member">
+                  <p className="first-text-be-member">Pronto, você já é um membro! \o/</p>
+                  <p className="second-text-be-member">Aí é só aproveitar todas as promoções exclusivas que reservamos para nossos clientes de carteirinha.</p>
+                </div>) :
+                (<div className="text-be-member">
+                  <p className="first-text-be-member">R$500 em compras</p>
+                  <p className="second-text-be-member">Pode ser em quantas compras quiser, o importante é que seja dentro do intervalo de um ano.</p>
+                </div>)
+              }
+              <div className="img-be-member">
                 <img src={require('assets/media/images/member-loyalty2.png')} alt="Membro" />
               </div>
             </div>
@@ -51,8 +70,13 @@ export class MemberLoyalty extends React.Component {
           <div className="qrk-link-scroll-be-member">
             <h3 className="first-text-scroll-be-member">Como se tornar membro premium?</h3>
             <p className="second-text-scroll-be-member">Entenda as regras e acomule benefícios</p>
-            <Link to="#"><ChevronDownIcon /></Link>
+            {!isMobile(screenSize) ?
+              <Link to="#" className="icon-arrow"><ChevronDownIcon /></Link> : null
+            }
           </div>
+          {isMobile(screenSize) ?
+            <Link to="#" className="icon-arrow"><ChevronDownIcon /></Link> : null
+          }
 
         </div>
       </div>
