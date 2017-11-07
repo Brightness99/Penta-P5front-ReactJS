@@ -18,7 +18,8 @@ type Props = {
 type State = {
   isReady: boolean,
   activeTab: number,
-  isVertical: number
+  isVertical: number,
+  showCutPreview: boolean,
 };
 
 export default class Canvas extends React.Component {
@@ -27,6 +28,7 @@ export default class Canvas extends React.Component {
     this.state = {
       isReady: false,
       activeTab: 1,
+      showCutPreview: false,
     };
   }
 
@@ -83,30 +85,37 @@ export default class Canvas extends React.Component {
     console.log(isVertical);
   };
 
+  showPreview = () => {
+    this.setState({
+      showCutPreview: true,
+    });
+  };
+
   render() {
     const { isReady, activeTab } = this.state;
-    const { cimpressInfo: { settings: { css }, orientation } } = this.props;
+    const { cimpressInfo: { settings: { css, has_cut_view }, orientation }, isSku } = this.props;
+
+    if (!isReady) return <Loading />;
 
     return (
       <div className="upload__canvas-schema">
-        {
-          !isReady
-            ? <Loading />
-            : [
-              <TopMenuBar key="top-menu-bar" handleSelectTab={this.handleSelectTab} />,
-              <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_main-area-container">
-                <SideBarPanel activeTab={activeTab} />
-                <div className="upload__canvas-schema_canvas-container">
-                  <CanvasToolBar
-                    isVertical={orientation === 'vertical'}
-                    handleOrientation={this.handleOrientationChanged}
-                  />
-                  <CanvasArea />
-                </div>
-              </div>,
-              <BottomMenuBar key="bottom-menu-bar" handleSave={this.handleOnSave} />,
-            ]
-        }
+        <TopMenuBar key="top-menu-bar" handleSelectTab={this.handleSelectTab} />
+        <div className="upload__canvas-schema_main-area-container" key="upload__canvasSchema_main-area-container">
+          <SideBarPanel activeTab={activeTab} />
+          <div className="upload__canvas-schema_canvas-container">
+            <CanvasToolBar
+              isVertical={orientation === 'vertical'}
+              handleOrientation={this.handleOrientationChanged}
+            />
+            <CanvasArea />
+          </div>
+        </div>
+        <BottomMenuBar
+          key="bottom-menu-bar"
+          handlePreview={this.showPreview}
+          hasCutPreview={!isSku && has_cut_view === '1'}
+          handleSave={this.handleOnSave}
+        />
         <style>{css}</style>
       </div>
     );
