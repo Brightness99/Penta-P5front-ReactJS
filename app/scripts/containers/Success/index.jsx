@@ -78,10 +78,10 @@ export class Success extends React.Component {
 
     return (
       <div className="sub-total">
-        <div className="sub-total-row">
+        {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
           <div className="key">Sub-total</div>
           <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
-        </div>
+        </div>}
         {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
           <div className="key">Cupom</div>
           <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_discount_price)}</IntlMoney></div>
