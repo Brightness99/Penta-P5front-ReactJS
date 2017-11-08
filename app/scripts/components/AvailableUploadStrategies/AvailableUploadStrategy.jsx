@@ -30,7 +30,7 @@ export default class AvailableUploadStrategy extends React.PureComponent {
     return (
       <section className="available-upload-strategy-container">
         <label className="main-content">
-          <section className={`icon-block ${checked ? 'active' : ''}`}>
+          <section className="icon-block">
             <AvailableUploadIcon iconIndex={index} />
           </section>
           <BoxRadio

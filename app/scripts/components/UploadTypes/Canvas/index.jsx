@@ -103,7 +103,7 @@ export default class Canvas extends React.Component {
 
   renderCanvas() {
     const { activeTab, showCutPreview } = this.state;
-    const { cimpressInfo: { settings: { css, has_cut_view }, orientation }, isSku } = this.props;
+    const { cimpressInfo: { settings: { css }, orientation } } = this.props;
 
     return (
       <div
@@ -120,12 +120,6 @@ export default class Canvas extends React.Component {
             <CanvasArea />
           </div>
         </div>
-        <BottomMenuBar
-          key="bottom-menu-bar"
-          handlePreview={this.showPreview}
-          hasCutPreview={!isSku && has_cut_view === '1'}
-          handleSave={this.handleOnSave}
-        />
         <style>{css}</style>
       </div>
     );
@@ -142,13 +136,22 @@ export default class Canvas extends React.Component {
   }
 
   render() {
-    const { isReady } = this.state;
+    const { isReady, showCutPreview } = this.state;
+    const { cimpressInfo: { settings: { has_cut_view } }, isSku } = this.props;
 
     if (!isReady) return <Loading />;
     return (
       <section>
         {this.renderCanvas()}
         {this.renderPreview()}
+        <BottomMenuBar
+          key="bottom-menu-bar"
+          handlePreview={this.showPreview}
+          hasCutPreview={!isSku && has_cut_view === '1'}
+          isPreview={showCutPreview}
+          handleReturnToEditor={this.hidePreview}
+          handleSave={this.handleOnSave}
+        />
       </section>
     );
   }

@@ -6,10 +6,17 @@ type Props = {
   handleSave: (data) => void,
   handleSaveError: (data) => void,
   handlePreview: (urls: Array<string>) => void,
+  handleReturnToEditor: () => void,
   hasCutPreview: boolean,
+  isPreview: boolean,
 }
 
-const BottomMenuBar = ({ handleSave, handleSaveError, hasCutPreview, handlePreview }: Props) => {
+const BottomMenuBar = ({ handleSave,
+                         handleSaveError,
+                         hasCutPreview,
+                         handlePreview,
+                         isPreview,
+                         handleReturnToEditor }: Props) => {
   const saveTemplate = () => {
     global.designer.saveDocumentToUds().then(
       (templateResponse) => handleSave(templateResponse.documentReferenceUrl),
@@ -41,15 +48,21 @@ const BottomMenuBar = ({ handleSave, handleSaveError, hasCutPreview, handlePrevi
     );
   };
 
+  const renderPreviewButton = () => (hasCutPreview ?
+    <button className="canvas-schema__preview-button" onClick={previewTemplate}>
+      <EyeEmptyIcon className="" />
+      <span className="description">Visualizar</span>
+    </button>
+        : <section className="dcl-widget-preview-document" />
+    );
+
   return (
     <div className="upload__canvas-schema__bottom-menu-bar">
-      {
-        hasCutPreview ?
-          <button className="canvas-schema__preview-button" onClick={previewTemplate}>
-            <EyeEmptyIcon className="" />
-            <span className="description">Visualizar</span>
-          </button>
-          : <section className="dcl-widget-preview-document" />
+      { !isPreview && renderPreviewButton() }
+      { isPreview &&
+        <button className="canvas-schema__preview-button" onClick={handleReturnToEditor}>
+          <span className="description">Voltar e editar</span>
+        </button>
       }
       <button className="bottom-menu-bar_btn bottom-menu-bar_btn-finish" onClick={saveTemplate}>
         Finalizar arte
