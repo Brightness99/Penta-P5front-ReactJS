@@ -1,0 +1,37 @@
+.reset-password-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+
+  .reset-password-sub-container {
+    background-color: $color-white;
+    margin: auto;
+    padding: 3rem 2rem;
+    width: 100%;
+
+    @include lg {
+      width: 49%;
+    }
+
+    .atm-title {
+      font-family: $font-family-open-sans;
+      font-size: $font-size-ix;
+      text-align: center;
+    }
+  }
+
+  .form-reset-password {
+    .app__qrk__input-container {
+      margin-bottom: 2rem;
+    }
+
+    .app__qrk__button.success {
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .show-password-block {
+      text-align: end;
+    }
+  }
+}
