@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { IntlMoney, IntlDate } from 'components/Intl';
+import WarningMessage from './WarningMessage';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
@@ -22,7 +23,7 @@ export class ProductItem extends React.Component {
       <div className="product-item-row">
         <div className="product-item-col-product">
           {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img src={item.info.thumbnail} alt="Product" />}
+          {item.info.thumbnail !== '' && item.info.thumbnail && <img className="preview" src={item.info.thumbnail} alt="Product" />}
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
@@ -34,6 +35,11 @@ export class ProductItem extends React.Component {
         <div className="product-item-col product-item-col-delivery">
           <div><IntlDate>{item.info.expected_delivery_date}</IntlDate></div>
           <div>{item.delivery_zipcode.label}: {item.delivery_zipcode.value}</div>
+          <div>
+            <WarningMessage>
+              <b>{item.upload_message && item.upload_message.label}</b>
+            </WarningMessage>
+          </div>
         </div>
         <div className="product-item-col product-item-col-amount">
           <div>{item.info.quantity}</div>
@@ -51,7 +57,7 @@ export class ProductItem extends React.Component {
       <div className="product-item-row">
         <div className="product-item-col product-item-col-product">
           {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img src={item.info.thumbnail} alt="Product" />}
+          {item.info.thumbnail !== '' && item.info.thumbnail && <img className="preview" src={item.info.thumbnail} alt="Product" />}
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
