@@ -2,29 +2,35 @@
   display: flex;
   justify-content: center;
   margin: 2rem 0;
+
   .mol-forgot-password {
     background-color: $color-white;
     margin: auto;
     padding: 5rem 2rem;
     width: 100%;
+
     @include lg {
       width: 49%;
     }
+
     .atm-title {
-      text-align: center;
       padding: 1rem 0;
+      text-align: center;
     }
+
     .atm-subtitle {
       font-size: $font-size-ix;
       margin-top: 2rem;
     }
+
     .app__qrk__button {
-      width: 100%;
       margin-top: 2rem;
+      width: 100%;
     }
+
     .atm-back-login {
-      text-align: center;
       margin: 2rem 0 0;
+      text-align: center;
     }
   }
 }

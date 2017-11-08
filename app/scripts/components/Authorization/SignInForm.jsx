@@ -133,7 +133,7 @@ export default class SignInForm extends React.Component {
               />
               <span>Permanecer conectado</span>
             </label>
-            <Link to="#">Esqueci minha senha</Link>
+            <Link to="/esqueci-minha-senha">Esqueci minha senha</Link>
           </section>
         </form>
       </div>
