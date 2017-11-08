@@ -131,21 +131,12 @@ export class App extends React.Component {
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
                       <Route
                         path="/esqueci-minha-senha"
-                        render={() => {
-                          if (isAuthorized) {
-                            return <Redirect to={'/'} />;
-                          }
-                          return <ForgotMyPassword />;
-                        }}
+                        render={() => (isAuthorized ? <Redirect to={'/'} /> : <ForgotMyPassword />)}
                       />
                       <Route
                         path="/redefinir-senha/:hash"
-                        render={({ match }) => {
-                          if (isAuthorized) {
-                            return <Redirect to={'/'} />;
-                          }
-                          return <ResetMyPassword hash={match.params.hash} />;
-                        }}
+                        render={({ match }) =>
+                          (isAuthorized ? <Redirect to={'/'} /> : <ResetMyPassword hash={match.params.hash} />)}
                       />
                       <Route path="/download-de-gabaritos" component={Templates} />
                       <Route exact path="/modelos" component={TemplatesSEO} />
