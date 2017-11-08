@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Loading from 'components/Loading';
+import OverlaySpinner from 'components/OverlaySpinner';
 import TopMenuBar from '../CimpressComponents/TopMenuBar';
 import SideBarPanel from '../CimpressComponents/SideBarPanel';
 import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
@@ -18,6 +18,7 @@ type Props = {
 
 type State = {
   isReady: boolean,
+  isLoaded: boolean,
   activeTab: number,
   isVertical: number,
   showCutPreview: boolean,
@@ -71,11 +72,12 @@ export default class Canvas extends React.Component {
     const config = cimpressConfigBuilder(cimpressInfo, isSku);
     global.designer.start(config)
       .then(
-        () => { }
+        () => {
+          this.setState({
+            isReady: true,
+          });
+        }
       );
-    this.setState({
-      isReady: true,
-    });
   };
 
   handleSelectTab = (value) => {
@@ -139,9 +141,8 @@ export default class Canvas extends React.Component {
     const { isReady, showCutPreview } = this.state;
     const { cimpressInfo: { settings: { has_cut_view } }, isSku } = this.props;
 
-    if (!isReady) return <Loading />;
     return (
-      <section>
+      <OverlaySpinner isLoading={!isReady}>
         {this.renderCanvas()}
         {this.renderPreview()}
         <BottomMenuBar
@@ -152,7 +153,7 @@ export default class Canvas extends React.Component {
           handleReturnToEditor={this.hidePreview}
           handleSave={this.handleOnSave}
         />
-      </section>
+      </OverlaySpinner>
     );
   }
 }
