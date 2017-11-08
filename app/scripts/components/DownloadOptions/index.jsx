@@ -38,7 +38,7 @@ const DownloadOptions = ({ options, requestDownloadTemplate, orientation, parts,
   return (
     <section className="mol-sidebar-download-template">
       <section className="atm-sidebar-choose-download">
-        <h4 className="title-atm-sidebar">{'Opções:'}</h4>
+        <h4 className="title-atm-sidebar">{'Baixe o gabarito:'}</h4>
         <ul className={cx('qrk-list-download', isMobile(getScreenSize()) && 'mobile-download-template')}>
           {
             options.map(option => {
