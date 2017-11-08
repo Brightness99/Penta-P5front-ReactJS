@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Loading from 'components/Loading';
-import { Arrow } from 'components/Icons';
+import { ChevronLeftIcon } from 'components/Icons';
 import Timeline from 'components/Timeline';
 import ProductsTemplates from 'components/ProductsTemplates';
 import ChooseSettings from 'components/ChooseSettings/index';
@@ -77,7 +77,7 @@ export class Templates extends React.Component<Props, State> {
           exact
           render={() =>
             <NavLink to={'/'} className="atm-link">
-              <Arrow />{'Voltar para escolher outro produto'}
+              <ChevronLeftIcon />{'Voltar para escolher outro produto'}
             </NavLink>
           }
         />
@@ -86,7 +86,7 @@ export class Templates extends React.Component<Props, State> {
           exact
           render={() =>
             <NavLink to={'/download-de-gabaritos'} className="atm-link">
-              <Arrow />{'Voltar para escolher outro produto'}
+              <ChevronLeftIcon />{'Voltar para escolher outro produto'}
             </NavLink>
           }
         />
@@ -95,7 +95,7 @@ export class Templates extends React.Component<Props, State> {
           exact
           render={({ match }) =>
             <NavLink to={`/download-de-gabaritos/${match.params.slug}`} className="atm-link">
-              <Arrow />{'Voltar para escolher outro produto'}
+              <ChevronLeftIcon />{'Voltar para escolher outro produto'}
             </NavLink>
           }
         />
@@ -127,8 +127,7 @@ export class Templates extends React.Component<Props, State> {
           {isMobile(screenSize) && this.renderBackLink()}
           <h3 className="title-timeline">{'Gabaritos'}</h3>
           <p className="subtitle-timeline">
-            {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis
-            consectetur purus sit amet fermentum`}
+            {'Faça o download do gabarito e instruções para montar sua arte corretamente.'}
           </p>
         </article>
         <Timeline

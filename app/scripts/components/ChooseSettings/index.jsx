@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import { push } from 'modules/ReduxRouter';
 import Button from 'quarks/Inputs/Button';
-import { Arrow } from 'components/Icons';
+import { ChevronLeftIcon } from 'components/Icons';
 import Loading from 'components/Loading';
 
 import Settings from './Settings';
@@ -168,12 +168,12 @@ class ChooseSettings extends React.PureComponent<Props, State> {
                   >
                     {productPart.data.name}
                   </h5>
-                  <span
+                  <button
                     className={'setting-remove-control'}
                     onClick={() => this.handleRemove(productPart.key)}
                   >
                     {'Remover'}
-                  </span>
+                  </button>
                 </section>
               }
               <Settings
@@ -190,7 +190,7 @@ class ChooseSettings extends React.PureComponent<Props, State> {
             to={'/download-de-gabaritos'}
             className="atm-link"
           >
-            <Arrow />{'Voltar para escolher outro produto'}
+            <ChevronLeftIcon />{'Voltar para escolher outro produto'}
           </NavLink>
           <Button
             type="submit"

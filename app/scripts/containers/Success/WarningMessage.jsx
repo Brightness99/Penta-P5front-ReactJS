@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { CalendarIcon, TimesIcon } from 'components/Icons';
+import { Warning } from 'components/Icons';
 
 type Props = {
   children: Node,
@@ -12,10 +12,7 @@ const WarningMessage = (props: Props) => {
 
   return (
     <div className="warning-message">
-      <div className="pull-right">
-        <TimesIcon />
-      </div>
-      <CalendarIcon />
+      <div className="warning-icon"><Warning /></div>
       <span>
         {children}
       </span>
