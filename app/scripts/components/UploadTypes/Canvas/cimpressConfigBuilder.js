@@ -244,7 +244,7 @@ const cimpressConfigBuilder = (config, isSku) => {
               top: -25,
             },
             dimensions: {
-              enabled: false,
+              enabled: true,
               measurement: 'mm',
             },
             infoIndicators: {
@@ -305,8 +305,8 @@ const cimpressConfigBuilder = (config, isSku) => {
           },
         },
         zoomStrategy: {
-          resizeEnabled: true,
-          initialHeight: 3,
+          resizeEnabled: false,
+          initialHeight: 1,
           initialZoom: 1,
           maxZoom: 10,
           minZoom: 0.50,
