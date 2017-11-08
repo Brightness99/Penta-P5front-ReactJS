@@ -51,11 +51,11 @@ export default class CanvasCutPreview extends React.Component {
       <section className="canvas-cut-preview">
         <h4>Confira como ficou seu cartão de visita</h4>
         <section className="previews">
-          <a className="preview-item first" onClick={() => this.handleOpenModal(previewUrls[0])}>
+          <a href="" className="preview-item first" onClick={() => this.handleOpenModal(previewUrls[0])}>
             <img className="card" src={previewUrls[0]} alt="preview" />
             <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
           </a>
-          <a className="preview-item second" onClick={() => this.handleOpenModal(previewUrls[1])}>
+          <a href="" className="preview-item second" onClick={() => this.handleOpenModal(previewUrls[1])}>
             <img className="card" src={previewUrls[1]} alt="preview" />
             <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
           </a>
