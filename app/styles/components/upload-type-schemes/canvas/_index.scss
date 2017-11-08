@@ -22,7 +22,7 @@
       .preview-item {
         background-color: #e6e7e9;
         border: 1px solid #c7c9cb;
-        width: 30rem;
+        width: 29rem;
         position: relative;
         cursor: zoom-in;
         &:hover {
@@ -31,7 +31,7 @@
         }
         .hand {
           position: relative;
-          width: 30rem;
+          width: 29rem;
           top: 0;
           left: 0;
           z-index: 1;
@@ -41,14 +41,14 @@
           .card {
             position: absolute;
             top: 4.5rem;
-            left: 7rem;
+            left: 6.7rem;
           }
         }
         &.second {
           .card {
             position: absolute;
             top: 4.5rem;
-            right: 7rem;
+            right: 6.7rem;
           }
           .hand {
             transform: scale(-1, 1)
