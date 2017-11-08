@@ -24,4 +24,8 @@ export const UploadConstants = keyMirror({
   UPLOAD_FINISH_SUCCESS: undefined,
   UPLOAD_FINISH_FAILURE: undefined,
   UPLOAD_FINISH_CANCEL: undefined,
+  UPLOAD_SET_ORIENTATION_REQUEST: undefined,
+  UPLOAD_SET_ORIENTATION_SUCCESS: undefined,
+  UPLOAD_SET_ORIENTATION_FAILURE: undefined,
+  UPLOAD_SET_ORIENTATION_CANCEL: undefined,
 });

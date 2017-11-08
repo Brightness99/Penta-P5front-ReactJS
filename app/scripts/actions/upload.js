@@ -50,7 +50,7 @@ export function uploadFileCancel(): Object {
 }
 
 /**
- * upload finish reuest
+ * upload finish request
  *
  * @param {Object} data
  * @param {string} itemId
@@ -63,6 +63,24 @@ export function uploadFinishRequest(data: {}, itemId: string): Object {
     payload: {
       data,
       itemId,
+    },
+  };
+}
+
+/**
+ * upload set orientation request
+ *
+ * @param {string} itemId
+ * @param {number} isVertical
+ *
+ * @returns {Object}
+ */
+export function uploadSetOrientationRequest(itemId: string, isVertical: number): Object {
+  return {
+    type: UploadConstants.UPLOAD_SET_ORIENTATION_REQUEST,
+    payload: {
+      itemId,
+      isVertical,
     },
   };
 }
