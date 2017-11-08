@@ -24,8 +24,6 @@
       @include lg {
         width: calc((100%/4) - 3rem);
         margin: 0 2rem;
-      }
-      @include lg {
         &:first-of-type {
           margin-left: 0;
         }
