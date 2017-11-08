@@ -11,7 +11,7 @@ export type UploadState = {
   isLoaded: boolean,
   error: boolean,
   message: string,
-  object: {},
+  object: UploadInfoType,
   uploadFile: {
     progress: number,
     preview: {},

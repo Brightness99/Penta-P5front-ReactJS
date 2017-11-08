@@ -61,13 +61,11 @@ export function uploadFinishRequest(action$) {
     })
     .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
     .defaultIfEmpty({ type: UploadConstants.UPLOAD_FINISH_CANCEL })
-    .catch(error => {
-      return ([{
-        type: UploadConstants.UPLOAD_FINISH_FAILURE,
-        payload: { message: error.message, status: error.status },
-        meta: { updatedAt: getUnixtime() },
-      }]);
-    });
+    .catch(error => ([{
+      type: UploadConstants.UPLOAD_FINISH_FAILURE,
+      payload: { message: error.message, status: error.status },
+      meta: { updatedAt: getUnixtime() },
+    }]));
 }
 
 export function uploadFileRequest(action$) {
