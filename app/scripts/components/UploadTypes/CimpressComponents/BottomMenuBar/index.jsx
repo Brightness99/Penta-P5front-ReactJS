@@ -27,13 +27,13 @@ const BottomMenuBar = ({ handleSave,
   const previewTemplate = () => {
     const preview1 = {
       size: {
-        width: 210,
+        width: 500,
       },
       page: 1,
     };
     const preview2 = {
       size: {
-        width: 210,
+        width: 500,
       },
       page: 2,
     };
