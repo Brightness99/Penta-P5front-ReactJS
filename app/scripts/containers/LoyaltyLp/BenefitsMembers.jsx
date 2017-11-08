@@ -4,6 +4,7 @@ import React from 'react';
 import { isMobile } from 'utils/helpers';
 import Slider from 'react-slick';
 import { CloseIcon, CheckIcon } from 'components/Icons';
+import { PrevArrow, NextArrow } from 'components/Carousel';
 
 type Props = {
   screenSize: string,
@@ -17,14 +18,15 @@ export class BenefitsMembers extends React.Component {
       <div className="mol-premium-members">
         <div className="atm-type-premium">
           <Slider
-            className="box-blogCards carousel-display-overflow"
-            arrows={false}
+            className="org-component-banners"
+            nextArrow={<NextArrow />}
+            prevArrow={<PrevArrow />}
             dots={true}
             dotsClass="atm-carousel-dots"
             autoplay={false}
           >
             <div>
-              <div className="qrk-premium">
+              <div className="qrk-premium club-premium">
                 <div className="list-benefits-premium">
                   <div className="logo-title-loyalty">
                     <div className="logo-loyalty bg-club">
@@ -48,14 +50,14 @@ export class BenefitsMembers extends React.Component {
             </div>
 
             <div>
-              <div className="qrk-premium">
+              <div className="qrk-premium silver-premium">
                 <div className="list-benefits-premium">
                   <div className="logo-title-loyalty">
                     <div className="logo-loyalty bg-silver">
                       <span className="title-logo-loyalty">Silver</span>
                     </div>
                   </div>
-                  <ul className="color-club">
+                  <ul className="color-silver">
                     <li className="li-active-color">Promoções exclusivas<span className="checkIcon"><CheckIcon /></span></li>
                     <li>Descontos especiais<span className="closeIcon"><CloseIcon /></span></li>
                     <li>Amostras grátis<span className="closeIcon"><CloseIcon /></span></li>
@@ -63,23 +65,23 @@ export class BenefitsMembers extends React.Component {
                     <li>Atendimento exclusivo<span className="closeIcon"><CloseIcon /></span></li>
                     <li>Entrega rápida com desconto<span className="closeIcon"><CloseIcon /></span></li>
                   </ul>
-                  <div className="amount-money">
-                    <p>Para fazer parte:</p>
-                    <p className="details-amount-money">R$3.000 ou mais em no mínimo 5 compras nos últimos 12 meses.</p>
-                  </div>
+                </div>
+                <div className="amount-money">
+                  <p>Para fazer parte:</p>
+                  <p className="details-amount-money">R$3.000 ou mais em no mínimo 5 compras nos últimos 12 meses.</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <div className="qrk-premium">
+              <div className="qrk-premium gold-premium">
                 <div className="list-benefits-premium">
                   <div className="logo-title-loyalty">
                     <div className="logo-loyalty bg-gold">
                       <span className="title-logo-loyalty">Gold</span>
                     </div>
                   </div>
-                  <ul className="color-club">
+                  <ul className="color-gold">
                     <li className="li-active-color">Promoções exclusivas<span className="checkIcon"><CheckIcon /></span></li>
                     <li>Descontos especiais<span className="closeIcon"><CloseIcon /></span></li>
                     <li>Amostras grátis<span className="closeIcon"><CloseIcon /></span></li>
@@ -87,16 +89,16 @@ export class BenefitsMembers extends React.Component {
                     <li>Atendimento exclusivo<span className="closeIcon"><CloseIcon /></span></li>
                     <li>Entrega rápida com desconto<span className="closeIcon"><CloseIcon /></span></li>
                   </ul>
-                  <div className="amount-money">
-                    <p>Para fazer parte:</p>
-                    <p className="details-amount-money">R$8.000 ou mais em no mínimo 10 compras nos últimos 12 meses.</p>
-                  </div>
+                </div>
+                <div className="amount-money">
+                  <p>Para fazer parte:</p>
+                  <p className="details-amount-money">R$8.000 ou mais em no mínimo 10 compras nos últimos 12 meses.</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <div className="qrk-premium">
+              <div className="qrk-premium black-premium">
                 <div className="list-benefits-premium">
                   <div className="logo-title-loyalty">
                     <div className="logo-loyalty bg-black">
@@ -133,7 +135,7 @@ export class BenefitsMembers extends React.Component {
           <p className="subtitle-loyalty">Silver, Gold e Black: mais compras, mais benefícios.</p>
           <div className="atm-type-premium">
 
-            <div className="qrk-premium">
+            <div className="qrk-premium club-premium">
               <div className="list-benefits-premium">
                 <div className="logo-title-loyalty">
                   <div className="logo-loyalty bg-club">
@@ -155,7 +157,7 @@ export class BenefitsMembers extends React.Component {
               </div>
             </div>
 
-            <div className="qrk-premium">
+            <div className="qrk-premium silver-premium">
               <div className="list-benefits-premium">
                 <div className="logo-title-loyalty">
                   <div className="logo-loyalty bg-silver">
@@ -177,7 +179,7 @@ export class BenefitsMembers extends React.Component {
               </div>
             </div>
 
-            <div className="qrk-premium">
+            <div className="qrk-premium gold-premium">
               <div className="list-benefits-premium">
                 <div className="logo-title-loyalty">
                   <div className="logo-loyalty bg-gold">
@@ -199,7 +201,7 @@ export class BenefitsMembers extends React.Component {
               </div>
             </div>
 
-            <div className="qrk-premium">
+            <div className="qrk-premium black-premium">
               <div className="list-benefits-premium">
                 <div className="logo-title-loyalty">
                   <div className="logo-loyalty bg-black">
