@@ -11,7 +11,7 @@ const OverlaySpinner = ({ isLoading, children }: Props) => (
     <section className="overlay-spinner-content">{children}</section>
     { isLoading &&
       <section className="overlay-spinner">
-        <div className="loader" />
+        <div className="spinner-loader" />
       </section>
     }
   </section>
