@@ -4,7 +4,6 @@ import React from 'react';
 import { isMobile } from 'utils/helpers';
 import Slider from 'react-slick';
 import { CloseIcon, CheckIcon } from 'components/Icons';
-import { PrevArrow, NextArrow } from 'components/Carousel';
 
 type Props = {
   screenSize: string,
@@ -19,8 +18,6 @@ export class BenefitsMembers extends React.Component {
         <div className="atm-type-premium">
           <Slider
             className="org-component-banners"
-            nextArrow={<NextArrow />}
-            prevArrow={<PrevArrow />}
             dots={true}
             dotsClass="atm-carousel-dots"
             autoplay={false}
