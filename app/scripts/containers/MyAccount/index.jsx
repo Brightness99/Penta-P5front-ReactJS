@@ -126,7 +126,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/enderecos"
-          render={(props) => <MyAddresses {...props} screenSize={screenSize} />}
+          render={(props) => <MyAddresses {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/cartoes-salvos"
@@ -142,7 +142,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/notificacoes"
-          render={(props) => <Notification {...props} screenSize={screenSize} />}
+          render={(props) => <Notification {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/cloud"

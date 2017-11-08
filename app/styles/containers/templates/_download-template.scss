@@ -13,7 +13,7 @@
   }
 
   .title-atm-sidebar {
-    font-family: $font-family-nunito-regular;
+    font-family: $font-family-open-sans;
     font-size: $font-size-il;
   }
 
@@ -37,9 +37,12 @@
       .qrk-list-download {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        margin: auto;
+        width: 80%;
 
         &.mobile-download-template {
           grid-template-columns: 1fr;
+          margin: 0;
         }
 
         li {
@@ -49,13 +52,13 @@
           flex-wrap: nowrap;
           justify-self: center;
           margin: 1.5rem 0;
+        }
 
-          .btn-default {
-            border: 0.1rem solid;
-            margin-left: 1.7rem;
-            padding: 0.5rem 2.922rem;
-            width: 150px;
-          }
+        .btn-default {
+          border: 0.1rem solid;
+          margin-left: 1.7rem;
+          padding: 0.5rem 2.922rem;
+          width: 15rem;
         }
       }
     }
@@ -136,11 +139,11 @@
             background: repeating-linear-gradient(
                 to right,
                 #fff,
-                #dcdcdc 4px,
-                #fff 4px,
-                #dcdcdc 4px,
-                #fff 4px,
-                #dcdcdc 5px
+                #dcdcdc 0.4rem,
+                #fff 0.4rem,
+                #dcdcdc 0.4rem,
+                #fff 0.4rem,
+                #dcdcdc 0.5rem
             );
           }
         }
