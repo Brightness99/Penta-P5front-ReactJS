@@ -2,6 +2,9 @@
 
 import React from 'react';
 import OverlaySpinner from 'components/OverlaySpinner';
+import { Button } from 'quarks/Inputs';
+import Modal from 'components/Modal';
+import { WarningFilled } from 'components/Icons';
 import TopMenuBar from '../CimpressComponents/TopMenuBar';
 import SideBarPanel from '../CimpressComponents/SideBarPanel';
 import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
@@ -20,6 +23,7 @@ type Props = {
 type State = {
   isReady: boolean,
   isOrientationChanging: boolean,
+  isOpenModal: boolean,
   activeTab: number,
   isVertical: number,
   showCutPreview: boolean,
@@ -32,6 +36,7 @@ export default class Canvas extends React.Component {
     this.state = {
       isReady: false,
       isOrientationChanging: false,
+      isOpenModal: false,
       activeTab: 1,
       showCutPreview: false,
       previewUrls: [],
@@ -107,15 +112,29 @@ export default class Canvas extends React.Component {
     });
   };
 
-  handleOrientationChanged = (isVertical) => {
+  handleOrientationChanged = () => {
     const { handleOrientationChanged } = this.props;
-
+    const { isVertical } = this.state;
     this.setState({
       isOrientationChanging: true,
     });
     if (handleOrientationChanged && typeof handleOrientationChanged === 'function') {
       handleOrientationChanged(isVertical);
     }
+    this.handleCloseAlertModal();
+  };
+
+  handleOpenAlertModal = (isVertical) => {
+    this.setState({
+      isOpenModal: true,
+      isVertical,
+    });
+  };
+
+  handleCloseAlertModal = () => {
+    this.setState({
+      isOpenModal: false,
+    });
   };
 
   showPreview = (urls) => {
@@ -129,6 +148,29 @@ export default class Canvas extends React.Component {
     this.setState({
       showCutPreview: false,
     });
+  };
+
+  renderModalDialog = () => {
+    const { isOpenModal } = this.state;
+    return (isOpenModal &&
+    <Modal handleCloseModal={this.handleCloseAlertModal}>
+      <section className="cimpress-alert-dialog">
+        <WarningFilled />
+        <h3>Atenção</h3>
+        <span>Ao alterar a orientação você perderá todas as edições feitas até o momento.</span>
+        <span>Deseja continuar?</span>
+        <section className="buttons-block">
+          <Button
+            onClick={this.handleCloseAlertModal}
+            kind="cancel"
+          >Não</Button>
+          <Button
+            onClick={this.handleOrientationChanged}
+            kind="success"
+          >Sim</Button>
+        </section>
+      </section>
+    </Modal>);
   };
 
   renderCanvas() {
@@ -145,12 +187,13 @@ export default class Canvas extends React.Component {
           <div className="upload__canvas-schema_canvas-container">
             <CanvasToolBar
               isVertical={orientation === 'vertical'}
-              handleOrientation={this.handleOrientationChanged}
+              handleOrientation={this.handleOpenAlertModal}
             />
             <CanvasArea />
           </div>
         </div>
         <style>{css}</style>
+        {this.renderModalDialog()}
       </div>
     );
   }
