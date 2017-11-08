@@ -43,6 +43,10 @@
       .key {
         width: 120px;
         font-size: 13px;
+        line-height: 23px;
+        &.total {
+          line-height: 31px;
+        }
       }
       .value {
         text-align: right;
@@ -92,11 +96,11 @@
       width: 100%;
     }
     img {
-      max-width: 130px;
+      width: 130px;
       margin-right: 15px;
       align-self: start;
       @include is-only {
-        max-width: 85px;
+        width: 85px;
       }
     }
     .preview {
@@ -138,7 +142,7 @@
     }
   }
   .product-item-col-delivery {
-    width: 19%;
+    width: 24%;
     @include is-only {
       width: 100%;
       display: flex;
@@ -152,7 +156,7 @@
     }
   }
   .product-item-col-amount {
-    width: 20%;
+    width: 15%;
     font-size: 18px;
     @include is-only {
       width: 100%;

@@ -2,15 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { CheckCircleIcon, MyAccountIcon, RefreshIcon } from 'components/Icons';
 import { successfulPurchaseFetch } from 'actions';
 import Loading from 'components/Loading';
 import Modal from 'components/Modal';
-import { IntlMoney, IntlDate } from 'components/Intl';
-
-import WarningMessage from './WarningMessage';
+import { IntlMoney } from 'components/Intl';
 import MethodItem from './MethodItem';
 import ProductItem from './ProductItem';
 import StayTunedItem from './StayTunedItem';
@@ -87,16 +84,21 @@ export class Success extends React.Component {
           <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_discount_price)}</IntlMoney></div>
         </div>}
         <div className="sub-total-row">
-          <div className="key">Total</div>
+          <div className="key total">Total</div>
           <div className="value total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
         </div>
       </div>
     );
   }
 
-  renderActions(actions, actionCount, createdDate) {
+  renderActions(actions, actionCount) {
     return Object.keys(actions).map((key) => (
-      actions[key].enabled && <MethodItem action={actions[key]} createdDate={createdDate} className={actionCount === 1 ? 'full-method-item' : ''} type={key} key={key} />
+      actions[key].enabled && <MethodItem
+        action={actions[key]}
+        className={actionCount === 1 ? 'full-method-item' : ''}
+        type={key}
+        key={key}
+      />
     ));
   }
 
@@ -145,14 +147,8 @@ export class Success extends React.Component {
             </div>
             {actionCount > 0 && <span>
               <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
-              <div>
-                <WarningMessage>
-                  <b>Prazo de entrega: </b> a arte deve ser enviada até às <b>{moment(successfulPurchase.order.info.created_at).format('hh:mm')}</b> do dia 
-                  <b><IntlDate>{successfulPurchase.order.info.created_at}</IntlDate></b>. Após esse período, a data para a previsão de entrega será alterada.
-                </WarningMessage>
-              </div>
               <div className="method-container">
-                {this.renderActions(successfulPurchase.order.actions, actionCount, successfulPurchase.order.info.created_at)}
+                {this.renderActions(successfulPurchase.order.actions, actionCount)}
               </div>
             </span>}
             <div className="main-container">
