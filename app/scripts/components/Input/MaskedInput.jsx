@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Inputmask from 'inputmask';
-import { TimesCircleIcon } from 'components/Icons';
+import cx from 'classnames';
 
 type Props = {
   id?: string,
@@ -18,6 +18,7 @@ type Props = {
 
 type State = {
   inputValue: string,
+  fullValue: string,
 };
 
 export default class MaskedInput extends React.Component {
@@ -26,6 +27,7 @@ export default class MaskedInput extends React.Component {
 
     this.state = {
       inputValue: props.defaultValue || '',
+      fullValue: props.defaultValue || '',
     };
   }
 
@@ -38,7 +40,11 @@ export default class MaskedInput extends React.Component {
     if (this.props.defaultValue !== nextProps.defaultValue) {
       this.setState({
         inputValue: nextProps.defaultValue,
+        fullValue: nextProps.defaultValue,
       });
+    }
+    if (this.props.mask !== nextProps.mask) {
+      Inputmask(nextProps.mask).mask(this._input);
     }
   }
 
@@ -55,25 +61,26 @@ export default class MaskedInput extends React.Component {
   static state: State;
 
   handleFetch = () => {
-    const { onValid, checkCompleted } = this.props;
-    const { inputValue } = this.state;
+    const { onValid, checkCompleted, mask } = this.props;
+    const { inputValue, fullValue } = this.state;
 
-    if (inputValue.length >= 8) {
+    if (inputValue.length >= mask.replace(/[^0-9]/g, '').length) {
       if (typeof onValid === 'function') {
         onValid(inputValue);
       }
 
       if (typeof checkCompleted === 'function') {
-        checkCompleted(true);
+        checkCompleted(true, fullValue);
       }
     } else if (typeof checkCompleted === 'function') {
-      checkCompleted(false);
+      checkCompleted(false, inputValue);
     }
   };
 
   onChange = (ev) => {
     this.setState({
-      inputValue: ev.target.value.replace(/[^0-9]/g, '').slice(0, 8),
+      inputValue: ev.target.value.replace(/[^0-9]/g, ''),
+      fullValue: ev.target.value,
     });
   };
 
@@ -87,17 +94,15 @@ export default class MaskedInput extends React.Component {
 
   render() {
     const { inputValue } = this.state;
+    const { className } = this.props;
     return (
-      <div className="app__input__masked">
+      <div className={cx('app__input__masked', className)}>
         <input
           type="text"
           onChange={this.onChange}
           value={inputValue}
           ref={(c) => (this._input = c)} // eslint-disable-line no-return-assign
         />
-        <button onClick={this.onClick} className="app__reset_zipcode">
-          <TimesCircleIcon />
-        </button>
       </div>
     );
   }
