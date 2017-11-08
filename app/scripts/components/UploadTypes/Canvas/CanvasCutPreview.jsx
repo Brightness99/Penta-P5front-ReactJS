@@ -1,13 +1,49 @@
 // @flow
 import React from 'react';
 import { CheckIcon, AlertCircle } from 'components/Icons';
+import PreviewImageModal from 'components/PreviewImageModal';
 
 type Props = {
   previewUrls: Array<string>,
 }
 
+type State = {
+  openModal: boolean,
+  imageUrl: string
+}
+
 export default class CanvasCutPreview extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openModal: false,
+      imageUrl: '',
+    };
+  }
   props: Props;
+  state: State;
+
+  renderModal = () => {
+    const { openModal, imageUrl } = this.state;
+
+    return (openModal &&
+    <PreviewImageModal handleClose={this.handleCloseModal}>
+      <img src={imageUrl} alt="preview" />
+    </PreviewImageModal>);
+  };
+
+  handleOpenModal = (imageUrl: string) => {
+    this.setState({
+      openModal: true,
+      imageUrl,
+    });
+  };
+
+  handleCloseModal = () => {
+    this.setState({
+      openModal: false,
+    });
+  };
 
   render() {
     const { previewUrls } = this.props;
@@ -15,14 +51,14 @@ export default class CanvasCutPreview extends React.Component {
       <section className="canvas-cut-preview">
         <h4>Confira como ficou seu cartão de visita</h4>
         <section className="previews">
-          <section className="preview-item first">
+          <a className="preview-item first" onClick={() => this.handleOpenModal(previewUrls[0])}>
             <img className="card" src={previewUrls[0]} alt="preview" />
             <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
-          </section>
-          <section className="preview-item second">
+          </a>
+          <a className="preview-item second" onClick={() => this.handleOpenModal(previewUrls[1])}>
             <img className="card" src={previewUrls[1]} alt="preview" />
             <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
-          </section>
+          </a>
         </section>
         <section className="footer">
           <section className="header">
@@ -46,6 +82,9 @@ export default class CanvasCutPreview extends React.Component {
             </ul>
           </section>
         </section>
+        {
+          this.renderModal()
+        }
       </section>
     );
   }
