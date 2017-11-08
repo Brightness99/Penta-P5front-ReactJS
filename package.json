@@ -133,6 +133,7 @@
     "react-credit-cards": "^0.4.1",
     "react-dates": "^12.5.0",
     "react-dom": "^15.6.1",
+    "react-facebook": "^4.0.16",
     "react-facebook-login": "3.6.2",
     "react-google-login": "2.9.3",
     "react-helmet": "^5.2.0",
