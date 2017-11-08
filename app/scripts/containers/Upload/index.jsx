@@ -1,7 +1,11 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { uploadFetch, uploadFinishRequest } from 'actions';
+import {
+  uploadFetch,
+  uploadFinishRequest,
+  uploadSetOrientationRequest
+} from 'actions';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { CheckBox } from 'components/Input';
 import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
@@ -40,6 +44,7 @@ type Props = {
   },
   isLoading: boolean,
   uploadInfo: {},
+  uploadSetOrientation: (itemId: string, isVertical: number) => void,
   uploadInfoFetch: (slug: string, itemId: string) => void,
   uploadFinish: (data: FinishUpload, itemId: string) => void,
   uploadFileProgress: {
@@ -173,6 +178,13 @@ export class Upload extends React.Component {
     }
   };
 
+  handleOrientationChanged = (isVertical: number) => {
+    const { uploadSetOrientation, match: { params: { itemId } } } = this.props;
+    if (uploadSetOrientation && typeof uploadSetOrientation === 'function') {
+      uploadSetOrientation(itemId, isVertical);
+    }
+  };
+
   renderFlashMessages = () => {
     const { uploadInfo: { flashMessages } } = this.props;
 
@@ -252,6 +264,7 @@ export class Upload extends React.Component {
           handleCanvasFinalize={this.handleCanvasFinalize}
           handleUploadFile={this.handleUploadFile}
           handleRemoveFile={this.handleRemoveFile}
+          handleOrientationChanged={this.handleOrientationChanged}
           showMessage={!(isMobile(screenSize) || isComplete) && flashMessages[0]}
           message={flashMessages[0] && flashMessages[0].content}
         />
@@ -352,9 +365,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
   uploadInfoFetch: (slug, itemId) => dispatch(uploadFetch(slug, itemId)),
+  uploadSetOrientation: (itemId, isVertical) => dispatch(uploadSetOrientationRequest(itemId, isVertical)),
   uploadFinish: (data, itemId) => dispatch(uploadFinishRequest(data, itemId)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Upload);
 

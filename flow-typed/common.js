@@ -5,6 +5,28 @@ declare type ImageType = {
   alt: string,
 };
 
+declare type CimpressInfo = {
+  order_item_cimpress_id: string,
+  cimpress_sku_scene: {},
+  orientation: string,
+  settings: {
+    has_preview: string,
+    has_cut_view: string,
+    has_zoom: string,
+    has_orientation: string,
+    css: string,
+  },
+  specifications: {
+    surfaces: Array<{
+      name: string,
+      widthInMm: number,
+      heightInMm: number,
+      processType: string,
+      trim: number,
+    }>
+  }
+}
+
 declare type UploadInfoType = {
   flashMessages: Array<{
     type: string,
@@ -45,25 +67,5 @@ declare type UploadInfoType = {
     }
   },
   availableStrategies: Array<number>,
-  cimpressInfo: {
-    order_item_cimpress_id: string,
-    cimpress_sku_scene: {},
-    orientation: string,
-    settings: {
-      has_preview: string,
-      has_cut_view: string,
-      has_zoom: string,
-      has_orientation: string,
-      css: string,
-    },
-    specifications: {
-      surfaces: Array<{
-        name: string,
-        widthInMm: number,
-        heightInMm: number,
-        processType: string,
-        trim: number,
-      }>
-    }
-  }
+  cimpressInfo: CimpressInfo,
 }

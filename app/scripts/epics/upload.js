@@ -68,6 +68,30 @@ export function uploadFinishRequest(action$) {
     }]));
 }
 
+export function uploadSetOrientationRequest(action$) {
+  return action$.ofType(UploadConstants.UPLOAD_SET_ORIENTATION_REQUEST)
+    .switchMap(action => {
+      const endpoint = `/v2/cimpress_upload/funnel/${action.payload.itemId}/is_vertical/${action.payload.isVertical}`;
+
+      return rxAjax({
+        endpoint,
+        method: 'GET',
+      })
+        .map(data => ({
+          type: UploadConstants.UPLOAD_SET_ORIENTATION_SUCCESS,
+          payload: data.response,
+          meta: { updatedAt: getUnixtime() },
+        }));
+    })
+    .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+    .defaultIfEmpty({ type: UploadConstants.UPLOAD_SET_ORIENTATION_CANCEL })
+    .catch(error => ([{
+      type: UploadConstants.UPLOAD_SET_ORIENTATION_FAILURE,
+      payload: { message: error.message, status: error.status },
+      meta: { updatedAt: getUnixtime() },
+    }]));
+}
+
 export function uploadFileRequest(action$) {
   return action$.ofType(UploadConstants.UPLOAD_FILE_REQUEST)
     .switchMap(action => uploader.uploadFile(action.payload)

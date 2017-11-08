@@ -11,14 +11,15 @@ import CanvasCutPreview from './CanvasCutPreview';
 import cimpressConfigBuilder from './cimpressConfigBuilder';
 
 type Props = {
-  cimpressInfo: {},
+  cimpressInfo: CimpressInfo,
   isSku: boolean,
-  handleCanvasFinalize: (docRef) => void
+  handleCanvasFinalize: (docRef) => void,
+  handleOrientationChanged: (isVertical: number) => void
 };
 
 type State = {
   isReady: boolean,
-  isLoaded: boolean,
+  isOrientationChanging: boolean,
   activeTab: number,
   isVertical: number,
   showCutPreview: boolean,
@@ -30,6 +31,7 @@ export default class Canvas extends React.Component {
     super(props);
     this.state = {
       isReady: false,
+      isOrientationChanging: false,
       activeTab: 1,
       showCutPreview: false,
       previewUrls: [],
@@ -49,6 +51,25 @@ export default class Canvas extends React.Component {
     oScript.onload = this.handleLoad;
     document.body.appendChild(oScript);
     oScript.src = '//dcl.cimpress.io/1.4.7/dcl.min.js';
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { isOrientationChanging } = this.state;
+    const prevProps = this.props;
+
+    if (prevProps.cimpressInfo && nextProps.cimpressInfo.orientation !== prevProps.cimpressInfo.orientation && isOrientationChanging) {
+      const { cimpressInfo } = nextProps;
+      global.designer.switchProduct({
+        surfaceSpecifications: cimpressInfo.specifications,
+      })
+        .then(
+          () => {
+            this.setState({
+              isOrientationChanging: false,
+            });
+          }
+        );
+    }
   }
 
   static props: Props;
@@ -87,7 +108,14 @@ export default class Canvas extends React.Component {
   };
 
   handleOrientationChanged = (isVertical) => {
-    console.log(isVertical);
+    const { handleOrientationChanged } = this.props;
+
+    this.setState({
+      isOrientationChanging: true,
+    });
+    if (handleOrientationChanged && typeof handleOrientationChanged === 'function') {
+      handleOrientationChanged(isVertical);
+    }
   };
 
   showPreview = (urls) => {
@@ -138,11 +166,11 @@ export default class Canvas extends React.Component {
   }
 
   render() {
-    const { isReady, showCutPreview } = this.state;
+    const { isReady, showCutPreview, isOrientationChanging } = this.state;
     const { cimpressInfo: { settings: { has_cut_view } }, isSku } = this.props;
 
     return (
-      <OverlaySpinner isLoading={!isReady}>
+      <OverlaySpinner isLoading={!isReady || isOrientationChanging}>
         {this.renderCanvas()}
         {this.renderPreview()}
         <BottomMenuBar

@@ -12,6 +12,7 @@ type Props = {
   fileFormats: [],
   handleUploadFile: (file: { title: string, preview: {} }) => void,
   handleRemoveFile: (file: { title: string, preview: {} }) => void,
+  handleOrientationChanged: (isVertical: number) => void,
   message: string,
   showMessage: boolean,
 }
@@ -21,6 +22,7 @@ const UploadTypes = ({ uploadType,
                        handleUploadFile,
                        handleRemoveFile,
                        handleCanvasFinalize,
+                       handleOrientationChanged,
                        cimpressInfo,
                        fileFormats,
                        message,
@@ -29,17 +31,21 @@ const UploadTypes = ({ uploadType,
   const renderType = () => {
     switch (uploadType) {
       case 'canvas':
-        return (<CanvasSchema
-          isSku={false}
-          handleCanvasFinalize={handleCanvasFinalize}
-          cimpressInfo={cimpressInfo}
-        />);
+        return (
+          <CanvasSchema
+            isSku={false}
+            handleCanvasFinalize={handleCanvasFinalize}
+            handleOrientationChanged={handleOrientationChanged}
+            cimpressInfo={cimpressInfo}
+          />);
       case 'sku_scene':
-        return (<CanvasSchema
-          isSku={true}
-          handleCanvasFinalize={handleCanvasFinalize}
-          cimpressInfo={cimpressInfo}
-        />);
+        return (
+          <CanvasSchema
+            isSku={true}
+            handleCanvasFinalize={handleCanvasFinalize}
+            handleOrientationChanged={handleOrientationChanged}
+            cimpressInfo={cimpressInfo}
+          />);
       default:
         return (
           <NormalUploadType

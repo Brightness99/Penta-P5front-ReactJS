@@ -25,6 +25,11 @@ export type UploadState = {
     error: boolean,
     message: string,
   },
+  setOrientation: {
+    isRunning: boolean,
+    error: boolean,
+    message: string,
+  },
   updatedAt: number,
 };
 
@@ -175,6 +180,52 @@ export default {
         ...state,
         uploadFinish: {
           ...state.uploadFinish,
+          isRunning: false,
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_SET_ORIENTATION_REQUEST](state) {
+      return {
+        ...state,
+        setOrientation: {
+          isRunning: true,
+          error: false,
+          message: '',
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_SET_ORIENTATION_SUCCESS](state, action) {
+      return {
+        ...state,
+        setOrientation: {
+          ...state.setOrientation,
+          isRunning: false,
+        },
+        object: {
+          ...state.object,
+          cimpressInfo: {
+            ...state.object.cimpressInfo,
+            ...action.payload,
+          },
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_SET_ORIENTATION_FAILURE](state, action) {
+      return {
+        ...state,
+        setOrientation: {
+          ...state.setOrientation,
+          isRunning: false,
+          error: false,
+          message: action.payload.message,
+        },
+      };
+    },
+    [UploadConstants.UPLOAD_SET_ORIENTATION_CANCEL](state) {
+      return {
+        ...state,
+        setOrientation: {
+          ...state.setOrientation,
           isRunning: false,
         },
       };
