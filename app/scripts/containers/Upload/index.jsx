@@ -140,7 +140,6 @@ export class Upload extends React.Component {
       selectedAdditionalParameters: parameters,
       fileFormats,
     }, this.updateCanSubmit);
-
   };
 
   handleSelectedStrategy = (strategy) => {
@@ -229,10 +228,12 @@ export class Upload extends React.Component {
   }
 
   renderFileUploadBlock() {
-    const { selectedStrategy, uploadedFiles, fileFormats } = this.state;
+    const { selectedStrategy, uploadedFiles, fileFormats, documentReferenceId } = this.state;
     const { uploadInfo: { globalFlags: { upload_type }, cimpressInfo, flashMessages }, screenSize } = this.props;
     const showStep = selectedStrategy > 1;
-    const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0;
+    const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2)
+      || uploadedFiles.length > 0
+      || !!documentReferenceId;
     return (
       showStep &&
       <FunnelBlock
