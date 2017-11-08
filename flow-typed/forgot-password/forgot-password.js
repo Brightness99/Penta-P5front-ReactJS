@@ -2,7 +2,7 @@
 declare type ForgotPasswordType = {
   isRunning: boolean,
   isLoaded: boolean,
-  data: { exists: boolean, passwordSet: boolean, type: 'email' | 'password' },
+  data: { exists: boolean },
   rehydrated: boolean,
   updatedAt: number,
   error: ErrorType,
