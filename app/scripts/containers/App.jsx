@@ -41,6 +41,8 @@ import Referral from 'containers/Referral';
 import ForgotMyPassword from 'containers/ForgotMyPassword';
 import LoyaltyLp from 'containers/LoyaltyLp';
 import CloudEditor from 'containers/CloudEditor';
+import Tutorial from 'containers/Tutorial';
+
 
 type Props = {
   app: AppStoreType,
@@ -125,6 +127,7 @@ export class App extends React.Component {
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
                       <Route path="/programa-de-fidelidade" component={LoyaltyLp} />
+                      <Route path="/tutoriais" component={Tutorial} />
                       <Route path="/esqueci-minha-senha" component={ForgotMyPassword} />
                       <Route path="/download-de-gabaritos" component={Templates} />
                       <Route exact path="/modelos" component={TemplatesSEO} />
