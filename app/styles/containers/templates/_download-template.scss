@@ -14,7 +14,10 @@
 
   .title-atm-sidebar {
     font-family: $font-family-open-sans;
-    font-size: $font-size-il;
+    font-size: $font-size-h5;
+    font-weight: normal;
+    line-height: 1.5;
+    margin-left: 1.8rem;
   }
 
   .mol-sidebar-download-template {
@@ -22,7 +25,7 @@
     border-radius: 0.3rem;
     flex: 1;
     margin-right: 2rem;
-    padding: 3rem 1.8rem;
+    padding: 3rem 0;
 
     .atm-sidebar-download-template {
       .qrk-list-sidebar {
@@ -35,22 +38,19 @@
 
     .atm-sidebar-choose-download {
       .qrk-list-download {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        margin: auto;
-        width: 80%;
-
-        &.mobile-download-template {
-          grid-template-columns: 1fr;
-          margin: 0;
-        }
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin: 0 0 0 1.8rem;
+        width: 100%;
 
         li {
           align-items: center;
-          align-self: center;
           display: flex;
+          flex-basis: 50%;
           flex-wrap: nowrap;
-          justify-self: center;
           margin: 1.5rem 0;
         }
 
@@ -196,7 +196,7 @@
   justify-content: space-between;
   margin-bottom: 5rem;
   padding: 1rem;
-  width: 40%;
+  width: 50%;
 }
 
 .mobile-download-template-form {
@@ -207,10 +207,13 @@
 
 .download-template-container {
   background-color: #fff;
+  margin: 0;
+  width: 50%;
 }
 
 .mobile-download-template-container {
   margin: 0 1.5rem;
+  width: calc(100% - 3rem);
 }
 
 .download-template-title {

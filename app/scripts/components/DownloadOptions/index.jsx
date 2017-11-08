@@ -1,7 +1,5 @@
 // @flow
 import React from 'react';
-import cx from 'classnames';
-import { isMobile, getScreenSize } from 'utils/helpers';
 
 type RequestDownloadTemplateType = (file: string, orientation: 'vertical' | 'horizontal', data: any) => void;
 
@@ -38,8 +36,8 @@ const DownloadOptions = ({ options, requestDownloadTemplate, orientation, parts,
   return (
     <section className="mol-sidebar-download-template">
       <section className="atm-sidebar-choose-download">
-        <h4 className="title-atm-sidebar">{'Baixe o gabarito:'}</h4>
-        <ul className={cx('qrk-list-download', isMobile(getScreenSize()) && 'mobile-download-template')}>
+        <h5 className="title-atm-sidebar">{'Baixe o gabarito:'}</h5>
+        <ul className="qrk-list-download">
           {
             options.map(option => {
               const href = url(option, orientation);
