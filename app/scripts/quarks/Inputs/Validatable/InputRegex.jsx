@@ -56,7 +56,7 @@ export class InputRegex extends React.Component {
   handleValidation(value, equalsTo) {
     const { onValidate, pattern, required, name, checkValidation, autoComplete, enableTrimForEndOfString } = this.props;
     let valid = true;
-    const validatableValue = !!value && enableTrimForEndOfString ? value.replace(/\s*$/, '') : value;
+    const validatableValue = !!value && !!enableTrimForEndOfString ? value.replace(/\s*$/, '') : value;
     if (pattern) {
       try {
         valid = pattern.test(validatableValue);
