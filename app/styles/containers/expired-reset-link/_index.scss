@@ -1,0 +1,21 @@
+.expired__container {
+  font-family: $font-family-open-sans;
+  margin: 3rem auto;
+}
+
+.expired__link-title {
+  font-family: $font-family-open-sans-bold;
+}
+
+.expired__reasons {
+  margin: 2rem 0;
+
+  li {
+    list-style-type: square;
+    margin-left: 2rem;
+  }
+}
+
+.expired__new-try {
+  text-decoration: none;
+}

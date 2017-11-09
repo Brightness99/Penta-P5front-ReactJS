@@ -40,7 +40,7 @@ import TemplatesSEO from 'containers/TemplatesSEO';
 import Referral from 'containers/Referral';
 import ForgotMyPassword from 'containers/ForgotMyPassword';
 import ResetMyPassword from 'containers/ResetMyPassword';
-
+import ExpiredResetLink from 'containers/ExpiredResetLink';
 import CloudEditor from 'containers/CloudEditor';
 
 type Props = {
@@ -137,6 +137,11 @@ export class App extends React.Component {
                         path="/redefinir-senha/:hash"
                         render={({ match }) =>
                           (isAuthorized ? <Redirect to={'/'} /> : <ResetMyPassword hash={match.params.hash} />)}
+                      />
+                      <Route path="/esqueci-minha-senha" component={ForgotMyPassword} />
+                      <Route
+                        path="/expirado-redefinir"
+                        render={() => (!isAuthorized ? <ExpiredResetLink /> : <Redirect to={'/'} />)}
                       />
                       <Route path="/download-de-gabaritos" component={Templates} />
                       <Route exact path="/modelos" component={TemplatesSEO} />
