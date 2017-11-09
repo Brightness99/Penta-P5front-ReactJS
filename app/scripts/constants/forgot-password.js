@@ -20,4 +20,8 @@ export const ForgotPasswordConstants = keyMirror({
   SET_NEW_PASSWORD_SUCCESS: undefined,
   SET_NEW_PASSWORD_FAILURE: undefined,
   SET_NEW_PASSWORD_CANCEL: undefined,
+  EXPIRED_INFO_REQUEST: undefined,
+  EXPIRED_INFO_REQUEST_SUCCESS: undefined,
+  EXPIRED_INFO_REQUEST_FAILURE: undefined,
+  EXPIRED_INFO_REQUEST_CANCEL: undefined,
 });

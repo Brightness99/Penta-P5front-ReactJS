@@ -12,11 +12,12 @@ import EyeIcon from 'components/Icons/Eye';
 import EyeSlashIcon from 'components/Icons/EyeSlash';
 import IconToggleButton from 'components/IconToggleButton';
 import Loading from 'components/Loading';
-import { shouldComponentUpdate } from 'utils/helpers';
+import { shouldComponentUpdate, isEmpty } from 'utils/helpers';
 
 type Props = {
-  setNewPassword: (password: string) => void,
+  setNewPassword: (password: string, hash: string) => void,
   forgotPassword: ForgotPasswordType,
+  getExpiredInfo: (hash: string) => void,
   hash: string,
   user: UserType,
 };
@@ -67,11 +68,21 @@ export class ResetMyPassword extends React.Component<Props, State> {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
-  componentWillReceiveProps(nextProps: Props) {
-    const { forgotPassword: { error = {} } } = nextProps;
-    const { forgotPassword: { isRunning } } = this.props;
 
-    if (!isRunning) {
+  componentDidMount() {
+    this.props.getExpiredInfo(this.props.hash);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { forgotPassword: { error = {}, data: { usable } } } = nextProps;
+    const { forgotPassword: { isRunning, data } } = this.props;
+
+    if (usable === false) {
+      push('/expirado-redefinir');
+      return;
+    }
+
+    if (!isRunning || isEmpty(data.usable)) {
       return;
     }
 
@@ -144,7 +155,7 @@ export class ResetMyPassword extends React.Component<Props, State> {
     const { form, canSubmit, showPassword, canShowError } = this.state;
     const { forgotPassword: { isRunning, error = {} }, user } = this.props;
 
-    if (user.isRunning) {
+    if (user.isRunning || isRunning) {
       return <Loading />;
     }
 
