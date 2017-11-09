@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { NavLink } from 'react-router-dom';
 import { push } from 'modules/ReduxRouter';
 import swal from 'sweetalert2';
 import { InputPassword } from 'quarks/Inputs/Validatable';
@@ -12,7 +13,6 @@ import EyeIcon from 'components/Icons/Eye';
 import EyeSlashIcon from 'components/Icons/EyeSlash';
 import IconToggleButton from 'components/IconToggleButton';
 import Loading from 'components/Loading';
-import ExpiredResetLink from 'components/ExpiredResetLink';
 import { shouldComponentUpdate, isEmpty } from 'utils/helpers';
 
 type Props = {
@@ -147,6 +147,30 @@ export class ResetMyPassword extends React.Component<Props, State> {
     this.setState({ canShowError: true });
   };
 
+  renderExpiredResetLink = () => (
+    <section className="container expired__container">
+      <h3 className="expired__link-title">{'OOPS...'}</h3>
+      <span className="expired__reasons-title">
+        {'Esta solicitação para redefinição de senha não é válida! Algumas razões para isso podem ser:'}
+      </span>
+      <ul className="expired__reasons">
+        <li>{'Você está acessando este link através de outro computador'}</li>
+        <li>{'A solicitação expirou (cada uma tem prazo de 5h)'}</li>
+        <li>{'Este link já foi utilizado para redefinir sua senha'}</li>
+      </ul>
+      <span className="expired__recommendations">
+        {'Independente do motivo, recomendamos que você faça uma '}
+        <NavLink
+          to={'/esqueci-minha-senha'}
+          className="expired__new-try"
+        >
+          {'nova tentativa'}
+        </NavLink>
+        {' se atentando aos pontos acima!'}
+      </span>
+    </section>
+  );
+
   render() {
     const { form, canSubmit, showPassword, canShowError } = this.state;
     const { forgotPassword: { isRunning, error = {}, data }, user } = this.props;
@@ -156,7 +180,7 @@ export class ResetMyPassword extends React.Component<Props, State> {
     }
 
     if (data.usable === false) {
-      return <ExpiredResetLink />;
+      return this.renderExpiredResetLink();
     }
 
     const confirmPasswordValue = form.confirmPassword.value;
