@@ -15,6 +15,44 @@
       }
     }
   }
+  .dcl-canvas-switcher {
+    &.horizontal {
+      .dcl-change-scene {
+        .dcl-change-scene__item {
+          .dcl-change-scene__item__img-wrapper {
+            .dcl-change-scene__item__img {
+              width: 4rem;
+              height: 3rem;
+            }
+          }
+        }
+      }
+    }
+    &.vertical {
+      .dcl-change-scene {
+        .dcl-change-scene__item {
+          .dcl-change-scene__item__img-wrapper {
+            .dcl-change-scene__item__img {
+              width: 2rem;
+              height: 3rem;
+            }
+          }
+        }
+      }
+    }
+    .dcl-change-scene {
+      display: flex;
+      flex-direction: row;
+      .dcl-change-scene__item {
+        .dcl-change-scene__item__title {
+          font-size: 1rem;
+          font-weight: 400;
+          padding: 0;
+          margin-bottom: 0.4rem;
+        }
+      }
+    }
+  }
   .canvas-area_orientation-container {
     display: flex;
     flex-direction: column;

@@ -27,6 +27,9 @@ const CanvasToolBar = ({ handleOrientation, isVertical }: Props) => (
       </div>
     </div>
     <div className="dcl-zoom-container" />
+    <div
+      className={`dcl-canvas-switcher ${!isVertical ? 'horizontal' : 'vertical'}`}
+    />
   </div>
 );
 
