@@ -51,14 +51,20 @@ export default class CanvasCutPreview extends React.Component {
       <section className="canvas-cut-preview">
         <h4>Confira como ficou seu cartão de visita</h4>
         <section className="previews">
-          <a href="#first-preview" className="preview-item first" onClick={() => this.handleOpenModal(previewUrls[0])}>
-            <img className="card" src={previewUrls[0]} alt="preview" />
-            <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
-          </a>
-          <a href="#second-preview" className="preview-item second" onClick={() => this.handleOpenModal(previewUrls[1])}>
-            <img className="card" src={previewUrls[1]} alt="preview" />
-            <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
-          </a>
+           <section className="preview-item">
+             <a href="#first-preview" className="image-card first" onClick={() => this.handleOpenModal(previewUrls[0])}>
+               <img className="card" src={previewUrls[0]} alt="preview" />
+               <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
+             </a>
+             <span>FRENTE</span>
+           </section>
+          <section className="preview-item">
+            <a href="#second-preview" className="image-card second" onClick={() => this.handleOpenModal(previewUrls[1])}>
+              <img className="card" src={previewUrls[1]} alt="preview" />
+              <img className="hand" src={require('assets/media/images/frente.png')} alt="hand" />
+            </a>
+            <span>verso</span>
+          </section>
         </section>
         <section className="footer">
           <section className="header">
