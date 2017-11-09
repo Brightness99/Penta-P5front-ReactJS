@@ -289,6 +289,10 @@ const cimpressConfigBuilder = (config, isSku) => {
             enabled: isSku && has_preview === '1',
             containerElement: '.dcl-widget-preview-document',
           },
+          canvasSwitcher: {
+            enabled: true,
+            containerElement: '.dcl-canvas-switcher',
+          },
           addText: {
             enabled: true,
             containerElement: '.add-text-button',
