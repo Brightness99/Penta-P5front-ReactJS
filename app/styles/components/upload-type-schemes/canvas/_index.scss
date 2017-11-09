@@ -46,40 +46,53 @@
       align-items: center;
       justify-content: center;
       .preview-item {
-        background-color: #e6e7e9;
-        border: 1px solid #c7c9cb;
-        width: 29rem;
-        position: relative;
-        cursor: zoom-in;
-        &:hover {
-          background-color: #f7f7f8;
-          opacity: 0.7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        span{
+          margin-top: 0.5rem;
+          color: #151617;
+          font-size: 1.2rem;
+          text-transform: uppercase;
+          font-weight: bold;
         }
-        .hand {
-          position: relative;
+        .image-card {
           width: 29rem;
-          top: 0;
-          left: 0;
-          z-index: 1;
-        }
-        &.first {
-          margin-right: 1rem;
-          .card {
-            position: absolute;
-            height: 12.6rem;
-            top: 4.3rem;
-            left: 6.7rem;
-          }
-        }
-        &.second {
-          .card {
-            position: absolute;
-            height: 12.6rem;
-            top: 4.3rem;
-            right: 6.7rem;
+          background-color: #e6e7e9;
+          border: 1px solid #c7c9cb;
+          position: relative;
+          cursor: zoom-in;
+          &:hover {
+            background-color: #f7f7f8;
+            opacity: 0.7;
           }
           .hand {
-            transform: scale(-1, 1)
+            position: relative;
+            width: 29rem;
+            top: 0;
+            left: 0;
+            z-index: 1;
+          }
+          &.first {
+            margin-right: 1rem;
+            .card {
+              position: absolute;
+              height: 12.6rem;
+              top: 4.3rem;
+              left: 6.7rem;
+            }
+          }
+          &.second {
+            .card {
+              position: absolute;
+              height: 12.6rem;
+              top: 4.3rem;
+              right: 6.7rem;
+            }
+            .hand {
+              transform: scale(-1, 1)
+            }
           }
         }
       }
