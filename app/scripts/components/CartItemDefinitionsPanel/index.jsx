@@ -10,7 +10,6 @@ import BulletListIcon from 'components/Icons/BulletList';
 type Props = {
   expectedDeliveryDate: string,
   subTotal: number,
-  commission: number,
   additionalOptions: {
     file_format: {},
     proof: {}
@@ -135,7 +134,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
   }
 
   renderDesktop() {
-    const { expectedDeliveryDate, subTotal, additionalOptions, commission } = this.props;
+    const { expectedDeliveryDate, subTotal, additionalOptions } = this.props;
     let total = subTotal;
     if (additionalOptions) {
       total += additionalOptions.file_format.price + additionalOptions.proof.price;
@@ -147,7 +146,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
           {this.renderParts()}
         </section>
         <hr />
-        <section className="sub-total">Sub-total: <span>{`R$${subTotal}`}</span>{`(R$${commission}un)`}</section>
+        <section className="sub-total">Sub-total: <span>{`R$${subTotal}`}</span></section>
         <hr />
         {
           additionalOptions &&
