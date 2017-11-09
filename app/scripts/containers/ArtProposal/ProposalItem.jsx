@@ -1,13 +1,10 @@
 // @flow
 import React from 'react';
-import Breadcrumbs from 'components/Breadcrumbs';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import config from 'config';
 import Slider from 'react-slick';
 import { RoundedTransparentButton } from 'atoms/Buttons';
 import { DownloadIcon } from 'components/Icons';
-import { PrevArrow, NextArrow } from 'components/Carousel/Arrows';
+import { PrevArrow, NextArrow } from 'components/Carousel';
 
 const docs = [
   {
@@ -94,7 +91,7 @@ export class ProposalItem extends React.Component {
             </RoundedTransparentButton>
           </div>
           <div className="note">
-            IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material. 
+            IMPORTANTE! Esse arquivo é apenas para aprovação. Não é o arquivo final e não deve ser utilizado para a produção do material.
           </div>
         </div>
       </div>

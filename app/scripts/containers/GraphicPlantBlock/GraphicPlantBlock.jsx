@@ -1,14 +1,11 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-
-import Loading from 'components/Loading';
 import Slider from 'react-slick';
-import { NextArrow, PrevArrow } from 'components/Carousel/Arrows';
+import { NextArrow, PrevArrow } from 'components/Carousel';
 
 type Props = {
   app: AppStore,
-  //screenSize: string,
   className: string,
   locale: {},
   dispatch: () => {},

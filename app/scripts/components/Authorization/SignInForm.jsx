@@ -28,7 +28,7 @@ type Props = {
 
 type State = { canSubmit: boolean, form: FormType, stayConnected: boolean };
 
-export default class SignInForm extends React.PureComponent {
+export default class SignInForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,14 +42,14 @@ export default class SignInForm extends React.PureComponent {
     };
   }
 
-  props: Props;
-  state: State;
-
   componentWillReceiveProps = (newProps: Props) => {
     if (this.props.isFingerprintLoaded !== newProps.isFingerprintLoaded) {
       addFingerprint('signInForm');
     }
   };
+
+  static props: Props;
+  static state: State;
 
   handleSignIn = (ev) => {
     ev.preventDefault();

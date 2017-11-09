@@ -1,5 +1,7 @@
 // @flow
 
+// TODO: Check why container has a different size when loading
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
@@ -33,9 +35,10 @@ import TermsOfUse from 'containers/TermsOfUse';
 import PrivacyPolicy from 'containers/PrivacyPolicy';
 import Sitemap from 'containers/Sitemap';
 import Search from 'components/Search';
-import Gabaritos from 'containers/Gabaritos';
-import Templateslp from 'containers/Templateslp';
+import Templates from 'containers/Templates';
+import TemplatesSEO from 'containers/TemplatesSEO';
 import Referral from 'containers/Referral';
+import ForgotMyPassword from 'containers/ForgotMyPassword';
 
 import CloudEditor from 'containers/CloudEditor';
 
@@ -86,8 +89,11 @@ export class App extends React.Component {
               render={() => (
                 <div key="app" className="app">
                   <Header
-                    screenSize={app.screenSize} dispatch={dispatch} totalCartItems={cart.count}
-                    isAuthorized={isAuthorized} config={headerConfig}
+                    screenSize={app.screenSize}
+                    dispatch={dispatch}
+                    totalCartItems={cart.count}
+                    isAuthorized={isAuthorized}
+                    config={headerConfig}
                   />
                   <main className="app__main">
                     <Switch>
@@ -96,9 +102,11 @@ export class App extends React.Component {
                       <Route path="/produtos-:slug" component={Products} />
                       <Route path="/login-cadastro" component={Authentication} />
                       <Route path="/minha-conta" component={MyAccount} />
-                      <Route path="/editor-cloud" component={CloudEditor} />
+                      <Route path="/montagem-do-arquivo/:slug" component={FileMount} />
                       <Route path="/montagem-do-arquivo" component={FileMount} />
+                      <Route path="/guia-de-impressao/:slug" component={PrintGuide} />
                       <Route path="/guia-de-impressao" component={PrintGuide} />
+                      <Route path="/editor-cloud" component={CloudEditor} />
                       <Route path="/central-de-ajuda" component={HelpCenterPage} />
                       <Route path="/politica-de-privacidade" component={PrivacyPolicy} />
                       <Route path="/mapa-do-site" component={Sitemap} />
@@ -116,8 +124,9 @@ export class App extends React.Component {
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
-                      <Route exact path="/gabaritos" component={Gabaritos} />
-                      <Route exact path="/modelos" component={Templateslp} />
+                      <Route path="/esqueci-minha-senha" component={ForgotMyPassword} />
+                      <Route path="/download-de-gabaritos" component={Templates} />
+                      <Route exact path="/modelos" component={TemplatesSEO} />
                       <Route component={Error404} />
                     </Switch>
                   </main>

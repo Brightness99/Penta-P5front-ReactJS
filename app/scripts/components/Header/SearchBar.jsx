@@ -7,72 +7,26 @@ import { SearchIcon } from 'components/Icons';
 import { push } from 'modules/ReduxRouter';
 
 type Props = {
-  router: {
-    location: {
-      search: string,
-    },
+  search: string,
+  locale: {
+    SEARCH_PLACEHOLDER: string,
   }
-};
-
-type State = {
-  isFocused: boolean,
-  isValid: boolean,
-  dirty: boolean,
-  value: string,
 };
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFocused: false,
-      isValid: false,
-      dirty: false,
-      value: '',
-    };
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
-
-  componentDidMount() {
-    const search = this.props.router.location.search;
-    this.setSearchQuery(search.replace('?q=', ''));
-  }
-
-  componentWillReceiveProps(newProps) {
-    const newSearch = newProps.router.location.search;
-    const search = this.props.router.location.search;
-    if (newSearch !== search) {
-      const queries = newSearch.split('&')
-        .filter(x => x.includes('?q='))
-        .map(x => x.replace('?q=', ''));
-      const query = queries[0] ? queries[0] : '';
-      this.setSearchQuery(query);
-    }
-  }
 
   static props: Props;
 
-  static state: State;
-
-  setSearchQuery(query: string) {
-    this.setState({
-      value: query,
-    });
-  }
-
-  handleChange = (ev) => {
-    this.setSearchQuery(ev.currentTarget.value);
-  };
-
   handleSubmit = (ev) => {
-    const { value } = this.state;
     ev.preventDefault();
 
-    push(`./buscar?q=${value}`);
+    push(`/buscar?q=${ev.currentTarget[0].value}`);
   };
 
   render() {
+    const { search, locale } = this.props;
+
     return (
       <form
         className="mol-header-search"
@@ -81,11 +35,10 @@ class SearchBar extends React.Component {
         <input
           type="text"
           name="q"
-          value={this.state.value}
-          placeholder="Procure por produtos ou informações..."
-          onChange={this.handleChange}
+          defaultValue={decodeURI(/q=([^&]+)/.exec(search) ? decodeURI(/q=([^&]+)/.exec(search)[1]) : '')}
+          placeholder={`${locale.SEARCH_PLACEHOLDER}...`}
         />
-        <button onClick={this.handleSubmit}>
+        <button>
           <SearchIcon />
         </button>
       </form>
@@ -94,7 +47,8 @@ class SearchBar extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  router: state.router,
+  search: state.router.location.search,
+  locale: state.locale.translate.header,
 });
 
 export default connect(mapStateToProps)(SearchBar);

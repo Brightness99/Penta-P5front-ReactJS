@@ -28,6 +28,6 @@ declare module 'json-loader' {
 declare module 'json-loader/index' {
   declare module.exports: $Exports<'json-loader'>;
 }
-declare module 'json-loader/index.js' {
+declare module 'json-loader/index.jsx' {
   declare module.exports: $Exports<'json-loader'>;
 }

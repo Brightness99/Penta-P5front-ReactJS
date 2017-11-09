@@ -9,6 +9,9 @@ import { createReducer, mergeDeep } from 'utils/helpers';
 import { LocaleConstants } from 'constants/index';
 
 const missingLocale = {
+  UNITS: 'Unidades',
+  UNIT: 'Unidade',
+  UNIT_SHORT: 'Un',
   translate: {
     common: {
       STARTING_FROM: 'A partir de',
@@ -20,6 +23,15 @@ const missingLocale = {
       BUTTON: 'inscrever',
       SUCCESS: 'E-mail cadastrado com sucesso',
       FAILURE: 'Houve um problema ao cadastrar seu e-mail',
+    },
+    header: {
+      REFERRAL: 'Indique a Printi',
+      MODELS: 'Modelos',
+      exclusive_service: {
+        TITLE: 'Venda Corporativa',
+      },
+      BLOG: 'Blog',
+      TEMPLATES: 'Gabaritos',
     },
     footer: {
       links: [
@@ -93,6 +105,11 @@ const missingLocale = {
           TIME_MEASURE: 'min',
           DATE_FORMAT: 'D MMM',
         },
+      },
+      cart: {
+        cross_selling: {
+          TITLE: 'PRODUTOS INDICADOS PARA VOCÊ',
+        }
       },
       product_settings: {
         source: {

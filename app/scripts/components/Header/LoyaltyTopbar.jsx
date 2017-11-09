@@ -2,37 +2,46 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { shouldComponentUpdate } from 'utils/helpers';
 import { CloseIcon } from 'components/Icons';
+import LogoLoyalty from 'components/LogoLoyalty';
+
+type Props = {
+  loyalty: {},
+  onClose: () => {},
+};
 
 export class LoyaltyTopbar extends React.Component {
-  props: Props;
+  shouldComponentUpdate = shouldComponentUpdate;
 
-  setBackgroundColor = (color) => {
-    return {
-      background: color,
-    };
+  componentDidMount() {
+    document.querySelector('body').classList.add('has-loyalty-bar');
   }
 
-  setColor = (color) => {
-    return {
-      color,
-    };
+  componentWillUnmount() {
+    document.querySelector('body').classList.remove('has-loyalty-bar');
   }
+
+  static props: Props;
+
+  handleClose = () => {
+    const { onClose } = this.props;
+
+    /* istanbul ignore else */
+    if (typeof onClose === 'function') {
+      onClose();
+    }
+  };
 
   render() {
-    const { account: { loyalty } } = this.props;
+    const { loyalty } = this.props;
+
     return (
-      <div className="org-loyalty-topbar" style={this.setBackgroundColor(loyalty.color)}>
-        <div className="container">
-          <div className="mol-loyalty-topbar">
-            <div>
-              <div className="qrk-type-of-loyalty" style={this.setColor(loyalty.color)}>
-                <p>{loyalty.loyalty_tier_name}</p>
-              </div>
-              <p>{loyalty.header}</p>
-            </div>
-            <a href="#close"><CloseIcon /></a>
-          </div>
+      <div className="org-loyalty-topbar" style={{ backgroundColor: loyalty.color }}>
+        <div className="mol-loyalty-topbar container">
+          <LogoLoyalty short={true} invert={true} />
+          <div className="atm-loyalty-text">{loyalty.header}</div>
+          <button className="atm-icon-button" onClick={this.handleClose}><CloseIcon /></button>
         </div>
       </div>
     );
@@ -41,7 +50,7 @@ export class LoyaltyTopbar extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    account: state.account,
+    loyalty: state.account.loyalty,
   };
 }
 

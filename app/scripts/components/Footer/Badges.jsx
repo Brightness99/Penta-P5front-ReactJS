@@ -12,11 +12,12 @@ type Props = {
     PAYMENT_METHODS: string,
     SELOS_RECLAME: string,
     security: {},
+    COUNTRY_CODE: string,
   },
 };
 
 const Badges = (props: Props) => {
-  const { locale: { SUPPORT, PAYMENT_METHODS, security } } = props;
+  const { locale: { SUPPORT, PAYMENT_METHODS, security, COUNTRY_CODE } } = props;
 
   return (
     <ul className="app__footer__badges container">
@@ -45,16 +46,18 @@ const Badges = (props: Props) => {
           </li>
         </ul>
       </li>
-      <li className="app__footer__badges-item">
-        <span className="app__footer__badges-title">{SUPPORT}</span>
-        <ul className="app__footer__badges-images">
-          <li>
-            <NavLink to="https://endeavor.org.br" target="_blank" title="Endeavour">
-              <img src={require('assets/media/images/endeavor.png')} alt="Endeavour" />
-            </NavLink>
-          </li>
-        </ul>
-      </li>
+      {COUNTRY_CODE === 'BR' &&
+        <li className="app__footer__badges-item">
+          <span className="app__footer__badges-title">{SUPPORT}</span>
+          <ul className="app__footer__badges-images">
+            <li>
+              <NavLink to="https://endeavor.org.br" target="_blank" title="Endeavour">
+                <img src={require('assets/media/images/endeavor.png')} alt="Endeavour" />
+              </NavLink>
+            </li>
+          </ul>
+        </li>
+      }
       <li className="app__footer__badges-item">
         <span className="app__footer__badges-title">{PAYMENT_METHODS}</span>
         <ul className="app__footer__badges-images">

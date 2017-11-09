@@ -1,5 +1,8 @@
 // @flow
 import React from 'react';
+import { findDOMNode } from 'react-dom';
+import swal from 'sweetalert2';
+import Inputmask from 'inputmask';
 import type { DataType } from 'actions';
 import { BlockTitle } from 'atoms/Titles';
 import { Select } from 'atoms/Inputs/Select';
@@ -15,7 +18,10 @@ type FormType = {
   website: { valid: boolean, value: string },
   spending: { valid: boolean, value: string },
 };
-type Props = { onSubmit: (data: DataType) => void }
+type Props = {
+  onSubmit: (data: DataType) => void,
+  handleCloseModal: () => void,
+}
 type State = { canSubmit: boolean, form: FormType };
 
 class ContactForm extends React.PureComponent<Props, State> {
@@ -36,8 +42,23 @@ class ContactForm extends React.PureComponent<Props, State> {
     };
   }
 
-  props: Props;
-  state: State;
+  componentDidMount() {
+    const phoneInput = document.getElementById('phone');
+    if (!phoneInput) {
+      return;
+    }
+    const mask = ['(99) 9999-9999', '(99) 99999-9999'];
+    const im = new Inputmask({
+      mask,
+      keepStatic: true,
+      showMaskOnHover: false,
+      showMaskOnFocus: false,
+    });
+    im.mask(findDOMNode(phoneInput));
+  }
+
+  static props: Props;
+  static state: State;
 
   handleSubmit(e) {
     e.preventDefault();
@@ -52,6 +73,14 @@ class ContactForm extends React.PureComponent<Props, State> {
           [nextInput]: form[nextInput].value,
         }), {});
         onSubmit(formData);
+        swal({
+          title: 'Seus dados foram enviados com sucesso',
+          type: 'success',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        })
+        .then(() => this.props.handleCloseModal());
       }
     }
   }

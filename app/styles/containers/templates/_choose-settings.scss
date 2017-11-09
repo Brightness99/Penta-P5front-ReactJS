@@ -1,0 +1,167 @@
+.org-choose-settings {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-family: $font-family-open-sans-bold;
+  font-size: $font-size-xs;
+  margin: 0 0 1.7rem;
+
+  @include lg {
+    flex-direction: row;
+    margin: 0 0 3.7rem;
+  }
+
+  .mol-choose-settings {
+    align-items: flex-start;
+    background: $color-white;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    flex-basis: calc((100% / 3) - 1.4rem);
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 0 2rem;
+    max-width: 100%;
+    padding: 2rem 1rem;
+    position: relative;
+    text-transform: uppercase;
+    transition-delay: 0.04s;
+    transition-timing-function: ease-in-out;
+
+    @include lg {
+      margin: 0 0.7rem 2rem;
+      max-width: calc(100% / 3);
+    }
+
+    &:nth-of-type(3n-2) {
+      margin-left: 0;
+    }
+
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+
+    span {
+      align-items: center;
+      border: 0.1rem solid $color-lightGray3;
+      border-radius: 1.5rem;
+      color: $color-lightGray3;
+      display: flex;
+      font-family: $font-family-nunito-regular;
+      font-size: $font-size-lg;
+      height: 3rem;
+      justify-content: center;
+      position: relative;
+      width: 3rem;
+
+      &.valid-number-setting {
+        background-color: $color-green-light;
+        border: 0;
+
+        svg {
+          fill: $color-white;
+          height: 2rem;
+          position: absolute;
+          width: 2rem;
+        }
+      }
+    }
+
+    .title-choose-settings {
+      color: $color-almostBlack;
+      font-family: $font-family-open-sans-light;
+      font-size: $font-size-xs;
+      margin-bottom: 0;
+      text-transform: none;
+
+      @include lg {
+        font-size: $font-size-base;
+      }
+    }
+
+    .org-checkout-content-data {
+      margin-top: 0;
+      width: 100%;
+
+      .atm-checkout-input-one {
+        width: 100%;
+      }
+    }
+
+    .atm-number-setting {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0 2.6rem;
+      width: 100%;
+    }
+  }
+}
+
+.org-links-choose-settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include lg {
+    flex-direction: row;
+    margin-bottom: 4rem;
+  }
+
+  .atm-link {
+    align-items: center;
+    color: $color-printi-blue;
+    font-family: $font-family-open-sans-regular;
+    font-size: $font-size-xs;
+    margin: 1.2rem 0;
+
+    @include lg {
+      color: $color-lightGray;
+      display: inline-flex;
+    }
+
+    svg {
+      fill: $color-printi-blue;
+      margin-right: 0.5rem;
+      width: 0.9rem;
+
+      @include lg {
+        fill: $color-lightGray;
+      }
+    }
+  }
+
+  .btn-default {
+    padding: 1.1rem 7.7rem;
+  }
+
+  &.footer-page {
+    margin-bottom: 4rem;
+  }
+}
+
+.final-product-name-title {
+  font-size: $font-size-xxl;
+  margin-bottom: 4rem;
+}
+
+.product-part-title-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+
+  .product-part-name-title {
+    color: $color-green;
+    font-size: $font-size-xl;
+    margin: 0 5rem 0 0;
+  }
+
+  .setting-remove-control {
+    background: none;
+    border: 0;
+    color: $color-red;
+  }
+}

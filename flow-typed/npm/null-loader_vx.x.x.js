@@ -28,6 +28,6 @@ declare module 'null-loader' {
 declare module 'null-loader/index' {
   declare module.exports: $Exports<'null-loader'>;
 }
-declare module 'null-loader/index.js' {
+declare module 'null-loader/index.jsx' {
   declare module.exports: $Exports<'null-loader'>;
 }

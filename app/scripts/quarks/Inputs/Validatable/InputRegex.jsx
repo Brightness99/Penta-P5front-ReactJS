@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-
 import { Input } from 'quarks/Inputs';
 
 type Props = {
@@ -26,6 +25,8 @@ type Props = {
   onBlur?: () => {},
   onValidate?: () => {},
   onEnterKeyPress?: () => {},
+  checkValidation?: () => {},
+  autoComplete?: () => {},
 };
 
 export class InputRegex extends React.Component {
@@ -40,14 +41,19 @@ export class InputRegex extends React.Component {
 
   componentWillReceiveProps(nextProps: Props) {
     const { equalsTo } = this.props;
+    const { value } = nextProps;
 
     if (equalsTo && equalsTo !== nextProps.equalsTo) {
       this.setState(this.handleValidation(this.state.value, nextProps.equalsTo));
     }
+
+    if (value !== this.props.value) {
+      this.setState(this.handleValidation(value));
+    }
   }
 
   handleValidation(value, equalsTo) {
-    const { onValidate, pattern, required, name } = this.props;
+    const { onValidate, pattern, required, name, checkValidation, autoComplete } = this.props;
 
     let valid = true;
 
@@ -67,11 +73,20 @@ export class InputRegex extends React.Component {
       valid = (value === equalsTo);
     }
 
-    if (typeof onValidate === 'function') {
-      onValidate(name, value, valid);
+    if (valid === true && (typeof checkValidation === 'function')) {
+      valid = checkValidation(value);
     }
 
-    return { value, valid };
+    let newValue = value;
+    if (typeof autoComplete === 'function') {
+      newValue = autoComplete(value);
+    }
+
+    if (typeof onValidate === 'function') {
+      onValidate(name, newValue, valid);
+    }
+
+    return { newValue, valid };
   }
 
   static props: Props;
