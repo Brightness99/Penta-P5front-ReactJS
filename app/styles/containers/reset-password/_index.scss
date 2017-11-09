@@ -35,3 +35,28 @@
     }
   }
 }
+
+.expired {
+  &__container {
+    font-family: $font-family-open-sans;
+    margin: 3rem auto;
+  }
+
+  &__link-title {
+    font-family: $font-family-open-sans-bold;
+  }
+
+  &__reasons {
+    margin: 2rem 0;
+
+    li {
+      list-style-type: square;
+      margin-left: 2rem;
+    }
+  }
+
+  &__new-try {
+    text-decoration: none;
+  }
+}
+
