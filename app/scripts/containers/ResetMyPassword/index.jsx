@@ -12,6 +12,7 @@ import EyeIcon from 'components/Icons/Eye';
 import EyeSlashIcon from 'components/Icons/EyeSlash';
 import IconToggleButton from 'components/IconToggleButton';
 import Loading from 'components/Loading';
+import ExpiredResetLink from 'components/ExpiredResetLink';
 import { shouldComponentUpdate, isEmpty } from 'utils/helpers';
 
 type Props = {
@@ -74,13 +75,8 @@ export class ResetMyPassword extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { forgotPassword: { error = {}, data: { usable } } } = nextProps;
+    const { forgotPassword: { error = {} } } = nextProps;
     const { forgotPassword: { isRunning, data } } = this.props;
-
-    if (usable === false) {
-      push('/expirado-redefinir');
-      return;
-    }
 
     if (!isRunning || isEmpty(data.usable)) {
       return;
@@ -153,10 +149,14 @@ export class ResetMyPassword extends React.Component<Props, State> {
 
   render() {
     const { form, canSubmit, showPassword, canShowError } = this.state;
-    const { forgotPassword: { isRunning, error = {} }, user } = this.props;
+    const { forgotPassword: { isRunning, error = {}, data }, user } = this.props;
 
     if (user.isRunning || isRunning) {
       return <Loading />;
+    }
+
+    if (data.usable === false) {
+      return <ExpiredResetLink />;
     }
 
     const confirmPasswordValue = form.confirmPassword.value;
