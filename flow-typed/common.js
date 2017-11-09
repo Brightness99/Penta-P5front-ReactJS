@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Stores
 
 declare type ImageType = {
@@ -69,3 +70,8 @@ declare type UploadInfoType = {
   availableStrategies: Array<number>,
   cimpressInfo: CimpressInfo,
 }
+
+declare type ErrorType = {
+  message: string,
+  status: string,
+};
