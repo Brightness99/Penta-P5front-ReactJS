@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Modernizr from 'modernizr';
 import { getScreenSize } from 'utils/helpers';
 import { updateBrowserOptions } from 'actions';
@@ -41,6 +41,7 @@ import Referral from 'containers/Referral';
 import ForgotMyPassword from 'containers/ForgotMyPassword';
 
 import CloudEditor from 'containers/CloudEditor';
+import ExpiredResetLink from 'containers/ExpiredResetLink';
 
 type Props = {
   app: AppStoreType,
@@ -125,6 +126,10 @@ export class App extends React.Component {
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
                       <Route path="/esqueci-minha-senha" component={ForgotMyPassword} />
+                      <Route
+                        path="/expirado-redefinir"
+                        render={() => (!isAuthorized ? <ExpiredResetLink /> : <Redirect to={'/'} />)}
+                      />
                       <Route path="/download-de-gabaritos" component={Templates} />
                       <Route exact path="/modelos" component={TemplatesSEO} />
                       <Route component={Error404} />
