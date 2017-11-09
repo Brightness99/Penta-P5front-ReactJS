@@ -17,6 +17,7 @@ type Props = {
   placeholder: string,
   showLabel: boolean,
   required: boolean,
+  enableTrimForEndOfString: boolean,
   equalsTo: any,
   value: string,
   onClick?: () => {},
@@ -53,33 +54,32 @@ export class InputRegex extends React.Component {
   }
 
   handleValidation(value, equalsTo) {
-    const { onValidate, pattern, required, name, checkValidation, autoComplete } = this.props;
-
+    const { onValidate, pattern, required, name, checkValidation, autoComplete, enableTrimForEndOfString } = this.props;
     let valid = true;
-
+    const validatableValue = !!value && enableTrimForEndOfString ? value.replace(/\s*$/, '') : value;
     if (pattern) {
       try {
-        valid = pattern.test(value);
+        valid = pattern.test(validatableValue);
       } catch (e) {
         valid = false;
       }
     }
 
     if (valid === true && required === true) {
-      valid = (value && value !== null && value.length > 0);
+      valid = (validatableValue && validatableValue !== null && validatableValue.length > 0);
     }
 
     if (valid === true && equalsTo) {
-      valid = (value === equalsTo);
+      valid = (validatableValue === equalsTo);
     }
 
     if (valid === true && (typeof checkValidation === 'function')) {
-      valid = checkValidation(value);
+      valid = checkValidation(validatableValue);
     }
 
-    let newValue = value;
+    let newValue = validatableValue;
     if (typeof autoComplete === 'function') {
-      newValue = autoComplete(value);
+      newValue = autoComplete(validatableValue);
     }
 
     if (typeof onValidate === 'function') {
