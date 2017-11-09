@@ -104,6 +104,7 @@ export class Search extends React.Component {
 
   subscribeToQueryChanging = () => {
     document.getElementsByClassName('gsc-search-button-v2')[0].addEventListener('click', this.queryChanged);
+    document.getElementsByClassName('gsst_a')[0].addEventListener('click', this.clearQuery);
     document.getElementById('gsc-i-id1').addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
         this.queryChanged();
@@ -114,6 +115,10 @@ export class Search extends React.Component {
   queryChanged = () => {
     const value = document.getElementById('gsc-i-id1').value;
     push(`./buscar?q=${value}`);
+  };
+
+  clearQuery = () => {
+    push('./buscar');
   };
 
   setSearchQuery(query: string) {
