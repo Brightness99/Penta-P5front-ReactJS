@@ -60,7 +60,6 @@
 @import 'containers/referral/index';
 @import 'containers/forgot-password/index';
 @import 'containers/reset-password/index';
-@import 'containers/expired-reset-link/index';
 
 // *** Components
 @import 'components/back-to-top/index';
@@ -84,6 +83,7 @@
 @import 'components/alphabet-list/index';
 @import 'components/icon-toogle-button/index';
 @import 'components/contact-form/index';
+@import 'components/expired-reset-link/index';
 
 // *** Bosons
 @import 'bosons/index';
