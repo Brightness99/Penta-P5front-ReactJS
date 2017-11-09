@@ -278,7 +278,6 @@ export class Upload extends React.Component {
     return (<CartItemDefinitionsPanel
       parts={parts}
       subTotal={total_price}
-      commission={0.18}
       expectedDeliveryDate={expected_delivery_date}
       isMobile={isMobile(screenSize)}
       additionalOptions={selectedAdditionalParameters}
