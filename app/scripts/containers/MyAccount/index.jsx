@@ -2,11 +2,14 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Switch, Route } from 'react-router-dom';
 import cx from 'classnames';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { PageTitle } from 'atoms/Titles';
 import Breadcrumbs from 'components/Breadcrumbs';
+import * as ReferralActions from 'actions/referral';
+import { socialLoginSettingsFetch } from 'actions';
 import Sidebar from './Sidebar';
 import OrderList from './OrderList';
 import OrderDetails from './OrderDetails';
@@ -25,8 +28,22 @@ type Props = {
   screenSize: AppStoreType.screenSize,
   router: RouterStore,
   locale: AccountLocaleType,
-  children: any,
-  dispatch: () => {},
+  voucher: {
+    voucher_id: string,
+    voucher_name: string,
+  },
+  sendReferralRequest: (customerId: string, emails: Array<string>) => void,
+  customerInfo: UserCustomerInfoType,
+  referral: ReferralType,
+  socialLoginSettingsFetch: () => void,
+  facebook: {
+    status: string,
+    credentials: {
+      app_id: number | string,
+      secret_key: string,
+    },
+  },
+  language: string,
 };
 
 type State = {
@@ -55,10 +72,14 @@ export class MyAccount extends React.Component {
 
   shouldComponentUpdate = shouldComponentUpdate;
 
+  componentDidMount() {
+    if (!this.props.facebook) {
+      this.props.socialLoginSettingsFetch();
+    }
+  }
+
   static props: Props;
-
   static state: State;
-
   static defaultBreadcrumbs: [];
 
   handleBreadcrumbs = (breadcrumbs) => {
@@ -68,7 +89,10 @@ export class MyAccount extends React.Component {
   };
 
   renderContainer() {
-    const { screenSize } = this.props;
+    const {
+      screenSize, voucher, customerInfo = {},
+      referral, facebook, language,
+    } = this.props;
 
     return (
       <Switch>
@@ -102,7 +126,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/enderecos"
-          render={(props) => <MyAddresses {...props} screenSize={screenSize} />}
+          render={(props) => <MyAddresses {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/cartoes-salvos"
@@ -118,7 +142,7 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/notificacoes"
-          render={(props) => <Notification {...props} screenSize={screenSize} />}
+          render={(props) => <Notification {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
         />
         <Route
           path="/minha-conta/cloud"
@@ -130,7 +154,17 @@ export class MyAccount extends React.Component {
         />
         <Route
           path="/minha-conta/indicacoes"
-          render={(props) => <Referral {...props} screenSize={screenSize} />}
+          render={(props) =>
+            <Referral
+              {...props}
+              referral={referral}
+              screenSize={screenSize}
+              voucher={voucher}
+              customerInfo={customerInfo}
+              sendReferralRequest={this.props.sendReferralRequest}
+              facebook={facebook}
+              language={language}
+            />}
         />
         <Route
           render={(props) => <OrderList {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
@@ -184,18 +218,32 @@ export class MyAccount extends React.Component {
   }
 }
 
-/* istanbul ignore next */
-function mapStoreToProps(state) {
+const mapStoreToProps = (state) => {
+  const { LANGUAGE: language, COUNTRY_CODE: countryCode } = state.locale;
+  const { socials } = state.socialLoginSettings;
+  const { voucher_id, voucher_name } = state.account;
   return ({
     screenSize: state.app.screenSize,
     locale: state.locale.translate.account,
     router: state.router,
+    referral: state.referral,
+    voucher: {
+      voucher_id,
+      voucher_name,
+    },
+    customerInfo: {
+      ...state.user.customerInfo,
+      voucher_id,
+      voucher_name,
+    },
+    language,
+    facebook: socials.facebook[countryCode],
   });
-}
+};
 
-/* istanbul ignore next */
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators(ReferralActions, dispatch),
+  socialLoginSettingsFetch: () => dispatch(socialLoginSettingsFetch()),
+});
 
 export default connect(mapStoreToProps, mapDispatchToProps)(MyAccount);

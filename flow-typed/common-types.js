@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Stores
 declare type AppStoreType = {
   rehydrated: boolean,

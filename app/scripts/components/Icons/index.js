@@ -110,7 +110,7 @@ export PictureIcon from './PictureIcon';
 export GlassZoomIcon from './GlassZoomIcon';
 export ReferralIcon from './ReferralIcon';
 export LinkIcon from './LinkIcon';
-export GmailIcon from './GmailIcon';
+export MailIcon from './MailIcon';
 export FacebookIcon from './FacebookIcon';
 export WarningFilled from './WarningFilled';
 export AngleRight from './AngleRight';

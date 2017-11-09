@@ -14,6 +14,7 @@ const currentStep = 1;
 export class ProductsTemplates extends React.PureComponent<Props> {
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.props.handleNavigation(currentStep);
   }
 
   static props: Props;
