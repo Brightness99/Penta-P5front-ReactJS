@@ -42,6 +42,11 @@ type Props = {
       itemId: string,
     }
   },
+  router: {
+    location: {
+      search: string,
+    },
+  },
   isLoading: boolean,
   isFinishInProgress: boolean,
   uploadInfo: {},
@@ -81,9 +86,11 @@ export class Upload extends React.Component {
 
   componentDidMount() {
     const { slug, itemId } = this.props.match.params;
+    const { router: { location: { search } } } = this.props;
     const { uploadInfoFetch } = this.props;
-
-    uploadInfoFetch(slug, itemId);
+    
+    const isVertical = /isVertical=([^&]+)/.exec(search) ? /isVertical=([^&]+)/.exec(search)[1] : 0;
+    uploadInfoFetch(slug, itemId, isVertical);
   }
 
   static props: Props;
@@ -95,10 +102,10 @@ export class Upload extends React.Component {
     let canSubmit;
     switch (upload_type) {
       case 'canvas':
-        canSubmit = !!documentReferenceId;
+        canSubmit = selectedStrategy === 1 || !!documentReferenceId;
         break;
       case 'sku_scene':
-        canSubmit = !!documentReferenceId;
+        canSubmit = selectedStrategy === 1 || !!documentReferenceId;
         break;
       default:
         canSubmit = (selectedStrategy === 1 ||
@@ -359,6 +366,7 @@ export class Upload extends React.Component {
 const mapStateToProps = (state) => ({
   screenSize: state.app.screenSize,
   isLoading: state.upload.isLoaded,
+  router: state.router,
   isFinishInProgress: state.upload.uploadFinish.isRunning,
   uploadInfo: state.upload.object,
   uploadFileProgress: state.upload.uploadFile,
@@ -366,7 +374,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
-  uploadInfoFetch: (slug, itemId) => dispatch(uploadFetch(slug, itemId)),
+  uploadInfoFetch: (slug, itemId, isVertical) => dispatch(uploadFetch(slug, itemId, isVertical)),
   uploadSetOrientation: (itemId, isVertical) => dispatch(uploadSetOrientationRequest(itemId, isVertical)),
   uploadFinish: (data, itemId) => dispatch(uploadFinishRequest(data, itemId)),
 });

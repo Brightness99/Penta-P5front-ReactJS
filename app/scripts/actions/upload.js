@@ -11,15 +11,17 @@ import { UploadConstants } from 'constants/index';
  *
  * @param {string} slug
  * @param {string} itemId
+ * @param {number} isVertical
  *
  * @returns {Object}
  */
-export function uploadFetch(slug: string, itemId: string): Object {
+export function uploadFetch(slug: string, itemId: string, isVertical: number): Object {
   return {
     type: UploadConstants.UPLOAD_FETCH_REQUEST,
     payload: {
       slug,
       itemId,
+      isVertical,
     },
   };
 }

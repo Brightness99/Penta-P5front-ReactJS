@@ -16,7 +16,7 @@ const uploader = new RxPlupload({
 export function uploadFetch(action$) {
   return action$.ofType(UploadConstants.UPLOAD_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v2/${action.payload.slug}/upload/${action.payload.itemId}`;
+      const endpoint = `/v2/${action.payload.slug}/upload/${action.payload.itemId}?isVertical=${action.payload.isVertical}`;
 
       return rxAjax({
         endpoint,
