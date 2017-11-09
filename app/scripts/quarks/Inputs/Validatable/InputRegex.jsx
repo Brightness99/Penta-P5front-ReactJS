@@ -26,6 +26,7 @@ type Props = {
   onValidate?: () => {},
   onEnterKeyPress?: () => {},
   checkValidation?: () => {},
+  autoComplete?: () => {},
 };
 
 export class InputRegex extends React.Component {
@@ -52,7 +53,7 @@ export class InputRegex extends React.Component {
   }
 
   handleValidation(value, equalsTo) {
-    const { onValidate, pattern, required, name, checkValidation } = this.props;
+    const { onValidate, pattern, required, name, checkValidation, autoComplete } = this.props;
 
     let valid = true;
 
@@ -76,11 +77,16 @@ export class InputRegex extends React.Component {
       valid = checkValidation(value);
     }
 
-    if (typeof onValidate === 'function') {
-      onValidate(name, value, valid);
+    let newValue = value;
+    if (typeof autoComplete === 'function') {
+      newValue = autoComplete(value);
     }
 
-    return { value, valid };
+    if (typeof onValidate === 'function') {
+      onValidate(name, newValue, valid);
+    }
+
+    return { newValue, valid };
   }
 
   static props: Props;
