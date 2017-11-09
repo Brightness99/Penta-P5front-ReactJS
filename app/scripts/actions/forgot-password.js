@@ -37,3 +37,18 @@ export function setNewPassword(new_password: string, hash: string): Object {
     },
   };
 }
+
+/**
+ * Get expired info
+ * @param {string} hash
+ *
+ * @returns {Object}
+ */
+export function getExpiredInfo(hash: string) {
+  return {
+    type: ForgotPasswordConstants.EXPIRED_INFO_REQUEST,
+    payload: {
+      hash,
+    },
+  };
+}

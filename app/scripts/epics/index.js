@@ -84,7 +84,7 @@ import {
   referralSendRequest
 } from './referral';
 
-import { resetPassword, setNewPassword } from './forgot-password';
+import { resetPassword, setNewPassword, getExpiredInfo } from './forgot-password';
 
 export default combineEpics(
   userNewsletter,
@@ -148,4 +148,5 @@ export default combineEpics(
   referralSendRequest,
   resetPassword,
   setNewPassword,
+  getExpiredInfo,
 );

@@ -80,5 +80,34 @@ export default {
         error: action.payload,
       };
     },
+    [ForgotPasswordConstants.EXPIRED_INFO_REQUEST](state) {
+      return {
+        ...state,
+        isRunning: true,
+        isLoaded: false,
+      };
+    },
+    [ForgotPasswordConstants.EXPIRED_INFO_REQUEST_SUCCESS](state, action) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          ...action.payload,
+        },
+        isRunning: false,
+        isLoaded: true,
+      };
+    },
+    [ForgotPasswordConstants.EXPIRED_INFO_REQUEST_FAILURE](state, action) {
+      return {
+        ...state,
+        isRunning: false,
+        isLoaded: true,
+        data: {
+          ...state.data,
+        },
+        error: action.payload,
+      };
+    },
   }),
 };
