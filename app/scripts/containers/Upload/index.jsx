@@ -43,6 +43,7 @@ type Props = {
     }
   },
   isLoading: boolean,
+  isFinishInProgress: boolean,
   uploadInfo: {},
   uploadSetOrientation: (itemId: string, isVertical: number) => void,
   uploadInfoFetch: (slug: string, itemId: string) => void,
@@ -285,7 +286,7 @@ export class Upload extends React.Component {
   }
 
   render() {
-    const { isLoading, screenSize } = this.props;
+    const { isLoading, screenSize, isFinishInProgress } = this.props;
     const { isRepurchase, canSubmit } = this.state;
     const breadcrumb = [
       {
@@ -341,6 +342,7 @@ export class Upload extends React.Component {
                   <Button
                     onClick={this.handleUploadFinish}
                     kind="success"
+                    isLoading={isFinishInProgress}
                     disabled={!canSubmit}
                   >Enviar arte final</Button>
                 </section>
@@ -357,6 +359,7 @@ export class Upload extends React.Component {
 const mapStateToProps = (state) => ({
   screenSize: state.app.screenSize,
   isLoading: state.upload.isLoaded,
+  isFinishInProgress: state.upload.uploadFinish.isRunning,
   uploadInfo: state.upload.object,
   uploadFileProgress: state.upload.uploadFile,
 });
