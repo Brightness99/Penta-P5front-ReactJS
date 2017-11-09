@@ -138,7 +138,6 @@ export class App extends React.Component {
                         render={({ match }) =>
                           (isAuthorized ? <Redirect to={'/'} /> : <ResetMyPassword hash={match.params.hash} />)}
                       />
-                      <Route path="/esqueci-minha-senha" component={ForgotMyPassword} />
                       <Route
                         path="/expirado-redefinir"
                         render={() => (!isAuthorized ? <ExpiredResetLink /> : <Redirect to={'/'} />)}
