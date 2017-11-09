@@ -175,10 +175,16 @@ export default class SignUpForm extends React.Component {
           <section className="show-password-block">
             <IconToggleButton
               onChange={this.handleToggleChanged}
-              title="Esconder senha"
+              checked={showPassword}
               iconChecked={<EyeSlashIcon />}
               iconUnchecked={<EyeIcon />}
-            />
+            >
+              <span>
+                {
+                  showPassword ? 'Esconder senha' : 'Visualizar senha'
+                }
+              </span>
+            </IconToggleButton>
           </section>
           <ErrorField message={errorMessage} />
           <Button
