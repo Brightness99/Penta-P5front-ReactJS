@@ -206,6 +206,11 @@ export class CustomerData extends React.Component {
     });
   }
 
+  renderStates = () => {
+    const states = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
+    return states.map((state) => (<option key={state} value={state.toLowerCase()}>{state}</option>));
+  }
+
   renderPersonalData() {
     const { first_name, last_name, gender, cloud_manager, form } = this.state;
     return (
@@ -253,8 +258,21 @@ export class CustomerData extends React.Component {
           onChange={(e) => { this.setState({ cloud_manager: e.target.value }); }}
           required={true}
         >
-          <option value={1}>Gráfica</option>
-          <option value={2}>Agência</option>
+          <option value={1}>Academia e Fitness</option>
+          <option value={2}>Advocacia</option>
+          <option value={3}>Arquitetura</option>
+          <option value={4}>Comunicação e Marketing</option>
+          <option value={5}>Consultoria</option>
+          <option value={6}>Design / Fotografia</option>
+          <option value={7}>Engenharia</option>
+          <option value={8}>Estética e bem estar</option>
+          <option value={9}>Fisioterapia</option>
+          <option value={10}>Imobiliárias e construtoras</option>
+          <option value={11}>Informática</option>
+          <option value={12}>Medicina</option>
+          <option value={13}>Odontologia</option>
+          <option value={14}>Veterinária / Pet</option>
+          <option value={15}>Outros</option>
         </Select>
       </form>
     );
@@ -300,8 +318,21 @@ export class CustomerData extends React.Component {
           placeholder="Área de Atuação"
           required={true}
         >
-          <option value={1}>Gráfica</option>
-          <option value={2}>Agência</option>
+          <option value={1}>Academia e Fitness</option>
+          <option value={2}>Advocacia</option>
+          <option value={3}>Arquitetura</option>
+          <option value={4}>Comunicação e Marketing</option>
+          <option value={5}>Consultoria</option>
+          <option value={6}>Design / Fotografia</option>
+          <option value={7}>Engenharia</option>
+          <option value={8}>Estética e bem estar</option>
+          <option value={9}>Fisioterapia</option>
+          <option value={10}>Imobiliárias e construtoras</option>
+          <option value={11}>Informática</option>
+          <option value={12}>Medicina</option>
+          <option value={13}>Odontologia</option>
+          <option value={14}>Veterinária / Pet</option>
+          <option value={15}>Outros</option>
         </Select>
         <Select
           className="atm-checkout-input atm-checkout-input-one"
@@ -313,8 +344,11 @@ export class CustomerData extends React.Component {
           onChange={(e) => { this.setState({ employee_number: e.target.value }); }}
           required={true}
         >
-          <option value={'1'}>1</option>
-          <option value={'2'}>2</option>
+          <option value={'1'}>Individual</option>
+          <option value={'2'}>de 02 a 19 funcionários</option>
+          <option value={'3'}>de 20 a 99 funcionários</option>
+          <option value={'4'}>de 100 a 499 funcionários</option>
+          <option value={'5'}>500 ou mais funcionários</option>
         </Select>
         <Select
           className="atm-checkout-input atm-checkout-input-one"
@@ -327,8 +361,7 @@ export class CustomerData extends React.Component {
           required={true}
         >
           <option value={'Isento'}>Isento</option>
-          <option value={'sp'}>SP</option>
-          <option value={'rj'}>RJ</option>
+          {this.renderStates()}
         </Select>
         {state_registration && state_registration !== 'Isento' && state_registration !== '' && <InputStateRegistration
           showLabel
