@@ -3,19 +3,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import Breadcrumbs from 'components/Breadcrumbs';
 import Sidebar from './Sidebar';
 import ArtProposalContent from './ArtProposalContent';
 
 type Props = {
   app: AppStoreType,
   router: RouterStore,
+  match: {},
   dispatch: () => {},
+  setBreadcrumbs: () => void,
   children: any,
 };
 
 export class ArtProposal extends React.Component {
+  componentDidMount() {
+    this.handleBreadcrumbs();
+  }
+
   static props: Props;
+
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs, match: { params: { orderNumber } } } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: 'Meus pedidos',
+          url: '/minha-conta/meus-pedidos',
+        },
+        {
+          title: `Pedido nº' ${orderNumber}`,
+          url: `/minha-conta/pedidos/${orderNumber}`,
+        },
+        {
+          title: 'Proposta de art',
+        },
+      ]);
+    }
+  }
 
   renderMobile() {
     return (
@@ -33,32 +58,9 @@ export class ArtProposal extends React.Component {
   renderDesktop() {
     const { app: { screenSize } } = this.props;
 
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Meus pedidos',
-        url: '/meus-pedidos',
-      },
-      {
-        title: 'Pedido nº483.093',
-        url: '/Pedido',
-      },
-      {
-        title: 'Proposta de art',
-      },
-    ];
-
     return (
       <div className="container">
         <div className="header-artproposal">
-          <Breadcrumbs links={breadcrumb} />
           <p className="title">PROPOSTA DE ARTE</p>
           <p className="destitle">Acompanhe a criação da sua arte</p>
         </div>

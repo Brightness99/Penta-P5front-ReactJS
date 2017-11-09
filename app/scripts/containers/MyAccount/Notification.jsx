@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { shouldComponentUpdate, isMobile } from 'utils/helpers';
-import Breadcrumbs from 'components/Breadcrumbs';
+import swal from 'sweetalert2';
+import { shouldComponentUpdate } from 'utils/helpers';
 import { RadioButton } from 'components/Input';
 import Loading from 'components/Loading';
 import { accountNotificationUpdate, accountNotificationFetch } from 'actions';
@@ -11,6 +11,7 @@ type Props = {
   screenSize: string,
   account: {},
   dispatch: () => {},
+  setBreadcrumbs: () => void,
 };
 
 export class Notification extends React.Component {
@@ -28,11 +29,32 @@ export class Notification extends React.Component {
     const { dispatch } = this.props;
 
     dispatch(accountNotificationFetch());
+    this.handleBreadcrumbs();
   }
 
   componentWillReceiveProps(nextProps) {
+    const { account: { notification } } = this.props;
     const { account } = nextProps;
-    if (account && account.notification) {
+    if (notification !== account.notifiation) {
+      if (!account.notification.isUpdating && account.notification.isUpdated) {
+        if (account.notification.error) {
+          swal({
+            title: account.notification.error.message,
+            type: 'error',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        } else {
+          swal({
+            title: 'Alterações salvas com sucesso!',
+            type: 'success',
+            confirmButtonColor: '#2cac57',
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+          });
+        }
+      }
       this.setState({
         sms_enabled: account.notification.sms_enabled,
       });
@@ -41,6 +63,17 @@ export class Notification extends React.Component {
 
   static props: Props;
 
+  handleBreadcrumbs = () => {
+    const { setBreadcrumbs } = this.props;
+
+    if (typeof setBreadcrumbs === 'function') {
+      setBreadcrumbs([
+        {
+          title: 'Notificações',
+        },
+      ]);
+    }
+  };
   handleChange = (ev) => {
     this.setState({
       [ev.currentTarget.name]: ev.currentTarget.value,
@@ -93,26 +126,10 @@ export class Notification extends React.Component {
   }
 
   render() {
-    const { screenSize, account: { notification } } = this.props;
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Notificações',
-      },
-    ];
+    const { account: { notification } } = this.props;
 
     return (
       <div className="container-myData">
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <h2>Minha conta</h2>
         <h3 className="title-myData">Notificações</h3>
         {!notification.isLoaded || notification.isRunning ? <Loading /> : this.renderForm()}
       </div>

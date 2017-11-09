@@ -2,67 +2,60 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-
-import { PrintiIcon, PrintiSymbolIcon } from 'components/Icons';
+import cx from 'classnames';
+import { shouldComponentUpdate } from 'utils/helpers';
 
 type Props = {
-  enableLink: boolean,
-  small: boolean,
-  fill: string,
-  onClick: () => {},
-  account: {},
+  short: boolean,
+  invert: boolean,
+  loyalty: {},
+  size: 'sm' | 'md' | 'lg',
 };
 
 export class LogoLoyalty extends React.Component {
-  props: Props;
+  static defaultProps = {
+    short: false,
+    invert: false,
+    size: 'md',
+  };
 
-  setBackgroundColor = (color) => {
-    return {
-      background: color,
-    };
-  }
+  shouldComponentUpdate = shouldComponentUpdate;
+
+  static props: Props;
+
+  handleColors = () => {
+    const { loyalty, invert } = this.props;
+
+    return ({
+      backgroundColor: invert ? '#fff' : loyalty.color,
+      color: invert ? loyalty.color : '#fff',
+    });
+  };
 
   render() {
-    const { enableLink, small, account: { loyalty } } = this.props;
+    const { loyalty, short, size } = this.props;
 
-    const handleClick = (ev) => {
-      const { onClick } = this.props;
-
-      if (typeof onClick === 'function') {
-        onClick(ev);
-      }
-    };
-
-    /*if (enableLink) {
-      return (
-        <div className="atm-printi-logo">
-          <NavLink to="/" onClick={handleClick}>
-            {small ? <PrintiSymbolIcon /> : <PrintiIcon fill={this.props.fill} />}
-            {loyalty.isLoaded && !loyalty.isRunning && loyalty.color && <div className="org-logo-loyalty">
-              <p>Club</p>
-              {loyalty.color && <p className="mol-logo-loyalty" style={this.setBackgroundColor(loyalty.color)}>{loyalty.loyalty_tier_name}</p>}
-            </div>}
-          </NavLink>
-        </div>
-      );
-}*/
+    if (!loyalty.color) {
+      return null;
+    }
 
     return (
-      <NavLink to="/" onClick={handleClick}>
-        {/*small ? <PrintiSymbolIcon /> : <PrintiIcon fill={this.props.fill} />*/}
-        {loyalty.isLoaded && !loyalty.isRunning && loyalty.color && <div className="org-logo-loyalty">
-          <p>Club</p>
-          {loyalty.color && <p className="mol-logo-loyalty" style={this.setBackgroundColor(loyalty.color)}>{loyalty.loyalty_tier_name}</p>}
-        </div>}
-      </NavLink>
+      <div
+        className={cx(
+          'mol-logo-loyalty',
+          !!size && `mol-logo-loyalty--${size}`
+        )}
+      >
+        {!short && <span>Club</span>}
+        {loyalty.color && <div style={this.handleColors()}>{loyalty.loyalty_tier_name}</div>}
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    account: state.account,
+    loyalty: state.account.loyalty,
   };
 }
 

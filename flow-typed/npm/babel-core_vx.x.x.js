@@ -138,7 +138,7 @@ declare module 'babel-core/register' {
 declare module 'babel-core/index' {
   declare module.exports: $Exports<'babel-core'>;
 }
-declare module 'babel-core/index.js' {
+declare module 'babel-core/index.jsx' {
   declare module.exports: $Exports<'babel-core'>;
 }
 declare module 'babel-core/lib/api/browser.js' {
@@ -177,7 +177,7 @@ declare module 'babel-core/lib/store.js' {
 declare module 'babel-core/lib/tools/build-external-helpers.js' {
   declare module.exports: $Exports<'babel-core/lib/tools/build-external-helpers'>;
 }
-declare module 'babel-core/lib/transformation/file/index.js' {
+declare module 'babel-core/lib/transformation/file/index.jsx' {
   declare module.exports: $Exports<'babel-core/lib/transformation/file/index'>;
 }
 declare module 'babel-core/lib/transformation/file/logger.js' {
@@ -192,7 +192,7 @@ declare module 'babel-core/lib/transformation/file/options/build-config-chain.js
 declare module 'babel-core/lib/transformation/file/options/config.js' {
   declare module.exports: $Exports<'babel-core/lib/transformation/file/options/config'>;
 }
-declare module 'babel-core/lib/transformation/file/options/index.js' {
+declare module 'babel-core/lib/transformation/file/options/index.jsx' {
   declare module.exports: $Exports<'babel-core/lib/transformation/file/options/index'>;
 }
 declare module 'babel-core/lib/transformation/file/options/option-manager.js' {

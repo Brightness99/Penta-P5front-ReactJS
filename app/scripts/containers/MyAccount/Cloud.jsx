@@ -70,7 +70,6 @@ export class Cloud extends React.Component {
     const { screenSize, locale } = this.props;
     const { focusedInput, startDate, endDate } = this.state;
     const csvLink = (startDate && endDate) && `${config.apiUrl}/v2/cloud/order-list?date_end=${endDate.format('YYYY-MM-DD')}&date_start=${startDate.format('YYYY-MM-DD')}`;
-
     return (
       <div className="container-cloud">
         <h3 className="atm-myorder-title">{locale.TITLE}</h3>
@@ -81,6 +80,7 @@ export class Cloud extends React.Component {
             focusedInput={focusedInput}
             startDate={startDate}
             endDate={endDate}
+            showDefaultInputIcon={true}
             orientation={isMobile(screenSize) ? VERTICAL_ORIENTATION : HORIZONTAL_ORIENTATION}
             withFullScreenPortal={isMobile(screenSize)}
             startDatePlaceholderText={locale.cloud_orders.STARTS_AT}

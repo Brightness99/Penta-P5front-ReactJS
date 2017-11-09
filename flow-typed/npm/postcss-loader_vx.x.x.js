@@ -33,6 +33,6 @@ declare module 'postcss-loader/error.js' {
 declare module 'postcss-loader/index' {
   declare module.exports: $Exports<'postcss-loader'>;
 }
-declare module 'postcss-loader/index.js' {
+declare module 'postcss-loader/index.jsx' {
   declare module.exports: $Exports<'postcss-loader'>;
 }

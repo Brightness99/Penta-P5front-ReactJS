@@ -1,7 +1,5 @@
 // @flow
 import React from 'react';
-import Breadcrumbs from 'components/Breadcrumbs';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RichTextEditor from 'react-rte';
 import { RoundedTransparentButton, RoundedConfirmationButton } from 'atoms/Buttons';
@@ -36,10 +34,6 @@ export class ArtProposalContent extends React.Component {
     screenSize: 'xs',
   };
 
-  static props: Props;
-
-  static state: State;
-
   componentDidMount() {
     const { screenSize } = this.props;
     const width = document.getElementsByClassName('container')[0].clientWidth;
@@ -47,7 +41,11 @@ export class ArtProposalContent extends React.Component {
     this.setState({ editorWidth: width - minusWidth });
   }
 
-  onChange = (val) => {};
+  static props: Props;
+
+  static state: State;
+
+  onChange = () => {};
 
   handleSelection = (ev) => {
     this.setState({

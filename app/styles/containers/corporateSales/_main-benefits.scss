@@ -1,54 +1,64 @@
-.container-mainBenefits {
-  // background-color: $color-white;
+.container-main-benefits {
   padding: 1rem;
+
   @include lg {
     padding: 3rem;
+
     .container {
       padding: 0;
     }
   }
 }
 
-.boxes-ourBenefits {
+.boxes-our-benefits {
   align-items: center;
   box-sizing: border-box;
   display: inline-flex;
+  flex-direction: column;
   justify-content: center;
   padding: 2rem 0;
-  flex-direction: column;
-  @include md {
-    display: flex;
-  }
+
   @include lg {
     flex-direction: row;
   }
-  .box-ourBenefits {
+
+  .slick-initialized {
+    margin-top: 2rem;
+  }
+
+  &.mobile {
+    align-items: initial;
+    display: initial;
+    flex-direction: initial;
+    justify-content: initial;
+  }
+
+  .box-our-benefits {
     align-items: center;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    height: auto;
     border: 0.1rem solid $color-lightGray2;
     border-radius: 0.3rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 2rem;
     padding: 2rem;
-    @include md {
-      max-width: 480px;
-    }
+
     @include lg {
+      height: 36rem;
       margin-right: 2rem;
-      height: 360px;
       max-width: inherit;
     }
+
     &:last-of-type {
       margin-right: 0;
     }
-    .title-ourBenefits {
+
+    .title-our-benefits {
       font-family: $font-family-nunito-regular;
       font-size: $font-size-il;
     }
-    .text-ourBenefits {
+
+    .text-our-benefits {
       color: $color-lightGray;
       font-family: $font-family-open-sans-light;
       font-size: $font-size-base;
@@ -56,9 +66,11 @@
       margin-bottom: 0;
       text-align: center;
     }
+
     svg {
-      width: 5.8rem;
       height: 5.8rem;
+      width: 5.8rem;
+
       @include lg {
         height: inherit;
       }

@@ -31,7 +31,7 @@ declare module 'react-inlinesvg/lib/shouldComponentUpdate' {
 }
 
 // Filename aliases
-declare module 'react-inlinesvg/lib/index.js' {
+declare module 'react-inlinesvg/lib/index.jsx' {
   declare module.exports: $Exports<'react-inlinesvg/lib/index'>;
 }
 declare module 'react-inlinesvg/lib/shouldComponentUpdate.js' {

@@ -5,14 +5,26 @@ import config from 'config'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { shouldComponentUpdate } from 'utils/helpers';
+import { accountFetch } from 'actions/account';
 
-import { BannersBlock, HighlightsBlock, BlogBlock, CustomersRelyBlock, CategoriesCarouselBlock } from 'components/LandingPage';
-import LoyaltyContainer from 'components/LoyaltyContainer';
+import {
+  BannersBlock,
+  HighlightsBlock,
+  BlogBlock,
+  CustomersRelyBlock,
+  CategoriesCarouselBlock
+} from 'components/LandingPage';
+import Loading from 'components/Loading/index';
 
 type Props = {
   screenSize: AppStoreType.screenSize,
   locale: SEOLocaleType,
   account: {},
+  accountFetch: () => void,
+  accountEffects: {
+    isRunning: boolean,
+    isLoaded: boolean,
+  },
 };
 
 const bannerImages = [
@@ -61,38 +73,52 @@ const bannerImages = [
 export class Home extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
-  props: Props;
+  componentDidMount() {
+    this.props.accountFetch();
+  }
+
+  static props: Props;
 
   render() {
-    const { locale, account: { loyalty } } = this.props;
+    const { locale, accountEffects } = this.props;
+    const { isRunning } = accountEffects;
+
+    if (isRunning) {
+      return <Loading />;
+    }
 
     return (
       <div className="container-homePage">
         <Helmet>
-          <title>{locale.PAGE_TITLE}</title>
-          <meta name="description" content={locale.META_DESCRIPTION} />
+          <title>{locale.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.seo.META_DESCRIPTION} />
         </Helmet>
         <BannersBlock images={bannerImages} />
-        {loyalty && loyalty.isLoaded && !loyalty.isRunning && loyalty.carousel && <LoyaltyContainer text={loyalty.carousel} />}
         <CategoriesCarouselBlock />
-        <HighlightsBlock />
+        {locale.COUNTRY_CODE === 'BR' && <HighlightsBlock />}
         <CustomersRelyBlock />
-        <BlogBlock />
+        {locale.COUNTRY_CODE === 'BR' && <BlogBlock />}
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    locale: state.locale.translate.page.home,
-    account: state.account,
-  };
-}
+const mapStateToProps = (state) => {
+  const { account, locale } = state;
+  const { isRunning, isLoaded } = account;
+  return ({
+    locale: {
+      ...locale.translate.page.home,
+      COUNTRY_CODE: locale.COUNTRY_CODE,
+    },
+    account,
+    accountEffects: { isRunning, isLoaded },
+  });
+};
 
-function mapDispatchToProps(dispatch) {
-  return { dispatch };
-}
+const mapDispatchToProps = (dispatch) => ({
+  accountFetch: () => dispatch(accountFetch()),
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

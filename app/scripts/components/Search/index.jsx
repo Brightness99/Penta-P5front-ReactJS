@@ -81,7 +81,7 @@ export class Search extends React.Component {
     gcse.id = 'gcse_printi';
     gcse.type = 'text/javascript';
     gcse.async = true;
-    gcse.src = `${document.location.protocol === 'https:' ? 'https:' : 'http:'}//www.google.com/cse/cse.js?cx=${cseId}`;
+    gcse.src = `${document.location.protocol === 'https:' ? 'https:' : 'http:'}//www.google.com/cse/cse.js?cx=${cseId.replace('searchbox_', '')}`;
     document.body.insertBefore(gcse, document.body.firstChild);
   };
 
@@ -137,7 +137,7 @@ export class Search extends React.Component {
       },
     ];
     return (
-      <section>
+      <section className="page-search">
         <div className="container">
           {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
           <div className="org-search-page">

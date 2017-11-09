@@ -3,7 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import config from 'config';
-import { TransitionGroup } from 'react-transition-group';
 import { IntlDate } from 'components/Intl';
 
 type Props = {

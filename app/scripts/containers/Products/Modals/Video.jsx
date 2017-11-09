@@ -28,6 +28,8 @@ export default class VideoModal extends React.Component {
 
   static props: Props;
 
+  static state: State;
+
   handleClose = (ev) => {
     const { onClose } = this.props;
 
