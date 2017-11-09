@@ -1,0 +1,147 @@
+// @flow
+
+.tpl-tutorial {
+  .org-tutorial {
+    .title-tutorial {
+      font-family: $font-family-open-sans-bold;
+      font-size: $font-size-lg;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .mol-content-tutorial {
+      display: flex;
+
+      .atm-sidebar-tutorial {
+        flex: 1;
+        padding-right: 2rem;
+        .qrk-search-tutorial {
+          font-family: $font-family-open-sans-light;
+          margin-bottom: 1rem;
+          input {
+            background: transparent;
+            border: 1px solid $color-hrLightGray;
+            border-right: transparent;
+            color: $color-lightGray;
+            padding: 1.5rem;
+          } 
+          button {
+            background: transparent;
+            border: 1px solid $color-hrLightGray;
+            border-left: transparent;
+            padding: 1.5rem;
+            svg {
+              fill: $color-lightGray;
+              height: 1.6rem;
+              width: 1.6rem;
+            }
+          }
+        }
+        .qrk-list-sidebar {
+          li {
+            color: $color-lightGray;
+            background-color: $color-white;
+            border-radius: 0.3rem;
+            font-size: $font-size-base;
+            font-weight: 600;
+            margin-bottom: 1rem;        
+            transition: 0.3s ease-in-out;
+            a {
+              color: $color-lightGray;
+              display: flex;
+              padding: 1.5rem;
+            }
+            &.active-li {
+              background-color: $color-print-blue-light;
+              box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+              a {
+                color: $color-printi-blue;
+              }
+            }
+            &:hover {
+              background-color: $color-print-blue-light;
+              box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+              a {
+                color: $color-printi-blue;
+              }
+            }
+          }
+        }
+      }
+
+      .atm-content-tutorial {
+        flex: 3;
+        .qrk-content-tutorial {
+          background-color: $color-white;
+          border-radius: 0.4rem;
+          display: inline-flex;
+          width: calc((100% /3) - 2rem);
+          margin: 0 2rem 2rem 0rem;
+          &:nth-of-type(3n) {
+            margin-right: 0;
+          }
+          .details-content-tutorial {
+            img {
+              width: 100%;
+            }
+            .desc-content-tutorial {
+              padding: 2.1rem 2rem;
+              .cat-content-tutorial {
+                border-radius: 1rem;
+                color: $color-white;
+                font-family: $font-family-open-sans-regular;
+                font-size: $font-size-xxs;
+                padding: 0.2rem 1rem;
+                &.bg-tools {
+                  border-left-color: $color-maize;
+                }
+                &.bg-tools {
+                  background-color: $color-melon;
+                }
+                &.bg-product {
+                  background-color: $color-green-light;
+                }
+                &.bg-videos {
+                  background-color: $color-barbie-pink;
+                }
+              }
+              .title-desc-content-tutorial {
+                font-family: $font-family-nunito-regular;
+                font-size: $font-size-lg;
+                font-weight: 400;
+                letter-spacing: inherit;
+                text-transform: inherit;
+                padding: 2rem 0;
+              }
+              .footer-content-tutorial {
+                display: flex;
+                justify-content: space-between;
+                .date-time-content-tutorial {
+                  display: flex;
+                  align-items: center;
+                  svg {
+                    fill: $color-lightGray;
+                    width: 1.8rem;
+                    height: 1.5rem;
+                    margin-right: 0.5rem;
+                  }
+                  span {
+                    color: $color-lightGray;
+                    font-family: $font-family-open-sans-regular;
+                    font-size: $font-size-xs;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .see-more-tutorial {
+          display: flex;
+          justify-content: center;
+          margin: 4rem 0;
+        }
+      }
+
+    }
+  }
+}
