@@ -133,7 +133,7 @@
     "react-credit-cards": "^0.4.1",
     "react-dates": "^12.7.1",
     "react-dom": "^15.6.1",
-    "react-facebook": "^4.0.16",
+    "react-facebook": "^4.1.1",
     "react-facebook-login": "3.6.2",
     "react-google-login": "2.9.3",
     "react-helmet": "^5.2.0",
@@ -157,7 +157,7 @@
     "slick-carousel": "^1.7.1",
     "sprintf-js": "^1.1.1",
     "string-mask": "^0.3.0",
-    "sweetalert2": "^6.11.4"
+    "sweetalert2": "^6.11.5"
   },
   "engines": {
     "node": ">=6.0.0",

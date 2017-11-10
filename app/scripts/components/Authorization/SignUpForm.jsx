@@ -176,7 +176,6 @@ export default class SignUpForm extends React.Component {
           <EnhancedInputPassword
             passwordPlaceholder={PASSWORD_PLACEHOLDER}
             handleValidatedInput={this.handleValidatedInput}
-            title={'Esconder senha'}
           />
           <ErrorField message={errorMessage} />
           <Button

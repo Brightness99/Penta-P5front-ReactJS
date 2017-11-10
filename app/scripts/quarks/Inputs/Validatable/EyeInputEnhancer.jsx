@@ -5,9 +5,6 @@ import EyeIcon from 'components/Icons/Eye';
 import EyeSlashIcon from 'components/Icons/EyeSlash';
 
 type Props = {
-  title: string,
-  passwordValue?: string,
-  confirmPasswordValue?: string,
   handleValidatedInput: (name: string, value: string, valid: boolean) => void,
   showPassword: boolean,
 };
@@ -46,7 +43,7 @@ const EyeIconEnhancer = () => (WrappedComponent: ReactElement) =>
                 checked={showPassword}
               />
               {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
-              <span>{this.props.title}</span>
+              <span>{showPassword ? 'Esconder senha' : 'Visualizar senha'}</span>
             </label>
           </section>
         </section>

@@ -225,7 +225,6 @@ export class ResetMyPassword extends React.Component<Props, State> {
                 passwordValue={passwordValue}
                 confirmPasswordValue={confirmPasswordValue}
                 handleValidatedInput={this.handleValidatedInput}
-                title={'Visualizar senha'}
               />
               <Button
                 type="submit"
