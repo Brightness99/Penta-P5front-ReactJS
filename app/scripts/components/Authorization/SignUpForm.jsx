@@ -4,10 +4,7 @@ import React from 'react';
 import ErrorField from 'components/ErrorField';
 import { CheckBox } from 'components/Input';
 import { BlockTitle } from 'atoms/Titles';
-import EyeIcon from 'components/Icons/Eye';
-import EyeSlashIcon from 'components/Icons/EyeSlash';
-import IconToggleButton from 'components/IconToggleButton';
-import { InputFullName, InputEmail, InputPassword } from 'quarks/Inputs/Validatable';
+import { InputFullName, InputEmail, InputPassword, EyeIconEnhancer } from 'quarks/Inputs/Validatable';
 import { Button } from 'quarks/Inputs';
 import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
 import TermsAndPolicyBlock from './TermsAndPolicyBlock';
@@ -39,8 +36,25 @@ type State = {
   canSubmit: boolean,
   form: FormType,
   hubspotSubscribe: boolean,
-  showPassword: boolean
 };
+
+type EnhancedInputPasswordProps = {
+  showPassword: boolean,
+  handleValidatedInput: (name: string, value: string, valid: boolean) => void,
+  passwordPlaceholder: string,
+};
+
+const WrappedInputPassword = ({ showPassword, handleValidatedInput, passwordPlaceholder }: EnhancedInputPasswordProps) => (
+  <InputPassword
+    name="password"
+    showPassword={showPassword}
+    placeholder={passwordPlaceholder}
+    showLabel={true}
+    onValidate={handleValidatedInput}
+  />
+);
+
+const EnhancedInputPassword = EyeIconEnhancer()(WrappedInputPassword);
 
 export default class SignUpForm extends React.Component {
   constructor(props) {
@@ -55,7 +69,6 @@ export default class SignUpForm extends React.Component {
       },
       canSubmit: false,
       hubspotSubscribe: false,
-      showPassword: false,
     };
   }
 
@@ -105,7 +118,8 @@ export default class SignUpForm extends React.Component {
     newState.form[name].value = value;
 
     if (canSubmit === true) {
-      Object.keys(newState.form).forEach((index) => {
+      Object.keys(newState.form)
+      .forEach((index) => {
         if (newState.form[index].valid !== true) {
           canSubmit = false;
         }
@@ -121,14 +135,8 @@ export default class SignUpForm extends React.Component {
     });
   };
 
-  handleToggleChanged = (value) => {
-    this.setState({
-      showPassword: value,
-    });
-  };
-
   render() {
-    const { canSubmit, form, hubspotSubscribe, showPassword } = this.state;
+    const { canSubmit, form, hubspotSubscribe } = this.state;
     const {
       errorMessage, isLoading, locale: {
         TITLE,
@@ -165,21 +173,11 @@ export default class SignUpForm extends React.Component {
             showLabel={true}
             onValidate={this.handleValidatedInput}
           />
-          <InputPassword
-            name="password"
-            showPassword={showPassword}
-            placeholder={PASSWORD_PLACEHOLDER}
-            showLabel={true}
-            onValidate={this.handleValidatedInput}
+          <EnhancedInputPassword
+            passwordPlaceholder={PASSWORD_PLACEHOLDER}
+            handleValidatedInput={this.handleValidatedInput}
+            title={'Esconder senha'}
           />
-          <section className="show-password-block">
-            <IconToggleButton
-              onChange={this.handleToggleChanged}
-              title="Esconder senha"
-              iconChecked={<EyeSlashIcon />}
-              iconUnchecked={<EyeIcon />}
-            />
-          </section>
           <ErrorField message={errorMessage} />
           <Button
             type="submit"
@@ -200,7 +198,7 @@ export default class SignUpForm extends React.Component {
             </label>
           </section>
         </form>
-        { !isMobile && <TermsAndPolicyBlock />}
+        {!isMobile && <TermsAndPolicyBlock />}
       </div>
     );
   }
