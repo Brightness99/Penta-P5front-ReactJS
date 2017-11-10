@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Modernizr from 'modernizr';
 import { getScreenSize } from 'utils/helpers';
 import { updateBrowserOptions } from 'actions';
@@ -40,6 +40,7 @@ import TemplatesSEO from 'containers/TemplatesSEO';
 import Referral from 'containers/Referral';
 import ForgotMyPassword from 'containers/ForgotMyPassword';
 import LoyaltyLp from 'containers/LoyaltyLp';
+import ResetMyPassword from 'containers/ResetMyPassword';
 import CloudEditor from 'containers/CloudEditor';
 import Tutorial from 'containers/Tutorial';
 
@@ -51,7 +52,8 @@ type Props = {
   router: RouterStore,
   locale: {},
   isAuthorized: boolean,
-  headerConfig: {}
+  headerConfig: {},
+  forgotPassword: ForgotPasswordType,
 };
 
 export class App extends React.Component {
@@ -77,7 +79,10 @@ export class App extends React.Component {
   };
 
   render() {
-    const { app, dispatch, router, cart, isAuthorized, headerConfig } = this.props;
+    const {
+      app, dispatch, router,
+      cart, isAuthorized, headerConfig,
+    } = this.props;
 
     let html = (<div className="loader">Loading</div>);
 
@@ -128,7 +133,15 @@ export class App extends React.Component {
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
                       <Route path="/programa-de-fidelidade" component={LoyaltyLp} />
                       <Route path="/tutoriais" component={Tutorial} />
-                      <Route path="/esqueci-minha-senha" component={ForgotMyPassword} />
+                      <Route
+                        path="/esqueci-minha-senha"
+                        render={() => (isAuthorized ? <Redirect to={'/'} /> : <ForgotMyPassword />)}
+                      />
+                      <Route
+                        path="/redefinir-senha/:hash"
+                        render={({ match }) =>
+                          (isAuthorized ? <Redirect to={'/'} /> : <ResetMyPassword hash={match.params.hash} />)}
+                      />
                       <Route path="/download-de-gabaritos" component={Templates} />
                       <Route exact path="/modelos" component={TemplatesSEO} />
                       <Route component={Error404} />
@@ -147,16 +160,14 @@ export class App extends React.Component {
   }
 }
 
-/* istanbul ignore next */
-function mapStateToProps(state) {
-  return {
-    app: state.app,
-    cart: state.cart,
-    router: state.router,
-    locale: state.locale,
-    isAuthorized: state.user.isAuthorized,
-    headerConfig: state.header,
-  };
-}
+const mapStateToProps = state => ({
+  app: state.app,
+  cart: state.cart,
+  router: state.router,
+  locale: state.locale,
+  isAuthorized: state.user.isAuthorized,
+  headerConfig: state.header,
+  forgotPassword: state.forgotPassword,
+});
 
 export default connect(mapStateToProps)(App);
