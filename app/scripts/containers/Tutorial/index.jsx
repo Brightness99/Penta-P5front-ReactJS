@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { isMobile } from 'utils/helpers';
 import BannerTutorial from './BannerTutorial';
 import Sidebar from './Sidebar';
 import CardsList from './CardsList';
@@ -20,9 +19,9 @@ export class Tutorial extends React.Component {
     const { app: { screenSize } } = this.props;
     return (
       <section className="tpl-tutorial">
-        <div className="container org-tutorial">
+        <div className="org-tutorial">
           <BannerTutorial screenSize={screenSize} />
-          <div>
+          <div className="container">
             <h2 className="title-tutorial">Tutoriais</h2>
             <div className="mol-content-tutorial">
               <Sidebar screenSize={screenSize} />
