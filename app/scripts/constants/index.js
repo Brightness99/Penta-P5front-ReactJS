@@ -27,3 +27,4 @@ export * from './about';
 export * from './file-mount';
 export * from './guide';
 export * from './referral';
+export * from './forgot-password';
