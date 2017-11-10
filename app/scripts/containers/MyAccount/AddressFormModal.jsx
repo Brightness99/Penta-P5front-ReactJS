@@ -40,7 +40,7 @@ class AddressFormModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { account: { zipcodeValid }, account } = nextProps;
-    const { account: prevAccount, dispatch } = this.props;
+    const { account: prevAccount, dispatch, onCloseModal } = this.props;
     const { form } = this.state;
 
     if (zipcodeValid !== prevAccount.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
@@ -84,11 +84,15 @@ class AddressFormModal extends React.Component {
         });
       } else {
         swal({
-          title: 'Alterações salvas com sucesso!',
+          title: 'Salvo com sucesso!',
           type: 'success',
           confirmButtonColor: '#2cac57',
           confirmButtonText: 'OK',
           showCancelButton: false,
+        }).then(() => {
+          if (onCloseModal) {
+            onCloseModal();
+          }
         });
       }
     }
