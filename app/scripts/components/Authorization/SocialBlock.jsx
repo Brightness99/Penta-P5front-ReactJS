@@ -6,48 +6,6 @@ import FacebookLogin from 'react-facebook-login';
 
 import { addFingerprint, getFingerprintFromForm } from 'vendor/fingerprint2';
 
-type GoogleSuccessResult = {
-  googleId: string,
-  tokenId: string,
-  accessToken: string,
-  tokenObj: Object,
-  profileObj: {
-    name: string,
-    email: string,
-  }
-}
-
-type GoogleFailureResult = {
-  error: string,
-  details: string
-}
-
-type FBSuccessResult = {
-  status: string,
-  accessToken: string,
-  expiresIn: string,
-  signedRequest: string,
-  userID: string,
-  name: string,
-  email: string,
-}
-
-type FBFailureResult = {}
-
-type SocialLoginResult = {
-  socialType: string,
-  socialData: {
-    socialId: string,
-    socialToken: string,
-  },
-  fingerprint: string,
-  email: string,
-  hubspot_subscribe: boolean,
-  stay_connected: boolean,
-  first_name: string,
-  error: {}
-}
-
 type Props = {
   facebook: {
     enabled: boolean,
