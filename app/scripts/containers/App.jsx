@@ -39,6 +39,7 @@ import Templates from 'containers/Templates';
 import TemplatesSEO from 'containers/TemplatesSEO';
 import Referral from 'containers/Referral';
 import ForgotMyPassword from 'containers/ForgotMyPassword';
+import LoyaltyLp from 'containers/LoyaltyLp';
 import ResetMyPassword from 'containers/ResetMyPassword';
 import CloudEditor from 'containers/CloudEditor';
 
@@ -128,6 +129,8 @@ export class App extends React.Component {
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
+                      <Route path="/programa-de-fidelidade" component={LoyaltyLp} />
+
                       <Route
                         path="/esqueci-minha-senha"
                         render={() => (isAuthorized ? <Redirect to={'/'} /> : <ForgotMyPassword />)}
