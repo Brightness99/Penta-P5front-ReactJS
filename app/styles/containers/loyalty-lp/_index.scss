@@ -1,0 +1,40 @@
+@import "loyalty-banner-member";
+@import "premium-benefits";
+@import "what-lost";
+@import "start-premium";
+
+.tpl-loyalty-lp {
+  background: url('../../assets/media/images/bg-loyalty-lp.png');
+  height: 100%;
+  .org-loyalty-lp {
+    .title-loyalty, .subtitle-loyalty {
+      text-align: center;
+      font-family: $font-family-open-sans-regular;
+    }
+    .title-loyalty {
+      font-size: $font-size-xl;
+      text-transform: inherit;
+      font-weight: 400;
+      letter-spacing: normal;
+      padding: 0 0 1rem 0;
+      @include lg {
+        padding-bottom: 2rem;
+        font-size: $font-size-xxl;
+      }
+    }
+    .subtitle-loyalty {
+      font-size: $font-size-h6;
+      color: $color-opacity-silver;
+    }
+
+    .icon-arrow {
+      display: flex;
+      justify-content: center;
+      svg {
+        fill: $color-printi-blue;
+        width: 1.2rem;
+        height: 7rem;
+      }
+    }
+  }
+}

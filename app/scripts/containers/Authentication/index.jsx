@@ -29,6 +29,7 @@ type Props = {
   signUpErrorMessage: string,
   locale: {},
   screenSize: string,
+  countryCode: string,
 };
 
 type States = {
@@ -207,17 +208,16 @@ export class Authentication extends React.Component {
   };
 
   renderSocialBlock = () => {
-    const { socialLoginSettings, locale: { social_block }, screenSize } = this.props;
+    const { socialLoginSettings, locale: { social_block }, screenSize, countryCode } = this.props;
     const { isFingerprintLoaded } = this.state;
     const isMobileLayout = isMobile(screenSize);
-
     return (
       <SocialBlock
         locale={social_block}
         loginFBSuccess={this.facebookSignIn}
         loginGoogleSuccess={this.googleSignIn}
-        facebook={socialLoginSettings.socials.facebook}
-        google={socialLoginSettings.socials.google}
+        facebook={socialLoginSettings.socials.facebook[countryCode]}
+        google={socialLoginSettings.socials.google[countryCode]}
         isFingerprintLoaded={isFingerprintLoaded}
         isMobile={isMobileLayout}
       />);
@@ -304,6 +304,7 @@ const mapStateToProps = state => ({
   signInErrorMessage: state.user.authentication.message,
   signUpErrorMessage: state.user.registration.message,
   locale: state.locale.translate.page.authentication,
+  countryCode: state.locale.COUNTRY_CODE,
   screenSize: state.app.screenSize,
 });
 

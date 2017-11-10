@@ -1,0 +1,42 @@
+.mol-start-premium {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem 0;
+  font-family: $font-family-open-sans-regular;
+  .qrk-start-premium {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-direction: column;
+    @include lg {
+      flex-direction: row;
+    }
+    .text-start-premium {
+      text-align: center;
+      p {
+        margin-bottom: 0;
+      }
+      .first-text-start-premium {
+        font-size: $font-size-xli;
+        @include lg {
+          font-size: $font-size-xxx;
+        }
+      }
+      .second-text-start-premium {
+        font-size: $font-size-sm;
+        margin-bottom: 1.2rem;
+        @include lg {
+          font-size: $font-size-il;
+          margin-bottom: 0;
+        }
+      }
+    }
+    &:last-child {
+      .btn-default {
+        padding: 1.25rem 6.5rem;
+      }
+    }
+  }
+}
