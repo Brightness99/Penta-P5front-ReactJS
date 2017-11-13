@@ -140,6 +140,7 @@ export default class Input extends React.Component {
           onBlur={this.handleBlur}
           onKeyPress={this.handleEnterKeyPress}
           readOnly={readOnly}
+          ref={(c) => (this._input = c)} // eslint-disable-line no-return-assign
         />
       </div>
     );
