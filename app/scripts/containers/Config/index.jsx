@@ -3,14 +3,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
+import Helmet from 'react-helmet';
+import { sprintf } from 'sprintf-js';
 import { settingsFetch, settingsOptionsFetch } from 'actions';
 import { isMobile } from 'utils/helpers';
 import { settingsSelector } from 'selectors';
 
 import { PageTitle } from 'atoms/Titles';
 import { RoundedConfirmationButton } from 'atoms/Buttons';
-import Breadcrumbs from 'components/Breadcrumbs';
+import Breadcrumbs from 'components/LandingPage/Breadcrumbs';
 import Loading from 'components/Loading';
 import SideBar from 'organisms/SideBar';
 import { TruckIcon } from 'components/Icons';
@@ -30,7 +31,7 @@ type Props = {
   match: {},
   options: {},
   user: {},
-  account: {},
+  loyalty: {},
 };
 
 export class Config extends React.Component {
@@ -136,57 +137,6 @@ export class Config extends React.Component {
     }));
   };
 
-  renderOptionsBlock() {
-    const {
-      app: {
-        config: {
-          viewType,
-        },
-        screenSize,
-      },
-      productSettings: {
-        selection,
-        source: {
-          isRunning,
-          isLoaded,
-        },
-        settings: {
-          showSteps,
-        },
-        config: {
-          isFulfilled,
-        },
-        calculator,
-        finalProduct,
-      },
-      productSettings,
-      locale,
-      dispatch,
-      options,
-    } = this.props;
-    const configLocale = locale.translate.page.product_settings.options;
-
-    if (isRunning || !isLoaded) {
-      return (<Loading />);
-    }
-
-    return (
-      <OptionsBlock
-        dispatch={dispatch}
-        viewType={viewType}
-        locale={configLocale}
-        order={showSteps.source ? 2 : 1}
-        isComplete={isFulfilled.options}
-        options={{ ...productSettings.options, ...options }}
-        selection={selection}
-        screenSize={screenSize}
-        calculator={calculator}
-        finalProduct={finalProduct}
-        onSelect={this.handleOptionSelection}
-      />
-    );
-  }
-
   renderMatrixBlock() {
     const {
       productSettings: {
@@ -241,13 +191,14 @@ export class Config extends React.Component {
   renderPage() {
     const {
       app: {
+        config: {
+          viewType,
+        },
         screenSize,
-      },
-      account: {
-        loyalty,
       },
       productSettings: {
         source,
+        options,
         finalProduct: {
           id,
         },
@@ -256,6 +207,7 @@ export class Config extends React.Component {
           showSteps,
           isFulfilled,
         },
+        finalProduct,
         selection,
         templates,
         optionSectionInfo,
@@ -281,10 +233,13 @@ export class Config extends React.Component {
 
     return (
       <div className="app__config">
-        <Breadcrumbs links={breadcrumb} />
+        <Helmet>
+          <title>{sprintf(locale.seo.PAGE_TITLE, product.title)}</title>
+          <meta name="description" content={sprintf(locale.seo.META_DESCRIPTION, product.title)} />
+        </Helmet>
+        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <div className="container">
           <PageTitle>{`${locale.TITLE}: ${product.title}`}</PageTitle>
-          {loyalty && loyalty.isLoaded && !loyalty.isRunning && loyalty.matrix && <LoyaltyContainer text={loyalty.matrix} />}
           <div className="app__config__content">
             <main>
               {showSteps.source &&
@@ -296,6 +251,22 @@ export class Config extends React.Component {
                   finalProductId={id}
                   dispatch={dispatch}
                   source={source}
+                />
+              }
+              {showSteps.options && source.selectedSource &&
+                <OptionsBlock
+                  dispatch={dispatch}
+                  viewType={viewType}
+                  locale={locale.options}
+                  order={showSteps.source ? 2 : 1}
+                  isComplete={isFulfilled.options}
+                  options={options}
+                  selection={selection}
+                  screenSize={screenSize}
+                  calculator={calculator}
+                  finalProduct={finalProduct}
+                  onSelect={this.handleOptionSelection}
+                  isLoading={source.isRunning || !source.isLoaded}
                 />
               }
             </main>
@@ -321,8 +292,9 @@ export class Config extends React.Component {
 function mapStateToProps(state) {
   return {
     ...settingsSelector(state),
+    app: state.app,
     locale: state.locale.translate.page.product_settings,
-    account: state.account,
+    loyalty: state.account.loyalty,
   };
 }
 

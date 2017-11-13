@@ -155,11 +155,23 @@ export default {
           isRunning: false,
           isLoaded: true,
         },
-        calculator: action.payload.calculator,
-        finalProduct: action.payload.final_product,
-        optionSectionInfo: action.payload.option_section_info,
-        defaultCombinationCount: action.payload.default_combination_count,
-        selection: action.payload.selection,
+        options: {
+          ...state.options,
+          defaultCombinationCount: action.payload.default_combination_count,
+        },
+        parts: action.payload.product.parts,
+        selection: action.payload.product.parts
+          .reduce((prevPart, currentPart) => ({
+            ...prevPart,
+            [currentPart.id]: currentPart.attributes
+              .filter((attribute) => attribute.visible)
+              .reduce((prevAttribute, currentAttribute) => ({
+                ...prevAttribute,
+                [currentAttribute.key]: currentAttribute.options
+                  .filter((option) => option.default)
+                  .reduce((prevOption, currentOption) => currentOption.id, ''),
+              }), {}),
+          }), {}),
         updatedAt: action.meta.updatedAt,
       };
     },

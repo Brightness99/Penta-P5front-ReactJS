@@ -72,10 +72,22 @@
     }
 
     &__content {
+      display: block;
       flex: 1;
       overflow-x: hidden;
       overflow-y: auto;
       position: relative;
+
+      @include lg {
+        overflow-y: hidden;
+      }
+
+      > img {
+        max-height: 100%;
+        height: auto;
+        width: auto;
+        max-width: 100%;
+      }
     }
 
     &.has-title {
