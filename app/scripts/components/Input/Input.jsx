@@ -51,7 +51,7 @@ export default class Input extends React.Component {
   componentDidMount() {
     const { type, pattern, onChange } = this.props;
 
-    if (['text', 'tel', 'password'].includes(type)) {
+    if (pattern && ['text', 'tel', 'password'].includes(type)) {
       Inputmask({
         showMaskOnHover: false,
         showMaskOnFocus: false,

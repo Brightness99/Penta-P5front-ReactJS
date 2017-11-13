@@ -9,15 +9,6 @@ import Loading from 'components/Loading';
 import { accountUpdate, accountFetch, accountFormReset } from 'actions';
 import CustomerDataForm from 'components/CustomerData';
 
-type FormType = {
-  phone: { valid: boolean, value: string },
-  cnpj: { valid: boolean, value: string },
-  cpf: { valid: boolean, value: string },
-  current_password: { valid: boolean, value: string },
-  new_password: { valid: boolean, value: string },
-  new_password_repeat: { valid: boolean, value: string },
-};
-
 type Props = {
   account: AccountLocaleType,
   locale: {},
@@ -26,9 +17,7 @@ type Props = {
 };
 
 type State = {
-  activeForm: string,
   canSubmit: boolean,
-  form: FormType,
 };
 
 export class CustomerData extends React.Component {
@@ -54,7 +43,7 @@ export class CustomerData extends React.Component {
         value: props.account.cpf,
       },
       gender: {
-        valid: false,
+        valid: !!props.account.gender,
         value: props.account.gender,
       },
       work_field: {
@@ -76,6 +65,10 @@ export class CustomerData extends React.Component {
       id_state_registration: {
         valid: !!props.account.id_state_registration,
         value: props.account.id_state_registration,
+      },
+      state_registration: {
+        valid: !!props.account.state_registration,
+        value: props.account.state_registration,
       },
       current_password: { valid: false, value: '' },
       new_password: { valid: false, value: '' },
@@ -136,47 +129,51 @@ export class CustomerData extends React.Component {
     }
   };
 
-  handleValidatedInput = (name, value, valid) => {
-    const { form } = this.state;
-    const newState = { form };
-    const target = name.target;
-    const key = target ? target.id : name;
+  getAdditionalKeys = () => {
+    const { locale } = this.props;
+    const { type } = this.state;
 
-    let canSubmit = true;
-    newState.form[key].valid = target ? !!target.value : valid;
-    newState.form[key].value = target ? target.value : value;
-
-    const updateState = {};
-    updateState[key] = newState.form[key].value;
-    this.setState(updateState);
-    if (canSubmit === true) {
-      Object.keys(newState.form)
-      .forEach((index) => {
-        if (newState.form[index].valid !== true) {
-          canSubmit = false;
-        }
-      });
+    if (locale.COUNTRY_CODE === 'US') {
+      return ['gender'];
+    } else if (type === 'PJ') {
+      return ['cnpj', 'work_field', 'trading_name', 'employee_number', 'id_state_registration', 'state_registration'];
     }
 
-    this.setState({ form: newState.form, canSubmit });
+    return ['gender', 'cpf', 'work_field'];
   };
 
   handleSubmit = (ev) => {
     ev.preventDefault();
 
     if (this.state.canSubmit) {
-      const { dispatch } = this.props;
-      const { form } = this.state;
+      const { dispatch, account } = this.props;
+      const { current_password, new_password, new_password_repeat } = this.state;
 
-      const dataToUpdate = this.state;
+      let keys = [
+        'email',
+        'phone',
+      ];
+
+      keys = keys.concat(this.getAdditionalKeys());
+
+      const names = this.state.full_name.value.split(' ');
+      const dataToUpdate = {
+        ...account,
+        first_name: (names && names[0]) || '',
+        last_name: (names && names[1]) || '',
+      };
+
+      keys.forEach((key) => {
+        dataToUpdate[key] = this.state[key].value;
+      });
 
       delete dataToUpdate.change_password;
 
-      if (form.current_password.value !== '' && form.new_password.value !== '' && form.new_password_repeat.value !== '') {
+      if (current_password.value !== '' && new_password.value !== '' && new_password_repeat.value !== '') {
         dataToUpdate.change_password = {
-          current_password: form.current_password.value,
-          new_password: form.new_password.value,
-          new_password_repeat: form.new_password_repeat.value,
+          current_password: current_password.value,
+          new_password: new_password.value,
+          new_password_repeat: new_password_repeat.value,
         };
       }
 
@@ -191,11 +188,29 @@ export class CustomerData extends React.Component {
   };
 
   handleChange = (input: string, valid: boolean, value: string): void => {
+    let canSubmit = valid;
+    let keys = [
+      'full_name',
+      'email',
+      'phone',
+      'current_password',
+      'new_password',
+      'new_password_repeat',
+    ];
+    keys = keys.concat(this.getAdditionalKeys());
+
+    keys.forEach((key) => {
+      if (this.state[key].valid !== true && key !== input) {
+        canSubmit = false;
+      }
+    });
+
     this.setState({
       [input]: {
         value,
         valid,
       },
+      canSubmit,
     });
   };
 
@@ -212,7 +227,7 @@ export class CustomerData extends React.Component {
     return (
       <div>
         <CustomerDataForm
-          activeType={type}
+          account={this.state}
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
         />
@@ -224,7 +239,6 @@ export class CustomerData extends React.Component {
             id="current_password"
             className="atm-checkout-input atm-checkout-input-one"
             placeholder={locale.CURRENT_PASSWORD}
-            required
             onChange={(isValid, value) => this.handleChange('current_password', isValid, value)}
             onEnterKeyPress={this.handleSubmit}
           />
@@ -234,7 +248,6 @@ export class CustomerData extends React.Component {
             id="new_password"
             className="atm-checkout-input atm-checkout-input-one"
             placeholder={locale.NEW_PASSWORD}
-            required
             onChange={(isValid, value) => this.handleChange('new_password', isValid, value)}
             onEnterKeyPress={this.handleSubmit}
           />
@@ -244,7 +257,6 @@ export class CustomerData extends React.Component {
             id="new_password_repeat"
             className="atm-checkout-input atm-checkout-input-one"
             placeholder={locale.REPEAT_NEW_PASSWORD}
-            required
             onChange={(isValid, value) => this.handleChange('new_password_repeat', isValid, value)}
             checkValidation={this.handlePasswordValidation}
             onEnterKeyPress={this.handleSubmit}
