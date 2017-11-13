@@ -10,8 +10,6 @@ import { Select } from 'atoms/Inputs';
 type Props = {
   account: AccountType,
   locale: LocaleType,
-  idStateRegistration: string,
-  activeType: string,
   onChange: (input: string, valid: boolean, value: string) => void,
   onSubmit: (ev) => void,
 };
@@ -31,9 +29,9 @@ export class CustomerDataForm extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   componentWillReceiveProps(nextProps: Props): void {
-    const { activeType } = this.props;
+    const { account } = this.props;
 
-    if (nextProps.activeType !== activeType) {
+    if (nextProps.account.type !== account.type) {
       this.setState({
         selectedStateId: nextProps.account.id_state_registration,
       });
@@ -104,7 +102,7 @@ export class CustomerDataForm extends React.Component {
         key="personal-form-full_name"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Nome Completo"
-        value={account.last_name ? `${account.first_name} ${account.last_name}` : account.first_name}
+        value={account.full_name.value}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('full_name', isValid, value)}
@@ -113,7 +111,7 @@ export class CustomerDataForm extends React.Component {
         name="email"
         key="personal-form-email"
         className="atm-checkout-input atm-checkout-input-one"
-        value={account.email}
+        value={account.email.value}
         placeholder="E-mail"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -125,7 +123,7 @@ export class CustomerDataForm extends React.Component {
         key="personal-form-cpf"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="CPF"
-        value={account.cpf}
+        value={account.cpf.value}
         pattern="999.999.999-99"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -137,7 +135,7 @@ export class CustomerDataForm extends React.Component {
         key="personal-form-phone"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Telefone"
-        value={account.phone}
+        value={account.phone.value}
         pattern="(99) 9999[9]-9999"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -149,7 +147,7 @@ export class CustomerDataForm extends React.Component {
         key="personal-form-gender"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Sexo"
-        value={account.gender}
+        value={account.gender.value}
         showLabel
         required
         onChange={(e) => this.handleChange('gender', true, e.target.value)}
@@ -164,7 +162,7 @@ export class CustomerDataForm extends React.Component {
         key="personal-form-work_field"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Área de Atuação"
-        value={account.work_field}
+        value={account.work_field.value}
         showLabel
         required
         onChange={(e) => this.handleChange('work_field', true, e.target.value)}
@@ -184,7 +182,7 @@ export class CustomerDataForm extends React.Component {
         key="enterprise-form-full_name"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Nome Completo"
-        value={account.last_name ? `${account.first_name} ${account.last_name}` : account.first_name}
+        value={account.full_name.value}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('full_name', isValid, value)}
@@ -194,7 +192,7 @@ export class CustomerDataForm extends React.Component {
         key="enterprise-form-trading_name"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Razão Social"
-        value={account.trading_name}
+        value={account.trading_name.value}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('trading_name', isValid, value)}
@@ -204,7 +202,7 @@ export class CustomerDataForm extends React.Component {
         key="enterprise-form-cnpj"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="CNPJ"
-        value={account.cnpj}
+        value={account.cnpj.value}
         pattern="99.999.999/9999-99"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -215,7 +213,7 @@ export class CustomerDataForm extends React.Component {
         name="email"
         key="enterprise-form-email"
         className="atm-checkout-input atm-checkout-input-one"
-        value={account.email}
+        value={account.email.value}
         placeholder="E-Mail"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -227,7 +225,7 @@ export class CustomerDataForm extends React.Component {
         key="enterprise-form-phone"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Telefone"
-        value={account.phone}
+        value={account.phone.value}
         pattern="(99) 9999[9]-9999"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -239,7 +237,7 @@ export class CustomerDataForm extends React.Component {
         key="enterprise-form-work_field"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Área de Atuação"
-        value={account.work_field}
+        value={account.work_field.value}
         showLabel
         required
         onChange={(e) => this.handleChange('work_field', true, e.target.value)}
@@ -252,7 +250,7 @@ export class CustomerDataForm extends React.Component {
         key="enterprise-form-employee_number"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Número de funcionários"
-        value={account.employee_number}
+        value={account.employee_number.value}
         required={true}
         showLabel
         onChange={(e) => this.handleChange('employee_number', true, e.target.value)}
@@ -269,7 +267,7 @@ export class CustomerDataForm extends React.Component {
         key="enterprise-form-id_state_registration"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Inscrição Estadual"
-        value={account.id_state_registration}
+        value={account.id_state_registration.value}
         required
         showLabel
         onChange={(e) => this.handleStateChange('id_state_registration', true, e.target.value)}
@@ -283,10 +281,10 @@ export class CustomerDataForm extends React.Component {
           key="enterprise-form-state_registration"
           className="atm-checkout-input atm-checkout-input-one"
           placeholder="Número Inscrição"
-          value={account.state_registration}
+          value={account.state_registration.value}
           required
           onEnterKeyPress={this.handleSubmit}
-          checkValidation={(value) => ie(value, account.id_state_registration)}
+          checkValidation={(value) => ie(value, account.id_state_registration.value)}
           onChange={(isValid, value) => this.handleChange('state_registration', isValid, value)}
         />,
     ];
@@ -301,7 +299,7 @@ export class CustomerDataForm extends React.Component {
         key="us-form-full_name"
         className="atm-checkout-input atm-checkout-input-two"
         placeholder="Full Name"
-        value={account.last_name ? `${account.first_name} ${account.last_name}` : account.first_name}
+        value={account.full_name.value}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('full_name', isValid, value)}
@@ -311,7 +309,7 @@ export class CustomerDataForm extends React.Component {
         key="us-form-phone"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Phone"
-        value={account.phone}
+        value={account.phone.value}
         pattern="(999) 999-9999"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -321,7 +319,7 @@ export class CustomerDataForm extends React.Component {
         name="email"
         key="us-form-email"
         className="atm-checkout-input atm-checkout-input-two"
-        value={account.email}
+        value={account.email.value}
         placeholder="E-Mail"
         required
         onEnterKeyPress={this.handleSubmit}
@@ -334,7 +332,7 @@ export class CustomerDataForm extends React.Component {
         key="us-form-gender"
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Gender"
-        value={account.gender}
+        value={account.gender.value}
         showLabel
         required
         onChange={(e) => this.handleChange('gender', true, e.target.value)}
@@ -347,13 +345,13 @@ export class CustomerDataForm extends React.Component {
   }
 
   renderForm() {
-    const { locale: { COUNTRY_CODE }, activeType } = this.props;
+    const { locale: { COUNTRY_CODE }, account } = this.props;
 
     if (COUNTRY_CODE === 'US') {
       return this.renderUS();
     }
 
-    if (activeType === 'PJ') {
+    if (account.type === 'PJ') {
       return this.renderEnterprise();
     }
 
@@ -371,7 +369,6 @@ export class CustomerDataForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    account: state.account,
     locale: {
       COUNTRY_CODE: state.locale.COUNTRY_CODE,
     },
