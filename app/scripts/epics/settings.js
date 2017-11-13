@@ -10,7 +10,7 @@ import { replace } from 'modules/ReduxRouter';
 export function settingsFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v1/product-settings/${action.payload.slug}`;
+      const endpoint = `/v2/product/${action.payload.slug}/settings`;
 
       return rxAjax({
         endpoint,
@@ -50,7 +50,7 @@ export function settingsFetch(action$) {
 export function settingsSourceFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_SOURCE_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v1/calculator/finalproducts/${action.payload.id}/source/${action.payload.source}`;
+      const endpoint = `/v2/calculator/finalproducts/${action.payload.id}/source/${action.payload.source}`;
 
       return rxAjax({
         endpoint,
@@ -58,27 +58,10 @@ export function settingsSourceFetch(action$) {
       })
         .map(data => {
           if (data.status === 200 && data.response) {
-            let hasDefaultSelection = true;
-            const selection = Object.keys(data.response.calculator)
-              .reduce((prevItem, currentItem) => ({
-                ...prevItem,
-                [currentItem]: Object.keys(data.response.calculator[currentItem].options).reduce((prevOption, nextOption) => ({
-                  ...prevOption,
-                  [nextOption]: data.response.calculator[currentItem].options[nextOption]
-                    .filter((optionItem) => optionItem.default)
-                    .reduce((prevOptionItem, nextOptionItem) => nextOptionItem.id, ''),
-                }), {}),
-              }), {});
-
-            // if (action.payload.source === 'upload') {
-            //   prePressTemplateFetch();
-            // }
-
             return {
               type: SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS,
               payload: {
                 ...data.response,
-                selection,
                 selectedSource: action.payload.source,
               },
               meta: { updatedAt: getUnixtime() },

@@ -3,13 +3,12 @@
 import React from 'react';
 import cx from 'classnames';
 import SVG from 'react-inlinesvg';
-import Modal from 'components/Modal';
-import { Accordion, AccordionItem } from 'components/Accordion';
-
 import { removePartSelection } from 'actions';
-
-import ConfigBlock from 'containers/Config/ConfigBlock';
-
+import Modal from 'components/Modal';
+import Loading from 'components/Loading';
+import { Accordion, AccordionItem } from 'components/Accordion';
+import MoreInfo from 'components/MoreInfo';
+import { FunnelBlock } from 'components/Funnel';
 import PartsLabel from './PartsLabel';
 import SelectView from './SelectView';
 import ListItem from './ListItem';
@@ -19,6 +18,7 @@ type Props = {
   viewType?: string,
   screenSize: string,
   order: number,
+  isLoading: boolean,
   dispatch: () => {},
   options: {},
   selection: {},
@@ -140,7 +140,7 @@ export default class OptionsBlock extends React.Component {
 
   renderOption(optionsList) {
     const { viewType, selection, onSelect } = this.props;
-
+    console.log(optionsList);
     return (
       <div>
         <ul className={cx(viewType === 'list' && 'app__config__options--show-list')}>
@@ -212,15 +212,23 @@ export default class OptionsBlock extends React.Component {
   }
 
   render() {
-    const { viewType, locale, options: { parts }, dispatch, order, screenSize } = this.props;
+    const { viewType, locale, options: { parts }, dispatch, order, screenSize, isLoading } = this.props;
     const { modal } = this.state;
 
+    if (isLoading) {
+      return <Loading />;
+    }
+
     return (
-      <ConfigBlock
+      <FunnelBlock
         order={order}
         locale={locale}
         screenSize={screenSize}
-        button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
+        header={[
+          <span key="source-block-title">{locale.TITLE}</span>,
+          <button className="app__config__block-header__button">{locale.COMBINATIONS}</button>,
+          <MoreInfo key="source-block-more-info" text={locale.MORE_INFO_TEXT} />,
+        ]}
         className="app__config__options-block"
       >
         <div className="app__config__options">
@@ -229,7 +237,7 @@ export default class OptionsBlock extends React.Component {
           {this.renderOptionList()}
           {modal.isOpen && this.handleModal()}
         </div>
-      </ConfigBlock>
+      </FunnelBlock>
     );
   }
 }
