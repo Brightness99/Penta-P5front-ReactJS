@@ -5,13 +5,10 @@ import { bindActionCreators } from 'redux';
 import { NavLink } from 'react-router-dom';
 import { push } from 'modules/ReduxRouter';
 import swal from 'sweetalert2';
-import { InputPassword } from 'quarks/Inputs/Validatable';
+import { InputPassword, EyeIconEnhancer } from 'quarks/Inputs/Validatable';
 import * as ForgotPasswordAction from 'actions/forgot-password';
 import { Button } from 'quarks/Inputs';
 import ErrorField from 'components/ErrorField';
-import EyeIcon from 'components/Icons/Eye';
-import EyeSlashIcon from 'components/Icons/EyeSlash';
-import IconToggleButton from 'components/IconToggleButton';
 import Loading from 'components/Loading';
 import { shouldComponentUpdate, isEmpty } from 'utils/helpers';
 
@@ -29,7 +26,6 @@ type State = {
     confirmPassword: { value: string, valid: boolean },
   },
   canSubmit: boolean,
-  showPassword: boolean,
   canShowError: boolean,
 };
 
@@ -53,6 +49,42 @@ const getErrorMessage = (password: string, confirmPassword: string, message: str
   return error || message;
 };
 
+type PasswordInputsProps = {
+  passwordValue: string,
+  confirmPasswordValue: string,
+  handleValidatedInput: (name: string, value: string, valid: boolean) => void,
+  showPassword: boolean,
+};
+
+const PasswordInputs = ({ passwordValue, confirmPasswordValue, handleValidatedInput, showPassword }: PasswordInputsProps) => (
+  <section>
+    <InputPassword
+      id="password"
+      name="password"
+      placeholder={'Nova senha'}
+      showLabel={true}
+      required={true}
+      value={passwordValue}
+      isOldRulesForPassword={true}
+      showPassword={showPassword}
+      onValidate={handleValidatedInput}
+    />
+    <InputPassword
+      id="confirmPassword"
+      name="confirmPassword"
+      placeholder={'Confirme a senha'}
+      showLabel={true}
+      required={true}
+      value={confirmPasswordValue}
+      isOldRulesForPassword={true}
+      showPassword={showPassword}
+      onValidate={handleValidatedInput}
+    />
+  </section>
+);
+
+const EnhancedPasswordInputs = EyeIconEnhancer()(PasswordInputs);
+
 export class ResetMyPassword extends React.Component<Props, State> {
   constructor(props) {
     super(props);
@@ -62,7 +94,6 @@ export class ResetMyPassword extends React.Component<Props, State> {
         confirmPassword: { value: '', valid: false },
       },
       canSubmit: false,
-      showPassword: false,
       canShowError: false,
     };
   }
@@ -119,10 +150,6 @@ export class ResetMyPassword extends React.Component<Props, State> {
   static props: Props;
   static state: State;
 
-  handleToggleChanged = () => {
-    this.setState({ showPassword: !this.state.showPassword });
-  };
-
   handleValidatedInput = (name: string, value: string, valid: boolean) => {
     const form = Object.assign({}, this.state.form);
     form[name] = { value, valid };
@@ -172,7 +199,7 @@ export class ResetMyPassword extends React.Component<Props, State> {
   );
 
   render() {
-    const { form, canSubmit, showPassword, canShowError } = this.state;
+    const { form, canSubmit, canShowError } = this.state;
     const { forgotPassword: { isRunning, error = {}, data }, user } = this.props;
 
     if (user.isRunning || isRunning) {
@@ -185,6 +212,7 @@ export class ResetMyPassword extends React.Component<Props, State> {
 
     const confirmPasswordValue = form.confirmPassword.value;
     const passwordValue = form.password.value;
+
     return (
       <section className="reset-password-container">
         <section className="container">
@@ -193,36 +221,11 @@ export class ResetMyPassword extends React.Component<Props, State> {
               {'Redefinição de senha'}
             </h3>
             <form className="form-reset-password" onSubmit={this.handleSubmit}>
-              <InputPassword
-                id="password"
-                name="password"
-                placeholder={'Nova senha'}
-                showLabel={true}
-                showPassword={showPassword}
-                required={true}
-                value={passwordValue}
-                isOldRulesForPassword={true}
-                onValidate={this.handleValidatedInput}
+              <EnhancedPasswordInputs
+                passwordValue={passwordValue}
+                confirmPasswordValue={confirmPasswordValue}
+                handleValidatedInput={this.handleValidatedInput}
               />
-              <InputPassword
-                id="confirmPassword"
-                name="confirmPassword"
-                placeholder={'Confirme a senha'}
-                showLabel={true}
-                showPassword={showPassword}
-                required={true}
-                value={confirmPasswordValue}
-                isOldRulesForPassword={true}
-                onValidate={this.handleValidatedInput}
-              />
-              <section className="show-password-block">
-                <IconToggleButton
-                  onChange={this.handleToggleChanged}
-                  title={'Visualizar senha'}
-                  iconChecked={<EyeSlashIcon />}
-                  iconUnchecked={<EyeIcon />}
-                />
-              </section>
               <Button
                 type="submit"
                 kind="success"
