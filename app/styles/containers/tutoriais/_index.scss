@@ -1,0 +1,27 @@
+// @flow
+@import 'sidebar';
+@import 'cards-list';
+
+.tpl-tutorial {
+  .org-tutorial {
+    .title-tutorial {
+      font-family: $font-family-open-sans-bold;
+      font-size: $font-size-lg;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .mol-content-tutorial {
+      display: flex;
+      flex-direction: column;
+      @include lg {
+        flex-direction: row;
+      }
+    }
+    .mol-banner-tutorial {
+      .org-component-banners {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}
