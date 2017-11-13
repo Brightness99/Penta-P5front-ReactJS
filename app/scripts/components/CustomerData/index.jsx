@@ -348,16 +348,16 @@ export class CustomerDataForm extends React.Component {
 
   renderForm() {
     const { locale: { COUNTRY_CODE }, activeType } = this.props;
-    return this.renderUS();
-    // if (COUNTRY_CODE === 'US') {
-    //   return this.renderUS();
-    // }
-    //
-    // if (activeType === 'PJ') {
-    //   return this.renderEnterprise();
-    // }
-    //
-    // return this.renderPersonal();
+
+    if (COUNTRY_CODE === 'US') {
+      return this.renderUS();
+    }
+
+    if (activeType === 'PJ') {
+      return this.renderEnterprise();
+    }
+
+    return this.renderPersonal();
   }
 
   render() {
