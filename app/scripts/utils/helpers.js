@@ -215,7 +215,7 @@ export function validateCpf(cpf) {
  * @param {string} cnpj
  * @returns {boolean}
  */
-export function validateCnpj(cnpj) {
+export function validateCnpj(cnpj: string) {
   const cleanValue = cnpj.replace(/[^\d]+/g, '');
   if (cleanValue.length < 14 && cleanValue.length < 15) {
     return false;
@@ -269,3 +269,14 @@ export function validateCnpj(cnpj) {
 }
 
 export const isEmpty = o => o === undefined || o === null;
+
+/**
+ * validate Email.
+ * @param {string} email
+ * @returns {boolean}
+ */
+export function validateEmail(email: string): boolean {
+  const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  return regex.test(email);
+}
