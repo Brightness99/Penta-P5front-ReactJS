@@ -1,0 +1,33 @@
+.org-customer-data-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 1rem -0.5rem 0;
+  width: calc(100% + 1rem);
+
+  > .atm-checkout-input {
+    display: inline-flex;
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+
+    > label {
+      left: 1.7rem;
+    }
+
+    > svg {
+      right: 1.3rem;
+    }
+
+    &-one {
+      width: calc(100% / 3);
+    }
+
+    &-two {
+      width: calc((100% / 3) * 2);
+    }
+
+    &-full {
+      width: 100%;
+    }
+  }
+}

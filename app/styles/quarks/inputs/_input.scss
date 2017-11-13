@@ -1,9 +1,9 @@
 .app__qrk__input-container {
-  height: 4rem;
+  height: 5rem;
   position: relative;
 
-  &--labeled {
-    height: 5rem;
+  &.app__qrk__input-container--labeled > input {
+    padding-top: 1.6rem;
   }
 
   &.dirty.invalid {
@@ -36,7 +36,7 @@
     font-family: $font-family-open-sans-light;
     font-size: $font-size-xs;
     line-height: 1.67;
-    padding-top: 1.6rem;
+    padding: 0;
     height: 100%;
     margin-bottom: 1rem;
     outline-color: transparent;

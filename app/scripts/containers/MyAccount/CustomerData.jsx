@@ -3,13 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import swal from 'sweetalert2';
-import { shouldComponentUpdate, validateCpf, validateCnpj } from 'utils/helpers';
-import { Input } from 'quarks/Inputs';
-import { MaskedInput } from 'components/Input';
-import { InputPassword, InputStateRegistration } from 'quarks/Inputs/Validatable';
-import { Select } from 'atoms/Inputs';
+import { shouldComponentUpdate } from 'utils/helpers';
+import { Ninput } from 'components/Input';
 import Loading from 'components/Loading';
 import { accountUpdate, accountFetch, accountFormReset } from 'actions';
+import CustomerDataForm from 'components/CustomerData';
 
 type FormType = {
   phone: { valid: boolean, value: string },
@@ -21,7 +19,7 @@ type FormType = {
 };
 
 type Props = {
-  account: {},
+  account: AccountLocaleType,
   locale: {},
   setBreadcrumbs: () => void,
   dispatch: () => {},
@@ -38,16 +36,50 @@ export class CustomerData extends React.Component {
     super(props);
 
     this.state = {
-      ...props.account,
-      activeForm: 'person',
-      form: {
-        phone: { valid: false, value: '' },
-        cnpj: { valid: false, value: '' },
-        cpf: { valid: false, value: '' },
-        current_password: { valid: false, value: '' },
-        new_password: { valid: false, value: '' },
-        new_password_repeat: { valid: false, value: '' },
+      type: props.account.type || 'PF',
+      full_name: {
+        valid: false,
+        value: props.account.last_name ? `${props.account.first_name} ${props.account.last_name}` : props.account.first_name,
       },
+      email: {
+        valid: false,
+        value: props.account.email,
+      },
+      phone: {
+        valid: false,
+        value: props.account.phone,
+      },
+      cpf: {
+        valid: false,
+        value: props.account.cpf,
+      },
+      gender: {
+        valid: false,
+        value: props.account.gender,
+      },
+      work_field: {
+        valid: !!props.account.work_field,
+        value: props.account.work_field,
+      },
+      cnpj: {
+        valid: false,
+        value: props.account.cnpj,
+      },
+      trading_name: {
+        valid: false,
+        value: props.account.trading_name,
+      },
+      employee_number: {
+        valid: !!props.account.employee_number,
+        value: props.account.employee_number,
+      },
+      id_state_registration: {
+        valid: !!props.account.id_state_registration,
+        value: props.account.id_state_registration,
+      },
+      current_password: { valid: false, value: '' },
+      new_password: { valid: false, value: '' },
+      new_password_repeat: { valid: false, value: '' },
       canSubmit: false,
     };
   }
@@ -86,19 +118,6 @@ export class CustomerData extends React.Component {
           });
         }
       }
-
-      this.setState({
-        ...nextProps.account,
-        form: {
-          phone: { valid: true, value: account.phone },
-          cnpj: { valid: true, value: account.cnpj },
-          cpf: { valid: true, value: account.cpf },
-          current_password: { valid: true, value: '' },
-          new_password: { valid: true, value: '' },
-          new_password_repeat: { valid: true, value: '' },
-        },
-        canSubmit: true,
-      });
     }
   }
 
@@ -116,14 +135,6 @@ export class CustomerData extends React.Component {
       ]);
     }
   };
-
-  handleChangeName = (e) => {
-    const names = e.target.value.split(' ');
-    this.setState({
-      first_name: names[0],
-      last_name: names[1],
-    });
-  }
 
   handleValidatedInput = (name, value, valid) => {
     const { form } = this.state;
@@ -148,38 +159,11 @@ export class CustomerData extends React.Component {
     }
 
     this.setState({ form: newState.form, canSubmit });
-  }
+  };
 
-  handleCheckCompleted = (key, isCompleted, value) => {
-    const { form } = this.state;
-    const newState = { form };
+  handleSubmit = (ev) => {
+    ev.preventDefault();
 
-    let canSubmit = true;
-    if (key === 'cpf' && isCompleted) {
-      newState.form[key].valid = validateCpf(value);
-    } else if (key === 'cnpj' && isCompleted) {
-      newState.form[key].valid = validateCnpj(value);
-    } else {
-      newState.form[key].valid = isCompleted;
-    }
-    newState.form[key].value = value;
-
-    const updateState = {};
-    updateState[key] = newState.form[key].value;
-    this.setState(updateState);
-    if (canSubmit === true) {
-      Object.keys(newState.form)
-      .forEach((index) => {
-        if (newState.form[index].valid !== true) {
-          canSubmit = false;
-        }
-      });
-    }
-
-    this.setState({ form: newState.form, canSubmit });
-  }
-
-  handleSubmit = () => {
     if (this.state.canSubmit) {
       const { dispatch } = this.props;
       const { form } = this.state;
@@ -198,232 +182,82 @@ export class CustomerData extends React.Component {
 
       dispatch(accountUpdate(dataToUpdate));
     }
-  }
+  };
 
-  handleSelection = () => {
+  handleSelection = (): void => {
     this.setState({
-      activeForm: (this.state.activeForm === 'person' ? 'enterprise' : 'person'),
+      type: this.state.type === 'PF' ? 'PJ' : 'PF',
     });
-  }
+  };
 
-  renderStates = () => {
-    const states = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
-    return states.map((state) => (<option key={state} value={state.toLowerCase()}>{state}</option>));
-  }
+  handleChange = (input: string, valid: boolean, value: string): void => {
+    this.setState({
+      [input]: {
+        value,
+        valid,
+      },
+    });
+  };
 
-  renderPersonalData() {
-    const { first_name, last_name, gender, cloud_manager, form } = this.state;
-    return (
-      <form className="org-checkout-content-data">
-        <Input
-          showLabel
-          className="atm-checkout-input atm-checkout-input-two"
-          placeholder="Nome Completo"
-          value={`${first_name} ${last_name}`}
-          onChange={this.handleChangeName}
-          onEnterKeyPress={this.handleSubmit}
-        />
-        <MaskedInput
-          mask="999.999.999-99"
-          className="atm-checkout-input atm-checkout-input-one"
-          defaultValue={form.cpf.value}
-          checkCompleted={(isCompleted, value) => { this.handleCheckCompleted('cpf', isCompleted, value); }}
-        />
-        <MaskedInput
-          mask="(99) 99999-9999"
-          className="atm-checkout-input atm-checkout-input-one"
-          defaultValue={form.phone.value}
-          checkCompleted={(isCompleted, value) => { this.handleCheckCompleted('phone', isCompleted, value); }}
-        />
-        <Select
-          className="atm-checkout-input atm-checkout-input-one"
-          name="data-pane-gender"
-          showLabel={true}
-          id="data-pane-gender"
-          placeholder="Sexo"
-          value={gender}
-          onChange={(e) => { this.setState({ gender: e.target.value }); }}
-          required={true}
-        >
-          <option value={'M'}>Masculino</option>
-          <option value={'F'}>Feminino</option>
-        </Select>
-        <Select
-          className="atm-checkout-input atm-checkout-input-one"
-          name="data-pane-area"
-          showLabel={true}
-          id="data-pane-area"
-          placeholder="Área de Atuação"
-          value={cloud_manager}
-          onChange={(e) => { this.setState({ cloud_manager: e.target.value }); }}
-          required={true}
-        >
-          <option value={1}>Academia e Fitness</option>
-          <option value={2}>Advocacia</option>
-          <option value={3}>Arquitetura</option>
-          <option value={4}>Comunicação e Marketing</option>
-          <option value={5}>Consultoria</option>
-          <option value={6}>Design / Fotografia</option>
-          <option value={7}>Engenharia</option>
-          <option value={8}>Estética e bem estar</option>
-          <option value={9}>Fisioterapia</option>
-          <option value={10}>Imobiliárias e construtoras</option>
-          <option value={11}>Informática</option>
-          <option value={12}>Medicina</option>
-          <option value={13}>Odontologia</option>
-          <option value={14}>Veterinária / Pet</option>
-          <option value={15}>Outros</option>
-        </Select>
-      </form>
-    );
-  }
+  handlePasswordValidation = (password_repeat: string): boolean => {
+    const { new_password } = this.state;
 
-  renderEnterpriseData() {
-    const { first_name, last_name, company_name, employee_number, state_registration, id_state_registration, form } = this.state;
-    return (
-      <form className="org-checkout-content-data">
-        <Input
-          showLabel={true}
-          className="atm-checkout-input atm-checkout-input-two"
-          placeholder="Nome Completo"
-          value={`${first_name} ${last_name}`}
-          onChange={this.handleChangeName}
-          onEnterKeyPress={this.handleSubmit}
-        />
-        <MaskedInput
-          mask="99.999.999/9999-99"
-          className="atm-checkout-input atm-checkout-input-one"
-          defaultValue={form.cnpj.value}
-          checkCompleted={(isCompleted, value) => { this.handleCheckCompleted('cnpj', isCompleted, value); }}
-        />
-        <Input
-          showLabel={true}
-          className="atm-checkout-input atm-checkout-input-two"
-          placeholder="Razão Social"
-          value={company_name}
-          onChange={(e) => { this.setState({ company_name: e.target.value }); }}
-          onEnterKeyPress={this.handleSubmit}
-        />
-        <MaskedInput
-          mask="(99) 99999-9999"
-          className="atm-checkout-input atm-checkout-input-one"
-          defaultValue={form.phone.value}
-          checkCompleted={(isCompleted, value) => { this.handleCheckCompleted('phone', isCompleted, value); }}
-        />
-        <Select
-          className="atm-checkout-input atm-checkout-input-one"
-          name="data-pane-area"
-          showLabel
-          id="data-pane-area"
-          placeholder="Área de Atuação"
-          required={true}
-        >
-          <option value={1}>Academia e Fitness</option>
-          <option value={2}>Advocacia</option>
-          <option value={3}>Arquitetura</option>
-          <option value={4}>Comunicação e Marketing</option>
-          <option value={5}>Consultoria</option>
-          <option value={6}>Design / Fotografia</option>
-          <option value={7}>Engenharia</option>
-          <option value={8}>Estética e bem estar</option>
-          <option value={9}>Fisioterapia</option>
-          <option value={10}>Imobiliárias e construtoras</option>
-          <option value={11}>Informática</option>
-          <option value={12}>Medicina</option>
-          <option value={13}>Odontologia</option>
-          <option value={14}>Veterinária / Pet</option>
-          <option value={15}>Outros</option>
-        </Select>
-        <Select
-          className="atm-checkout-input atm-checkout-input-one"
-          name="data-pane-collaborators"
-          showLabel
-          id="data-pane-collaborators"
-          placeholder="Número de funcionários"
-          value={employee_number}
-          onChange={(e) => { this.setState({ employee_number: e.target.value }); }}
-          required={true}
-        >
-          <option value={'1'}>Individual</option>
-          <option value={'2'}>de 02 a 19 funcionários</option>
-          <option value={'3'}>de 20 a 99 funcionários</option>
-          <option value={'4'}>de 100 a 499 funcionários</option>
-          <option value={'5'}>500 ou mais funcionários</option>
-        </Select>
-        <Select
-          className="atm-checkout-input atm-checkout-input-one"
-          name="data-pane-state"
-          showLabel
-          id="data-pane-state"
-          placeholder="Inscrição Estadual"
-          value={state_registration}
-          onChange={(e) => { this.setState({ state_registration: e.target.value }); }}
-          required={true}
-        >
-          <option value={'Isento'}>Isento</option>
-          {this.renderStates()}
-        </Select>
-        {state_registration && state_registration !== 'Isento' && state_registration !== '' && <InputStateRegistration
-          showLabel
-          className="atm-checkout-input atm-checkout-input-one"
-          placeholder="Número da Inscrição"
-          value={id_state_registration}
-          state_registration={state_registration}
-          onEnterKeyPress={this.handleSubmit}
-        />}
-      </form>
-    );
-  }
+    return new_password.value === password_repeat;
+  };
 
   renderForm() {
-    const { activeForm } = this.state;
+    const { locale } = this.props;
+    const { type } = this.state;
 
     return (
       <div>
-        {activeForm === 'person' ? this.renderPersonalData() : this.renderEnterpriseData()}
-        <h3 className="atm-myorder-title mar-top-20">Alterar senha</h3>
+        <CustomerDataForm
+          activeType={type}
+          onChange={this.handleChange}
+          onSubmit={this.handleSubmit}
+        />
+        <h3 className="atm-myorder-title mar-top-20">{locale.CHANGE_PASSWORD}</h3>
         <form className="org-checkout-content-data">
-          <InputPassword
-            id="current_password"
+          <Ninput
+            type="password"
             name="current_password"
-            showLabel
+            id="current_password"
             className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Senha atual"
-            onValidate={this.handleValidatedInput}
-            value={this.state.current_password}
-            onChange={(e) => { this.setState({ current_password: e.target.value }); }}
+            placeholder={locale.CURRENT_PASSWORD}
+            required
+            onChange={(isValid, value) => this.handleChange('current_password', isValid, value)}
             onEnterKeyPress={this.handleSubmit}
           />
-          <InputPassword
-            id="new_password"
+          <Ninput
+            type="password"
             name="new_password"
-            showLabel
+            id="new_password"
             className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Nova senha"
-            onValidate={this.handleValidatedInput}
-            value={this.state.new_password}
-            onChange={(e) => { this.setState({ new_password: e.target.value }); }}
+            placeholder={locale.NEW_PASSWORD}
+            required
+            onChange={(isValid, value) => this.handleChange('new_password', isValid, value)}
             onEnterKeyPress={this.handleSubmit}
           />
-          <InputPassword
-            id="new_password_repeat"
+          <Ninput
+            type="password"
             name="new_password_repeat"
-            showLabel
+            id="new_password_repeat"
             className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Confirme sua nova senha"
-            equalsTo={this.state.new_password}
-            onValidate={this.handleValidatedInput}
-            value={this.state.new_password_repeat}
-            onChange={(e) => { this.setState({ new_password_repeat: e.target.value }); }}
+            placeholder={locale.REPEAT_NEW_PASSWORD}
+            required
+            onChange={(isValid, value) => this.handleChange('new_password_repeat', isValid, value)}
+            checkValidation={this.handlePasswordValidation}
             onEnterKeyPress={this.handleSubmit}
           />
         </form>
-        <div className="mol-account-data-pane-choser">
-          Se quiser trocar para uma conta com dados de {activeForm === 'person' ? 'pessoa jurídica' : 'pessoa física'},
-          <a onClick={this.handleSelection}>clique aqui.</a>
-        </div>
+        {locale.COUNTRY_CODE === 'BR' &&
+          <div className="mol-account-data-pane-choser">
+            Se quiser trocar para uma conta com dados de {type === 'PF' ? 'pessoa jurídica' : 'pessoa física'},
+            <button className="atm-link-button" onClick={this.handleSelection}>clique aqui.</button>
+          </div>
+        }
         <div className="mol-checkout-pane-footer mol-account-pane-footer">
-          <button onClick={this.handleSubmit} className="atm-send-button">SALVAR ALTERAÇÕES</button>
+          <button onClick={this.handleSubmit} className="atm-send-button">{locale.SAVE}</button>
         </div>
       </div>
     );
@@ -458,7 +292,11 @@ export class CustomerData extends React.Component {
 function mapStateToProps(state) {
   return {
     account: state.account,
-    locale: state.locale.translate.account.my_register_data,
+    locale: {
+      ...state.locale.translate.account.my_register_data,
+      COUNTRY_CODE: state.locale.COUNTRY_CODE,
+      SAVE: state.locale.translate.form.common.SAVE,
+    },
   };
 }
 
