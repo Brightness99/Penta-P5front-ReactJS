@@ -1,0 +1,44 @@
+.org-we-search {
+  background-color: $color-white;
+  padding: 6rem 0;
+  .title-we-search {
+    color: $color-almostBlack;
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-h2;
+    font-weight: lighter;
+    text-transform: none;
+    text-align: center;
+    @include lg {
+      font-size: $font-size-xxll;
+    }
+  }
+  .atm-skill-search {
+    color: $color-almostBlack;
+    display: flex;
+    font-family: $font-family-nunito-regular;
+    font-size: $font-size-lg;
+    flex-wrap: wrap;
+    flex-direction: row;
+    li {
+      align-items: center;
+      border: 0.1rem solid $color-hrLightGray;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 0;
+      margin-bottom: 1rem;
+      width: 100%;
+      @include lg {
+        width: calc((100%/3) - 1.4rem);
+        margin: 0 2rem 2rem 0;
+        &:nth-of-type(3n) {
+          margin-right: 0;
+        }
+      }
+      svg {
+        width: 3.1rem;
+        height: 2.2rem;
+        fill: $color-green-light;
+      }
+    }
+  }
+}

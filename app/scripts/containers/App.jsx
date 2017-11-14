@@ -43,7 +43,7 @@ import LoyaltyLp from 'containers/LoyaltyLp';
 import ResetMyPassword from 'containers/ResetMyPassword';
 import CloudEditor from 'containers/CloudEditor';
 import Tutorial from 'containers/Tutorial';
-
+import Work from 'containers/Work';
 
 type Props = {
   app: AppStoreType,
@@ -133,6 +133,7 @@ export class App extends React.Component {
                       <Route exact path="/proposta-de-arte" component={ArtProposal} />
                       <Route path="/programa-de-fidelidade" component={LoyaltyLp} />
                       <Route path="/tutoriais" component={Tutorial} />
+                      <Route path="/trabalhe-conosco" component={Work} />
                       <Route
                         path="/esqueci-minha-senha"
                         render={() => (isAuthorized ? <Redirect to={'/'} /> : <ForgotMyPassword />)}
