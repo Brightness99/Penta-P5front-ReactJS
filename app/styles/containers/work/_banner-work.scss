@@ -1,20 +1,29 @@
 .org-banner-work {
-  margin-top: 3rem;
   background: url('../../assets/media/images/banner-work.png');
+  @include lg {
+    margin-top: 3rem;
+  }
   .atm-texts-banner-work {
     align-items: center;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding: 6rem 0;
-    text-align: center;
-    width: 66%;
+    padding: 4rem 0;
+    width: 90%;
     max-width: 740px;
+    @include lg {
+      text-align: center;
+      width: 66%;
+      padding: 6rem 0;
+    }
     .title-banner-work {
       color: $color-white;
       font-family: $font-family-nunito-regular;
-      font-size: $font-size-banner;
+      font-size: $font-size-xxl;
       font-weight: 300;
+      @include lg {
+        font-size: $font-size-banner;
+      }
     }
     .subtitle-banner-work {
       color: $color-white;

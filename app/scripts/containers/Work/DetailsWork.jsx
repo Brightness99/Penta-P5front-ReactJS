@@ -1,7 +1,59 @@
+// @flow
 import React from 'react';
+import { isMobile } from 'utils/helpers';
+import Slider from 'react-slick';
+
+type Props = {
+  screenSize: boolean,
+}
 
 export class DetailsWork extends React.Component {
-  render() {
+  props: Props;
+
+  renderMobile() {
+    return (
+      <div>
+        <Slider
+          className="org-component-banners"
+          dots={true}
+          dotsClass="atm-carousel-dots"
+          autoplay={false}
+        >
+          <div className="org-details-work-us">
+            <div className="atm-left-details">
+              <img src={require('assets/media/images/trabalhe-ambiente.png')} alt="Trabalhe em um ambiente agradável" />
+            </div>
+            <div className="atm-right-details">
+              <h3 className="title-details">Trabalhe em um ambiente agradável</h3>
+            </div>
+          </div>
+
+          <div className="org-details-work-us">
+            <div className="atm-left-details">
+              <img src={require('assets/media/images/trabalhe-ambiente.png')} alt="Trabalhe em um ambiente agradável" />
+            </div>
+
+            <div className="atm-right-details">
+              <h3 className="title-details">Encontre pessoas inovadoras</h3>
+            </div>
+          </div>
+
+          <div className="org-details-work-us">
+            <div className="atm-left-details">
+              <img src={require('assets/media/images/trabalhe-ambiente.png')} alt="Trabalhe em um ambiente agradável" />
+            </div>
+
+            <div className="atm-right-details">
+              <h3 className="title-details">Participe de projetos importantes</h3>
+            </div>
+          </div>
+
+        </Slider>
+      </div>
+    );
+  }
+
+  renderDesktop() {
     return (
       <div className="container">
         <div className="org-desc-work-us">
@@ -40,6 +92,11 @@ export class DetailsWork extends React.Component {
         </div>
       </div>
     );
+  }
+  render() {
+    const { screenSize } = this.props;
+
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
 

@@ -4,14 +4,20 @@
   display: flex;
   flex-direction: column;
   margin: 6rem 0;
-  padding: 6rem 0;
+  padding: 6rem 2rem;
+  @include lg {
+    padding: 6rem 0;
+  }
   .title-look-jobs {
     color: $color-white;
     font-family: $font-family-nunito-regular;
-    font-size: $font-size-xxll;
+    font-size: $font-size-h2;
     font-weight: 300;
     letter-spacing: -0.72px;
     text-transform: none;
+    @include lg {
+      font-size: $font-size-xxll;
+    }
   }
   .desc-look-jobs {
     color: $color-white;
