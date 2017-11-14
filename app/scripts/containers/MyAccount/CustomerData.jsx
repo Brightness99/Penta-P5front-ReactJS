@@ -3,7 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import swal from 'sweetalert2';
-import { shouldComponentUpdate } from 'utils/helpers';
+import Breadcrumbs from 'components/Breadcrumbs';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { Ninput } from 'components/Input';
 import Loading from 'components/Loading';
 import { accountUpdate, accountFetch, accountFormReset } from 'actions';
@@ -14,6 +15,7 @@ type Props = {
   locale: {},
   setBreadcrumbs: () => void,
   dispatch: () => {},
+  screenSize: string,
 };
 
 type State = {
@@ -286,10 +288,24 @@ export class CustomerData extends React.Component {
   }
 
   render() {
-    const { locale } = this.props;
+    const { locale, screenSize } = this.props;
+    const breadcrumb = [
+      {
+        title: 'Home',
+        url: '/',
+      },
+      {
+        title: 'Minha conta',
+        url: '/minha-conta',
+      },
+      {
+        title: 'Meus dados',
+      },
+    ];
 
     return (
       <div>
+        {isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h3 className="atm-myorder-title">{locale.TITLE}</h3>
         {this.renderItems()}
         <Helmet>
@@ -309,6 +325,7 @@ function mapStateToProps(state) {
       COUNTRY_CODE: state.locale.COUNTRY_CODE,
       SAVE: state.locale.translate.form.common.SAVE,
     },
+    screenSize: state.app.screenSize,
   };
 }
 
