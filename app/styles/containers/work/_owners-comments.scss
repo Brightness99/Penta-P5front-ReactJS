@@ -1,0 +1,42 @@
+.org-owners-comments {
+  display: flex;
+  font-family: $font-family-open-sans;
+  margin: 0 auto;
+  width: 66%;
+  .atm-comment {
+    font-size: $font-size-xs;
+    flex: 1;
+    margin: 2rem 2rem 4rem 0;
+    &:last-of-type {
+      margin-right: 0;
+    }
+    .qrk-comment {
+      color: $color-lightGray;
+      background-color: $color-white;
+      padding: 3rem;
+      border-radius: 0.3rem;
+      p { margin-bottom: 0;}
+    }
+    .qrk-img-comment {
+      align-items: center;
+      color: $color-almostBlack;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      flex: 0 0 auto;
+      flex-direction: column;
+      margin-top: -2rem;
+      p {
+        margin: 0;
+      }
+      .name-person-comment {
+        font-size: $font-size-base;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+      .name-position-comment {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+}
