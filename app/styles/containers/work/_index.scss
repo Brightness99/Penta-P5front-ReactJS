@@ -4,4 +4,8 @@
 @import 'look-search';
 @import 'we-search';
 
-.tpl-work-us {}
+.tpl-work-us {
+  .atm-carousel-dots {
+    bottom: 0;
+  }
+}
