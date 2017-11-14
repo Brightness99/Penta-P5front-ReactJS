@@ -2,12 +2,15 @@
   color: $color-almostBlack;
   font-family: $font-family-nunito-regular;
   font-size: $font-size-lg;
-  font-weight: bold;
   line-height: 3rem;
   padding: 5rem 0;
   margin: 0 auto;
-  width: 68%;
-  text-align: center;
+  width: 100%;
+  @include lg {
+    font-weight: bold;
+    text-align: center;
+    width: 68%;
+  }
   p {
     margin-bottom: 0;
   }
@@ -20,6 +23,10 @@
   align-items: center;
   display: inline-flex;
   margin: 4rem 0;
+  background-color: $color-white;
+  @include lg {
+    background-color: transparent;
+  }
   p {
     margin-bottom: 0;
   }
@@ -39,7 +46,9 @@
   }
   .atm-left-details {
     flex: 1;
-    margin-right: 2rem;
+    @include lg {
+      margin-right: 2rem;
+    }
   }
   .atm-right-details {
     flex: 1;

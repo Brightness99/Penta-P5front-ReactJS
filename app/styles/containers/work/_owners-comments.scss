@@ -1,14 +1,22 @@
 .org-owners-comments {
   display: flex;
+  flex-direction: column;
   font-family: $font-family-open-sans;
   margin: 0 auto;
-  width: 66%;
+  width: 100%;
+  @include lg {
+    width: 66%;
+    flex-direction: row;
+  }
   .atm-comment {
     font-size: $font-size-xs;
     flex: 1;
-    margin: 2rem 2rem 4rem 0;
-    &:last-of-type {
-      margin-right: 0;
+    margin-bottom: 4rem;
+    @include lg {
+      margin: 2rem 2rem 4rem 0;
+      &:last-of-type {
+        margin-right: 0;
+      }
     }
     .qrk-comment {
       color: $color-lightGray;
