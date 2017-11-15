@@ -206,7 +206,7 @@ export class MyAccount extends React.Component {
             >
               {!isMobile(screenSize) && !isProposalArtPage && <Sidebar screenSize={screenSize} />}
               <div className="container-myaccount-content">
-                {!isMobile(screenSize) && breadcrumbsMark}
+                {breadcrumbsMark}
                 {!isProposalArtPage && <PageTitle>{locale.TITLE}</PageTitle>}
                 {this.renderContainer()}
               </div>

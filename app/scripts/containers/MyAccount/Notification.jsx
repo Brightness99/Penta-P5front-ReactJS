@@ -2,8 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import swal from 'sweetalert2';
-import Breadcrumbs from 'components/Breadcrumbs';
-import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { shouldComponentUpdate } from 'utils/helpers';
 import { RadioButton } from 'components/Input';
 import Loading from 'components/Loading';
 import { accountNotificationUpdate, accountNotificationFetch } from 'actions';
@@ -127,25 +126,10 @@ export class Notification extends React.Component {
   }
 
   render() {
-    const { account: { notification }, screenSize } = this.props;
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Notificações',
-      },
-    ];
+    const { account: { notification } } = this.props;
 
     return (
       <div className="container-myData">
-        {isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h3 className="title-myData">Notificações</h3>
         {!notification.isLoaded || notification.isRunning ? <Loading /> : this.renderForm()}
       </div>
@@ -156,7 +140,6 @@ export class Notification extends React.Component {
 function mapStateToProps(state) {
   return {
     account: state.account,
-    screenSize: state.app.screenSize,
   };
 }
 
