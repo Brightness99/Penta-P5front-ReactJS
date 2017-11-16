@@ -282,12 +282,11 @@ export class Upload extends React.Component {
 
   renderCartItemDefinitions() {
     const { selectedAdditionalParameters } = this.state;
-    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } }, screenSize } = this.props;
+    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
     return (<CartItemDefinitionsPanel
       parts={parts}
       subTotal={total_price}
       expectedDeliveryDate={expected_delivery_date}
-      isMobile={isMobile(screenSize)}
       additionalOptions={selectedAdditionalParameters}
     />);
   }
