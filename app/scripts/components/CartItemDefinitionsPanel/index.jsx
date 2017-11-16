@@ -3,7 +3,7 @@ import React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
-import { TruckIcon, WarningFilled, AngleRight } from 'components/Icons';
+import { WarningFilled, AngleRight } from 'components/Icons';
 import FileFormatIcon from 'components/FileFormatIcon';
 import BulletListIcon from 'components/Icons/BulletList';
 
@@ -18,7 +18,6 @@ type Props = {
     name: string,
     options: Array<{ field: string, value: string }>
   }>,
-  isMobile: boolean,
 };
 
 type State = {
@@ -68,7 +67,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
     return <span className="price-title">{title}: {price}</span>;
   };
 
-  renderMobile() {
+  render() {
     const { isOpen } = this.state;
     const { expectedDeliveryDate, subTotal, additionalOptions } = this.props;
     let total = subTotal;
@@ -131,44 +130,5 @@ export default class CartItemDefinitionsPanel extends React.Component {
         ]}
       </TransitionGroup>
     </section>);
-  }
-
-  renderDesktop() {
-    const { expectedDeliveryDate, subTotal, additionalOptions } = this.props;
-    let total = subTotal;
-    if (additionalOptions) {
-      total += additionalOptions.file_format.price + additionalOptions.proof.price;
-    }
-    return (
-      <aside className="cart-item-definitions-container">
-        <h4>Resumo do produto</h4>
-        <section className="options">
-          {this.renderParts()}
-        </section>
-        <hr />
-        <section className="sub-total">Sub-total: <span>{`R$${subTotal}`}</span></section>
-        <hr />
-        {
-          additionalOptions &&
-          <section className="additional-options">
-            <section>{this.renderOption(additionalOptions.file_format)}</section>
-            <section>{this.renderOption(additionalOptions.proof)}</section>
-          </section>
-        }
-        <hr />
-        <section className="total">Total: <span>{`R$${total.toFixed(2)}`}</span></section>
-        <section className="delivery-info">
-          <TruckIcon />
-          <span>Previsão de entrega:</span>
-          <span>{`${expectedDeliveryDate}`}</span>
-        </section>
-      </aside>
-    );
-  }
-
-  render() {
-    const { isMobile } = this.props;
-
-    return isMobile ? this.renderMobile() : this.renderDesktop();
   }
 }
