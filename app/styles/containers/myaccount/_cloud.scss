@@ -61,6 +61,7 @@
           font-size: $font-size-base;
           padding: inherit;
           width: auto;
+          text-decoration: underline;
           &__input {
             cursor: pointer;
           }
@@ -69,6 +70,9 @@
             border-bottom: 0.1rem solid $color-printi-blue;
             color: $color-lightGray;
           }
+        }
+        .DateInput--with-caret {
+          text-decoration: none !important;
         }
       }
       .DayPickerKeyboardShortcuts {

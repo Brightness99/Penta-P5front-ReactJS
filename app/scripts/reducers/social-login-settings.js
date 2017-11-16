@@ -13,19 +13,37 @@ export type SocialLoginSettingsState = {
   message: string,
   socials: {
     facebook: {
-      enabled: boolean,
-      credentials: {
-        app_id: string,
-        secret_key: string,
-      }
+      BR: {
+        enabled: boolean,
+        credentials: {
+          app_id: string,
+          secret_key: string,
+        },
+      },
+      US: {
+        enabled: boolean,
+        credentials: {
+          app_id: string,
+          secret_key: string,
+        },
+      },
     },
     google: {
-      enabled: boolean,
-      credentials: {
-        client_id: string,
-        secret_key: string,
-      }
-    }
+      BR: {
+        enabled: boolean,
+        credentials: {
+          client_id: string,
+          secret_key: string,
+        },
+      },
+      US: {
+        enabled: boolean,
+        credentials: {
+          client_id: string,
+          secret_key: string,
+        },
+      },
+    },
   },
   updatedAt: number,
 };
@@ -38,17 +56,35 @@ export const socialLoginSettingsState: SocialLoginSettingsState = {
   message: '',
   socials: {
     facebook: {
-      enabled: false,
-      credentials: {
-        app_id: '',
-        secret_key: '',
+      BR: {
+        enabled: false,
+        credentials: {
+          app_id: '',
+          secret_key: '',
+        },
+      },
+      US: {
+        enabled: false,
+        credentials: {
+          app_id: '',
+          secret_key: '',
+        },
       },
     },
     google: {
-      enabled: false,
-      credentials: {
-        client_id: '',
-        secret_key: '',
+      BR: {
+        enabled: false,
+        credentials: {
+          client_id: '',
+          secret_key: '',
+        },
+      },
+      US: {
+        enabled: false,
+        credentials: {
+          client_id: '',
+          secret_key: '',
+        },
       },
     },
   },

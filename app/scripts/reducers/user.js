@@ -9,54 +9,11 @@ import { createReducer } from 'utils';
 
 import { UserConstants, SettingsConstants } from 'constants/index';
 
-export type UserState = {
-  rehydrated: boolean,
-  isAuthorized: boolean,
-  newsletter: {
-    component: string,
-    error: boolean,
-    isRunning: boolean,
-    message: string,
-    subscribed: boolean,
-  },
-  authentication: {
-    isRunning: boolean,
-    error: boolean,
-    message: string,
-  },
-  socialAuthentication: {
-    isRunning: boolean,
-    error: boolean,
-    message: string,
-    userNotFound: boolean
-  },
-  socialRegistration: {
-    isRunning: boolean,
-    error: boolean,
-    message: string,
-  },
-  registration: {
-    isRunning: boolean,
-    error: boolean,
-    message: string,
-  },
-  logout: {
-    isRunning: boolean,
-    error: boolean,
-    message: string,
-  },
-  customerInfo: {},
-  address: {
-    isZipcodeValid: boolean,
-    zipcode: string,
-    zipcodeErrorMessage: string,
-  },
-  updatedAt: number,
-};
-
-export const userState:UserState = {
+export const userState: UserType = {
   rehydrated: false,
   isAuthorized: false,
+  isRunning: false,
+  isLoaded: false,
   newsletter: {
     component: '',
     error: false,
@@ -115,6 +72,8 @@ export default {
           component: action.payload.component,
           isRunning: true,
         },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_NEWSLETTER_SUCCESS](state, action) {
@@ -127,6 +86,8 @@ export default {
           subscribed: true,
         },
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: true,
       };
     },
     [UserConstants.USER_NEWSLETTER_FAILURE](state, action) {
@@ -139,6 +100,8 @@ export default {
           message: action.payload.message,
           subscribed: false,
         },
+        isRunning: false,
+        isLoaded: false,
         updatedAt: action.meta.updatedAt,
       };
     },
@@ -150,6 +113,8 @@ export default {
           isZipcodeValid: true,
           zipcode: action.payload.zipcode,
         },
+        isRunning: false,
+        isLoaded: true,
       };
     },
     [SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE](state, action) {
@@ -161,6 +126,8 @@ export default {
           zipcode: action.payload.zipcode,
           zipcodeErrorMessage: action.payload.message,
         },
+        isRunning: false,
+        isLoaded: false,
       };
     },
     [SettingsConstants.SETTINGS_ZIPCODE_RESET](state) {
@@ -172,6 +139,8 @@ export default {
           zipcode: '',
           zipcodeErrorMessage: '',
         },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_REQUEST](state) {
@@ -183,6 +152,8 @@ export default {
           error: false,
           message: '',
         },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_SUCCESS](state, action) {
@@ -192,9 +163,15 @@ export default {
           ...state.authentication,
           isRunning: false,
         },
-        customerInfo: action.payload,
+        customerInfo: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
         isAuthorized: true,
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: true,
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_FAILURE](state, action) {
@@ -207,6 +184,8 @@ export default {
           message: action.payload.message,
         },
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_SOCIAL_REQUEST](state) {
@@ -219,6 +198,8 @@ export default {
           message: '',
           userNotFound: false,
         },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_SOCIAL_SUCCESS](state, action) {
@@ -228,9 +209,15 @@ export default {
           ...state.socialAuthentication,
           isRunning: false,
         },
-        customerInfo: action.payload,
+        customerInfo: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
         isAuthorized: true,
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: true,
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_SOCIAL_FAILURE](state, action) {
@@ -244,14 +231,48 @@ export default {
           userNotFound: true,
         },
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: false,
+      };
+    },
+    [UserConstants.USER_AUTH_VALIDATE_REQUEST](state) {
+      return {
+        ...state,
+        customerInfo: {
+          ...state.customerInfo,
+          isRunning: true,
+          isLoaded: false,
+        },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_VALIDATE_SUCCESS](state, action) {
       return {
         ...state,
-        customerInfo: action.payload,
+        customerInfo: {
+          ...state.customerInfo,
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
         isAuthorized: true,
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: true,
+      };
+    },
+    [UserConstants.USER_AUTH_VALIDATE_FAILURE](state, action) {
+      return {
+        ...state,
+        customerInfo: {
+          ...state.customerInfo,
+          error: action.payload,
+          isRunning: false,
+          isLoaded: false,
+        },
+        isRunning: false,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_UP_REQUEST](state) {
@@ -263,6 +284,8 @@ export default {
           error: false,
           message: '',
         },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_UP_SUCCESS](state, action) {
@@ -272,9 +295,15 @@ export default {
           ...state.registration,
           isRunning: false,
         },
-        customerInfo: action.payload,
+        customerInfo: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
         isAuthorized: true,
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: true,
       };
     },
     [UserConstants.USER_AUTH_SIGN_UP_FAILURE](state, action) {
@@ -287,6 +316,8 @@ export default {
           message: action.payload.message,
         },
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_UP_SOCIAL_REQUEST](state) {
@@ -298,6 +329,8 @@ export default {
           error: false,
           message: '',
         },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_UP_SOCIAL_SUCCESS](state, action) {
@@ -307,9 +340,15 @@ export default {
           ...state.socialRegistration,
           isRunning: false,
         },
-        customerInfo: action.payload,
+        customerInfo: {
+          ...action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
         isAuthorized: true,
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: true,
       };
     },
     [UserConstants.USER_AUTH_SIGN_UP_SOCIAL_FAILURE](state, action) {
@@ -322,6 +361,8 @@ export default {
           message: action.payload.message,
         },
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_LOG_OUT_REQUEST](state) {
@@ -333,6 +374,8 @@ export default {
           error: false,
           message: '',
         },
+        isRunning: true,
+        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_LOG_OUT_SUCCESS](state, action) {
@@ -345,6 +388,8 @@ export default {
         customerInfo: {},
         isAuthorized: false,
         updatedAt: action.meta.updatedAt,
+        isRunning: false,
+        isLoaded: true,
       };
     },
     [UserConstants.USER_AUTH_LOG_OUT_FAILURE](state, action) {

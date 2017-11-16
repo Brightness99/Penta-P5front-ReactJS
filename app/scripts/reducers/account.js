@@ -49,6 +49,14 @@ export default {
         isLoaded: true,
       };
     },
+    [AccountConstants.ACCOUNT_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        error: action.payload,
+        isRunning: false,
+        isLoaded: false,
+      };
+    },
     [AccountConstants.ACCOUNT_ADDRESS_FETCH_REQUEST](state) {
       return {
         ...state,
@@ -74,7 +82,7 @@ export default {
         addresses: {
           ...state.addresses,
           isRunning: false,
-          isLoaded: true,
+          isLoaded: false,
         },
       };
     },
@@ -103,7 +111,7 @@ export default {
         error: action.payload,
       };
     },
-    [AccountConstants.ACCOUNT_FORM_RESET](state, action) {
+    [AccountConstants.ACCOUNT_FORM_RESET](state) {
       return {
         ...state,
         isUpdating: false,
@@ -195,6 +203,8 @@ export default {
           ...state.addresses,
           isAddressSaving: false,
           isAddressSavingCalled: false,
+          isAddressDeleting: false,
+          isAddressDeletingCalled: false,
           error: null,
         },
       };
@@ -204,6 +214,8 @@ export default {
         ...state,
         addresses: {
           ...state.addresses,
+          isAddressDeleting: true,
+          isAddressDeletingCalled: false,
           error: null,
         },
       };
@@ -215,8 +227,8 @@ export default {
           ...state.addresses,
           billing: state.addresses.billing.filter((item) => item.id !== action.payload.id),
           shipping: state.addresses.shipping.filter((item) => item.id !== action.payload.id),
-          isRunning: false,
-          isLoaded: true,
+          isAddressDeleting: false,
+          isAddressDeletingCalled: true,
           error: null,
         },
       };
@@ -225,8 +237,8 @@ export default {
       return {
         ...state,
         addresses: {
-          isRunning: false,
-          isLoaded: true,
+          isAddressDeleting: false,
+          isAddressDeletingCalled: true,
           error: action.payload,
         },
       };

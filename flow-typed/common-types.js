@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Stores
 declare type AppStoreType = {
   rehydrated: boolean,
@@ -100,7 +101,7 @@ declare type SettingsStore = {
   },
 };
 
-decare type BannerImageType = {
+declare type BannerImageType = {
   link: {
     url?: string,
     target: string,
@@ -111,3 +112,45 @@ decare type BannerImageType = {
   },
   alt: string,
 };
+
+declare type GoogleSuccessResult = {
+  googleId: string,
+  tokenId: string,
+  accessToken: string,
+  tokenObj: Object,
+  profileObj: {
+    name: string,
+    email: string,
+  }
+}
+
+declare type GoogleFailureResult = {
+  error: string,
+  details: string
+}
+
+declare type FBSuccessResult = {
+  status: string,
+  accessToken: string,
+  expiresIn: string,
+  signedRequest: string,
+  userID: string,
+  name: string,
+  email: string,
+}
+
+declare type FBFailureResult = {}
+
+declare type SocialLoginResult = {
+  socialType: string,
+  socialData: {
+    socialId: string,
+    socialToken: string,
+  },
+  fingerprint: string,
+  email: string,
+  hubspot_subscribe: boolean,
+  stay_connected: boolean,
+  first_name: string,
+  error: {}
+}

@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import swal from 'sweetalert2';
 import { Button } from 'quarks/Inputs';
-import { InputRegex } from 'quarks/Inputs/Validatable';
+import { Ninput } from 'components/Input';
 import { accountAddressCreate, accountAddressUpdate, zipcodeValidate, accountAddressFormReset } from 'actions';
 
 type Props = {
@@ -40,29 +40,34 @@ class AddressFormModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { account: { zipcodeValid }, account } = nextProps;
-    const { account: prevAccount, dispatch } = this.props;
+    const { account: prevAccount, dispatch, onCloseModal } = this.props;
     const { form } = this.state;
 
     if (zipcodeValid !== prevAccount.zipcodeValid && !zipcodeValid.isRunning && zipcodeValid.isLoaded) {
       if (!zipcodeValid.error) {
         if (zipcodeValid.list) {
+          const newCity = zipcodeValid.list.city ? zipcodeValid.list.city : form.city.value;
+          const newNeighborhood = zipcodeValid.list.neighborhood ? zipcodeValid.list.neighborhood : form.neighborhood.value;
+          const newAddressState = zipcodeValid.list.state ? zipcodeValid.list.state : form.state.value;
+          const newStreet = zipcodeValid.list.street ? zipcodeValid.list.street : form.street.value;
+
           const newState = {
             ...form,
             city: {
-              value: zipcodeValid.list.city || '',
-              valid: !!zipcodeValid.list.city,
+              value: newCity,
+              valid: !!newCity,
             },
             neighborhood: {
-              value: zipcodeValid.list.neighborhood || '',
-              valid: !!zipcodeValid.list.neighborhood,
+              value: newNeighborhood,
+              valid: !!newNeighborhood,
             },
             state: {
-              value: zipcodeValid.list.state || '',
-              valid: !!zipcodeValid.list.state,
+              value: newAddressState,
+              valid: !!newAddressState,
             },
             street: {
-              value: zipcodeValid.list.street || '',
-              valid: !!zipcodeValid.list.street,
+              value: newStreet,
+              valid: !!newStreet,
             },
           };
           this.setState({
@@ -84,11 +89,15 @@ class AddressFormModal extends React.Component {
         });
       } else {
         swal({
-          title: 'Successfully saved.',
+          title: 'Salvo com sucesso!',
           type: 'success',
           confirmButtonColor: '#2cac57',
           confirmButtonText: 'OK',
           showCancelButton: false,
+        }).then(() => {
+          if (onCloseModal) {
+            onCloseModal();
+          }
         });
       }
     }
@@ -129,24 +138,20 @@ class AddressFormModal extends React.Component {
     }
   }
 
-  handleValidatedInput = (name, value, valid) => {
+  handleChange = (key, valid, value) => {
     const { form } = this.state;
     const { dispatch, locale } = this.props;
     const newState = { form };
-    const target = name.target;
-    const key = target ? target.id : name;
 
     let canSubmit = true;
-    newState.form[key].valid = target ? !!target.value : valid;
-    newState.form[key].value = target ? target.value : value;
-    if (canSubmit === true) {
-      Object.keys(newState.form)
-      .forEach((index) => {
-        if (newState.form[index].valid !== true) {
-          canSubmit = false;
-        }
-      });
-    }
+    newState.form[key].valid = valid;
+    newState.form[key].value = value;
+    Object.keys(newState.form)
+    .forEach((index) => {
+      if (newState.form[index].valid !== true) {
+        canSubmit = false;
+      }
+    });
     this.setState({ form: newState.form, canSubmit });
 
     if (key === 'zipcode' && locale.COUNTRY_CODE === 'BR' && newState.form[key].valid) {
@@ -155,111 +160,98 @@ class AddressFormModal extends React.Component {
   }
 
   render() {
-    const { locale, account: { addresses, zipcodeValid } } = this.props;
-    const zipcodePattern = locale.COUNTRY_CODE === 'BR' ? /^([0-9]){5}[-]([0-9]){3}$/ : /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+    const { account: { addresses, zipcodeValid }, locale } = this.props;
     const { form, canSubmit } = this.state;
+    const pattern = locale.COUNTRY_CODE === 'BR' ? '99999-999' : '99999';
 
     return (
       <div className="address-form-modal-container">
         <h2>Adicionar endereço</h2>
         <div>* Campos Obrigatórios</div>
         <form className="address-form-modal">
-          <InputRegex
-            id="receiver_name"
+          <Ninput
             name="receiver_name"
-            type="text"
-            showLabel
+            key="address-form-receiver_name"
             className="atm-checkout-input atm-checkout-input-three"
-            placeholder="Nome*"
+            placeholder="Nome"
             value={form.receiver_name.value}
             onEnterKeyPress={this.handleClick}
-            onValidate={this.handleValidatedInput}
+            onChange={(isValid, value) => this.handleChange('receiver_name', isValid, value)}
             required
           />
           <div className="atm-checkout-input atm-checkout-input-two zipcode">
-            <InputRegex
+            <Ninput
               id="zipcode"
               name="zipcode"
-              type="text"
-              showLabel
-              placeholder="CEP*"
+              key="address-form-zipcode"
+              placeholder="CEP"
+              pattern={pattern}
               value={form.zipcode.value}
               onEnterKeyPress={this.handleClick}
-              onValidate={this.handleValidatedInput}
-              pattern={zipcodePattern}
+              onChange={(isValid, value) => this.handleChange('zipcode', isValid, value)}
+              checkValidation={this.checkZipCode}
               required
             />
             <a target="_blank" className="link" href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm">Nao sei meu CEP*</a>
           </div>
-          <InputRegex
-            id="additional_address"
+          <Ninput
             name="additional_address"
-            type="text"
-            showLabel
+            key="address-form-additional_address"
             className="atm-checkout-input atm-checkout-input-three"
-            placeholder="Endereço*"
+            placeholder="Endereço"
             value={form.additional_address.value}
             onEnterKeyPress={this.handleClick}
-            onValidate={this.handleValidatedInput}
+            onChange={(isValid, value) => this.handleChange('additional_address', isValid, value)}
             required
           />
-          <InputRegex
-            id="number"
+          <Ninput
             name="number"
-            type="text"
-            showLabel
+            key="address-form-number"
             className="atm-checkout-input atm-checkout-input-one"
             placeholder="Numero*"
             value={form.number.value}
             onEnterKeyPress={this.handleClick}
-            onValidate={this.handleValidatedInput}
+            onChange={(isValid, value) => this.handleChange('number', isValid, value)}
             required
           />
-          <InputRegex
-            id="street"
+          <Ninput
             name="street"
-            type="text"
-            showLabel
+            key="address-form-street"
             className="atm-checkout-input atm-checkout-input-one"
             placeholder="Complemento"
             value={form.street.value}
-            onValidate={this.handleValidatedInput}
             onEnterKeyPress={this.handleClick}
+            onChange={(isValid, value) => this.handleChange('street', isValid, value)}
+            required
           />
-          <InputRegex
-            id="neighborhood"
+          <Ninput
             name="neighborhood"
-            type="text"
-            showLabel
+            key="address-form-neighborhood"
             className="atm-checkout-input atm-checkout-input-two"
-            placeholder="Bairro*"
+            placeholder="Bairro"
             value={form.neighborhood.value}
             onEnterKeyPress={this.handleClick}
-            onValidate={this.handleValidatedInput}
+            onChange={(isValid, value) => this.handleChange('neighborhood', isValid, value)}
             required
           />
-          <InputRegex
-            id="city"
+          <Ninput
             name="city"
-            type="text"
-            showLabel
-            className="atm-checkout-input atm-checkout-input-two"
-            placeholder="Cidade*"
+            key="address-form-city"
+            className="atm-checkout-input atm-checkout-input-one"
+            placeholder="Cidade"
             value={form.city.value}
             onEnterKeyPress={this.handleClick}
-            onValidate={this.handleValidatedInput}
+            onChange={(isValid, value) => this.handleChange('city', isValid, value)}
             required
           />
-          <InputRegex
-            id="state"
+          <Ninput
             name="state"
-            type="text"
-            showLabel
-            className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Estado*"
+            key="address-form-state"
+            className="atm-checkout-input atm-checkout-input-two"
+            placeholder="Estado"
             value={form.state.value}
             onEnterKeyPress={this.handleClick}
-            onValidate={this.handleValidatedInput}
+            onChange={(isValid, value) => this.handleChange('state', isValid, value)}
             required
           />
         </form>
