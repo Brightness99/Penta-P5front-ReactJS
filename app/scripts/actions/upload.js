@@ -9,20 +9,14 @@ import { UploadConstants } from 'constants/index';
 /**
  * Fetching upload info
  *
- * @param {string} slug
- * @param {string} itemId
- * @param {number} isVertical
+ * @param {object} data
  *
  * @returns {Object}
  */
-export function uploadFetch(slug: string, itemId: string, isVertical: number): Object {
+export function uploadFetch(data: {}): Object {
   return {
     type: UploadConstants.UPLOAD_FETCH_REQUEST,
-    payload: {
-      slug,
-      itemId,
-      isVertical,
-    },
+    payload: data,
   };
 }
 
@@ -55,34 +49,26 @@ export function uploadFileCancel(): Object {
  * upload finish request
  *
  * @param {Object} data
- * @param {string} itemId
  *
  * @returns {Object}
  */
-export function uploadFinishRequest(data: {}, itemId: string): Object {
+export function uploadFinishRequest(data: {}): Object {
   return {
     type: UploadConstants.UPLOAD_FINISH_REQUEST,
-    payload: {
-      data,
-      itemId,
-    },
+    payload: data,
   };
 }
 
 /**
  * upload set orientation request
  *
- * @param {string} itemId
- * @param {number} isVertical
+ * @param {object} data
  *
  * @returns {Object}
  */
-export function uploadSetOrientationRequest(itemId: string, isVertical: number): Object {
+export function uploadSetOrientationRequest(data: {}): Object {
   return {
     type: UploadConstants.UPLOAD_SET_ORIENTATION_REQUEST,
-    payload: {
-      itemId,
-      isVertical,
-    },
+    payload: data,
   };
 }
