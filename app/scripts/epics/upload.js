@@ -16,8 +16,12 @@ const uploader = new RxPlupload({
 export function uploadFetch(action$) {
   return action$.ofType(UploadConstants.UPLOAD_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v2/${action.payload.slug}/upload/${action.payload.itemId}?isVertical=${action.payload.isVertical}`;
-
+      let endpoint;
+      if (action.payload.isAccount) {
+        endpoint = `/v2/upload-de-arquivos?p1=${action.payload.itemId}`;
+      } else {
+        endpoint = `/v2/${action.payload.slug}/upload/${action.payload.itemId}?isVertical=${action.payload.isVertical}`;
+      }
       return rxAjax({
         endpoint,
         method: 'GET',
@@ -46,11 +50,16 @@ export function uploadFetch(action$) {
 export function uploadFinishRequest(action$) {
   return action$.ofType(UploadConstants.UPLOAD_FINISH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v2/upload/cart/${action.payload.itemId}`;
+      let endpoint;
+      if (action.payload.isAccount) {
+        endpoint = `/v2/upload/order/${action.payload.itemId}`;
+      } else {
+        endpoint = `/v2/upload/cart/${action.payload.itemId}`;
+      }
 
       return rxAjax({
         endpoint,
-        payload: action.payload.data,
+        payload: action.payload.request,
         method: 'POST',
       })
         .map(data => ({
@@ -71,8 +80,12 @@ export function uploadFinishRequest(action$) {
 export function uploadSetOrientationRequest(action$) {
   return action$.ofType(UploadConstants.UPLOAD_SET_ORIENTATION_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v2/cimpress_upload/funnel/${action.payload.itemId}/is_vertical/${action.payload.isVertical}`;
-
+      let endpoint;
+      if (action.payload.isAccount) {
+        endpoint = `/v2/cimpress_upload/my_account/${action.payload.itemId}/is_vertical/${action.payload.isVertical}`;
+      } else {
+        endpoint = `/v2/cimpress_upload/funnel/${action.payload.itemId}/is_vertical/${action.payload.isVertical}`;
+      }
       return rxAjax({
         endpoint,
         method: 'GET',

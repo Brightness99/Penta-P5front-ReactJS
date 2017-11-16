@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { push } from 'modules/ReduxRouter';
 import OverlaySpinner from 'components/OverlaySpinner';
 import { Button } from 'quarks/Inputs';
 import Modal from 'components/Modal';
@@ -119,7 +118,6 @@ export default class Canvas extends React.Component {
     this.setState({
       isOrientationChanging: true,
     });
-    push(`?isVertical=${isVertical}`);
     if (handleOrientationChanged && typeof handleOrientationChanged === 'function') {
       handleOrientationChanged(isVertical);
     }
