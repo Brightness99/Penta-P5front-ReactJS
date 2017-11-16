@@ -25,6 +25,8 @@ import about from './about';
 import fileMount from './file-mount';
 import guide from './guide';
 import templates from './templates';
+import referral from './referral';
+import forgotPassword from './forgot-password';
 
 export default {
   ...app,
@@ -49,4 +51,6 @@ export default {
   ...fileMount,
   ...guide,
   ...templates,
+  ...referral,
+  ...forgotPassword,
 };

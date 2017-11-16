@@ -3,7 +3,6 @@ import React from 'react';
 import cx from 'classnames';
 import Select from 'atoms/Inputs/Select/Simple';
 import DownloadOptions from 'components/DownloadOptions';
-import { Input, Button } from 'quarks/Inputs';
 import { isMobile, getScreenSize } from 'utils/helpers';
 
 type Props = {
@@ -102,36 +101,36 @@ const DownloadSection = ({ downloadData, form, canSubmit, handleChange, requestD
           </section>
         }
       </form>
-      {
-        canShowDownloadOptions &&
-        <section>
-          <section className="org-download-template">
-            <article className="mol-footer-preview">
-              <section className="container">
-                <p className="text-footer-preview">
-                  {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                  auctor sapien nibh, nec varius sem finibus sit amet. Nulla ornare ligula nec ex sodales rutrum. Maecenas ac
-                  consectetur mi, vel malesuada libero.`}
-                </p>
-                <form>
-                  <Input
-                    name="email"
-                    placeholder="E-mail"
-                    showLabel={true}
-                  />
-                  <Button
-                    type="submit"
-                    kind="success"
-                    className="btn-default"
-                  >
-                    {'Enviar'}
-                  </Button>
-                </form>
-              </section>
-            </article>
-          </section>
-        </section>
-      }
+      {/* {*/}
+      {/* canShowDownloadOptions &&*/}
+      {/* <section>*/}
+      {/* <section className="org-download-template">*/}
+      {/* <article className="mol-footer-preview">*/}
+      {/* <section className="container">*/}
+      {/* <p className="text-footer-preview">*/}
+      {/* {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque*/}
+      {/* auctor sapien nibh, nec varius sem finibus sit amet. Nulla ornare ligula nec ex sodales rutrum. Maecenas ac*/}
+      {/* consectetur mi, vel malesuada libero.`}*/}
+      {/* </p>*/}
+      {/* <form>*/}
+      {/* <Input*/}
+      {/* name="email"*/}
+      {/* placeholder="E-mail"*/}
+      {/* showLabel={true}*/}
+      {/* />*/}
+      {/* <Button*/}
+      {/* type="submit"*/}
+      {/* kind="success"*/}
+      {/* className="btn-default"*/}
+      {/* >*/}
+      {/* {'Enviar'}*/}
+      {/* </Button>*/}
+      {/* </form>*/}
+      {/* </section>*/}
+      {/* </article>*/}
+      {/* </section>*/}
+      {/* </section>*/}
+      {/* }*/}
     </section>
   );
 };

@@ -59,9 +59,14 @@
 @import 'containers/templateslp/index';
 @import 'containers/referral/index';
 @import 'containers/forgot-password/index';
+@import 'containers/loyalty-lp/index';
+@import 'containers/tutoriais/index';
+@import 'containers/reset-password/index';
+@import 'containers/work/index';
 
 // *** Components
 @import 'components/back-to-top/index';
+@import 'components/customer-data/index';
 @import 'components/footer/index';
 @import 'components/header/index';
 @import 'components/input/index';
@@ -80,8 +85,9 @@
 @import 'components/loyaltycontainers/index';
 @import 'components/printi-press-item/index';
 @import 'components/alphabet-list/index';
-@import 'components/icon-toogle-button/index';
+@import 'components/eye-input-enhancer/index';
 @import 'components/contact-form/index';
+@import 'components/glossary-list-by-letter/index';
 
 // *** Bosons
 @import 'bosons/index';

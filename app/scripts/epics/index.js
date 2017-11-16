@@ -80,6 +80,12 @@ import {
 } from './file-mount';
 import { guideFetch } from './guide';
 
+import {
+  referralSendRequest
+} from './referral';
+
+import { resetPassword, setNewPassword, getExpiredInfo } from './forgot-password';
+
 export default combineEpics(
   userNewsletter,
   productsFetch,
@@ -139,4 +145,8 @@ export default combineEpics(
   fetchTemplateById,
   sendDownloadTemplatesRequest,
   fetchTemplate,
+  referralSendRequest,
+  resetPassword,
+  setNewPassword,
+  getExpiredInfo,
 );

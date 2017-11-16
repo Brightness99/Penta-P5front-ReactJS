@@ -1,108 +1,141 @@
 .tpl-referral {
-  padding: 4rem 0 3rem 0;
+  padding: 4rem 0 3rem;
+
   @include lg {
     background-color: $color-white;
     box-sizing: border-box;
     flex: 5;
     padding: 2rem 6rem;
   }
+
   .org-referral-share {
     display: flex;
     flex-direction: column;
+
     @include lg {
       flex-direction: row;
     }
+
     .mol-referral-text {
       flex: 1;
+
       .qrk-title-text {
         color: $color-almostBlack;
         font-family: $font-family-nunito-light;
         font-size: $font-size-il;
         font-weight: 300;
+
         @include lg {
           font-size: $font-size-xl;
         }
       }
+
       .qrk-text {
         color: $color-lightGray;
         font-family: $font-family-open-sans-light;
         font-size: $font-size-sm;
         line-height: 2.5rem;
+
         @include lg {
           font-size: $font-size-base;
         }
       }
     }
+
     .mol-content-share {
       flex: 2;
       max-width: 488px;
+
       @include xxl {
         flex: 1;
       }
+
       .qrk-text-share {
         color: $color-lightGray;
         font-family: $font-family-open-sans-regular;
         font-size: $font-size-xs;
       }
+
+      .mol-tooltip {
+        position: static;
+      }
+
+      .atm-tooltip {
+        display: flex;
+      }
     }
   }
 
   .org-table-referral {
-    margin-top: 5.3rem;
     font-family: $font-family-open-sans-light;
     font-size: $font-size-sm;
+    margin-top: 5.3rem;
+
     @include lg {
       margin-top: 8.3rem;
     }
+
     .qrk-text {
       color: $color-lightGray;
       font-family: $font-family-open-sans-light;
       font-size: $font-size-base;
       margin-bottom: 0;
     }
+
     .qrk-value {
       color: $color-printi-blue;
       font-family: $font-family-nunito-light;
       font-size: $font-size-il;
       font-weight: 300;
       margin-bottom: 2.6rem;
+
       @include lg {
         font-size: $font-size-xl;
       }
     }
+
     .mol-content-table {
       border: 0.1rem solid $body-bg;
+
       @include lg {
         padding: 2rem;
       }
+
       .atm-head-table {
         border-bottom: 0.1rem solid $body-bg;
         color: $color-almostBlack;
         display: flex;
         font-weight: 700;
+
         li {
           flex: 1;
           margin-bottom: 1rem;
+
           &:first-of-type {
             flex: 2;
           }
         }
       }
+
       .atm-content {
         color: $color-lightGray;
         display: flex;
         flex-wrap: wrap;
+
         .qrk-content-item {
-          flex-basis: calc((100% / 4) + 2px);
+          flex-basis: calc((100% / 4) + 0.2rem);
           position: relative;
+
           &:nth-of-type(3n-2) {
-            flex-basis: calc(((100% / 4) - 2px) * 2);
+            flex-basis: calc(((100% / 4) - 0.2rem) * 2);
           }
+
           &.color-credit {
             color: $color-printi-blue;
             display: inline-flex;
             justify-content: space-between;
           }
+
           svg {
             fill: $color-green;
             width: 1.5rem;
@@ -118,6 +151,7 @@
   overflow-x: scroll;
   overflow-y: auto;
   width: 100%;
+
   .atm-content-list {
     background-color: $color-white;
     border-radius: 0.3rem;
@@ -125,15 +159,18 @@
     margin-right: 2rem;
     padding: 1rem;
     text-align: center;
+
     .qrk-title-list {
       color: $color-almostBlack;
       font-weight: 700;
       margin-bottom: 0;
     }
+
     .qrk-text-list {
       color: $color-lightGray;
       font-family: $font-family-open-sans-light;
       font-size: $font-size-base;
+
       &:last-of-type {
         color: $color-printi-blue;
         margin-bottom: 0;
@@ -145,23 +182,31 @@
 .mol-share {
   display: flex;
   flex-direction: column;
+
   @include lg {
     background-color: $body-bg;
     flex-direction: row;
     padding: 2rem;
   }
+
   .atm-input-link {
     flex: 4;
     position: relative;
+
     @include lg {
       margin-right: 1rem;
     }
+
     .app__qrk__input-container {
       > input {
         padding-top: 0;
       }
     }
+
     .atm-link-copy {
+      background: none;
+      border: 0;
+      color: $color-printi-blue;
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xs;
       position: absolute;
@@ -170,9 +215,11 @@
       top: 1.2rem;
     }
   }
+
   .btn-default {
     font-size: $font-size-xs;
     margin-top: 1rem;
+
     @include lg {
       margin-top: 0;
       padding: 0 1.922rem;
