@@ -41,6 +41,18 @@ export class ArtProposal extends React.Component {
     dispatch(proposalsFetch(order_item_id));
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { artCreation } = this.props;
+    if (nextProps.artCreation.file.url !== artCreation.file.url && nextProps.artCreation.file.url !== '') {
+      setTimeout(() => {
+        const response = {
+          file: nextProps.artCreation.file.url,
+        };
+        window.open(response.file);
+      }, 100);
+    }
+  }
+
   static props: Props;
 
   static state: State;
@@ -64,7 +76,6 @@ export class ArtProposal extends React.Component {
       ]);
     }
   }
-
 
   renderMobile() {
     return (

@@ -39,7 +39,7 @@ export function newProposalRequest(data: Object): Object {
 }
 
 /**
- * new Proposal Request
+ * Approve Proposal Request
  * @param {Object} data
  *
  * @returns {Object}
@@ -55,7 +55,24 @@ export function approveProposalRequest(data: Object): Object {
 }
 
 /**
- * new Proposal Request
+ * Fetch Proposal File List Request
+ * @param {Object} data
+ *
+ * @returns {Object}
+ */
+export function fetchFileListRequest(data: Object): Object {
+  return {
+    type: ArtCreationConstants.FILE_LIST_FETCH_REQUEST,
+    payload: {
+      order_item_id: data.order_item_id,
+      proposal_id: data.proposal_id,
+    },
+  };
+}
+
+
+/**
+ * Fetch Single File Request
  * @param {Object} data
  *
  * @returns {Object}

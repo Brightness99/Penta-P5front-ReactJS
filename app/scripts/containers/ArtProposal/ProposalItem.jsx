@@ -9,36 +9,55 @@ import Slider from 'react-slick';
 import { RoundedTransparentButton } from 'atoms/Buttons';
 import { DownloadIcon } from 'components/Icons';
 import { PrevArrow, NextArrow } from 'components/Carousel';
+import { fetchSingleFileRequest } from 'actions';
 
 type Props = {
   proposal: {},
   type: string,
+  dispatch: () => {}
 }
 
-export class ProposalItem extends React.Component {
+class ProposalItem extends React.Component {
 
   static props: Props;
 
-  renderFiles = (files) => (
-    files.map((file, index) => (
-      <div className="slider-doc-item" key={index.toString()}>
-        <div className="doc">
-          {/* <embed src={file.file_url} /> */}
-          {/* <img src={file.file_url} alt={file.file_name} /> */}
+  componentWillReceiveProps(newProps) {
+    
+  }
+
+  state = {
+    selectedFileId: -1
+  };
+
+  renderFiles = (files) => {
+    const { selectedFileId } = this.state;
+    return (
+      files.map((file, index) => (
+        <div className={cx('slider-doc-item', (file.id === selectedFileId) && 'selected')} key={index.toString()} onClick={() => this.selectItem(file)}>
+          <div className="doc">
+            {/* <embed src={file.file_url} /> */}
+            {/* <img src={file.file_url} alt={file.file_name} /> */}
+          </div>
         </div>
-      </div>
-    ))
-  );
+      ))
+    );
+  }
+
+  selectItem(file) {
+    const { selectedFileId } = this.state;
+    const newId = (selectedFileId === file.id) ? -1 : file.id;
+    this.setState({ selectedFileId: newId });
+  }
 
   downloadButtonClickHandler = () => {
-    // const { dispatch } = this.props;
-    // const { proposal, customerMessage } = this.state;
-    // const payload = {
-    //   order_item_id: proposal.order_item_id,
-    //   proposal_id: proposal.id,
-    //   customer_message: customerMessage,
-    // };
-    // dispatch(newProposalRequest(payload));
+    const { dispatch, proposal } = this.props;
+    const { selectedFileId } = this.state;
+    const payload = {
+      order_item_id: proposal.order_item_id,
+      proposal_id: proposal.id,
+      file_id: selectedFileId,
+    };
+    dispatch(fetchSingleFileRequest(payload));
   }
 
   render() {
@@ -108,5 +127,16 @@ export class ProposalItem extends React.Component {
   }
 }
 
-export default ProposalItem;
+function mapStateToProps(state) {
+  console.log('state === *** ==> ', state);
+  return {
+    
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProposalItem);
 

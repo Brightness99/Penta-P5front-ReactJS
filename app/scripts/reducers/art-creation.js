@@ -23,6 +23,11 @@ export const artCreationState = {
     isRunning: false,
     isLoaded: false,
   },
+  file: {
+    url: '',
+    isRunning: false,
+    isLoaded: false,
+  }
 };
 
 export default {
@@ -109,6 +114,33 @@ export default {
     [ArtCreationConstants.SINGLE_FILE_FETCH_REQUEST](state) {
       return {
         ...state,
+        file: {
+          url: '',
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [ArtCreationConstants.SINGLE_FILE_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        file: {
+          url: action.payload.url,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [ArtCreationConstants.SINGLE_FILE_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+
+    [ArtCreationConstants.FILE_LIST_FETCH_REQUEST](state) {
+      return {
+        ...state,
         files: {
           ...state.files,
           isRunning: true,
@@ -116,7 +148,7 @@ export default {
         },
       };
     },
-    [ArtCreationConstants.SINGLE_FILE_FETCH_SUCCESS](state, action) {
+    [ArtCreationConstants.FILE_LIST_FETCH_SUCCESS](state, action) {
       return {
         ...state,
         files: {
@@ -133,7 +165,7 @@ export default {
         },
       };
     },
-    [ArtCreationConstants.SINGLE_FILE_FETCH_FAILURE](state, action) {
+    [ArtCreationConstants.FILE_LIST_FETCH_FAILURE](state, action) {
       return {
         ...state,
         error: action.payload,

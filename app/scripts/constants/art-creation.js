@@ -28,4 +28,8 @@ export const ArtCreationConstants = keyMirror({
   SINGLE_FILE_FETCH_SUCCESS: undefined,
   SINGLE_FILE_FETCH_FAILURE: undefined,
   SINGLE_FILE_FETCH_CANCEL: undefined,
+  FILE_LIST_FETCH_REQUEST: undefined,
+  FILE_LIST_FETCH_SUCCESS: undefined,
+  FILE_LIST_FETCH_FAILURE: undefined,
+  FILE_LIST_FETCH_CANCEL: undefined,
 });
