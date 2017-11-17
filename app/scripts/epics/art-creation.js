@@ -88,14 +88,14 @@ export function newProposalRequest(action$) {
 export function approveProposalRequest(action$) {
   return action$.ofType(ArtCreationConstants.APPROVE_PROPOSAL_REQUEST)
     .switchMap((action) => {
-      const endpoint = `/v2/order_items/${action.payload.order_item_id}/art_creation/proposals/${action.payload.proposal_id}/approve`;
+      const endpoint = `/v2/order_items/${action.payload.order_item_id}/art_creation/proposals/${action.payload.proposal_id}/accept`;
       return rxAjax({
         endpoint,
         payload: {},
         method: 'PUT',
       })
         .map(data => {
-          if (data.status === 200) {
+          if (data.status === 200 || data.status === 204) {
             return {
               type: ArtCreationConstants.APPROVE_PROPOSAL_SUCCESS,
               payload: {},
