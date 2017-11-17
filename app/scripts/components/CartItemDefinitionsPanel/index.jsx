@@ -71,6 +71,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
     const { isOpen } = this.state;
     const { expectedDeliveryDate, subTotal, additionalOptions } = this.props;
     let total = subTotal;
+
     if (additionalOptions) {
       total += additionalOptions.file_format.price + additionalOptions.proof.price;
     }
@@ -91,15 +92,14 @@ export default class CartItemDefinitionsPanel extends React.Component {
                   <section className="options">
                     {this.renderParts()}
                   </section>
-                  <hr />
                   {
                     additionalOptions &&
-                    <section className="additional-options">
-                      <section>{this.renderOption(additionalOptions.file_format)}</section>
-                      <section>{this.renderOption(additionalOptions.proof)}</section>
-                    </section>
+                      [<hr key="horizontal-line" />,
+                        <section className="additional-options" key="options">
+                          <section>{this.renderOption(additionalOptions.file_format)}</section>
+                          <section>{this.renderOption(additionalOptions.proof)}</section>
+                        </section>]
                   }
-                  <hr />
                   <section className="delivery-info-mobile">
                     <section>
                       <WarningFilled />

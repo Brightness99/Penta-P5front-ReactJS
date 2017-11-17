@@ -76,6 +76,7 @@ class AccountUploadPage extends React.Component {
       <UploadContent
         breadcrumb={breadcrumb}
         isLoading={isLoading}
+        isAccount={true}
         uploadInfo={uploadInfo}
         uploadFileProgress={uploadFileProgress}
         screenSize={screenSize}

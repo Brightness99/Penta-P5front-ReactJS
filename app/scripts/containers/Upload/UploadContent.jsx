@@ -17,6 +17,7 @@ import { isMobile } from 'utils/helpers';
 type Props = {
   screenSize: string,
   isLoading: boolean,
+  isAccount: boolean,
   isFinishInProgress: boolean,
   uploadInfo: {},
   handleOrientationChanged: (isVertical: number) => void,
@@ -156,13 +157,14 @@ export default class UploadContent extends React.Component {
     );
   };
 
-  renderAdditionalParameters() {
+  renderAdditionalParameters = (order: number) => {
     const { selectedAdditionalParameters } = this.state;
     const { uploadInfo: { additionalOptions: { availableAdditionalOptionList, selectedAdditionalOptions } } } = this.props;
     const isComplete = !!selectedAdditionalParameters;
     return (
       <FunnelBlock
-        order="1"
+        order={order}
+        key={order}
         isComplete={isComplete}
         header={[
           <span key="source-block-title">Configurações adicionais</span>,
@@ -176,16 +178,17 @@ export default class UploadContent extends React.Component {
         />
       </FunnelBlock>
     );
-  }
+  };
 
-  renderUploadTypeSchemes() {
+  renderUploadTypeSchemes = (order: number) => {
     const { selectedStrategy, selectedAdditionalParameters } = this.state;
     const { uploadInfo: { availableStrategies, flashMessages }, screenSize } = this.props;
-    const showStep = !!selectedAdditionalParameters;
+    const showStep = !!selectedAdditionalParameters || order === 1;
     return (
       showStep &&
       <FunnelBlock
-        order="2"
+        order={order}
+        key={order}
         isComplete={selectedStrategy !== 0}
         header={[
           <span key="source-block-title">Como você quer enviar sua arte?</span>,
@@ -200,9 +203,9 @@ export default class UploadContent extends React.Component {
         />
       </FunnelBlock>
     );
-  }
+  };
 
-  renderFileUploadBlock() {
+  renderFileUploadBlock = (order: number) => {
     const { selectedStrategy, uploadedFiles, fileFormats, documentReferenceId } = this.state;
     const { uploadInfo: { globalFlags: { upload_type }, cimpressInfo, flashMessages }, screenSize } = this.props;
     const showStep = selectedStrategy > 1;
@@ -212,7 +215,8 @@ export default class UploadContent extends React.Component {
     return (
       showStep &&
       <FunnelBlock
-        order="3"
+        order={order}
+        key={order}
         isComplete={isComplete}
         header={[
           <span key="source-block-title">Enviar arquivo da arte</span>,
@@ -233,11 +237,12 @@ export default class UploadContent extends React.Component {
         />
       </FunnelBlock>
     );
-  }
+  };
 
   renderCartItemDefinitions() {
     const { selectedAdditionalParameters } = this.state;
     const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
+
     return (<CartItemDefinitionsPanel
       parts={parts}
       subTotal={total_price}
@@ -247,11 +252,17 @@ export default class UploadContent extends React.Component {
   }
 
   render() {
-    const { isLoading, screenSize, isFinishInProgress, breadcrumb } = this.props;
+    const { isLoading, screenSize, isFinishInProgress, breadcrumb, isAccount } = this.props;
     const { isRepurchase, canSubmit } = this.state;
 
     if (!isLoading) return <Loading />;
 
+    let funnels;
+    if (isAccount) {
+      funnels = [this.renderUploadTypeSchemes, this.renderFileUploadBlock];
+    } else {
+      funnels = [this.renderAdditionalParameters, this.renderUploadTypeSchemes, this.renderFileUploadBlock];
+    }
     return (
       <section className="page-upload">
         <div className="container">
@@ -264,13 +275,7 @@ export default class UploadContent extends React.Component {
           <section className="content">
             <section className="main-upload-container">
               {
-                this.renderAdditionalParameters()
-              }
-              {
-                this.renderUploadTypeSchemes()
-              }
-              {
-                this.renderFileUploadBlock()
+                funnels.map((x, i) => x(i + 1))
               }
               <section className="upload-finish-block">
                 <label>

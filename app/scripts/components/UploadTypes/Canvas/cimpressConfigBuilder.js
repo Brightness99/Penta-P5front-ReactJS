@@ -6,6 +6,7 @@ import UploadButtonCimpress from './UploadButtonCimpress';
 const cimpressConfigBuilder = (config, isSku) => {
   const { settings: { has_preview, has_zoom } } = config;
   const cimpressDesignerSettings = {
+    documentReference: config.document_reference_url,
     configuration: {
       services: {
         clients: {
