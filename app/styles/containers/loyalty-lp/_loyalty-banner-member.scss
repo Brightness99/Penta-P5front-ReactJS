@@ -1,0 +1,189 @@
+.mol-banner-member-loyalty {
+  position: relative;
+  .atm-banner-loyalty {
+    position: relative;
+    img {
+      width: 100%;
+      max-height: 672px;
+    }
+    .qrk-banner-text {
+      position: absolute;
+      top: 8%;
+      left: 5%;
+      max-width: 90%;
+      @include sm {
+        left: 16%;
+        max-width: 344px;
+      }
+      svg {
+        width: 167px;
+      }
+      .title-banner-text {
+        @media (min-width: 320px) and (max-width: 400px) {
+          font-size: $font-size-il;
+          line-height: 3rem;
+        }
+        color: $color-printi-blue;
+        font-family: $font-family-open-sans;
+        margin: 2.4rem 0;
+        font-size: $font-size-xxll;
+        line-height: 4.5rem;
+      }
+      .subtitle-banner-text {
+        @media (min-width: 320px) and (max-width: 400px) {
+          font-size: $font-size-xs;
+        }
+        color: $color-dark;
+        font-family: $font-family-open-sans-regular;
+        font-size: $font-size-h6;
+        font-weight: 400;
+        margin-bottom: 2.4rem;
+      }
+    }
+  }
+  .atm-member-loyalty {
+    background-color: $color-white;
+    box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+    padding: 6rem 0;
+    width: 100%;
+    @include lg {
+      margin-top: -12.2rem;
+    }
+    .qrk-be-member {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      max-width: 86%;
+      margin: auto;
+      position: relative;
+      @include lg {
+        flex-direction: row;
+        margin-top: 6rem;
+      }
+      .img-desc-be-member {
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        .img-be-member {
+          order: 2;
+          @include lg {
+            order: inherit;
+          }
+          &:last-of-type {
+            padding-bottom: 5rem;
+            @include lg {
+              padding-bottom: 0;
+            }
+          }
+        }
+        .text-be-member {
+          font-family: $font-family-open-sans-regular;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          order: 1;
+          margin: 5rem 0 5rem 7rem;
+          @include lg {
+            height: 192px;
+            order: inherit;
+            margin: 5rem 0;
+          }
+          .first-text-be-member {
+            font-size: $font-size-il;
+          }
+          .second-text-be-member {
+            color: $color-dark;
+            font-size: $font-size-base;
+          }
+        }
+        >div {
+          max-width: 312px;
+          @include lg {
+            margin: 5rem 0;
+            &:nth-of-type(2n) {
+              margin-bottom: 19rem;
+            }
+          }
+        }
+      }
+      .line-dashed {
+        border-left: 2px dashed $color-bluey-grey;
+        width: 0.4rem;
+        margin-top: 6rem;
+        position: absolute;
+        top: 0;
+        left: 4%;
+        height: 100%;
+        @include lg {
+          position: relative;
+          height: auto;
+          left: 0;
+        }
+        .icon-into-line {
+          position: absolute;
+          background: $color-white;
+          padding: 1.4rem 0.8rem;
+          left: -2.7rem;
+          border: 2px dashed $color-bluey-grey;
+          border-radius: 2rem;
+          width: 5.6rem;
+          height: 5.6rem;
+          span {
+            border-radius: 3rem;
+            color: $color-white;
+            font-family: $font-family-open-sans-bold;
+            font-size: $font-size-xxxs;
+            text-transform: uppercase;
+            padding: 0.1rem 0.5rem;
+          }
+          &:first-of-type {
+            @include lg {
+              top: 10%;
+            }
+            span {
+              background-color: $color-silver;
+            }
+          }
+          &:nth-of-type(2n) {
+            top: 50%;
+            span {
+              background-color: $color-deep-purple;
+            }
+          }
+          &:last-of-type {
+            bottom: 0;
+            left: -2.7rem;
+            width: 5.6rem;
+            height: 5.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+    .qrk-link-scroll-be-member {
+      align-items: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 10rem;
+      @include lg {
+        align-items: center;
+        margin: 4rem 0;
+      }
+      .first-text-scroll-be-member {
+        font-family: $font-family-open-sans-regular;
+        font-size: $font-size-il;
+        font-weight: 400;
+        letter-spacing: normal;
+        text-transform: inherit;
+      }
+      .second-text-scroll-be-member {
+        color: $color-opacity-silver;
+        font-family: $font-family-open-sans-regular;
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
