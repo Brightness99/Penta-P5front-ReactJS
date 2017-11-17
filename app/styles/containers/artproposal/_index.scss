@@ -105,7 +105,7 @@
                 fill: $color-warning;
               }
               .status-approved svg {
-                fill: $color-success;
+                fill: $color-green;
               }
               .status-disapproved svg{
                 fill: $color-tomato-error-dark;
@@ -192,6 +192,9 @@
                     margin-left: 1.0rem;
                     background-color: $color-almostWhite;
                     border: solid 1px $color-lightGray3;
+                    &.selected {
+                      border: solid 1px $color-printi-blue;
+                    }
                     .doc {
                         position: absolute;
                         left: 30px;
