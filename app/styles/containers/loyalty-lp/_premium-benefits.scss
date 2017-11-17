@@ -1,0 +1,173 @@
+.mol-premium-members {
+  margin: 9rem 0px;
+  @include lg {
+    display: flex;
+    flex-direction: column;
+  }
+  .atm-type-premium {
+    margin-top: 4rem;
+    @include lg {
+      display: flex;
+    }
+    .slick-initialized {
+      .slick-list {
+        .slick-track {
+          .slick-slide {
+            padding: 0 2rem;
+          }
+        }
+      }
+    }
+    .qrk-premium {
+      max-width: 320px;
+      margin: 0 auto;
+      @include lg {
+        width: calc((100%/4) - 3rem);
+        margin: 0 2rem;
+        &:first-of-type {
+          margin-left: 0;
+        }
+        &:nth-of-type(4n) {
+          margin-right: 0;
+        }
+      }
+      &.club-premium {
+        background-color: $color-deep-purple-light;
+      }
+      &.silver-premium {
+        background: linear-gradient(117deg, rgba(213, 217, 222, 0.3) 0%, rgba(163, 174, 191, 0.3) 100%);
+      }
+      &.gold-premium {
+        background-color: $color-maize-light;
+      }
+      &.black-premium {
+        background: linear-gradient(117deg, rgba(163, 174, 191, 0.3) 0%, rgba(10, 29, 51, 0.3) 100%);
+      }
+      .list-benefits-premium {
+        font-size: $font-size-xs;
+        font-family: $font-family-open-sans-regular;
+        padding: 2.8rem;
+        .logo-title-loyalty {
+          display: flex;
+          align-items: center;
+          .logo-loyalty {
+            @include center-child-flex;
+            border-radius: 3rem;
+            font-family: $font-family-open-sans-bold;
+            line-height: 1;
+            margin: auto;
+            padding: 0.6rem 1.28em;
+            .title-logo-loyalty {
+              color: $color-white;
+              font-size: $font-size-lg;
+              text-transform: uppercase;
+            }
+            &.bg-club {
+              background-color: $color-deep-purple;
+            }
+            &.bg-silver {
+              background: linear-gradient(117deg, #d5d9de 0%, #a3aebf 100%);
+            }
+            &.bg-gold {
+              background-color: $color-maize;
+            }
+            &.bg-black {
+              background: linear-gradient(117deg, #a3aebf 0%, #0a1d33 100%);
+            }
+          }
+        }
+        ul {
+          display: flex;
+          flex-direction: column;
+          margin: 1rem 0;
+          li {
+            align-items: center;
+            color: $color-opacity-silver;
+            display: flex;
+            justify-content: space-between;
+            line-height: 2.2rem;
+            .checkIcon {
+              svg {
+                width: 1.6rem;
+                height: 1.6rem;
+              }
+            }
+            .closeIcon {
+              svg {
+                width: 1.2rem;
+                height: 1.2rem;
+              }
+            }
+            &.li-active-color {
+              color: $color-dark;
+            }
+          }
+          &.color-club {
+            li {
+              .checkIcon {
+                svg {
+                  fill: $color-deep-purple;
+                }
+              }
+              .closeIcon {
+                svg {
+                  fill: $color-deep-purple-medium;
+                }
+              }
+            }
+          }
+          &.color-silver {
+            li {
+              .checkIcon {
+                svg {
+                  fill: $color-bluey-grey;
+                }
+              }
+              .closeIcon {
+                svg {
+                  fill: $color-silver;
+                }
+              }
+            }
+          }
+          &.color-gold {
+            li {
+              .checkIcon {
+                svg {
+                  fill: $color-maize;
+                }
+              }
+              .closeIcon {
+                svg {
+                  fill: $color-maize-medium;
+                }
+              }
+            }
+          }
+          &.color-black {
+            li {
+              .checkIcon {
+                svg {
+                  fill: $color-dark;
+                }
+              }
+            }
+          }
+        }
+      }
+      .amount-money {
+        background-color: $color-white;
+        font-family: $font-family-open-sans-regular;
+        font-size: $font-size-xs;
+        padding: 2rem;
+        .details-amount-money {
+          color: $color-opacity-silver;
+          margin-top: 1rem;
+        }
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
