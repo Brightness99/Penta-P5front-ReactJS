@@ -103,8 +103,7 @@ export default class CartVoucher extends React.Component {
         <TicketIcon />
         <div className="mol-cart-voucher-ticket-body">
           <div className="mol-cart-voucher-ticket-text">
-            <span>{locale.TEXT_TITLE}</span>
-            <p>{locale.TEXT}</p>
+            <span>{locale.TITLE}</span>
           </div>
           {this.handleState()}
         </div>

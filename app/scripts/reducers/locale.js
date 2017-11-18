@@ -107,9 +107,10 @@ const missingLocale = {
         },
       },
       cart: {
+        DOWNLOAD_QUOTATION: 'Baixar Orçamento',
         cross_selling: {
           TITLE: 'PRODUTOS INDICADOS PARA VOCÊ',
-        }
+        },
       },
       product_settings: {
         source: {
