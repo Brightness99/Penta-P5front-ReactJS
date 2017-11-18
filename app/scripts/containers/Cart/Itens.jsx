@@ -117,7 +117,7 @@ export default class CartItens extends React.Component {
   }
 
   renderZipcode() {
-    const { usePickupPlaces, pickupPlaceId, pickupPlaces, locale, zipcode } = this.props;
+    const { usePickupPlaces, pickupPlaceId, pickupPlaces, zipcode } = this.props;
 
     if (usePickupPlaces) {
       if (!pickupPlaces[pickupPlaceId]) {
@@ -133,7 +133,7 @@ export default class CartItens extends React.Component {
 
     return (
       <div className="atm-cart-item-zipcode">
-        {locale.product_list.ZIPCODE_TYPE}: <IntlZipcode>{zipcode}</IntlZipcode>
+        <IntlZipcode>{zipcode}</IntlZipcode>
       </div>
     );
   }
@@ -154,7 +154,7 @@ export default class CartItens extends React.Component {
     const { locale } = this.props;
 
     const slicedList = Object.keys(item.product_parts[Object.keys(item.product_parts)[0]].options)
-      .slice(0, 1)
+      .slice(0, 2)
       .reduce((prevOption, currentOption) => (
         [
           ...prevOption,
@@ -176,7 +176,7 @@ export default class CartItens extends React.Component {
           value={itemId}
           onClick={this.handleModalOpen}
         >
-          {locale.product_list.SEE_MORE}
+          {locale.common.VIEW_MORE}
         </button>
       </div>
     );
@@ -190,7 +190,7 @@ export default class CartItens extends React.Component {
       <div className="org-cart-items-desktop">
         <div className="mol-cart-items-header">
           <span>{locale.product_list.PRODUCT}</span>
-          <span>{locale.product_list.DELIVERY}</span>
+          <span>{locale.product_list.ESTIMATED_DELIVERY}</span>
           <span>{locale.product_list.QUANTITY}</span>
           <span>{locale.product_list.PRICE}</span>
         </div>
@@ -219,14 +219,10 @@ export default class CartItens extends React.Component {
               </div>
               <div className="mol-cart-item-quantity">
                 <div className="atm-cart-item-quantity">{items[item].quantity}</div>
-                <div className="atm-cart-item-quantity-unit">
-                  {items[item].quantity > 1 ? locale.UNITS : locale.UNIT}
-                </div>
               </div>
               <div className="mol-cart-item-price">
                 <div className="atm-cart-item-price">
                   <IntlMoney>{items[item].prices.total}</IntlMoney>
-                  <span><IntlMoney>{items[item].prices.total / items[item].quantity}</IntlMoney>/{locale.UNIT_SHORT}</span>
                 </div>
                 <Actions
                   screenSize={screenSize}
@@ -277,7 +273,6 @@ export default class CartItens extends React.Component {
                   </div>
                   <div>
                     <div className="atm-cart-item-info-title">{locale.product_list.QUANTITY}</div>
-                    <div className="atm-cart-item-info-text">{`${items[item].quantity} ${items[item].quantity > 1 ? locale.UNITS : locale.UNIT}`}</div>
                   </div>
                   <div>
                     <div className="atm-cart-item-info-title">{locale.product_list.PRICE}</div>
