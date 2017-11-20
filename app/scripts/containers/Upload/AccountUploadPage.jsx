@@ -40,18 +40,18 @@ class AccountUploadPage extends React.Component {
   props: Props;
 
   handleUploadFinish = (request: FinishUploadType) => {
-    const { match: { params: { itemId } }, uploadFinish } = this.props;
+    const { uploadFinish, uploadInfo: { globalFlags: { order_item_id } } } = this.props;
 
 
     if (uploadFinish && typeof uploadFinish === 'function') {
-      uploadFinish({ request, itemId, isAccount: true });
+      uploadFinish({ request, itemId: order_item_id, isAccount: true });
     }
   };
 
   handleOrientationChanged = (isVertical: number) => {
-    const { uploadSetOrientation, match: { params: { itemId } } } = this.props;
+    const { uploadSetOrientation, uploadInfo: { globalFlags: { order_item_id } } } = this.props;
     if (uploadSetOrientation && typeof uploadSetOrientation === 'function') {
-      uploadSetOrientation({ itemId, isVertical, isAccount: true });
+      uploadSetOrientation({ itemId: order_item_id, isVertical, isAccount: true });
     }
   };
 
