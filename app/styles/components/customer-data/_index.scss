@@ -19,11 +19,17 @@
     }
 
     &-one {
-      width: calc(100% / 3);
+      width: 100%;
+      @include lg {
+        width: calc(100% / 3);
+      }
     }
 
     &-two {
-      width: calc((100% / 3) * 2);
+      width: 100%;
+      @include lg {
+        width: calc((100% / 3) * 2);
+      }
     }
 
     &-full {
