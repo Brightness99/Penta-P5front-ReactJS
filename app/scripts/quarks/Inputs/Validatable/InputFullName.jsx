@@ -72,6 +72,7 @@ export default class InputFullName extends React.Component {
     return (
       <InputRegex
         {...elementProps}
+        enableTrimForEndOfString={true}
         onClick={this.handleClick}
         onChange={this.handleChange}
         onFocus={this.handleFocus}

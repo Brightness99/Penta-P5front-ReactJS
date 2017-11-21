@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import swal from 'sweetalert2';
-import Breadcrumbs from 'components/Breadcrumbs';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import Collapse, { Panel } from 'rc-collapse';
 import Loading from 'components/Loading';
@@ -281,22 +280,8 @@ export class MyAddresses extends React.Component {
   }
 
   render() {
-    const { screenSize, account: { addresses } } = this.props;
+    const { account: { addresses } } = this.props;
     const { openAddressModal, type, selectedAddress } = this.state;
-
-    const breadcrumb = [
-      {
-        title: 'Home',
-        url: '/',
-      },
-      {
-        title: 'Minha conta',
-        url: '/minha-conta',
-      },
-      {
-        title: 'Meus pedidos',
-      },
-    ];
 
     return (
       <section className="container-myaddresses">
@@ -304,7 +289,6 @@ export class MyAddresses extends React.Component {
         <Modal handleCloseModal={this.handleCloseModal}>
           <AddressFormModal type={type} onCloseModal={this.handleCloseModal} address={selectedAddress} isNew={!selectedAddress} />
         </Modal>}
-        {isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
         <h3 className="subtitle-myAddresses">Meus endereços</h3>
         {!addresses.isLoaded || addresses.isLoading ? <Loading /> : this.renderPage()}
       </section>

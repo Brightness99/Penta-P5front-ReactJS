@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { isMobile } from 'utils/helpers';
 import { cartFetch, cartPickupFetch } from 'actions';
 import { NavLink } from 'react-router-dom';
@@ -33,7 +34,7 @@ export class Cart extends React.Component {
     super(props);
 
     this.state = {
-      isVoucherActive: false,
+      isVoucherActive: true,
     };
   }
   componentDidMount() {
@@ -166,7 +167,7 @@ export class Cart extends React.Component {
             to="/pagamento"
             className="atm-button-rounded atm-button-rounded--enabled"
           >
-            {locale.seo.PROCEED_TO_CHECKOUT}
+            {locale.PROCEED_TO_CHECKOUT}
           </NavLink>
         </StickBar>
       </div>
@@ -247,7 +248,7 @@ export class Cart extends React.Component {
         url: '/',
       },
       {
-        title: locale.seo.TITLE,
+        title: locale.TITLE,
       },
     ];
 
@@ -257,9 +258,13 @@ export class Cart extends React.Component {
 
     return (
       <div className="page-cart container">
+        <Helmet>
+          <title>{locale.seo.PAGE_TITLE}</title>
+          <meta name="description" content={locale.seo.META_DESCRIPTION} />
+        </Helmet>
         {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <PageTitle>{locale.seo.TITLE}</PageTitle>
-        {count > 0 ? this.renderContent() : <CartEmpty locale={locale.seo} />}
+        <PageTitle>{locale.TITLE}</PageTitle>
+        {count > 0 ? this.renderContent() : <CartEmpty locale={locale} />}
       </div>
     );
   }

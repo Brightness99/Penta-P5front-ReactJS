@@ -6,6 +6,10 @@
   margin-bottom: 3rem;
   padding: 2.5rem 0;
 
+  .app__qrk__input-container > input {
+    padding: 0;
+  }
+
   @include lg {
     box-shadow: none;
     height: 100%;

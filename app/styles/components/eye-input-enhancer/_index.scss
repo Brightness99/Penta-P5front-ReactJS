@@ -1,0 +1,23 @@
+.eye-input-enhancer {
+  align-items: center;
+  display: inline-flex;
+  justify-content: flex-end;
+
+  input {
+    display: none;
+    height: 0;
+    opacity: 0;
+    width: 0;
+  }
+
+  svg {
+    height: 2rem;
+    margin-right: 1rem;
+    padding: 0.2rem;
+    width: 2rem;
+  }
+
+  span {
+    font-size: 1.2rem;
+  }
+}

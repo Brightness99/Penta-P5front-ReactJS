@@ -59,9 +59,14 @@
 @import 'containers/templateslp/index';
 @import 'containers/referral/index';
 @import 'containers/forgot-password/index';
+@import 'containers/loyalty-lp/index';
+@import 'containers/tutoriais/index';
+@import 'containers/reset-password/index';
+@import 'containers/work/index';
 
 // *** Components
 @import 'components/back-to-top/index';
+@import 'components/customer-data/index';
 @import 'components/footer/index';
 @import 'components/header/index';
 @import 'components/input/index';
@@ -88,10 +93,10 @@
 @import 'components/file-format-icon/index';
 @import 'components/progress-bar/index';
 @import 'components/cart-item-definitions-panel/index';
-@import 'components/icon-toogle-button/index';
 @import 'components/contact-form/index';
 @import 'components/preview-image-modal/index';
 @import 'components/overlay-spinner/index';
+@import 'components/eye-input-enhancer/index';
 
 // *** Bosons
 @import 'bosons/index';
