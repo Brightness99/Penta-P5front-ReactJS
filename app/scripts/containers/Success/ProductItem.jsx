@@ -38,7 +38,7 @@ export class ProductItem extends React.Component {
       <div className="product-item-row">
         <div className="product-item-col-product">
           {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={imageAspect === 'height' ? cx('preview', 'fit-height') : 'preview'} src={item.info.thumbnail} alt="Product" />}
+          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
@@ -73,7 +73,7 @@ export class ProductItem extends React.Component {
       <div className="product-item-row">
         <div className="product-item-col product-item-col-product">
           {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={imageAspect === 'height' ? cx('preview', 'fit-height') : 'preview'} src={item.info.thumbnail} alt="Product" />}
+          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
