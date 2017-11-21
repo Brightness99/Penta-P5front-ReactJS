@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import UploadExtraInformationPanel from 'components/UploadExtraInformationPanel';
+import CanvasSchema from 'components/CimpressEditor/index';
 import NormalUploadType from './NormalUploadType';
-import CanvasSchema from './Canvas';
 
 type Props = {
   uploadType: string,
