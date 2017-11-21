@@ -7,6 +7,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { proposalsFetch } from 'actions';
 import Sidebar from './Sidebar';
 import ArtProposalContent from './ArtProposalContent';
+import BriefingContent from './BriefingContent';
 
 type Props = {
   app: AppStoreType,
@@ -127,15 +128,27 @@ export class ArtProposal extends React.Component {
 
   renderContainer() {
     const { app: { screenSize }, artCreation } = this.props;
-    console.log('proposals map to artpropsalcontent ====>', artCreation.proposals.list);
-    console.log('proposals map to artpropsalcontent ====>', artCreation.proposals.list);
-    return (
-      <ArtProposalContent
-        activeIndex={this.state.activeIndex}
-        proposals={artCreation.proposals.list}
-        screenSize={screenSize}
-      />
-    );
+    const { activeIndex } = this.state;
+    let renderContainerMark;
+    if (activeIndex < artCreation.proposals.list.length) {
+      renderContainerMark = (
+        <ArtProposalContent
+          activeIndex={this.state.activeIndex}
+          proposals={artCreation.proposals.list}
+          screenSize={screenSize}
+        />
+      );
+    } else {
+      renderContainerMark = (
+        <BriefingContent
+          activeIndex={this.state.activeIndex}
+          proposals={artCreation.proposals.list}
+          screenSize={screenSize}
+        />
+      );
+    }
+
+    return renderContainerMark;
   }
 
   render() {

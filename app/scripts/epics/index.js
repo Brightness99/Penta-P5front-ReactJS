@@ -72,7 +72,13 @@ import {
   proposalsFetch,
   newProposalRequest,
   approveProposalRequest,
-  fetchSingleFileRequest
+  fetchSingleFileRequest,
+  saveBriefing,
+  updateBriefing,
+  briefingDetailsFetch,
+  removeFile,
+  deleteBriefing,
+  finishUploadFiles
 } from './art-creation';
 
 import {
@@ -161,4 +167,10 @@ export default combineEpics(
   resetPassword,
   setNewPassword,
   getExpiredInfo,
+  saveBriefing,
+  updateBriefing,
+  briefingDetailsFetch,
+  removeFile,
+  deleteBriefing,
+  finishUploadFiles,
 );
