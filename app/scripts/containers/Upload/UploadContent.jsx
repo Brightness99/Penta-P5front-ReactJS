@@ -272,36 +272,34 @@ export default class UploadContent extends React.Component {
           <p className="description">Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>
           }
           {this.renderFlashMessages()}
-          <section className="content">
-            <section className="main-upload-container">
-              {
+          <section className="main-upload-container">
+            {
                 funnels.map((x, i) => x(i + 1))
-              }
-              <section className="upload-finish-block">
-                <label>
-                  <CheckBox
-                    checked={isRepurchase}
-                    onChange={this.handleChoose}
-                  />
+            }
+            <section className="upload-finish-block">
+              <label>
+                <CheckBox
+                  checked={isRepurchase}
+                  onChange={this.handleChoose}
+                />
                   Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer
                   outro ajuste.
                 </label>
-                <section className={`buttons-block ${isMobile(screenSize) ? 'mobile' : ''}`} >
-                  <Button
-                    onClick={this.handleUploadFinish}
-                    kind="cancel"
-                  >ENVIAR MAIS TARDE</Button>
-                  <Button
-                    onClick={this.handleUploadFinish}
-                    kind="success"
-                    isLoading={isFinishInProgress}
-                    disabled={!canSubmit}
-                  >Enviar arte final</Button>
-                </section>
+              <section className={`buttons-block ${isMobile(screenSize) ? 'mobile' : ''}`} >
+                <Button
+                  onClick={this.handleUploadFinish}
+                  kind="cancel"
+                >ENVIAR MAIS TARDE</Button>
+                <Button
+                  onClick={this.handleUploadFinish}
+                  kind="success"
+                  isLoading={isFinishInProgress}
+                  disabled={!canSubmit}
+                >Enviar arte final</Button>
               </section>
             </section>
-            { this.renderCartItemDefinitions()}
           </section>
+          { this.renderCartItemDefinitions()}
         </div>
       </section>
     );
