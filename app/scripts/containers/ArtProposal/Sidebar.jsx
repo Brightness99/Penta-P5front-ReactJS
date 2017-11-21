@@ -26,14 +26,14 @@ export class Sidebar extends React.Component {
     this.setState({ activeIndex: index });
   }
 
-  renderItem() {
+  renderProposalItem() {
     const { proposals } = this.props;
     const { activeIndex } = this.state;
     let itemMark = null;
     if (Object.getOwnPropertyNames(proposals).length !== 0) {
       const length = proposals.length;
       itemMark = proposals.map((item, index) => (
-        <li key={index.toString()}>
+        <li key={`proposal-item-${index.toString()}`}>
           <a
             onClick={() => this.handleClick(index)}
             className={(index === activeIndex) ? 'is-active' : ''}
@@ -46,11 +46,32 @@ export class Sidebar extends React.Component {
     return itemMark;
   }
 
+  renderBriefingItem() {
+    const { proposals } = this.props;
+    const { activeIndex } = this.state;
+    let itemMark = null;
+    if (Object.getOwnPropertyNames(proposals).length !== 0) {
+      const length = proposals.length;
+      itemMark = proposals.map((item, index) => (
+        <li key={`briefing-item-${index.toString()}`}>
+          <a
+            onClick={() => this.handleClick(proposals.length + index)}
+            className={(proposals.length + index === activeIndex) ? 'is-active' : ''}
+          >
+            <span>BRIEFING INICIAL {length - index}</span>
+          </a>
+        </li>
+      ));
+    }
+    return itemMark;
+  }
+
   render() {
     return (
       <div className="container-sidebarproposal">
         <ul className="menu-proposal">
-          {this.renderItem()}
+          {this.renderProposalItem()}
+          {this.renderBriefingItem()}
         </ul>
       </div>
     );
