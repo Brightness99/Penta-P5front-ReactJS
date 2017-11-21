@@ -6,7 +6,6 @@ import { BoxRadio } from 'atoms/Inputs';
 
 type Props = {
   title: string,
-  video: string,
   options: [],
   defaultValue: string,
   handleOptionSelected: (value) => Object
@@ -73,16 +72,10 @@ export default class AdditionalUploadOption extends React.Component {
   };
 
   render() {
-    const { title, video } = this.props;
+    const { title } = this.props;
     return (
       <section className="additional-option-container">
-        <div className="header">
-          <h4 className="title">{title}</h4>
-          <div className="media">
-            <i className="media-icon"><PlayCircleIcon /></i>
-            <a className="link" href={video}>Vídeo explicativo</a>
-          </div>
-        </div>
+        <h4 className="title">{title}</h4>
         <div className="content">
           {this.renderOptions()}
         </div>
