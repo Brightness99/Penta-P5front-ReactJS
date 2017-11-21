@@ -103,6 +103,13 @@
         width: 85px;
       }
     }
+    .fit-height {
+      width: auto !important;
+      height: 110px !important;
+      @include is-only {
+        width: 80px;
+      }
+    }
     .preview {
       box-shadow: 0 0.1rem 3rem 0 #ccc;
       border: 1px solid #ccc;
