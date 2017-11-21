@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { PlayCircleIcon } from 'components/Icons';
 import { BoxRadio } from 'atoms/Inputs';
 
 type Props = {
@@ -23,8 +22,7 @@ export default class AdditionalUploadOption extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { defaultValue } = nextProps;
+  componentWillReceiveProps({ defaultValue }) {
     if (defaultValue !== this.props.defaultValue) {
       this.handleSelection(defaultValue);
     }
