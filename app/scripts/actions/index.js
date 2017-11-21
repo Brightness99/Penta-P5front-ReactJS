@@ -27,3 +27,4 @@ export * from './about';
 export * from './file-mount';
 export * from './guide.js';
 export * from './templates';
+export * from './forgot-password';

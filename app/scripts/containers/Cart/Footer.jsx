@@ -56,7 +56,7 @@ export default class CartFooter extends React.Component {
           to="/pagamento"
           className="atm-button-rounded atm-button-rounded--enabled"
         >
-          {locale.seo.PROCEED_TO_CHECKOUT}
+          {locale.PROCEED_TO_CHECKOUT}
         </NavLink>
       </div>
     );
@@ -73,15 +73,15 @@ export default class CartFooter extends React.Component {
             target="new"
             className="atm-button-transparent"
           >
-            <FileTextOIcon /> {locale.seo.DOWNLOAD_QUOTATION}
+            <FileTextOIcon /> {locale.DOWNLOAD_QUOTATION}
           </NavLink>
         </div>
-        <NavLink to="/" className="atm-cart-shopping">{locale.seo.KEEP_BUYING}</NavLink>
+        <NavLink to="/" className="atm-cart-shopping">{locale.KEEP_BUYING}</NavLink>
         <NavLink
           to="/pagamento"
           className="atm-button-rounded atm-button-rounded--enabled"
         >
-          {locale.seo.PROCEED_TO_CHECKOUT}
+          {locale.PROCEED_TO_CHECKOUT}
         </NavLink>
       </div>
     );
@@ -92,13 +92,13 @@ export default class CartFooter extends React.Component {
 
     return (
       <div className="org-cart-footer org-cart-footer--mobile">
-        <NavLink to="/" className="atm-cart-shopping">{locale.seo.KEEP_BUYING}</NavLink>
+        <NavLink to="/" className="atm-cart-shopping">{locale.KEEP_BUYING}</NavLink>
         <NavLink
           to={`${config.basePath}v1/customers/pdf_quotation/download`}
           target="new"
           className="atm-button-transparent"
         >
-          <FileTextOIcon /> {locale.seo.DOWNLOAD_QUOTATION}
+          <FileTextOIcon /> {locale.DOWNLOAD_QUOTATION}
         </NavLink>
         {this.renderStickFooter()}
       </div>

@@ -131,6 +131,13 @@ new WebpackDevServer(compiler, {
   hot: true,
   historyApiFallback: true,
   stats: { colors: true },
+  proxy: [
+    {
+      context: ['/v1/**', '/v2/**'],
+      target: 'http://dev-cms.printi.com.br',
+      secure: false,
+    },
+  ],
 }).listen(3030, 'localhost', function(err) {
   if (err) {
     console.log('err', err);
