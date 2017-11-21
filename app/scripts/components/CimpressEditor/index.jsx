@@ -5,11 +5,11 @@ import OverlaySpinner from 'components/OverlaySpinner';
 import { Button } from 'quarks/Inputs';
 import Modal from 'components/Modal';
 import { WarningFilled } from 'components/Icons';
-import TopMenuBar from '../CimpressComponents/TopMenuBar';
-import SideBarPanel from '../CimpressComponents/SideBarPanel';
-import CanvasToolBar from '../CimpressComponents/CanvasToolBar';
-import CanvasArea from '../CimpressComponents/CanvasArea';
-import BottomMenuBar from '../CimpressComponents/BottomMenuBar';
+import TopMenuBar from './CimpressComponents/TopMenuBar/index';
+import SideBarPanel from './CimpressComponents/SideBarPanel/index';
+import CanvasToolBar from './CimpressComponents/CanvasToolBar/index';
+import CanvasArea from './CimpressComponents/CanvasArea/index';
+import BottomMenuBar from './CimpressComponents/BottomMenuBar/index';
 import CanvasCutPreview from './CanvasCutPreview';
 import cimpressConfigBuilder from './cimpressConfigBuilder';
 

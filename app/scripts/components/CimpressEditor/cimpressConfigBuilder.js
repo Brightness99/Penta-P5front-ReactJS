@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Indicator from '../CimpressComponents/Indicator';
-import UploadButtonCimpress from './UploadButtonCimpress';
+import Indicator from './CimpressComponents/Indicator/index';
+import UploadButtonCimpress from './CimpressComponents/UploadButton/index';
 
 const cimpressConfigBuilder = (config, isSku) => {
   const { settings: { has_preview, has_zoom } } = config;
