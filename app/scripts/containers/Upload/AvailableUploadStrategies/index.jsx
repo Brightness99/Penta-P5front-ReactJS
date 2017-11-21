@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import UploadExtraInformationPanel from 'components/UploadExtraInformationPanel';
+import UploadExtraInformationPanel from '../UploadExtraInformationPanel';
 import AvailableUploadStrategy from './AvailableUploadStrategy';
 import strategiesInfo from './availableUploadStrategies';
 

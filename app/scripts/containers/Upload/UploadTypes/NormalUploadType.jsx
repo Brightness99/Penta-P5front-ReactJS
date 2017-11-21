@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import UploadFile from 'components/UploadFile';
+import UploadFile from '../UploadFile';
 
 type Props = {
   multipleFiles: boolean,

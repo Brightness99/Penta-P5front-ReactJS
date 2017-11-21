@@ -2,17 +2,17 @@
 import React from 'react';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { CheckBox } from 'components/Input';
-import AvailableUploadStrategies from 'components/AvailableUploadStrategies';
 import { PageTitle } from 'atoms/Titles';
 import { FunnelBlock } from 'components/Funnel';
 import FlashMessage from 'components/FlashMessage';
 import MoreInfo from 'components/MoreInfo';
 import Loading from 'components/Loading';
-import AdditionalUploadOptions from 'components/AdditionalUploadOptions';
-import UploadTypes from 'components/UploadTypes';
-import CartItemDefinitionsPanel from 'components/CartItemDefinitionsPanel';
 import { Button } from 'quarks/Inputs';
 import { isMobile } from 'utils/helpers';
+import AdditionalUploadOptions from './AdditionalUploadOptions';
+import AvailableUploadStrategies from './AvailableUploadStrategies';
+import UploadTypes from './UploadTypes';
+import CartItemDefinitionsPanel from './CartItemDefinitionsPanel';
 
 type Props = {
   screenSize: string,
@@ -287,7 +287,6 @@ export default class UploadContent extends React.Component {
                 </label>
               <section className={`buttons-block ${isMobile(screenSize) ? 'mobile' : ''}`} >
                 <Button
-                  onClick={this.handleUploadFinish}
                   kind="cancel"
                 >ENVIAR MAIS TARDE</Button>
                 <Button
