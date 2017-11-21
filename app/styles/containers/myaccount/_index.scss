@@ -1303,6 +1303,21 @@
       }
     }
   }
+  .box-addressRequest {
+    margin-bottom: 0;
+    font-size: 14px;
+    .mol-checkout-pane-footer {
+      justify-content: flex-end;
+    }
+    .sender-address-check-box-label {
+      span {
+        margin-left: 40px;
+      }
+    }
+    @include lg {
+      margin: 1rem 0 3.7rem 0;
+    }
+  }
   .box-addressDelivery {
     display: flex;
     flex-direction: column;

@@ -62,6 +62,11 @@
 
       .atm-tooltip {
         display: flex;
+        left: calc(100% - 3rem);
+        position: absolute;
+        right: 0;
+        top: 3.5rem;
+        width: 13rem;
       }
     }
   }
