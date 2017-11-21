@@ -195,3 +195,16 @@ export function accountAddressFormReset(): Object {
     payload: {},
   };
 }
+
+/**
+ * Sender Address Request
+ *
+ * @returns {Object}
+ */
+export function accountSenderAddressRequest(): Object {
+  return {
+    type: AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST,
+    payload: {},
+  };
+}
+
