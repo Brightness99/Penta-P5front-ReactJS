@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import Indicator from './CimpressComponents/Indicator/index';
 import UploadButtonCimpress from './CimpressComponents/UploadButton/index';
 
-const cimpressConfigBuilder = (config, isSku) => {
+const cimpressConfigBuilder = (config, isSku, locale) => {
   const { settings: { has_preview, has_zoom } } = config;
   const cimpressDesignerSettings = {
     documentReference: config.document_reference_url,
@@ -190,7 +190,7 @@ const cimpressConfigBuilder = (config, isSku) => {
               cropModalTitle: 'Defina como a imagem será recortada:',
               cancelButton: 'Cancelar',
               applyButton: 'Recortar',
-              previewDocumentButton: 'Visualizar',
+              previewDocumentButton: locale.page.upload.cimpress_designer.PREVIEW,
               upload: {
                 infoText: 'Após adicionar os arquivos, arraste-os para a Área de edição.',
               },

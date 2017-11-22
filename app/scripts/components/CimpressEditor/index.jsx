@@ -17,7 +17,8 @@ type Props = {
   cimpressInfo: CimpressInfo,
   isSku: boolean,
   handleCanvasFinalize: (docRef) => void,
-  handleOrientationChanged: (isVertical: number) => void
+  handleOrientationChanged: (isVertical: number) => void,
+  locale: {}
 };
 
 type State = {
@@ -94,8 +95,8 @@ export default class Canvas extends React.Component {
   };
 
   handleLoad = () => {
-    const { cimpressInfo, isSku } = this.props;
-    const config = cimpressConfigBuilder(cimpressInfo, isSku);
+    const { cimpressInfo, isSku, locale } = this.props;
+    const config = cimpressConfigBuilder(cimpressInfo, isSku, locale);
     global.designer.start(config)
       .then(
         () => {
@@ -152,6 +153,7 @@ export default class Canvas extends React.Component {
 
   renderModalDialog = () => {
     const { isOpenModal } = this.state;
+    const { locale } = this.props;
     return (isOpenModal &&
     <Modal handleCloseModal={this.handleCloseAlertModal}>
       <section className="cimpress-alert-dialog">
@@ -163,11 +165,11 @@ export default class Canvas extends React.Component {
           <Button
             onClick={this.handleCloseAlertModal}
             kind="cancel"
-          >Não</Button>
+          >{locale.common.PROMPT_NO}</Button>
           <Button
             onClick={this.handleOrientationChanged}
             kind="success"
-          >Sim</Button>
+          >{locale.common.PROMPT_YES}</Button>
         </section>
       </section>
     </Modal>);
@@ -210,7 +212,7 @@ export default class Canvas extends React.Component {
 
   render() {
     const { isReady, showCutPreview, isOrientationChanging } = this.state;
-    const { cimpressInfo: { settings: { has_cut_view } }, isSku } = this.props;
+    const { cimpressInfo: { settings: { has_cut_view } }, isSku, locale } = this.props;
 
     return (
       <OverlaySpinner isLoading={!isReady || isOrientationChanging}>
@@ -219,6 +221,7 @@ export default class Canvas extends React.Component {
         <BottomMenuBar
           key="bottom-menu-bar"
           handlePreview={this.showPreview}
+          locale={locale}
           hasCutPreview={!isSku && has_cut_view === '1'}
           isPreview={showCutPreview}
           handleReturnToEditor={this.hidePreview}
