@@ -12,6 +12,7 @@ type Props = {
   handleReturnToEditor: () => void,
   hasCutPreview: boolean,
   isPreview: boolean,
+  locale: {}
 }
 
 type State = {
@@ -67,16 +68,16 @@ export default class BottomMenuBar extends React.Component {
     });
   };
 
-  renderPreviewButton = (hasCutPreview) => (hasCutPreview ?
+  renderPreviewButton = (hasCutPreview, locale) => (hasCutPreview ?
     <button className="canvas-schema__preview-button" onClick={this.previewTemplate}>
       <EyeEmptyIcon className="" />
-      <span className="description">Visualizar</span>
+      <span className="description">{locale.page.upload.cimpress_designer.PREVIEW}</span>
     </button>
       : <section className="dcl-widget-preview-document" />
   );
 
   render() {
-    const { hasCutPreview, isPreview, handleReturnToEditor } = this.props;
+    const { hasCutPreview, isPreview, handleReturnToEditor, locale } = this.props;
     const { isAgree } = this.state;
     return (
       <div className="upload__canvas-schema__bottom-menu-bar">
@@ -88,7 +89,7 @@ export default class BottomMenuBar extends React.Component {
           <span>Revisei e aprovo minha arte. <Link to="#">Ler mais.</Link></span>
         </label>
         <section className="buttons-block">
-          { !isPreview && this.renderPreviewButton(hasCutPreview) }
+          { !isPreview && this.renderPreviewButton(hasCutPreview, locale) }
           { isPreview &&
           <button className="canvas-schema__preview-button" onClick={handleReturnToEditor}>
             <span className="description">Voltar e editar</span>
