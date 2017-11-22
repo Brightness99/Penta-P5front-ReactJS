@@ -133,21 +133,6 @@ export function removePartSelection(part: string): Object {
 }
 
 /**
- * Select Prepress Template Orientation
- * @param {string} orientation
- *
- * @returns {Object}
- */
-export function selectPrepressOrientation(orientation: string): Object {
-  return {
-    type: SettingsConstants.SELECT_PREPRESS_ORIENTATION,
-    payload: {
-      orientation,
-    },
-  };
-}
-
-/**
  * Prepress Template Download
  * @param {string} orientation
  * @param {string} extension

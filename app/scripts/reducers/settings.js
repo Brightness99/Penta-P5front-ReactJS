@@ -54,21 +54,8 @@ export const productSettingsState = {
     isSelectionComplete: false,
   },
   templates: {
-    options: {
-      vertical: ['illustrator', 'photoshop', 'photoshop'],
-      horizontal: ['illustrator', 'photoshop', 'photoshop'],
-    },
-    downloadUrls: {
-      vertical: {},
-      horizontal: {},
-    },
-    parts: {
-      pbcard: {
-        guideCombinationId: 25,
-        fileCombinationId: 27,
-      },
-    },
-    selectedOrientation: 'vertical',
+    isRunning: false,
+    isLoaded: false,
   },
   calculator: {},
   finalProduct: {},
@@ -192,6 +179,10 @@ export default {
 
       return {
         ...state,
+        options: {
+          ...state.options,
+          selectionIsComplete: false,
+        },
         selection: state.options.parts
           .reduce((prevPart, currentPart) => {
             if (currentPart.id === action.payload.partId) {
@@ -343,13 +334,43 @@ export default {
         },
       };
     },
-    [SettingsConstants.SELECT_PREPRESS_ORIENTATION](state, action) {
+    [SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_REQUEST](state) {
       return {
         ...state,
         templates: {
-          ...state.templates,
-          selectedOrientation: action.payload.orientation,
+          ...productSettingsState.templates,
+          isRunning: true,
         },
+      };
+    },
+    [SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        templates: {
+          ...action.payload,
+          parts: state.options.parts
+            .reduce((prevPart, currentPart) => ({
+              ...prevPart,
+              [currentPart.id]: action.payload[currentPart.id],
+            }), {}),
+          downloadUrls: Object.keys(action.payload.options)
+            .reduce((prevOption, nextOption) => ({
+              ...prevOption,
+              [nextOption]: action.payload.options[nextOption]
+                .reduce((prevSoftware, currentSoftware) => ({
+                  ...prevSoftware,
+                  [currentSoftware]: '',
+                }), {}),
+            }), {}),
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_FAILURE](state) {
+      return {
+        ...state,
+        templates: productSettingsState.templates,
       };
     },
     [SettingsConstants.PRE_PRESS_DOWNLOAD_FETCH_SUCCESS](state, action) {

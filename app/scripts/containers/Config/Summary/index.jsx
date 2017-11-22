@@ -13,6 +13,7 @@ type Props = {
   templates: {},
   dispatch: {},
   productTitle: string,
+  selectionIsComplete: boolean,
 };
 
 export class ItemSummary extends React.Component {
@@ -26,7 +27,7 @@ export class ItemSummary extends React.Component {
     const { locale } = this.props;
     return (
       <div className="app__settings__summary">
-        <h3>{locale.TITLE}</h3>
+        <h3>{locale.sidebar.TITLE}</h3>
         {/*{Object.keys(selection).map((option) => (*/}
         {/*<div key={option}>*/}
         {/*{Object.keys(selection).length > 1 && <span>{calculator[option].name}</span>}*/}
@@ -83,17 +84,24 @@ export class ItemSummary extends React.Component {
   }
 
   renderDesktop() {
-    const { locale, templates, dispatch, productTitle } = this.props;
+    const { locale, templates, dispatch, productTitle, selectionIsComplete } = this.props;
 
     return (
       <StickBar>
         <div className="org-cart-stickbar">
-          <div className="atm-cart-sidebar-title">{locale.TITLE}</div>
+          <div className="atm-cart-sidebar-title">{locale.sidebar.TITLE}</div>
           <div className="mol-cart-sidebar-summary">
             {this.renderSelection()}
           </div>
         </div>
-        <PrePressTemplate templates={templates} dispatch={dispatch} productTitle={productTitle} />
+        {selectionIsComplete &&
+          <PrePressTemplate
+            locale={locale.prepress_template}
+            templates={templates}
+            dispatch={dispatch}
+            productTitle={productTitle}
+          />
+        }
       </StickBar>
     );
   }
@@ -108,7 +116,7 @@ export class ItemSummary extends React.Component {
 function mapStateToProps(state) {
   return {
     screenSize: state.app.screenSize,
-    locale: state.locale.translate.page.product_settings.sidebar,
+    locale: state.locale.translate.page.product_settings,
     selection: state.productSettings.options.parts
       .reduce((prevPart, currentPart) => ({
         ...prevPart,

@@ -46,7 +46,6 @@ export const SettingsConstants = keyMirror({
   PRE_PRESS_DOWNLOAD_FETCH_FAILURE: undefined,
   PRE_PRESS_DOWNLOAD_FETCH_CANCEL: undefined,
   REMOVE_SELECTION_PART: undefined,
-  SELECT_PREPRESS_ORIENTATION: undefined,
   SETTINGS_PICKUP_FETCH_REQUEST: undefined,
   SETTINGS_PICKUP_FETCH_SUCCESS: undefined,
   SETTINGS_PICKUP_FETCH_FAILURE: undefined,

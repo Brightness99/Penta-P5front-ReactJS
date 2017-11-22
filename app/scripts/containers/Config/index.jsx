@@ -319,7 +319,14 @@ export class Config extends React.Component {
                 ]
               }
             </main>
-            <Summary matrix={matrix} templates={templates} dispatch={dispatch} productTitle={product.title} />
+            <Summary
+              selectionIsComplete={options.selectionIsComplete}
+              matrix={matrix}
+              templates={templates}
+              dispatch={dispatch}
+              productTitle={product.title}
+              locale={locale}
+            />
           </div>
         </div>
         {isModalOpen &&

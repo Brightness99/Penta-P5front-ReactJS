@@ -291,7 +291,6 @@ export function getSelection(parts: []): {} {
     .reduce((prevPart, currentPart) => ({
       ...prevPart,
       [currentPart.id]: currentPart.attributes
-        .filter((attribute) => attribute.visible)
         .reduce((prevAttribute, currentAttribute) => ({
           ...prevAttribute,
           [currentAttribute.key]: currentAttribute.options
