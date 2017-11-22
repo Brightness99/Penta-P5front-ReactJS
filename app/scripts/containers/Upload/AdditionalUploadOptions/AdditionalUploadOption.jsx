@@ -7,6 +7,7 @@ type Props = {
   title: string,
   options: [],
   defaultValue: string,
+  freeTitle: string,
   handleOptionSelected: (value) => Object
 };
 
@@ -43,13 +44,13 @@ export default class AdditionalUploadOption extends React.Component {
     }
   };
 
-  renderPriceTitle = (option) => {
-    if (option.price === 0) return <span className="gratis-title">GRATIS</span>;
+  renderPriceTitle = (option, freeTitle) => {
+    if (option.price === 0) return <span className="gratis-title">{freeTitle}</span>;
     return <span className="price-title">{`+R$${option.price}`}</span>;
   };
 
   renderOptions = () => {
-    const { options } = this.props;
+    const { options, freeTitle } = this.props;
     const { activeRadio } = this.state;
     return options.map(
       (option) => (
@@ -62,7 +63,7 @@ export default class AdditionalUploadOption extends React.Component {
         >
           <section className="box-radio-container">
             <span className="radio-label">{option.name}</span>
-            {this.renderPriceTitle(option)}
+            {this.renderPriceTitle(option, freeTitle)}
           </section>
         </BoxRadio>
       )

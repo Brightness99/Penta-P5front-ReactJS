@@ -20,6 +20,7 @@ type Props = {
   isAccount: boolean,
   isFinishInProgress: boolean,
   uploadInfo: {},
+  locale: {},
   handleOrientationChanged: (isVertical: number) => void,
   handleUploadFinish: (data: FinishUploadType) => void,
   breadcrumb: Array<{title: string, url: string}>,
@@ -159,7 +160,15 @@ export default class UploadContent extends React.Component {
 
   renderAdditionalParameters = (order: number) => {
     const { selectedAdditionalParameters } = this.state;
-    const { uploadInfo: { additionalOptions: { availableAdditionalOptionList, selectedAdditionalOptions } } } = this.props;
+    const {
+      uploadInfo: {
+        additionalOptions: {
+          availableAdditionalOptionList, selectedAdditionalOptions,
+        },
+      },
+      locale,
+    } = this.props;
+
     const isComplete = !!selectedAdditionalParameters;
     return (
       <FunnelBlock
@@ -167,11 +176,12 @@ export default class UploadContent extends React.Component {
         key={order}
         isComplete={isComplete}
         header={[
-          <span key="source-block-title">Configurações adicionais</span>,
-          <MoreInfo key="source-block-more-info" text="Mais informações" />,
+          <span key="source-block-title">{locale.box_additional_options.TITLE}</span>,
+          <MoreInfo key="source-block-more-info" text={locale.box_additional_options.MORE_INFO_TEXT} />,
         ]}
       >
         <AdditionalUploadOptions
+          locale={locale}
           options={availableAdditionalOptionList}
           defaultValues={selectedAdditionalOptions}
           handleOptionsChanged={this.handleAdditionalParameters}
@@ -182,7 +192,7 @@ export default class UploadContent extends React.Component {
 
   renderUploadTypeSchemes = (order: number) => {
     const { selectedStrategy, selectedAdditionalParameters } = this.state;
-    const { uploadInfo: { availableStrategies, flashMessages }, screenSize } = this.props;
+    const { uploadInfo: { availableStrategies, flashMessages }, screenSize, locale } = this.props;
     const showStep = !!selectedAdditionalParameters || order === 1;
     return (
       showStep &&
@@ -191,12 +201,13 @@ export default class UploadContent extends React.Component {
         key={order}
         isComplete={selectedStrategy !== 0}
         header={[
-          <span key="source-block-title">Como você quer enviar sua arte?</span>,
-          <MoreInfo key="source-block-more-info" text="Mais informações" />,
+          <span key="source-block-title">{locale.box_strategy.TITLE}</span>,
+          <MoreInfo key="source-block-more-info" text={locale.box_strategy.MORE_INFO_TEXT} />,
         ]}
       >
         <AvailableUploadStrategies
           availableStrategies={availableStrategies}
+          locale={locale}
           handleSelectedStrategy={this.handleSelectedStrategy}
           showMessage={!(isMobile(screenSize) || selectedStrategy > 1) && flashMessages[0]}
           message={flashMessages[0] && flashMessages[0].content}
@@ -207,7 +218,13 @@ export default class UploadContent extends React.Component {
 
   renderFileUploadBlock = (order: number) => {
     const { selectedStrategy, uploadedFiles, fileFormats, documentReferenceId } = this.state;
-    const { uploadInfo: { globalFlags: { upload_type }, cimpressInfo, flashMessages }, screenSize } = this.props;
+    const {
+      uploadInfo: {
+        globalFlags: { upload_type }, cimpressInfo, flashMessages,
+      },
+      screenSize,
+      locale,
+    } = this.props;
     const showStep = selectedStrategy > 1;
     const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2)
       || uploadedFiles.length > 0
@@ -219,8 +236,8 @@ export default class UploadContent extends React.Component {
         key={order}
         isComplete={isComplete}
         header={[
-          <span key="source-block-title">Enviar arquivo da arte</span>,
-          <MoreInfo key="source-block-more-info" text="Mais informações" />,
+          <span key="source-block-title">{locale.box_upload.TITLE}</span>,
+          <MoreInfo key="source-block-more-info" text={locale.box_upload.MORE_INFO_TEXT} />,
         ]}
       >
         <UploadTypes
@@ -228,6 +245,7 @@ export default class UploadContent extends React.Component {
           cimpressInfo={cimpressInfo}
           selectedStrategy={selectedStrategy}
           fileFormats={fileFormats}
+          locale={locale}
           handleCanvasFinalize={this.handleCanvasFinalize}
           handleUploadFile={this.handleUploadFile}
           handleRemoveFile={this.handleRemoveFile}
@@ -241,9 +259,10 @@ export default class UploadContent extends React.Component {
 
   renderCartItemDefinitions() {
     const { selectedAdditionalParameters } = this.state;
-    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } } } = this.props;
+    const { uploadInfo: { cartItemDefinitions: { parts, total_price, expected_delivery_date } }, locale } = this.props;
 
     return (<CartItemDefinitionsPanel
+      locale={locale}
       parts={parts}
       subTotal={total_price}
       expectedDeliveryDate={expected_delivery_date}
@@ -252,7 +271,7 @@ export default class UploadContent extends React.Component {
   }
 
   render() {
-    const { isLoading, screenSize, isFinishInProgress, breadcrumb, isAccount } = this.props;
+    const { isLoading, isFinishInProgress, breadcrumb, isAccount, locale } = this.props;
     const { isRepurchase, canSubmit } = this.state;
 
     if (!isLoading) return <Loading />;
@@ -267,10 +286,7 @@ export default class UploadContent extends React.Component {
       <section className="page-upload">
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
-          <PageTitle>envie sua arte final</PageTitle>
-          { isMobile(screenSize) &&
-          <p className="description">Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>
-          }
+          <PageTitle>{locale.TITLE}</PageTitle>
           {this.renderFlashMessages()}
           <section className="main-upload-container">
             {
@@ -282,15 +298,14 @@ export default class UploadContent extends React.Component {
                   checked={isRepurchase}
                   onChange={this.handleChoose}
                 />
-                  Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer
-                  outro ajuste.
-                </label>
+                {locale.cimpress_designer.AGREE_WITH_TERMS}
+              </label>
               <Button
                 onClick={this.handleUploadFinish}
                 kind="success"
                 isLoading={isFinishInProgress}
                 disabled={!canSubmit}
-              >Enviar arte final</Button>
+              >{locale.box_upload.SEND_FILES}</Button>
             </section>
           </section>
           { this.renderCartItemDefinitions()}

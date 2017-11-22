@@ -12,6 +12,7 @@ type Props = {
       file_format: string,
       proof: string
     },
+    locale: {},
     handleOptionsChanged: (options: {}) => void
 }
 
@@ -54,19 +55,19 @@ export default class AdditionalUploadOptions extends React.Component {
   }
 
   render() {
-    const { options, defaultValues } = this.props;
+    const { options, defaultValues, locale } = this.props;
     return (
       <section className="additional-options-container">
         <AdditionalOption
-          title="Formato do arquivo"
-          video="youtube.com"
+          title={locale.box_upload.FILE_FORMAT}
+          freeTitle={locale.box_additional_options.FREE}
           options={options.file_format}
           defaultValue={defaultValues.file_format}
           handleOptionSelected={(value) => this.handleSelectedOption(value, 'file_format')}
         />
         <AdditionalOption
-          title="Checagem do arquivo"
-          video="youtube.com"
+          title={locale.box_upload.PROOF}
+          freeTitle={locale.box_additional_options.FREE}
           options={options.proof}
           defaultValue={defaultValues.proof}
           handleOptionSelected={(value) => this.handleSelectedOption(value, 'proof')}

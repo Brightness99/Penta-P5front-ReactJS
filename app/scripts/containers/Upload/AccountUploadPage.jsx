@@ -16,6 +16,7 @@ type Props = {
       itemId: string,
     }
   },
+  locale: {},
   isLoading: boolean,
   isFinishInProgress: boolean,
   uploadInfo: {},
@@ -56,7 +57,13 @@ class AccountUploadPage extends React.Component {
   };
 
   render() {
-    const { isLoading, screenSize, isFinishInProgress, uploadFileProgress, uploadInfo } = this.props;
+    const {
+      isLoading,
+      screenSize,
+      isFinishInProgress,
+      uploadFileProgress,
+      uploadInfo,
+      locale } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -67,7 +74,7 @@ class AccountUploadPage extends React.Component {
         url: '/configuracao-marca-pagina',
       },
       {
-        title: 'Enviar arte',
+        title: locale.BREADCRUMB_TITLE,
         url: '',
       },
     ];
@@ -77,6 +84,7 @@ class AccountUploadPage extends React.Component {
         breadcrumb={breadcrumb}
         isLoading={isLoading}
         isAccount={true}
+        locale={locale}
         uploadInfo={uploadInfo}
         uploadFileProgress={uploadFileProgress}
         screenSize={screenSize}
@@ -92,6 +100,7 @@ const mapStateToProps = (state) => ({
   screenSize: state.app.screenSize,
   isLoading: state.upload.isLoaded,
   router: state.router,
+  locale: state.locale.translate.page.upload,
   isFinishInProgress: state.upload.uploadFinish.isRunning,
   uploadInfo: state.upload.object,
   uploadFileProgress: state.upload.uploadFile,
