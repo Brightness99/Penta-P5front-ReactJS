@@ -285,17 +285,12 @@ export default class UploadContent extends React.Component {
                   Concordo que a arte enviada é de minha responsabilidade. Não haverá revisão ortográfica ou qualquer
                   outro ajuste.
                 </label>
-              <section className={`buttons-block ${isMobile(screenSize) ? 'mobile' : ''}`} >
-                <Button
-                  kind="cancel"
-                >ENVIAR MAIS TARDE</Button>
-                <Button
-                  onClick={this.handleUploadFinish}
-                  kind="success"
-                  isLoading={isFinishInProgress}
-                  disabled={!canSubmit}
-                >Enviar arte final</Button>
-              </section>
+              <Button
+                onClick={this.handleUploadFinish}
+                kind="success"
+                isLoading={isFinishInProgress}
+                disabled={!canSubmit}
+              >Enviar arte final</Button>
             </section>
           </section>
           { this.renderCartItemDefinitions()}

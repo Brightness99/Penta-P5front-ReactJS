@@ -43,15 +43,6 @@
           border           : 0.1rem solid #6a6f7a;
         }
       }
-      .buttons-block {
-        display        : flex;
-        flex-direction : row;
-
-        &.mobile {
-          flex-direction : column-reverse;
-          align-items: flex-end;
-        }
-      }
     }
   }
 }
