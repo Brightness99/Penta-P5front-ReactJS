@@ -267,11 +267,11 @@ export class MyAddresses extends React.Component {
         </div>);
       case '2':
         return (<div className="box-addressRequest">
-          Waiting Authorization
+          Sua solicitação de ter endereço de remetente personalizado foi enviada para o departamento da Printi! Aguarde a resposta da sua solicitação.
         </div>);
       case '3':
         return (<div className="box-addressRequest">
-          Authorization Rejected
+          Infelizmente sua solicitação de endereço do remetente personalizado não foi autorizada.
         </div>);
       default:
         return null;
