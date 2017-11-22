@@ -56,7 +56,7 @@ export class OrderListDetails extends React.Component {
   renderItemActionButtons = (item) => {
     const { match: { params: { orderNumber } } } = this.props;
     return Object.keys(item.actions).map((key) => (
-      item.actions[key].enabled && <Link key={key} className="btn-default btn-quarter fnt-sbold btn-lg" to={`/minha-conta/pedidos/${orderNumber}/proposta-de-arte`}><i><Archive /></i>{item.actions[key].label}</Link>
+      item.actions[key].enabled && <Link key={key} className="btn-default btn-quarter fnt-sbold btn-lg" to={`/minha-conta/pedidos/${orderNumber}/${item.info.id}/proposta-de-arte`}><i><Archive /></i>{item.actions[key].label}</Link>
     ));
   }
 

@@ -559,3 +559,44 @@ export function accountLoyaltyFetch(action$) {
     });
   });
 }
+
+export function accountSenderAddressRequest(action$) {
+  return action$.ofType(AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST)
+  .switchMap(() => {
+    const endpoint = '/v2/customers/request_custom_sender_address';
+    return rxAjax({
+      endpoint,
+      method: 'GET',
+    })
+    .map(data => {
+      if (data.status === 200 && data.response) {
+        return {
+          type: AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST_SUCCESS,
+          payload: data.response,
+          meta: { updatedAt: getUnixtime() },
+        };
+      }
+
+      return {
+        type: AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST_FAILURE,
+        payload: { message: 'Algo de errado não está correto' },
+        meta: { updatedAt: getUnixtime() },
+      };
+    })
+    .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+    .defaultIfEmpty({ type: AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST_CANCEL })
+    .catch(error => {
+      if (error.status === 404) {
+        push('/404');
+      }
+
+      return ([
+        {
+          type: AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST_FAILURE,
+          payload: { message: error.message, status: error.status },
+          meta: { updatedAt: getUnixtime() },
+        },
+      ]);
+    });
+  });
+}
