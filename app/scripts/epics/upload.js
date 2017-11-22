@@ -61,6 +61,10 @@ export function uploadFinishRequest(action$) {
         endpoint,
         payload: action.payload.request,
         method: 'POST',
+      }).do((data) => {
+        if (data.status === 200) {
+          push('/meu-carrinho');
+        }
       })
         .map(data => ({
           type: UploadConstants.UPLOAD_FINISH_SUCCESS,
