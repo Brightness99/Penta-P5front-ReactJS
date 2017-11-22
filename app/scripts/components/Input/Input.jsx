@@ -12,6 +12,7 @@ type Props = {
   value?: string,
   className?: string,
   placeholder?: string,
+  watcher?: string,
   pattern?: boolean,
   onClick?: () => {},
   onChange?: () => {},
@@ -71,7 +72,7 @@ export default class Input extends React.Component {
   componentWillUpdate(nextProps, nextState) {
     const { onChange } = this.props;
 
-    if (nextProps.value !== this.props.value) {
+    if (nextProps.value !== this.props.value || this.props.watcher !== nextProps.watcher) {
       this.setState({
         value: nextProps.value,
         valid: this.handleValidation(nextProps.value),

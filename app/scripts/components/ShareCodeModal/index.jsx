@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import cx from 'classnames';
+import swal from 'sweetalert2';
 import FacebookProvider, { Share } from 'react-facebook';
 import { Input } from 'quarks/Inputs';
 
@@ -61,7 +62,7 @@ export default class ShareCode extends React.PureComponent<Props, State> {
           emails: { valid: false, value: '' },
           message: {
             valid: true,
-            value: message(voucher),
+            value: '',
           },
         },
         link: {
@@ -119,7 +120,18 @@ export default class ShareCode extends React.PureComponent<Props, State> {
         [nextInput]: nextInput === 'emails' ? activeForm[nextInput].value.split(/\s*,\s*/) : activeForm[nextInput].value,
       }), {});
       sendReferralRequest(customerId, formData);
-      handleCloseModal();
+      if (activeSection === 'email') {
+        swal({
+          title: 'O Voucher foi enviado com sucesso!',
+          type: 'success',
+          confirmButtonColor: '#2cac57',
+          confirmButtonText: 'OK',
+          showCancelButton: false,
+        })
+        .then(() => handleCloseModal());
+      } else {
+        handleCloseModal();
+      }
     }
   };
 

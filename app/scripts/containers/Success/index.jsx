@@ -143,7 +143,7 @@ export class Success extends React.Component {
           {successfulPurchase.isLoaded && !successfulPurchase.isRunning && <div className="template-success">
             <div className="success-message atm-success-text">
               <CheckCircleIcon />
-              <span>Pedido nº{successfulPurchase.order.info.id} efetuado com sucesso!</span>
+              <span>Pedido #{successfulPurchase.order.info.id} efetuado com sucesso!</span>
             </div>
             {actionCount > 0 && <span>
               <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>
