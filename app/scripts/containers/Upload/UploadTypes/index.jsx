@@ -9,6 +9,7 @@ type Props = {
   handleCanvasFinalize: (docRef: string) => void,
   cimpressInfo: {},
   fileFormats: [],
+  locale: {},
   handleUploadFile: (file: { title: string, preview: {} }) => void,
   handleRemoveFile: (file: { title: string, preview: {} }) => void,
   handleOrientationChanged: (isVertical: number) => void,
@@ -21,6 +22,7 @@ const UploadTypes = ({ uploadType,
                        handleCanvasFinalize,
                        handleOrientationChanged,
                        cimpressInfo,
+                       locale,
                        fileFormats,
                      }: Props) => {
   const renderType = () => {
@@ -29,6 +31,7 @@ const UploadTypes = ({ uploadType,
         return (
           <CanvasSchema
             isSku={false}
+            locale={locale}
             handleCanvasFinalize={handleCanvasFinalize}
             handleOrientationChanged={handleOrientationChanged}
             cimpressInfo={cimpressInfo}
@@ -37,6 +40,7 @@ const UploadTypes = ({ uploadType,
         return (
           <CanvasSchema
             isSku={true}
+            locale={locale}
             handleCanvasFinalize={handleCanvasFinalize}
             handleOrientationChanged={handleOrientationChanged}
             cimpressInfo={cimpressInfo}
@@ -45,6 +49,7 @@ const UploadTypes = ({ uploadType,
         return (
           <NormalUploadType
             fileFormats={fileFormats}
+            locale={locale}
             uploadTwoFiles={selectedStrategy === 4}
             multipleFiles={selectedStrategy === 5}
             handleUploadFile={handleUploadFile}

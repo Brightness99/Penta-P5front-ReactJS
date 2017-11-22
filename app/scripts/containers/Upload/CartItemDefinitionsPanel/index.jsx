@@ -62,15 +62,15 @@ export default class CartItemDefinitionsPanel extends React.Component {
   }
 
   renderOption = (option) => {
-    const { locale: { box_additional_options: { FREE } } } = this.props;
+    const { locale } = this.props;
     const title = option.name.split('(')[0];
-    const price = option.price === 0 ? <span className="free">{FREE}</span> : <span className="cost">{`+R$${option.price}`}</span>;
+    const price = option.price === 0 ? <span className="free">{locale.page.upload.box_additional_options.FREE}</span> : <span className="cost">{`+R$${option.price}`}</span>;
     return <span className="price-title">{title}: {price}</span>;
   };
 
   render() {
     const { isOpen } = this.state;
-    const { expectedDeliveryDate, subTotal, additionalOptions, locale: { sidebar } } = this.props;
+    const { expectedDeliveryDate, subTotal, additionalOptions, locale } = this.props;
     let total = subTotal;
 
     if (additionalOptions) {
@@ -89,7 +89,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
               <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>
               <section className="side-panel-content">
                 <aside className="cart-item-definitions-container">
-                  <h4>{sidebar.TITLE}</h4>
+                  <h4>{locale.page.upload.sidebar.TITLE}</h4>
                   <section className="options">
                     {this.renderParts()}
                   </section>
@@ -104,7 +104,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
                   <section className="delivery-info">
                     <section>
                       <WarningFilled />
-                      <span>{sidebar.ESTIMATED_DELIVERY}:</span>
+                      <span>{locale.page.upload.sidebar.ESTIMATED_DELIVERY}:</span>
                       <span>{`${expectedDeliveryDate}`}</span>
                     </section>
                   </section>

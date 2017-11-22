@@ -59,15 +59,15 @@ export default class AdditionalUploadOptions extends React.Component {
     return (
       <section className="additional-options-container">
         <AdditionalOption
-          title={locale.box_upload.FILE_FORMAT}
-          freeTitle={locale.box_additional_options.FREE}
+          title={locale.page.upload.box_upload.FILE_FORMAT}
+          freeTitle={locale.page.upload.box_additional_options.FREE}
           options={options.file_format}
           defaultValue={defaultValues.file_format}
           handleOptionSelected={(value) => this.handleSelectedOption(value, 'file_format')}
         />
         <AdditionalOption
-          title={locale.box_upload.PROOF}
-          freeTitle={locale.box_additional_options.FREE}
+          title={locale.page.upload.box_upload.PROOF}
+          freeTitle={locale.page.upload.box_additional_options.FREE}
           options={options.proof}
           defaultValue={defaultValues.proof}
           handleOptionSelected={(value) => this.handleSelectedOption(value, 'proof')}
