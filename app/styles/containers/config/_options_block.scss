@@ -13,8 +13,10 @@
   &-parts {
     background-color: $color-printi;
     color: $white;
+    margin: -2rem -3rem 0;
     padding: 1rem 1.5rem;
     text-align: center;
+    width: calc(100% + 6rem);
   }
 
   ul {
@@ -44,16 +46,18 @@
 
     &__youtube {
       align-items: center;
+      background-color: transparent;
+      border: 0 transparent;
       color: $color-printi;
       display: inline-flex;
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xs;
 
       @include lg {
-        padding-left: 2rem;
+        margin-left: 2rem;
       }
 
-      span {
+      > svg {
         display: inline-flex;
         height: 1.8rem;
         margin-right: 0.5rem;
@@ -63,17 +67,11 @@
   }
 
   &-listing {
-    padding: 1rem;
-
-    @include lg {
-      padding: 3rem 2rem;
-    }
-
     > h3 {
       position: relative;
       width: 100%;
 
-      > span {
+      > .app__config__remove-button {
         color: #ea0000;
         font-size: $font-size-ix;
         position: absolute;
