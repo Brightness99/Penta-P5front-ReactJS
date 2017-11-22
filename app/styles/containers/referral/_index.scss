@@ -120,7 +120,7 @@
       flex-direction: column;
       font-family: $font-family-open-sans-regular;
       font-size: $font-size-xs;
-      justify-content: space-between;
+      justify-content: center;
       text-align: center;
 
       @include lg {
@@ -130,11 +130,7 @@
       }
 
       p {
-        margin-bottom: 0;
-
-        &:first-of-type {
-          margin-bottom: 1rem;
-        }
+        margin: 0;
       }
 
       a {
