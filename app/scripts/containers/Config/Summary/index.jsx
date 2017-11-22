@@ -1,84 +1,78 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import StickBar from 'components/StickBar';
+import PrePressTemplate from 'containers/Config/PrePressTemplate';
 
 type Props = {
-  selection: [],
-  screenSize: 'string',
-  optionSectionInfo: {},
-  calculator: {},
+  screenSize: AppStoreType.screenSize,
+  locale: LocaleType.translate.page.product_settings.sidebar,
+  selection: {},
+  templates: {},
+  dispatch: {},
+  productTitle: string,
 };
 
-type State = {
-  position: string,
-  top: number,
-};
-
-export default class SummaryBlock extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      width: 0,
-    };
-  }
-
-  componentDidMount() {
-    this.handlePosition();
-    this.handleResize();
-    window.addEventListener('scroll', this.handlePosition);
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handlePosition);
-    window.removeEventListener('resize', this.handleResize);
-  }
+export class ItemSummary extends React.Component {
+  shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
   static state: State;
 
-  handleResize = () => {
-    const bodyWidth = document.querySelector('body').offsetWidth;
-    const containerWidth = document.querySelector('.app__config__content').offsetWidth;
+  renderSummary() {
+    const { locale } = this.props;
+    return (
+      <div className="app__settings__summary">
+        <h3>{locale.TITLE}</h3>
+        {/*{Object.keys(selection).map((option) => (*/}
+        {/*<div key={option}>*/}
+        {/*{Object.keys(selection).length > 1 && <span>{calculator[option].name}</span>}*/}
+        {/*{Object.keys(selection) > 1 && <b>{option}:</b>}*/}
+        {/*<ul>*/}
+        {/*{Object.keys(selection[option]).map((item) => (*/}
+        {/*<li key={item}>*/}
+        {/*<span>{*/}
+        {/*optionSectionInfo[option]*/}
+        {/*.filter(obj => obj.key === item)*/}
+        {/*.reduce((prevValue, currentValue) => currentValue.name, '')*/}
+        {/*}</span>: {*/}
+        {/*calculator[option].options[item]*/}
+        {/*.filter(obj => obj.id === selection[option][item])*/}
+        {/*.reduce((prevValue, currentValue) => currentValue.name, '')*/}
+        {/*}*/}
+        {/*</li>*/}
+        {/*))}*/}
+        {/*</ul>*/}
+        {/*</div>*/}
+        {/*))}*/}
+        {/*{!!matrix.selection.date && !!matrix.selection.quantity && <div className="atm-summary-warning">*/}
+        {/*<TruckIcon />Previsão de entrega: {selectedDate.format('DD/MM/YYYY')}*/}
+        {/*</div>}*/}
+      </div>
+    );
+  }
 
-    this.setState({
-      right: (bodyWidth - containerWidth) / 2,
-      width: containerWidth * 0.23,
-    });
+  renderSelection() {
+    const { selection } = this.props;
 
-    this.handlePosition();
-  };
-
-  handlePosition = () => {
-    const { position } = this.state;
-    const headerHeight = document.querySelector('.app__header').offsetHeight;
-    const bodyWidth = document.querySelector('body').offsetWidth;
-    const containerOffset = document.querySelector('.app__config__content').offsetTop;
-    const containerHeight = document.querySelector('.app__config__content').offsetHeight;
-    const containerWidth = document.querySelector('.app__config__content').offsetWidth;
-    const componentHeight = document.querySelector('.app__sidebar').offsetHeight;
-    const componentOffset = headerHeight + containerOffset;
-    const pageOffset = window.pageYOffset;
-
-    if (pageOffset + componentHeight >= containerHeight) {
-      this.setState({
-        position: 'absolute',
-        right: 0,
-        top: containerHeight - componentHeight,
-      });
-    } else if (position !== 'fixed') {
-      this.setState({
-        position: 'fixed',
-        right: (bodyWidth - containerWidth) / 2,
-        top: componentOffset,
-      });
+    if (Object.keys(selection).length <= 0) {
+      return [];
     }
-  };
+
+    return Object.keys(selection).map((part) => (
+      <div key={part}>
+        {Object.keys(selection).length > 1 && <span>{part}</span>}
+        <ul>
+          {Object.keys(selection[part])
+            .map((attribute) => <li key={attribute}><span>{attribute}:</span> {selection[part][attribute]}</li>)
+          }
+        </ul>
+      </div>
+    ));
+  }
 
   renderMobile() {
     return (
@@ -88,19 +82,45 @@ export default class SummaryBlock extends React.Component {
     );
   }
 
-  renderSummary() {
+  renderDesktop() {
+    const { locale, templates, dispatch, productTitle } = this.props;
+
     return (
-      <div className="app__sidebar" style={this.state}>
-        123
-      </div>
+      <StickBar>
+        <div className="org-cart-stickbar">
+          <div className="atm-cart-sidebar-title">{locale.TITLE}</div>
+          <div className="mol-cart-sidebar-summary">
+            {this.renderSelection()}
+          </div>
+        </div>
+        <PrePressTemplate templates={templates} dispatch={dispatch} productTitle={productTitle} />
+      </StickBar>
     );
   }
 
   render() {
     const { screenSize } = this.props;
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderSummary();
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    screenSize: state.app.screenSize,
+    locale: state.locale.translate.page.product_settings.sidebar,
+    selection: state.productSettings.options.parts
+      .reduce((prevPart, currentPart) => ({
+        ...prevPart,
+        [currentPart.name]: currentPart.attributes
+          .reduce((prevAttribute, currentAttribute) => ({
+            ...prevAttribute,
+            [currentAttribute.name]: currentAttribute.options
+              .filter((option) => (state.productSettings.selection && state.productSettings.selection[currentPart.id] && option.id === state.productSettings.selection[currentPart.id][currentAttribute.key]))
+              .reduce((prevOption, currentOption) => (currentOption.name), '')
+          }), {}),
+      }), {}),
+  };
+}
+
+export default connect(mapStateToProps)(ItemSummary);

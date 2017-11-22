@@ -51,14 +51,14 @@ export function settingsSourceReset(): Object {
 
 /**
  * Options Fetch
- * @param {Object} selection
+ * @param {Object} payload
  *
  * @returns {Object}
  */
-export function settingsOptionsFetch(selection: {}): Object {
+export function settingsOptionsFetch(payload: {}): Object {
   return {
     type: SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST,
-    payload: selection,
+    payload,
   };
 }
 
@@ -163,5 +163,30 @@ export function prepressDownloadFetch(orientation: string, extension: string, fi
       extension,
       fileName,
     },
+  };
+}
+
+/**
+ * Picup Places List Fetch
+ *
+ * @returns {Object}
+ */
+export function pickupPlacesFetch(): Object {
+  return {
+    type: SettingsConstants.SETTINGS_PICKUP_FETCH_REQUEST,
+    payload: {},
+  };
+}
+
+/**
+ * Additional Options Fetch
+ * @param {Object} payload
+ *
+ * @returns {Object}
+ */
+export function settingsAdditionalOptionsFetch(payload: {}): Object {
+  return {
+    type: SettingsConstants.SETTINGS_ADDITIONAL_OPTIONS_FETCH_REQUEST,
+    payload,
   };
 }

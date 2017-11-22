@@ -65,8 +65,13 @@ export default class StickBar extends React.Component {
     const { children } = this.props;
 
     return (
-      <div className="org-stick-bar">
-        <div className="org-stick-bar-content" style={this.state}>
+      <div
+        className="org-stick-bar"
+      >
+        <div
+          className="org-stick-bar-content"
+          style={this.state}
+        >
           {children}
         </div>
       </div>

@@ -4,8 +4,7 @@
  */
 
 import { REHYDRATE } from 'redux-persist/constants';
-import { createReducer, updateSelection } from 'utils';
-
+import { createReducer, getSelection, isSelectionComplete } from 'utils';
 import { SettingsConstants } from 'constants/index';
 
 export const productSettingsState = {
@@ -25,6 +24,12 @@ export const productSettingsState = {
       options: false,
       matrix: false,
     },
+    zipcode: {
+      value: '',
+      isZipcodeValid: false,
+      zipcodeErrorMessage: '',
+    },
+    pickupPlaces: [],
   },
   settings: {
     showSteps: {
@@ -42,9 +47,11 @@ export const productSettingsState = {
   },
   options: {
     defaultCombinationCount: 0,
-    list: [],
+    parts: [],
     isRunning: false,
     isLoaded: false,
+    removed: [],
+    isSelectionComplete: false,
   },
   templates: {
     options: {
@@ -76,7 +83,9 @@ export const productSettingsState = {
     },
     isRunning: false,
     isLoaded: false,
+    deliveryMethod: 'zipcode',
   },
+  additionalOptions: {},
 };
 
 export default {
@@ -148,6 +157,8 @@ export default {
       };
     },
     [SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS](state, action) {
+      const selection = getSelection(action.payload.product.parts);
+
       return {
         ...state,
         source: {
@@ -158,20 +169,10 @@ export default {
         options: {
           ...state.options,
           defaultCombinationCount: action.payload.default_combination_count,
+          parts: action.payload.product.parts,
+          selectionIsComplete: isSelectionComplete(selection),
         },
-        parts: action.payload.product.parts,
-        selection: action.payload.product.parts
-          .reduce((prevPart, currentPart) => ({
-            ...prevPart,
-            [currentPart.id]: currentPart.attributes
-              .filter((attribute) => attribute.visible)
-              .reduce((prevAttribute, currentAttribute) => ({
-                ...prevAttribute,
-                [currentAttribute.key]: currentAttribute.options
-                  .filter((option) => option.default)
-                  .reduce((prevOption, currentOption) => currentOption.id, ''),
-              }), {}),
-          }), {}),
+        selection,
         updatedAt: action.meta.updatedAt,
       };
     },
@@ -182,99 +183,101 @@ export default {
           ...state.source,
           selectedSource: '',
         },
+        options: productSettingsState.options,
+        selection: productSettingsState.selection,
       };
     },
     [SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST](state, action) {
-      const actionSelection = Object.keys(state.optionSectionInfo)
-        .map((part) => ({
-          key: part,
-          values: state.optionSectionInfo[part]
-            .reduce((prevSection, currentSection) => {
-              let sectionValue = '';
-
-              if (action.payload.partId === part) {
-                sectionValue = action.payload.selection[currentSection.key] || '';
-              }
-
-              return {
-                ...prevSection,
-                [currentSection.key]: sectionValue,
-              };
-            }, {}),
-        }))
-        .reduce((prevValue, currentValue) => ({
-          ...prevValue,
-          [currentValue.key]: currentValue.values,
-        }), {});
+      let shouldReset = false;
 
       return {
         ...state,
-        selection: updateSelection(state.selection, actionSelection),
+        selection: state.options.parts
+          .reduce((prevPart, currentPart) => {
+            if (currentPart.id === action.payload.partId) {
+              shouldReset = true;
+            }
+
+            if (!shouldReset) {
+              return {
+                ...prevPart,
+                [currentPart.id]: state.selection[currentPart.id],
+              };
+            }
+
+            return {
+              ...prevPart,
+              [currentPart.id]: currentPart.attributes
+                .reduce((prevAttribute, currentAttribute) => ({
+                  ...prevAttribute,
+                  [currentAttribute.key]: currentPart.id === action.payload.partId ? action.payload.selection[currentPart.id][currentAttribute.key] : '',
+                }), {}),
+            };
+          }, {}),
       };
     },
     [SettingsConstants.SETTINGS_OPTIONS_FETCH_SUCCESS](state, action) {
-      const calculator = Object.keys(state.calculator).map((calculate) => ({
-        ...state.calculator[calculate],
-        options: {
-          ...state.calculator[calculate].options,
-          ...action.payload.options[calculate],
-        },
-      }))
-        .reduce((prevValue, currentValue) => ({
-          ...prevValue,
-          [currentValue.id]: currentValue,
-        }), {});
+      const parts = [
+        ...state.options.parts.map((part) => ({
+          ...part,
+          attributes: part.attributes.map((attribute) => ({
+            ...attribute,
+            options: action.payload.options[part.id] && action.payload.options[part.id][attribute.key]
+              ? action.payload.options[part.id][attribute.key].map((option) => ({
+                ...option,
+                imageSmall: option.image_small,
+                imageBig: option.image_big,
+              }))
+              : attribute.options,
+          })),
+        })),
+      ];
 
-      const actionSelection = Object.keys(state.selection)
-        .map((part) => ({
-          key: part,
-          value: Object.keys(action.payload.options[part])
-            .map((select) => {
-              if (action.payload.options[part][select].length === 1) {
-                return {
-                  key: select,
-                  value: action.payload.options[part][select][0].id,
-                };
-              }
-
-              if (action.payload.partId === part && action.payload.selection[select]) {
-                return {
-                  key: select,
-                  value: action.payload.selection[select],
-                };
-              }
-
-              return {
-                key: select,
-                value: '',
-              };
-            })
-            .reduce((prevValue, currentValue) => ({
-              ...prevValue,
-              [currentValue.key]: currentValue.value,
+      const selection = parts
+        .reduce((prevPart, currentPart) => ({
+          ...prevPart,
+          [currentPart.id]: currentPart.attributes
+            .reduce((prevAttribute, currentAttribute) => ({
+              ...prevAttribute,
+              [currentAttribute.key]: (state.selection && state.selection[currentPart.id] && state.selection[currentPart.id][currentAttribute.key])
+              || (currentAttribute.options.length === 1 && currentAttribute.options[0].id) || '',
             }), {}),
-        }))
-        .reduce((prevValue, currentValue) => ({
-          ...prevValue,
-          [currentValue.key]: currentValue.value,
         }), {});
 
       return {
         ...state,
-        calculator,
-        selection: updateSelection(state.selection, actionSelection),
+        options: {
+          ...state.options,
+          parts,
+          selectionIsComplete: isSelectionComplete(selection),
+        },
+        selection,
         updatedAt: action.meta.updatedAt,
       };
     },
-    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_REQUEST](state) {
+    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_REQUEST](state, action) {
       return {
         ...state,
+        config: {
+          ...state.config,
+          zipcode: {
+            ...productSettingsState.config.zipcode,
+            value: action.payload.zipcode,
+          },
+        },
         matrix: productSettingsState.matrix,
       };
     },
     [SettingsConstants.SETTINGS_ZIPCODE_FETCH_SUCCESS](state) {
       return {
         ...state,
+        config: {
+          ...state.config,
+          zipcode: {
+            ...state.config.zipcode,
+            isZipcodeValid: true,
+          },
+        },
         matrix: {
           ...state.matrix,
           isRunning: true,
@@ -282,15 +285,27 @@ export default {
         },
       };
     },
-    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE](state) {
+    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE](state, action) {
       return {
         ...state,
+        config: {
+          ...state.config,
+          zipcode: {
+            ...state.config.zipcode,
+            isZipcodeValid: false,
+            zipcodeErrorMessage: action.payload,
+          },
+        },
         matrix: productSettingsState.matrix,
       };
     },
     [SettingsConstants.SETTINGS_ZIPCODE_RESET](state) {
       return {
         ...state,
+        config: {
+          ...state.config,
+          zipcode: productSettingsState.config.zipcode,
+        },
         matrix: productSettingsState.matrix,
       };
     },
@@ -304,38 +319,28 @@ export default {
           isRunning: false,
           isLoaded: true,
         },
+        additionalOptions: action.payload.additional_options,
       };
     },
-    [SettingsConstants.SETTINGS_MATRIX_SELECT_QUANTITY](state, action) {
+    [SettingsConstants.SETTINGS_ADDITIONAL_OPTIONS_FETCH_REQUEST](state, action) {
       return {
         ...state,
         matrix: {
           ...state.matrix,
-          selection: action.payload,
+          selection: {
+            date: action.payload.selectedDate,
+            quantity: action.payload.selectedQuantity,
+          },
         },
       };
     },
     [SettingsConstants.REMOVE_SELECTION_PART](state, action) {
       return {
         ...state,
-        selection: Object.keys(state.selection)
-          .filter((obj) => obj !== action.payload.part)
-          .reduce((prevValue, currentValue) => ({
-            ...prevValue,
-            [currentValue]: state.selection[currentValue],
-          }), {}),
-        calculator: Object.keys(state.calculator)
-          .filter((obj) => obj !== action.payload.part)
-          .reduce((prevValue, currentValue) => ({
-            ...prevValue,
-            [currentValue]: state.calculator[currentValue],
-          }), {}),
-        optionSectionInfo: Object.keys(state.optionSectionInfo)
-          .filter((obj) => obj !== action.payload.part)
-          .reduce((prevValue, currentValue) => ({
-            ...prevValue,
-            [currentValue]: state.optionSectionInfo[currentValue],
-          }), {}),
+        options: {
+          ...state.options,
+          removed: state.options.removed.push(action.payload),
+        },
       };
     },
     [SettingsConstants.SELECT_PREPRESS_ORIENTATION](state, action) {
@@ -359,6 +364,36 @@ export default {
               [action.payload.extension]: action.payload.filePackageUrl,
             },
           },
+        },
+      };
+    },
+    [SettingsConstants.SETTINGS_PICKUP_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          pickupPlaces: productSettingsState.config.pickupPlaces,
+        },
+      };
+    },
+    [SettingsConstants.SETTINGS_PICKUP_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          pickupPlaces: action.payload,
+        },
+      };
+    },
+    [SettingsConstants.SETTINGS_PICKUP_FETCH_FAILURE](state) {
+      return state;
+    },
+    [SettingsConstants.SETTINGS_SET_DELIVERY_METHOD](state, action) {
+      return {
+        ...state,
+        matrix: {
+          ...state.matrix,
+          deliveryMethod: action.payload,
         },
       };
     },

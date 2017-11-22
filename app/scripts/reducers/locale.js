@@ -109,7 +109,7 @@ const missingLocale = {
       cart: {
         cross_selling: {
           TITLE: 'PRODUTOS INDICADOS PARA VOCÊ',
-        }
+        },
       },
       product_settings: {
         source: {
