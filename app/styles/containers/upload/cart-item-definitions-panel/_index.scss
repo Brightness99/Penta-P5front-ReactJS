@@ -1,118 +1,75 @@
 @import "side-panel";
 
 .cart-item-definitions-container {
-  margin           : 0 0 auto 0;
-  background-color : #ffffff;
-  box-shadow       : 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 0 0 auto 0;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   .sub-total {
-    font-weight : bold;
+    font-weight: bold;
     span {
-      color : #1271e0;
+      color: #1271e0;
     }
   }
   .total {
-    font-weight : bold;
+    background-color: #3fc069;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
     span {
-      color     : #1271e0;
-      font-size : 2rem;
-    }
-  }
-  .total-mobile {
-    background-color : #3fc069;
-    border-radius    : 0 0 3px 3px;
-    margin           : 3rem 0;
-    padding          : 1rem 2rem;
-    span {
-      font-weight : bold;
-      color       : white;
-      font-size   : 2rem;
+      font-weight: bold;
+      color: white;
+      font-size: 2rem;
     }
   }
   .additional-options {
     .price-title {
-      font-size : 1.2rem;
-      font-weight : bold;
+      font-size: 1.2rem;
+      font-weight: bold;
       .free {
         color: #3fc069;
       }
       .cost {
-        color :#1271e0;
+        color:#1271e0;
       }
     }
   }
-  .instruction-container {
-    padding : 0 2rem 3rem;
-    h4 {
-      padding-left: 0;
-    }
-    li > svg, span > svg {
-      width: 1rem;
-      height: 1rem;
-    }
-    .icon-list {
-      display: flex;
-    }
-  }
-  .delivery-info-mobile {
-    display         : flex;
-    align-items     : center;
-    justify-content : center;
-    & > * {
-      background-color : #f3db3a;
-      border-radius    : 0.3rem;
-      display          : flex;
-      align-items      : center;
-      justify-content  : center;
-      padding          : 0.5rem 3rem;
-    }
-    span {
-      font-size : 1.2rem;
-    }
-    span:first-of-type {
-      font-weight : bold;
-      margin      : 0 0.2rem;
-    }
-    svg {
-      width        : 1.2rem;
-      height       : 1.2rem;
-      fill         : black;
-      stroke       : black;
-      display      : inline-block;
-      stroke-width : 0;
-      transform    : scale(-1, 1);
-    }
-  }
   .delivery-info {
-    display          : flex;
-    align-items      : center;
-    padding          : 2rem;
-    background-color : #f3db3a;
-    height           : 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > * {
+      margin: 0 1rem;
+      background-color: #f3db3a;
+      border-radius: 0.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 3rem;
+    }
     span {
-      font-size : 1.2rem;
+      font-size: 1.2rem;
     }
     span:first-of-type {
-      font-weight : bold;
-      margin      : 0 0.2rem;
+      font-weight: bold;
+      margin: 0 0.2rem;
     }
     svg {
-      width        : 2rem;
-      height       : 2rem;
-      fill         : black;
-      stroke       : black;
-      display      : inline-block;
-      stroke-width : 0;
-      transform    : scale(-1, 1);
+      width: 1.2rem;
+      height: 1.2rem;
+      fill: black;
+      stroke: black;
+      display: inline-block;
+      stroke-width: 0;
+      transform: scale(-1, 1);
     }
   }
   .options, .sub-total, .additional-options, .total {
-    font-size : 1.2rem;
-    padding   : 1rem 2rem;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
   }
   h4 {
-    padding : 2rem;
+    padding: 2rem;
   }
   hr {
-    margin : 0 1rem;
+    margin: 0 1rem;
   }
 }
