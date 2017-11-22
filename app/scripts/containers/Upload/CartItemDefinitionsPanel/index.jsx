@@ -3,8 +3,7 @@ import React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { FadeToggle, SlideToggle } from 'animations';
 import Overlay from 'components/Overlay';
-import { WarningFilled, AngleRight } from 'components/Icons';
-import FileFormatIcon from 'components/FileFormatIcon';
+import { WarningFilled } from 'components/Icons';
 import BulletListIcon from 'components/Icons/BulletList';
 
 type Props = {
@@ -18,6 +17,7 @@ type Props = {
     name: string,
     options: Array<{ field: string, value: string }>
   }>,
+  locale: {}
 };
 
 type State = {
@@ -62,14 +62,15 @@ export default class CartItemDefinitionsPanel extends React.Component {
   }
 
   renderOption = (option) => {
+    const { locale: { box_additional_options: { FREE } } } = this.props;
     const title = option.name.split('(')[0];
-    const price = option.price === 0 ? <span className="free">GRATIS</span> : <span className="cost">{`+R$${option.price}`}</span>;
+    const price = option.price === 0 ? <span className="free">{FREE}</span> : <span className="cost">{`+R$${option.price}`}</span>;
     return <span className="price-title">{title}: {price}</span>;
   };
 
   render() {
     const { isOpen } = this.state;
-    const { expectedDeliveryDate, subTotal, additionalOptions } = this.props;
+    const { expectedDeliveryDate, subTotal, additionalOptions, locale: { sidebar } } = this.props;
     let total = subTotal;
 
     if (additionalOptions) {
@@ -88,7 +89,7 @@ export default class CartItemDefinitionsPanel extends React.Component {
               <button className="side-panel-button" onClick={this.handleToggle}><BulletListIcon /></button>
               <section className="side-panel-content">
                 <aside className="cart-item-definitions-container">
-                  <h4>Resumo do produto</h4>
+                  <h4>{sidebar.TITLE}</h4>
                   <section className="options">
                     {this.renderParts()}
                   </section>
@@ -100,29 +101,14 @@ export default class CartItemDefinitionsPanel extends React.Component {
                           <section>{this.renderOption(additionalOptions.proof)}</section>
                         </section>]
                   }
-                  <section className="delivery-info-mobile">
+                  <section className="delivery-info">
                     <section>
                       <WarningFilled />
-                      <span>Previsão de entrega:</span>
+                      <span>{sidebar.ESTIMATED_DELIVERY}:</span>
                       <span>{`${expectedDeliveryDate}`}</span>
                     </section>
                   </section>
-                  <section className="total-mobile"><span>{`R$${total.toFixed(2)}`}</span></section>
-                  <hr />
-                  <section className="instruction-container">
-                    <h4>Instruções do produto</h4>
-                    <ul>
-                      <li>
-                        <span><AngleRight /> Baixar gabarito deste produto:</span>
-                        <section className="icon-list">
-                          <FileFormatIcon title="AI" />
-                          <FileFormatIcon title="EPS" />
-                          <FileFormatIcon title="PSD" />
-                        </section></li>
-                      <li><AngleRight /> Como finalizar a arte frente e verso</li>
-                      <li><AngleRight /> Como preparar o arquivo de verniz</li>
-                    </ul>
-                  </section>
+                  <section className="total"><span>{`R$${total.toFixed(2)}`}</span></section>
                 </aside>
               </section>
             </section>
