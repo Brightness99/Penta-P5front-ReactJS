@@ -5,6 +5,7 @@ import OverlaySpinner from 'components/OverlaySpinner';
 import { Button } from 'quarks/Inputs';
 import Modal from 'components/Modal';
 import { WarningFilled } from 'components/Icons';
+import cimpress from 'vendor/cimpress';
 import TopMenuBar from './CimpressComponents/TopMenuBar/index';
 import SideBarPanel from './CimpressComponents/SideBarPanel/index';
 import CanvasToolBar from './CimpressComponents/CanvasToolBar/index';
@@ -65,9 +66,7 @@ export default class Canvas extends React.Component {
 
     if (prevProps.cimpressInfo && nextProps.cimpressInfo.orientation !== prevProps.cimpressInfo.orientation && isOrientationChanging) {
       const { cimpressInfo } = nextProps;
-      global.designer.switchProduct({
-        surfaceSpecifications: cimpressInfo.specifications,
-      })
+      cimpress.switchProduct(cimpressInfo.specifications)
         .then(
           () => {
             this.setState({
@@ -97,7 +96,7 @@ export default class Canvas extends React.Component {
   handleLoad = () => {
     const { cimpressInfo, isSku, locale } = this.props;
     const config = cimpressConfigBuilder(cimpressInfo, isSku, locale);
-    global.designer.start(config)
+    cimpress.start(config)
       .then(
         () => {
           this.setState({
