@@ -137,8 +137,9 @@ export class Referral extends React.Component<Props, State> {
               <section className="mol-texts-referral">
                 <h3 className="qrk-title">{'Quem indica ganha. E quem é indicado também!'}</h3>
                 <p className="qrk-text">
-                  {`Isso mesmo: indique a Printi para seus amigos, e a cada compra feita por eles utilizando
-                  seu código promocional (voucher), você receberá um voucher de desconto!`}
+                  {`Isso mesmo: indique a Printi para seus amigos,
+                  e a cada primeira compra feita por eles utilizando seu código promocional,
+                  você receberá um voucher de desconto!`}
                 </p>
               </section>
 
@@ -186,7 +187,6 @@ export class Referral extends React.Component<Props, State> {
             <section className="mol-infos-referral">
               <section className="container">
                 <section className="atm-infos">
-                  <p>{'Depois de convidar seus amigos, você poderá visualizar o statos das indicações.'}</p>
                   <p>{'Em caso de dúvida, visite a nossa '}<Link to="/central-de-ajuda">{'Central de ajuda'}</Link></p>
                 </section>
               </section>
