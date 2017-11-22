@@ -8,6 +8,7 @@ import FlashMessage from 'components/FlashMessage';
 import MoreInfo from 'components/MoreInfo';
 import Loading from 'components/Loading';
 import { Button } from 'quarks/Inputs';
+import cimpress from 'vendor/cimpress';
 import AdditionalUploadOptions from './AdditionalUploadOptions';
 import AvailableUploadStrategies from './AvailableUploadStrategies';
 import UploadTypes from './UploadTypes';
@@ -31,6 +32,7 @@ type State = {
   fileFormats: [],
   uploadedFiles: [],
   canSubmit: boolean,
+  isAgree: boolean,
   documentReferenceId: string,
 }
 
@@ -43,6 +45,7 @@ export default class UploadContent extends React.Component {
       uploadedFiles: [],
       fileFormats: [],
       isRepurchase: false,
+      isAgree: false,
       canSubmit: false,
     };
   }
@@ -51,28 +54,25 @@ export default class UploadContent extends React.Component {
   state: State;
 
   updateCanSubmit = () => {
-    const { selectedStrategy, uploadedFiles, documentReferenceId } = this.state;
+    const { selectedStrategy, uploadedFiles, isAgree } = this.state;
     const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
-    let canSubmit;
-    switch (upload_type) {
-      case 'canvas':
-        canSubmit = selectedStrategy === 1 || !!documentReferenceId;
-        break;
-      case 'sku_scene':
-        canSubmit = selectedStrategy === 1 || !!documentReferenceId;
-        break;
-      default:
-        canSubmit = (selectedStrategy === 1 ||
-        (selectedStrategy === 4 && uploadedFiles.length === 2)
-        || uploadedFiles.length > 0);
-    }
+    const normalFunnelValidation = (selectedStrategy === 1 || (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0);
+    const canSubmit = (upload_type === 'normal' && normalFunnelValidation) || (upload_type !== 'normal' && selectedStrategy > 0 && isAgree);
+
     this.setState({ canSubmit });
   };
 
-  handleChoose = () => {
+  handleRepurchaseChoose = () => {
     const { isRepurchase } = this.state;
     this.setState({
       isRepurchase: !isRepurchase,
+    });
+  };
+
+  handleAgreeChoose = () => {
+    const { isAgree } = this.state;
+    this.setState({
+      isAgree: !isAgree,
     });
   };
 
@@ -137,7 +137,11 @@ export default class UploadContent extends React.Component {
     };
 
     if (uploadFinish && typeof uploadFinish === 'function') {
-      uploadFinish(result);
+      if (upload_type === 'normal') {
+        uploadFinish(result);
+      } else {
+        cimpress.saveTemplate().then(() => uploadFinish(result));
+      }
     }
   };
 
@@ -258,9 +262,55 @@ export default class UploadContent extends React.Component {
     />);
   }
 
+  renderTerms() {
+    const { locale, uploadInfo: { globalFlags: { upload_type } } } = this.props;
+    const { isRepurchase, isAgree } = this.state;
+    if (upload_type === 'normal') {
+      return (<label key={'upload-terms'}>
+        <CheckBox
+          checked={isRepurchase}
+          onChange={this.handleRepurchaseChoose}
+        />
+        {locale.page.upload.box_upload.UPLOAD_TERMS}
+      </label>);
+    }
+
+    return [
+      <label key={'upload-terms'}>
+        <CheckBox
+          checked={isRepurchase}
+          onChange={this.handleRepurchaseChoose}
+        />
+        {locale.page.upload.cimpress_designer.AGREE_WITH_TERMS}
+      </label>,
+      <label key={'must-agree-terms'}>
+        <CheckBox
+          checked={isAgree}
+          onChange={this.handleAgreeChoose}
+        />
+        <span>{locale.page.upload.cimpress_designer.MUST_AGREE_WITH_TERMS} </span>
+      </label>];
+  }
+
+  renderButtonsBlock() {
+    const { isFinishInProgress, locale } = this.props;
+    const { canSubmit } = this.state;
+
+    return (<section className="upload-finish-block">
+      {
+        this.renderTerms()
+      }
+      <Button
+        onClick={this.handleUploadFinish}
+        kind="success"
+        isLoading={isFinishInProgress}
+        disabled={!canSubmit}
+      >{locale.page.upload.box_upload.SEND_FILES}</Button>
+    </section>);
+  }
+
   render() {
-    const { isLoading, isFinishInProgress, breadcrumb, isAccount, locale } = this.props;
-    const { isRepurchase, canSubmit } = this.state;
+    const { isLoading, breadcrumb, isAccount, locale } = this.props;
 
     if (!isLoading) return <Loading />;
 
@@ -280,21 +330,9 @@ export default class UploadContent extends React.Component {
             {
                 funnels.map((x, i) => x(i + 1))
             }
-            <section className="upload-finish-block">
-              <label>
-                <CheckBox
-                  checked={isRepurchase}
-                  onChange={this.handleChoose}
-                />
-                {locale.page.upload.cimpress_designer.AGREE_WITH_TERMS}
-              </label>
-              <Button
-                onClick={this.handleUploadFinish}
-                kind="success"
-                isLoading={isFinishInProgress}
-                disabled={!canSubmit}
-              >{locale.page.upload.box_upload.SEND_FILES}</Button>
-            </section>
+            {
+              this.renderButtonsBlock()
+            }
           </section>
           { this.renderCartItemDefinitions()}
         </div>
