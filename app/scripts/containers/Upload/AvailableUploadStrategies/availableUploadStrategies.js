@@ -1,27 +1,29 @@
-module.exports = [
+const getUploadStrategies = (locale) => ([
   {
     index: 1,
-    title: 'Enviar arte mais tarde',
-    description: 'Você pode concluir seu pedido e enviar a arte mais tarde',
+    title: locale.box_strategy.send_later.TITLE,
+    description: locale.box_strategy.send_later.DESCRIPTION,
   },
   {
     index: 2,
-    title: 'Enviar arte agora',
-    description: 'Enviar as artes da frente e do verso em um único arquivo',
+    title: locale.box_strategy.send_one_file.TITLE,
+    description: locale.box_strategy.send_one_file.DESCRIPTION,
   },
   {
     index: 3,
-    title: 'Enviar arte agora',
-    description: 'Enviar as artes da frente e do verso em um único arquivo',
+    title: locale.box_strategy.send_one_file.TITLE,
+    description: locale.box_strategy.send_one_file.DESCRIPTION,
   },
   {
     index: 4,
-    title: 'Dois arquivos',
-    description: 'Enviar um arquivo com a arte da frente e outro com o verso',
+    title: locale.box_strategy.send_two_files.TITLE,
+    description: locale.box_strategy.send_two_files.DESCRIPTION,
   },
   {
     index: 5,
-    title: 'Multiplos arquivos',
-    description: 'Enviar arte em multiplos arquivos',
+    title: locale.box_strategy.send_multiple_files.TITLE,
+    description: locale.box_strategy.send_multiple_files.DESCRIPTION,
   },
-];
+]);
+
+export default getUploadStrategies;

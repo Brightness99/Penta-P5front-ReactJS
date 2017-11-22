@@ -22,6 +22,7 @@ type Props = {
       search: string,
     },
   },
+  locale: {},
   isLoading: boolean,
   isFinishInProgress: boolean,
   uploadInfo: {},
@@ -65,7 +66,13 @@ class FunnelUploadPage extends React.Component {
   };
 
   render() {
-    const { isLoading, screenSize, isFinishInProgress, uploadFileProgress, uploadInfo } = this.props;
+    const {
+      isLoading,
+      screenSize,
+      isFinishInProgress,
+      uploadFileProgress,
+      uploadInfo,
+      locale } = this.props;
     const breadcrumb = [
       {
         title: 'Home',
@@ -76,7 +83,7 @@ class FunnelUploadPage extends React.Component {
         url: '/configuracao-marca-pagina',
       },
       {
-        title: 'Enviar arte',
+        title: locale.BREADCRUMB_TITLE,
         url: '',
       },
     ];
@@ -88,6 +95,7 @@ class FunnelUploadPage extends React.Component {
         uploadInfo={uploadInfo}
         uploadFileProgress={uploadFileProgress}
         screenSize={screenSize}
+        locale={locale}
         isFinishInProgress={isFinishInProgress}
         handleOrientationChanged={this.handleOrientationChanged}
         handleUploadFinish={this.handleUploadFinish}
@@ -100,6 +108,7 @@ const mapStateToProps = (state) => ({
   screenSize: state.app.screenSize,
   isLoading: state.upload.isLoaded,
   router: state.router,
+  locale: state.locale.translate.page.upload,
   isFinishInProgress: state.upload.uploadFinish.isRunning,
   uploadInfo: state.upload.object,
   uploadFileProgress: state.upload.uploadFile,
