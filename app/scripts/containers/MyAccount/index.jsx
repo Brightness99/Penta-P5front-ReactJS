@@ -105,7 +105,7 @@ export class MyAccount extends React.Component {
                 render={() => (
                   <Switch>
                     <Route
-                      path="/minha-conta/pedidos/:orderNumber/proposta-de-arte"
+                      path="/minha-conta/pedidos/:orderNumber/:orderItemId/proposta-de-arte"
                       render={(props) => <ArtProposal {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
                     />
                     <Route
@@ -115,7 +115,7 @@ export class MyAccount extends React.Component {
                 )}
               />
               <Route
-                path="/minha-conta/pedidos/:orderNumber/proposta-de-arte"
+                path="/minha-conta/pedidos/:orderNumber/:orderItemId/proposta-de-arte"
                 render={(props) => <ArtProposal {...props} setBreadcrumbs={this.handleBreadcrumbs} />}
               />
               <Route
