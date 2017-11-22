@@ -10,7 +10,6 @@ import { push } from 'modules/ReduxRouter';
 import UploadContent from './UploadContent';
 
 type Props = {
-  screenSize: string,
   match: {
     params: {
       slug: string,
@@ -68,7 +67,6 @@ class FunnelUploadPage extends React.Component {
   render() {
     const {
       isLoading,
-      screenSize,
       isFinishInProgress,
       uploadFileProgress,
       uploadInfo,
@@ -94,7 +92,6 @@ class FunnelUploadPage extends React.Component {
         isLoading={isLoading}
         uploadInfo={uploadInfo}
         uploadFileProgress={uploadFileProgress}
-        screenSize={screenSize}
         locale={locale}
         isFinishInProgress={isFinishInProgress}
         handleOrientationChanged={this.handleOrientationChanged}
@@ -105,7 +102,6 @@ class FunnelUploadPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  screenSize: state.app.screenSize,
   isLoading: state.upload.isLoaded,
   router: state.router,
   locale: state.locale.translate.page.upload,
