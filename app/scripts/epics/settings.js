@@ -219,41 +219,46 @@ export function settingsMatrixFetch(action$, store) {
 
 export function settingsPrePressFetch(action$, store) {
   return action$.ofType(SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_REQUEST)
-    .switchMap(action => {
+    .switchMap(() => {
       const productSettings = store.getState().productSettings;
       const endpoint = `/v1/prepress_template/download_options/${productSettings.finalProduct.id}`;
 
       return rxAjax({
         endpoint,
-        payload: {
-          combination: productSettings.selection,
-          source: productSettings.source.selectedSource,
-          zipcode: action.payload.zipcode,
-        },
+        payload: Object.keys(productSettings.selection)
+          .reduce((prevPart, currentPart) => ({
+            ...prevPart,
+            [currentPart]: Object.keys(productSettings.selection[currentPart])
+              .reduce((prevAttribute, currentAttribute) => ({
+                ...prevAttribute,
+                [`product_${currentAttribute}_id`]: productSettings.selection[currentPart][currentAttribute],
+              }), {})
+          }), {}),
         method: 'POST',
       })
         .map(data => {
-          if (data.status === 200 && data.response) {
+          if (data.status === 200 && data.response && data.response.options) {
             return {
-              type: SettingsConstants.SETTINGS_MATRIX_FETCH_SUCCESS,
+              type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_SUCCESS,
               payload: {
                 ...data.response,
+                parts: data.response[productSettings.finalProduct.id],
               },
               meta: { updatedAt: getUnixtime() },
             };
           }
 
           return {
-            type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_FAILURE,
             payload: { message: 'Algo de errado não está correto' },
             meta: { updatedAt: getUnixtime() },
           };
         })
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
-        .defaultIfEmpty({ type: SettingsConstants.SETTINGS_MATRIX_FETCH_CANCEL })
+        .defaultIfEmpty({ type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_CANCEL })
         .catch(error => (
           [{
-            type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
           }]
