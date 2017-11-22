@@ -22,6 +22,7 @@ type Props = {
   isUploadRunning: boolean,
   isUploaded: boolean,
   progress: boolean,
+  locale: {},
   uploadFile: (file: {}) => void,
   uploadCancel: () => void,
   uploadedFileInfo: {}
@@ -184,12 +185,13 @@ export class UploadFile extends React.Component {
   };
 
   renderContent = () => {
-    const { progress, multiple, fileFormats } = this.props;
+    const { progress, multiple, fileFormats, locale } = this.props;
     const { isSelectedFileForUpload, fileName, fileFormat, isShowDropzone } = this.state;
 
     if (isSelectedFileForUpload) {
       return (<UploadProgress
         progress={progress}
+        locale={locale}
         fileName={fileName}
         fileFormat={fileFormat}
         handleCancelUploading={this.handleCancelUploading}
@@ -219,7 +221,7 @@ export class UploadFile extends React.Component {
           }
         </section>
         <p className="description">Arraste um arquivo até aqui para enviar ou</p>
-        <button className="select-file">Procurar aquivo</button>
+        <button className="select-file">{locale.page.upload.box_upload.CHOOSE_FILE}</button>
       </label>
     );
   };
@@ -243,8 +245,9 @@ export class UploadFile extends React.Component {
 
   render() {
     const { isShowPreview, preview } = this.state;
+    const { locale } = this.props;
     return isShowPreview ?
-      <PreviewUploadedFile preview={preview} handleRemoveFile={this.handleRemoveFile} /> :
+      <PreviewUploadedFile locale={locale} preview={preview} handleRemoveFile={this.handleRemoveFile} /> :
       this.renderUploadContainer();
   }
 }

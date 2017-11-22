@@ -72,7 +72,7 @@ class AccountUploadPage extends React.Component {
         url: '/configuracao-marca-pagina',
       },
       {
-        title: locale.BREADCRUMB_TITLE,
+        title: locale.page.upload.BREADCRUMB_TITLE,
         url: '',
       },
     ];
@@ -96,7 +96,7 @@ class AccountUploadPage extends React.Component {
 const mapStateToProps = (state) => ({
   isLoading: state.upload.isLoaded,
   router: state.router,
-  locale: state.locale.translate.page.upload,
+  locale: state.locale.translate,
   isFinishInProgress: state.upload.uploadFinish.isRunning,
   uploadInfo: state.upload.object,
   uploadFileProgress: state.upload.uploadFile,

@@ -174,8 +174,8 @@ export default class UploadContent extends React.Component {
         key={order}
         isComplete={isComplete}
         header={[
-          <span key="source-block-title">{locale.box_additional_options.TITLE}</span>,
-          <MoreInfo key="source-block-more-info" text={locale.box_additional_options.MORE_INFO_TEXT} />,
+          <span key="source-block-title">{locale.page.upload.box_additional_options.TITLE}</span>,
+          <MoreInfo key="source-block-more-info" text={locale.page.upload.box_additional_options.MORE_INFO_TEXT} />,
         ]}
       >
         <AdditionalUploadOptions
@@ -199,8 +199,8 @@ export default class UploadContent extends React.Component {
         key={order}
         isComplete={selectedStrategy !== 0}
         header={[
-          <span key="source-block-title">{locale.box_strategy.TITLE}</span>,
-          <MoreInfo key="source-block-more-info" text={locale.box_strategy.MORE_INFO_TEXT} />,
+          <span key="source-block-title">{locale.page.upload.box_strategy.TITLE}</span>,
+          <MoreInfo key="source-block-more-info" text={locale.page.upload.box_strategy.MORE_INFO_TEXT} />,
         ]}
       >
         <AvailableUploadStrategies
@@ -226,8 +226,8 @@ export default class UploadContent extends React.Component {
         key={order}
         isComplete={isComplete}
         header={[
-          <span key="source-block-title">{locale.box_upload.TITLE}</span>,
-          <MoreInfo key="source-block-more-info" text={locale.box_upload.MORE_INFO_TEXT} />,
+          <span key="source-block-title">{locale.page.upload.box_upload.TITLE}</span>,
+          <MoreInfo key="source-block-more-info" text={locale.page.upload.box_upload.MORE_INFO_TEXT} />,
         ]}
       >
         <UploadTypes
@@ -274,7 +274,7 @@ export default class UploadContent extends React.Component {
       <section className="page-upload">
         <div className="container">
           <Breadcrumbs links={breadcrumb} />
-          <PageTitle>{locale.TITLE}</PageTitle>
+          <PageTitle>{locale.page.upload.TITLE}</PageTitle>
           {this.renderFlashMessages()}
           <section className="main-upload-container">
             {
@@ -286,14 +286,14 @@ export default class UploadContent extends React.Component {
                   checked={isRepurchase}
                   onChange={this.handleChoose}
                 />
-                {locale.cimpress_designer.AGREE_WITH_TERMS}
+                {locale.page.upload.cimpress_designer.AGREE_WITH_TERMS}
               </label>
               <Button
                 onClick={this.handleUploadFinish}
                 kind="success"
                 isLoading={isFinishInProgress}
                 disabled={!canSubmit}
-              >{locale.box_upload.SEND_FILES}</Button>
+              >{locale.page.upload.box_upload.SEND_FILES}</Button>
             </section>
           </section>
           { this.renderCartItemDefinitions()}

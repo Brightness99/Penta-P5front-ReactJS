@@ -10,6 +10,7 @@ type Props = {
     originalName: string,
     pages: {}
   },
+  locale: {},
   handleRemoveFile: () => void
 }
 
@@ -55,7 +56,7 @@ export default class PreviewUploadedFile extends React.Component {
   };
 
   render() {
-    const { preview: { originalName, pages }, handleRemoveFile } = this.props;
+    const { preview: { originalName, pages }, handleRemoveFile, locale } = this.props;
     const { apiUrl } = config;
     const mappedPages = Object.keys(pages).map(x => pages[x]).slice(0, 2);
 
@@ -77,7 +78,7 @@ export default class PreviewUploadedFile extends React.Component {
             }
           </section>
           <section className="preview-footer">
-            <button className="remove-button" onClick={handleRemoveFile}><TrashIcon />Excluir arquivo</button>
+            <button className="remove-button" onClick={handleRemoveFile}><TrashIcon />{locale.form.common.CANCEL}</button>
           </section>
         </section>
       </section>
