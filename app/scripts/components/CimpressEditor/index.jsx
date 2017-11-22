@@ -19,7 +19,8 @@ type Props = {
   isSku: boolean,
   handleCanvasFinalize: (docRef) => void,
   handleOrientationChanged: (isVertical: number) => void,
-  locale: {}
+  locale: {},
+  hideSubmitButton: boolean,
 };
 
 type State = {
@@ -211,7 +212,7 @@ export default class Canvas extends React.Component {
 
   render() {
     const { isReady, showCutPreview, isOrientationChanging } = this.state;
-    const { cimpressInfo: { settings: { has_cut_view } }, isSku, locale } = this.props;
+    const { cimpressInfo: { settings: { has_cut_view } }, isSku, locale, hideSubmitButton } = this.props;
 
     return (
       <OverlaySpinner isLoading={!isReady || isOrientationChanging}>
@@ -225,6 +226,7 @@ export default class Canvas extends React.Component {
           isPreview={showCutPreview}
           handleReturnToEditor={this.hidePreview}
           handleSave={this.handleOnSave}
+          hideSubmitButton={hideSubmitButton}
         />
       </OverlaySpinner>
     );

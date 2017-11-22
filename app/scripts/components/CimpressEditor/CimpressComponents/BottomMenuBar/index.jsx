@@ -13,6 +13,7 @@ type Props = {
   handleReturnToEditor: () => void,
   hasCutPreview: boolean,
   isPreview: boolean,
+  hideSubmitButton: boolean,
   locale: {}
 }
 
@@ -62,17 +63,20 @@ export default class BottomMenuBar extends React.Component {
   );
 
   render() {
-    const { hasCutPreview, isPreview, handleReturnToEditor, locale } = this.props;
+    const { hasCutPreview, isPreview, handleReturnToEditor, locale, hideSubmitButton } = this.props;
     const { isAgree } = this.state;
     return (
       <div className="upload__canvas-schema__bottom-menu-bar">
-        <label>
-          <CheckBox
-            checked={isAgree}
-            onChange={this.handleChoose}
-          />
-          <span>Revisei e aprovo minha arte. <Link to="#">Ler mais.</Link></span>
-        </label>
+        {
+          !hideSubmitButton &&
+          <label>
+            <CheckBox
+              checked={isAgree}
+              onChange={this.handleChoose}
+            />
+            <span>Revisei e aprovo minha arte. <Link to="#">Ler mais.</Link></span>
+          </label>
+        }
         <section className="buttons-block">
           { !isPreview && this.renderPreviewButton(hasCutPreview, locale) }
           { isPreview &&
@@ -80,11 +84,14 @@ export default class BottomMenuBar extends React.Component {
             <span className="description">Voltar e editar</span>
           </button>
           }
-          <Button
-            onClick={this.saveTemplate}
-            kind="success"
-            disabled={!isAgree}
-          >Finalizar arte</Button>
+          {
+            !hideSubmitButton &&
+            <Button
+              onClick={this.saveTemplate}
+              kind="success"
+              disabled={!isAgree}
+            >Finalizar arte</Button>
+          }
         </section>
       </div>
     );

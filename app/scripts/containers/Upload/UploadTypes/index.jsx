@@ -31,6 +31,7 @@ const UploadTypes = ({ uploadType,
         return (
           <CanvasSchema
             isSku={false}
+            hideSubmitButton={true}
             locale={locale}
             handleCanvasFinalize={handleCanvasFinalize}
             handleOrientationChanged={handleOrientationChanged}
@@ -40,6 +41,7 @@ const UploadTypes = ({ uploadType,
         return (
           <CanvasSchema
             isSku={true}
+            hideSubmitButton={true}
             locale={locale}
             handleCanvasFinalize={handleCanvasFinalize}
             handleOrientationChanged={handleOrientationChanged}
