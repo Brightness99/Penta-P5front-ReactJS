@@ -9,7 +9,6 @@ import {
 import UploadContent from './UploadContent';
 
 type Props = {
-  screenSize: string,
   match: {
     params: {
       slug: string,
@@ -59,7 +58,6 @@ class AccountUploadPage extends React.Component {
   render() {
     const {
       isLoading,
-      screenSize,
       isFinishInProgress,
       uploadFileProgress,
       uploadInfo,
@@ -87,7 +85,6 @@ class AccountUploadPage extends React.Component {
         locale={locale}
         uploadInfo={uploadInfo}
         uploadFileProgress={uploadFileProgress}
-        screenSize={screenSize}
         isFinishInProgress={isFinishInProgress}
         handleOrientationChanged={this.handleOrientationChanged}
         handleUploadFinish={this.handleUploadFinish}
@@ -97,7 +94,6 @@ class AccountUploadPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  screenSize: state.app.screenSize,
   isLoading: state.upload.isLoaded,
   router: state.router,
   locale: state.locale.translate.page.upload,

@@ -2,7 +2,6 @@
 import React from 'react';
 import CanvasSchema from 'components/CimpressEditor/index';
 import NormalUploadType from './NormalUploadType';
-import UploadExtraInformationPanel from '../UploadExtraInformationPanel';
 
 type Props = {
   uploadType: string,
@@ -13,8 +12,6 @@ type Props = {
   handleUploadFile: (file: { title: string, preview: {} }) => void,
   handleRemoveFile: (file: { title: string, preview: {} }) => void,
   handleOrientationChanged: (isVertical: number) => void,
-  message: string,
-  showMessage: boolean,
 }
 
 const UploadTypes = ({ uploadType,
@@ -25,8 +22,6 @@ const UploadTypes = ({ uploadType,
                        handleOrientationChanged,
                        cimpressInfo,
                        fileFormats,
-                       message,
-                       showMessage,
                      }: Props) => {
   const renderType = () => {
     switch (uploadType) {
@@ -61,10 +56,6 @@ const UploadTypes = ({ uploadType,
   return (<section className="upload-type-schemes-container">
     {
       renderType()
-    }
-    {
-      showMessage && uploadType === 'normal'
-      && <UploadExtraInformationPanel description={message} />
     }
   </section>);
 };

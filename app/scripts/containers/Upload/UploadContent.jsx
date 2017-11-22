@@ -8,14 +8,12 @@ import FlashMessage from 'components/FlashMessage';
 import MoreInfo from 'components/MoreInfo';
 import Loading from 'components/Loading';
 import { Button } from 'quarks/Inputs';
-import { isMobile } from 'utils/helpers';
 import AdditionalUploadOptions from './AdditionalUploadOptions';
 import AvailableUploadStrategies from './AvailableUploadStrategies';
 import UploadTypes from './UploadTypes';
 import CartItemDefinitionsPanel from './CartItemDefinitionsPanel';
 
 type Props = {
-  screenSize: string,
   isLoading: boolean,
   isAccount: boolean,
   isFinishInProgress: boolean,
@@ -192,7 +190,7 @@ export default class UploadContent extends React.Component {
 
   renderUploadTypeSchemes = (order: number) => {
     const { selectedStrategy, selectedAdditionalParameters } = this.state;
-    const { uploadInfo: { availableStrategies, flashMessages }, screenSize, locale } = this.props;
+    const { uploadInfo: { availableStrategies }, locale } = this.props;
     const showStep = !!selectedAdditionalParameters || order === 1;
     return (
       showStep &&
@@ -209,8 +207,6 @@ export default class UploadContent extends React.Component {
           availableStrategies={availableStrategies}
           locale={locale}
           handleSelectedStrategy={this.handleSelectedStrategy}
-          showMessage={!(isMobile(screenSize) || selectedStrategy > 1) && flashMessages[0]}
-          message={flashMessages[0] && flashMessages[0].content}
         />
       </FunnelBlock>
     );
@@ -218,13 +214,7 @@ export default class UploadContent extends React.Component {
 
   renderFileUploadBlock = (order: number) => {
     const { selectedStrategy, uploadedFiles, fileFormats, documentReferenceId } = this.state;
-    const {
-      uploadInfo: {
-        globalFlags: { upload_type }, cimpressInfo, flashMessages,
-      },
-      screenSize,
-      locale,
-    } = this.props;
+    const { uploadInfo: { globalFlags: { upload_type }, cimpressInfo }, locale } = this.props;
     const showStep = selectedStrategy > 1;
     const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2)
       || uploadedFiles.length > 0
@@ -250,8 +240,6 @@ export default class UploadContent extends React.Component {
           handleUploadFile={this.handleUploadFile}
           handleRemoveFile={this.handleRemoveFile}
           handleOrientationChanged={this.handleOrientationChanged}
-          showMessage={!(isMobile(screenSize) || isComplete) && flashMessages[0]}
-          message={flashMessages[0] && flashMessages[0].content}
         />
       </FunnelBlock>
     );
