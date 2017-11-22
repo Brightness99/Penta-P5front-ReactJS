@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { EyeEmptyIcon } from 'components/Icons';
 import { CheckBox } from 'components/Input';
 import { Button } from 'quarks/Inputs';
+import cimpress from 'vendor/cimpress';
 
 type Props = {
   handleSave: (data) => void,
@@ -31,7 +32,7 @@ export default class BottomMenuBar extends React.Component {
 
   saveTemplate = () => {
     const { handleSave, handleSaveError } = this.props;
-    global.designer.saveDocumentToUds().then(
+    cimpress.saveTemplate().then(
       (templateResponse) => handleSave(templateResponse.documentReferenceUrl),
       handleSaveError
     );
@@ -39,23 +40,7 @@ export default class BottomMenuBar extends React.Component {
 
   previewTemplate = () => {
     const { handlePreview } = this.props;
-    const preview1 = {
-      size: {
-        width: 500,
-      },
-      page: 1,
-    };
-    const preview2 = {
-      size: {
-        width: 500,
-      },
-      page: 2,
-    };
-
-    Promise.all([
-      global.designer.preview.getPreview(preview1),
-      global.designer.preview.getPreview(preview2),
-    ]).then(
+    cimpress.getPreview().then(
       (urls) => {
         handlePreview(urls);
       }
