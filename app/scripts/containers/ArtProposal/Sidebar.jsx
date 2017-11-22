@@ -52,16 +52,16 @@ export class Sidebar extends React.Component {
     let itemMark = null;
     if (Object.getOwnPropertyNames(proposals).length !== 0) {
       const length = proposals.length;
-      itemMark = proposals.map((item, index) => (
-        <li key={`briefing-item-${index.toString()}`}>
+      itemMark = (
+        <li key={`briefing-item-${length.toString()}`}>
           <a
-            onClick={() => this.handleClick(proposals.length + index)}
-            className={(proposals.length + index === activeIndex) ? 'is-active' : ''}
+            onClick={() => this.handleClick(length)}
+            className={(proposals.length === activeIndex) ? 'is-active' : ''}
           >
-            <span>BRIEFING INICIAL {length - index}</span>
+            <span>BRIEFING INICIAL</span>
           </a>
         </li>
-      ));
+      );
     }
     return itemMark;
   }

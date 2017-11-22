@@ -37,7 +37,7 @@ export class ArtProposal extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { match: { params: { orderItemId } }, dispatch } = this.props;
     this.handleBreadcrumbs();
     dispatch(proposalsFetch(order_item_id));
   }
@@ -59,7 +59,7 @@ export class ArtProposal extends React.Component {
   static state: State;
 
   handleBreadcrumbs = () => {
-    const { setBreadcrumbs, match: { params: { orderNumber } } } = this.props;
+    const { setBreadcrumbs, match: { params: { orderNumber, orderItemId } } } = this.props;
 
     if (typeof setBreadcrumbs === 'function') {
       setBreadcrumbs([
@@ -72,7 +72,7 @@ export class ArtProposal extends React.Component {
           url: `/minha-conta/pedidos/${orderNumber}`,
         },
         {
-          title: 'Proposta de art',
+          title: `Pedido nº' ${orderItemId} - Proposta de art`,
         },
       ]);
     }
@@ -100,12 +100,14 @@ export class ArtProposal extends React.Component {
     const { activeIndex } = this.state;
     let sideBar = null;
     console.log('artCreation in the index ======>', artCreation);
-
+    const label = (artCreation.proposals.list.length === 0) ?
+      'There isn\'t any proposal' :
+      'Acompanhe a criação da sua arte';
     return (
       <div className="container">
         <div className="header-artproposal">
           <p className="title">PROPOSTA DE ARTE</p>
-          <p className="destitle">Acompanhe a criação da sua arte</p>
+          <p className="destitle">{label}</p>
         </div>
         {
           (artCreation.proposals.isLoaded) ?
@@ -128,25 +130,24 @@ export class ArtProposal extends React.Component {
 
   renderContainer() {
     const { app: { screenSize }, artCreation } = this.props;
+
     const { activeIndex } = this.state;
-    let renderContainerMark;
-    if (activeIndex < artCreation.proposals.list.length) {
-      renderContainerMark = (
+    const renderContainerMark = (activeIndex === artCreation.proposals.list.length) ?
+      (
+        <BriefingContent
+          activeIndex={this.state.activeIndex}
+          proposals={artCreation.proposals.list}
+          screenSize={screenSize}
+        />
+      ) :
+      (artCreation.proposals.list.length !== 0) &&
+      (
         <ArtProposalContent
           activeIndex={this.state.activeIndex}
           proposals={artCreation.proposals.list}
           screenSize={screenSize}
         />
       );
-    } else {
-      renderContainerMark = (
-        <BriefingContent
-          activeIndex={this.state.activeIndex}
-          proposals={artCreation.proposals.list}
-          screenSize={screenSize}
-        />
-      );
-    }
 
     return renderContainerMark;
   }

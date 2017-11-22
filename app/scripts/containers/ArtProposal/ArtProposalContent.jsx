@@ -147,10 +147,10 @@ export class ArtProposalContent extends React.Component {
     if (isObject(proposal)) {
       const proposalTitle = `Proposta ${proposals.length - activeIndex}`;
 
-      const customerProposalItemMark = (proposal.customer_message == null) ?
-        null :
-        (<ProposalItem proposal={proposal} type={'customer'} />);
-      const waitingMark = (proposal.status === 'waiting_customer') ?
+      const customerProposalItemMark = (proposal && proposal.customer_message) ?
+        (<ProposalItem proposal={proposal} type={'customer'} />) :
+        null;
+      const waitingMark = (proposal && proposal.status === 'waiting_customer') ?
       //const waitingMark = (true) ?
         (
           <div>
@@ -228,20 +228,20 @@ export class ArtProposalContent extends React.Component {
               <div className="container-right">
                 <div className="container-status">
                   <p className="sidetitle regular">Última alteração</p>
-                  <p className="sidetitle">{proposal.updated_at}</p>
+                  <p className="sidetitle">{proposal && proposal.updated_at}</p>
                 </div>
                 <div className="container-status">
                   <p className="sidetitle regular">Status</p>
-                  <label className={`status-${proposal.status}`} >
+                  <label className={`status-${proposal && proposal.status}`} >
                     <StatusIcon />
-                    <p className="statuslabel">{proposal.status}</p>
+                    <p className="statuslabel">{proposal && proposal.status}</p>
                   </label>
                 </div>
               </div>
             </div>
             <p className="subtitle">Alteração solicitada</p>
             {customerProposalItemMark}
-            <ProposalItem proposal={proposal} type={'designer'} />
+            {proposal && <ProposalItem proposal={proposal} type={'designer'} />}
             {waitingMark}
           </div>
         </div>
@@ -259,10 +259,10 @@ export class ArtProposalContent extends React.Component {
     let renderMark = null;
     const proposalTitle = `Proposta ${proposals.length - activeIndex}`;
 
-    const customerProposalItemMark = (proposal.customer_message == null) ?
-      null :
-      (<ProposalItem proposal={proposal} type={'customer'} />);
-    const waitingMark = (proposal.status === 'waiting_customer') ?
+    const customerProposalItemMark = (proposal && proposal.customer_message) ?
+      (<ProposalItem proposal={proposal} type={'customer'} />) :
+      null;
+    const waitingMark = (proposal && proposal.status === 'waiting_customer') ?
     //const waitingMark = (true) ?
       (
         <div>
@@ -340,20 +340,20 @@ export class ArtProposalContent extends React.Component {
             <div className="container-right">
               <div className="container-status">
                 <p className="sidetitle regular">Última alteração</p>
-                <p className="sidetitle">{proposal.updated_at}</p>
+                <p className="sidetitle">{proposal && proposal.updated_at}</p>
               </div>
               <div className="container-status">
                 <p className="sidetitle regular">Status</p>
-                <label className={`status-${proposal.status}`} >
+                <label className={`status-${proposal && proposal.status}`} >
                   <StatusIcon />
-                  <p className="statuslabel">{proposal.status}</p>
+                  <p className="statuslabel">{proposal && proposal.status}</p>
                 </label>
               </div>
             </div>
           </div>
           <p className="subtitle">Alteração solicitada</p>
           {customerProposalItemMark}
-          <ProposalItem proposal={proposal} type={'designer'} />
+          {proposal && <ProposalItem proposal={proposal} type={'designer'} />}
           {waitingMark}
         </div>
       </div>
