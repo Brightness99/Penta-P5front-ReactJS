@@ -199,6 +199,15 @@ export class CustomerData extends React.Component {
     ];
     keys = keys.concat(this.getAdditionalKeys());
 
+    if (input === 'id_state_registration' && value === '0') {
+      this.setState({
+        state_registration: {
+          valid: true,
+          value: '',
+        },
+      });
+    }
+
     keys.forEach((key) => {
       if (this.state[key].valid !== true && key !== input) {
         canSubmit = false;
@@ -232,7 +241,7 @@ export class CustomerData extends React.Component {
           onSubmit={this.handleSubmit}
         />
         <h3 className="atm-myorder-title mar-top-20">{locale.CHANGE_PASSWORD}</h3>
-        <form className="org-checkout-content-data">
+        <form className="org-customer-data-form">
           <Ninput
             type="password"
             name="current_password"

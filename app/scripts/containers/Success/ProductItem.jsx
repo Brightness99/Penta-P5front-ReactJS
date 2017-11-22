@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import { shouldComponentUpdate, isMobile } from 'utils/helpers';
 import { IntlMoney, IntlDate } from 'components/Intl';
 import WarningMessage from './WarningMessage';
@@ -17,13 +18,27 @@ export class ProductItem extends React.Component {
 
   static props: Props;
 
+  state = {
+    imageAspect: 'width',
+  };
+
+  handleProductImageSize = ({ target: img }) => {
+    if (img.width < img.height) {
+      this.setState({
+        imageAspect: 'height',
+      });
+    }
+  };
+
   renderDesktop() {
     const { item, handleShowingModal } = this.props;
+    const { imageAspect } = this.state;
+
     return (
       <div className="product-item-row">
         <div className="product-item-col-product">
           {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img className="preview" src={item.info.thumbnail} alt="Product" />}
+          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
@@ -35,11 +50,11 @@ export class ProductItem extends React.Component {
         <div className="product-item-col product-item-col-delivery">
           <div><IntlDate>{item.info.expected_delivery_date}</IntlDate></div>
           <div>{item.delivery_zipcode.label}: {item.delivery_zipcode.value}</div>
-          <div>
+          {(item.info.type !== 'upload' || item.info.upload_date) && <div>
             <WarningMessage>
               <b>{item.upload_message && item.upload_message.label}</b>
             </WarningMessage>
-          </div>
+          </div>}
         </div>
         <div className="product-item-col product-item-col-amount">
           <div>{item.info.quantity}</div>
@@ -53,11 +68,12 @@ export class ProductItem extends React.Component {
 
   renderMobile() {
     const { item, handleShowingModal } = this.props;
+    const { imageAspect } = this.state;
     return (
       <div className="product-item-row">
         <div className="product-item-col product-item-col-product">
           {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img className="preview" src={item.info.thumbnail} alt="Product" />}
+          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
