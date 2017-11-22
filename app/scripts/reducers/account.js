@@ -24,6 +24,7 @@ export const accountState = {
     isRunning: false,
     isLoaded: false,
   },
+  senderAddressRequest: {},
 };
 
 export default {
@@ -466,6 +467,35 @@ export default {
         loyalty: {
           isRunning: false,
           isLoaded: false,
+          error: action.payload,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST](state) {
+      return {
+        ...state,
+        senderAddressRequest: {
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST_SUCCESS](state, action) {
+      return {
+        ...state,
+        senderAddressRequest: {
+          message: action.payload,
+          isRunning: false,
+          isLoaded: true,
+        },
+      };
+    },
+    [AccountConstants.ACCOUNT_SENDER_ADDRESS_REQUEST_FAILURE](state, action) {
+      return {
+        ...state,
+        senderAddressRequest: {
+          isRunning: false,
+          isLoaded: true,
           error: action.payload,
         },
       };
