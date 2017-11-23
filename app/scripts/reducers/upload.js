@@ -13,7 +13,11 @@ export type UploadState = {
   message: string,
   object: UploadInfoType,
   uploadFile: {
-    progress: number,
+    progress: {
+      name: string,
+      percent: number,
+      format: string,
+    },
     preview: {},
     isRunning: boolean,
     isUploaded: boolean,
@@ -42,7 +46,11 @@ export const uploadState: UploadState = {
   object: {},
   updatedAt: 0,
   uploadFile: {
-    progress: 0,
+    progress: {
+      name: '',
+      percent: 0,
+      format: '',
+    },
     preview: {},
     isRunning: false,
     isUploaded: false,
@@ -94,7 +102,11 @@ export default {
       return {
         ...state,
         uploadFile: {
-          progress: 0,
+          progress: {
+            name: '',
+            percent: 0,
+            format: '',
+          },
           preview: {},
           isRunning: true,
           isUploaded: false,
@@ -117,7 +129,6 @@ export default {
         ...state,
         uploadFile: {
           ...state.uploadFile,
-          progress: 100,
           isRunning: false,
           isUploaded: true,
           preview: action.payload,

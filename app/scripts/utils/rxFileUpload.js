@@ -45,7 +45,12 @@ export class RxPlupload {
       chunk_size: this.config.chunkSize,
       init: {
         UploadProgress: (up, file) => {
-          this.subject.next({ type: PluploadConstants.UPLOAD_PROGRESS, progress: file.percent });
+          this.subject.next({ type: PluploadConstants.UPLOAD_PROGRESS,
+            progress: {
+              percent: file.percent,
+              name: file.name,
+              format: file.name.split('.')[1],
+            } });
         },
         FileUploaded: (up, file, result) => {
           if (result.status === 200) {
@@ -65,8 +70,8 @@ export class RxPlupload {
     this.uploader.init();
   }
 
-  uploadFile(file: {}) {
-    this.uploader.addFile(file);
+  uploadFile(files: []) {
+    files.forEach(x => this.uploader.addFile(x));
     this.uploader.start();
     return this.subject.asObservable();
   }

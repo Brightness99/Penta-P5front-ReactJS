@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import cx from 'classnames';
 import { uploadFileRequest, uploadFileCancel } from 'actions';
 import { Button } from 'quarks/Inputs';
 import Modal from 'components/Modal';
@@ -20,11 +19,14 @@ type Props = {
   showTitle: string,
   isUploadRunning: boolean,
   isUploaded: boolean,
-  progress: boolean,
+  progress: {
+    name: string,
+    percent: number,
+    format: string,
+  },
   locale: {},
   uploadFile: (file: {}) => void,
   uploadCancel: () => void,
-  uploadedFileInfo: {}
 }
 
 type State = {
@@ -75,22 +77,18 @@ export class UploadFile extends React.Component {
   state: State;
 
   uploadFile = (files) => {
-    const file = files[0];
     const { uploadFile, fileFormats } = this.props;
-    const fileName = file.name;
-    const format = fileName.split('.').pop();
-    if (!fileFormats.includes(`.${format}`)) {
+    const formats = files.map(x => x.name.split('.').pop());
+    if (formats.some(x => !fileFormats.includes(`.${x}`))) {
       this.handleDialogOpen();
       return;
     }
     this.setState({
-      fileName,
-      fileFormat: format,
       isSelectedFileForUpload: true,
     });
 
     if (typeof uploadFile === 'function') {
-      uploadFile(file);
+      uploadFile(files);
     }
   };
 
@@ -160,16 +158,16 @@ export class UploadFile extends React.Component {
 
   renderContent = () => {
     const { progress, multiple, fileFormats, locale, isUploadRunning } = this.props;
-    const { isSelectedFileForUpload, fileName, fileFormat } = this.state;
+    const { isSelectedFileForUpload } = this.state;
 
     if (isSelectedFileForUpload) {
       return (
         <section className="upload-file-content active">
           <UploadProgress
-            progress={progress}
+            progress={progress.percent}
             locale={locale}
-            fileName={fileName}
-            fileFormat={fileFormat}
+            fileName={progress.name}
+            fileFormat={progress.format}
             handleCancelUploading={this.handleCancelUploading}
           />
         </section>);
