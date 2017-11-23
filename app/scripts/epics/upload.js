@@ -123,7 +123,7 @@ export function uploadFileRequest(action$) {
           case PluploadConstants.UPLOAD_SUCCESS:
             return {
               type: UploadConstants.UPLOAD_FILE_SUCCESS,
-              payload: JSON.parse(data.response),
+              payload: data.response,
               meta: { updatedAt: getUnixtime() },
             };
           case PluploadConstants.UPLOAD_FAILURE:

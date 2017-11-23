@@ -10,8 +10,7 @@ import UploadProgress from './UploadProgress';
 import UploadFileContainer from './UploadFileContainer';
 
 type Props = {
-  handleUploadFile: (file: { title: string, preview: {} }) => void,
-  handleRemoveFile: (file: { title: string, preview: {} }) => void,
+  handleFiles: (files: { title: string, previews: [] }) => void,
   fileFormats: Array<string>,
   multiple: boolean,
   preview: {},
@@ -35,12 +34,13 @@ type State = {
   fileName: string,
   fileFormat: string,
   isShowPreview: boolean,
-  preview: {
+  preview: Array<{
     originalName: string,
     basename: string,
     pages: Array<{ preview_big: string, preview_small: string }>,
+    timeToken: number,
     thumbnail: string
-  }
+  }>
 }
 
 export class UploadFile extends React.Component {
@@ -50,26 +50,28 @@ export class UploadFile extends React.Component {
     this.state = {
       isSelectedFileForUpload: false,
       isShowPreview: false,
+      preview: [],
     };
   }
 
   componentWillReceiveProps({ isUploaded, preview, fileFormats }) {
-    const { handleUploadFile, title } = this.props;
+    const { handleFiles, title } = this.props;
     const { isSelectedFileForUpload, fileFormat } = this.state;
 
     if (isSelectedFileForUpload && isUploaded) {
+      const previews = [...this.state.preview, ...preview];
       this.setState({
         isSelectedFileForUpload: false,
         isShowPreview: true,
-        preview,
+        preview: previews,
       });
-      if (handleUploadFile && typeof handleUploadFile === 'function') {
-        handleUploadFile({ title, preview });
+      if (handleFiles && typeof handleFiles === 'function') {
+        handleFiles({ title, previews });
       }
     }
 
     if (fileFormat && !fileFormats.includes(`.${fileFormat}`)) {
-      this.handleRemoveFile();
+      this.handleFiles({ title, previews: [] });
     }
   }
 
@@ -92,18 +94,17 @@ export class UploadFile extends React.Component {
     }
   };
 
-  handleRemoveFile = () => {
-    const { preview } = this.state;
-    const { handleRemoveFile, title } = this.props;
-
+  handleRemoveFile = (preview) => {
+    const { handleFiles, title } = this.props;
+    const previews = this.state.preview.filter(x => x.timeToken !== preview.timeToken);
     this.setState({
       isSelectedFileForUpload: false,
-      isShowPreview: false,
-      preview: {},
+      isShowPreview: previews.length > 0,
+      preview: [...previews],
     });
 
-    if (handleRemoveFile && typeof handleRemoveFile === 'function') {
-      handleRemoveFile({ title, preview });
+    if (handleFiles && typeof handleFiles === 'function') {
+      handleFiles({ title, previews: previews });
     }
   };
 
@@ -112,7 +113,6 @@ export class UploadFile extends React.Component {
     this.setState({
       isSelectedFileForUpload: false,
       isShowPreview: false,
-      preview: {},
     });
     if (uploadCancel && typeof uploadCancel === 'function') {
       uploadCancel();
@@ -194,12 +194,29 @@ export class UploadFile extends React.Component {
     );
   }
 
-  render() {
-    const { isShowPreview, preview } = this.state;
+  renderPreviews() {
+    const { preview } = this.state;
     const { locale } = this.props;
-    return isShowPreview ?
-      <PreviewUploadedFile locale={locale} preview={preview} handleRemoveFile={this.handleRemoveFile} /> :
-      this.renderUploadContainer();
+
+    return preview.map(x => (
+          <PreviewUploadedFile
+            key={x.timeToken}
+            locale={locale}
+            preview={x}
+            handleRemoveFile={this.handleRemoveFile}
+          />));
+  }
+
+  render() {
+    const { isShowPreview } = this.state;
+    const { multiple } = this.props;
+
+    return (
+      <section className="upload-file-and-preview-container">
+        {isShowPreview && this.renderPreviews()}
+        {(!isShowPreview || multiple) && this.renderUploadContainer()}
+      </section>
+    );
   }
 }
 

@@ -89,18 +89,13 @@ export default class UploadContent extends React.Component {
     }, this.updateCanSubmit);
   };
 
-  handleUploadFile = (file: { title: string, preview: {} }) => {
-    const { uploadedFiles } = this.state;
-    this.setState({
-      uploadedFiles: [...uploadedFiles, file],
-    }, this.updateCanSubmit);
-  };
-
-  handleRemoveFile = (file: { title: string, preview: {} }) => {
-    const { uploadedFiles } = this.state;
-    this.setState({
-      uploadedFiles: [...uploadedFiles.filter(x => x.title !== file.title)],
-    }, this.updateCanSubmit);
+  handleUploadFile = (files: { title: string, previews: []}) => {
+    const uploadedFiles = this.state.uploadedFiles.filter(x => x.title !== files.title);
+    if (files.previews.length > 0) {
+      this.setState({
+        uploadedFiles: [...uploadedFiles, files],
+      }, this.updateCanSubmit);
+    }
   };
 
   handleAdditionalParameters = (parameters) => {
@@ -129,13 +124,13 @@ export default class UploadContent extends React.Component {
     const { uploadedFiles, isRepurchase, selectedStrategy, documentReferenceId, selectedAdditionalParameters } = this.state;
     const uploads = {};
     uploadedFiles.forEach((x) => {
-      uploads[x.preview.basename] = x.preview;
+      x.previews.forEach(y => {
+        uploads[y.basename] = y;
+      });
     });
-    const thumbnail = uploadedFiles.length > 0 ? uploadedFiles[0].preview.thumbnail : null;
     const result = {
       document_reference_url: documentReferenceId,
       cimpress_sku_scene: null,
-      thumbnail,
       isRepurchase,
       upload_type,
       upload_strategy: selectedStrategy,
@@ -248,8 +243,7 @@ export default class UploadContent extends React.Component {
           fileFormats={fileFormats}
           locale={locale}
           handleCanvasFinalize={this.handleCanvasFinalize}
-          handleUploadFile={this.handleUploadFile}
-          handleRemoveFile={this.handleRemoveFile}
+          handleFiles={this.handleUploadFile}
           handleOrientationChanged={this.handleOrientationChanged}
         />
       </FunnelBlock>

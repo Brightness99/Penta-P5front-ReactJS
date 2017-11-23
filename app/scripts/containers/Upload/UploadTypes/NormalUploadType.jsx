@@ -6,8 +6,7 @@ type Props = {
   multipleFiles: boolean,
   uploadTwoFiles: boolean,
   locale: {},
-  handleUploadFile: (file: {title: string, preview: {}}) => void,
-  handleRemoveFile: (file: {title: string, preview: {}}) => void,
+  handleFiles: (files: {}) => void,
   fileFormats: Array<string>,
 }
 
@@ -19,12 +18,8 @@ export default class NormalUploadType extends React.PureComponent {
 
   props: Props;
 
-  handleUploadFile = (file: {}) => {
-    this.props.handleUploadFile(file);
-  };
-
-  handleRemoveFile = (file: {}) => {
-    this.props.handleRemoveFile(file);
+  handleFiles = (file: {}) => {
+    this.props.handleFiles(file);
   };
 
   renderUploadFiles() {
@@ -33,8 +28,7 @@ export default class NormalUploadType extends React.PureComponent {
     if (uploadTwoFiles) {
       return [
         <UploadFile
-          handleUploadFile={this.handleUploadFile}
-          handleRemoveFile={this.handleRemoveFile}
+          handleFiles={this.handleFiles}
           fileFormats={fileFormats}
           locale={locale}
           showTitle={true}
@@ -42,8 +36,7 @@ export default class NormalUploadType extends React.PureComponent {
           key="arte1"
         />,
         <UploadFile
-          handleUploadFile={this.handleUploadFile}
-          handleRemoveFile={this.handleRemoveFile}
+          handleFiles={this.handleFiles}
           showTitle={true}
           fileFormats={fileFormats}
           locale={locale}
@@ -55,11 +48,10 @@ export default class NormalUploadType extends React.PureComponent {
       <UploadFile
         multiple={multipleFiles}
         fileFormats={fileFormats}
-        handleRemoveFile={this.handleRemoveFile}
-        handleUploadFile={this.handleUploadFile}
+        handleFiles={this.handleFiles}
         locale={locale}
         title="Arte 1"
-        key="arte1"
+        key="arte3"
       />
     );
   }

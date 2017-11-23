@@ -27,6 +27,7 @@ export class RxPlupload {
   config: Config;
   uploader;
   subject: Subject = new Subject();
+  previews = [];
 
   constructor(config: Config) {
     this.config = config;
@@ -53,11 +54,15 @@ export class RxPlupload {
             } });
         },
         FileUploaded: (up, file, result) => {
-          if (result.status === 200) {
-            this.subject.next({ type: PluploadConstants.UPLOAD_SUCCESS, response: result.response });
+          if (result.status === 200 && result.response !== '""') {
+            this.previews.push(JSON.parse(result.response));
             return;
           }
+          this.previews = [];
           this.subject.next({ type: PluploadConstants.UPLOAD_FAILURE, error: result.response });
+        },
+        UploadComplete: () => {
+          if (this.previews.length > 0) { this.subject.next({ type: PluploadConstants.UPLOAD_SUCCESS, response: this.previews }); }
         },
         FilesAdded: () => {
           /* It's needed for adding files from code */
@@ -71,12 +76,14 @@ export class RxPlupload {
   }
 
   uploadFile(files: []) {
+    this.previews = [];
     files.forEach(x => this.uploader.addFile(x));
     this.uploader.start();
     return this.subject.asObservable();
   }
 
   cancelUpload() {
+    this.previews = [];
     this.uploader.stop();
     this.uploader.splice();
     this.subject.next({ type: PluploadConstants.UPLOAD_CANCEL });
