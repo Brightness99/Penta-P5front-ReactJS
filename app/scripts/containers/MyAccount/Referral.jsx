@@ -2,13 +2,16 @@
 
 import React from 'react';
 import cx from 'classnames';
+import Slider from 'react-slick';
 import { isMobile } from 'utils/helpers';
+import { ChevronLeftIcon, ChevronRightIcon } from 'components/Icons';
 import TooltipEnhancer from 'components/TooltipEnhancer/index';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { Input } from 'quarks/Inputs';
-import { CheckIcon } from 'components/Icons';
+import Loading from 'components/Loading';
 import Modal from 'components/Modal';
 import ShareCode from 'components/ShareCodeModal';
+import { IntlMoney, IntlDate } from 'components/Intl';
 import { copyElementContentToClipboard } from 'utils/copy-util';
 
 type Props = {
@@ -18,6 +21,7 @@ type Props = {
     voucher_name: string,
   },
   sendReferralRequest: (customerId: string, emails: Array<string>) => void,
+  getReferralHistory: ({ order: string, page: number, per_page: number, sort: string }) => void,
   customerInfo: UserCustomerInfoType,
   referral: ReferralType,
   socialLoginSettingsFetch: () => void,
@@ -31,23 +35,48 @@ type Props = {
   language: string,
 };
 
+type HistoryType = {
+  page: number,
+  per_page: number,
+  order: ReferralHistoryOrder,
+  sort: ReferralHistorySort,
+};
+
 type State = {
   showCopiedTooltip: boolean,
   showShareModal: boolean,
+  history: HistoryType,
 };
 
 export class Referral extends React.PureComponent<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       showCopiedTooltip: false,
       showShareModal: false,
+      history: {
+        page: 1,
+        per_page: 10,
+        order: 'desc',
+        sort: 'created_at',
+      },
     };
   }
+
 
   static defaultProps = {
     screenSize: 'xs',
   };
+
+  componentDidMount() {
+    this.getHistory(this.state.history);
+  }
+
+  getHistory = (history: HistoryType) => {
+    const { getReferralHistory } = this.props;
+    getReferralHistory(history);
+  };
+
   static props: Props;
   static state: State;
 
@@ -67,6 +96,13 @@ export class Referral extends React.PureComponent<Props, State> {
     this.handleShowingModal();
   };
 
+  handleChangeHistoryTable = (name: ReferralHistoryFieldName, value: ReferralHistoryFieldValue) => {
+    const newHistory = Object.assign({}, this.state.history);
+    newHistory[name] = value;
+    this.getHistory(newHistory);
+    this.setState({ history: newHistory });
+  };
+
   handleCopyLink = () => {
     const isSuccessful = copyElementContentToClipboard('voucher_code');
     const { voucher_id, voucher_name } = this.props.voucher;
@@ -77,31 +113,88 @@ export class Referral extends React.PureComponent<Props, State> {
   };
 
   renderList() {
+    const { referral } = this.props;
+    const sliderSettings = {
+      arrows: false,
+      dots: true,
+      infinite: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+    const data = referral.data[this.state.history.page] || [];
+
     return (
-      <div className="mol-list-mobile">
-        <div className="atm-content-list">
-          <p className="qrk-title-list">Email</p>
-          <p className="qrk-text-list">adriano_rod_oliveira@gmail.com</p>
-          <p className="qrk-title-list">Atualizado</p>
-          <p className="qrk-text-list">15/05/2017</p>
-          <p className="qrk-title-list">Créditos</p>
-          <p className="qrk-text-list">R$5,00</p>
-        </div>
-        <div className="atm-content-list">
-          <p className="qrk-title-list">Email</p>
-          <p className="qrk-text-list">adriano_rod_oliveira@gmail.com</p>
-          <p className="qrk-title-list">Atualizado</p>
-          <p className="qrk-text-list">15/05/2017</p>
-          <p className="qrk-title-list">Créditos</p>
-          <p className="qrk-text-list">R$5,00</p>
-        </div>
-      </div>
+      <section className="mol-list-mobile">
+        {
+          data.length > 0 &&
+          <Slider {...sliderSettings}>
+            {
+              !referral.isRunning ?
+                data.map(history =>
+                  <section
+                    key={`${history.voucher_used_by_email_id}-${history.voucher_id}`}
+                    className="atm-content-list"
+                  >
+                    <span className="qrk-title-list">{'Data'}</span>
+                    <IntlDate className="qrk-text-list">{history.voucher_used_on_date}</IntlDate>
+                    <span className="qrk-title-list">{'E-mail'}</span>
+                    <span className="qrk-text-list">{history.voucher_used_by_email_id}</span>
+                    <span className="qrk-title-list">{'Voucher value'}</span>
+                    <span className="qrk-text-list">{history.voucher_name}</span>
+                    <span className="qrk-title-list">{'Valor'}</span>
+                    <IntlMoney className="qrk-text-list voucher-value">{+history.voucher_amount}</IntlMoney>
+                    <span className="qrk-title-list">{'Data de validade'}</span>
+                    <IntlDate className="qrk-text-list">{history.voucher_expiry_date}</IntlDate>
+                  </section>
+                ) : <Loading />
+            }
+          </Slider>
+        }
+        {data.length > 0 && this.renderPagination()}
+      </section>
     );
   }
 
+  renderPagination = () => {
+    const { referral } = this.props;
+    const totalCount = +referral.total_count || 0;
+    const { page, per_page: perPage } = this.state.history;
+
+    return (
+      totalCount !== 0 &&
+      <nav className="referral-pagination">
+        <button
+          onClick={() => page > 1 && this.handleChangeHistoryTable('page', page - 1)}
+        >
+          <ChevronLeftIcon />
+        </button>
+        {[...new Array(Math.ceil(totalCount / perPage)).keys()].map(i =>
+          <li
+            key={`${i + 1}-page`}
+          >
+            <button
+              className={cx('referral-pagination__page-number', page === (i + 1) && 'active')}
+              onClick={() => this.handleChangeHistoryTable('page', i + 1)}
+            >
+              {i + 1}
+            </button>
+          </li>
+        )}
+        <button
+          onClick={() => page < Math.ceil(totalCount / perPage) && this.handleChangeHistoryTable('page', page + 1)}
+        >
+          <ChevronRightIcon />
+        </button>
+      </nav>
+    );
+  };
+
   render() {
-    const { showCopiedTooltip, showShareModal } = this.state;
-    const { screenSize, voucher, facebook, customerInfo, language } = this.props;
+    const { showCopiedTooltip, showShareModal, history } = this.state;
+    const {
+      screenSize, voucher, facebook,
+      customerInfo, language, referral,
+    } = this.props;
     const { voucher_id, voucher_name } = voucher;
     const breadcrumb = [
       {
@@ -121,10 +214,15 @@ export class Referral extends React.PureComponent<Props, State> {
         {'copiar'}
       </button>
     );
+
+    const isMobileScreen = isMobile(screenSize);
+    const { page } = history;
+    const data = referral.data[page] || [];
+
     return (
-      <div className="tpl-referral">
-        {!isMobile(screenSize) && <Breadcrumbs links={breadcrumb} />}
-        <div className={cx(isMobile(screenSize) && 'container')}>
+      <section className="tpl-referral">
+        {!isMobileScreen && <Breadcrumbs links={breadcrumb} />}
+        <section className={cx(isMobileScreen && 'container')}>
           {
             showShareModal &&
             <section className="modal-referral">
@@ -141,15 +239,17 @@ export class Referral extends React.PureComponent<Props, State> {
               </Modal>
             </section>
           }
-          <h2 className="title-myaccount">Minha conta</h2>
-          <div className="org-referral-share">
-            <div className="mol-referral-text">
-              <h4 className="qrk-title-text">Indicações</h4>
-              <p className="qrk-text">Indique a Printi para seus amigos, a cada um que comprar, você e ele ganham
-                créditos para trocar por nossos produtos</p>
-            </div>
-            <div className="mol-content-share">
-              <p className="qrk-text-share">Compartilhe seu código promocional:</p>
+          <h2 className="title-myaccount">{'Minha conta'}</h2>
+          <section className="org-referral-share">
+            <article className="mol-referral-text">
+              <h4 className="qrk-title-text">{'Indicações'}</h4>
+              <p className="qrk-text">
+                {`Indique a Printi para seus amigos, a cada um que comprar, você e ele ganham
+                créditos para trocar por nossos produtos`}
+              </p>
+            </article>
+            <section className="mol-content-share">
+              <p className="qrk-text-share">{'Compartilhe seu código promocional:'}</p>
               <form
                 className="mol-share"
                 onSubmit={this.handleSubmit}
@@ -176,46 +276,55 @@ export class Referral extends React.PureComponent<Props, State> {
                   {'Compartilhar'}
                 </button>
               </form>
-            </div>
-          </div>
-          <div className="org-table-referral">
-            <p className="qrk-text">Até o momento você ganhou:</p>
-            <p className="qrk-value">R$45,00</p>
-            {isMobile(screenSize) && (this.renderList())}
-            {!isMobile(screenSize) && (
-              <div className="mol-content-table">
+            </section>
+          </section>
+          <section className="org-table-referral">
+            <p className="qrk-text">{'Descontos que você ganhou:'}</p>
+            <IntlMoney className="qrk-value">
+              {+referral.total_voucher_amount || 0}
+            </IntlMoney>
+            {isMobileScreen && (this.renderList())}
+            {!isMobileScreen && (
+              <section className="mol-content-table">
                 <ul className="atm-head-table">
-                  <li>Email</li>
-                  <li>Atualizado</li>
-                  <li>Créditos</li>
+                  <li>{'Data'}</li>
+                  <li>{'E-mail'}</li>
+                  <li>{'Voucher value'}</li>
+                  <li>{'Valor'}</li>
+                  <li>{'Data de validade'}</li>
                 </ul>
-                <div className="atm-content">
-                  <div className="qrk-content-item">
-                    <p>adriano_rod_oliveira@gmail.com</p>
-                  </div>
-                  <div className="qrk-content-item">
-                    <p>15/05/2017</p>
-                  </div>
-                  <div className="qrk-content-item color-credit">
-                    <p>R$5,00</p>
-                    <CheckIcon />
-                  </div>
-                  <div className="qrk-content-item">
-                    <p>adriano_rod_oliveira@gmail.com</p>
-                  </div>
-                  <div className="qrk-content-item">
-                    <p>15/05/2017</p>
-                  </div>
-                  <div className="qrk-content-item color-credit">
-                    <p>R$5,00</p>
-                    <CheckIcon />
-                  </div>
-                </div>
-              </div>
+                <section className="atm-content">
+                  {data.length > 0 || !referral.isRunning
+                    ? data.map(voucherData =>
+                      <section
+                        key={`${voucherData.voucher_id}-${voucherData.voucher_used_by_email_id}`}
+                        className="voucher-history__row-content"
+                      >
+                        <section className="qrk-content-item">
+                          <IntlDate>{voucherData.voucher_used_on_date}</IntlDate>
+                        </section>
+                        <section className="qrk-content-item">
+                          <p>{voucherData.voucher_used_by_email_id}</p>
+                        </section>
+                        <section className="qrk-content-item">
+                          <p>{voucherData.voucher_name}</p>
+                        </section>
+                        <section className="qrk-content-item color-credit">
+                          <IntlMoney>{+voucherData.voucher_amount}</IntlMoney>
+                        </section>
+                        <section className="qrk-content-item">
+                          <IntlDate>{voucherData.voucher_expiry_date}</IntlDate>
+                        </section>
+                      </section>
+                    ) : <Loading />
+                  }
+                </section>
+              </section>
             )}
-          </div>
-        </div>
-      </div>
+            {!isMobileScreen && this.renderPagination()}
+          </section>
+        </section>
+      </section>
     );
   }
 }

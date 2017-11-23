@@ -28,18 +28,24 @@ export default class CartFooter extends React.Component {
   }
 
   componentWillUnmount() {
-    document.querySelector('body').classList.remove('has-stick-footer');
+    document.querySelector('body')
+    .classList
+    .remove('has-stick-footer');
   }
 
   handleResize = () => {
     const { screenSize } = this.props;
 
     if (isMobile(screenSize)) {
-      document.querySelector('body').classList.add('has-stick-footer');
+      document.querySelector('body')
+      .classList
+      .add('has-stick-footer');
     } else {
-      document.querySelector('body').classList.remove('has-stick-footer');
+      document.querySelector('body')
+      .classList
+      .remove('has-stick-footer');
     }
-  }
+  };
 
   static props: Props;
 
