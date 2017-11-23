@@ -29,6 +29,7 @@ type Props = {
     },
   },
   language: string,
+  domain: string,
 };
 
 type State = {
@@ -101,7 +102,7 @@ export class Referral extends React.PureComponent<Props, State> {
 
   render() {
     const { showCopiedTooltip, showShareModal } = this.state;
-    const { screenSize, voucher, facebook, customerInfo, language } = this.props;
+    const { screenSize, voucher, facebook, customerInfo, language, domain } = this.props;
     const { voucher_id, voucher_name } = voucher;
     const breadcrumb = [
       {
@@ -137,6 +138,7 @@ export class Referral extends React.PureComponent<Props, State> {
                   facebook={facebook}
                   language={language}
                   screenSize={screenSize}
+                  domain={domain}
                 />
               </Modal>
             </section>
