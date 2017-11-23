@@ -37,8 +37,10 @@ export class ProductItem extends React.Component {
     return (
       <div className="product-item-row">
         <div className="product-item-col-product">
-          {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
+          <div className="image-container">
+            {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
+            {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
+          </div>
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>
@@ -50,7 +52,7 @@ export class ProductItem extends React.Component {
         <div className="product-item-col product-item-col-delivery">
           <div><IntlDate>{item.info.expected_delivery_date}</IntlDate></div>
           <div>{item.delivery_zipcode.label}: {item.delivery_zipcode.value}</div>
-          {(item.info.type !== 'upload' || item.info.upload_date) && <div>
+          {item.upload_message && item.upload_message.label && item.upload_message.label !== '' && <div>
             <WarningMessage>
               <b>{item.upload_message && item.upload_message.label}</b>
             </WarningMessage>
@@ -72,8 +74,10 @@ export class ProductItem extends React.Component {
     return (
       <div className="product-item-row">
         <div className="product-item-col product-item-col-product">
-          {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-          {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
+          <div className="image-container">
+            {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
+            {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
+          </div>
           <div>
             <div>{item.info.alias}</div>
             <div>{item.info.type_alias}</div>

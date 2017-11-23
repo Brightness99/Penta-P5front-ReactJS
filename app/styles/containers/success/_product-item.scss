@@ -38,8 +38,11 @@
     margin: 35px 0px 25px;
     color: #151617;
     .sub-total-row {
-      display: flex;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      @include lg {
+        display: flex;
+        margin-bottom: 10px;
+      }
       .key {
         width: 120px;
         font-size: 13px;
@@ -95,9 +98,14 @@
     @include is-only {
       width: 100%;
     }
+    .image-container {
+      flex: 0 0 100px;
+      @include lg {
+        flex: 0 0 145px;
+      }
+    }
     img {
       width: 130px;
-      margin-right: 15px;
       align-self: start;
       @include is-only {
         width: 85px;
