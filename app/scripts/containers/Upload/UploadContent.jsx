@@ -54,10 +54,12 @@ export default class UploadContent extends React.Component {
   state: State;
 
   updateCanSubmit = () => {
-    const { selectedStrategy, uploadedFiles, isAgree } = this.state;
+    const { selectedStrategy, uploadedFiles, isAgree, isRepurchase } = this.state;
     const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
     const normalFunnelValidation = (selectedStrategy === 1 || (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0);
-    const canSubmit = (upload_type === 'normal' && normalFunnelValidation) || (upload_type !== 'normal' && selectedStrategy > 0 && isAgree);
+    const canSubmit = ((upload_type === 'normal' && normalFunnelValidation)
+                      || (upload_type !== 'normal' && selectedStrategy > 0 && isAgree))
+                      && isRepurchase;
 
     this.setState({ canSubmit });
   };
@@ -66,14 +68,14 @@ export default class UploadContent extends React.Component {
     const { isRepurchase } = this.state;
     this.setState({
       isRepurchase: !isRepurchase,
-    });
+    }, this.updateCanSubmit);
   };
 
   handleAgreeChoose = () => {
     const { isAgree } = this.state;
     this.setState({
       isAgree: !isAgree,
-    });
+    }, this.updateCanSubmit);
   };
 
   handleCanvasFinalize = (documentRef: string) => {
@@ -288,7 +290,7 @@ export default class UploadContent extends React.Component {
           checked={isAgree}
           onChange={this.handleAgreeChoose}
         />
-        <span>{locale.page.upload.cimpress_designer.MUST_AGREE_WITH_TERMS} </span>
+        <span>{locale.page.upload.cimpress_designer.MUST_AGREE_WITH_TERMS}</span>
       </label>];
   }
 
