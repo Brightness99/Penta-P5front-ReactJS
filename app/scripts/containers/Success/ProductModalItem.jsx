@@ -32,8 +32,10 @@ export class ProductModalItem extends React.Component {
         <h3>DETALHES DO PRODUTO</h3>
         <div className="product-item-row">
           <div className="product-item-col-product modal-content">
-            {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
-            {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
+            <div className="image-container">
+              {(item.info.thumbnail === '' || !item.info.thumbnail) && <img className="preview" src={require('assets/media/images/blue-logo.png')} alt="Product" />}
+              {item.info.thumbnail !== '' && item.info.thumbnail && <img onLoad={this.handleProductImageSize} className={cx('preview', imageAspect === 'height' && 'fit-height')} src={item.info.thumbnail} alt="Product" />}
+            </div>
             <div>
               <p><b>{item.info.alias}</b></p>
               <p className="content"><span>{item.info.parts[0].part}</span>: {item.info.parts[0].opt_string}</p>
