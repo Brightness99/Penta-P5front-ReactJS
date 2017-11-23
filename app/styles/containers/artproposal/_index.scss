@@ -19,6 +19,14 @@
       display: flex;
       flex-direction: row;
     }
+    .atm-accordion-item-body {
+      &.atm-accordion-sub-item-body {
+        height: auto !important;
+      }
+      &.atm-accordion-sub-item-body-close {
+        height: 0 !important;
+      }
+    }
     .container-sidebarproposal {
       //height: 100%;
       box-sizing: border-box;
@@ -383,6 +391,157 @@
           }
         }
       }
+      .bg-briefing {
+        background: $color-grayWhite;
+      }
+      .container .brief-header .atm-box-radio:hover .tooltip {
+        display: none;
+      }
     }
   }
+
+  .briefing-container {
+
+    .bg-briefing {
+      background-color: $color-white;
+      padding-bottom: 1rem;
+    }
+    .container-createBriefing, .container-reproduction {
+      padding-top: 2rem;
+    }
+    .text-bold-briefing {
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-sm;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .text-italic-briefing {
+      font-family: $font-family-open-sans-regular;
+      font-size: $font-size-xs;
+      font-style: italic;
+      &.margin-b {
+        margin-bottom: 3.5rem;
+      }
+    }
+    .button-item-container {
+      width: 100%;
+      margin-bottom: 4rem;
+      .text-bold-briefing, .text-italic-briefing {
+        margin-bottom: 3rem;
+      }
+      &.no-margin {
+        margin-bottom: 0;
+      }
+    }
+    .org-checkout-content-data {
+      .input-item-container {
+        width: 100%;
+        margin-bottom: 3rem;
+      }
+      .atm-checkout-input-one, .app__qrk__input-container {
+        width: 100%;
+        @include lg {
+          width: calc(50% - 0.5rem);
+        }
+      }
+      .atm-checkout-input-full {
+        width: 100%;
+        &.textArea-height {
+          height: 15rem;
+          .app__qrk__input-label {
+            top: 32%;
+            @include lg {
+              top: 20%;
+            }
+            &--active {
+              top: 5%;
+            }
+          }
+        }
+      }
+    }
+    .app__qrk__input-container {
+      margin-top: 1rem;
+    }
+    .box-textsBriefing {
+      margin: 0 0 4rem 0;
+    }
+  }
+  .brief-header {
+    position: relative;
+    .separate-line {
+      margin: 3rem -3rem 0;
+      border-bottom: solid 1px $color-light-grey;
+    }
+    h3 {
+      text-align: center;
+    }
+    .atm-box-radio {
+      padding: 0.5rem 2rem;
+      width: calc(50% - 0.5rem);
+      font-size: $font-size-sm;
+      &:first-of-type {
+        margin-right: 0.5rem;
+      }
+      &:last-of-type {
+        margin-left: 0.5rem;
+      }
+      .tooltip {
+        position: absolute;
+        top: 6rem;
+        padding: 1.4rem 4.4rem;
+        line-height: 2.0rem;
+        text-align: center;
+        font-size: $font-size-xs;
+        background: $color-printi-blue;
+        color: white;
+        display: none;
+        &.left {
+          left: 25%;
+          right: -75%;
+        }
+        &.right {
+          right: 25%;
+          left: -75%;
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 100%;
+          width: 0; height: 0;
+          border-bottom: 8px solid #006EE3;
+          border-right: 8px solid transparent;
+          border-left: 8px solid transparent;
+        }
+      }
+      
+      &:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+        top: 6rem;
+        z-index: 999;
+        &.left {
+          left: 25%;
+          right: -75%;
+        }
+        &.right {
+          right: 25%;
+          left: -75%;
+        }
+        &.left:after {
+          left: 15%;
+        }
+        &.right:after {
+          right: 15%;
+        }
+      }
+
+      &:hover .tooltip {
+        display: block;
+      }
+    }
+
+  }
+  
 }

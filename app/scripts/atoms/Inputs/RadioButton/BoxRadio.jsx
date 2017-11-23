@@ -19,7 +19,6 @@ const BoxRadio = (props: Props) => {
 
   const handleChange = (ev) => {
     const { onChange } = props;
-
     if (typeof onChange === 'function') {
       onChange(ev);
     }

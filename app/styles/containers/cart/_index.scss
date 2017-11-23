@@ -118,6 +118,23 @@
   }
 }
 
+.atm-input-textarea {
+  @include border-radius;
+  background-color: #f8f8f8;
+  border: solid 1px #dbdddf;
+  color: $color-almostBlack;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-sm;
+  min-height: 16rem;
+  outline: none;
+  padding: 1rem;
+  width: 100%;
+
+  &::placeholder {
+    color: #c7c9cb;
+  }
+}
+
 .mol-cart-item-section-data,
 .mol-cart-item-delivery {
   align-items: flex-end;

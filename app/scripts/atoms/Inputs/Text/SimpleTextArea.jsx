@@ -15,7 +15,7 @@ type State = {
   value: string,
 };
 
-export default class SimpleText extends React.Component {
+export default class SimpleTextArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,9 +45,9 @@ export default class SimpleText extends React.Component {
     const { placeholder, className } = this.props;
     const { value } = this.state;
     return (
-      <input
+      <textarea
         type="text"
-        className={cx('atm-input-text', className)}
+        className={cx('atm-input-textarea', className)}
         value={value}
         placeholder={placeholder}
         onChange={this.handleChange}
