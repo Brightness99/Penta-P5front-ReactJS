@@ -266,3 +266,45 @@
     }
   }
 }
+
+.referral-pagination {
+  align-items: center;
+  color: $color-lightGray;
+  display: flex;
+  flex-direction: row;
+  font-family: $font-family-open-sans-regular;
+  font-size: $font-size-sm;
+  justify-content: center;
+  margin: 3rem;
+
+  button {
+    background: none;
+    border: 0;
+  }
+
+  svg {
+    cursor: pointer;
+    fill: $color-lightGray;
+    height: $font-size-sm;
+    margin: 0 2rem;
+    width: $font-size-sm;
+  }
+
+  &__page-number {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 0 1.5rem;
+
+    &.active {
+      background-color: $color-printi-blue;
+      border-radius: 1.5rem;
+      box-shadow: 0 0.4rem 1.8rem 0.2rem rgba(83, 117, 153, 0.5);
+      color: $color-white;
+      height: 3rem;
+      margin: 0 0.4rem;
+      width: 3rem;
+    }
+  }
+}
