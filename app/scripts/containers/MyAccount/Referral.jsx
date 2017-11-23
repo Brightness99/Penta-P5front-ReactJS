@@ -130,24 +130,23 @@ export class Referral extends React.PureComponent<Props, State> {
           data.length > 0 &&
           <Slider {...sliderSettings}>
             {
-              !referral.isRunning ?
-                data.map(history =>
-                  <section
-                    key={`${history.voucher_used_by_email_id}-${history.voucher_id}`}
-                    className="atm-content-list"
-                  >
-                    <span className="qrk-title-list">{'Data'}</span>
-                    <IntlDate className="qrk-text-list">{history.voucher_used_on_date}</IntlDate>
-                    <span className="qrk-title-list">{'E-mail'}</span>
-                    <span className="qrk-text-list">{history.voucher_used_by_email_id}</span>
-                    <span className="qrk-title-list">{'Voucher value'}</span>
-                    <span className="qrk-text-list">{history.voucher_name}</span>
-                    <span className="qrk-title-list">{'Valor'}</span>
-                    <IntlMoney className="qrk-text-list voucher-value">{+history.voucher_amount}</IntlMoney>
-                    <span className="qrk-title-list">{'Data de validade'}</span>
-                    <IntlDate className="qrk-text-list">{history.voucher_expiry_date}</IntlDate>
-                  </section>
-                ) : <Loading />
+              data.map(history =>
+                <section
+                  key={`${history.voucher_used_by_email_id}-${history.voucher_id}`}
+                  className="atm-content-list"
+                >
+                  <span className="qrk-title-list">{'Data'}</span>
+                  <IntlDate className="qrk-text-list">{history.voucher_used_on_date}</IntlDate>
+                  <span className="qrk-title-list">{'E-mail'}</span>
+                  <span className="qrk-text-list">{history.voucher_used_by_email_id}</span>
+                  <span className="qrk-title-list">{'Voucher value'}</span>
+                  <span className="qrk-text-list">{history.voucher_name}</span>
+                  <span className="qrk-title-list">{'Valor'}</span>
+                  <IntlMoney className="qrk-text-list voucher-value">{+history.voucher_amount}</IntlMoney>
+                  <span className="qrk-title-list">{'Data de validade'}</span>
+                  <IntlDate className="qrk-text-list">{history.voucher_expiry_date}</IntlDate>
+                </section>
+              )
             }
           </Slider>
         }
