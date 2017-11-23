@@ -53,10 +53,9 @@ export class UploadFile extends React.Component {
     };
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps({ isUploaded, preview, fileFormats }) {
     const { handleUploadFile, title } = this.props;
-    const { isSelectedFileForUpload } = this.state;
-    const { isUploaded, preview } = newProps;
+    const { isSelectedFileForUpload, fileFormat } = this.state;
 
     if (isSelectedFileForUpload && isUploaded) {
       this.setState({
@@ -67,6 +66,10 @@ export class UploadFile extends React.Component {
       if (handleUploadFile && typeof handleUploadFile === 'function') {
         handleUploadFile({ title, preview });
       }
+    }
+
+    if (fileFormat && !fileFormats.includes(`.${fileFormat}`)) {
+      this.handleRemoveFile();
     }
   }
 
