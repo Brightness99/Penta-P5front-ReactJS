@@ -10,6 +10,7 @@ import { CheckBox } from 'components/Input';
 import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 'components/Accordion/nAccordion';
 import { PictureIcon, StatusIcon } from 'components/Icons';
 import ProposalItem from './ProposalItem';
+import BriefingContent from './BriefingContent';
 
 type Props = {
   screenSize: string,
@@ -26,6 +27,7 @@ type State = {
   proposal: {},
   activeIndex: number,
   confirmChecked: boolean,
+  briefingClass: string,
 };
 
 export class ArtProposalContent extends React.Component {
@@ -114,14 +116,36 @@ export class ArtProposalContent extends React.Component {
     dispatch(newProposalRequest(payload));
   }
 
+  updateBriefContent(className) {
+    this.setState({ briefingClass: className });
+  }
+
   renderMobile() {
-    const { proposals } = this.props;
+    const { proposals, screenSize } = this.props;
+    const { briefingClass } = this.state;
+    const length = proposals.length;
     let accordionList = null;
+    const briefingMark =
+      (
+        <Accordion key={`briefing-item-${length.toString()}`}>
+          <AccordionItem>
+            <AccordionItemTitle className="atm-header-menu-title">BRIEFING INICIAL</AccordionItemTitle>
+            <AccordionItemBody className={briefingClass} >
+              <BriefingContent
+                activeIndex={this.state.activeIndex}
+                proposals={proposals.list}
+                screenSize={screenSize}
+                updateTab={(className) => this.updateBriefContent(className)}
+              />
+            </AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
+      );
     if (Object.getOwnPropertyNames(proposals).length !== 0)  {
       accordionList = proposals.map((item, index) => {
         const proposalTitle = `Proposta ${proposals.length - index}`;
         return (
-          <Accordion key={item.id}>
+          <Accordion key={`proposal-item-${index.toString()}`}>
             <AccordionItem>
               <AccordionItemTitle className="atm-header-menu-title">{proposalTitle}</AccordionItemTitle>
               <AccordionItemBody>{this.getProposal(item)}</AccordionItemBody>
@@ -133,6 +157,7 @@ export class ArtProposalContent extends React.Component {
     return (
       <div className="accordion-wrapper">
         {accordionList}
+        {briefingMark}
       </div>
     );
   }

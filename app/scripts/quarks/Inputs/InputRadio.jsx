@@ -17,7 +17,7 @@ const InputRadio = (props: Props) => {
 
   const handleChange = (ev) => {
     const { onChange } = props;
-
+    console.log('*********');
     if (typeof onChange === 'function') {
       onChange(ev);
     }
@@ -30,7 +30,7 @@ const InputRadio = (props: Props) => {
         name={name}
         id={id}
         value={value}
-        onChange={handleChange}
+        onChange={(ev) => handleChange(ev)}
         checked={checked}
       />
       <SVG src={require('assets/media/svg/icon_check.svg')} />
