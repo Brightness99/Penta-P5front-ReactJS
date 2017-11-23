@@ -7,6 +7,7 @@ import { FunnelBlock } from 'components/Funnel';
 import FlashMessage from 'components/FlashMessage';
 import MoreInfo from 'components/MoreInfo';
 import Loading from 'components/Loading';
+import TooltipEnhancer from 'components/TooltipEnhancer';
 import { Button } from 'quarks/Inputs';
 import cimpress from 'vendor/cimpress';
 import AdditionalUploadOptions from './AdditionalUploadOptions';
@@ -32,7 +33,6 @@ type State = {
   fileFormats: [],
   uploadedFiles: [],
   canSubmit: boolean,
-  isAgree: boolean,
   documentReferenceId: string,
 }
 
@@ -45,7 +45,6 @@ export default class UploadContent extends React.Component {
       uploadedFiles: [],
       fileFormats: [],
       isRepurchase: false,
-      isAgree: false,
       canSubmit: false,
     };
   }
@@ -54,27 +53,32 @@ export default class UploadContent extends React.Component {
   state: State;
 
   updateCanSubmit = () => {
-    const { selectedStrategy, uploadedFiles, isAgree, isRepurchase } = this.state;
+    const { selectedStrategy, uploadedFiles, isRepurchase } = this.state;
     const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
     const normalFunnelValidation = (selectedStrategy === 1 || (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0);
-    const canSubmit = ((upload_type === 'normal' && normalFunnelValidation)
-                      || (upload_type !== 'normal' && selectedStrategy > 0 && isAgree))
+    const canSubmit = ((upload_type === 'normal' && normalFunnelValidation))
                       && isRepurchase;
 
     this.setState({ canSubmit });
   };
 
+  getSubmitButtonTooltip() {
+    const { locale, uploadInfo: { globalFlags: { upload_type } } } = this.props;
+    const { selectedStrategy, uploadedFiles, isRepurchase } = this.state;
+
+    if ((upload_type === 'normal' && uploadedFiles.length === 0) || selectedStrategy === 0) {
+      return locale.page.upload.box_upload.UPLOAD_MISSING;
+    }
+    if (!isRepurchase) {
+      return locale.page.upload.box_upload.TERMS_MISSING;
+    }
+    return '';
+  }
+
   handleRepurchaseChoose = () => {
     const { isRepurchase } = this.state;
     this.setState({
       isRepurchase: !isRepurchase,
-    }, this.updateCanSubmit);
-  };
-
-  handleAgreeChoose = () => {
-    const { isAgree } = this.state;
-    this.setState({
-      isAgree: !isAgree,
     }, this.updateCanSubmit);
   };
 
@@ -266,48 +270,41 @@ export default class UploadContent extends React.Component {
 
   renderTerms() {
     const { locale, uploadInfo: { globalFlags: { upload_type } } } = this.props;
-    const { isRepurchase, isAgree } = this.state;
-    if (upload_type === 'normal') {
-      return (<label key={'upload-terms'}>
-        <CheckBox
-          checked={isRepurchase}
-          onChange={this.handleRepurchaseChoose}
-        />
-        {locale.page.upload.box_upload.UPLOAD_TERMS}
-      </label>);
-    }
-
-    return [
+    const { isRepurchase } = this.state;
+    return (
       <label key={'upload-terms'}>
         <CheckBox
           checked={isRepurchase}
           onChange={this.handleRepurchaseChoose}
         />
-        {locale.page.upload.cimpress_designer.AGREE_WITH_TERMS}
-      </label>,
-      <label key={'must-agree-terms'}>
-        <CheckBox
-          checked={isAgree}
-          onChange={this.handleAgreeChoose}
-        />
-        <span>{locale.page.upload.cimpress_designer.MUST_AGREE_WITH_TERMS}</span>
-      </label>];
+        {
+        upload_type === 'normal' ?
+          locale.page.upload.box_upload.UPLOAD_TERMS : locale.page.upload.cimpress_designer.AGREE_WITH_TERMS
+      }
+      </label>
+    );
   }
 
   renderButtonsBlock() {
     const { isFinishInProgress, locale } = this.props;
     const { canSubmit } = this.state;
 
-    return (<section className="upload-finish-block">
-      {
-        this.renderTerms()
-      }
+    const EnhancedSubmitButton = TooltipEnhancer(!canSubmit)(() =>
       <Button
         onClick={this.handleUploadFinish}
         kind="success"
         isLoading={isFinishInProgress}
         disabled={!canSubmit}
       >{locale.page.upload.box_upload.SEND_FILES}</Button>
+    );
+    return (<section className="upload-finish-block">
+      {
+        this.renderTerms()
+      }
+      <EnhancedSubmitButton
+        keyProp={'submit-button-tooltip'}
+        text={this.getSubmitButtonTooltip()}
+      />
     </section>);
   }
 
