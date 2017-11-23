@@ -57,7 +57,7 @@ export default class PreviewUploadedFile extends React.Component {
 
   render() {
     const { preview: { originalName, pages }, handleRemoveFile, locale } = this.props;
-    const { apiUrl } = config;
+    const { basePath } = config;
     const mappedPages = Object.keys(pages).map(x => pages[x]).slice(0, 2);
 
     return (
@@ -71,8 +71,8 @@ export default class PreviewUploadedFile extends React.Component {
             {
               mappedPages.map(x =>
                 <section className="preview-item" key={x.preview_small}>
-                  <Link to="#" onClick={() => this.handleOpenModal(`${apiUrl + x.preview_big}`)}>
-                    <img src={`${apiUrl + x.preview_small}`} alt="preview" />
+                  <Link to="#" onClick={() => this.handleOpenModal(`${basePath + x.preview_big}`)}>
+                    <img src={`${basePath + x.preview_small}`} alt="preview" />
                   </Link>
                 </section>)
             }
