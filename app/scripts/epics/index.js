@@ -25,7 +25,10 @@ import {
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
-  prepressDownloadFetch
+  prepressDownloadFetch,
+  pickupPlacesFetch,
+  settingsAdditionalOptionsFetch,
+  settingsPrePressFetch,
 } from './settings';
 import { localeFetch } from './locale';
 import {
@@ -98,7 +101,10 @@ export default combineEpics(
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
+  settingsAdditionalOptionsFetch,
   prepressDownloadFetch,
+  settingsPrePressFetch,
+  pickupPlacesFetch,
   userSignIn,
   userSignUp,
   userSocialSignIn,

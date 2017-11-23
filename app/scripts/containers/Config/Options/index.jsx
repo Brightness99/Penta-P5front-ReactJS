@@ -2,14 +2,14 @@
 
 import React from 'react';
 import cx from 'classnames';
-import SVG from 'react-inlinesvg';
-import Modal from 'components/Modal';
-import { Accordion, AccordionItem } from 'components/Accordion';
-
+import { shouldComponentUpdate, isSelectionComplete } from 'utils/helpers';
 import { removePartSelection } from 'actions';
-
-import ConfigBlock from 'containers/Config/ConfigBlock';
-
+import { VideoIcon } from 'components/Icons';
+import Modal from 'components/Modal';
+import Loading from 'components/Loading';
+import { Accordion, AccordionItem } from 'components/Accordion';
+import MoreInfo from 'components/MoreInfo';
+import { FunnelBlock } from 'components/Funnel';
 import PartsLabel from './PartsLabel';
 import SelectView from './SelectView';
 import ListItem from './ListItem';
@@ -19,6 +19,7 @@ type Props = {
   viewType?: string,
   screenSize: string,
   order: number,
+  isLoading: boolean,
   dispatch: () => {},
   options: {},
   selection: {},
@@ -45,6 +46,8 @@ export default class OptionsBlock extends React.Component {
     viewType: 'gallery',
   };
 
+  shouldComponentUpdate = shouldComponentUpdate;
+
   static props: Props;
 
   handlePartRemove = (part: string) => {
@@ -53,15 +56,13 @@ export default class OptionsBlock extends React.Component {
     dispatch(removePartSelection(part));
   };
 
-  handleZoomClick = (ev) => {
-    const part = ev.currentTarget.name.split('-');
-
+  handleZoomClick = (imageBig, alt) => {
     this.setState({
       modal: {
         isOpen: true,
-        partId: part[0],
-        optionId: part[1],
-        itemId: ev.currentTarget.value,
+        type: 'image',
+        link: imageBig,
+        text: alt,
       },
     });
   };
@@ -73,36 +74,19 @@ export default class OptionsBlock extends React.Component {
       modal: {
         ...modal,
         isOpen: false,
+        type: '',
+        link: '',
+        text: '',
       },
     });
   };
 
   handleModal() {
-    const { options: { list } } = this.props;
-    const { modal: { optionId, partId, itemId } } = this.state;
-
-    let altText = '';
-
-    const imgSrc = list
-      .filter((part) => part.id === partId)
-      .reduce((prevPart, currentPart) => {
-        altText += `${currentPart.name} `;
-        return currentPart.options
-        .filter((option) => option.key === optionId)
-          .reduce((prevOption, currentOption) => {
-            altText += `- ${currentOption.name} `;
-            return currentOption.items
-              .filter((item) => item.id === itemId)
-              .reduce((prevItem, currentItem) => {
-                altText += `- ${currentItem.name}`;
-                return currentItem.image_big;
-              }, '');
-          }, '');
-      }, '');
+    const { modal } = this.state;
 
     return (
       <Modal handleCloseModal={this.handleCloseModal}>
-        <img src={`http://printi.com.br${imgSrc}`} alt={altText} />
+        <img src={`http://printi.com.br${modal.link}`} alt={modal.text} title={modal.text} />
       </Modal>
     );
   }
@@ -121,7 +105,7 @@ export default class OptionsBlock extends React.Component {
 
     const item = {
       id: 'custom',
-      image_small: '/previews.php?img=fallback-image180x180-final.jpg&type=icon',
+      imageSmall: '/previews.php?img=fallback-image180x180-final.jpg&type=icon',
       name: 'Personalizar',
     };
     return (
@@ -138,37 +122,39 @@ export default class OptionsBlock extends React.Component {
     );
   }
 
-  renderOption(optionsList) {
+  renderOption(part) {
     const { viewType, selection, onSelect } = this.props;
 
     return (
       <div>
         <ul className={cx(viewType === 'list' && 'app__config__options--show-list')}>
-          {optionsList.options.filter((option) => option.visible).map((option) => (
-            <li key={option.key}>
+          {part.attributes.filter((attribute) => attribute.visible).map((attribute) => (
+            <li key={attribute.key}>
               <div className="app__config__options-header">
                 <h4>
-                  {option.name}
+                  {attribute.name}
                 </h4>
-                <div className="app__config__options-header__youtube">
-                  <SVG src={require('assets/media/svg/icon_video.svg')} /> Vídeo explicativo
-                </div>
+                {attribute.video.length >= 1 &&
+                  <button onClick={() => console.log('CU DE ANU')} className="app__config__options-header__youtube">
+                    <VideoIcon /> Vídeo explicativo
+                  </button>
+                }
               </div>
               <ul className="app__config__options-body">
-                {option.items.map((optionItem) => (
+                {attribute.options.map((option) => (
                   <ListItem
-                    item={optionItem}
+                    item={option}
                     viewType={viewType}
-                    key={optionItem.id}
-                    optionKey={`${optionsList.id}-${option.key}`}
-                    checked={optionItem.id === selection[optionsList.id][option.key]}
+                    key={option.id}
+                    optionKey={`${part.id}-${attribute.key}`}
+                    checked={selection && selection[part.id] ? option.id === selection[part.id][attribute.key] : false}
                     onSelect={onSelect}
-                    partId={optionsList.id}
-                    onZoomClick={this.handleZoomClick}
+                    partId={part.id}
+                    onZoomClick={() => this.handleZoomClick(option.imageBig, `${attribute.name} - ${option.name}`)}
                     enableZoom={true}
                   />
                 ))}
-                {this.renderCustomQuantity(option.key)}
+                {attribute.hasCustom && this.renderCustomQuantity(part.id, attribute.key)}
               </ul>
             </li>
           ))}
@@ -178,33 +164,34 @@ export default class OptionsBlock extends React.Component {
   }
 
   renderOptionList() {
-    const { options: { parts, list } } = this.props;
-    if (parts.total === 1) {
+    const { options: { parts } } = this.props;
+    if (parts.length === 1) {
       return (
         <div className="app__config__options-listing">
-          {this.renderOption(list[0])}
+          {this.renderOption(parts[0])}
         </div>
       );
     }
+
     return (
       <Accordion className="app__config__options-listing">
-        {list.map((item, index) => (
-          <AccordionItem key={item.id}>
+        {parts.map((part, index) => (
+          <AccordionItem key={part.id}>
             <h3>
-              {item.name}
+              {part.name}
               {index > 0 &&
-                <span
-                  role="link"
+                <button
+                  className="atm-link-button app__config__remove-button"
                   onClick={(ev) => {
                     ev.stopPropagation();
-                    return this.handlePartRemove(item.id);
+                    return this.handlePartRemove(part.id);
                   }}
                 >
                   Remover
-                </span>
+                </button>
               }
             </h3>
-            {this.renderOption(item)}
+            {this.renderOption(part)}
           </AccordionItem>
         ))}
       </Accordion>
@@ -212,24 +199,33 @@ export default class OptionsBlock extends React.Component {
   }
 
   render() {
-    const { viewType, locale, options: { parts }, dispatch, order, screenSize } = this.props;
+    const { viewType, locale, options: { parts }, dispatch, order, screenSize, isLoading, selection } = this.props;
     const { modal } = this.state;
 
+    if (isLoading) {
+      return <Loading />;
+    }
+
     return (
-      <ConfigBlock
+      <FunnelBlock
         order={order}
         locale={locale}
         screenSize={screenSize}
-        button={<button className="app__config__block-header__button">Me ajude a configurar</button>}
+        isComplete={Object.keys(selection).length > 0 && isSelectionComplete(selection)}
+        header={[
+          <span key="options-block-title">{locale.TITLE}</span>,
+          <button className="app__config__block-header__button" key="options-block-button">{locale.COMBINATIONS}</button>,
+          <MoreInfo key="options-block-more-info" text={locale.MORE_INFO_TEXT} />,
+        ]}
         className="app__config__options-block"
       >
         <div className="app__config__options">
-          <PartsLabel locale={locale} total={parts.total} names={parts.names} />
+          <PartsLabel locale={locale} parts={parts} />
           <SelectView locale={locale} dispatch={dispatch} viewType={viewType} />
           {this.renderOptionList()}
           {modal.isOpen && this.handleModal()}
         </div>
-      </ConfigBlock>
+      </FunnelBlock>
     );
   }
 }

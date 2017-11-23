@@ -12,7 +12,20 @@
   position: relative;
 
   &__content{
+    display: flex;
+    height: auto;
+    justify-content: space-between;
     position: relative;
+    width: 100%;
+
+    > .org-stick-bar {
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 23.8%;
+    }
+
     > main {
       width: 100%;
 

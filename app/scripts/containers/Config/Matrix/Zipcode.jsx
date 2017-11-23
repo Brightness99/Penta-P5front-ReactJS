@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { MaskedInput } from 'components/Input';
-import SVG from 'react-inlinesvg';
 import { SuccessText, ErrorText } from 'atoms/Texts';
 
 type Props = {
@@ -73,10 +72,7 @@ export default class MatrixZipcode extends React.Component {
     return (
       <div className="mol-matrix-zipcode">
         <h4>
-          Digite seu CEP para ver os valores e a previsão de entrega
-          <div className="app__config__options-header__youtube">
-            <SVG src={require('assets/media/svg/icon_video.svg')} /> Vídeo explicativo
-          </div>
+          Digite seu CEP
         </h4>
         <div className="app__zipcode__validation">
           <MaskedInput
