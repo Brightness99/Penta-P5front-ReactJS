@@ -10,7 +10,7 @@ import { replace } from 'modules/ReduxRouter';
 export function settingsFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v1/product-settings/${action.payload.slug}`;
+      const endpoint = `/v2/product/${action.payload.slug}/settings`;
 
       return rxAjax({
         endpoint,
@@ -50,7 +50,7 @@ export function settingsFetch(action$) {
 export function settingsSourceFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_SOURCE_FETCH_REQUEST)
     .switchMap(action => {
-      const endpoint = `/v1/calculator/finalproducts/${action.payload.id}/source/${action.payload.source}`;
+      const endpoint = `/v2/calculator/finalproducts/${action.payload.id}/source/${action.payload.source}`;
 
       return rxAjax({
         endpoint,
@@ -58,27 +58,10 @@ export function settingsSourceFetch(action$) {
       })
         .map(data => {
           if (data.status === 200 && data.response) {
-            let hasDefaultSelection = true;
-            const selection = Object.keys(data.response.calculator)
-              .reduce((prevItem, currentItem) => ({
-                ...prevItem,
-                [currentItem]: Object.keys(data.response.calculator[currentItem].options).reduce((prevOption, nextOption) => ({
-                  ...prevOption,
-                  [nextOption]: data.response.calculator[currentItem].options[nextOption]
-                    .filter((optionItem) => optionItem.default)
-                    .reduce((prevOptionItem, nextOptionItem) => nextOptionItem.id, ''),
-                }), {}),
-              }), {});
-
-            // if (action.payload.source === 'upload') {
-            //   prePressTemplateFetch();
-            // }
-
             return {
               type: SettingsConstants.SETTINGS_SOURCE_FETCH_SUCCESS,
               payload: {
                 ...data.response,
-                selection,
                 selectedSource: action.payload.source,
               },
               meta: { updatedAt: getUnixtime() },
@@ -112,19 +95,14 @@ export function settingsOptionsFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_OPTIONS_FETCH_REQUEST)
     .switchMap(action => {
       const endpoint = `/v1/calculator/finalproducts/${action.payload.productId}/deny_rules/source/${action.payload.selectedSource}`;
-      const selection = Object.keys(action.payload.selection)
-        .filter((item) => action.payload.selection[item] !== '')
-        .reduce((prevValue, currentValue) => ({
-          ...prevValue,
-          [currentValue]: action.payload.selection[currentValue],
-        }), {});
+
       return rxAjax({
         endpoint,
         payload: {
           id: action.payload.partId,
-          selection,
+          selection: action.payload.selection,
           type: 'product_part',
-          option: action.payload.option,
+          option: {},
         },
         method: 'POST',
       })
@@ -135,7 +113,7 @@ export function settingsOptionsFetch(action$) {
               payload: {
                 ...data.response,
                 partId: action.payload.partId,
-                selection,
+                selection: action.payload.selection,
               },
               meta: { updatedAt: getUnixtime() },
             };
@@ -162,35 +140,24 @@ export function settingsOptionsFetch(action$) {
 export function settingsZipcodeFetch(action$) {
   return action$.ofType(SettingsConstants.SETTINGS_ZIPCODE_FETCH_REQUEST)
     .switchMap(action => {
-      const url = 'https://api.intelipost.com.br/api';
-      const endpoint = `/v1/cep_location/address_complete/${action.payload.zipcode}`;
+      const endpoint = `/v2/zipcode/${action.payload.zipcode}`;
 
       return rxAjax({
-        url,
         endpoint,
-        headers: {
-          'api-key': '3d26e268e228a9555a13f90da2afc8392203bf0d668fafd1f04e0185531826f8',
-        },
         method: 'GET',
       })
         .map(data => {
-          if (data.status === 200 && data.response.status === "OK" && data.response.messages.length === 0) {
+          if (data.status === 200 && data.response.zipcode) {
             return {
               type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_SUCCESS,
-              payload: {
-                ...data.response,
-                zipcode: action.payload.zipcode,
-              },
+              payload: data.response,
               meta: { updatedAt: getUnixtime() },
             };
           }
 
           return {
             type: SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE,
-            payload: {
-              zipcode: action.payload.zipcode,
-              message: data.response.messages[0].text
-            },
+            payload: data.response.message,
             meta: { updatedAt: getUnixtime() },
           };
         })
@@ -252,41 +219,46 @@ export function settingsMatrixFetch(action$, store) {
 
 export function settingsPrePressFetch(action$, store) {
   return action$.ofType(SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_REQUEST)
-    .switchMap(action => {
+    .switchMap(() => {
       const productSettings = store.getState().productSettings;
       const endpoint = `/v1/prepress_template/download_options/${productSettings.finalProduct.id}`;
 
       return rxAjax({
         endpoint,
-        payload: {
-          combination: productSettings.selection,
-          source: productSettings.source.selectedSource,
-          zipcode: action.payload.zipcode,
-        },
+        payload: Object.keys(productSettings.selection)
+          .reduce((prevPart, currentPart) => ({
+            ...prevPart,
+            [currentPart]: Object.keys(productSettings.selection[currentPart])
+              .reduce((prevAttribute, currentAttribute) => ({
+                ...prevAttribute,
+                [`product_${currentAttribute}_id`]: productSettings.selection[currentPart][currentAttribute],
+              }), {})
+          }), {}),
         method: 'POST',
       })
         .map(data => {
-          if (data.status === 200 && data.response) {
+          if (data.status === 200 && data.response && data.response.options) {
             return {
-              type: SettingsConstants.SETTINGS_MATRIX_FETCH_SUCCESS,
+              type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_SUCCESS,
               payload: {
                 ...data.response,
+                parts: data.response[productSettings.finalProduct.id],
               },
               meta: { updatedAt: getUnixtime() },
             };
           }
 
           return {
-            type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_FAILURE,
             payload: { message: 'Algo de errado não está correto' },
             meta: { updatedAt: getUnixtime() },
           };
         })
         .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
-        .defaultIfEmpty({ type: SettingsConstants.SETTINGS_MATRIX_FETCH_CANCEL })
+        .defaultIfEmpty({ type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_CANCEL })
         .catch(error => (
           [{
-            type: SettingsConstants.SETTINGS_MATRIX_FETCH_FAILURE,
+            type: SettingsConstants.PRE_PRESS_TEMPLATE_FETCH_FAILURE,
             payload: { message: error.message, status: error.status },
             meta: { updatedAt: getUnixtime() },
           }]
@@ -338,3 +310,94 @@ export function prepressDownloadFetch(action$, store) {
         ));
     });
 }
+
+export function pickupPlacesFetch(action$) {
+  return action$.ofType(SettingsConstants.SETTINGS_PICKUP_FETCH_REQUEST)
+    .switchMap(action => {
+      const endpoint = '/v1/pickup_places/addresses';
+
+      return rxAjax({
+        endpoint,
+        method: 'GET',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+            return {
+              type: SettingsConstants.SETTINGS_PICKUP_FETCH_SUCCESS,
+              payload: action.payload,
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: SettingsConstants.SETTINGS_PICKUP_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: SettingsConstants.SETTINGS_PICKUP_FETCH_CANCEL })
+        .catch(error => (
+          [{
+            type: SettingsConstants.SETTINGS_PICKUP_FETCH_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          }]
+        ));
+    });
+}
+
+export function settingsAdditionalOptionsFetch(action$, store) {
+  return action$.ofType(SettingsConstants.SETTINGS_ADDITIONAL_OPTIONS_FETCH_REQUEST)
+    .switchMap(action => {
+      const productSettings = store.getState().productSettings;
+      const endpoint = `/v1/calculator/finalproducts/${action.payload.productId}/deny_rules_additional_options/source/${action.payload.selectedSource}`;
+
+      return rxAjax({
+        endpoint,
+        payload: {
+          additional_options: action.payload.additional_options,
+          data: action.payload.data,
+          selection: action.payload.selection,
+          type: 'product_part',
+        },
+        method: 'POST',
+      })
+        .map(data => {
+          if (data.status === 200 && data.response) {
+
+            return {
+              type: SettingsConstants.SETTINGS_ADDITIONAL_OPTIONS_FETCH_SUCCESS,
+              payload: {
+                ...data.response,
+                partId: action.payload.partId,
+                selection: action.payload.selection,
+              },
+              meta: { updatedAt: getUnixtime() },
+            };
+          }
+
+          return {
+            type: SettingsConstants.SETTINGS_ADDITIONAL_OPTIONS_FETCH_FAILURE,
+            payload: { message: 'Algo de errado não está correto' },
+            meta: { updatedAt: getUnixtime() },
+          };
+        })
+        .takeUntil(action$.ofType(AppConstants.CANCEL_FETCH))
+        .defaultIfEmpty({ type: SettingsConstants.SETTINGS_ADDITIONAL_OPTIONS_FETCH_CANCEL })
+        .catch(error => (
+          [{
+            type: SettingsConstants.SETTINGS_ADDITIONAL_OPTIONS_FETCH_FAILURE,
+            payload: { message: error.message, status: error.status },
+            meta: { updatedAt: getUnixtime() },
+          }]
+        ));
+    });
+}
+
+
+// TODO: /v1/finalproducts/fstbro/all_combinations?source=upload
+// TODO: /v1/calculator/productparts/pctstb/custom_format/123/123
+// TODO: /v1/calculator/productparts/pctstb/custom_page/50000
+// TODO: /v1/calculator/finalproducts/fstbro/matrix/custom_qty/125/upload
+// TODO: /v1/customers/380201/cart

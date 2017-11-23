@@ -361,16 +361,16 @@ export class MyAddresses extends React.Component {
     const { account: { addresses } } = this.props;
     const { openAddressModal, type, selectedAddress } = this.state;
 
-    return (
+    return (<div>
+      <h3 className="atm-myorder-title">Meus endereços</h3>
       <section className="container-myaddresses">
         {openAddressModal &&
         <Modal handleCloseModal={this.handleCloseModal}>
           <AddressFormModal type={type} onCloseModal={this.handleCloseModal} address={selectedAddress} isNew={!selectedAddress} />
         </Modal>}
-        <h3 className="subtitle-myAddresses">Meus endereços</h3>
         {!addresses.isLoaded || addresses.isLoading ? <Loading /> : this.renderPage()}
       </section>
-    );
+    </div>);
   }
 }
 
