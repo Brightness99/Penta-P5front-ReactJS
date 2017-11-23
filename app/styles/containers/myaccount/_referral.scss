@@ -101,6 +101,8 @@
 
     .mol-content-table {
       border: 0.1rem solid $body-bg;
+      margin-top: 1.5rem;
+      min-width: 75rem;
 
       @include lg {
         padding: 2rem;
@@ -109,16 +111,13 @@
       .atm-head-table {
         border-bottom: 0.1rem solid $body-bg;
         color: $color-almostBlack;
-        display: flex;
+        display: grid;
         font-weight: 700;
+        grid-template-columns: repeat(5, 1fr);
 
         li {
           flex: 1;
           margin-bottom: 1rem;
-
-          &:first-of-type {
-            flex: 2;
-          }
         }
       }
 
@@ -127,13 +126,15 @@
         display: flex;
         flex-wrap: wrap;
 
-        .qrk-content-item {
-          flex-basis: calc((100% / 4) + 0.2rem);
-          position: relative;
+        .voucher-history__row-content {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          width: 100%;
+        }
 
-          &:nth-of-type(3n-2) {
-            flex-basis: calc(((100% / 4) - 0.2rem) * 2);
-          }
+        .qrk-content-item {
+          flex-basis: calc((100% / 5) + 0.2rem);
+          position: relative;
 
           &.color-credit {
             color: $color-printi-blue;
@@ -152,18 +153,17 @@
 }
 
 .mol-list-mobile {
-  display: inline-flex;
-  overflow-x: scroll;
-  overflow-y: auto;
-  width: 100%;
-
   .atm-content-list {
+    align-items: center;
     background-color: $color-white;
     border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-bottom: 1rem;
-    margin-right: 2rem;
     padding: 1rem;
     text-align: center;
+    width: 100%;
 
     .qrk-title-list {
       color: $color-almostBlack;
@@ -177,9 +177,12 @@
       font-size: $font-size-base;
 
       &:last-of-type {
-        color: $color-printi-blue;
         margin-bottom: 0;
       }
+    }
+
+    .voucher-value {
+      color: $color-printi-blue;
     }
   }
 }

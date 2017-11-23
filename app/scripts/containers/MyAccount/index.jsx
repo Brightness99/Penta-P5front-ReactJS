@@ -33,6 +33,8 @@ type Props = {
     voucher_name: string,
   },
   sendReferralRequest: (customerId: string, emails: Array<string>) => void,
+  getReferralSum: () => void,
+  getReferralHistory: (options: { desc: string, sort: string, page: number, per_page: number }) => void,
   customerInfo: UserCustomerInfoType,
   referral: ReferralType,
   socialLoginSettingsFetch: () => void,
@@ -77,6 +79,7 @@ export class MyAccount extends React.Component {
     if (!this.props.facebook) {
       this.props.socialLoginSettingsFetch();
     }
+    this.props.getReferralSum();
   }
 
   static props: Props;
@@ -163,6 +166,8 @@ export class MyAccount extends React.Component {
               voucher={voucher}
               customerInfo={customerInfo}
               sendReferralRequest={this.props.sendReferralRequest}
+              getReferralSum={this.props.getReferralSum}
+              getReferralHistory={this.props.getReferralHistory}
               facebook={facebook}
               language={language}
               domain={domain}

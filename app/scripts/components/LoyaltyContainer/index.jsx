@@ -2,35 +2,40 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { shouldComponentUpdate } from 'utils/helpers';
+import { accountLoyaltyFetch } from 'actions';
+import LogoLoyalty from 'components/LogoLoyalty';
 
 type Props = {
-  text: String,
-  account: {},
+  component: string,
+  loyalty: {},
+  loyaltyFetch: () => {},
 };
 
 export class LoyaltyContainer extends React.Component {
-  props: Props;
+  shouldComponentUpdate = shouldComponentUpdate;
 
-  setBackgroundColor = (color) => ({
-    background: color,
-  });
+  componentDidMount() {
+    const { loyalty, loyaltyFetch } = this.props;
 
-  setColor = (color) => ({
-    color,
-  });
+    if ((!loyalty || !loyalty.loyalty_tier_id) && typeof loyaltyFetch === 'function') {
+      loyaltyFetch();
+    }
+  }
+
+  static props: Props;
 
   render() {
-    const { account: { loyalty }, text } = this.props;
+    const { loyalty, component } = this.props;
+
+    if (!loyalty || !loyalty.loyalty_tier_id) {
+      return null;
+    }
+
     return (
-      <div className="org-loyalty-container">
-        <div className="mol-loyalty-container" style={this.setBackgroundColor(loyalty.color)}>
-          <div>
-            <div className="qrk-type-of-loyalty" style={this.setColor(loyalty.color)}>
-              <p>{loyalty.loyalty_tier_name}</p>
-            </div>
-            <p>{text}</p>
-          </div>
-        </div>
+      <div className="org-loyalty-container" style={{ backgroundColor: loyalty.color }}>
+        <LogoLoyalty short={true} invert={true} key="LogoLoyalty" />
+        {loyalty[component] || ''}
       </div>
     );
   }
@@ -38,9 +43,15 @@ export class LoyaltyContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    account: state.account,
+    loyalty: state.account.loyalty,
   };
 }
 
-export default connect(mapStateToProps)(LoyaltyContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    loyaltyFetch: () => dispatch(accountLoyaltyFetch()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoyaltyContainer);
 
