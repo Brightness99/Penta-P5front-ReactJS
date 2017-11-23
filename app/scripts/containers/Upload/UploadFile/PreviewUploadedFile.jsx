@@ -56,15 +56,15 @@ export default class PreviewUploadedFile extends React.Component {
   };
 
   render() {
-    const { preview: { originalName, pages }, handleRemoveFile, locale } = this.props;
+    const { preview, handleRemoveFile, locale } = this.props;
     const { basePath } = config;
-    const mappedPages = Object.keys(pages).map(x => pages[x]).slice(0, 2);
+    const mappedPages = Object.keys(preview.pages).map(x => preview.pages[x]).slice(0, 2);
 
     return (
       <section className="upload-file-preview-container">
         {this.renderModal()}
         <section className="preview-header">
-          <h4>{originalName}</h4>
+          <h4>{preview.originalName}</h4>
         </section>
         <section className="preview-content">
           <section className="preview-images-container">
@@ -78,7 +78,7 @@ export default class PreviewUploadedFile extends React.Component {
             }
           </section>
           <section className="preview-footer">
-            <button className="remove-button" onClick={handleRemoveFile}><TrashIcon />{locale.form.common.CANCEL}</button>
+            <button className="remove-button" onClick={() => handleRemoveFile(preview)}><TrashIcon />{locale.form.common.CANCEL}</button>
           </section>
         </section>
       </section>

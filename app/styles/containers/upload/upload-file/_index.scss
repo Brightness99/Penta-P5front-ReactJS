@@ -1,9 +1,16 @@
+.upload-file-and-preview-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
 .upload-file-container {
-  display         : flex;
-  flex-direction  : column;
-  justify-content : center;
-  align-items     : center;
-  width           : 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   .upload-file-warning-dialog{
     display: flex;
     flex-direction: column;
@@ -29,175 +36,176 @@
 }
 
 .upload-file-content {
-  border        : 1px dashed #c7c9cb;
-  padding       : 1rem;
-  border-radius : 3px;
-  width         : 100%;
-  max-width     : 40rem;
-  height        : 19rem;
-  cursor        : pointer;
+  border: 1px dashed #c7c9cb;
+  padding: 1rem;
+  border-radius: 3px;
+  width: 100%;
+  max-width: 40rem;
+  height: 19rem;
+  cursor: pointer;
   input[type=file] {
-    width    : 1px;
-    height   : 1px;
-    opacity  : 0;
-    overflow : hidden;
-    position : absolute;
-    z-index  : -1;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
   }
   .upload-file-block {
-    display         : flex;
-    flex-direction  : column;
-    justify-content : center;
-    align-items     : center;
-    width           : 100%;
-    height          : 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     .description {
-      color     : #6a6f7a;
-      font-size : 1.2rem;
+      color: #6a6f7a;
+      font-size: 1.2rem;
     }
     .select-file {
-      border-radius    : 3px;
-      border           : 1px solid #006ee3;
-      color            : #006ee3;
-      background-color : transparent;
-      text-transform   : uppercase;
-      padding          : 0.3rem 2rem;
+      border-radius: 3px;
+      border: 1px solid #006ee3;
+      color: #006ee3;
+      background-color: transparent;
+      text-transform: uppercase;
+      padding: 0.3rem 2rem;
     }
     & > * {
-      pointer-events : none;
+      pointer-events: none;
     }
   }
   .placeholder {
-    margin : auto;
+    margin: auto;
   }
   .loading-content {
-    display         : flex;
-    flex-direction  : column;
-    justify-content : center;
-    align-items     : center;
-    height          : 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     .file-title {
-      width         : 100%;
-      font-size     : 1.6rem;
-      font-weight   : bold;
-      text-overflow : ellipsis;
-      text-wrap     : none;
-      white-space   : nowrap;
-      overflow      : hidden;
-      text-align    : center;
+      width: 100%;
+      font-size: 1.6rem;
+      font-weight: bold;
+      text-overflow: ellipsis;
+      text-wrap: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: center;
     }
     .file-format-icon-container {
-      width : 5rem;
+      width: 5rem;
       span {
-        font-size : 1.2rem;
+        font-size: 1.2rem;
       }
     }
     .cancel-button {
-      color            : #006ee3;
-      border           : none;
-      background-color : transparent;
-      text-transform   : uppercase;
-      padding          : 0.3rem 2rem;
-      pointer-events   : auto;
+      color: #006ee3;
+      border: none;
+      background-color: transparent;
+      text-transform: uppercase;
+      padding: 0.3rem 2rem;
+      pointer-events: auto;
     }
   }
   .icons {
-    display        : flex;
-    flex-direction : row;
+    display: flex;
+    flex-direction: row;
     .file-format-icon-container:not(:only-of-type) {
       &:first-child, &:last-child {
-        width : 2rem;
+        width: 2rem;
         span {
-          font-size : 0.6rem;
-          color     : #b6bbc3;
+          font-size: 0.6rem;
+          color: #b6bbc3;
         }
         svg {
-          fill : #b6bbc3;
+          fill: #b6bbc3;
         }
       }
       &:nth-child(2), &:nth-child(4) {
-        width : 3rem;
+        width: 3rem;
         span {
-          font-size : 0.7rem;
-          color     : #b6bbc3;
+          font-size: 0.7rem;
+          color: #b6bbc3;
         }
         svg {
-          fill : #b6bbc3;
+          fill: #b6bbc3;
         }
       }
     }
     .file-format-icon-container {
-      width : 4rem;
+      width: 4rem;
       span {
-        font-size : 1.2rem;
+        font-size: 1.2rem;
       }
     }
   }
   &.active {
-    background-color : #eef3f9;
-    border           : 1px dashed #006ee3;
+    background-color: #eef3f9;
+    border: 1px dashed #006ee3;
   }
 
   &.inactive {
-    pointer-events : none;
-    opacity        : 0.6;
+    pointer-events: none;
+    opacity: 0.6;
   }
 }
 
 .upload-file-preview-container {
-  display         : flex;
-  flex-direction  : column;
-  justify-content : flex-start;
-  width           : 100%;
-  max-width       : 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 40rem;
+  margin: 1rem;
   .preview-content {
     .preview-images-container {
-      display          : flex;
-      background-color : #eeeeee;
-      border           : 0.1rem solid #c7c9cb;
-      border-bottom    : 0;
-      border-radius    : 0.3rem 0.3rem 0 0;
+      display: flex;
+      background-color: #eeeeee;
+      border: 0.1rem solid #c7c9cb;
+      border-bottom: 0;
+      border-radius: 0.3rem 0.3rem 0 0;
       .preview-item {
-        padding : 1.5rem 0;
-        width   : 100%;
-        height  : 15rem;
+        padding: 1.5rem 0;
+        width: 100%;
+        height: 15rem;
         a {
-          display         : flex;
-          justify-content : center;
-          align-items     : center;
-          width           : 100%;
-          height          : 100%;
-          cursor          : zoom-in;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          cursor: zoom-in;
         }
       }
       .preview-item:not(:only-of-type) {
-        width : 50%;
+        width: 50%;
         &:first-of-type {
-          border-right : 0.1rem solid #c7c9cb;
+          border-right: 0.1rem solid #c7c9cb;
         }
       }
     }
     .preview-footer {
-      display          : flex;
-      justify-content  : flex-end;
-      padding          : 0.8rem;
-      background-color : #ffffff;
-      border           : 0.1rem solid #c7c9cb;
-      border-radius    : 0 0 0.3rem 0.3rem;
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.8rem;
+      background-color: #ffffff;
+      border: 0.1rem solid #c7c9cb;
+      border-radius: 0 0 0.3rem 0.3rem;
       .remove-button {
-        display          : flex;
-        justify-content  : center;
-        align-items      : center;
-        border           : none;
-        font-size        : 1.2rem;
-        font-family      : $font-family-open-sans-bold;
-        color            : #fa656e;
-        background-color : transparent;
-        text-align       : center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        font-size: 1.2rem;
+        font-family: $font-family-open-sans-bold;
+        color: #fa656e;
+        background-color: transparent;
+        text-align: center;
         svg {
-          width  : 2rem;
-          height : 2rem;
-          fill   : #fa656e;
+          width: 2rem;
+          height: 2rem;
+          fill: #fa656e;
         }
       }
     }

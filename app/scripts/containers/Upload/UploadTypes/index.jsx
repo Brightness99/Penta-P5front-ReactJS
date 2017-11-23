@@ -10,15 +10,13 @@ type Props = {
   cimpressInfo: {},
   fileFormats: [],
   locale: {},
-  handleUploadFile: (file: { title: string, preview: {} }) => void,
-  handleRemoveFile: (file: { title: string, preview: {} }) => void,
+  handleFiles: (files: []) => void,
   handleOrientationChanged: (isVertical: number) => void,
 }
 
 const UploadTypes = ({ uploadType,
                        selectedStrategy,
-                       handleUploadFile,
-                       handleRemoveFile,
+                       handleFiles,
                        handleCanvasFinalize,
                        handleOrientationChanged,
                        cimpressInfo,
@@ -54,8 +52,7 @@ const UploadTypes = ({ uploadType,
             locale={locale}
             uploadTwoFiles={selectedStrategy === 4}
             multipleFiles={selectedStrategy === 5}
-            handleUploadFile={handleUploadFile}
-            handleRemoveFile={handleRemoveFile}
+            handleFiles={handleFiles}
           />);
     }
   };
