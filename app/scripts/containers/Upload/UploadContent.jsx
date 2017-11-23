@@ -56,7 +56,8 @@ export default class UploadContent extends React.Component {
     const { selectedStrategy, uploadedFiles, isRepurchase } = this.state;
     const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
     const normalFunnelValidation = (selectedStrategy === 1 || (selectedStrategy === 4 && uploadedFiles.length === 2) || uploadedFiles.length > 0);
-    const canSubmit = ((upload_type === 'normal' && normalFunnelValidation))
+    const canSubmit = ((upload_type === 'normal' && normalFunnelValidation)
+      || (upload_type !== 'normal' && selectedStrategy > 0))
                       && isRepurchase;
 
     this.setState({ canSubmit });
