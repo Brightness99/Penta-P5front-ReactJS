@@ -31,6 +31,7 @@ type Props = {
     },
   },
   language: string,
+  domain: string,
 };
 
 type State = {
@@ -84,7 +85,7 @@ export class Referral extends React.Component<Props, State> {
   render() {
     const {
       app: { screenSize }, customerInfo = {},
-      referral, facebook, language,
+      referral, facebook, language, domain,
     } = this.props;
     const { showShareModal, showCopiedTooltip } = this.state;
     const { voucher_id, voucher_name } = customerInfo;
@@ -123,6 +124,7 @@ export class Referral extends React.Component<Props, State> {
                 voucher={{ voucher_id, voucher_name }}
                 facebook={facebook}
                 language={language}
+                domain={domain}
                 screenSize={screenSize}
               />
             </Modal>
@@ -199,7 +201,7 @@ export class Referral extends React.Component<Props, State> {
 }
 
 const mapStoreToProps = (state) => {
-  const { LANGUAGE: language, COUNTRY_CODE: countryCode } = state.locale;
+  const { LANGUAGE: language, COUNTRY_CODE: countryCode, DOMAIN: domain } = state.locale;
   const { socials } = state.socialLoginSettings;
   const { voucher_id, voucher_name } = state.account;
   return ({
@@ -212,6 +214,7 @@ const mapStoreToProps = (state) => {
     referral: state.referral,
     facebook: socials.facebook[countryCode],
     language,
+    domain,
   });
 };
 
