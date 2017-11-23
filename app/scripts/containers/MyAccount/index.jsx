@@ -46,6 +46,7 @@ type Props = {
     },
   },
   language: string,
+  domain: string,
 };
 
 type State = {
@@ -94,7 +95,7 @@ export class MyAccount extends React.Component {
   renderContainer() {
     const {
       screenSize, voucher, customerInfo = {},
-      referral, facebook, language,
+      referral, facebook, language, domain,
     } = this.props;
 
     return (
@@ -169,6 +170,7 @@ export class MyAccount extends React.Component {
               getReferralHistory={this.props.getReferralHistory}
               facebook={facebook}
               language={language}
+              domain={domain}
             />}
         />
         <Route
@@ -224,7 +226,7 @@ export class MyAccount extends React.Component {
 }
 
 const mapStoreToProps = (state) => {
-  const { LANGUAGE: language, COUNTRY_CODE: countryCode } = state.locale;
+  const { LANGUAGE: language, COUNTRY_CODE: countryCode, DOMAIN: domain } = state.locale;
   const { socials } = state.socialLoginSettings;
   const { voucher_id, voucher_name } = state.account;
   return ({
@@ -242,6 +244,7 @@ const mapStoreToProps = (state) => {
       voucher_name,
     },
     language,
+    domain,
     facebook: socials.facebook[countryCode],
   });
 };

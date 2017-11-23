@@ -33,6 +33,7 @@ type Props = {
     },
   },
   language: string,
+  domain: string,
 };
 
 type HistoryType = {
@@ -193,7 +194,7 @@ export class Referral extends React.PureComponent<Props, State> {
     const { showCopiedTooltip, showShareModal, history } = this.state;
     const {
       screenSize, voucher, facebook,
-      customerInfo, language, referral,
+      customerInfo, language, referral, domain,
     } = this.props;
     const { voucher_id, voucher_name } = voucher;
     const breadcrumb = [
@@ -235,6 +236,7 @@ export class Referral extends React.PureComponent<Props, State> {
                   facebook={facebook}
                   language={language}
                   screenSize={screenSize}
+                  domain={domain}
                 />
               </Modal>
             </section>
