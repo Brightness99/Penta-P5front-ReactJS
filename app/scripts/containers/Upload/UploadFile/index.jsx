@@ -168,14 +168,22 @@ export class UploadFile extends React.Component {
   };
 
   renderModalDialog = () => {
+    const { fileFormats, locale } = this.props;
     const { isShowErrorDialog } = this.state;
+    const isPdfOnly = fileFormats.length === 1 && fileFormats.includes('.pdf');
     return (isShowErrorDialog &&
       <Modal handleCloseModal={this.handleDialogClose}>
         <section className="upload-file-warning-dialog">
           <WarningFilled />
           <h3>Formato de arquivo inválido</h3>
-          <p>Você optou por enviar arquivo fechado. Por favor envie arquivo no formato PDF ou retorne para página de
-            Configurações e opte por Arquivo aberto.</p>
+          {
+            isPdfOnly &&
+            <p>{locale.page.upload.box_upload.PDF_WARNING}</p>
+          }
+          {
+            !isPdfOnly &&
+            <p>{locale.page.upload.box_upload.LFILE_WARNING}</p>
+          }
           <Button
             onClick={this.handleDialogClose}
             kind="success"

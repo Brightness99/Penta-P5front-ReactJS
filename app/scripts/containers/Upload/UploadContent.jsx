@@ -103,7 +103,7 @@ export default class UploadContent extends React.Component {
     if (parameters.file_format.id === 'ppdf') {
       fileFormats = ['.pdf'];
     } else {
-      fileFormats = ['.ai', '.indd', '.psd', '.cdr', '.jpg', '.jpeg'];
+      fileFormats = ['.pdf', '.ai', '.indd', '.psd', '.cdr', '.jpg', '.jpeg'];
     }
     this.setState({
       selectedAdditionalParameters: parameters,
