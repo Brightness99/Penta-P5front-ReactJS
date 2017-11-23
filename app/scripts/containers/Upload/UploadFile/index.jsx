@@ -6,12 +6,11 @@ import { uploadFileRequest, uploadFileCancel } from 'actions';
 import { Button } from 'quarks/Inputs';
 import Modal from 'components/Modal';
 import { WarningFilled } from 'components/Icons';
-import FileFormatIcon from 'components/FileFormatIcon';
 import PreviewUploadedFile from './PreviewUploadedFile';
 import UploadProgress from './UploadProgress';
+import UploadFileContainer from './UploadFileContainer';
 
 type Props = {
-  acceptedFormats: Array<string>,
   handleUploadFile: (file: { title: string, preview: {} }) => void,
   handleRemoveFile: (file: { title: string, preview: {} }) => void,
   fileFormats: Array<string>,
@@ -29,7 +28,6 @@ type Props = {
 }
 
 type State = {
-  isShowDropzone: boolean,
   isShowErrorDialog: boolean,
   isSelectedFileForUpload: boolean,
   fileName: string,
@@ -76,41 +74,8 @@ export class UploadFile extends React.Component {
   props: Props;
   state: State;
 
-  onDragEnter = (e) => {
-    this.setState({ isShowDropzone: true });
-    e.stopPropagation();
-    e.preventDefault();
-    return false;
-  };
-
-  onDragOver = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-  };
-
-  onDragLeave = (e) => {
-    this.setState({ isShowDropzone: false });
-    e.stopPropagation();
-    e.preventDefault();
-    return false;
-  };
-
-  onDrop = (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    this.uploadFile(files[0]);
-    return false;
-  };
-
-  onChangeInput = (e) => {
-    e.preventDefault();
-    const files = e.target.files;
-    this.uploadFile(files[0]);
-    return false;
-  };
-
-  uploadFile(file) {
+  uploadFile = (files) => {
+    const file = files[0];
     const { uploadFile, fileFormats } = this.props;
     const fileName = file.name;
     const format = fileName.split('.').pop();
@@ -119,7 +84,6 @@ export class UploadFile extends React.Component {
       return;
     }
     this.setState({
-      isShowDropzone: false,
       fileName,
       fileFormat: format,
       isSelectedFileForUpload: true,
@@ -128,7 +92,7 @@ export class UploadFile extends React.Component {
     if (typeof uploadFile === 'function') {
       uploadFile(file);
     }
-  }
+  };
 
   handleRemoveFile = () => {
     const { preview } = this.state;
@@ -159,7 +123,6 @@ export class UploadFile extends React.Component {
 
   handleDialogOpen = () => {
     this.setState({
-      isShowDropzone: false,
       isShowErrorDialog: true,
     });
   };
@@ -196,60 +159,39 @@ export class UploadFile extends React.Component {
   };
 
   renderContent = () => {
-    const { progress, multiple, fileFormats, locale } = this.props;
-    const { isSelectedFileForUpload, fileName, fileFormat, isShowDropzone } = this.state;
+    const { progress, multiple, fileFormats, locale, isUploadRunning } = this.props;
+    const { isSelectedFileForUpload, fileName, fileFormat } = this.state;
 
     if (isSelectedFileForUpload) {
-      return (<UploadProgress
-        progress={progress}
-        locale={locale}
-        fileName={fileName}
-        fileFormat={fileFormat}
-        handleCancelUploading={this.handleCancelUploading}
-      />);
+      return (
+        <section className="upload-file-content active">
+          <UploadProgress
+            progress={progress}
+            locale={locale}
+            fileName={fileName}
+            fileFormat={fileFormat}
+            handleCancelUploading={this.handleCancelUploading}
+          />
+        </section>);
     }
 
-    return (
-      <label
-        className="upload-file-block"
-        onDragLeave={this.onDragLeave}
-        onDragEnter={this.onDragEnter}
-        onDragOver={this.onDragOver}
-        onDrop={this.onDrop}
-      >
-        <input type="file" multiple={multiple} accept={fileFormats.join()} onChange={this.onChangeInput} />
-        <section className="icons">
-          {
-            !isShowDropzone &&
-              [<FileFormatIcon key="ai" title="AI" />,
-                <FileFormatIcon key="ind" title="IND" />]
-          }
-          <FileFormatIcon title="+" />
-          {
-           !isShowDropzone &&
-             [<FileFormatIcon key="psd" title="PSD" />,
-               <FileFormatIcon key="jpg" title="JPG" />]
-          }
-        </section>
-        <p className="description">Arraste um arquivo até aqui para enviar ou</p>
-        <button className="select-file">{locale.page.upload.box_upload.CHOOSE_FILE}</button>
-      </label>
-    );
+    return (<UploadFileContainer
+      multiple={multiple}
+      fileFormats={fileFormats}
+      handleFiles={this.uploadFile}
+      locale={locale}
+      disabled={isUploadRunning}
+    />);
   };
 
   renderUploadContainer() {
-    const { isShowDropzone, isSelectedFileForUpload } = this.state;
-    const { isUploadRunning, title, showTitle } = this.props;
-    const isActive = isShowDropzone || isSelectedFileForUpload;
-    const isInactive = !isSelectedFileForUpload && isUploadRunning;
+    const { title, showTitle } = this.props;
 
     return (
       <section className="upload-file-container">
         { showTitle && <h4>{title}</h4> }
-        <section className={cx('upload-file-content', isActive && 'active', isInactive && 'inactive')}>
-          {this.renderModalDialog()}
-          {this.renderContent()}
-        </section>
+        {this.renderModalDialog()}
+        {this.renderContent()}
       </section>
     );
   }
