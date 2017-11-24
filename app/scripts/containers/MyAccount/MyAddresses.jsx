@@ -225,7 +225,7 @@ export class MyAddresses extends React.Component {
           </div>
           <div className="details">
             <p className="firstDetail">Endereço</p>
-            <p className="secondDetail">{item.additional_address} {item.street}</p>
+            <p className="secondDetail">{item.street}, {item.number} - {item.additional_address}</p>
           </div>
           <div className="details">
             <p className="firstDetail">Cidade/UF</p>
