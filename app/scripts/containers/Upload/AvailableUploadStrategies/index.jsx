@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import AvailableUploadStrategy from './AvailableUploadStrategy';
-import getUploadStrategies from './availableUploadStrategies';
+import getUploadStrategies from './getUploadStrategies';
 
 type Props = {
   availableStrategies: Array<number>,

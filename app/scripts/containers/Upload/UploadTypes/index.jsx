@@ -6,18 +6,16 @@ import NormalUploadType from './NormalUploadType';
 type Props = {
   uploadType: string,
   selectedStrategy: number,
-  handleCanvasFinalize: (docRef: string) => void,
   cimpressInfo: {},
   fileFormats: [],
   locale: {},
-  handleFiles: (files: []) => void,
+  handleFiles: (files: { title: string, previews: []}) => void,
   handleOrientationChanged: (isVertical: number) => void,
 }
 
 const UploadTypes = ({ uploadType,
                        selectedStrategy,
                        handleFiles,
-                       handleCanvasFinalize,
                        handleOrientationChanged,
                        cimpressInfo,
                        locale,
@@ -31,7 +29,6 @@ const UploadTypes = ({ uploadType,
             isSku={false}
             hideSubmitButton={true}
             locale={locale}
-            handleCanvasFinalize={handleCanvasFinalize}
             handleOrientationChanged={handleOrientationChanged}
             cimpressInfo={cimpressInfo}
           />);
@@ -41,7 +38,6 @@ const UploadTypes = ({ uploadType,
             isSku={true}
             hideSubmitButton={true}
             locale={locale}
-            handleCanvasFinalize={handleCanvasFinalize}
             handleOrientationChanged={handleOrientationChanged}
             cimpressInfo={cimpressInfo}
           />);

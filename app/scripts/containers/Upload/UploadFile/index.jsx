@@ -112,7 +112,6 @@ export class UploadFile extends React.Component {
     const { uploadCancel } = this.props;
     this.setState({
       isSelectedFileForUpload: false,
-      isShowPreview: false,
     });
     if (uploadCancel && typeof uploadCancel === 'function') {
       uploadCancel();
