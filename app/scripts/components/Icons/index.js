@@ -69,26 +69,6 @@ export EyeEmptyIcon from './EyeEmptyIcon';
 export BarCodeFileIcon from './BarCodeFile';
 export ImageFileIcon from './ImageFile';
 export ReceiptFileIcon from './ReceiptFile';
-
-// Temporary
-export AngleRightIcon from './AngleRight';
-export AngleLeftIcon from './AngleLeft';
-export OneFileIcon from './OneFileIcon';
-export MultipleFilesIcon from './MultipleFilesIcon';
-export AccordionMinusIcon from './AccordionMinus';
-export AccordionPlusIcon from './AccordionPlus';
-export NFIcon from './NF';
-
-// new definitive icons
-export AngleDownIcon from './_AngleDown';
-export ExclusiveServiceIcon from './_ExclusiveService';
-export HeartIcon from './_Heart';
-export HelpCircleIcon from './_HelpCircle';
-export MenuIcon from './_Menu';
-export MyAccountIcon from './_MyAccount';
-export PrintiIcon from './_Printi';
-export PrintiSymbolIcon from './_PrintiSymbol';
-export SearchIcon from './_Search';
 export FilialIcon from './FilialIcon';
 export GraficProduction from './GraficProduction';
 export ControlProduction from './ControlProduction';
@@ -114,3 +94,25 @@ export MailIcon from './MailIcon';
 export FacebookIcon from './FacebookIcon';
 export StatusIcon from './StatusIcon';
 export Bell from './Bell';
+export VideoIcon from './Video';
+export AlertCircle from './AlertCircle';
+
+// Temporary
+export AngleRightIcon from './AngleRight';
+export AngleLeftIcon from './AngleLeft';
+export OneFileIcon from './OneFileIcon';
+export MultipleFilesIcon from './MultipleFilesIcon';
+export AccordionMinusIcon from './AccordionMinus';
+export AccordionPlusIcon from './AccordionPlus';
+export NFIcon from './NF';
+
+// new definitive icons
+export AngleDownIcon from './_AngleDown';
+export ExclusiveServiceIcon from './_ExclusiveService';
+export HeartIcon from './_Heart';
+export HelpCircleIcon from './_HelpCircle';
+export MenuIcon from './_Menu';
+export MyAccountIcon from './_MyAccount';
+export PrintiIcon from './_Printi';
+export PrintiSymbolIcon from './_PrintiSymbol';
+export SearchIcon from './_Search';

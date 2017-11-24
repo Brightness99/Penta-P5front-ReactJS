@@ -225,7 +225,7 @@ export class MyAddresses extends React.Component {
           </div>
           <div className="details">
             <p className="firstDetail">Endereço</p>
-            <p className="secondDetail">{item.additional_address} {item.street}</p>
+            <p className="secondDetail">{item.street}, {item.number} - {item.additional_address}</p>
           </div>
           <div className="details">
             <p className="firstDetail">Cidade/UF</p>
@@ -267,11 +267,11 @@ export class MyAddresses extends React.Component {
         </div>);
       case '2':
         return (<div className="box-addressRequest">
-          Waiting Authorization
+          Sua solicitação de ter endereço de remetente personalizado foi enviada para o departamento da Printi! Aguarde a resposta da sua solicitação.
         </div>);
       case '3':
         return (<div className="box-addressRequest">
-          Authorization Rejected
+          Infelizmente sua solicitação de endereço do remetente personalizado não foi autorizada.
         </div>);
       default:
         return null;
@@ -361,16 +361,16 @@ export class MyAddresses extends React.Component {
     const { account: { addresses } } = this.props;
     const { openAddressModal, type, selectedAddress } = this.state;
 
-    return (
+    return (<div>
+      <h3 className="atm-myorder-title">Meus endereços</h3>
       <section className="container-myaddresses">
         {openAddressModal &&
         <Modal handleCloseModal={this.handleCloseModal}>
           <AddressFormModal type={type} onCloseModal={this.handleCloseModal} address={selectedAddress} isNew={!selectedAddress} />
         </Modal>}
-        <h3 className="subtitle-myAddresses">Meus endereços</h3>
         {!addresses.isLoaded || addresses.isLoading ? <Loading /> : this.renderPage()}
       </section>
-    );
+    </div>);
   }
 }
 

@@ -8,16 +8,23 @@
 .mol-prepress-files,
 .mol-prepress-orientarion {
   flex-direction: column;
-  display: flex;
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .mol-prepress-orientarion {
   padding-bottom: 1rem;
+
   > div {
     display: flex;
     justify-content: space-around;
     > label {
-      width: 46%;
+      margin-top: 0.8rem;
+      width: 100%;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
   }
 }

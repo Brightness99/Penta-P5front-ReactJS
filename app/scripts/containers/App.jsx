@@ -21,7 +21,7 @@ import MyAccount from 'containers/MyAccount';
 import ArtProposal from 'containers/ArtProposal';
 import Checkout from 'containers/Checkout';
 import Header from 'components/Header';
-import Upload from 'containers/Upload';
+import { FunnelUploadPage, AccountUploadPage } from 'containers/Upload';
 import CloudCompany from 'containers/CloudCompany';
 import Glossary from 'containers/Glossary';
 import Success from 'containers/Success';
@@ -126,7 +126,8 @@ export class App extends React.Component {
                       <Route path="/cloud" component={CloudCompany} />
                       <Route exact path="/test" component={Home} />
                       <Route path="/meu-carrinho" component={Cart} />
-                      <Route path="/:slug/upload/:itemId" component={Upload} />
+                      <Route path="/editar-modelo/:itemId" component={AccountUploadPage} />
+                      <Route path="/:slug/upload/:itemId" component={FunnelUploadPage} />
                       <Route path="/indique-a-printi" component={Referral} />
                       <Route exact path="/404" component={Error404} />
                       <Route exact path="/venda-corporativa" component={CorporateSales} />

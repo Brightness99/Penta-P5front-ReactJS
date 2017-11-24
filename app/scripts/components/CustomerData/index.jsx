@@ -136,7 +136,7 @@ export class CustomerDataForm extends React.Component {
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Telefone"
         value={account.phone.value}
-        pattern="(99) 9999[9]-9999"
+        pattern={['(99) 9999-9999', '(99) 99999-9999']}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('phone', isValid, value)}
@@ -316,7 +316,7 @@ export class CustomerDataForm extends React.Component {
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Phone"
         value={account.phone.value}
-        pattern="(999) 999-9999"
+        pattern={['(99) 9999-9999', '(99) 99999-9999']}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('phone', isValid, value)}

@@ -9,26 +9,29 @@
       padding: 2rem;
 
       .atm-funnel-block-title {
-        align-items: center;
-        color: $color-almostBlack;
         display: inline-flex;
         flex-direction: column;
-        font-family: $font-family-nunito-light;
-        font-size: $font-size-xl;
-        justify-content: space-between;
         line-height: 1;
         margin-left: 1rem;
         width: 100%;
+        font-family: $font-family-nunito-light;
+        color: $color-almostBlack;
+        font-size: $font-size-xl;
 
         @include lg {
           flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
         }
       }
     }
 
     &-body {
       display: flex;
-      padding: 2rem 3rem;
+      padding: 1rem;
+      @include lg {
+        padding: 2rem 3rem;
+      }
     }
   }
 }

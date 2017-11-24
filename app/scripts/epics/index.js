@@ -18,6 +18,13 @@ import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
 import { printiPressFetch } from './printi-press';
 import { glossarySlugFetch, glossaryFetch } from './glossary';
+import {
+  uploadFetch,
+  uploadFileRequest,
+  uploadFileCancel,
+  uploadFinishRequest,
+  uploadSetOrientationRequest
+} from './upload';
 import { siteMapFetch } from './site-map';
 import {
   settingsFetch,
@@ -25,7 +32,10 @@ import {
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
-  prepressDownloadFetch
+  prepressDownloadFetch,
+  pickupPlacesFetch,
+  settingsAdditionalOptionsFetch,
+  settingsPrePressFetch,
 } from './settings';
 import { localeFetch } from './locale';
 import {
@@ -96,7 +106,9 @@ import {
 import { guideFetch } from './guide';
 
 import {
-  referralSendRequest
+  referralSendRequest,
+  getReferralVoucherSum,
+  getReferralHistory
 } from './referral';
 
 import { resetPassword, setNewPassword, getExpiredInfo } from './forgot-password';
@@ -112,7 +124,10 @@ export default combineEpics(
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
+  settingsAdditionalOptionsFetch,
   prepressDownloadFetch,
+  settingsPrePressFetch,
+  pickupPlacesFetch,
   userSignIn,
   userSignUp,
   userSocialSignIn,
@@ -151,6 +166,12 @@ export default combineEpics(
   accountSenderAddressRequest,
   policyFetch,
   termsFetch,
+  productCategoriesFetch,
+  uploadFetch,
+  uploadFileRequest,
+  uploadFileCancel,
+  uploadFinishRequest,
+  uploadSetOrientationRequest,
   aboutFetch,
   productCategoriesFetch,
   proposalsFetch,
@@ -175,4 +196,6 @@ export default combineEpics(
   removeFile,
   deleteBriefing,
   finishUploadFiles,
+  getReferralVoucherSum,
+  getReferralHistory,
 );

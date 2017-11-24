@@ -10,7 +10,12 @@
 
     &__logo {
       border: none;
+      text-align: center;
       width: 17.9%;
+
+      > img {
+        height: 4.9rem;
+      }
     }
 
     &--th {

@@ -7,7 +7,7 @@
 import { REHYDRATE } from 'redux-persist/constants';
 import { createReducer } from 'utils';
 
-import { UserConstants, SettingsConstants } from 'constants/index';
+import { UserConstants } from 'constants/index';
 
 export const userState: UserType = {
   rehydrated: false,
@@ -48,11 +48,6 @@ export const userState: UserType = {
     message: '',
   },
   customerInfo: {},
-  address: {
-    isZipcodeValid: false,
-    zipcode: '',
-    zipcodeErrorMessage: '',
-  },
   updatedAt: 0,
 };
 
@@ -103,44 +98,6 @@ export default {
         isRunning: false,
         isLoaded: false,
         updatedAt: action.meta.updatedAt,
-      };
-    },
-    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_SUCCESS](state, action) {
-      return {
-        ...state,
-        address: {
-          ...state.address,
-          isZipcodeValid: true,
-          zipcode: action.payload.zipcode,
-        },
-        isRunning: false,
-        isLoaded: true,
-      };
-    },
-    [SettingsConstants.SETTINGS_ZIPCODE_FETCH_FAILURE](state, action) {
-      return {
-        ...state,
-        address: {
-          ...state.address,
-          isZipcodeValid: false,
-          zipcode: action.payload.zipcode,
-          zipcodeErrorMessage: action.payload.message,
-        },
-        isRunning: false,
-        isLoaded: false,
-      };
-    },
-    [SettingsConstants.SETTINGS_ZIPCODE_RESET](state) {
-      return {
-        ...state,
-        address: {
-          ...state.address,
-          isZipcodeValid: false,
-          zipcode: '',
-          zipcodeErrorMessage: '',
-        },
-        isRunning: true,
-        isLoaded: false,
       };
     },
     [UserConstants.USER_AUTH_SIGN_IN_REQUEST](state) {

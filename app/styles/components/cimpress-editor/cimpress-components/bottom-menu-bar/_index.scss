@@ -1,0 +1,66 @@
+.upload__canvas-schema__bottom-menu-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    font-size: 1rem;
+    color: #6a6f7a;
+    .app__input__checkbox {
+      span {
+        margin-right: 1rem;
+      }
+    }
+  }
+  .buttons-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    .dcl-action-btn--preview, .canvas-schema__preview-button{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 16rem;
+      height: 4rem;
+      padding: 0;
+      border: 0.1rem solid $color-printi;
+      border-radius: 0.3rem;
+      transition: 0.3s;
+      background-color: transparent;
+      color: $color-printi;
+      &:hover {
+        background-color: $color-sky-blue-light;
+      }
+      svg{
+        fill: $color-printi;
+        margin-right: 1rem;
+        width: 2.3rem;
+        height: 2.3rem;
+      }
+      .dcl-action-btn__icon {
+        fill: $color-printi;
+        margin-right: 1rem;
+      }
+      .dcl-action-btn__description, .description {
+        color: $color-printi;
+        font-family: $font-family-open-sans;
+        font-weight: 700;
+        font-size: 1.3rem;
+      }
+    }
+    .app__qrk__button {
+      display: flex;
+      width: 14rem;
+      height: 4rem;
+      border-radius: 0.3rem;
+      transition: 0.3s;
+      justify-content: center;
+      margin: 0 0 0 2rem;
+    }
+  }
+}
