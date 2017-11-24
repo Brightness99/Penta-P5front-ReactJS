@@ -1,0 +1,40 @@
+.upload__canvas-schema__top-menu-bar {
+  display       : flex;
+  width         : 100%;
+  border        : 1px solid $color-hrLightGray;
+  border-radius : 3px;
+  .top-menu-bar_btn {
+    display          : flex;
+    flex-direction   : column;
+    align-items      : center;
+    justify-content  : center;
+    width            : 8rem;
+    height           : 6rem;
+    background-color : transparent;
+    box-sizing       : border-box;
+    transition       : 0.3s;
+    border           : none;
+    border-right : 0.1rem solid $color-hrLightGray;
+    svg {
+      width         : 2rem;
+      height        : 2.5rem;
+      margin-bottom : 0.2rem;
+    }
+    span {
+      display     : flex;
+      font-family : $font-family-open-sans-regular;
+      font-size   : 1rem;
+      color       : $color-lightGray;
+      margin-top  : 0.5rem;
+    }
+    &.active, &:hover {
+      background-color : $color-sky-blue-light;
+      span {
+        color : $color-printi-blue;
+      }
+      svg {
+        fill : $color-printi-blue;
+      }
+    }
+  }
+}

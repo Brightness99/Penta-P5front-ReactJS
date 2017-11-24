@@ -1,0 +1,56 @@
+.preview-image-modal-container {
+  z-index  : 10;
+  position : fixed;
+  left     : 0;
+  top      : 0;
+  width    : 100%;
+  height   : 100%;
+  .close-button {
+    z-index  : 10;
+    position : fixed;
+    right    : 1rem;
+    top      : 1rem;
+    svg {
+      margin : 1rem;
+      width  : 3rem;
+      height : 3rem;
+      fill   : white;
+      float  : right;
+      &:hover {
+        fill : #969696;
+      }
+    }
+  }
+  .preview-image-modal {
+    z-index        : 10;
+    position       : fixed;
+    left           : 0;
+    top            : 0;
+    width          : 100%;
+    height         : 100%;
+    pointer-events : none;
+    .preview-image-content {
+      display            : flex;
+      flex-direction     : column;
+      justify-content    : center;
+      align-items        : center;
+      width              : 100%;
+      height             : 100%;
+      animation-name     : zoom;
+      animation-duration : 0.6s;
+      z-index            : 8;
+      img {
+        max-width  : 80%;
+        max-height : 80%;
+      }
+      @keyframes zoom {
+        from {
+          transform : scale(0)
+        }
+        to {
+          transform : scale(1)
+        }
+      }
+    }
+  }
+}

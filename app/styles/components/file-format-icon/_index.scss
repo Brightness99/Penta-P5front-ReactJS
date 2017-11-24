@@ -1,0 +1,19 @@
+.file-format-icon-container {
+  align-items     : center;
+  display         : flex;
+  justify-content : center;
+  margin          : 1rem 0;
+  width            : 3rem;
+  span {
+    color       : #1271e0;
+    font-family : $font-family-open-sans;
+    font-size   : 0.8rem;
+    font-weight : bold;
+    position    : absolute;
+  }
+  & > svg {
+    background-color : transparent;
+    fill             : #1271e0;
+    transform        : scale(1, -1)
+  }
+}

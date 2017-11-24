@@ -19,6 +19,7 @@ import terms from './terms';
 import printiPress from './printi-press';
 import glossary from './glossary';
 import header from './header';
+import upload from './upload';
 import successfulPurchase from './successful-purchase';
 import siteMap from './site-map';
 import about from './about';
@@ -45,6 +46,7 @@ export default {
   ...printiPress,
   ...glossary,
   ...header,
+  ...upload,
   ...successfulPurchase,
   ...siteMap,
   ...about,
