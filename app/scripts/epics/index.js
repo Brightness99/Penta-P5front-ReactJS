@@ -18,6 +18,13 @@ import { productCategoriesFetch } from './header';
 import { blogFetch } from './blog';
 import { printiPressFetch } from './printi-press';
 import { glossarySlugFetch, glossaryFetch } from './glossary';
+import {
+  uploadFetch,
+  uploadFileRequest,
+  uploadFileCancel,
+  uploadFinishRequest,
+  uploadSetOrientationRequest
+} from './upload';
 import { siteMapFetch } from './site-map';
 import {
   settingsFetch,
@@ -145,6 +152,12 @@ export default combineEpics(
   accountSenderAddressRequest,
   policyFetch,
   termsFetch,
+  productCategoriesFetch,
+  uploadFetch,
+  uploadFileRequest,
+  uploadFileCancel,
+  uploadFinishRequest,
+  uploadSetOrientationRequest,
   aboutFetch,
   productCategoriesFetch,
   successfulPurchaseFetch,

@@ -20,6 +20,7 @@ export * from './terms';
 export * from './printi-press';
 export * from './glossary';
 export * from './header';
+export * from './upload';
 export * from './successful-purchase';
 export * from './site-map';
 export * from './templates';

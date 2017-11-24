@@ -8,7 +8,7 @@ import cx from 'classnames';
 type Props = {
   type: string,
   title: string,
-  message: string,
+  content: string,
 };
 
 const FlashMessage = (props: Props) => {
@@ -40,7 +40,7 @@ const FlashMessage = (props: Props) => {
         </div>
         <div className="flashmessage-item-content-container">
           <span className="flashmessage-item-title">{props.title}</span>
-          <p className="flashmessage-item-content">{props.message}</p>
+          <p className="flashmessage-item-content">{props.content}</p>
         </div>
       </div>
     </div>

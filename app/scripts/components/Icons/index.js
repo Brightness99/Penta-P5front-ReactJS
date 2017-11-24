@@ -94,6 +94,7 @@ export MailIcon from './MailIcon';
 export FacebookIcon from './FacebookIcon';
 export Bell from './Bell';
 export VideoIcon from './Video';
+export AlertCircle from './AlertCircle';
 
 // Temporary
 export AngleRightIcon from './AngleRight';

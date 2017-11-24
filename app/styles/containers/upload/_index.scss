@@ -1,49 +1,48 @@
-@import "additionalOptions/index";
-@import "availableStrategy/index";
-@import "uploadTypeSchemas/canvas/index";
-@import "uploadTypeSchemas/normal/index";
+@import './additional-upload-options/index';
+@import './available-upload-strategies/index';
+@import './upload-file/index';
+@import './upload-type-schemes/index';
+@import './cart-item-definitions-panel/index';
 
 .page-upload {
-	.container {
-		.upload-container {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      background-color: $color-white;
-      justify-content: center;
-      margin-bottom: 2rem;
-			.upload-container-centralized {
-        display: flex;
-        flex-direction: column;
-        margin: 0 0 2rem 0;
-        width: 93%;
-				@include md {
-			    width: 82%;
-			  }
-				@include lg {
-          justify-content: space-between;
-          flex-direction: row;
-			  }
-				.container-midSide {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-					@include lg {
-						width: 49%;
-					}
-				}
-			}
-      .upload-container-canvasCentralized {
-        display: flex;
-        flex-direction: column;
-        margin: 0 0 2rem 0;
-        width: 98%;
-        @include md {
-          width: 95%;
-        }
-        @include lg {
+  margin-bottom : 5rem;
+  .container {
+    .description {
+      color : #6a6f7a;
+    }
+    .upload-finish-block {
+      display         : flex;
+      flex-direction  : column;
+      justify-content : flex-end;
+      align-items     : flex-end;
+      label {
+        display         : flex;
+        flex-direction  : row;
+        justify-content : space-between;
+        align-items     : center;
+        font-size       : 1rem;
+        color           : #6a6f7a;
+        .app__input__checkbox {
+          span {
+            margin-right : 1rem;
+          }
         }
       }
-		}
-	}
+      .app__qrk__button {
+        margin-top     : 1rem;
+        padding        : 0.5rem 2rem;
+        border         : none;
+        border-radius  : 3px;
+        color          : #ffffff;
+        text-transform : uppercase;
+        width          : 23rem;
+        margin-left    : 1rem;
+        &.cancel {
+          background-color : transparent;
+          color            : #6a6f7a;
+          border           : 0.1rem solid #6a6f7a;
+        }
+      }
+    }
+  }
 }

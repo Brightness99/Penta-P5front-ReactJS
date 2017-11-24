@@ -113,6 +113,20 @@ declare type BannerImageType = {
   alt: string,
 };
 
+declare type FinishUploadType = {
+  document_reference_url: string,
+  upload_type: string,
+  cimpress_sku_scene: {},
+  thumbnail: string,
+  upload_strategy: number,
+  isRepurchase: boolean,
+  additional_options: {
+    file_format: { id: string, name: string },
+    proof: { id: string, name: string }
+  },
+  uploads: {}
+}
+
 declare type GoogleSuccessResult = {
   googleId: string,
   tokenId: string,
