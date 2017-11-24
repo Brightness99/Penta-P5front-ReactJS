@@ -104,7 +104,7 @@ export class UploadFile extends React.Component {
     });
 
     if (handleFiles && typeof handleFiles === 'function') {
-      handleFiles({ title, previews: previews });
+      handleFiles({ title, previews });
     }
   };
 
@@ -198,12 +198,12 @@ export class UploadFile extends React.Component {
     const { locale } = this.props;
 
     return preview.map(x => (
-          <PreviewUploadedFile
-            key={x.timeToken}
-            locale={locale}
-            preview={x}
-            handleRemoveFile={this.handleRemoveFile}
-          />));
+      <PreviewUploadedFile
+        key={x.timeToken}
+        locale={locale}
+        preview={x}
+        handleRemoveFile={this.handleRemoveFile}
+      />));
   }
 
   render() {
