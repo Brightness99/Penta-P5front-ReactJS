@@ -15,6 +15,7 @@ type Props = {
   customerId: string,
   handleCloseModal: () => void,
   promoCodeLink: string,
+  domain: string,
   socialLoginSettingsFetch: () => void,
   facebook: {
     status: string,
@@ -43,10 +44,17 @@ type State = {
   activeSection: 'email' | 'link' | 'facebook',
 };
 
-const message = (voucher: string) =>
-  `Hey all, check my discount voucher from printi, with that you can get discount on your order: ${voucher}`;
+const messageMap = new Map()
+.set('pt_BR', voucher =>
+  `Oi pessoal! Tenho um voucher de desconto para a Printi! Adicionem no carrinho para receber o desconto! Voucher: ${voucher}`)
+.set('en_US', voucher =>
+  `Hey all, check my discount voucher from printi, with that you can get discount on your order: ${voucher}`);
 
-// TODO: check facebook share
+const message = (voucher: string, language: string) => {
+  const localeMessage = messageMap.get(language);
+  return localeMessage ? localeMessage(voucher) : '';
+};
+
 export default class ShareCode extends React.PureComponent<Props, State> {
   constructor(props) {
     super(props);
@@ -218,8 +226,9 @@ export default class ShareCode extends React.PureComponent<Props, State> {
 
   render() {
     const { activeSection } = this.state;
-    const { facebook, language, screenSize, voucher } = this.props;
+    const { facebook, language, screenSize, voucher, domain } = this.props;
     const credentials = (facebook || {}).credentials || {};
+
     return (
       <section className="org-modal-share">
         <h4 className="title-modal-share">{'Compartilhar código'}</h4>
@@ -250,9 +259,9 @@ export default class ShareCode extends React.PureComponent<Props, State> {
           >
             <Share
               appId={(credentials.app_id || 0).toString()}
-              href="https://www.facebook.com/"
+              href={`https://www.${domain}`}
               mobileIframe={isMobile(screenSize)}
-              quote={message(voucher.voucher_name || voucher.voucher_id)}
+              quote={message(voucher.voucher_name || voucher.voucher_id, language)}
             >
               <button
                 type="button"

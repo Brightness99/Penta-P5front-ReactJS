@@ -3,13 +3,25 @@
 import React from 'react';
 
 type Props = {
-  total: number,
-  names: string,
-}
+  parts: Object,
+  locale: {
+    TWO_PART_PRODUCT: string,
+    COUNTRY_CODE: string,
+  },
+};
 
 const PartsLabel = (props: Props) => {
-  if (props.total > 1) {
-    return (<div className="app__config__options-parts">Este item possui {props.total} partes: {props.names}</div>);
+  const { parts, locale } = props;
+
+  if (parts.length > 1) {
+    return (
+      <div className="app__config__options-parts">
+        {`${locale.TWO_PART_PRODUCT}: ${parts.reduce(
+          (prevPart, currentPart) => (prevPart !== '' ? `${prevPart} ${locale.COUNTRY_CODE === 'US' ? 'and' : 'e'} ${currentPart.name}` : currentPart.name),
+          ''
+        )}`}
+      </div>
+    );
   }
 
   return null;

@@ -208,7 +208,7 @@ class AddressFormModal extends React.Component {
             name="number"
             key="address-form-number"
             className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Numero"
+            placeholder="Número"
             value={form.number.value}
             onEnterKeyPress={this.handleClick}
             onChange={(isValid, value) => this.handleChange('number', isValid, value)}

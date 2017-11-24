@@ -1,0 +1,33 @@
+.available-upload-icon{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 2.5rem;
+  @include lg {
+    width: 6.5rem;
+  }
+  span {
+    color: $color-lightGray;
+    font-family: $font-family-open-sans;
+    font-size: 0.6rem;
+    font-style: oblique;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    position: absolute;
+    @include lg {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.available-upload-double-icon{
+  display: flex;
+  flex-direction: row;
+  padding: 0 0.2rem;
+  .available-upload-icon:first-of-type{
+    margin-bottom: 0.8rem;
+  }
+  .available-upload-icon:last-child{
+    margin-top: 0.8rem;
+  }
+}

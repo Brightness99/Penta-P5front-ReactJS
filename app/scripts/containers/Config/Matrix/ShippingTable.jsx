@@ -3,8 +3,10 @@
 import React from 'react';
 import moment from 'moment';
 import cx from 'classnames';
-
-import { settingsMatrixSelect } from 'actions';
+import { shouldComponentUpdate, isMobile } from 'utils/helpers';
+import { RoundedTransparentButton } from 'atoms/Buttons';
+import { PlusCircleIcon } from 'components/Icons';
+import LoyaltyContainer from 'components/LoyaltyContainer';
 
 import { RadioButton } from 'components/Input';
 import Loading from 'components/Loading';
@@ -18,42 +20,31 @@ type Props = {
     rows: {},
     selection: {},
   },
+  loyalty: {},
   dispatch: () => {},
+  onSelect: () => {},
+  isCustomEnabled: boolean,
 };
 
 export default class MatrixShippingTable extends React.Component {
-  componentWillUpdate(nextProps) {
-    const currentProps = this.props;
-
-    if (Object.keys(currentProps.matrix.dates).length <= 0 && Object.keys(nextProps.matrix.dates).length > 0) {
-      this.handleMatrixSelection(Object.keys(nextProps.matrix.dates)[0]);
-    }
-  }
+  shouldComponentUpdate = shouldComponentUpdate;
 
   static props: Props;
 
-  handleMatrixSelection = (selectedDate: number, selectedQuantity: number = 0) => {
-    const { dispatch } = this.props;
+  handleSelection = (ev) => {
+    const { onSelect } = this.props;
 
-    dispatch(settingsMatrixSelect(selectedDate, selectedQuantity));
-  };
-
-  handleMobileDate = (ev) => {
-    this.handleMatrixSelection(ev.currentTarget.name);
-  };
-
-  handleDateSelection = (ev) => {
-    this.handleMatrixSelection(ev.currentTarget.value, ev.currentTarget.name);
+    if (typeof onSelect === 'function') {
+      onSelect(ev);
+    }
   };
 
   renderTdPrice(prices, date, quantity) {
-    const { matrix: { selection } } = this.props;
+    const { matrix: { selection }, locale } = this.props;
 
     if (typeof prices === 'undefined') {
       return (<td key={`price-${date}`}>---</td>);
     }
-
-    console.log(selection.date, date, selection.quantity, quantity);
 
     const isChecked = selection.date === date && selection.quantity === quantity;
 
@@ -61,14 +52,14 @@ export default class MatrixShippingTable extends React.Component {
       <td key={`price-${date}`} className={cx(isChecked && 'active')}>
         <label>
           <RadioButton
-            name={quantity}
-            value={date}
+            name={date}
+            value={quantity}
             checked={isChecked}
-            onChange={this.handleDateSelection}
+            onChange={this.handleSelection}
           />
           <div className="app__config__shipping-table__price">
             {`R$ ${prices.total.toFixed(2)}`}
-            <span>{`R$ ${prices.unit.toFixed(2)} / un`}</span>
+            <span>{`R$ ${prices.unit.toFixed(2)} ${locale.COUNTRY_CODE === 'BR' ? '/ un' : 'each'}`}</span>
           </div>
         </label>
       </td>
@@ -76,8 +67,10 @@ export default class MatrixShippingTable extends React.Component {
   }
 
   renderTdDate(quantity: number) {
+    const { locale } = this.props;
+
     return (
-      <td key={`quantity-${quantity}`}><span>{quantity}</span> un</td>
+      <td key={`quantity-${quantity}`}><span>{quantity}</span>{locale.COUNTRY_CODE === 'BR' && ' un'}</td>
     );
   }
 
@@ -96,18 +89,18 @@ export default class MatrixShippingTable extends React.Component {
   }
 
   renderMobile() {
-    const { matrix: { dates, rows, selection } } = this.props;
+    const { matrix: { dates, rows, selection }, isCustomEnabled, locale } = this.props;
 
     return (
-      <div className="app__config__shipping app__config__shipping--mobile">
-        <ul className="app__config__shipping-datepicker">
+      <div className="app__config__shipping--mobile">
+        <ul className="app__config__shipping-datepicker" key="datepicker">
           {
             Object.keys(dates).map((timestamp) => (
               <li key={timestamp}>
                 <button
                   className={cx(selection.date === timestamp && 'selected')}
                   name={timestamp}
-                  onClick={this.handleMobileDate}
+                  onClick={() => {}}
                 >
                   {this.renderTrDate(timestamp)}
                 </button>
@@ -115,10 +108,10 @@ export default class MatrixShippingTable extends React.Component {
             ))
           }
         </ul>
-        <table className="app__config__shipping-table">
+        <table className="app__config__shipping-table" key="shipping-table">
           <thead>
             <tr>
-              <th className="app__config__shipping-table__quantity app__config__shipping-table--th app__config__shipping-table--th-gray">Quantidade</th>
+              <th className="app__config__shipping-table__quantity app__config__shipping-table--th app__config__shipping-table--th-gray">{locale.QUANTITY}</th>
               <th className="app__config__shipping-table--th app__config__shipping-table--th-gray">Valor</th>
             </tr>
           </thead>
@@ -133,31 +126,42 @@ export default class MatrixShippingTable extends React.Component {
                 ))}
           </tbody>
         </table>
+        {isCustomEnabled && <RoundedTransparentButton key="button">
+          <PlusCircleIcon />
+          <span>{locale.CUSTOM_QUANTITY}</span>
+        </RoundedTransparentButton>}
       </div>
     );
   }
 
   renderDesktop() {
-    const { matrix: { rows, dates } } = this.props;
+    const { matrix: { rows, dates }, isCustomEnabled, locale } = this.props;
 
     return (
-      <div className="app__config__shipping app__config__shipping--desktop">
+      <div className="app__config__shipping--desktop">
         <table className="app__config__shipping-table">
           <thead>
             <tr>
               <th className="app__config__shipping-table__logo" rowSpan={4}>
-                Logo
+                <img src={require('assets/media/svg-wannabe/icon-frete.png')} alt="Printi Delivery" />
               </th>
               <th
-                className="app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-yellow app__config__shipping-table--th app__config__shipping-table--th-round"
+                className={cx(
+                  locale.COUNTRY_CODE === 'BR' && [
+                    'app__config__shipping-table--th',
+                    'app__config__shipping-table--th-rounded',
+                    'app__config__shipping-table--th-yellow',
+                    'app__config__shipping-table--th-round',
+                  ]
+                )}
               >
-                SuperExpress
+                {locale.COUNTRY_CODE === 'BR' && 'SUPEREXPRESS'}
               </th>
               <th colSpan={Object.keys(dates).length - 2} />
               <th
                 className="app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-green"
               >
-                Frete <span>Grátis</span>
+                {locale.SHIPPING} <span>{locale.FREE}</span>
               </th>
             </tr>
             <tr>
@@ -165,7 +169,7 @@ export default class MatrixShippingTable extends React.Component {
                 className="app__config__shipping-table--th app__config__shipping-table--th-gray"
                 colSpan={Object.keys(dates).length}
               >
-                PREVISÃO DE ENTREGA E VALORES
+                {locale.QTY_DATE_PRICE}
               </th>
             </tr>
             <tr>
@@ -175,7 +179,7 @@ export default class MatrixShippingTable extends React.Component {
             </tr>
             <tr />
             <tr>
-              <th className="app__config__shipping-table__quantity app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-gray">Quantidade</th>
+              <th className="app__config__shipping-table__quantity app__config__shipping-table--th app__config__shipping-table--th-rounded app__config__shipping-table--th-gray">{locale.QUANTITY}</th>
             </tr>
           </thead>
           <tbody>
@@ -189,20 +193,32 @@ export default class MatrixShippingTable extends React.Component {
             ))}
           </tbody>
         </table>
+        {isCustomEnabled && <RoundedTransparentButton key="button">
+          <PlusCircleIcon />
+          <span>{locale.CUSTOM_QUANTITY}</span>
+        </RoundedTransparentButton>}
       </div>
     );
   }
 
-  render() {
-    console.log('updated');
+  renderPage() {
     const { screenSize, matrix: { isRunning, isLoaded } } = this.props;
 
     if (isRunning || !isLoaded) {
       return <Loading />;
     }
 
-    return ['xs', 'is', 'sm', 'ix', 'md', 'im'].includes(screenSize)
-      ? this.renderMobile()
-      : this.renderDesktop();
+    return isMobile(screenSize) ? this.renderMobile() : this.renderDesktop();
+  }
+
+  render() {
+    const { screenSize } = this.props;
+
+    return (
+      <div className={cx('app__config__shipping', isMobile(screenSize) ? 'app__config__shipping--mobile' : 'app__config__shipping--desktop')}>
+        <LoyaltyContainer component="matrix" />
+        {this.renderPage()}
+      </div>
+    );
   }
 }
