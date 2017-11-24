@@ -62,7 +62,7 @@ export class ProductItem extends React.Component {
           <div>{item.info.quantity}</div>
         </div>
         <div className="product-item-col product-item-col-value">
-          <div><IntlMoney>{parseFloat(item.info.price)}</IntlMoney></div>
+          <div><IntlMoney>{parseFloat(item.info.total_price)}</IntlMoney></div>
         </div>
       </div>
     );
@@ -102,7 +102,7 @@ export class ProductItem extends React.Component {
             <div>{item.info.quantity}</div>
           </div>
           <div className="product-item-col product-item-col-value">
-            <div><IntlMoney>{parseFloat(item.info.price)}</IntlMoney></div>
+            <div><IntlMoney>{parseFloat(item.info.total_price)}</IntlMoney></div>
           </div>
         </div>
       </div>
