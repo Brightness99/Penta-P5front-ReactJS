@@ -27,7 +27,12 @@ export const artCreationState = {
     url: '',
     isRunning: false,
     isLoaded: false,
-  }
+  },
+  briefing: {
+    isRunning: false,
+    isLoaded: false,
+    data: {},
+  },
 };
 
 export default {
@@ -171,6 +176,89 @@ export default {
         error: action.payload,
       };
     },
+
+
+    [ArtCreationConstants.BRIEFING_DETAILS_FETCH_REQUEST](state) {
+      return {
+        ...state,
+        briefing: {
+          ...state.briefing,
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [ArtCreationConstants.BRIEFING_DETAILS_FETCH_SUCCESS](state, action) {
+      return {
+        ...state,
+        briefing: {
+          data: action.payload.data,
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [ArtCreationConstants.BRIEFING_DETAILS_FETCH_FAILURE](state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+
+    [ArtCreationConstants.SAVE_BRIEFING_REQUEST](state) {
+      return {
+        ...state,
+        briefing: {
+          ...state.briefing,
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [ArtCreationConstants.SAVE_BRIEFING_SUCCESS](state, action) {
+      return {
+        ...state,
+        briefing: {
+          data: action.payload.data,
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [ArtCreationConstants.SAVE_BRIEFING_FAILURE](state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+
+    [ArtCreationConstants.UPDATE_BRIEFING_REQUEST](state) {
+      return {
+        ...state,
+        briefing: {
+          ...state.briefing,
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [ArtCreationConstants.UPDATE_BRIEFING_SUCCESS](state, action) {
+      return {
+        ...state,
+        briefing: {
+          data: action.payload.data,
+          isRunning: true,
+          isLoaded: false,
+        },
+      };
+    },
+    [ArtCreationConstants.UPDATE_BRIEFING_FAILURE](state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+
   }),
 };
 
