@@ -146,6 +146,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 26rem;
+  width: 100%;
 
   .title-modal-share {
     font-family: $font-family-nunito-light;
@@ -174,10 +175,8 @@
   }
 
   .mol-texts-modal-share {
-    display: flex;
-    flex-direction: column;
-
     @include lg {
+      display: flex;
       flex-direction: row;
     }
 
@@ -191,6 +190,7 @@
       justify-content: center;
       margin-bottom: 1rem;
       padding: 1.5rem;
+      width: 100%;
 
       @include lg {
         margin-bottom: 0;
