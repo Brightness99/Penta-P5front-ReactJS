@@ -22,7 +22,7 @@ export class CustomerDataForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStateId: props.account.id_state_registration,
+      selectedStateId: props.account.id_state_registration.value,
     };
   }
 
@@ -33,7 +33,7 @@ export class CustomerDataForm extends React.Component {
 
     if (nextProps.account.type !== account.type) {
       this.setState({
-        selectedStateId: nextProps.account.id_state_registration,
+        selectedStateId: nextProps.account.id_state_registration.value,
       });
     }
   }
@@ -136,7 +136,7 @@ export class CustomerDataForm extends React.Component {
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Telefone"
         value={account.phone.value}
-        pattern="(99) 9999[9]-9999"
+        pattern={['(99) 9999-9999', '(99) 99999-9999']}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('phone', isValid, value)}
@@ -171,6 +171,11 @@ export class CustomerDataForm extends React.Component {
       </Select>,
     ];
   }
+
+  handleCheckValidation = (value) => {
+    const { account } = this.props;
+    return ie(value, account.id_state_registration.value);
+  };
 
   renderEnterprise() {
     const { account } = this.props;
@@ -226,7 +231,7 @@ export class CustomerDataForm extends React.Component {
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Telefone"
         value={account.phone.value}
-        pattern="(99) 9999[9]-9999"
+        pattern={['(99) 9999-9999', '(99) 99999-9999']}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('phone', isValid, value)}
@@ -275,7 +280,7 @@ export class CustomerDataForm extends React.Component {
         <option value="0">Isento</option>
         {this.renderStates()}
       </Select>,
-      selectedStateId && selectedStateId !== '0' &&
+      selectedStateId && selectedStateId !== '' && selectedStateId.toLowerCase() !== 'isento' && selectedStateId !== '0' &&
         <Ninput
           name="state_registration"
           key="enterprise-form-state_registration"
@@ -284,7 +289,8 @@ export class CustomerDataForm extends React.Component {
           value={account.state_registration.value}
           required
           onEnterKeyPress={this.handleSubmit}
-          checkValidation={(value) => ie(value, account.id_state_registration.value)}
+          checkValidation={this.handleCheckValidation}
+          watcher={account.id_state_registration.value}
           onChange={(isValid, value) => this.handleChange('state_registration', isValid, value)}
         />,
     ];
@@ -310,7 +316,7 @@ export class CustomerDataForm extends React.Component {
         className="atm-checkout-input atm-checkout-input-one"
         placeholder="Phone"
         value={account.phone.value}
-        pattern="(999) 999-9999"
+        pattern={['(99) 9999-9999', '(99) 99999-9999']}
         required
         onEnterKeyPress={this.handleSubmit}
         onChange={(isValid, value) => this.handleChange('phone', isValid, value)}

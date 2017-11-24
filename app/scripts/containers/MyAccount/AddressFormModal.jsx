@@ -195,33 +195,33 @@ class AddressFormModal extends React.Component {
             <a target="_blank" className="link" href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm">Nao sei meu CEP*</a>
           </div>
           <Ninput
-            name="additional_address"
-            key="address-form-additional_address"
+            name="street"
+            key="address-form-street"
             className="atm-checkout-input atm-checkout-input-three"
             placeholder="Endereço"
-            value={form.additional_address.value}
+            value={form.street.value}
             onEnterKeyPress={this.handleClick}
-            onChange={(isValid, value) => this.handleChange('additional_address', isValid, value)}
+            onChange={(isValid, value) => this.handleChange('street', isValid, value)}
             required
           />
           <Ninput
             name="number"
             key="address-form-number"
             className="atm-checkout-input atm-checkout-input-one"
-            placeholder="Numero*"
+            placeholder="Número"
             value={form.number.value}
             onEnterKeyPress={this.handleClick}
             onChange={(isValid, value) => this.handleChange('number', isValid, value)}
             required
           />
           <Ninput
-            name="street"
-            key="address-form-street"
+            name="additional_address"
+            key="address-form-additional_address"
             className="atm-checkout-input atm-checkout-input-one"
             placeholder="Complemento"
-            value={form.street.value}
+            value={form.additional_address.value}
             onEnterKeyPress={this.handleClick}
-            onChange={(isValid, value) => this.handleChange('street', isValid, value)}
+            onChange={(isValid, value) => this.handleChange('additional_address', isValid, value)}
             required
           />
           <Ninput

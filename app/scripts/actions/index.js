@@ -28,3 +28,4 @@ export * from './file-mount';
 export * from './guide.js';
 export * from './templates';
 export * from './forgot-password';
+export * from './referral';

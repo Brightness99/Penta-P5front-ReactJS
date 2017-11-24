@@ -3,7 +3,7 @@
 import React from 'react';
 import { vsprintf } from 'sprintf-js';
 
-import { CalendarIcon, HelpIcon } from 'components/Icons';
+import { CalendarIcon, Warning } from 'components/Icons';
 import PrePressTemplate from './PrePressTemplate';
 
 type Props = {
@@ -15,14 +15,25 @@ type Props = {
 
 const art_text = 'A arte deve ser enviada até %s %s às %s. Após esse período a data para a previsão de entrega será alterada.';
 
-export default class Warning extends React.Component {
+export default class MatrixWarning extends React.Component {
   static props: Props;
 
   render() {
-    const { templates, dispatch, product } = this.props;
+    const { locale } = this.props;
 
     return (
       <div className="app__config__warning">
+        <div className="app__config__warning-block app__config__warning-block-delivery">
+          <div className="app__config__warning__logo"><Warning /></div>
+          <div className="app__config__warning__infos">
+            <div className="app__config__warning__title">
+              {locale.flash_messages.delivery_text.ATTENTION}
+            </div>
+            <div className="app__config__warning__text">
+              <span dangerouslySetInnerHTML={{ __html: locale.flash_messages.delivery_text.cep.DESCRIPTION }} />
+            </div>
+          </div>
+        </div>
         <div className="app__config__warning-block app__config__warning-block-delivery">
           <div className="app__config__warning__logo"><CalendarIcon /></div>
           <div className="app__config__warning__infos">
@@ -33,10 +44,6 @@ export default class Warning extends React.Component {
               {vsprintf(art_text, ['terça', '24/11/16', '14:00'])}
             </div>
           </div>
-        </div>
-        <div className="app__config__warning-block app__config__warning-block-template">
-          <div className="app__config__warning__logo"><HelpIcon /></div>
-          <PrePressTemplate templates={templates} dispatch={dispatch} productTitle={product.title} />
         </div>
       </div>
     );

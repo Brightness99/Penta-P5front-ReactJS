@@ -9,7 +9,7 @@ import { SearchPlusIcon } from 'components/Icons';
 type Props = {
   item: {
     id: string,
-    image_small: string,
+    imageSmall: string,
     name: string,
   },
   viewType: string,
@@ -42,7 +42,7 @@ const ListItem = (props: Props) => {
       </button>}
       <label className={cx(props.checked && 'app__config__option--selected')}>
         {props.viewType === 'photos' &&
-        <img src={`https://www.printi.com.br${props.item.image_small}`} alt="not-found" />}
+        <img src={`https://www.printi.com.br${props.item.imageSmall}`} alt="not-found" />}
         <div className="app__config__options-input">
           <RadioButton
             name={props.optionKey}

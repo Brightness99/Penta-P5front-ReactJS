@@ -64,8 +64,18 @@ export class Success extends React.Component {
 
     return (
       <div className="sub-total">
-        <div className="mb-total-label">TOTAL</div>
-        <div className="mb-total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
+        {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
+          <div className="mb-total-label">Sub-total</div>
+          <div className="mb-total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price_before_discount)}</IntlMoney></div>
+        </div>}
+        {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
+          <div className="mb-total-label">Cupom</div>
+          <div className="mb-total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_discount_price)}</IntlMoney></div>
+        </div>}
+        <div className="sub-total-row">
+          <div className="mb-total-label">TOTAL</div>
+          <div className="mb-total-value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
+        </div>
       </div>
     );
   }
@@ -77,7 +87,7 @@ export class Success extends React.Component {
       <div className="sub-total">
         {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
           <div className="key">Sub-total</div>
-          <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price)}</IntlMoney></div>
+          <div className="value"><IntlMoney>{parseFloat(successfulPurchase.order.info.total_price_before_discount)}</IntlMoney></div>
         </div>}
         {parseFloat(successfulPurchase.order.info.total_discount_price) > 0 && <div className="sub-total-row">
           <div className="key">Cupom</div>
@@ -143,7 +153,7 @@ export class Success extends React.Component {
           {successfulPurchase.isLoaded && !successfulPurchase.isRunning && <div className="template-success">
             <div className="success-message atm-success-text">
               <CheckCircleIcon />
-              <span>Pedido nº{successfulPurchase.order.info.id} efetuado com sucesso!</span>
+              <span>Pedido #{successfulPurchase.order.info.id} efetuado com sucesso!</span>
             </div>
             {actionCount > 0 && <span>
               <div>Falta pouco! Agora é só pagar o boleto para finalizar o seu pedido.</div>

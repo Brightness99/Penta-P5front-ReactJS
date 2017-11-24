@@ -17,7 +17,6 @@ type Props = {
   finalProductId: string,
   dispatch: () => {},
   source: {},
-  isComplete: boolean,
 };
 
 type State = {
@@ -161,7 +160,7 @@ export default class SourcesBlock extends React.Component {
     const { source: { selectedSource } } = this.props;
 
     return (
-      <div className={`app__config__creation-${blockName}`}>
+      <div className={`app__config__creation-${blockName}`} key={blockName}>
         <label
           className={cx(
             'app__config__creation-label',

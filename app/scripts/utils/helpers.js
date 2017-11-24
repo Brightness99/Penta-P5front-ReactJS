@@ -280,3 +280,36 @@ export function validateEmail(email: string): boolean {
 
   return regex.test(email);
 }
+
+/**
+ * Generate selection based on the parts.
+ * @param {Array} parts
+ * @returns {Object}
+ */
+export function getSelection(parts: []): {} {
+  return parts
+    .reduce((prevPart, currentPart) => ({
+      ...prevPart,
+      [currentPart.id]: currentPart.attributes
+        .reduce((prevAttribute, currentAttribute) => ({
+          ...prevAttribute,
+          [currentAttribute.key]: currentAttribute.options
+            .filter((option) => option.default)
+            .reduce((prevOption, currentOption) => currentOption.id, ''),
+        }), {}),
+    }), {});
+}
+
+
+/**
+ * Check if selection is complete
+ * @param {Array} parts
+ * @returns {boolean}
+ */
+export function isSelectionComplete(selection: {}): boolean {
+  return Object.keys(selection)
+    .reduce((prevPart, currentPart) => (
+      prevPart && Object.keys(selection[currentPart])
+        .filter((attribute) => (selection[currentPart][attribute] === '')).length === 0
+    ), true);
+}
