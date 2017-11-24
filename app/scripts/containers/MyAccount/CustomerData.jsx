@@ -206,6 +206,7 @@ export class CustomerData extends React.Component {
           value: '',
         },
       });
+      keys.splice(keys.indexOf('state_registration'), 1);
     }
 
     keys.forEach((key) => {
