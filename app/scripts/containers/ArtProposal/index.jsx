@@ -39,7 +39,7 @@ export class ArtProposal extends React.Component {
   componentDidMount() {
     const { match: { params: { orderItemId } }, dispatch } = this.props;
     this.handleBreadcrumbs();
-    dispatch(proposalsFetch(order_item_id));
+    dispatch(proposalsFetch(orderItemId));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -99,7 +99,6 @@ export class ArtProposal extends React.Component {
     const { app: { screenSize }, artCreation } = this.props;
     const { activeIndex } = this.state;
     let sideBar = null;
-    console.log('artCreation in the index ======>', artCreation);
     const label = (artCreation.proposals.list.length === 0) ?
       'There isn\'t any proposal' :
       'Acompanhe a criação da sua arte';
@@ -129,7 +128,7 @@ export class ArtProposal extends React.Component {
   }
 
   renderContainer() {
-    const { app: { screenSize }, artCreation } = this.props;
+    const { app: { screenSize }, artCreation, match } = this.props;
 
     const { activeIndex } = this.state;
     const renderContainerMark = (activeIndex === artCreation.proposals.list.length) ?
@@ -138,6 +137,7 @@ export class ArtProposal extends React.Component {
           activeIndex={this.state.activeIndex}
           proposals={artCreation.proposals.list}
           screenSize={screenSize}
+          match={match}
         />
       ) :
       (artCreation.proposals.list.length !== 0) &&
@@ -146,6 +146,7 @@ export class ArtProposal extends React.Component {
           activeIndex={this.state.activeIndex}
           proposals={artCreation.proposals.list}
           screenSize={screenSize}
+          match={match}
         />
       );
 

@@ -16,6 +16,7 @@ type Props = {
   screenSize: string,
   activeIndex: string,
   proposals: {},
+  match: {},
   dispatch: () => {},
 };
 
@@ -68,7 +69,6 @@ export class ArtProposalContent extends React.Component {
   }
 
   onCustomerMessageChange = (value) => {
-    console.log('value ===>', value.toString('html'));
     this.setState({
       customerMessageValue: value,
       customerMessage: value.toString('html'),
@@ -121,7 +121,7 @@ export class ArtProposalContent extends React.Component {
   }
 
   renderMobile() {
-    const { proposals, screenSize } = this.props;
+    const { proposals, screenSize, match } = this.props;
     const { briefingClass } = this.state;
     const length = proposals.length;
     let accordionList = null;
@@ -136,6 +136,7 @@ export class ArtProposalContent extends React.Component {
                 proposals={proposals.list}
                 screenSize={screenSize}
                 updateTab={(className) => this.updateBriefContent(className)}
+                match={match}
               />
             </AccordionItemBody>
           </AccordionItem>
@@ -163,9 +164,6 @@ export class ArtProposalContent extends React.Component {
   }
 
   getProposal = (proposal) => {
-    console.log('active proposal ===> ', this.state.proposal);
-    console.log('active activeIndex ===> ', this.state.activeIndex);
-
     const { activeButton, editorWidth, activeIndex, confirmChecked } = this.state;
     const { proposals } = this.props;
     let renderMark = null;
@@ -276,9 +274,6 @@ export class ArtProposalContent extends React.Component {
   }
 
   renderDesktop() {
-    console.log('active proposal ===> ', this.state.proposal);
-    console.log('active activeIndex ===> ', this.state.activeIndex);
-
     const { activeButton, editorWidth, proposal, activeIndex, confirmChecked } = this.state;
     const { proposals } = this.props;
     let renderMark = null;

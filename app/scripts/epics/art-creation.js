@@ -212,7 +212,7 @@ export function fetchSingleFileRequest(action$) {
         });
     });
 }
-/////
+
 
 export function saveBriefing(action$) {
   return action$.ofType(ArtCreationConstants.SAVE_BRIEFING_REQUEST)
@@ -224,12 +224,18 @@ export function saveBriefing(action$) {
         method: 'POST',
       })
         .map(data => {
-          
-          if (data.status === 201) {
+          if (data.status === 200) {
+            if (data.duplicated) {
+              return {
+                type: ArtCreationConstants.SAVE_BRIEFING_FAILURE,
+                payload: { message: data.message },
+                meta: { updatedAt: getUnixtime() },
+              };
+            }
             return {
               type: ArtCreationConstants.SAVE_BRIEFING_SUCCESS,
               payload: {
-                data,
+                data: data.response,
               },
               meta: { updatedAt: getUnixtime() },
             };
@@ -267,12 +273,18 @@ export function updateBriefing(action$) {
         method: 'POST',
       })
         .map(data => {
-          
           if (data.status === 200) {
+            if (data.duplicated) {
+              return {
+                type: ArtCreationConstants.UPDATE_BRIEFING_FAILURE,
+                payload: { message: data.message },
+                meta: { updatedAt: getUnixtime() },
+              };
+            }
             return {
               type: ArtCreationConstants.UPDATE_BRIEFING_SUCCESS,
               payload: {
-                data,
+                data: data.response,
               },
               meta: { updatedAt: getUnixtime() },
             };
@@ -309,12 +321,11 @@ export function briefingDetailsFetch(action$) {
         method: 'GET',
       })
         .map(data => {
-          
           if (data.status === 200) {
             return {
               type: ArtCreationConstants.BRIEFING_DETAILS_FETCH_SUCCESS,
               payload: {
-                data,
+                data: data.response,
               },
               meta: { updatedAt: getUnixtime() },
             };
