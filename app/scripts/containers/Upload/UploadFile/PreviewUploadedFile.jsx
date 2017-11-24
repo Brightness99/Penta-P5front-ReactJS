@@ -11,7 +11,7 @@ type Props = {
     pages: {}
   },
   locale: {},
-  handleRemoveFile: () => void
+  handleRemoveFile: (preview: {}) => void
 }
 
 type State = {

@@ -58,10 +58,12 @@ class FunnelUploadPage extends React.Component {
 
   handleOrientationChanged = (isVertical: number) => {
     const { uploadSetOrientation, match: { params: { itemId } } } = this.props;
-    push(`?isVertical=${isVertical}`);
+
     if (uploadSetOrientation && typeof uploadSetOrientation === 'function') {
       uploadSetOrientation({ itemId, isVertical });
     }
+
+    push(`?isVertical=${isVertical}`);
   };
 
   render() {

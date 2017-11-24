@@ -33,7 +33,6 @@ type State = {
   fileFormats: [],
   uploadedFiles: [],
   canSubmit: boolean,
-  documentReferenceId: string,
 }
 
 export default class UploadContent extends React.Component {
@@ -83,12 +82,6 @@ export default class UploadContent extends React.Component {
     }, this.updateCanSubmit);
   };
 
-  handleCanvasFinalize = (documentRef: string) => {
-    this.setState({
-      documentReferenceId: documentRef,
-    }, this.updateCanSubmit);
-  };
-
   handleUploadFile = (files: { title: string, previews: []}) => {
     const uploadedFiles = this.state.uploadedFiles.filter(x => x.title !== files.title);
     if (files.previews.length > 0) {
@@ -121,7 +114,7 @@ export default class UploadContent extends React.Component {
   handleUploadFinish = () => {
     const { uploadInfo: { globalFlags: { upload_type } } } = this.props;
     const uploadFinish = this.props.handleUploadFinish;
-    const { uploadedFiles, isRepurchase, selectedStrategy, documentReferenceId, selectedAdditionalParameters } = this.state;
+    const { uploadedFiles, isRepurchase, selectedStrategy, selectedAdditionalParameters } = this.state;
     const uploads = {};
     uploadedFiles.forEach((x) => {
       x.previews.forEach(y => {
@@ -129,7 +122,6 @@ export default class UploadContent extends React.Component {
       });
     });
     const result = {
-      document_reference_url: documentReferenceId,
       cimpress_sku_scene: null,
       isRepurchase,
       upload_type,
@@ -142,7 +134,9 @@ export default class UploadContent extends React.Component {
       if (upload_type === 'normal') {
         uploadFinish(result);
       } else {
-        cimpress.saveTemplate().then(() => uploadFinish(result));
+        cimpress.saveTemplate().then((x) => {
+          uploadFinish({ ...result, document_reference_url: x.documentReferenceUrl });
+        });
       }
     }
   };
@@ -219,12 +213,12 @@ export default class UploadContent extends React.Component {
   };
 
   renderFileUploadBlock = (order: number) => {
-    const { selectedStrategy, uploadedFiles, fileFormats, documentReferenceId } = this.state;
+    const { selectedStrategy, uploadedFiles, fileFormats } = this.state;
     const { uploadInfo: { globalFlags: { upload_type }, cimpressInfo }, locale } = this.props;
     const showStep = selectedStrategy > 1;
     const isComplete = (selectedStrategy === 4 && uploadedFiles.length === 2)
       || uploadedFiles.length > 0
-      || !!documentReferenceId;
+      || upload_type !== 'normal';
     return (
       showStep &&
       <FunnelBlock
@@ -242,7 +236,6 @@ export default class UploadContent extends React.Component {
           selectedStrategy={selectedStrategy}
           fileFormats={fileFormats}
           locale={locale}
-          handleCanvasFinalize={this.handleCanvasFinalize}
           handleFiles={this.handleUploadFile}
           handleOrientationChanged={this.handleOrientationChanged}
         />
@@ -316,7 +309,7 @@ export default class UploadContent extends React.Component {
     }
     return (
       <section className="page-upload">
-        <div className="container">
+        <section className="container">
           <Breadcrumbs links={breadcrumb} />
           <PageTitle>{locale.page.upload.TITLE}</PageTitle>
           {this.renderFlashMessages()}
@@ -329,7 +322,7 @@ export default class UploadContent extends React.Component {
             }
           </section>
           { this.renderCartItemDefinitions()}
-        </div>
+        </section>
       </section>
     );
   }
