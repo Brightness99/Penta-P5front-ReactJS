@@ -32,7 +32,10 @@ import {
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
-  prepressDownloadFetch
+  prepressDownloadFetch,
+  pickupPlacesFetch,
+  settingsAdditionalOptionsFetch,
+  settingsPrePressFetch,
 } from './settings';
 import { localeFetch } from './locale';
 import {
@@ -66,7 +69,8 @@ import {
   accountOrderDetailFetch,
   accountOrderFetch,
   zipcodeValidate,
-  accountLoyaltyFetch
+  accountLoyaltyFetch,
+  accountSenderAddressRequest
 } from './account';
 
 import {
@@ -88,7 +92,9 @@ import {
 import { guideFetch } from './guide';
 
 import {
-  referralSendRequest
+  referralSendRequest,
+  getReferralVoucherSum,
+  getReferralHistory
 } from './referral';
 
 import { resetPassword, setNewPassword, getExpiredInfo } from './forgot-password';
@@ -104,7 +110,10 @@ export default combineEpics(
   settingsSourceFetch,
   settingsZipcodeFetch,
   settingsMatrixFetch,
+  settingsAdditionalOptionsFetch,
   prepressDownloadFetch,
+  settingsPrePressFetch,
+  pickupPlacesFetch,
   userSignIn,
   userSignUp,
   userSocialSignIn,
@@ -140,6 +149,7 @@ export default combineEpics(
   accountOrderFetch,
   zipcodeValidate,
   accountLoyaltyFetch,
+  accountSenderAddressRequest,
   policyFetch,
   termsFetch,
   productCategoriesFetch,
@@ -162,4 +172,6 @@ export default combineEpics(
   resetPassword,
   setNewPassword,
   getExpiredInfo,
+  getReferralVoucherSum,
+  getReferralHistory,
 );

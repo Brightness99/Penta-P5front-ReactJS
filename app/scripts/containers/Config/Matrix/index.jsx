@@ -3,15 +3,13 @@
 import React from 'react';
 
 import { settingsMatrixFetch, settingsZipcodeReset } from 'actions';
-
-import { RoundedTransparentButton } from 'atoms/Buttons';
-import { PlusCircleIcon } from 'components/Icons';
+import MoreInfo from 'components/MoreInfo';
+import { FunnelBlock } from 'components/Funnel';
 
 import Loading from 'components/Loading';
 
 import Zipcode from './Zipcode';
 import ShippingTable from './ShippingTable';
-import ConfigBlock from '../ConfigBlock';
 import Warning from '../Warning';
 
 type Props = {
@@ -21,20 +19,21 @@ type Props = {
   selection: {},
   screenSize: string,
   matrix: {},
-  zipcode: number,
   templates: {},
   dispatch: () => {},
   product: {},
-  user: {},
+  config: {},
   isCustomEnabled: boolean,
+  onSelect: () => {},
+  loyalty: {},
 };
 
 export default class MatrixBlock extends React.Component {
   componentDidMount() {
-    const { user: { address } } = this.props;
+    const { config: { zipcode } } = this.props;
 
-    if (address.isZipcodeValid) {
-      this.onZipcodeValid(address.zipcode);
+    if (zipcode.isZipcodeValid) {
+      this.onZipcodeValid(zipcode.value);
     }
   }
 
@@ -52,49 +51,75 @@ export default class MatrixBlock extends React.Component {
     dispatch(settingsZipcodeReset());
   };
 
+  handleSelection = (ev) => {
+    const { onSelect } = this.props;
+
+    if (typeof onSelect === 'function') {
+      onSelect(ev);
+    }
+  };
+
+  renderDeliveryMethods() {
+    const { selection, dispatch, config: { zipcode } } = this.props;
+
+    return (
+      <Zipcode
+        selection={selection}
+        onZipcodeValid={this.onZipcodeValid}
+        dispatch={dispatch}
+        defaultValue={zipcode.value}
+        isZipcodeValid={zipcode.isZipcodeValid}
+        errorMessage={zipcode.zipcodeErrorMessage}
+        onReset={this.handleZipcodeReset}
+      />
+    );
+  }
+
   renderMatrix() {
-    const { selection, dispatch, screenSize, matrix, templates, product, user, isCustomEnabled } = this.props;
-    console.log('templates:', templates);
-    console.log('dispatch:', dispatch);
-    console.log('product:', product);
+    const { dispatch, screenSize, matrix, loyalty, locale, isCustomEnabled } = this.props;
+
     return (
       <div className="app__config__matrix">
-        <Zipcode
-          selection={selection}
-          onZipcodeValid={this.onZipcodeValid}
-          dispatch={dispatch}
-          defaultValue={user.address.zipcode}
-          isZipcodeValid={user.address.isZipcodeValid}
-          errorMessage={user.address.zipcodeErrorMessage}
-          onReset={this.handleZipcodeReset}
-        />
-        { !matrix.isLoaded && !matrix.isRunning
+        {this.renderDeliveryMethods()}
+        {!matrix.isLoaded && !matrix.isRunning
           ? null
-          : <ShippingTable
-            dispatch={dispatch}
-            screenSize={screenSize}
-            matrix={matrix}
-          />}
-        {isCustomEnabled && <RoundedTransparentButton>
-          <PlusCircleIcon />
-          <span>Adicionar outra quantidade</span>
-        </RoundedTransparentButton>}
-        <Warning templates={templates} dispatch={dispatch} product={product} />
+          : [
+            <ShippingTable
+              key="matrix"
+              dispatch={dispatch}
+              screenSize={screenSize}
+              matrix={matrix}
+              onSelect={this.handleSelection}
+              loyalty={loyalty}
+              isCustomEnabled={isCustomEnabled}
+              locale={locale}
+            />,
+            <Warning
+              locale={locale}
+              key="warning"
+            />,
+          ]
+        }
       </div>
     );
   }
 
   render() {
-    const { locale } = this.props;
+    const { locale, order, screenSize } = this.props;
 
     return (
-      <ConfigBlock
-        order="3"
+      <FunnelBlock
+        order={order}
         locale={locale}
+        screenSize={screenSize}
+        header={[
+          <span key="options-block-title">{locale.TITLE}</span>,
+          <MoreInfo key="options-block-more-info" text={locale.MORE_INFO_TEXT} />,
+        ]}
         className="app__config__matrix-block"
       >
         {this.renderMatrix()}
-      </ConfigBlock>
+      </FunnelBlock>
     );
   }
 }

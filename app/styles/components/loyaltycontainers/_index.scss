@@ -70,40 +70,42 @@
 }
 
 .org-loyalty-container {
-  margin-bottom: 3rem;
-  display: flex;
-  justify-content: center;
-  .mol-loyalty-container {
-    width: 100%;
-    max-width: 750px;
-    border-radius: 0.4rem;
-    p {
-      margin: 0;
+  @include center-child-flex;
+  border-radius: $bsn-border-radius;
+  color: $color-white;
+  flex-direction: column;
+  font-family: $font-family-open-sans;
+  font-size: $font-size-base;
+  font-weight: 700;
+  height: auto;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  padding: 2.4rem;
+  width: 100%;
+
+  @include lg {
+    justify-content: flex-start;
+    flex-direction: row;
+    height: 5.6rem;
+    padding: 0 2.4rem;
+  }
+
+  .mol-logo-loyalty {
+    align-items: center;
+    display: inline-flex;
+    height: 2.4rem;
+    margin: 0 0 1.6rem 0;
+
+    @include lg {
+      margin: 0 5.8rem 0 0;
     }
-    div {
-      color: $color-white;
-      display: flex;
-      font-family: $font-family-open-sans-bold;
-      font-size: $font-size-xs;
-      padding: 1rem;
-      justify-content: left;
-      flex-direction: row;
+
+    > div {
+      font-size: $font-size-sm;
+      height: 100%;
+
       @include lg {
-        font-size: $font-size-base;
-        padding: 1.6rem 2rem 1.6rem 2rem;
-      }
-      &.qrk-type-of-loyalty {
-        background-color: $color-white;
-        box-sizing: border-box;
-        border-radius: 30px;
         font-size: $font-size-xs;
-        margin-right: 2rem;
-        text-transform: uppercase;
-        text-align: center;
-        padding: 0rem 0.9rem;
-        @include lg {
-          font-size: $font-size-base;
-        }
       }
     }
   }
